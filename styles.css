@@ -209,6 +209,7 @@ body {
     }*/
 }
 #ultra_nav .menu .box {
+  position: relative;
   overflow: hidden;
   display: inline-block;
   background: #2e2e2e;
@@ -234,7 +235,6 @@ body {
   line-height: 0;
   border-bottom: 4px solid black;
   border-top: 4px solid black;
-  animation: 0.9s cellexpand cubic-bezier(0.6, 0.01, 0.5, 1);
 }
 #ultra_nav .menu .box .box_text .box_header .before,
 #ultra_nav .menu .box .box_text .box_header .after {
@@ -256,6 +256,30 @@ body {
   top: -30px;
   transform: rotateZ(-45deg) translateX(45px);
 }
+#ultra_nav .menu .box .box_text .box_header .below,
+#ultra_nav .menu .box .box_text .box_header .over {
+  position: absolute;
+  background: url('https://i.gyazo.com/d3454e553f00a384862950210990c16c.png');
+  background-attachment: fixed;
+  width: 100%;
+  height: 0;
+  left: 0;
+  animation: 1.3s boxcurtain_height cubic-bezier(0.8, 0, 1, 1), 1s boxcurtain_width_left ease-out;
+}
+#ultra_nav .menu .box .box_text .box_header .below {
+  bottom: 4px;
+}
+#ultra_nav .menu .box .box_text .box_header .over {
+  top: 4px;
+}
+#ultra_nav .menu .box .box_text .box_header .below_overlay {
+  border-top: 3px solid;
+  animation: 1.3s boxcurtain_height cubic-bezier(0.8, 0, 1, 1);
+}
+#ultra_nav .menu .box .box_text .box_header .over_overlay {
+  border-bottom: 3px solid;
+  animation: 1.3s boxcurtain_height cubic-bezier(0.8, 0, 1, 1);
+}
 #ultra_nav .menu .box .box_text .box_header:hover .before {
   transform: rotateZ(45deg) translateY(0);
 }
@@ -263,8 +287,8 @@ body {
   transform: rotateZ(-45deg) translateX(0);
 }
 #ultra_nav .menu .box .box_text .box_header#header_box1 {
-  background: url('https://i.gyazo.com/7f6a04143c26fa071b91457ace2e70eb.png');
-  background-size: cover;
+  background: url('https://i.gyazo.com/d3454e553f00a384862950210990c16c.png');
+  background-attachment: fixed;
 }
 #ultra_nav .menu .box .box_text a {
   padding: 20px 10px;
@@ -352,6 +376,17 @@ body {
 @keyframes boxtext_shiftin {
   from {
     transform: translateX(-40px);
+  }
+}
+@keyframes boxcurtain_height {
+  from {
+    height: 38px;
+  }
+}
+@keyframes boxcurtain_width_left {
+  from {
+    width: 0;
+    left: 200px;
   }
 }
 @keyframes buttonshake {
