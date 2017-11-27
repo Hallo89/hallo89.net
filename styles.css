@@ -173,40 +173,40 @@ body {
   color: #000000;
 }
 #ultra_nav .menu {
-  position: relative;
+  /*position: relative;*/
   margin: 35px auto 0;
   max-width: 1000px;
-}
-#ultra_nav .menu .box_about {
-  margin-left: 300px;
-  display: inline-block;
-  width: 400px;
-  height: 400px;
-}
-#ultra_nav .menu .box_about:hover .box_about_content {
-  left: 0;
-}
-#ultra_nav .menu .box_about:hover .about_content {
-  opacity: 1;
-}
-#ultra_nav .menu .box_about .box_about_content {
-  position: absolute;
-  left: 300px;
-  display: inherit;
-  background: #2e2e2e;
-  width: 400px;
-  height: 400px;
-  box-shadow: 1.6px 1.6px 16px 1.5px rgba(8, 8, 8, 0.88);
-  transition: all .7s;
-}
-#ultra_nav .menu .about_content {
-  font: 20px 'Arial';
-  opacity: 0;
-  position: absolute;
-  top: 20px;
-  right: 0;
-  left: 450px;
-  transition: all .5s .2s;
+  /*.box_about {
+      margin-left: 300px;
+      display: inline-block;
+      width: @box-dimension;
+      height: @box-dimension;
+      &:hover .box_about_content {
+        left: 0;
+      }
+      &:hover .about_content {
+        opacity: 1;
+      }
+      .box_about_content {
+        position: absolute;
+        left: 300px;
+        display: inherit;
+        background: @ultranav-box;
+        width: @box-dimension;
+        height: @box-dimension;
+        box-shadow: 1.6px 1.6px 16px 1.5px @ultranav-box-shadow;
+        transition: all .7s;
+      }
+    }
+    .about_content {
+      font: 20px 'Arial';
+      opacity: 0;
+      position: absolute;
+      top: 20px;
+      right: 0;
+      left: 450px;
+      transition: all .5s .2s;
+    }*/
 }
 #ultra_nav .menu .box {
   overflow: hidden;
@@ -263,7 +263,7 @@ body {
   transform: rotateZ(-45deg) translateX(0);
 }
 #ultra_nav .menu .box .box_text .box_header#header_box1 {
-  background: url('C:/Users/Hendrik/Downloads/Discord is a drug.png');
+  background: url('https://i.gyazo.com/7f6a04143c26fa071b91457ace2e70eb.png');
   background-size: cover;
 }
 #ultra_nav .menu .box .box_text a {
@@ -287,11 +287,11 @@ body {
   border-bottom: solid 5px transparent;
 }
 #ultra_nav .menu .box .box_text a#box1text1 {
-  background: url('C:/Users/Hendrik/Downloads/1.png');
+  background: url('https://i.gyazo.com/d3454e553f00a384862950210990c16c.png');
   background-size: cover;
 }
 #ultra_nav .menu .box .box_text a#box1text1:hover {
-  background: url('C:/Users/Hendrik/Downloads/1blur.png');
+  background: url('https://i.gyazo.com/aee35492a1a0a171280fe4f7a0d97343.png');
   background-size: cover;
 }
 #ultra_nav .menu .box .box_text a:nth-of-type(1) {
