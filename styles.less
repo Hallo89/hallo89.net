@@ -1,0 +1,272 @@
+// out: C:\Users\Hendrik\Desktop\styles.css, sourcemap: false, compress: false,
+
+/*
+Written by Hallo89 using LESS CSS - http://lesscss.org
+No necessity to write this in here but Less is awesome :o
+*/
+
+@import "colors.less";
+@import "mixins.less";
+
+
+body {
+  background: @background-color;
+  font-family: Arial;
+}
+
+#head_block {
+  margin: auto;
+  box-shadow: 1px 3px 13px 1px @header-shadow;
+  background-color: @header-background-color;
+  max-width: 1130px;
+  height: 410px;
+  color: @heading-foreground-color;
+  text-align: center;
+  /*border-left: solid 5px;
+  border-right: solid 5px;
+  border-radius: 5px;
+  border-color: @header-border-color;*/
+  #main_header {
+    margin-top: 100px;
+    border: solid 11px;
+    display: inline-block;
+    transition: .5s;
+    animation: 1.2s fadein, 1.02s shiftin, 1s borderbuildup;
+    &:hover {
+      color: @main-box-hover;
+      transform: scale(0.968);
+    }
+    h1 {
+      font: bold 105px 'Century Gothic', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      line-height: 83px;
+      margin: 0;
+      padding: 30px 30px 35px;
+      transition: .9s;
+      animation: 1.8s fadein, 1.3s rotateX;
+      &:hover {
+        color: @main-text-hover;
+        transform: scale(0.7) scale(1.47);
+      }
+      .selection-w-color(@header-selection)
+    }
+  }
+  p {
+    margin-top: 45px;
+    font: 19px 'Segoe UI';
+    animation: @shift-fade-in;
+    .selection-w-color;
+    &::before, &::after {
+      content: '';
+      border-bottom: solid 1px;
+      vertical-align: middle;
+      width: 20px;
+      display: inline-block;
+    }
+  }
+}
+
+#head_nav {
+  margin-top: 15px;
+  position: sticky;
+  top: 2px;
+  z-index: 10;
+  #links {
+    margin: 25px auto auto;
+    padding: 15px;
+    background-color: @navbox-background;
+    max-width: 615px;
+    animation: 5s fadein2;
+    nav {
+      font: 22px Arial, sans-serif;
+      text-transform: uppercase;
+      text-align: center;
+      animation: 1.15s shiftin cubic-bezier(.52,.51,.61,.99), 1.22s fadein;
+      .selection-background;
+      a {
+        margin-left: 60px;
+        padding: 5px 5px 3px;
+        text-decoration: none;
+        background: @nav-background;
+        color: @nav-foreground-color;
+        display: inline-block;
+        border: solid 2px;
+        transition:  all .8s, color .38s;
+        &:first-child {
+          margin-left: 0;
+        }
+        &::before, &::after {
+          content: '';
+          border-bottom: solid 1.5px;
+          vertical-align: middle;
+          width: 0;
+          display: inline-block;
+          transition: all .8s;
+        }
+        &:hover {
+          margin: -.5px 12px -.5px 72px;
+          padding: 5.5px 5px 3.5px;
+          transition: transform 0;
+          transform: scale(1.07);
+          box-shadow: 1px 1px 6px @nav-border-shadow;
+          animation: .36s buttonshake;
+        }
+        &:hover:first-child {
+          margin-left: 12px;
+        }
+        &:hover::before, &:hover::after {
+          width: 10px;
+        }
+        &:active {
+          color: @nav-active;
+        }
+        .selection-w-color(@nav-selection)
+      }
+    }
+  }
+  #expanding_border {
+    margin: 3px auto auto;
+    max-width: 710px;
+    border-bottom: solid 2px;
+    border-radius: 150px;
+    color: @nav-border;
+    animation: 2.7s borderglide, 2.5s fadein, 2s shiftin2;
+  }
+}
+
+#ultra_nav {
+  color: @ultranav-foreground-color;
+  .menu {
+    position: relative;
+    margin: 35px auto 0;
+    max-width: 1000px;
+    .box_about {
+      margin-left: 300px;
+      display: inline-block;
+      width: @box-dimension;
+      height: @box-dimension;
+      &:hover .box_about_content {
+        left: 0;
+      }
+      &:hover .about_content {
+        opacity: 1;
+      }
+      .box_about_content {
+        position: absolute;
+        left: 300px;
+        display: inherit;
+        background: @ultranav-box;
+        width: @box-dimension;
+        height: @box-dimension;
+        box-shadow: 1.6px 1.6px 16px 1.5px @ultranav-box-shadow;
+        transition: all .7s;
+      }
+    }
+    .about_content {
+      font: 20px 'Arial';
+      opacity: 0;
+      position: absolute;
+      top: 20px;
+      right: 0;
+      left: 450px;
+      transition: all .5s .2s;
+    }
+    .box {
+      overflow: hidden;
+      display: inline-block;
+      background: @ultranav-box;
+      width: @box-dimension;
+      height: @box-dimension;
+      box-shadow: 1.6px 1.6px 16px 1.5px @ultranav-box-shadow;
+      &:last-child {
+        float: right;
+      }
+      .box_text {
+        font-size: 30px;
+        .box_header {
+          position: relative;
+          overflow: hidden;
+          .header_maintext {
+            padding: 38px 28px;
+            font: 1.15em 'Ubuntu', sans-serif;
+            text-transform: uppercase;
+            display: inherit;
+            line-height: 0;
+            border-bottom: 4px solid black;
+            border-top: 4px solid black;
+            animation: .9s cellexpand cubic-bezier(.6,.01,.5,1);
+          }
+          .before, .after {
+            position: absolute;
+            background: @ultranav-boxheader-elements;
+            transition: all .5s ease-out;
+          }
+          .before {
+            height: 45px;
+            width: 100px;
+            left: -30px;
+            bottom: -10px;
+            transform: rotateZ(45deg) translateY(45px);
+          }
+          .after {
+            height: 100px;
+            width: 45px;
+            right: -10px;
+            top: -30px;
+            transform: rotateZ(-45deg) translateX(45px);
+          }
+          &:hover .before {
+            transform: rotateZ(45deg) translateY(0);
+          }
+          &:hover .after {
+            transform: rotateZ(-45deg) translateX(0);
+          }
+          &#header_box1 {
+            background: @boxheader-background-box1;
+            background-size: cover;
+          }
+        }
+        a {
+          padding: 20px 10px;
+          display: inherit;
+          text-decoration: none;
+          color: inherit;
+          transition: all .9s, padding-left .1s, background 1.2s cubic-bezier(.87,0,1,1);
+          line-height: 50px;
+          &:hover {
+            padding: 48px 48px 48px 17px;
+          }
+          &:hover::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            height: 44px;
+            border-left: solid 5px @ultranav-boxtext-additional-border;
+            border-top: solid 5px transparent;
+            border-bottom: solid 5px transparent;
+          }
+          &#box1text1 {
+            background: @boxtext-background-box1span1;
+            background-size: cover;
+            &:hover {
+              background: @boxtext-background-box1span1_blur;
+              background-size: cover;
+            }
+          }
+          &:nth-of-type(1) {
+            animation: .6s boxtext_shiftin, .8s fadein;
+          }
+          &:nth-of-type(2) {
+            animation: 1s boxtext_shiftin, .8s fadein;
+          }
+          &:nth-of-type(3) {
+            animation: 1.4s boxtext_shiftin, .8s fadein;
+          }
+        }
+      }
+    }
+  }
+}
+
+@import "keyframes.less";

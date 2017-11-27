@@ -1,0 +1,44 @@
+// main: C:\Users\Hendrik\Desktop\styles.less
+
+// ::selection mixin
+.selection-background(@background: transparent) {
+  &::selection {
+    background-color: @background;
+  }
+  &::-webkit-selection {
+    background-color: @background;
+  }
+  &::-moz-selection {
+    background-color: @background;
+  }
+}
+
+.selection-w-color(@color: @subheader-selection; @background: transparent;) {
+  &::selection {
+    background-color: @background;
+    color: @color;
+  }
+  &::-webkit-selection {
+    background-color: @background;
+    color: @color;
+  }
+  &::-moz-selection {
+    background-color: @background;
+    color: @color;
+  }
+}
+
+//random stuff which doesn't fit elsewhere
+//calculation variables
+
+//Variables being just handy having them here
+@box-dimension: 400px;
+
+//animation variables
+@shift-fade-in: .8s shiftin ease-out, .8s fadein ease-in;
+
+//backgrounds
+@boxheader-background-box1: url('C:/Users/Hendrik/Downloads/Discord is a drug.png');
+
+@boxtext-background-box1span1: url('C:/Users/Hendrik/Downloads/1.png');
+@boxtext-background-box1span1_blur: url('C:/Users/Hendrik/Downloads/1blur.png');

@@ -1,0 +1,30 @@
+// main: C:\Users\Hendrik\Desktop\styles.less
+
+@background-color: hsl(0, 0%, 17%);
+@foreground-color: hsl(0, 0%, 85%);
+
+@heading-foreground-color: hsl(0, 0%, 95%);
+
+//@header-border-color: lighten(spin(saturate(@header-background-color, 7%), 170), 3%);
+@header-background-color: lighten(@background-color, 4%);
+@header-shadow: fadeout(darken(@background-color, 7%), 23%);
+
+@main-text-hover: #A1D7DD;
+@main-box-hover: #C9E8E5;
+
+@header-selection: #1398A9;
+@subheader-selection: #DB968C;
+@nav-selection: lighten(desaturate(spin(@header-selection, -40), 20%), 9%);
+
+@nav-foreground-color: darken(@heading-foreground-color, 10%);
+@navbox-background: fadeout(lighten(@background-color, 3%), 24%);
+@nav-background: fadeout(lighten(@header-background-color, 7%), 35%);
+@nav-border: darken(@heading-foreground-color, 22%);
+@nav-border-shadow: darken(@background-color, 4%);
+@nav-active: @main-text-hover;
+
+@ultranav-foreground-color: darken(@background-color, 20%);
+@ultranav-box: lighten(@background-color, 1%);
+@ultranav-box-shadow: fadeout(darken(@background-color, 14%), 12%);
+@ultranav-boxheader-elements: fadeout(darken(@background-color, 10%), 10%);
+@ultranav-boxtext-additional-border: desaturate(mix( orange, @ultranav-foreground-color, 19% ), 40%);
