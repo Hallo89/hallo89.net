@@ -83,6 +83,7 @@ body {
       text-transform: uppercase;
       text-align: center;
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-around;
       animation: 1.15s shiftin cubic-bezier(.52,.51,.61,.99), 1.22s fadein;
       .selection-background;
@@ -94,9 +95,6 @@ body {
         display: inline-block;
         border: solid 2px;
         transition:  all .8s, color .38s;
-        &:first-child {
-          margin-left: 0;
-        }
         &::before, &::after {
           content: '';
           border-bottom: solid 1.5px;
@@ -112,16 +110,21 @@ body {
           box-shadow: 1px 1px 6px @nav-border-shadow;
           animation: .36s buttonshake;
         }
-        &:hover:first-child {
-          margin-left: 12px;
-        }
         &:hover::before, &:hover::after {
           width: 10px;
+        }
+        @media screen and (max-width: 430px) {
+          &:hover {
+            margin: 0;
+          }
+          &:hover::before, &:hover::after {
+            width: 2.5px;
+          }
         }
         &:active {
           color: @nav-active;
         }
-        .selection-w-color(@nav-selection)
+        .selection-w-color(@nav-selection);
       }
     }
   }
@@ -139,6 +142,9 @@ body {
   color: @ultranav-foreground-color;
   .menu {
     /*position: relative;*/
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
     margin: 35px auto 0;
     max-width: 1000px;
     /*.box_about {
@@ -172,6 +178,12 @@ body {
       left: 450px;
       transition: all .5s .2s;
     }*/
+    @media screen and (max-width: 834px) {
+      justify-content: center;
+      .box {
+        margin: 0 10px 25px 10px;
+      }
+    }
     .box {
       position: relative;
       overflow: hidden;
@@ -180,14 +192,13 @@ body {
       width: @box-dimension;
       height: @box-dimension;
       box-shadow: 1.6px 1.6px 16px 1.5px @ultranav-box-shadow;
-      &:last-child {
-        float: right;
-      }
+      animation: .8s fadein;
       .box_text {
         font-size: 30px;
         .box_header {
           position: relative;
           overflow: hidden;
+          background-attachment: fixed;
           .header_maintext {
             padding: 38px 28px;
             font: 1.15em 'Ubuntu', sans-serif;
@@ -238,27 +249,25 @@ body {
               top: 0;
             }
             .curtain_below, .curtain_above {
-              background: @boxheader-background-box1 right 0;
               background-attachment: fixed;
               height: 0;
-              animation: 1.3s boxcurtain_imageheight cubic-bezier(.8,0,1,1);
+              animation: 1.1s boxcurtain_imageheight cubic-bezier(.8,0,1,1);
             }
             .below_overlay, .above_overlay {
               height: 100%;
             }
             .below_overlay {
               border-top: none;
-              animation: 1s boxcurtain_width_left ease-out, 1.3s boxcurtain_bordertop;
+              animation: .9s boxcurtain_width_left ease-out, 1.3s boxcurtain_bordertop;
             }
             .above_overlay {
               border-bottom: none;
-              animation: 1s boxcurtain_width_left ease-out, 1.3s boxcurtain_borderbottom;
+              animation: .9s boxcurtain_width_left ease-out, 1.3s boxcurtain_borderbottom;
             }
           }
-          &#header_box1 {
-            background: @boxheader-background-box1 right 0;
-            background-attachment: fixed;
-          }
+        }
+        .header_box1 {
+          background-image: @boxheader-background-box1;
         }
         a {
           padding: 20px 10px;
