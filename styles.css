@@ -239,7 +239,6 @@ body {
 #ultra_nav .menu .box .box_text .box_header {
   position: relative;
   overflow: hidden;
-  background-attachment: fixed;
 }
 #ultra_nav .menu .box .box_text .box_header .header_maintext {
   padding: 38px 28px;
@@ -291,7 +290,6 @@ body {
 }
 #ultra_nav .menu .box .box_text .box_header .curtainanimation .curtain_below,
 #ultra_nav .menu .box .box_text .box_header .curtainanimation .curtain_above {
-  background-attachment: fixed;
   height: 0;
   animation: 1.1s boxcurtain_imageheight cubic-bezier(0.8, 0, 1, 1);
 }
@@ -308,7 +306,7 @@ body {
   animation: 0.9s boxcurtain_width_left ease-out, 1.3s boxcurtain_borderbottom;
 }
 #ultra_nav .menu .box .box_text .header_box1 {
-  background-image: url('https://i.gyazo.com/7f6a04143c26fa071b91457ace2e70eb.png');
+  background: fixed url('https://i.gyazo.com/7f6a04143c26fa071b91457ace2e70eb.png');
 }
 #ultra_nav .menu .box .box_text a {
   padding: 20px 10px;
