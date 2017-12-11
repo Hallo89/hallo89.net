@@ -245,7 +245,7 @@ body {
   background: #2e2e2e;
   width: 400px;
   height: 400px;
-  box-shadow: 1.6px 1.6px 16px 1.5px rgba(8, 8, 8, 0.88);
+  box-shadow: 1.4px 1.4px 13px 1px rgba(10, 10, 10, 0.88);
 }
 #ultra_nav .box.box_about {
   position: static;
