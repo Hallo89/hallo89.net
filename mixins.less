@@ -28,6 +28,37 @@
   }
 }
 
+//nth nesting mixin -> shiftin animation + header background per individual box
+//for one box in a menu
+.nth-box-alone(@boxheaderbackground; @seconds;) {
+  .box:nth-of-type {
+    &(1) {
+      animation: @seconds shiftin2 ease-out;
+      .box_header, .curtain_below, .curtain_above {
+        background-image: @boxheaderbackground;
+      }
+    }
+  }
+}
+
+//for two boxes in a menu (default)
+.nth-box-twins(@boxheaderbackground1; @boxheaderbackground2; @seconds1; @seconds2;) {
+  .box:nth-of-type {
+    &(1) {
+      animation: @seconds1 shiftin2 ease-out;
+      .box_header, .curtain_below, .curtain_above {
+        background-image: @boxheaderbackground1;
+      }
+    }
+    &(2) {
+      animation: @seconds2 shiftin2 ease-out;
+      .box_header, .curtain_below, .curtain_above {
+        background-image: @boxheaderbackground2;
+      }
+    }
+  }
+}
+
 //random stuff which doesn't fit elsewhere
 //calculation variables
 
