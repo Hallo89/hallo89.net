@@ -15,6 +15,12 @@ body {
 }
 
 #head_block {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-flow: column wrap;
   margin: auto;
   box-shadow: 1px 3px 13px 1px @header-shadow;
   background-color: @header-background-color;
@@ -26,12 +32,39 @@ body {
   border-right: solid 5px;
   border-radius: 5px;
   border-color: mix(@header-background-color, lime, 85%);*/
+  span {
+    position: absolute;
+    background-color: @heading-foreground-color;
+    z-index: 1;
+    &#overlay_top, &#overlay_bottom {
+      width: 648px;
+      height: 11px;
+    }
+    &#overlay_top {
+      top: 120px;
+      animation: 1.5s loltop, 1.5s fadein;
+    }
+    &#overlay_bottom {
+      bottom: 120px;
+      animation: 1.5s lolbottom, 1.5s fadein;
+    }
+    &#overlay_right, &#overlay_left {
+      width: 11px;
+      height: 170px;
+    }
+    &#overlay_right {
+      right: 242px;
+      animation: 1.5s lolright, 1.5s fadein;
+    }
+    &#overlay_left {
+      left: 241px;
+      animation: 1.5s lolleft, 1.5s fadein;
+    }
+  }
   #main_header {
-    margin-top: 100px;
     border: solid 11px;
-    display: inline-block;
     transition: .5s;
-    animation: 1.2s fadein, 1.02s shiftin, 1s borderbuildup;
+    animation: 1.2s fadein, 1.02s shiftin, 2s borderbuildup;
     &:hover {
       color: @main-box-hover;
       transform: scale(0.968);
@@ -53,7 +86,8 @@ body {
     }
   }
   p {
-    margin-top: 45px;
+    position: absolute;
+    bottom: 30px;
     font: 19px 'Segoe UI';
     animation: @shift-fade-in;
     .selection-w-color;

@@ -7,6 +7,12 @@ body {
   font-family: Arial;
 }
 #head_block {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-flow: column wrap;
   margin: auto;
   box-shadow: 1px 3px 13px 1px rgba(26, 26, 26, 0.77);
   background-color: #363636;
@@ -19,12 +25,41 @@ body {
   border-radius: 5px;
   border-color: mix(@header-background-color, lime, 85%);*/
 }
+#head_block span {
+  position: absolute;
+  background-color: #f2f2f2;
+  z-index: 1;
+}
+#head_block span#overlay_top,
+#head_block span#overlay_bottom {
+  width: 648px;
+  height: 11px;
+}
+#head_block span#overlay_top {
+  top: 120px;
+  animation: 1.5s loltop, 1.5s fadein;
+}
+#head_block span#overlay_bottom {
+  bottom: 120px;
+  animation: 1.5s lolbottom, 1.5s fadein;
+}
+#head_block span#overlay_right,
+#head_block span#overlay_left {
+  width: 11px;
+  height: 170px;
+}
+#head_block span#overlay_right {
+  right: 242px;
+  animation: 1.5s lolright, 1.5s fadein;
+}
+#head_block span#overlay_left {
+  left: 241px;
+  animation: 1.5s lolleft, 1.5s fadein;
+}
 #head_block #main_header {
-  margin-top: 100px;
   border: solid 11px;
-  display: inline-block;
   transition: .5s;
-  animation: 1.2s fadein, 1.02s shiftin, 1s borderbuildup;
+  animation: 1.2s fadein, 1.02s shiftin, 2s borderbuildup;
 }
 #head_block #main_header:hover {
   color: #C9E8E5;
@@ -57,7 +92,8 @@ body {
   color: #1398A9;
 }
 #head_block p {
-  margin-top: 45px;
+  position: absolute;
+  bottom: 30px;
   font: 19px 'Segoe UI';
   animation: 0.8s shiftin ease-out, 0.8s fadein ease-in;
 }
@@ -411,16 +447,8 @@ body {
   from {
     border-width: 0;
   }
-}
-@keyframes delaydisplaynone {
-  0% {
-    display: block;
-  }
-  99% {
-    display: block;
-  }
-  100% {
-    display: block;
+  to {
+    border-width: 0;
   }
 }
 @keyframes boxtext_shiftin {
@@ -449,6 +477,30 @@ body {
   from,
   to {
     border-bottom: solid 3px;
+  }
+}
+@keyframes loltop {
+  from {
+    top: 0;
+    transform: rotateZ(30deg);
+  }
+}
+@keyframes lolbottom {
+  from {
+    bottom: 28px;
+    transform: rotateZ(54deg);
+  }
+}
+@keyframes lolleft {
+  from {
+    left: 23px;
+    transform: rotateZ(-30deg);
+  }
+}
+@keyframes lolright {
+  from {
+    right: 72px;
+    transform: rotateZ(12deg);
   }
 }
 @keyframes boxcurtain_width_left {

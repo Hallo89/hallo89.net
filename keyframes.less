@@ -20,11 +20,7 @@
 }
 @keyframes borderbuildup {
   from { border-width: 0; }
-}
-@keyframes delaydisplaynone {
-  0% { display: block; }
-  99%  { display: block; }
-  100%  { display: block; }
+  to   { border-width: 0; }
 }
 @keyframes boxtext_shiftin {
   from { transform: translateX(-40px); }
@@ -39,6 +35,18 @@
 }
 @keyframes boxcurtain_borderbottom {
   from, to { border-bottom: solid 3px }
+}
+@keyframes loltop {
+  from { top: 0; transform: rotateZ(30deg); }
+}
+@keyframes lolbottom {
+  from { bottom: 28px; transform: rotateZ(54deg); }
+}
+@keyframes lolleft {
+  from { left: 23px; transform: rotateZ(-30deg); }
+}
+@keyframes lolright {
+  from { right: 72px; transform: rotateZ(12deg); }
 }
 @keyframes boxcurtain_width_left {
   0% { width: 0; left: 200px }
