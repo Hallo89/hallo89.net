@@ -6,6 +6,9 @@
 @keyframes shiftin2 {
   from { transform: translateY(-20px); }
 }
+@keyframes shiftinX {
+  from { transform: translateX(-40px); }
+}
 @keyframes rotateX {
   to   { transform: rotateX(360deg); }
 }
@@ -15,16 +18,32 @@
 @keyframes fadein2 {
   from { background-color: fadeout(@navbox-background, 100%); }
 }
-@keyframes borderglide {
-  from { max-width: 0; }
+
+@keyframes headerborder_top {
+  from { top: 0; transform: scale(0) rotateX(180deg); width: 647px; }
+  to   { width: 647px; height: 11px; }
 }
-@keyframes borderbuildup {
+@keyframes headerborder_bottom {
+  from { bottom: 0; transform: scale(0) rotateX(180deg); width: 647px; }
+  to   { width: 647px; height: 11px; }
+}
+@keyframes headerborder_left {
+  from { left: 0; transform: scale(0) rotateZ(45deg) translateY(-25px); height: 170px;}
+  to   { width: 11px; height: 170px; }
+}
+@keyframes headerborder_right {
+  from { right: 0; transform: scale(0) rotateZ(45deg) translateY(25px); height: 170px; }
+  to   {  width: 11px; height: 170px; }
+}
+
+@keyframes borderdisappearance {
   from { border-width: 0; }
   to   { border-width: 0; }
 }
-@keyframes boxtext_shiftin {
-  from { transform: translateX(-40px); }
+@keyframes borderglide {
+  from { max-width: 0; }
 }
+
 @keyframes boxcurtain_imageheight {
   0%   { height: 50%; }
   50%  { height: 50%; }
@@ -36,28 +55,19 @@
 @keyframes boxcurtain_borderbottom {
   from, to { border-bottom: solid 3px }
 }
-@keyframes loltop {
-  from { top: 0; transform: rotateZ(30deg); }
-}
-@keyframes lolbottom {
-  from { bottom: 28px; transform: rotateZ(54deg); }
-}
-@keyframes lolleft {
-  from { left: 23px; transform: rotateZ(-30deg); }
-}
-@keyframes lolright {
-  from { right: 72px; transform: rotateZ(12deg); }
-}
 @keyframes boxcurtain_width_left {
   0% { width: 0; left: 200px }
   15% { width: 0; left: 200px }
 }
+
 @keyframes buttonshake {
   0%   { transform: none; }
   38%  { transform: rotateZ(2.8deg) scale(1.032); }
   62%  { transform: rotateZ(-3.5deg) scale(1.048); }
   100% { transform: scale(1.07); }
-}/*
+}
+
+/*
 @keyframes shake_horizontal {
   0%, 100% { transform: none }
   20%      { transform: translateX(-3px); }

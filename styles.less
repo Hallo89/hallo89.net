@@ -34,37 +34,31 @@ body {
   border-color: mix(@header-background-color, lime, 85%);*/
   span {
     position: absolute;
+    width: 0;
+    height: 0;
     background-color: @heading-foreground-color;
     z-index: 1;
-    &#overlay_top, &#overlay_bottom {
-      width: 648px;
-      height: 11px;
-    }
     &#overlay_top {
       top: 120px;
-      animation: 1.5s loltop, 1.5s fadein;
+      animation: .87s headerborder_top, 1.35s fadein;
     }
     &#overlay_bottom {
       bottom: 120px;
-      animation: 1.5s lolbottom, 1.5s fadein;
-    }
-    &#overlay_right, &#overlay_left {
-      width: 11px;
-      height: 170px;
+      animation: .87s headerborder_bottom, 1.35s fadein;
     }
     &#overlay_right {
       right: 242px;
-      animation: 1.5s lolright, 1.5s fadein;
+      animation: .87s headerborder_right, 1.35s fadein;
     }
     &#overlay_left {
       left: 241px;
-      animation: 1.5s lolleft, 1.5s fadein;
+      animation: .87s headerborder_left, 1.35s fadein;
     }
   }
   #main_header {
     border: solid 11px;
     transition: .5s;
-    animation: 1.2s fadein, 1.02s shiftin, 2s borderbuildup;
+    animation: 1.2s fadein, 1.02s shiftin, .87s borderdisappearance;
     &:hover {
       color: @main-box-hover;
       transform: scale(0.968);
@@ -339,13 +333,13 @@ body {
         }
       }
       &:nth-of-type(1) {
-        animation: .6s boxtext_shiftin, .8s fadein;
+        animation: .6s shiftinX, .8s fadein;
       }
       &:nth-of-type(2) {
-        animation: 1s boxtext_shiftin, .8s fadein;
+        animation: 1s shiftinX, .8s fadein;
       }
       &:nth-of-type(3) {
-        animation: 1.4s boxtext_shiftin, .8s fadein;
+        animation: 1.4s shiftinX, .8s fadein;
       }
     }
   }
