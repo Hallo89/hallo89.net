@@ -1,0 +1,124 @@
+// out: global.css, sourcemap: false, compress: false,
+
+/*
+Written by Hallo89 using LESS CSS - http://lesscss.org
+No necessity to write this in here but Less is awesome :o
+*/
+
+@import "colors.less";
+@import "mixins.less";
+
+
+#mode_switch {
+  position: absolute;
+  right: 50px;
+  top: 30px;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  cursor: pointer;
+  border: 2px solid;
+  z-index: 1;
+  .noselect;
+  #switch_inner {
+    font-size: 20px;
+    transition: all .53s cubic-bezier(.4,.07,.6,.93);
+  }
+  #switch_circle {
+    border: 10px solid;
+    border-radius: 100px;
+    transition: all .53s;
+  }
+}
+.dark-mode #mode_switch {
+  color: @mode-switch;
+  background: @mode-switch-background;
+  #switch_circle {
+    margin: 2px 5px 2px 2px;
+  }
+}
+.light-mode #mode_switch {
+  color: @mode-switch--light;
+  background: @mode-switch-background--light;
+  #switch_inner {
+    transform: translateX(-27px);
+  }
+  #switch_circle {
+    margin: 2px 2px 2px 5px;
+    transform: translateX(59px);
+  }
+}
+
+#head_nav {
+  margin-top: 15px;
+  position: sticky;
+  top: 2px;
+  z-index: 10;
+  nav {
+    margin: 25px auto auto;
+    padding: 15px;
+    background-color: @navbox-background;
+    max-width: 615px;
+    animation: 5s fadein2;
+    #links {
+      font: 22px Arial, sans-serif;
+      text-transform: uppercase;
+      text-align: center;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      animation: 1.15s shiftin cubic-bezier(.52,.51,.61,.99), 1.22s fadein;
+      .noselect;
+      a {
+        padding: 5px 5px 3px;
+        text-decoration: none;
+        background: @nav-background;
+        color: @nav-foreground-color;
+        display: inline-block;
+        border: solid 2px;
+        transition:  all .8s, color .38s;
+        &::before, &::after {
+          content: '';
+          border-bottom: solid 1.5px;
+          vertical-align: middle;
+          width: 0;
+          display: inline-block;
+          transition: all .8s;
+        }
+        &:hover {
+          margin: 0 13px;
+          transition: transform 0;
+          transform: scale(1.07);
+          box-shadow: 1px 1px 6px @nav-border-shadow;
+          animation: .36s buttonshake;
+        }
+        &:hover::before, &:hover::after {
+          width: 10px;
+        }
+        @media screen and (max-width: 430px) {
+          &:hover {
+            margin: 0;
+          }
+          &:hover::before, &:hover::after {
+            width: 2.5px;
+          }
+        }
+        &:active {
+          color: @nav-active;
+        }
+        .selection-w-color(@nav-selection);
+      }
+    }
+  }
+  #expanding_border {
+    margin: 3px auto auto;
+    max-width: 710px;
+    border-bottom: solid 2px;
+    border-radius: 150px;
+    color: @nav-border;
+    animation: 2.7s borderglide, 2.5s fadein, 2s shiftin2;
+  }
+}
+
+
+@import "keyframes.less";

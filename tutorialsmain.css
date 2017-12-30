@@ -1,55 +1,116 @@
-// main: mainpage.less
-
+/*
+Written by Hallo89 using LESS CSS - http://lesscss.org
+No necessity to write this in here but Less is awesome :o
+*/
+#main {
+  display: flex;
+  padding: 30px 15px 15px;
+}
+#main aside {
+  position: sticky;
+  font: 30px 'Roboto', sans-serif;
+  margin-right: 30px;
+  padding: 15px;
+  width: 25%;
+  height: 520px;
+  background: #383838;
+}
+#main aside a {
+  margin: 8px;
+  display: block;
+}
+#main #main_content {
+  width: 100%;
+  height: 2000px;
+  background: #303030;
+}
 @keyframes shiftin {
-  from { transform: translateY(-60px); }
+  from {
+    transform: translateY(-60px);
+  }
 }
 @keyframes shiftin2 {
-  from { transform: translateY(-20px); }
+  from {
+    transform: translateY(-20px);
+  }
 }
 @keyframes shiftinX {
-  from { transform: translateX(-40px); }
+  from {
+    transform: translateX(-40px);
+  }
 }
 @keyframes rotateX {
-  to   { transform: rotateX(360deg); }
+  to {
+    transform: rotateX(360deg);
+  }
 }
 @keyframes fadein {
-  from { opacity: 0.1; }
+  from {
+    opacity: 0.1;
+  }
 }
 @keyframes fadein2 {
-  from { background-color: fadeout(@navbox-background, 100%); }
+  from {
+    background-color: rgba(51, 51, 51, 0);
+  }
 }
-
 @keyframes borderbuildup {
-  from { border-width: 0; }
+  from {
+    border-width: 0;
+  }
 }
-
 @keyframes borderglide {
-  from { max-width: 0; }
+  from {
+    max-width: 0;
+  }
 }
-
 @keyframes boxcurtain_imageheight {
-  0%   { height: 50%; }
-  50%  { height: 50%; }
-  100% { height: 0; }
+  0% {
+    height: 50%;
+  }
+  50% {
+    height: 50%;
+  }
+  100% {
+    height: 0;
+  }
 }
 @keyframes boxcurtain_bordertop {
-  from, to { border-top: solid 3px }
+  from,
+  to {
+    border-top: solid 3px;
+  }
 }
 @keyframes boxcurtain_borderbottom {
-  from, to { border-bottom: solid 3px }
+  from,
+  to {
+    border-bottom: solid 3px;
+  }
 }
 @keyframes boxcurtain_width_left {
-  0%  { width: 0; left: 200px }
-  10% { width: 0; left: 200px }
+  0% {
+    width: 0;
+    left: 200px;
+  }
+  10% {
+    width: 0;
+    left: 200px;
+  }
 }
-
 @keyframes buttonshake {
-  0%   { transform: none; }
-  38%  { transform: rotateZ(2.8deg) scale(1.032); }
-  62%  { transform: rotateZ(-3.5deg) scale(1.048); }
-  100% { transform: scale(1.07); }
+  0% {
+    transform: none;
+  }
+  38% {
+    transform: rotateZ(2.8deg) scale(1.032);
+  }
+  62% {
+    transform: rotateZ(-3.5deg) scale(1.048);
+  }
+  100% {
+    transform: scale(1.07);
+  }
 }
-
 /*
 @keyframes shake_horizontal {
   0%, 100% { transform: none }

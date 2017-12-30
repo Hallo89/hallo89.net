@@ -1,16 +1,18 @@
-// main: styles.less
+// main: mainpage.less
 
 // ::selection mixin
-.selection-background(@background: transparent) {
-  &::selection {
-    background-color: @background;
-  }
-  &::-webkit-selection {
-    background-color: @background;
-  }
-  &::-moz-selection {
-    background-color: @background;
-  }
+.noselect() {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.mode-switch-transition() {
+  transition: background .15s linear;
+}
+
+.mode-switch-transition-w-shadow() {
+  transition: background .15s linear, box-shadow .15s linear;
 }
 
 .selection-w-color(@color: @subheader-selection; @background: transparent;) {

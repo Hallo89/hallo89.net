@@ -4,32 +4,30 @@
     <meta charset="utf-8">
     <title>Nesewebel fanclub</title>
     <link rel="icon" href="https://cdn.discordapp.com/attachments/363044137106276354/392035652444749825/Nesewebels_geils_profilbild_in_geil_lol_geil.png.ico">
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="global.css">
+    <link rel="stylesheet" type="text/css" href="mainpage.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <script>
+    //Copied out of the internet D:> (sry)
+      function toggleMode() {
+        var body = document.getElementById("body");
+        var currentClass = body.className;
+        body.className = currentClass == "dark-mode" ? "light-mode" : "dark-mode";
+      }
+    </script>
   </head>
-  <body>
+  <body id="body" class="dark-mode">
+
+    <div onclick="toggleMode()" id="mode_switch">
+      <span id="switch_circle"></span>
+      <span id="switch_inner"> Switch </span>
+    </div>
 
     <div id="head_block">
-      <span id="overlay_top"></span>
-      <span id="overlay_right"></span>
-      <span id="overlay_bottom"></span>
-      <span id="overlay_left"></span>
       <div id="main_header">
         <h1>nesewebel</h1>
       </div>
       <p> Eine Ode an den Nesewebel </p>
-    </div>
-
-    <div id="head_nav">
-      <nav>
-        <div id="links">
-          <a href="http://api.nesewebel.de/raj.json" target="_blank">Nese1</a>
-          <a href="http://nesewebel.de/mockbob" target="_blank">Nese2</a>
-          <a href="https://twitter.com/Nesewebel" target="_blank">Nese3</a>
-          <a href="http://steamcommunity.com/id/Nesewebel/" target="_blank">Nese4</a>
-        </div>
-      </nav>
-      <div id="expanding_border"></div>
     </div>
 
     <nav id="ultra_nav">
@@ -51,13 +49,13 @@
             <span class="header_maintext"> About Nesewebel </span>
           </div>
           <div class="about_content">
-            <span> Nesewebel is pretty lit yeah what should I now write in here hmm it's pretty difficult because I actually want to replace the 'Lorem Ipsum' text by Atom because it wasn't Nesewebel-y enough. So Nesewebel is pretty lit, as I said, he is a very cool guy haha that was actually a lie he's the shittiest person on earth but is this really true hmm I don't know so decide whether he's cool or not :thinking:. Please gift him a CPU cooler he needs it desperately actually please gift him everything you have because he is very awesome </span>
+            <span> Nesewebel is pretty lit yeah what should I now write in here hmm it's pretty difficult because I actually want to replace the 'Lorem Ipsum' text by Atom because it wasn't Nesewebel-y enough. So Nesewebel is pretty lit, as I said, he is a very cool guy haha that was actually a lie he's the shittiest person on earth but is this really true hmm I don't know so decide whether he's cool or not :thinking:. Please gift him a CPU cooler he needs it desperately actually please gift him everything you have because he is very awesome. <br> ALSO SORRY THAT I DIDN'T BUY THAT BOX FOR YOU D::::: ;________; SOB </span>
           </div>
         </div>
       </div>
 
       <div class="menu">
-        <div class="box">
+        <div class="box light-mode">
           <div class="box_header header_box1">
             <div class="curtainanimation">
               <div class="curtain_below header_box1">
