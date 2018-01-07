@@ -54,6 +54,14 @@ No necessity to write this in here but Less is awesome :o
     background-color: rgba(51, 51, 51, 0);
   }
 }
+@keyframes fadein3 {
+  0% {
+    opacity: 0;
+  }
+  18% {
+    opacity: 0;
+  }
+}
 @keyframes borderbuildup {
   from {
     border-width: 0;
@@ -62,39 +70,6 @@ No necessity to write this in here but Less is awesome :o
 @keyframes borderglide {
   from {
     max-width: 0;
-  }
-}
-@keyframes boxcurtain_imageheight {
-  0% {
-    height: 50%;
-  }
-  50% {
-    height: 50%;
-  }
-  100% {
-    height: 0;
-  }
-}
-@keyframes boxcurtain_bordertop {
-  from,
-  to {
-    border-top: solid 3px;
-  }
-}
-@keyframes boxcurtain_borderbottom {
-  from,
-  to {
-    border-bottom: solid 3px;
-  }
-}
-@keyframes boxcurtain_width_left {
-  0% {
-    width: 0;
-    left: 200px;
-  }
-  10% {
-    width: 0;
-    left: 200px;
   }
 }
 @keyframes buttonshake {
@@ -129,7 +104,7 @@ No necessity to write this in here but Less is awesome :o
   95%  { border-radius: 16.35px; }
   100% { border-radius: 17px; }
 }*/
-/*@keyframes shade_is_super {
+/*@keyframes wtflol {
   0%, 100% { transform: none }
   20%      { transform: translateX(-450px) scale(3) rotateX(200deg); opacity: 0.5; background: red; }
   40%      { transform: translateX(350px) scale(2) rotateX(360deg); opacity: 1; background: blue; }

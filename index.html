@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="mainpage.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
     <script>
-    //Copied out of the internet D:> (sry)
+    //Shamefully copied out of the internet D:> (sry)
       function toggleMode() {
         var body = document.getElementById("body");
         var currentClass = body.className;
@@ -18,9 +18,17 @@
   </head>
   <body id="body" class="dark-mode">
 
-    <div onclick="toggleMode()" id="mode_switch">
-      <span id="switch_circle"></span>
-      <span id="switch_inner"> Switch </span>
+    <div id="headline">
+      <div onclick="toggleMode()" id="mode_switch_daynight">
+        <span class="switch_circle"></span>
+        <span class="switch_inner"> Switch </span>
+      </div>
+      <!-- pls end my life
+      <div onclick="toggleModeNesewebel()" id="mode_switch">
+        <span class="switch_circle"></span>
+        <span class="switch_inner"> Switch </span>
+      </div>
+      life successfully ended -->
     </div>
 
     <div id="head_block">
@@ -32,20 +40,12 @@
 
     <nav id="ultra_nav">
       <div class="menu menu_about">
-        <div class="box box_about">
+        <div class="box box_about" id="box1">
+          <div class="corneranimation">
+            <span class="corner_before"></span>
+            <span class="corner_after"></span>
+          </div>
           <div class="box_header header_box1">
-            <div class="curtainanimation">
-              <div class="curtain_below header_box1">
-                <span class="below_overlay"></span>
-              </div>
-              <div class="curtain_above header_box1">
-                <span class="above_overlay"></span>
-              </div>
-            </div>
-            <div class="corneranimation">
-              <span class="corner_before"></span>
-              <span class="corner_after"></span>
-            </div>
             <span class="header_maintext"> About Nesewebel </span>
           </div>
           <div class="about_content">
@@ -55,44 +55,28 @@
       </div>
 
       <div class="menu">
-        <div class="box light-mode">
+        <div class="box" id="box2">
+          <div class="corneranimation">
+            <span class="corner_before"></span>
+            <span class="corner_after"></span>
+          </div>
           <div class="box_header header_box1">
-            <div class="curtainanimation">
-              <div class="curtain_below header_box1">
-                <span class="below_overlay"></span>
-              </div>
-              <div class="curtain_above header_box1">
-                <span class="above_overlay"></span>
-              </div>
-            </div>
-            <div class="corneranimation">
-              <span class="corner_before"></span>
-              <span class="corner_after"></span>
-            </div>
             <span class="header_maintext"> Nesey Projects </span>
           </div>
-          <a href="http://nesewebel.de" id="box1text1"> Dandelion With Nese </a>
-          <a href="http://nesewebel.de" id="box1text2"> This Nesey site lol </a>
+          <a href="http://nesewebel.de"> Dandelion With Nese </a>
+          <a href="http://nesewebel.de"> This Nesey site lol </a>
         </div>
-        <div class="box">
+        <div class="box" id="box3">
+          <div class="corneranimation">
+            <span class="corner_before"></span>
+            <span class="corner_after"></span>
+          </div>
           <div class="box_header header_box2">
-            <div class="curtainanimation">
-              <div class="curtain_below header_box2">
-                <span class="below_overlay"></span>
-              </div>
-              <div class="curtain_above header_box2">
-                <span class="above_overlay"></span>
-              </div>
-            </div>
-            <div class="corneranimation">
-              <span class="corner_before"></span>
-              <span class="corner_after"></span>
-            </div>
             <span class="header_maintext"> Other Neses </span>
           </div>
-          <a href="./sponge.html" id="box2text1"> Nese1 </a>
-          <a href="http://nesewebel.de" id="box2text2"> Nese2 </a>
-          <a href="http://nesewebel.de" id="box2text3"> Nese3 </a>
+          <a href="./sponge.html"> Nese1 </a>
+          <a href="./tutorials.html"> Nese2 </a>
+          <a href="http://nesewebel.de"> Nese3 </a>
         </div>
       </div>
     </nav>

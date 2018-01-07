@@ -1,4 +1,4 @@
-// main: global.less
+// main: mainpage.less
 
 @background-color: hsl(0, 0%, 17%);
 @foreground-color: hsl(0, 0%, 61%);
@@ -55,19 +55,19 @@
 
 
 @ultranav-box: lighten(@background-color, 1%);
+@ultranav-box-corners: fadeout(darken(@background-color, 5%), 38%);
 @ultranav-box-shadow: fadeout(darken(@background-color, 12%), 12%);
 @ultranav-boxheader-bordertopbottom: darken(@foreground-color, 23%);
-@ultranav-boxheader-foreground: darken(@foreground-color, 40%);
-@ultranav-boxheader-elements: fadeout(darken(@background-color, 10%), 20%);
+@ultranav-boxheader-foreground: darken(@foreground-color, 28%);
 @ultranav-boxabout-foreground: @ultranav-boxtext-foreground;
 @ultranav-boxtext-foreground: @foreground-color;
 @ultranav-boxtext-additional-border: darken(@background-color, 8%);
 
 @ultranav-box--light: lighten(@background-color--light, 4%);
+@ultranav-box-corners--light: fadeout(darken(@foreground-color--light, 5%), 10%);
 @ultranav-box-shadow--light: fadeout(darken(@background-color--light, 19%), 12%);
 @ultranav-boxheader-bordertopbottom--light: darken(@foreground-color--light, 23%);
 @ultranav-boxheader-foreground--light: darken(@foreground-color--light, 17%);
-@ultranav-boxheader-elements--light: fadeout(darken(@foreground-color--light, 5%), 10%);
 @ultranav-boxabout-foreground--light: darken(@ultranav-boxtext-foreground--light, 3%);
 @ultranav-boxtext-foreground--light: @foreground-color--light;
 @ultranav-boxtext-additional-border--light: @foreground-color--light;

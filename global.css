@@ -2,10 +2,8 @@
 Written by Hallo89 using LESS CSS - http://lesscss.org
 No necessity to write this in here but Less is awesome :o
 */
-#mode_switch {
-  position: absolute;
-  right: 50px;
-  top: 30px;
+#mode_switch_daynight {
+  margin: 10px 20px 10px 0;
   display: flex;
   align-items: center;
   padding: 5px;
@@ -15,31 +13,38 @@ No necessity to write this in here but Less is awesome :o
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
+  /*
+  &:nth-of-type(1) {
+    top: 30px;
+  }
+  &:nth-of-type(2) {
+    top: 94px;
+  }*/
 }
-#mode_switch #switch_inner {
+#mode_switch_daynight .switch_inner {
   font-size: 20px;
   transition: all 0.53s cubic-bezier(0.4, 0.07, 0.6, 0.93);
 }
-#mode_switch #switch_circle {
+#mode_switch_daynight .switch_circle {
   border: 10px solid;
   border-radius: 100px;
   transition: all .53s;
 }
-.dark-mode #mode_switch {
+.dark-mode #mode_switch_daynight {
   color: #9c9c9c;
   background: rgba(237, 237, 237, 0.13);
 }
-.dark-mode #mode_switch #switch_circle {
+.dark-mode #mode_switch_daynight .switch_circle {
   margin: 2px 5px 2px 2px;
 }
-.light-mode #mode_switch {
+.light-mode #mode_switch_daynight {
   color: #666666;
   background: rgba(43, 43, 43, 0.13);
 }
-.light-mode #mode_switch #switch_inner {
+.light-mode #mode_switch_daynight .switch_inner {
   transform: translateX(-27px);
 }
-.light-mode #mode_switch #switch_circle {
+.light-mode #mode_switch_daynight .switch_circle {
   margin: 2px 2px 2px 5px;
   transform: translateX(59px);
 }
@@ -54,7 +59,7 @@ No necessity to write this in here but Less is awesome :o
   padding: 15px;
   background-color: rgba(51, 51, 51, 0.76);
   max-width: 615px;
-  animation: 5s fadein2;
+  animation: 4s fadein2;
 }
 #head_nav nav #links {
   font: 22px Arial, sans-serif;
@@ -63,7 +68,7 @@ No necessity to write this in here but Less is awesome :o
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  animation: 1.15s shiftin cubic-bezier(0.52, 0.51, 0.61, 0.99), 1.22s fadein;
+  animation: 0.85s shiftin3 cubic-bezier(0.52, 0.51, 0.61, 0.99), 1.22s fadein;
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
@@ -95,7 +100,7 @@ No necessity to write this in here but Less is awesome :o
 }
 #head_nav nav #links a:hover::before,
 #head_nav nav #links a:hover::after {
-  width: 10px;
+  width: 9px;
 }
 @media screen and (max-width: 430px) {
   #head_nav nav #links a:hover {
@@ -127,7 +132,7 @@ No necessity to write this in here but Less is awesome :o
   border-bottom: solid 2px;
   border-radius: 150px;
   color: #8a8a8a;
-  animation: 2.7s borderglide, 2.5s fadein, 2s shiftin2;
+  animation: 2.2s borderglide, 2s fadein, 1.7s shiftin2;
 }
 @keyframes shiftin {
   from {
@@ -137,6 +142,11 @@ No necessity to write this in here but Less is awesome :o
 @keyframes shiftin2 {
   from {
     transform: translateY(-20px);
+  }
+}
+@keyframes shiftin3 {
+  from {
+    transform: translateY(-30px);
   }
 }
 @keyframes shiftinX {
@@ -159,6 +169,14 @@ No necessity to write this in here but Less is awesome :o
     background-color: rgba(51, 51, 51, 0);
   }
 }
+@keyframes fadein3 {
+  0% {
+    opacity: 0;
+  }
+  18% {
+    opacity: 0;
+  }
+}
 @keyframes borderbuildup {
   from {
     border-width: 0;
@@ -169,39 +187,6 @@ No necessity to write this in here but Less is awesome :o
     max-width: 0;
   }
 }
-@keyframes boxcurtain_imageheight {
-  0% {
-    height: 50%;
-  }
-  50% {
-    height: 50%;
-  }
-  100% {
-    height: 0;
-  }
-}
-@keyframes boxcurtain_bordertop {
-  from,
-  to {
-    border-top: solid 3px;
-  }
-}
-@keyframes boxcurtain_borderbottom {
-  from,
-  to {
-    border-bottom: solid 3px;
-  }
-}
-@keyframes boxcurtain_width_left {
-  0% {
-    width: 0;
-    left: 200px;
-  }
-  10% {
-    width: 0;
-    left: 200px;
-  }
-}
 @keyframes buttonshake {
   0% {
     transform: none;
@@ -210,7 +195,7 @@ No necessity to write this in here but Less is awesome :o
     transform: rotateZ(2.8deg) scale(1.032);
   }
   62% {
-    transform: rotateZ(-3.5deg) scale(1.048);
+    transform: rotateZ(-3.2deg) scale(1.048);
   }
   100% {
     transform: scale(1.07);
@@ -234,7 +219,7 @@ No necessity to write this in here but Less is awesome :o
   95%  { border-radius: 16.35px; }
   100% { border-radius: 17px; }
 }*/
-/*@keyframes shade_is_super {
+/*@keyframes wtflol {
   0%, 100% { transform: none }
   20%      { transform: translateX(-450px) scale(3) rotateX(200deg); opacity: 0.5; background: red; }
   40%      { transform: translateX(350px) scale(2) rotateX(360deg); opacity: 1; background: blue; }

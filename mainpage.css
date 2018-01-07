@@ -3,12 +3,19 @@ Written by Hallo89 using LESS CSS - http://lesscss.org
 No necessity to write this in here but Less is awesome :o
 */
 body {
+  margin: 0;
   background: #2b2b2b;
   font-family: Arial;
   transition: background .15s linear;
 }
 body.light-mode {
   background: #ededed;
+}
+#headline {
+  display: flex;
+  justify-content: flex-end;
+  max-width: 100vw;
+  box-shadow: 0 1px 3px;
 }
 #head_block {
   position: relative;
@@ -18,9 +25,9 @@ body.light-mode {
   align-content: center;
   flex-flow: column wrap;
   margin: auto;
-  box-shadow: 1px 3px 13px 1px rgba(26, 26, 26, 0.77);
+  box-shadow: 0 2px 10px 1px rgba(26, 26, 26, 0.77);
   background-color: #363636;
-  max-width: 1130px;
+  max-width: 100vw;
   height: 410px;
   color: #c2c2c2;
   text-align: center;
@@ -69,7 +76,7 @@ body.light-mode {
   position: absolute;
   bottom: 30px;
   font: 19px 'Segoe UI';
-  animation: 0.8s shiftin ease-out, 0.8s fadein ease-in;
+  animation: 0.75s fadein3 ease-in;
   transition: background .15s linear;
 }
 #head_block p::selection {
@@ -93,7 +100,7 @@ body.light-mode {
   display: inline-block;
 }
 .light-mode #head_block {
-  box-shadow: 1px 3px 13px 1px rgba(194, 194, 194, 0.8);
+  box-shadow: 0 2px 10px 1px rgba(194, 194, 194, 0.8);
   background-color: #f7f7f7;
   color: #6e6e6e;
 }
@@ -125,46 +132,6 @@ body.light-mode {
 #ultra_nav .menu.menu_about {
   justify-content: center;
 }
-#ultra_nav .menu:nth-of-type(1) .box:nth-of-type(1) {
-  animation: 0.8s shiftin2 ease-out;
-}
-#ultra_nav .menu:nth-of-type(1) .box:nth-of-type(1) .box_header,
-#ultra_nav .menu:nth-of-type(1) .box:nth-of-type(1) .curtain_below,
-#ultra_nav .menu:nth-of-type(1) .box:nth-of-type(1) .curtain_above {
-  background-image: url('https://i.gyazo.com/7f6a04143c26fa071b91457ace2e70eb.png');
-}
-#ultra_nav .menu:nth-of-type(2) .box:nth-of-type(1) {
-  animation: 0.9s shiftin2 ease-out;
-}
-#ultra_nav .menu:nth-of-type(2) .box:nth-of-type(1) .box_header,
-#ultra_nav .menu:nth-of-type(2) .box:nth-of-type(1) .curtain_below,
-#ultra_nav .menu:nth-of-type(2) .box:nth-of-type(1) .curtain_above {
-  background-image: url('https://i.gyazo.com/7f6a04143c26fa071b91457ace2e70eb.png');
-}
-#ultra_nav .menu:nth-of-type(2) .box:nth-of-type(2) {
-  animation: 1s shiftin2 ease-out;
-}
-#ultra_nav .menu:nth-of-type(2) .box:nth-of-type(2) .box_header,
-#ultra_nav .menu:nth-of-type(2) .box:nth-of-type(2) .curtain_below,
-#ultra_nav .menu:nth-of-type(2) .box:nth-of-type(2) .curtain_above {
-  background-image: url('https://i.gyazo.com/7f6a04143c26fa071b91457ace2e70eb.png');
-}
-#ultra_nav .menu:nth-of-type(3) .box:nth-of-type(1) {
-  animation: 1.2s shiftin2 ease-out;
-}
-#ultra_nav .menu:nth-of-type(3) .box:nth-of-type(1) .box_header,
-#ultra_nav .menu:nth-of-type(3) .box:nth-of-type(1) .curtain_below,
-#ultra_nav .menu:nth-of-type(3) .box:nth-of-type(1) .curtain_above {
-  background-image: url('https://i.gyazo.com/7f6a04143c26fa071b91457ace2e70eb.png');
-}
-#ultra_nav .menu:nth-of-type(3) .box:nth-of-type(2) {
-  animation: 1.3s shiftin2 ease-out;
-}
-#ultra_nav .menu:nth-of-type(3) .box:nth-of-type(2) .box_header,
-#ultra_nav .menu:nth-of-type(3) .box:nth-of-type(2) .curtain_below,
-#ultra_nav .menu:nth-of-type(3) .box:nth-of-type(2) .curtain_above {
-  background-image: url('https://i.gyazo.com/7f6a04143c26fa071b91457ace2e70eb.png');
-}
 @media screen and (max-width: 845px) {
   #ultra_nav .menu {
     justify-content: center;
@@ -188,7 +155,6 @@ body.light-mode {
   transition: background 0.15s linear, box-shadow 0.15s linear;
 }
 #ultra_nav .box.box_about {
-  position: static;
   height: 82px;
   transition: all 0.92s cubic-bezier(0.71, 0.12, 0.45, 0.81), box-shadow 0.15s linear;
 }
@@ -210,10 +176,31 @@ body.light-mode {
   transform: scale(0);
   transition: all 0.7s cubic-bezier(0.8, 0, 0.79, 0.74), opacity 0.525s ease;
 }
-#ultra_nav .box .box_header {
-  position: relative;
-  overflow: hidden;
-  background-attachment: fixed;
+#ultra_nav .box .corneranimation .corner_before,
+#ultra_nav .box .corneranimation .corner_after {
+  position: absolute;
+  background: rgba(31, 31, 31, 0.62);
+  transition: all 0.4s ease-out;
+}
+#ultra_nav .box .corneranimation .corner_before {
+  height: 40px;
+  width: 80px;
+  left: -26px;
+  bottom: -6px;
+  transform: rotateZ(45deg) translateY(40px);
+}
+#ultra_nav .box .corneranimation .corner_after {
+  height: 80px;
+  width: 40px;
+  right: -6px;
+  top: -26px;
+  transform: rotateZ(-45deg) translateX(40px);
+}
+#ultra_nav .box:hover .corner_before {
+  transform: rotateZ(45deg) translateY(0);
+}
+#ultra_nav .box:hover .corner_after {
+  transform: rotateZ(-45deg) translateX(0);
 }
 #ultra_nav .box .box_header .header_maintext {
   padding: 38px 28px;
@@ -221,69 +208,10 @@ body.light-mode {
   text-transform: uppercase;
   display: inherit;
   line-height: 0;
-  color: #363636;
+  color: #545454;
   border-bottom: 3px solid #616161;
   border-top: 3px solid #616161;
   transition: background 0.15s linear, border-bottom 0.15s linear, border-top 0.15s linear;
-}
-#ultra_nav .box .box_header .corneranimation .corner_before,
-#ultra_nav .box .box_header .corneranimation .corner_after {
-  position: absolute;
-  background: rgba(18, 18, 18, 0.8);
-  transition: all 0.5s ease-out;
-}
-#ultra_nav .box .box_header .corneranimation .corner_before {
-  height: 45px;
-  width: 100px;
-  left: -30px;
-  bottom: -10px;
-  transform: rotateZ(45deg) translateY(45px);
-}
-#ultra_nav .box .box_header .corneranimation .corner_after {
-  height: 100px;
-  width: 45px;
-  right: -10px;
-  top: -30px;
-  transform: rotateZ(-45deg) translateX(45px);
-}
-#ultra_nav .box .box_header:hover .corner_before {
-  transform: rotateZ(45deg) translateY(0);
-}
-#ultra_nav .box .box_header:hover .corner_after {
-  transform: rotateZ(-45deg) translateX(0);
-}
-#ultra_nav .box .box_header .curtainanimation * {
-  position: absolute;
-  width: 100%;
-  left: 0;
-}
-#ultra_nav .box .box_header .curtainanimation .curtain_below,
-#ultra_nav .box .box_header .curtainanimation .below_overlay {
-  bottom: 0;
-}
-#ultra_nav .box .box_header .curtainanimation .curtain_above,
-#ultra_nav .box .box_header .curtainanimation .above_overlay {
-  top: 0;
-}
-#ultra_nav .box .box_header .curtainanimation .curtain_below,
-#ultra_nav .box .box_header .curtainanimation .curtain_above {
-  background-attachment: fixed;
-  height: 0;
-  animation: 1.02s boxcurtain_imageheight cubic-bezier(0.8, 0, 1, 1);
-}
-#ultra_nav .box .box_header .curtainanimation .below_overlay,
-#ultra_nav .box .box_header .curtainanimation .above_overlay {
-  height: 100%;
-  color: #616161;
-  transition: background .15s linear;
-}
-#ultra_nav .box .box_header .curtainanimation .below_overlay {
-  border-top: none;
-  animation: 0.78s boxcurtain_width_left ease-out, 1.02s boxcurtain_bordertop;
-}
-#ultra_nav .box .box_header .curtainanimation .above_overlay {
-  border-bottom: none;
-  animation: 0.78s boxcurtain_width_left ease-out, 1.02s boxcurtain_borderbottom;
 }
 #ultra_nav .box a {
   padding: 20px 10px;
@@ -305,22 +233,34 @@ body.light-mode {
   border-top: solid 5px transparent;
   border-bottom: solid 5px transparent;
 }
-#ultra_nav .box a#box1text1 {
+#ultra_nav .box a:nth-of-type(1) {
+  animation: .8s shiftinX, .75s fadein;
+}
+#ultra_nav .box a:nth-of-type(2) {
+  animation: 1s shiftinX, .75s fadein;
+}
+#ultra_nav .box a:nth-of-type(3) {
+  animation: 1.2s shiftinX, .75s fadein;
+}
+#ultra_nav .box#box1 {
+  animation: 0.8s shiftin2 ease-out;
+}
+#ultra_nav .box#box1 .box_header {
+  background: url('https://i.gyazo.com/7f6a04143c26fa071b91457ace2e70eb.png');
+}
+#ultra_nav .box#box2 {
+  animation: 0.9s shiftin2 ease-out;
+}
+#ultra_nav .box#box2 a:nth-of-type(1) {
   background: url('https://i.gyazo.com/d3454e553f00a384862950210990c16c.png');
   background-size: cover;
 }
-#ultra_nav .box a#box1text1:hover {
+#ultra_nav .box#box2 a:nth-of-type(1):hover {
   background: url('https://i.gyazo.com/aee35492a1a0a171280fe4f7a0d97343.png');
   background-size: cover;
 }
-#ultra_nav .box a:nth-of-type(1) {
-  animation: .6s shiftinX, .8s fadein;
-}
-#ultra_nav .box a:nth-of-type(2) {
-  animation: 1s shiftinX, .8s fadein;
-}
-#ultra_nav .box a:nth-of-type(3) {
-  animation: 1.4s shiftinX, .8s fadein;
+#ultra_nav .box#box3 {
+  animation: 1s shiftin2 ease-out;
 }
 .light-mode #ultra_nav .box {
   background: #f7f7f7;
@@ -358,6 +298,11 @@ body.light-mode {
     transform: translateY(-20px);
   }
 }
+@keyframes shiftin3 {
+  from {
+    transform: translateY(-30px);
+  }
+}
 @keyframes shiftinX {
   from {
     transform: translateX(-40px);
@@ -378,6 +323,14 @@ body.light-mode {
     background-color: rgba(51, 51, 51, 0);
   }
 }
+@keyframes fadein3 {
+  0% {
+    opacity: 0;
+  }
+  18% {
+    opacity: 0;
+  }
+}
 @keyframes borderbuildup {
   from {
     border-width: 0;
@@ -388,39 +341,6 @@ body.light-mode {
     max-width: 0;
   }
 }
-@keyframes boxcurtain_imageheight {
-  0% {
-    height: 50%;
-  }
-  50% {
-    height: 50%;
-  }
-  100% {
-    height: 0;
-  }
-}
-@keyframes boxcurtain_bordertop {
-  from,
-  to {
-    border-top: solid 3px;
-  }
-}
-@keyframes boxcurtain_borderbottom {
-  from,
-  to {
-    border-bottom: solid 3px;
-  }
-}
-@keyframes boxcurtain_width_left {
-  0% {
-    width: 0;
-    left: 200px;
-  }
-  10% {
-    width: 0;
-    left: 200px;
-  }
-}
 @keyframes buttonshake {
   0% {
     transform: none;
@@ -429,7 +349,7 @@ body.light-mode {
     transform: rotateZ(2.8deg) scale(1.032);
   }
   62% {
-    transform: rotateZ(-3.5deg) scale(1.048);
+    transform: rotateZ(-3.2deg) scale(1.048);
   }
   100% {
     transform: scale(1.07);
@@ -453,7 +373,7 @@ body.light-mode {
   95%  { border-radius: 16.35px; }
   100% { border-radius: 17px; }
 }*/
-/*@keyframes shade_is_super {
+/*@keyframes wtflol {
   0%, 100% { transform: none }
   20%      { transform: translateX(-450px) scale(3) rotateX(200deg); opacity: 0.5; background: red; }
   40%      { transform: translateX(350px) scale(2) rotateX(360deg); opacity: 1; background: blue; }

@@ -7,6 +7,11 @@
   user-select: none;
 }
 
+.boxanimation(@seconds) {
+  animation: @seconds shiftin2 ease-out;
+}
+
+
 .mode-switch-transition() {
   transition: background .15s linear;
 }
@@ -30,45 +35,12 @@
   }
 }
 
-//nth nesting mixin -> shiftin animation + header background per individual box
-//for one box in a menu
-.nth-box-alone(@boxheaderbackground; @seconds;) {
-  .box:nth-of-type {
-    &(1) {
-      animation: @seconds shiftin2 ease-out;
-      .box_header, .curtain_below, .curtain_above {
-        background-image: @boxheaderbackground;
-      }
-    }
-  }
-}
-
-//for two boxes in a menu (default)
-.nth-box-twins(@boxheaderbackground1; @boxheaderbackground2; @seconds1; @seconds2;) {
-  .box:nth-of-type {
-    &(1) {
-      animation: @seconds1 shiftin2 ease-out;
-      .box_header, .curtain_below, .curtain_above {
-        background-image: @boxheaderbackground1;
-      }
-    }
-    &(2) {
-      animation: @seconds2 shiftin2 ease-out;
-      .box_header, .curtain_below, .curtain_above {
-        background-image: @boxheaderbackground2;
-      }
-    }
-  }
-}
-
 //random stuff which doesn't fit elsewhere
 //calculation variables
 
 //Variables being just handy having them here
 @box-dimension: 400px;
 
-//animation variables
-@shift-fade-in: .8s shiftin ease-out, .8s fadein ease-in;
 
 //background images
 @boxheader-background-box1: url('https://i.gyazo.com/7f6a04143c26fa071b91457ace2e70eb.png');
