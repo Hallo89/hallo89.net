@@ -8,47 +8,116 @@ No necessity to write this in here but Less is awesome :o
 @import "colors.less";
 @import "mixins.less";
 
-#mode_switch_daynight {
-  margin: 10px 20px 10px 0;
-  display: flex;
-  align-items: center;
-  padding: 5px;
-  cursor: pointer;
-  border: 2px solid;
-  z-index: 1;
-  .noselect;/*
-  &:nth-of-type(1) {
-    top: 30px;
+
+#mode_dropdown {
+  position: relative;
+  &.enabled #mode_dropdown_box {
+    display: block;
   }
-  &:nth-of-type(2) {
-    top: 94px;
-  }*/
-  .switch_inner {
-    font-size: 20px;
-    transition: all .53s cubic-bezier(.4,.07,.6,.93);
+  #mode_gear {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 38px;
+    color: @headline-gear;
+    cursor: pointer;
+    transition: .475s;
   }
-  .switch_circle {
-    border: 10px solid;
-    border-radius: 100px;
-    transition: all .53s;
+  &.enabled #mode_gear {
+    transform: rotateZ(135deg);
+  }
+  #mode_dropdown_box {
+    display: none;
+    position: absolute;
+    right: -29px;
+    margin: 18px 5px 5px;
+    box-shadow: 1px 1px 10px @mode-dropdown-box-shadow;
+    .mode-switch-transition-w-shadow;
+    z-index: 1;
+    &::before {
+      content: '';
+      position: absolute;
+      right: 28px;
+      top: -7px;
+      border: 15px solid @mode-dropdown-box;
+      box-shadow: 1px 1px 10px @mode-dropdown-box-shadow;
+      transform: rotate(45deg);
+      transition: border .15s linear, box-shadow .15s linear;
+      z-index: -1;
+    }
+    .mode_switch {
+      font: 21px 'Roboto', sans-serif;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      color: @mode-switch-foreground;
+      background: @mode-switch-background;
+      cursor: pointer;
+      transition: all .15s linear; //all .53s cubic-bezier(.4,.07,.6,.93);
+      .noselect;
+      &:hover {
+        background: @mode-switch-background-hover;
+      }
+    }
   }
 }
-.dark-mode #mode_switch_daynight {
-  color: @mode-switch;
-  background: @mode-switch-background;
-  .switch_circle {
-    margin: 2px 5px 2px 2px;
+
+.light-mode #mode_dropdown {
+  #mode_dropdown_box {
+    box-shadow: 1px 1px 10px @mode-dropdown-box-shadow--light;
+    &::before {
+      border: 15px solid @mode-dropdown-box--light;
+      box-shadow: 1px 1px 10px @mode-dropdown-box-shadow--light;
+    }
+    .mode_switch {
+      color: @mode-switch-foreground--light;
+      background: @mode-switch-background--light;
+      &:hover {
+        background: @mode-switch-background-hover--light;
+      }
+    }
+    #switch_daynight {
+      color: @mode-switch-foreground-enabled;
+    }
   }
 }
-.light-mode #mode_switch_daynight {
-  color: @mode-switch--light;
-  background: @mode-switch-background--light;
-  .switch_inner {
-    transform: translateX(-27px);
+.nesewebel-mode.dark-mode #mode_dropdown {
+  #mode_dropdown_box {
+    box-shadow: 1px 1px 10px  @nesewebel-shadow;
+    &::before {
+      border: 15px solid @nesewebel-background;
+      box-shadow: 2px 2px 20px  @nesewebel-shadow;
+    }
+    .mode_switch {
+      color: @nesewebel-foreground;
+      background: @nesewebel-background;
+      &:hover {
+        background: @nesewebel-shadow;
+      }
+    }
+    #switch_nesewebel {
+      color: @nesewebel-foreground-switch-enabled;
+    }
   }
-  .switch_circle {
-    margin: 2px 2px 2px 5px;
-    transform: translateX(59px);
+}
+.nesewebel-mode.light-mode #mode_dropdown {
+  #mode_dropdown_box {
+    box-shadow: 1px 1px 10px @nesewebel-shadow--light;
+    &::before {
+      border: 15px solid @nesewebel-background--light;
+      box-shadow: 1px 1px 10px @nesewebel-shadow--light;
+    }
+    .mode_switch {
+      color: @nesewebel-background;
+      background: @nesewebel-background--light;
+      &:hover {
+        background: @nesewebel-shadow--light;
+      }
+    }
+    #switch_nesewebel,
+    #switch_daynight {
+      color: @nesewebel-foreground-switch-enabled--light;
+    }
   }
 }
 

@@ -2,51 +2,111 @@
 Written by Hallo89 using LESS CSS - http://lesscss.org
 No necessity to write this in here but Less is awesome :o
 */
-#mode_switch_daynight {
-  margin: 10px 20px 10px 0;
+#mode_dropdown {
+  position: relative;
+}
+#mode_dropdown.enabled #mode_dropdown_box {
+  display: block;
+}
+#mode_dropdown #mode_gear {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 38px;
+  color: #869296;
+  cursor: pointer;
+  transition: .475s;
+}
+#mode_dropdown.enabled #mode_gear {
+  transform: rotateZ(135deg);
+}
+#mode_dropdown #mode_dropdown_box {
+  display: none;
+  position: absolute;
+  right: -29px;
+  margin: 18px 5px 5px;
+  box-shadow: 1px 1px 10px rgba(18, 18, 18, 0.8);
+  transition: background 0.15s linear, box-shadow 0.15s linear;
+  z-index: 1;
+}
+#mode_dropdown #mode_dropdown_box::before {
+  content: '';
+  position: absolute;
+  right: 28px;
+  top: -7px;
+  border: 15px solid #3d3d3d;
+  box-shadow: 1px 1px 10px rgba(18, 18, 18, 0.8);
+  transform: rotate(45deg);
+  transition: border 0.15s linear, box-shadow 0.15s linear;
+  z-index: -1;
+}
+#mode_dropdown #mode_dropdown_box .mode_switch {
+  font: 21px 'Roboto', sans-serif;
+  white-space: nowrap;
   display: flex;
   align-items: center;
-  padding: 5px;
+  padding: 10px;
+  color: #9c9c9c;
+  background: #3d3d3d;
   cursor: pointer;
-  border: 2px solid;
-  z-index: 1;
+  transition: all .15s linear;
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
-  /*
-  &:nth-of-type(1) {
-    top: 30px;
-  }
-  &:nth-of-type(2) {
-    top: 94px;
-  }*/
 }
-#mode_switch_daynight .switch_inner {
-  font-size: 20px;
-  transition: all 0.53s cubic-bezier(0.4, 0.07, 0.6, 0.93);
+#mode_dropdown #mode_dropdown_box .mode_switch:hover {
+  background: #474747;
 }
-#mode_switch_daynight .switch_circle {
-  border: 10px solid;
-  border-radius: 100px;
-  transition: all .53s;
+.light-mode #mode_dropdown #mode_dropdown_box {
+  box-shadow: 1px 1px 10px rgba(201, 201, 201, 0.8);
 }
-.dark-mode #mode_switch_daynight {
-  color: #9c9c9c;
-  background: rgba(237, 237, 237, 0.13);
+.light-mode #mode_dropdown #mode_dropdown_box::before {
+  border: 15px solid #fafafa;
+  box-shadow: 1px 1px 10px rgba(201, 201, 201, 0.8);
 }
-.dark-mode #mode_switch_daynight .switch_circle {
-  margin: 2px 5px 2px 2px;
-}
-.light-mode #mode_switch_daynight {
+.light-mode #mode_dropdown #mode_dropdown_box .mode_switch {
   color: #666666;
-  background: rgba(43, 43, 43, 0.13);
+  background: #fafafa;
 }
-.light-mode #mode_switch_daynight .switch_inner {
-  transform: translateX(-27px);
+.light-mode #mode_dropdown #mode_dropdown_box .mode_switch:hover {
+  background: #f0f0f0;
 }
-.light-mode #mode_switch_daynight .switch_circle {
-  margin: 2px 2px 2px 5px;
-  transform: translateX(59px);
+.light-mode #mode_dropdown #mode_dropdown_box #switch_daynight {
+  color: #6e8d70;
+}
+.nesewebel-mode.dark-mode #mode_dropdown #mode_dropdown_box {
+  box-shadow: 1px 1px 10px #141414;
+}
+.nesewebel-mode.dark-mode #mode_dropdown #mode_dropdown_box::before {
+  border: 15px solid black;
+  box-shadow: 2px 2px 20px #141414;
+}
+.nesewebel-mode.dark-mode #mode_dropdown #mode_dropdown_box .mode_switch {
+  color: white;
+  background: black;
+}
+.nesewebel-mode.dark-mode #mode_dropdown #mode_dropdown_box .mode_switch:hover {
+  background: #141414;
+}
+.nesewebel-mode.dark-mode #mode_dropdown #mode_dropdown_box #switch_nesewebel {
+  color: #d6e9d7;
+}
+.nesewebel-mode.light-mode #mode_dropdown #mode_dropdown_box {
+  box-shadow: 1px 1px 10px #ebebeb;
+}
+.nesewebel-mode.light-mode #mode_dropdown #mode_dropdown_box::before {
+  border: 15px solid white;
+  box-shadow: 1px 1px 10px #ebebeb;
+}
+.nesewebel-mode.light-mode #mode_dropdown #mode_dropdown_box .mode_switch {
+  color: black;
+  background: white;
+}
+.nesewebel-mode.light-mode #mode_dropdown #mode_dropdown_box .mode_switch:hover {
+  background: #ebebeb;
+}
+.nesewebel-mode.light-mode #mode_dropdown #mode_dropdown_box #switch_nesewebel,
+.nesewebel-mode.light-mode #mode_dropdown #mode_dropdown_box #switch_daynight {
+  color: #3b5a3d;
 }
 #head_nav {
   margin-top: 15px;
@@ -76,8 +136,8 @@ No necessity to write this in here but Less is awesome :o
 #head_nav nav #links a {
   padding: 5px 5px 3px;
   text-decoration: none;
-  background: rgba(71, 71, 71, 0.65);
-  color: #a8a8a8;
+  background: rgba(69, 69, 69, 0.65);
+  color: #9c9c9c;
   display: inline-block;
   border: solid 2px;
   transition: all .8s, color .38s;
@@ -131,7 +191,7 @@ No necessity to write this in here but Less is awesome :o
   max-width: 710px;
   border-bottom: solid 2px;
   border-radius: 150px;
-  color: #8a8a8a;
+  color: #7d7d7d;
   animation: 2.2s borderglide, 2s fadein, 1.7s shiftin2;
 }
 @keyframes shiftin {

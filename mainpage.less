@@ -19,12 +19,20 @@ body {
 body.light-mode {
   background: @background-color--light;
 }
+body.nesewebel-mode.dark-mode {
+  background: @nesewebel-background;
+}
+body.nesewebel-mode.light-mode {
+  background: @nesewebel-background--light;
+}
 
 #headline {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  padding: 8px 35px;
   max-width: 100vw;
-  box-shadow: 0 1px 3px;
+  min-height: 38px;
 }
 
 #head_block {
@@ -103,6 +111,16 @@ body.light-mode {
     }
   }
 }
+.nesewebel-mode.dark-mode #head_block {
+  box-shadow: 0 2px 10px 1px @nesewebel-shadow;
+  background-color: @nesewebel-background;
+  color: @nesewebel-foreground;
+}
+.nesewebel-mode.light-mode #head_block {
+  box-shadow: 0 2px 10px 1px @nesewebel-shadow--light;
+  background-color: @nesewebel-background--light;
+  color: @nesewebel-foreground--light;
+}
 
 
 #ultra_nav {
@@ -133,12 +151,12 @@ body.light-mode {
     background: @ultranav-box;
     width: @box-dimension;
     height: @box-dimension;
-    box-shadow: 1.4px 1.4px 13px 1px @ultranav-box-shadow;
+    box-shadow: 1.4px 1.4px 15px 1px @ultranav-box-shadow;
     .mode-switch-transition-w-shadow;
   //'about'-box extension
     &.box_about {
       height: 82px;
-      transition: all .92s cubic-bezier(.71,.12,.45,.81), box-shadow .15s linear;
+      transition: all .92s cubic-bezier(.71,.12,.45,.81), background .15s linear, box-shadow .15s linear;
       &:hover {
         width: 100%;
         height: @box-dimension;
@@ -155,7 +173,7 @@ body.light-mode {
         margin: 15px;
         opacity: 0;
         transform: scale(0);
-        transition: all .7s cubic-bezier(.8,0,.79,.74), opacity .525s ease;
+        transition: all .7s cubic-bezier(.8,0,.79,.74), opacity .525s ease, color .15s linear;
       }
     }
   //end of about-box
@@ -199,7 +217,7 @@ body.light-mode {
         color: @ultranav-boxheader-foreground;
         border-bottom: 3px solid @ultranav-boxheader-bordertopbottom;
         border-top: 3px solid @ultranav-boxheader-bordertopbottom;
-          transition: background .15s linear, border-bottom .15s linear, border-top .15s linear;
+        transition: background .15s linear, border-bottom .15s linear, border-top .15s linear, color .15s linear;
       }
     }
   //end of header
@@ -240,6 +258,7 @@ body.light-mode {
       .boxanimation(.8s);
       .box_header {
         background: @boxheader-background-box1;
+        cursor: pointer;
       }
     }
     &#box2 {
@@ -282,13 +301,6 @@ body.light-mode {
         }
       }
     //end of corneranimation
-    //curtains when loading the site
-      .curtainanimation {
-        .below_overlay, .above_overlay {
-          color: @ultranav-boxheader-bordertopbottom--light;
-        }
-      }
-    //end of curtainanimation
     }
   //end of header
   //main text inside the boxes
@@ -296,6 +308,72 @@ body.light-mode {
       color: @ultranav-boxtext-foreground--light;
       &:hover::before {
         border-left: solid 5px @ultranav-boxtext-additional-border--light;
+      }
+    }
+  }
+}
+.nesewebel-mode.dark-mode #ultra_nav {
+  .box {
+    background: @nesewebel-background;
+    box-shadow: 1.6px 1.6px 13px 1px @nesewebel-shadow;
+    &.box_about {
+      .about_content {
+        color: @nesewebel-foreground;
+      }
+    }
+    .box_header {
+      .header_maintext {
+        color: @nesewebel-foreground;
+        border-bottom: 3px solid @nesewebel-foreground;
+        border-top: 3px solid @nesewebel-foreground;
+      }
+    //corners shifting in when hovering
+      .corneranimation {
+        .corner_before, .corner_after {
+          background: @nesewebel-background;
+        }
+      }
+    //end of corneranimation
+    }
+  //end of header
+  //main text inside the boxes
+    a {
+      color: @nesewebel-foreground;
+      &:hover::before {
+        border-left: solid 5px @nesewebel-foreground;
+      }
+    }
+  }
+}
+.nesewebel-mode.light-mode #ultra_nav {
+  .box {
+    background: @nesewebel-background--light;
+    box-shadow: 1.6px 1.6px 13px 1px @nesewebel-shadow--light;
+    &.box_about {
+      .about_content {
+        color: @nesewebel-foreground--light;
+      }
+    }
+    .box_header {
+      .header_maintext {
+        color: @nesewebel-foreground--light;
+        border-bottom: 3px solid @nesewebel-foreground--light;
+        border-top: 3px solid @nesewebel-foreground--light;
+      }
+    //corners shifting in when hovering
+      .corneranimation {
+        .corner_before, .corner_after {
+          background: @nesewebel-background--light;
+        }
+      }
+    //end of corneranimation
+    }
+  //end of header
+  //main text inside the boxes
+    a {
+      color: @nesewebel-foreground--light;
+      &:hover::before {
+        border-left: solid 5px @nesewebel-foreground--light;
       }
     }
   }

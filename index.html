@@ -7,48 +7,75 @@
     <link rel="stylesheet" type="text/css" href="global.css">
     <link rel="stylesheet" type="text/css" href="mainpage.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.3/css/all.css">
     <script>
-    //Shamefully copied out of the internet D:> (sry)
+    //holy, 2 lines
+    //theme changers
       function toggleMode() {
-        var body = document.getElementById("body");
-        var currentClass = body.className;
-        body.className = currentClass == "dark-mode" ? "light-mode" : "dark-mode";
+        document.body.classList.toggle('dark-mode');
+        document.body.classList.toggle('light-mode');
+      }
+      function toggleModeNesewebel() {
+        document.body.classList.toggle('nesewebel-mode');
+        document.body.classList.toggle('no-nesewebelsadface');
+      }
+
+    //theme buttons dropdown
+      function toggleDropdown() {
+          document.getElementById("mode_dropdown").classList.toggle("enabled");
+      }
+      window.onclick = function(event) {
+        if (!event.target.matches (
+          [
+            '.fa-cog',
+            '.mode_switch',
+            '.mode_dropdown_box'
+          ]
+        ))
+        {
+          if (document.getElementById("mode_dropdown").classList.contains('enabled')) {
+            document.getElementById("mode_dropdown").classList.remove('enabled');
+          }
+        }
       }
     </script>
   </head>
-  <body id="body" class="dark-mode">
+  <body class="dark-mode no-nesewebelsadface">
 
     <div id="headline">
-      <div onclick="toggleMode()" id="mode_switch_daynight">
-        <span class="switch_circle"></span>
-        <span class="switch_inner"> Switch </span>
+      <div id="mode_dropdown" class="mode_dropdown">
+        <span onclick="toggleDropdown()" class="fa fa-cog" id="mode_gear"></span>
+        <div id="mode_dropdown_box">
+          <div onclick="toggleMode()" class="mode_switch" id="switch_daynight">
+            Day/Night Theme
+          </div>
+          <div onclick="toggleModeNesewebel()" class="mode_switch" id="switch_nesewebel">
+            Nesewebel Theme
+          </div>
+        </div>
       </div>
-      <!-- pls end my life
-      <div onclick="toggleModeNesewebel()" id="mode_switch">
-        <span class="switch_circle"></span>
-        <span class="switch_inner"> Switch </span>
-      </div>
-      life successfully ended -->
     </div>
 
     <div id="head_block">
       <div id="main_header">
         <h1>nesewebel</h1>
       </div>
-      <script type="text/javascript">
-        var r_text = new Array ();
-        r_text[0] = "Eine Ode an den Nesewebel";
-        r_text[1] = "Ein Gesang an den Nesewebel";
-        r_text[2] = "Ein Gedicht an den Nesewebel";
-        r_text[3] = "Eine Geschichte an den Nesewebel";
-        r_text[4] = "Eine Erzählung an den Nesewebel";
-        r_text[5] = "Ein Buch an den Nesewebel";
-        r_text[6] = "Eine Memoire an den Nesewebel";
-        r_text[7] = "Ein Bericht an den Nesewebel";
-        r_text[8] = "Eine Mitteilung an den Nesewebel";
-        r_text[9] = "Eine Legende des Nesewebels";
+      <script>
+        var randomText = new Array ();
+        randomText = [
+          "Eine Ode an den Nesewebel",
+          "Ein Gesang an den Nesewebel",
+          "Ein Gedicht an den Nesewebel",
+          "Eine Geschichte an den Nesewebel",
+          "Eine Erzählung an den Nesewebel",
+          "Ein Buch an den Nesewebel",
+          "Eine Memoire an den Nesewebel",
+          "Ein Bericht an den Nesewebel",
+          "Eine Mitteilung an den Nesewebel",
+          "Eine Legende des Nesewebels"
+       ];
         var i = Math.floor(10*Math.random())
-        document.write('<p>' + r_text[i] + '</p>');
+        document.write('<p>' + randomText[i] + '</p>');
       </script>
       <!-- p> Eine Ode an den Nesewebel </p -->
     </div>
