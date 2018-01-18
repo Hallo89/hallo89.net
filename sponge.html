@@ -3,8 +3,88 @@
   <head>
     <meta charset="utf-8">
     <title>Mocking</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+      #main {
+        height: 100vh;
+        width: 100vw;
+        background-size: 100% 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .arrow_container {
+        position: relative;
+        width: 175px;
+        height: 175px;
+        border-radius: 100%;
+      }
+      #container_left:hover #arrow_left {
+        left: 55px;
+      }
+      #container_right:hover #arrow_right {
+        right: 55px;
+      }
+      .arrow {
+        position: absolute;
+        top: 55px;
+        width: 65px;
+        height: 65px;
+        font: 30px 'Century Gothic', sans-serif;
+        text-align: center;
+        line-height: 65px;
+        border-radius: 100%;
+        background: gray;
+        opacity: 0.75;
+        cursor: pointer;
+        transition: all .3s ease;
+      }
+      #arrow_left {
+        left: -70px;
+      }
+      #arrow_left::before {
+        content: '\25c0'
+      }
+      #arrow_right {
+        right: -70px;
+      }
+      #arrow_right::before {
+        content: '\25b6'
+      }
+    </style>
+    <script>
+      var randomImg = new Array ();
+      randomImg = [
+        "url('https://cdn.discordapp.com/attachments/247841904341942273/390973795428728842/unknown.png')",
+        "url('https://cdn.discordapp.com/attachments/247841904341942273/390969197871759361/unknown.png')",
+        "url('https://cdn.discordapp.com/attachments/247841904341942273/390967982999732244/unknown.png')",
+        "url('https://cdn.discordapp.com/attachments/247841904341942273/390966769076142080/unknown.png')",
+        "url('https://cdn.discordapp.com/attachments/247841904341942273/390972469701509123/unknown.png')",
+        "url('https://cdn.discordapp.com/attachments/247841904341942273/390973697298661376/unknown.png')",
+        "url('https://cdn.discordapp.com/attachments/247841904341942273/390975389586948098/unknown.png')",
+        "url('https://cdn.discordapp.com/attachments/247841904341942273/392311078492569601/image.png')"
+      ];
+      function toggleForward() {
+        var index = Math.floor(8*Math.random());
+        document.getElementById('main').style.backgroundImage = randomImg[index];
+      };
+      function toggleBackward() {
+        var index = Math.floor(8*Math.random());
+        document.getElementById('main').style.backgroundImage = randomImg[index];
+      }
+    </script>
   </head>
-  <body style="margin: 0;">
-    <div style="height: 100vh; width: 100vw; background-size: 100% 100%; background-image: url('https://cdn.discordapp.com/attachments/247841904341942273/392311078492569601/image.png')"></div>
+  <body>
+    <div id="main" style="background-image: url('https://cdn.discordapp.com/attachments/247841904341942273/392311078492569601/image.png')">
+      <div class="arrow_container" id="container_left">
+        <div onclick="toggleBackward()" class="arrow" id="arrow_left"></div>
+      </div>
+      <div class="arrow_container" id="container_right">
+        <div onclick="toggleForward()" class="arrow" id="arrow_right"></div>
+      </div>
+    </div>
   </body>
 </html>
