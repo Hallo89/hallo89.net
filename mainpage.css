@@ -3,7 +3,7 @@ Written by Hallo89 using LESS CSS - http://lesscss.org
 No necessity to write this in here but Less is awesome :o
 */
 body {
-  margin: 0;
+  margin: 0 0 15px 0;
   background: #2b2b2b;
   font-family: Arial;
   transition: background .15s linear;
@@ -30,7 +30,6 @@ body.nesewebel-mode.light-mode {
   display: flex;
   justify-content: center;
   align-items: center;
-  align-content: center;
   flex-flow: column wrap;
   margin: auto;
   box-shadow: 0 2px 10px 1px rgba(26, 26, 26, 0.77);
@@ -80,10 +79,42 @@ body.nesewebel-mode.light-mode {
   background-color: transparent;
   color: #1398A9;
 }
+@media screen and (max-width: 865px) and (min-width: 721px) {
+  #head_block #main_header {
+    border: solid 1.35vw;
+  }
+  #head_block #main_header h1 {
+    font-size: 12vw;
+    line-height: 9.4vw;
+    padding: 3.5vw 3.5vw 4.2vw;
+  }
+}
+@media screen and (max-width: 720px) and (min-width: 436px) {
+  #head_block #main_header {
+    border: solid 1.6vw;
+  }
+  #head_block #main_header h1 {
+    font-size: 14vw;
+    line-height: 11vw;
+    padding: 4.2vw 4.2vw 4.7vw;
+  }
+}
+@media screen and (max-width: 435px) {
+  #head_block #main_header {
+    border: solid 7px;
+    margin: 0 0 0 7px;
+  }
+  #head_block #main_header h1 {
+    font-size: 65px;
+    line-height: 54px;
+    padding: 15px 15px 20px;
+  }
+}
 #head_block p {
   position: absolute;
   bottom: 30px;
   font: 19px 'Segoe UI';
+  white-space: nowrap;
   animation: 0.75s fadein3 ease-in;
   transition: background .15s linear;
 }
@@ -106,6 +137,12 @@ body.nesewebel-mode.light-mode {
   vertical-align: middle;
   width: 20px;
   display: inline-block;
+}
+@media screen and (max-width: 330px) {
+  #head_block p {
+    left: 0;
+    margin-left: 10px;
+  }
 }
 .light-mode #head_block {
   box-shadow: 0 2px 10px 1px rgba(194, 194, 194, 0.8);
@@ -144,26 +181,24 @@ body.nesewebel-mode.light-mode {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin: 35px auto 0;
-  max-width: 1000px;
+  margin: 0 auto;
+  max-width: 1020px;
 }
 #ultra_nav .menu.menu_about {
   justify-content: center;
 }
-@media screen and (max-width: 845px) {
+@media screen and (max-width: 865px) {
   #ultra_nav .menu {
     justify-content: center;
-  }
-  #ultra_nav .menu .box {
-    margin: 0 10px 25px 10px;
+    width: 420px;
   }
   #ultra_nav .menu .box.box_about:hover {
-    width: 400px;
-    height: auto;
+    height: 710px;
   }
 }
 #ultra_nav .box {
   font-size: 30px;
+  margin: 40px 10px 0;
   position: relative;
   overflow: hidden;
   background: #2e2e2e;

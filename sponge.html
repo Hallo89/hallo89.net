@@ -68,12 +68,12 @@
         "url('https://cdn.discordapp.com/attachments/247841904341942273/392311078492569601/image.png')"
       ];
       function toggleForward() {
-        var index = Math.floor(8*Math.random());
-        document.getElementById('main').style.backgroundImage = randomImg[index];
+        randomImg.push(randomImg.shift());
+        document.getElementById('main').style.backgroundImage = randomImg[0];
       };
       function toggleBackward() {
-        var index = Math.floor(8*Math.random());
-        document.getElementById('main').style.backgroundImage = randomImg[index];
+        randomImg.unshift(randomImg.pop());
+        document.getElementById('main').style.backgroundImage = randomImg[0];
       }
     </script>
   </head>
