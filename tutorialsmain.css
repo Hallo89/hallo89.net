@@ -4,7 +4,7 @@ No necessity to write this in here but Less is awesome :o
 */
 #main {
   display: flex;
-  padding: 30px 15px 15px;
+  padding: 80px 15px 15px;
 }
 #main aside {
   position: sticky;
@@ -34,6 +34,11 @@ No necessity to write this in here but Less is awesome :o
     transform: translateY(-20px);
   }
 }
+@keyframes shiftin3 {
+  from {
+    transform: translateY(-30px);
+  }
+}
 @keyframes shiftinX {
   from {
     transform: translateX(-40px);
@@ -50,11 +55,6 @@ No necessity to write this in here but Less is awesome :o
   }
 }
 @keyframes fadein2 {
-  from {
-    background-color: rgba(51, 51, 51, 0);
-  }
-}
-@keyframes fadein3 {
   0% {
     opacity: 0;
   }
@@ -72,6 +72,12 @@ No necessity to write this in here but Less is awesome :o
     max-width: 0;
   }
 }
+@keyframes borderglideX {
+  from {
+    height: 0;
+    top: 22.5px;
+  }
+}
 @keyframes buttonshake {
   0% {
     transform: none;
@@ -80,7 +86,7 @@ No necessity to write this in here but Less is awesome :o
     transform: rotateZ(2.8deg) scale(1.032);
   }
   62% {
-    transform: rotateZ(-3.5deg) scale(1.048);
+    transform: rotateZ(-3.2deg) scale(1.048);
   }
   100% {
     transform: scale(1.07);

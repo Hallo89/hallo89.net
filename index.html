@@ -8,41 +8,10 @@
     <link rel="stylesheet" type="text/css" href="mainpage.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.3/css/all.css">
-    <script>
-    //holy, 2 lines
-    //theme changers
-      function toggleMode() {
-        document.body.classList.toggle('dark-mode');
-        document.body.classList.toggle('light-mode');
-      }
-      function toggleModeNesewebel() {
-        document.body.classList.toggle('nesewebel-mode');
-        document.body.classList.toggle('no-nesewebelsadface');
-      }
-
-    //theme buttons dropdown
-      function toggleDropdown() {
-          document.getElementById('mode_dropdown').classList.toggle('enabled');
-      }
-      window.onclick = function(event) {
-        if (!event.target.matches (
-          [
-            '.fa-cog',
-            '.mode_switch',
-            '.mode_dropdown_box'
-          ]
-        ))
-        {
-          if (document.getElementById('mode_dropdown').classList.contains('enabled')) {
-            document.getElementById('mode_dropdown').classList.remove('enabled');
-          }
-        }
-      }
-    </script>
   </head>
   <body class="dark-mode no-nesewebelsadface">
 
-    <div id="headline">
+    <div id="headline-main">
       <div id="mode_dropdown" class="mode_dropdown">
         <span onclick="toggleDropdown()" class="fa fa-cog" id="mode_gear"></span>
         <div id="mode_dropdown_box">
@@ -122,5 +91,12 @@
         </div>
       </div>
     </nav>
+    <script>
+      function toggleModeNesewebel() {
+        document.body.classList.toggle('nesewebel-mode');
+        document.body.classList.toggle('no-nesewebelsadface');
+      }
+    </script>
+    <script src="global.js"></script>
   </body>
 </html>

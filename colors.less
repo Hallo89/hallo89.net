@@ -6,6 +6,7 @@
 @background-color--light: hsl(0, 0%, 93%);
 @foreground-color--light: hsl(0, 0%, 40%);
 
+@headline-background: darken(@background-color, 2.25%);
 @headline-gear: mix(darken(@foreground-color, 3%), #0480A4, 90%);
 
 @mode-dropdown-box: lighten(@background-color, 7%);
@@ -47,14 +48,12 @@
 
 
 @nav-foreground-color: darken(@heading-foreground-color, 10%);
-@navbox-background: fadeout(lighten(@background-color, 3%), 24%);
 @nav-background: fadeout(lighten(@header-background-color, 7%), 35%);
 @nav-border: darken(@heading-foreground-color, 22%);
 @nav-border-shadow: darken(@background-color, 4%);
 @nav-active: @main-text-hover;
 
 @nav-foreground-color--light: darken(@heading-foreground-color--light, 10%);
-@navbox-background--light: fadeout(lighten(@background-color--light, 3%), 24%);
 @nav-background--light: fadeout(lighten(@header-background-color--light, 7%), 35%);
 @nav-border--light: darken(@heading-foreground-color--light, 22%);
 @nav-border-shadow--light: darken(@background-color--light, 4%);

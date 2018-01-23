@@ -9,14 +9,95 @@ No necessity to write this in here but Less is awesome :o
 @import "mixins.less";
 
 
+body {
+  margin: 0 0 15px 0;
+  background: @background-color;
+  font-family: Arial;
+  .mode-switch-transition;
+}
+
+body.light-mode {
+  background: @background-color--light;
+}
+
+#headline {
+  position: fixed;
+  background: @headline-background;
+  width: 100%;
+  z-index: 10;
+}
+
+#head_nav {
+  margin: auto;
+  padding: 13px 0 12px;
+  max-width: 615px;
+  #links {
+    font: 21px 'Ubuntu', sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    animation: .85s shiftin2 cubic-bezier(.52,.51,.61,.99), 1.22s fadein;
+    .noselect;
+    a {
+      padding: 5px 5px 3px;
+      text-decoration: none;
+      background: @nav-background;
+      color: @nav-foreground-color;
+      display: inline-block;
+      border: solid 2px;
+      transition:  all .8s, color .38s;
+      &::before, &::after {
+        content: '';
+        border-bottom: solid 1.5px;
+        vertical-align: middle;
+        width: 0;
+        display: inline-block;
+        transition: all .8s;
+      }
+      &:hover {
+        margin: 0 10px;
+        transition: transform 0;
+        transform: scale(1.065);
+        box-shadow: 1px 1px 6px @nav-border-shadow;
+        animation: .34s buttonshake;
+      }
+      &:hover::before, &:hover::after {
+        width: 8px;
+      }
+      @media screen and (max-width: 430px) {
+        &:hover {
+          margin: 0;
+        }
+        &:hover::before, &:hover::after {
+          width: 2.5px;
+        }
+      }
+      &:active {
+        color: @nav-active;
+      }
+      .selection-w-color(@nav-selection);
+    }
+  }
+}
+#expanding_border {
+  margin: auto;
+  max-width: 710px;
+  border-bottom: solid 2px;
+  border-radius: 150px;
+  color: @nav-border;
+  animation: 2.2s borderglide, 2s fadein, 1.7s shiftin2;
+}
+
 #mode_dropdown {
-  position: relative;
+  position: absolute;
+  right: 35px;
+  top: 11px;
   &.enabled #mode_dropdown_box {
     display: block;
   }
   #mode_gear {
-    display: flex;
-    justify-content: flex-end;
     font-size: 38px;
     color: @headline-gear;
     cursor: pointer;
@@ -47,6 +128,7 @@ No necessity to write this in here but Less is awesome :o
     .mode_switch {
       font: 21px 'Roboto', sans-serif;
       white-space: nowrap;
+      position: relative;
       display: flex;
       align-items: center;
       padding: 10px;
@@ -58,7 +140,24 @@ No necessity to write this in here but Less is awesome :o
       &:hover {
         background: @mode-switch-background-hover;
       }
+      &::before {
+        position: absolute;
+        left: 6px;
+        top: 7px;
+        border-left: 3px solid;
+        height: 70%;
+        animation: .55s borderglideX;
+      }
     }
+  }
+}
+
+.light-mode #mode_dropdown #switch_daynight,
+.nesewebel-mode #mode_dropdown #switch_nesewebel,
+.nesewebel-mode.light-mode #mode_dropdown #switch_daynight {
+  padding-left: 14px;
+  &::before {
+    content: '';
   }
 }
 
@@ -81,116 +180,5 @@ No necessity to write this in here but Less is awesome :o
     }
   }
 }
-.nesewebel-mode.dark-mode #mode_dropdown {
-  #mode_dropdown_box {
-    box-shadow: 1px 1px 10px  @nesewebel-shadow;
-    &::before {
-      border: 15px solid @nesewebel-background;
-      box-shadow: 2px 2px 20px  @nesewebel-shadow;
-    }
-    .mode_switch {
-      color: @nesewebel-foreground;
-      background: @nesewebel-background;
-      &:hover {
-        background: @nesewebel-shadow;
-      }
-    }
-    #switch_nesewebel {
-      color: @nesewebel-foreground-switch-enabled;
-    }
-  }
-}
-.nesewebel-mode.light-mode #mode_dropdown {
-  #mode_dropdown_box {
-    box-shadow: 1px 1px 10px @nesewebel-shadow--light;
-    &::before {
-      border: 15px solid @nesewebel-background--light;
-      box-shadow: 1px 1px 10px @nesewebel-shadow--light;
-    }
-    .mode_switch {
-      color: @nesewebel-background;
-      background: @nesewebel-background--light;
-      &:hover {
-        background: @nesewebel-shadow--light;
-      }
-    }
-    #switch_nesewebel,
-    #switch_daynight {
-      color: @nesewebel-foreground-switch-enabled--light;
-    }
-  }
-}
-
-#head_nav {
-  margin-top: 15px;
-  position: sticky;
-  top: 2px;
-  z-index: 10;
-  nav {
-    margin: 25px auto auto;
-    padding: 15px;
-    background-color: @navbox-background;
-    max-width: 615px;
-    animation: 4s fadein2;
-    #links {
-      font: 22px Arial, sans-serif;
-      text-transform: uppercase;
-      text-align: center;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-      animation: .85s shiftin3 cubic-bezier(.52,.51,.61,.99), 1.22s fadein;
-      .noselect;
-      a {
-        padding: 5px 5px 3px;
-        text-decoration: none;
-        background: @nav-background;
-        color: @nav-foreground-color;
-        display: inline-block;
-        border: solid 2px;
-        transition:  all .8s, color .38s;
-        &::before, &::after {
-          content: '';
-          border-bottom: solid 1.5px;
-          vertical-align: middle;
-          width: 0;
-          display: inline-block;
-          transition: all .8s;
-        }
-        &:hover {
-          margin: 0 13px;
-          transition: transform 0;
-          transform: scale(1.07);
-          box-shadow: 1px 1px 6px @nav-border-shadow;
-          animation: .36s buttonshake;
-        }
-        &:hover::before, &:hover::after {
-          width: 9px;
-        }
-        @media screen and (max-width: 430px) {
-          &:hover {
-            margin: 0;
-          }
-          &:hover::before, &:hover::after {
-            width: 2.5px;
-          }
-        }
-        &:active {
-          color: @nav-active;
-        }
-        .selection-w-color(@nav-selection);
-      }
-    }
-  }
-  #expanding_border {
-    margin: 3px auto auto;
-    max-width: 710px;
-    border-bottom: solid 2px;
-    border-radius: 150px;
-    color: @nav-border;
-    animation: 2.2s borderglide, 2s fadein, 1.7s shiftin2;
-  }
-}
-
 
 @import "keyframes.less";

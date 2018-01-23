@@ -1,4 +1,4 @@
-// main: mainpage.less
+// main: global.less
 
 @keyframes shiftin {
   from { transform: translateY(-60px); }
@@ -19,9 +19,6 @@
   from { opacity: 0.1; }
 }
 @keyframes fadein2 {
-  from { background-color: fadeout(@navbox-background, 100%); }
-}
-@keyframes fadein3 {
   0%  { opacity: 0; }
   18% { opacity: 0; }
 }
@@ -32,6 +29,9 @@
 
 @keyframes borderglide {
   from { max-width: 0; }
+}
+@keyframes borderglideX {
+  from { height: 0; top: 22.5px; }
 }
 
 @keyframes buttonshake {

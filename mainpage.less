@@ -9,16 +9,6 @@ No necessity to write this in here but Less is awesome :o
 @import "mixins.less";
 
 
-body {
-  margin: 0 0 15px 0;
-  background: @background-color;
-  font-family: Arial;
-  .mode-switch-transition;
-}
-
-body.light-mode {
-  background: @background-color--light;
-}
 body.nesewebel-mode.dark-mode {
   background: @nesewebel-background;
 }
@@ -26,14 +16,60 @@ body.nesewebel-mode.light-mode {
   background: @nesewebel-background--light;
 }
 
-#headline {
+#headline-main {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding: 8px 35px;
+  padding: 7px 35px;
   max-width: 100vw;
   min-height: 38px;
+  #mode_dropdown {
+    position: relative;
+    right: 0;
+    top: 0;
+  }
 }
+
+.nesewebel-mode.dark-mode #mode_dropdown {
+  #mode_dropdown_box {
+    box-shadow: 1px 1px 10px  @nesewebel-shadow;
+    &::before {
+      border: 15px solid @nesewebel-background;
+      box-shadow: 2px 2px 20px  @nesewebel-shadow;
+    }
+    .mode_switch {
+      color: @nesewebel-foreground;
+      background: @nesewebel-background;
+      &:hover {
+        background: @nesewebel-shadow;
+      }
+    }
+    #switch_nesewebel {
+      color: @nesewebel-foreground-switch-enabled;
+    }
+  }
+}
+.nesewebel-mode.light-mode #mode_dropdown {
+  #mode_dropdown_box {
+    box-shadow: 1px 1px 10px @nesewebel-shadow--light;
+    &::before {
+      border: 15px solid @nesewebel-background--light;
+      box-shadow: 1px 1px 10px @nesewebel-shadow--light;
+    }
+    .mode_switch {
+      color: @nesewebel-background;
+      background: @nesewebel-background--light;
+      &:hover {
+        background: @nesewebel-shadow--light;
+      }
+    }
+    #switch_nesewebel,
+    #switch_daynight {
+      color: @nesewebel-foreground-switch-enabled--light;
+    }
+  }
+}
+
 
 #head_block {
   position: relative;
@@ -107,7 +143,7 @@ body.nesewebel-mode.light-mode {
     bottom: 30px;
     font: 19px 'Segoe UI';
     white-space: nowrap;
-    animation: .75s fadein3 ease-in;
+    animation: .75s fadein2 ease-in;
     .selection-w-color;
     .mode-switch-transition;
     &::before, &::after {
@@ -150,7 +186,6 @@ body.nesewebel-mode.light-mode {
   background-color: @nesewebel-background--light;
   color: @nesewebel-foreground--light;
 }
-
 
 #ultra_nav {
   .menu {
