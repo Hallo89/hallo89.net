@@ -17,25 +17,24 @@
         align-items: center;
       }
       .arrow_container {
-        position: relative;
-        width: 175px;
-        height: 175px;
+        display: grid;
+        align-items: center;
+        width: 45vw;
+        height: 60vh;
         border-radius: 100%;
       }
       #container_left:hover #arrow_left {
-        left: 55px;
+        transform: translate(200px);
       }
       #container_right:hover #arrow_right {
-        right: 55px;
+        transform: translate(-200px);
       }
       .arrow {
-        position: absolute;
-        top: 55px;
-        width: 65px;
-        height: 65px;
-        font: 30px 'Century Gothic', sans-serif;
+        width: 100px;
+        height: 100px;
+        font: 50px 'Century Gothic', sans-serif;
         text-align: center;
-        line-height: 65px;
+        line-height: 100px;
         border-radius: 100%;
         background: gray;
         opacity: 0.75;
@@ -43,13 +42,14 @@
         transition: all .3s ease;
       }
       #arrow_left {
-        left: -70px;
+        transform: translate(-100px);
       }
       #arrow_left::before {
         content: '\25c0'
       }
       #arrow_right {
-        right: -70px;
+        transform: translate(100px);
+        justify-self: end;
       }
       #arrow_right::before {
         content: '\25b6'
@@ -59,6 +59,7 @@
       var randomImg = new Array ();
       randomImg = [
         "url('https://cdn.discordapp.com/attachments/247841904341942273/390973795428728842/unknown.png')",
+        "url('https://cdn.discordapp.com/attachments/247841904341942273/406227895800037376/unknown.png')",
         "url('https://cdn.discordapp.com/attachments/247841904341942273/390969197871759361/unknown.png')",
         "url('https://cdn.discordapp.com/attachments/247841904341942273/390967982999732244/unknown.png')",
         "url('https://cdn.discordapp.com/attachments/247841904341942273/390966769076142080/unknown.png')",
