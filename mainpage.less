@@ -91,8 +91,9 @@ body.nesewebel-mode.light-mode {
   border-color: mix(@header-background-color, lime, 85%);*/
   #main_header {
     border: solid 11px;
+    position: relative;
     transition: all .5s, color .15s;
-    animation: 1.2s fadein, 1.02s shiftin, 1s borderbuildup;
+    animation: .8s fadein, 1.02s shiftin, 1s borderbuildup;
     &:hover {
       color: @main-box-hover;
       transform: scale(0.968);
@@ -102,13 +103,47 @@ body.nesewebel-mode.light-mode {
       text-transform: uppercase;
       letter-spacing: 1.5px;
       line-height: 83px;
+      text-shadow:
+        1px 0px @heading-shadow,
+        0px 1px @heading-shadow,
+        2px 1px @heading-shadow,
+        1px 2px @heading-shadow,
+        3px 2px @heading-shadow,
+        2px 3px @heading-shadow,
+        4px 3px @heading-shadow,
+        3px 4px @heading-shadow,
+        5px 4px @heading-shadow,
+        4px 5px @heading-shadow,
+        6px 5px @heading-shadow,
+        5px 6px @heading-shadow;
       margin: 0;
       padding: 30px 30px 35px;
       transition: all .9s, color 0s;
-      animation: 1.8s fadein, 1.3s rotateX;
+      animation: 1.2s fadein;
       &:hover {
         color: @main-text-hover;
         transform: scale(0.7) scale(1.47);
+      }
+      &::before, &::after {
+        content: attr(data-heading);
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 30px 30px 35px;
+      }
+      &::before {
+        color: @header-background-color;
+        text-shadow:
+          6px 6px @header-background-color,
+          6px -6px @header-background-color,
+          -6px 6px @header-background-color,
+          -6px -6px @header-background-color;
+        clip-path: polygon(0 58%, 0 0, 100% 0, 100% 37%);
+      }
+      &::after {
+       clip-path: polygon(0 56%, 0 0, 100% 0, 100% 35%);
+       transform: translate(-5px);
+       animation: .69s headershift;
       }
       .selection-w-color(@header-selection);
     }

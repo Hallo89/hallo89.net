@@ -187,7 +187,7 @@ body.light-mode {
 }
 @keyframes shiftin {
   from {
-    transform: translateY(-60px);
+    transform: translateY(-50px);
   }
 }
 @keyframes shiftin2 {
@@ -226,6 +226,14 @@ body.light-mode {
 @keyframes borderbuildup {
   from {
     border-width: 0;
+  }
+}
+@keyframes headershift {
+  from {
+    transform: translate(20px);
+  }
+  to {
+    transform: translate(-5px);
   }
 }
 @keyframes borderglide {

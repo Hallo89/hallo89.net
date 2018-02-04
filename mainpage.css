@@ -77,8 +77,9 @@ body.nesewebel-mode.light-mode {
 }
 #head_block #main_header {
   border: solid 11px;
+  position: relative;
   transition: all .5s, color .15s;
-  animation: 1.2s fadein, 1.02s shiftin, 1s borderbuildup;
+  animation: .8s fadein, 1.02s shiftin, 1s borderbuildup;
 }
 #head_block #main_header:hover {
   color: #b2c9c7;
@@ -89,14 +90,33 @@ body.nesewebel-mode.light-mode {
   text-transform: uppercase;
   letter-spacing: 1.5px;
   line-height: 83px;
+  text-shadow: 1px 0px #8e8e8e, 0px 1px #8e8e8e, 2px 1px #8e8e8e, 1px 2px #8e8e8e, 3px 2px #8e8e8e, 2px 3px #8e8e8e, 4px 3px #8e8e8e, 3px 4px #8e8e8e, 5px 4px #8e8e8e, 4px 5px #8e8e8e, 6px 5px #8e8e8e, 5px 6px #8e8e8e;
   margin: 0;
   padding: 30px 30px 35px;
   transition: all .9s, color 0s;
-  animation: 1.8s fadein, 1.3s rotateX;
+  animation: 1.2s fadein;
 }
 #head_block #main_header h1:hover {
   color: #94bdc1;
   transform: scale(0.7) scale(1.47);
+}
+#head_block #main_header h1::before,
+#head_block #main_header h1::after {
+  content: attr(data-heading);
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 30px 30px 35px;
+}
+#head_block #main_header h1::before {
+  color: #343434;
+  text-shadow: 6px 6px #343434, 6px -6px #343434, -6px 6px #343434, -6px -6px #343434;
+  clip-path: polygon(0 58%, 0 0, 100% 0, 100% 37%);
+}
+#head_block #main_header h1::after {
+  clip-path: polygon(0 56%, 0 0, 100% 0, 100% 35%);
+  transform: translate(-5px);
+  animation: .69s headershift;
 }
 #head_block #main_header h1::selection {
   background-color: transparent;
@@ -415,7 +435,7 @@ body.nesewebel-mode.light-mode {
 }
 @keyframes shiftin {
   from {
-    transform: translateY(-60px);
+    transform: translateY(-50px);
   }
 }
 @keyframes shiftin2 {
@@ -454,6 +474,14 @@ body.nesewebel-mode.light-mode {
 @keyframes borderbuildup {
   from {
     border-width: 0;
+  }
+}
+@keyframes headershift {
+  from {
+    transform: translate(20px);
+  }
+  to {
+    transform: translate(-5px);
   }
 }
 @keyframes borderglide {

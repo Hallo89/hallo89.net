@@ -1,4 +1,4 @@
-// main: global.less
+// main: mainpage.less
 
 @background-color: hsl(0, 0%, 17%);
 @foreground-color: hsl(0, 0%, 61%);
@@ -25,6 +25,7 @@
 
 @heading-foreground-color: lighten(@foreground-color, 10%);
 @heading-foreground-color--light: lighten(@foreground-color--light, 3%);
+@heading-shadow: mix(@heading-foreground-color, @header-background-color, 70%);
 
 @header-background-color: lighten(@background-color, 3.2%);
 @header-shadow: fadeout(darken(@background-color, 7%), 23%);
