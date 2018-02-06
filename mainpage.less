@@ -104,18 +104,12 @@ body.nesewebel-mode.light-mode {
       letter-spacing: 1.5px;
       line-height: 83px;
       text-shadow:
-        1px 0px @heading-shadow,
-        0px 1px @heading-shadow,
-        2px 1px @heading-shadow,
-        1px 2px @heading-shadow,
-        3px 2px @heading-shadow,
-        2px 3px @heading-shadow,
-        4px 3px @heading-shadow,
-        3px 4px @heading-shadow,
-        5px 4px @heading-shadow,
-        4px 5px @heading-shadow,
-        6px 5px @heading-shadow,
-        5px 6px @heading-shadow;
+        1px 1px @heading-shadow,
+        2px 2px @heading-shadow,
+        3px 3px @heading-shadow,
+        4px 4px @heading-shadow,
+        5px 5px @heading-shadow,
+        6px 6px @heading-shadow;
       margin: 0;
       padding: 30px 30px 35px;
       transition: all .9s, color 0s;
@@ -131,19 +125,20 @@ body.nesewebel-mode.light-mode {
         left: 0;
         padding: 30px 30px 35px;
       }
-      &::before {
+      &:hover::before {
         color: @header-background-color;
         text-shadow:
-          6px 6px @header-background-color,
-          6px -6px @header-background-color,
-          -6px 6px @header-background-color,
-          -6px -6px @header-background-color;
+          7px 7px @header-background-color,
+          7px -7px @header-background-color,
+          -7px 7px @header-background-color,
+          -7px -7px @header-background-color;
         clip-path: polygon(0 58%, 0 0, 100% 0, 100% 37%);
+        animation: .32s headingcut ease-in;
       }
-      &::after {
-       clip-path: polygon(0 56%, 0 0, 100% 0, 100% 35%);
-       transform: translate(-5px);
-       animation: .69s headershift;
+      &:hover::after {
+       clip-path: polygon(0 57.5%, 0 0, 100% 0, 100% 36.5%);
+       transform: translate(-4px);
+       animation: .69s headingshift cubic-bezier(.85,0,1,1);
       }
       .selection-w-color(@header-selection);
     }
@@ -153,6 +148,9 @@ body.nesewebel-mode.light-mode {
         font-size: 12vw;
         line-height: 9.4vw;
         padding: 3.5vw 3.5vw 4.2vw;
+        &::before, &::after {
+          padding: 3.5vw 3.5vw 4.2vw;
+        }
       }
     }
     @media screen and (max-width: 720px) and (min-width: 436px){
@@ -161,6 +159,9 @@ body.nesewebel-mode.light-mode {
         font-size: 14vw;
         line-height: 11vw;
         padding: 4.2vw 4.2vw 4.7vw;
+        &::before, &::after {
+          padding: 4.2vw 4.2vw 4.7vw;
+        }
       }
     }
     @media screen and (max-width: 435px) {
@@ -170,6 +171,9 @@ body.nesewebel-mode.light-mode {
         font-size: 65px;
         line-height: 54px;
         padding: 15px 15px 20px;
+        &::before, &::after {
+          padding: 15px 15px 20px;
+        }
       }
     }
   }

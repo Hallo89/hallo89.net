@@ -90,7 +90,7 @@ body.nesewebel-mode.light-mode {
   text-transform: uppercase;
   letter-spacing: 1.5px;
   line-height: 83px;
-  text-shadow: 1px 0px #8e8e8e, 0px 1px #8e8e8e, 2px 1px #8e8e8e, 1px 2px #8e8e8e, 3px 2px #8e8e8e, 2px 3px #8e8e8e, 4px 3px #8e8e8e, 3px 4px #8e8e8e, 5px 4px #8e8e8e, 4px 5px #8e8e8e, 6px 5px #8e8e8e, 5px 6px #8e8e8e;
+  text-shadow: 1px 1px #8e8e8e, 2px 2px #8e8e8e, 3px 3px #8e8e8e, 4px 4px #8e8e8e, 5px 5px #8e8e8e, 6px 6px #8e8e8e;
   margin: 0;
   padding: 30px 30px 35px;
   transition: all .9s, color 0s;
@@ -108,15 +108,16 @@ body.nesewebel-mode.light-mode {
   left: 0;
   padding: 30px 30px 35px;
 }
-#head_block #main_header h1::before {
+#head_block #main_header h1:hover::before {
   color: #343434;
-  text-shadow: 6px 6px #343434, 6px -6px #343434, -6px 6px #343434, -6px -6px #343434;
+  text-shadow: 7px 7px #343434, 7px -7px #343434, -7px 7px #343434, -7px -7px #343434;
   clip-path: polygon(0 58%, 0 0, 100% 0, 100% 37%);
+  animation: 0.32s headingcut ease-in;
 }
-#head_block #main_header h1::after {
-  clip-path: polygon(0 56%, 0 0, 100% 0, 100% 35%);
-  transform: translate(-5px);
-  animation: .69s headershift;
+#head_block #main_header h1:hover::after {
+  clip-path: polygon(0 57.5%, 0 0, 100% 0, 100% 36.5%);
+  transform: translate(-4px);
+  animation: 0.69s headingshift cubic-bezier(0.85, 0, 1, 1);
 }
 #head_block #main_header h1::selection {
   background-color: transparent;
@@ -139,6 +140,10 @@ body.nesewebel-mode.light-mode {
     line-height: 9.4vw;
     padding: 3.5vw 3.5vw 4.2vw;
   }
+  #head_block #main_header h1::before,
+  #head_block #main_header h1::after {
+    padding: 3.5vw 3.5vw 4.2vw;
+  }
 }
 @media screen and (max-width: 720px) and (min-width: 436px) {
   #head_block #main_header {
@@ -147,6 +152,10 @@ body.nesewebel-mode.light-mode {
   #head_block #main_header h1 {
     font-size: 14vw;
     line-height: 11vw;
+    padding: 4.2vw 4.2vw 4.7vw;
+  }
+  #head_block #main_header h1::before,
+  #head_block #main_header h1::after {
     padding: 4.2vw 4.2vw 4.7vw;
   }
 }
@@ -158,6 +167,10 @@ body.nesewebel-mode.light-mode {
   #head_block #main_header h1 {
     font-size: 65px;
     line-height: 54px;
+    padding: 15px 15px 20px;
+  }
+  #head_block #main_header h1::before,
+  #head_block #main_header h1::after {
     padding: 15px 15px 20px;
   }
 }
@@ -476,12 +489,23 @@ body.nesewebel-mode.light-mode {
     border-width: 0;
   }
 }
-@keyframes headershift {
+@keyframes headingcut {
   from {
-    transform: translate(20px);
+    clip-path: polygon(100% 37%, 100% 0, 100% 0, 100% 37%);
   }
   to {
-    transform: translate(-5px);
+    clip-path: polygon(0 58%, 0 0, 100% 0, 100% 37%);
+  }
+}
+@keyframes headingshift {
+  0% {
+    transform: translate(0);
+  }
+  30% {
+    transform: translate(0);
+  }
+  100% {
+    transform: translate(-4px);
   }
 }
 @keyframes borderglide {
