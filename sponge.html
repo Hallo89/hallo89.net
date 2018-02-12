@@ -30,8 +30,8 @@
         transform: translate(-200px);
       }
       .arrow {
-        width: 100px;
-        height: 100px;
+        width: calc(5vw + 5vh);
+        height: calc(5vw + 5vh);
         font: 50px 'Century Gothic', sans-serif;
         text-align: center;
         line-height: 100px;
@@ -67,11 +67,11 @@
         "url('https://cdn.discordapp.com/attachments/247841904341942273/390973697298661376/unknown.png')",
         "url('https://cdn.discordapp.com/attachments/247841904341942273/390975389586948098/unknown.png')",
         "url('https://cdn.discordapp.com/attachments/247841904341942273/392311078492569601/image.png')"
-      ];
+      ]
       function toggleForward() {
         randomImg.push(randomImg.shift());
         document.getElementById('main').style.backgroundImage = randomImg[0];
-      };
+      }
       function toggleBackward() {
         randomImg.unshift(randomImg.pop());
         document.getElementById('main').style.backgroundImage = randomImg[0];
@@ -79,6 +79,7 @@
     </script>
   </head>
   <body>
+    <button onclick="fnc()">
     <div id="main" style="background-image: url('https://cdn.discordapp.com/attachments/247841904341942273/392311078492569601/image.png')">
       <div class="arrow_container" id="container_left">
         <div onclick="toggleBackward()" class="arrow" id="arrow_left"></div>
@@ -87,5 +88,6 @@
         <div onclick="toggleForward()" class="arrow" id="arrow_right"></div>
       </div>
     </div>
+  </button>
   </body>
 </html>

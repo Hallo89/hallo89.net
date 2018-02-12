@@ -100,8 +100,8 @@ body.nesewebel-mode.light-mode {
   color: #94bdc1;
   transform: scale(0.7) scale(1.47);
 }
-#head_block #main_header h1::before,
-#head_block #main_header h1::after {
+#head_block #main_header h1:hover::before,
+#head_block #main_header h1:hover::after {
   content: attr(data-heading);
   position: absolute;
   top: 0;
@@ -241,43 +241,49 @@ body.nesewebel-mode.light-mode {
   background-color: white;
   color: black;
 }
-#ultra_nav .menu {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin: 0 auto;
-  max-width: 1020px;
+#ultra_nav {
+  display: grid;
+  grid-template-columns: 400px 1fr 400px;
+  grid-template-rows: auto 400px;
+  grid-gap: 35px;
+  margin: 35px auto 10px;
+  max-width: 1000px;
 }
-#ultra_nav .menu.menu_about {
-  justify-content: center;
-}
-@media screen and (max-width: 865px) {
-  #ultra_nav .menu {
-    justify-content: center;
-    width: 420px;
+@media (max-width: 865px) {
+  #ultra_nav {
+    grid-template-columns: 400px;
+    grid-template-rows: auto repeat(2, 400px);
+    grid-auto-flow: row;
+    max-width: 400px;
   }
-  #ultra_nav .menu .box.box_about:hover {
-    height: 710px;
+  #ultra_nav .box {
+    grid-column: auto !important;
+  }
+  #ultra_nav .box.box_about:hover {
+    height: 740px !important;
   }
 }
 #ultra_nav .box {
   font-size: 30px;
-  margin: 40px 10px 0;
+  /*margin: 40px @box-margin-sides 0;*/
   position: relative;
   overflow: hidden;
   background: #2e2e2e;
-  width: 400px;
-  height: 400px;
+  /*width: @box-dimension;
+    height: @box-dimension;*/
   box-shadow: 1.4px 1.4px 15px 1px rgba(18, 18, 18, 0.8);
   transition: background 0.15s linear, box-shadow 0.15s linear;
 }
 #ultra_nav .box.box_about {
   height: 82px;
+  width: 400px;
+  grid-column: 1 / -1;
+  justify-self: center;
   transition: all 0.92s cubic-bezier(0.71, 0.12, 0.45, 0.81), background 0.15s linear, box-shadow 0.15s linear;
 }
 #ultra_nav .box.box_about:hover {
-  width: 100%;
   height: 400px;
+  width: 100%;
   transition: all .7s;
 }
 #ultra_nav .box.box_about:hover .about_content {
@@ -292,6 +298,9 @@ body.nesewebel-mode.light-mode {
   opacity: 0;
   transform: scale(0);
   transition: all 0.7s cubic-bezier(0.8, 0, 0.79, 0.74), opacity 0.525s ease, color 0.15s linear;
+}
+#ultra_nav .box:nth-of-type(2n+3) {
+  grid-column: 3;
 }
 #ultra_nav .box .corneranimation .corner_before,
 #ultra_nav .box .corneranimation .corner_after {
@@ -359,25 +368,25 @@ body.nesewebel-mode.light-mode {
 #ultra_nav .box a:nth-of-type(3) {
   animation: 1.2s shiftinX, .75s fadein;
 }
-#ultra_nav .box#box1 {
+#ultra_nav .box:nth-of-type(1) {
   animation: 0.8s shiftin2 ease-out;
 }
-#ultra_nav .box#box1 .box_header {
+#ultra_nav .box:nth-of-type(1) .box_header {
   background: url('https://i.gyazo.com/7f6a04143c26fa071b91457ace2e70eb.png');
   cursor: pointer;
 }
-#ultra_nav .box#box2 {
+#ultra_nav .box:nth-of-type(2) {
   animation: 0.9s shiftin2 ease-out;
 }
-#ultra_nav .box#box2 a:nth-of-type(1) {
+#ultra_nav .box:nth-of-type(2) a:nth-of-type(1) {
   background: url('https://i.gyazo.com/d3454e553f00a384862950210990c16c.png');
   background-size: cover;
 }
-#ultra_nav .box#box2 a:nth-of-type(1):hover {
+#ultra_nav .box:nth-of-type(2) a:nth-of-type(1):hover {
   background: url('https://i.gyazo.com/aee35492a1a0a171280fe4f7a0d97343.png');
   background-size: cover;
 }
-#ultra_nav .box#box3 {
+#ultra_nav .box:nth-of-type(3) {
   animation: 1s shiftin2 ease-out;
 }
 .light-mode #ultra_nav .box {

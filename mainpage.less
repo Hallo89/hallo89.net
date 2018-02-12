@@ -118,7 +118,7 @@ body.nesewebel-mode.light-mode {
         color: @main-text-hover;
         transform: scale(0.7) scale(1.47);
       }
-      &::before, &::after {
+      &:hover::before, &:hover::after {
         content: attr(data-heading);
         position: absolute;
         top: 0;
@@ -227,40 +227,44 @@ body.nesewebel-mode.light-mode {
 }
 
 #ultra_nav {
-  .menu {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    margin: 0 auto;
-    max-width: 1020px;
-    &.menu_about {
-      justify-content: center;
-    }
-    @media screen and (max-width: 865px) {
-      justify-content: center;
-      width: @box-dimension + @box-margin-sides *2;
-      .box.box_about:hover {
-        height: 710px; //unfortunately need to hardcode this (no transition otherwise)
+  display: grid;
+  grid-template-columns: 400px 1fr 400px;
+  grid-template-rows: auto 400px;
+  grid-gap: 35px;
+  margin: 35px auto 10px;
+  max-width: 1000px;
+  @media (max-width: 865px) {
+    grid-template-columns: 400px;
+    grid-template-rows: auto repeat(2, 400px);
+    grid-auto-flow: row;
+    max-width: 400px;
+    .box {
+      grid-column: auto !important;
+      &.box_about:hover {
+        height: 740px !important; //unfortunately need to hardcode this (no transition otherwise) :/
       }
     }
   }
   .box {
     font-size: 30px;
-    margin: 40px @box-margin-sides 0;
+    /*margin: 40px @box-margin-sides 0;*/
     position: relative;
     overflow: hidden;
     background: @ultranav-box;
-    width: @box-dimension;
-    height: @box-dimension;
+    /*width: @box-dimension;
+    height: @box-dimension;*/
     box-shadow: 1.4px 1.4px 15px 1px @ultranav-box-shadow;
     .mode-switch-transition-w-shadow;
   //'about'-box extension
     &.box_about {
       height: 82px;
+      width: 400px;
+      grid-column: ~"1 / -1";
+      justify-self: center;
       transition: all .92s cubic-bezier(.71,.12,.45,.81), background .15s linear, box-shadow .15s linear;
       &:hover {
+        height: 400px;
         width: 100%;
-        height: @box-dimension;
         transition: all .7s;
       }
       &:hover .about_content {
@@ -278,6 +282,10 @@ body.nesewebel-mode.light-mode {
       }
     }
   //end of about-box
+    &:nth-of-type(2n+3) {
+      grid-column: 3;
+    }
+  //end of media
   //corners shifting in when hovering
     .corneranimation {
       .corner_before, .corner_after {
@@ -352,17 +360,17 @@ body.nesewebel-mode.light-mode {
         animation: 1.2s shiftinX, .75s fadein;
       }
     }
-  //end
+  //end of <a> in .box
 
-  //individual arrangements
-    &#box1 {
+  //individual arguments (still nested in .box)
+    &:nth-of-type(1) {
       .boxanimation(.8s);
       .box_header {
         background: @boxheader-background-box1;
         cursor: pointer;
       }
     }
-    &#box2 {
+    &:nth-of-type(2) {
       .boxanimation(.9s);
       a:nth-of-type(1) {
         background: @boxtext-background-box1span1;
@@ -373,11 +381,13 @@ body.nesewebel-mode.light-mode {
         }
       }
     }
-    &#box3 {
+    &:nth-of-type(3) {
       .boxanimation(1s);
     }
   }
+  //end of .box
 }
+//end of #ultra_nav
 
 
 .light-mode #ultra_nav {
