@@ -84,7 +84,8 @@ body.nesewebel-mode.light-mode {
   height: 410px;
   color: @heading-foreground-color;
   text-align: center;
-  .mode-switch-transition-w-shadow;
+  .mode-switch-transition;
+  .mode-switch-transition-shadow;
   /*border-left: solid 5px;
   border-right: solid 5px;
   border-radius: 5px;
@@ -247,27 +248,29 @@ body.nesewebel-mode.light-mode {
   }
   .box {
     font-size: 30px;
-    /*margin: 40px @box-margin-sides 0;*/
     position: relative;
     overflow: hidden;
     background: @ultranav-box;
-    /*width: @box-dimension;
-    height: @box-dimension;*/
     box-shadow: 1.4px 1.4px 15px 1px @ultranav-box-shadow;
-    .mode-switch-transition-w-shadow;
+    .mode-switch-transition;
+    .mode-switch-transition-shadow;
   //'about'-box extension
     &.box_about {
       height: 82px;
       width: 400px;
       grid-column: ~"1 / -1";
       justify-self: center;
-      transition: all .92s cubic-bezier(.71,.12,.45,.81), background .15s linear, box-shadow .15s linear;
-      &:hover {
+      transition+: all .92s cubic-bezier(.71,.12,.45,.81);
+      .mode-switch-transition;
+      .mode-switch-transition-shadow;
+      &.expanded {
         height: 400px;
         width: 100%;
-        transition: all .7s;
+        transition+: all .7s;
+        .mode-switch-transition;
+        .mode-switch-transition-shadow;
       }
-      &:hover .about_content {
+      &.expanded .about_content {
         transform: scale(1);
         opacity: 1;
         transition: all .45s
@@ -278,7 +281,8 @@ body.nesewebel-mode.light-mode {
         margin: 15px;
         opacity: 0;
         transform: scale(0);
-        transition: all .7s cubic-bezier(.8,0,.79,.74), opacity .525s ease, color .15s linear;
+        transition+: all .7s cubic-bezier(.8,0,.79,.74), opacity .525s ease;
+        .mode-switch-transition-color;
       }
     }
   //end of about-box
@@ -292,6 +296,7 @@ body.nesewebel-mode.light-mode {
         position: absolute;
         background: @ultranav-box-corners;
         transition: all .4s ease-out;
+        z-index: 3;
       }
       .corner_before {
         height: 40px;
@@ -326,18 +331,23 @@ body.nesewebel-mode.light-mode {
         color: @ultranav-boxheader-foreground;
         border-bottom: 3px solid @ultranav-boxheader-bordertopbottom;
         border-top: 3px solid @ultranav-boxheader-bordertopbottom;
-        transition: background .15s linear, border-bottom .15s linear, border-top .15s linear, color .15s linear;
+        transition: border-bottom .15s linear, border-top .15s linear;
+        .mode-switch-transition;
+        .mode-switch-transition-color;
       }
     }
   //end of header
   //main text inside the boxes
     a {
+      position: relative;
       padding: 20px 10px;
       display: inherit;
       text-decoration: none;
       color: @ultranav-boxtext-foreground;
-      transition: all .9s, padding-left .1s, background 1.2s cubic-bezier(.87,0,1,1), color .15s linear;
+      transition+: all .75s, padding-left .1s;
+      .mode-switch-transition-color;
       line-height: 50px;
+      z-index: 1;
       &:hover {
         padding: 48px 48px 48px 17px;
       }
@@ -349,6 +359,16 @@ body.nesewebel-mode.light-mode {
         border-left: solid 5px @ultranav-boxtext-additional-border;
         border-top: solid 5px transparent;
         border-bottom: solid 5px transparent;
+      }
+      &::after {
+        background-size: cover;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        transition: .75s linear;
+        z-index: -1;
       }
       &:nth-of-type(1) {
         animation: .8s shiftinX, .75s fadein;
@@ -366,18 +386,18 @@ body.nesewebel-mode.light-mode {
     &:nth-of-type(1) {
       .boxanimation(.8s);
       .box_header {
-        background: @boxheader-background-box1;
         cursor: pointer;
       }
     }
     &:nth-of-type(2) {
       .boxanimation(.9s);
       a:nth-of-type(1) {
-        background: @boxtext-background-box1span1;
-        background-size: cover;
-        &:hover {
-          background: @boxtext-background-box1span1_blur;
-          background-size: cover;
+        &::after {
+          content: '';
+          background-image: @boxtext-background-box1span1;
+        }
+        &:hover::after {
+          filter: blur(1.5px);
         }
       }
     }

@@ -25,7 +25,7 @@
       </div>
     </div>
 
-    <div id="head_block">
+    <div class="head" id="head_block">
       <div id="main_header">
         <h1 data-heading="Hallo89">Hallo89</h1>
       </div>
@@ -50,16 +50,16 @@
     </div>
 
     <nav id="ultra_nav">
-      <div class="box box_about">
+      <div class="box box_about" id="about_box">
         <div class="corneranimation">
-          <span class="corner_before"></span>
-          <span class="corner_after"></span>
+          <span class="corner_before corner_about"></span>
+          <span class="corner_after corner_about"></span>
         </div>
-        <div class="box_header header_box1">
+        <div class="box_header header_box1" onclick="toggleAbout()">
           <span class="header_maintext"> About Nesewebel </span>
         </div>
         <div class="about_content">
-          <span> Nesewebel is pretty lit yeah what should I now write in here hmm it's pretty difficult because I actually want to replace the 'Lorem Ipsum' text by Atom because it wasn't Nesewebel-y enough. So Nesewebel is pretty lit, as I said, he is a very cool guy haha that was actually a lie he's the shittiest person on earth but is this really true hmm I don't know so decide whether he's cool or not :thinking:. Please gift him a CPU cooler he needs it desperately actually please gift him everything you have because he is very awesome. <br> ALSO SORRY THAT I DIDN'T BUY THAT BOX FOR YOU D::::: ;________; SOB </span>
+          <span class="actual_about_content"> Nesewebel is pretty lit yeah what should I now write in here hmm it's pretty difficult because I actually want to replace the 'Lorem Ipsum' text by Atom because it wasn't Nesewebel-y enough. So Nesewebel is pretty lit, as I said, he is a very cool guy haha that was actually a lie he's the shittiest person on earth but is this really true hmm I don't know so decide whether he's cool or not :thinking:. Please gift him a CPU cooler he needs it desperately actually please gift him everything you have because he is very awesome. <br> ALSO SORRY THAT I DIDN'T BUY THAT BOX FOR YOU D::::: ;________; SOB </span>
         </div>
       </div>
 
@@ -91,6 +91,26 @@
       function toggleModeNesewebel() {
         document.body.classList.toggle('nesewebel-mode');
         document.body.classList.toggle('no-nesewebelsadface');
+      }
+      function toggleAbout() {
+        document.getElementById('about_box').classList.toggle('expanded');
+        window.onclick = function(event) {
+          if (!event.target.matches(
+            [
+              '.box_about',
+              '.about_content',
+              '.actual_about_content',
+              '.header_maintext',
+              '.corner_before.corner_about',
+              '.corner_after.corner_about'
+            ]
+          ))
+          {
+            if(document.getElementById('about_box').classList.contains('expanded')) {
+              document.getElementById('about_box').classList.remove('expanded');
+            }
+          }
+        }
       }
     </script>
     <script src="global.js"></script>

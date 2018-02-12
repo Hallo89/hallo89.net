@@ -13,12 +13,15 @@
 
 
 .mode-switch-transition() {
-  transition: background .15s linear;
+  transition+: background .15s linear;
+}
+.mode-switch-transition-shadow() {
+  transition+: box-shadow .15s linear;
+}
+.mode-switch-transition-color() {
+  transition+: color .15s linear;
 }
 
-.mode-switch-transition-w-shadow() {
-  transition: background .15s linear, box-shadow .15s linear;
-}
 
 .selection-w-color(@color: @subheader-selection; @background: transparent;) {
   &::selection {

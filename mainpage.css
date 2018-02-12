@@ -69,7 +69,7 @@ body.nesewebel-mode.light-mode {
   height: 410px;
   color: #b5b5b5;
   text-align: center;
-  transition: background 0.15s linear, box-shadow 0.15s linear;
+  transition: background .15s linear, box-shadow 0.15s linear;
   /*border-left: solid 5px;
   border-right: solid 5px;
   border-radius: 5px;
@@ -265,28 +265,25 @@ body.nesewebel-mode.light-mode {
 }
 #ultra_nav .box {
   font-size: 30px;
-  /*margin: 40px @box-margin-sides 0;*/
   position: relative;
   overflow: hidden;
   background: #2e2e2e;
-  /*width: @box-dimension;
-    height: @box-dimension;*/
   box-shadow: 1.4px 1.4px 15px 1px rgba(18, 18, 18, 0.8);
-  transition: background 0.15s linear, box-shadow 0.15s linear;
+  transition: background .15s linear, box-shadow 0.15s linear;
 }
 #ultra_nav .box.box_about {
   height: 82px;
   width: 400px;
   grid-column: 1 / -1;
   justify-self: center;
-  transition: all 0.92s cubic-bezier(0.71, 0.12, 0.45, 0.81), background 0.15s linear, box-shadow 0.15s linear;
+  transition: all 0.92s cubic-bezier(0.71, 0.12, 0.45, 0.81), background .15s linear, box-shadow 0.15s linear;
 }
-#ultra_nav .box.box_about:hover {
+#ultra_nav .box.box_about.expanded {
   height: 400px;
   width: 100%;
-  transition: all .7s;
+  transition: all .7s, background .15s linear, box-shadow 0.15s linear;
 }
-#ultra_nav .box.box_about:hover .about_content {
+#ultra_nav .box.box_about.expanded .about_content {
   transform: scale(1);
   opacity: 1;
   transition: all 0.45s;
@@ -297,7 +294,7 @@ body.nesewebel-mode.light-mode {
   margin: 15px;
   opacity: 0;
   transform: scale(0);
-  transition: all 0.7s cubic-bezier(0.8, 0, 0.79, 0.74), opacity 0.525s ease, color 0.15s linear;
+  transition: all 0.7s cubic-bezier(0.8, 0, 0.79, 0.74), opacity 0.525s ease, color .15s linear;
 }
 #ultra_nav .box:nth-of-type(2n+3) {
   grid-column: 3;
@@ -307,6 +304,7 @@ body.nesewebel-mode.light-mode {
   position: absolute;
   background: rgba(31, 31, 31, 0.62);
   transition: all 0.4s ease-out;
+  z-index: 3;
 }
 #ultra_nav .box .corneranimation .corner_before {
   height: 40px;
@@ -337,15 +335,18 @@ body.nesewebel-mode.light-mode {
   color: #545454;
   border-bottom: 3px solid #616161;
   border-top: 3px solid #616161;
-  transition: background 0.15s linear, border-bottom 0.15s linear, border-top 0.15s linear, color 0.15s linear;
+  transition: border-bottom 0.15s linear, border-top 0.15s linear;
+  transition: background .15s linear, color .15s linear;
 }
 #ultra_nav .box a {
+  position: relative;
   padding: 20px 10px;
   display: inherit;
   text-decoration: none;
   color: #9c9c9c;
-  transition: all 0.9s, padding-left 0.1s, background 1.2s cubic-bezier(0.87, 0, 1, 1), color 0.15s linear;
+  transition: all 0.75s, padding-left 0.1s, color .15s linear;
   line-height: 50px;
+  z-index: 1;
 }
 #ultra_nav .box a:hover {
   padding: 48px 48px 48px 17px;
@@ -358,6 +359,16 @@ body.nesewebel-mode.light-mode {
   border-left: solid 5px #171717;
   border-top: solid 5px transparent;
   border-bottom: solid 5px transparent;
+}
+#ultra_nav .box a::after {
+  background-size: cover;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  transition: .75s linear;
+  z-index: -1;
 }
 #ultra_nav .box a:nth-of-type(1) {
   animation: .8s shiftinX, .75s fadein;
@@ -372,19 +383,17 @@ body.nesewebel-mode.light-mode {
   animation: 0.8s shiftin2 ease-out;
 }
 #ultra_nav .box:nth-of-type(1) .box_header {
-  background: url('https://i.gyazo.com/7f6a04143c26fa071b91457ace2e70eb.png');
   cursor: pointer;
 }
 #ultra_nav .box:nth-of-type(2) {
   animation: 0.9s shiftin2 ease-out;
 }
-#ultra_nav .box:nth-of-type(2) a:nth-of-type(1) {
-  background: url('https://i.gyazo.com/d3454e553f00a384862950210990c16c.png');
-  background-size: cover;
+#ultra_nav .box:nth-of-type(2) a:nth-of-type(1)::after {
+  content: '';
+  background-image: url('https://i.gyazo.com/d3454e553f00a384862950210990c16c.png');
 }
-#ultra_nav .box:nth-of-type(2) a:nth-of-type(1):hover {
-  background: url('https://i.gyazo.com/aee35492a1a0a171280fe4f7a0d97343.png');
-  background-size: cover;
+#ultra_nav .box:nth-of-type(2) a:nth-of-type(1):hover::after {
+  filter: blur(1.5px);
 }
 #ultra_nav .box:nth-of-type(3) {
   animation: 1s shiftin2 ease-out;
