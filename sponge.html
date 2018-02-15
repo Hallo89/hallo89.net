@@ -24,31 +24,32 @@
         border-radius: 100%;
       }
       #container_left:hover #arrow_left {
-        transform: translate(200px);
+        transform: translate(30vw);
       }
       #container_right:hover #arrow_right {
-        transform: translate(-200px);
+        transform: translate(-30vw);
       }
       .arrow {
         width: calc(5vw + 5vh);
         height: calc(5vw + 5vh);
-        font: 50px 'Century Gothic', sans-serif;
-        text-align: center;
-        line-height: 100px;
+        font: calc(3vh + 3vw) 'Century Gothic', sans-serif;
+        color: hsla(0, 0%, 10%, .8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
         border-radius: 100%;
-        background: gray;
-        opacity: 0.75;
+        background: hsla(0, 0%, 45%, 0.5);
         cursor: pointer;
-        transition: all .3s ease;
+        transition: all .2s ease;
       }
       #arrow_left {
-        transform: translate(-100px);
+        transform: translate(-11vw);
       }
       #arrow_left::before {
         content: '\25c0'
       }
       #arrow_right {
-        transform: translate(100px);
+        transform: translate(11vw);
         justify-self: end;
       }
       #arrow_right::before {
@@ -58,6 +59,7 @@
     <script>
       var randomImg = new Array ();
       randomImg = [
+        "url('https://cdn.discordapp.com/attachments/247841904341942273/392311078492569601/image.png')",
         "url('https://cdn.discordapp.com/attachments/247841904341942273/390973795428728842/unknown.png')",
         "url('https://cdn.discordapp.com/attachments/247841904341942273/406227895800037376/unknown.png')",
         "url('https://cdn.discordapp.com/attachments/247841904341942273/390969197871759361/unknown.png')",
@@ -66,8 +68,11 @@
         "url('https://cdn.discordapp.com/attachments/247841904341942273/390972469701509123/unknown.png')",
         "url('https://cdn.discordapp.com/attachments/247841904341942273/390973697298661376/unknown.png')",
         "url('https://cdn.discordapp.com/attachments/247841904341942273/390975389586948098/unknown.png')",
-        "url('https://cdn.discordapp.com/attachments/247841904341942273/392311078492569601/image.png')"
-      ]
+        "url('https://cdn.discordapp.com/attachments/406581280172670976/413725355933696000/unknown.png')"
+      ];
+      function onLoad() {
+        document.getElementById('main').style.backgroundImage = randomImg[0];
+      }
       function toggleForward() {
         randomImg.push(randomImg.shift());
         document.getElementById('main').style.backgroundImage = randomImg[0];
@@ -76,11 +81,11 @@
         randomImg.unshift(randomImg.pop());
         document.getElementById('main').style.backgroundImage = randomImg[0];
       }
+      window.onload = onLoad;
     </script>
   </head>
   <body>
-    <button onclick="fnc()">
-    <div id="main" style="background-image: url('https://cdn.discordapp.com/attachments/247841904341942273/392311078492569601/image.png')">
+    <div id="main">
       <div class="arrow_container" id="container_left">
         <div onclick="toggleBackward()" class="arrow" id="arrow_left"></div>
       </div>
@@ -88,6 +93,5 @@
         <div onclick="toggleForward()" class="arrow" id="arrow_right"></div>
       </div>
     </div>
-  </button>
   </body>
 </html>
