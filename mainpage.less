@@ -338,9 +338,17 @@ body.nesewebel-mode.light-mode {
     }
   //end of header
   //main text inside the boxes
+    .box_text {
+      display: flex;
+      flex-direction: column;
+      height: ~"calc(100% - 86px)";
+    }
     a {
+      display: flex;
+      align-items: center;
       position: relative;
-      padding: 20px 10px;
+      flex: 1;
+      padding: 0 0 0 10px;
       display: inherit;
       text-decoration: none;
       color: @ultranav-boxtext-foreground;
@@ -349,7 +357,7 @@ body.nesewebel-mode.light-mode {
       line-height: 50px;
       z-index: 1;
       &:hover {
-        padding: 48px 48px 48px 17px;
+        padding: 22px 0 22px 17px;
       }
       &:hover::before {
         content: '';

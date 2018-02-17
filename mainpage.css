@@ -338,9 +338,17 @@ body.nesewebel-mode.light-mode {
   transition: border-bottom 0.15s linear, border-top 0.15s linear;
   transition: background .15s linear, color .15s linear;
 }
+#ultra_nav .box .box_text {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 86px);
+}
 #ultra_nav .box a {
+  display: flex;
+  align-items: center;
   position: relative;
-  padding: 20px 10px;
+  flex: 1;
+  padding: 0 0 0 10px;
   display: inherit;
   text-decoration: none;
   color: #9c9c9c;
@@ -349,7 +357,7 @@ body.nesewebel-mode.light-mode {
   z-index: 1;
 }
 #ultra_nav .box a:hover {
-  padding: 48px 48px 48px 17px;
+  padding: 22px 0 22px 17px;
 }
 #ultra_nav .box a:hover::before {
   content: '';

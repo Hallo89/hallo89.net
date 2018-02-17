@@ -6,15 +6,34 @@
     <style>
       body {
         margin: 0;
-        overflow: hidden;
+        /*overflow: hidden;*/
+      }
+      #images {
+        display: flex;
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+      #images > div {
+        position: absolute;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+        background-size: 100% 100%;
+        transform: translate(100vw);
+        transition: all .1s;
+      }
+      #images > div.this {
+        transform: translate(0);
       }
       #main {
         height: 100vh;
         width: 100vw;
-        background-size: 100% 100%;
         display: flex;
         justify-content: space-between;
+        background-size: 100% 100%;
         align-items: center;
+        z-index: 10000;
       }
       .arrow_container {
         display: grid;
@@ -22,6 +41,7 @@
         width: 45vw;
         height: 60vh;
         border-radius: 100%;
+        z-index: 10001;
       }
       #container_left:hover #arrow_left {
         transform: translate(30vw);
@@ -57,8 +77,8 @@
       }
     </style>
     <script>
-      var randomImg = new Array ();
-      randomImg = [
+      var imgArray = new Array ();
+      imgArray = [
         "url('https://cdn.discordapp.com/attachments/247841904341942273/392311078492569601/image.png')",
         "url('https://cdn.discordapp.com/attachments/247841904341942273/390973795428728842/unknown.png')",
         "url('https://cdn.discordapp.com/attachments/247841904341942273/406227895800037376/unknown.png')",
@@ -69,28 +89,67 @@
         "url('https://cdn.discordapp.com/attachments/247841904341942273/390973697298661376/unknown.png')",
         "url('https://cdn.discordapp.com/attachments/247841904341942273/390975389586948098/unknown.png')",
         "url('https://cdn.discordapp.com/attachments/406581280172670976/413725355933696000/unknown.png')"
-      ];
-      function onLoad() {
-        document.getElementById('main').style.backgroundImage = randomImg[0];
+      ];/*
+      var imgArrayPure = new Array();
+      var images = [];*/
+      var imgHTML = htmlTemplate(imgArray[0]);
+      var currentImg = 0;
+      var executed;
+      function preload() {
+        ImageOnLoad();
+        htmlGeneration();
+      }
+      function ImageOnLoad() {
+        document.getElementById('main').style.backgroundImage = imgArray[0];
+      }
+      function htmlTemplate(setBackgroundImage) {
+        return `
+        <div style="background-image: ${setBackgroundImage}"></div>
+        `;
+      }
+      function htmlGeneration() {
+        for (var int = 1; int < imgArray.length; int++) {
+          imgHTML += htmlTemplate(imgArray[int]);
+        }
+      }
+      /*function preloadImages() {
+        for (var int = 0; int < imgArray.length; int++) {
+          imgArrayPure[int] = imgArray[int].replace("url('", "");
+          imgArrayPure[int] = imgArrayPure[int].replace("')", "");
+          images[int] = new Image();
+          images[int].src = imgArrayPure[int];
+        }
+      }*/
+      function htmlGenExecution() {
+        if (executed != true ) {
+          document.getElementById('images').innerHTML = imgHTML;
+        }
+        executed = true;
       }
       function toggleForward() {
-        randomImg.push(randomImg.shift());
-        document.getElementById('main').style.backgroundImage = randomImg[0];
+        if (currentImg >= (imgArray.length - 1)) {
+        }
+        else if (currentImg < (imgArray.length - 1)) {
+          document.getElementById('images').children[++currentImg].classList.add('this');
+        }
       }
       function toggleBackward() {
-        randomImg.unshift(randomImg.pop());
-        document.getElementById('main').style.backgroundImage = randomImg[0];
+         document.getElementById('images').children[--currentImg].classList.add('this');
       }
-      window.onload = onLoad;
+      window.onload = preload;
     </script>
   </head>
   <body>
+    <div id="images">
+
+    </div>
+
     <div id="main">
       <div class="arrow_container" id="container_left">
-        <div onclick="toggleBackward()" class="arrow" id="arrow_left"></div>
+        <div onclick="htmlGenExecution(); toggleBackward()" class="arrow" id="arrow_left"></div>
       </div>
       <div class="arrow_container" id="container_right">
-        <div onclick="toggleForward()" class="arrow" id="arrow_right"></div>
+        <div onclick="htmlGenExecution(); toggleForward()" class="arrow" id="arrow_right"></div>
       </div>
     </div>
   </body>
