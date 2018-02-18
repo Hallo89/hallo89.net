@@ -8,19 +8,6 @@ body.nesewebel-mode.dark-mode {
 body.nesewebel-mode.light-mode {
   background: white;
 }
-#headline-main {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 7px 35px;
-  max-width: 100vw;
-  min-height: 38px;
-}
-#headline-main #mode_dropdown {
-  position: relative;
-  right: 0;
-  top: 0;
-}
 .nesewebel-mode.dark-mode #mode_dropdown #mode_dropdown_box {
   box-shadow: 1px 1px 10px #141414;
 }
@@ -63,11 +50,11 @@ body.nesewebel-mode.light-mode {
   align-items: center;
   flex-flow: column wrap;
   margin: auto;
-  box-shadow: 0 2px 10px 1px rgba(26, 26, 26, 0.77);
-  background-color: #343434;
+  box-shadow: 0 2px 10px 1px rgba(10, 10, 10, 0.77);
+  background-color: #242424;
   max-width: 100vw;
   height: 410px;
-  color: #b5b5b5;
+  color: #a1a1a1;
   text-align: center;
   transition: background .15s linear, box-shadow 0.15s linear;
   /*border-left: solid 5px;
@@ -90,7 +77,7 @@ body.nesewebel-mode.light-mode {
   text-transform: uppercase;
   letter-spacing: 1.5px;
   line-height: 83px;
-  text-shadow: 1px 1px #8e8e8e, 2px 2px #8e8e8e, 3px 3px #8e8e8e, 4px 4px #8e8e8e, 5px 5px #8e8e8e, 6px 6px #8e8e8e;
+  text-shadow: 1px 1px #7b7b7b, 2px 2px #7b7b7b, 3px 3px #7b7b7b, 4px 4px #7b7b7b, 5px 5px #7b7b7b, 6px 6px #7b7b7b;
   margin: 0;
   padding: 30px 30px 35px;
   transition: all .9s, color 0s;
@@ -109,8 +96,8 @@ body.nesewebel-mode.light-mode {
   padding: 30px 30px 35px;
 }
 #head_block #main_header h1:hover::before {
-  color: #343434;
-  text-shadow: 7px 7px #343434, 7px -7px #343434, -7px 7px #343434, -7px -7px #343434;
+  color: #242424;
+  text-shadow: 7px 7px #242424, 7px -7px #242424, -7px 7px #242424, -7px -7px #242424;
   clip-path: polygon(0 58%, 0 0, 100% 0, 100% 37%);
   animation: 0.32s headingcut ease-in;
 }
@@ -267,8 +254,8 @@ body.nesewebel-mode.light-mode {
   font-size: 30px;
   position: relative;
   overflow: hidden;
-  background: #2e2e2e;
-  box-shadow: 1.4px 1.4px 15px 1px rgba(18, 18, 18, 0.8);
+  background: #202020;
+  box-shadow: 1.4px 1.4px 11px rgba(5, 5, 5, 0.8);
   transition: background .15s linear, box-shadow 0.15s linear;
 }
 #ultra_nav .box.box_about {
@@ -290,7 +277,7 @@ body.nesewebel-mode.light-mode {
 }
 #ultra_nav .box.box_about .about_content {
   font: 25px 'Roboto', sans-serif;
-  color: #9c9c9c;
+  color: #999999;
   margin: 15px;
   opacity: 0;
   transform: scale(0);
@@ -302,7 +289,7 @@ body.nesewebel-mode.light-mode {
 #ultra_nav .box .corneranimation .corner_before,
 #ultra_nav .box .corneranimation .corner_after {
   position: absolute;
-  background: rgba(31, 31, 31, 0.62);
+  background: rgba(15, 15, 15, 0.62);
   transition: all 0.4s ease-out;
   z-index: 3;
 }
@@ -332,9 +319,9 @@ body.nesewebel-mode.light-mode {
   text-transform: uppercase;
   display: inherit;
   line-height: 0;
-  color: #545454;
-  border-bottom: 3px solid #616161;
-  border-top: 3px solid #616161;
+  color: #525252;
+  border-bottom: 3px solid #5e5e5e;
+  border-top: 3px solid #5e5e5e;
   transition: border-bottom 0.15s linear, border-top 0.15s linear;
   transition: background .15s linear, color .15s linear;
 }
@@ -351,20 +338,20 @@ body.nesewebel-mode.light-mode {
   padding: 0 0 0 10px;
   display: inherit;
   text-decoration: none;
-  color: #9c9c9c;
+  color: #999999;
   transition: all 0.75s, padding-left 0.1s, color .15s linear;
   line-height: 50px;
   z-index: 1;
 }
 #ultra_nav .box a:hover {
-  padding: 22px 0 22px 17px;
+  flex-grow: 1.7;
 }
 #ultra_nav .box a:hover::before {
   content: '';
   position: absolute;
   left: 0;
   height: 44px;
-  border-left: solid 5px #171717;
+  border-left: solid 5px #080808;
   border-top: solid 5px transparent;
   border-bottom: solid 5px transparent;
 }
@@ -398,7 +385,7 @@ body.nesewebel-mode.light-mode {
 }
 #ultra_nav .box:nth-of-type(2) a:nth-of-type(1)::after {
   content: '';
-  background-image: url('https://i.gyazo.com/d3454e553f00a384862950210990c16c.png');
+  background-image: url('https://cdn.discordapp.com/attachments/363044137106276354/414869247421054976/host.png');
 }
 #ultra_nav .box:nth-of-type(2) a:nth-of-type(1):hover::after {
   filter: blur(1.5px);

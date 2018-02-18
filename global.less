@@ -87,13 +87,14 @@ body.light-mode {
   border-bottom: solid 2px;
   border-radius: 150px;
   color: @nav-border;
-  animation: 2.2s borderglide, 2s fadein, 1.7s shiftin2;
+  animation: 2s borderglide, 1.85s fadein, 1.7s shiftin2;
 }
 
 #mode_dropdown {
   position: absolute;
   right: 35px;
   top: 11px;
+  z-index: 11;
   &.enabled #mode_dropdown_box {
     display: block;
   }
@@ -112,7 +113,8 @@ body.light-mode {
     right: -29px;
     margin: 18px 5px 5px;
     box-shadow: 1px 1px 10px @mode-dropdown-box-shadow;
-    .mode-switch-transition-w-shadow;
+    .mode-switch-transition;
+    .mode-switch-transition-shadow;
     z-index: 1;
     &::before {
       content: '';

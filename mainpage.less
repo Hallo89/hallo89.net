@@ -16,19 +16,6 @@ body.nesewebel-mode.light-mode {
   background: @nesewebel-background--light;
 }
 
-#headline-main {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 7px 35px;
-  max-width: 100vw;
-  min-height: 38px;
-  #mode_dropdown {
-    position: relative;
-    right: 0;
-    top: 0;
-  }
-}
 
 .nesewebel-mode.dark-mode #mode_dropdown {
   #mode_dropdown_box {
@@ -251,7 +238,7 @@ body.nesewebel-mode.light-mode {
     position: relative;
     overflow: hidden;
     background: @ultranav-box;
-    box-shadow: 1.4px 1.4px 15px 1px @ultranav-box-shadow;
+    box-shadow: 1.4px 1.4px 11px @ultranav-box-shadow;
     .mode-switch-transition;
     .mode-switch-transition-shadow;
   //'about'-box extension
@@ -357,7 +344,7 @@ body.nesewebel-mode.light-mode {
       line-height: 50px;
       z-index: 1;
       &:hover {
-        padding: 22px 0 22px 17px;
+        flex-grow: 1.7;
       }
       &:hover::before {
         content: '';

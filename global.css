@@ -4,7 +4,7 @@ No necessity to write this in here but Less is awesome :o
 */
 body {
   margin: 0 0 15px 0;
-  background: #2b2b2b;
+  background: #1c1c1c;
   font-family: Arial;
   transition: background .15s linear;
 }
@@ -13,7 +13,7 @@ body.light-mode {
 }
 #headline {
   position: fixed;
-  background: #262626;
+  background: #161616;
   width: 100%;
   z-index: 10;
 }
@@ -37,7 +37,7 @@ body.light-mode {
 #head_nav #links a {
   padding: 5px 5px 3px;
   text-decoration: none;
-  background: rgba(69, 69, 69, 0.65);
+  background: rgba(54, 54, 54, 0.65);
   color: #9c9c9c;
   display: inline-block;
   border: solid 2px;
@@ -56,7 +56,7 @@ body.light-mode {
   margin: 0 10px;
   transition: transform 0;
   transform: scale(1.065);
-  box-shadow: 1px 1px 6px #212121;
+  box-shadow: 1px 1px 6px #121212;
   animation: .34s buttonshake;
 }
 #head_nav #links a:hover::before,
@@ -93,12 +93,13 @@ body.light-mode {
   border-bottom: solid 2px;
   border-radius: 150px;
   color: #7d7d7d;
-  animation: 2.2s borderglide, 2s fadein, 1.7s shiftin2;
+  animation: 2s borderglide, 1.85s fadein, 1.7s shiftin2;
 }
 #mode_dropdown {
   position: absolute;
   right: 35px;
   top: 11px;
+  z-index: 11;
 }
 #mode_dropdown.enabled #mode_dropdown_box {
   display: block;
@@ -117,8 +118,8 @@ body.light-mode {
   position: absolute;
   right: -29px;
   margin: 18px 5px 5px;
-  box-shadow: 1px 1px 10px rgba(18, 18, 18, 0.8);
-  transition: background 0.15s linear, box-shadow 0.15s linear;
+  box-shadow: 1px 1px 10px rgba(3, 3, 3, 0.8);
+  transition: background .15s linear, box-shadow 0.15s linear;
   z-index: 1;
 }
 #mode_dropdown #mode_dropdown_box::before {
@@ -126,8 +127,8 @@ body.light-mode {
   position: absolute;
   right: 28px;
   top: -7px;
-  border: 15px solid #3d3d3d;
-  box-shadow: 1px 1px 10px rgba(18, 18, 18, 0.8);
+  border: 15px solid #2e2e2e;
+  box-shadow: 1px 1px 10px rgba(3, 3, 3, 0.8);
   transform: rotate(45deg);
   transition: border 0.15s linear, box-shadow 0.15s linear;
   z-index: -1;
@@ -140,7 +141,7 @@ body.light-mode {
   align-items: center;
   padding: 10px;
   color: #9c9c9c;
-  background: #3d3d3d;
+  background: #2e2e2e;
   cursor: pointer;
   transition: all .15s linear;
   -webkit-user-select: none;
@@ -148,7 +149,7 @@ body.light-mode {
   user-select: none;
 }
 #mode_dropdown #mode_dropdown_box .mode_switch:hover {
-  background: #474747;
+  background: #383838;
 }
 #mode_dropdown #mode_dropdown_box .mode_switch::before {
   position: absolute;
