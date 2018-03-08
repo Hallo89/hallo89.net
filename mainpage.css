@@ -22,9 +22,6 @@ body.nesewebel-mode.light-mode {
 .nesewebel-mode.dark-mode #mode_dropdown #mode_dropdown_box .mode_switch:hover {
   background: #141414;
 }
-.nesewebel-mode.dark-mode #mode_dropdown #mode_dropdown_box #switch_nesewebel {
-  color: #d6e9d7;
-}
 .nesewebel-mode.light-mode #mode_dropdown #mode_dropdown_box {
   box-shadow: 1px 1px 10px #ebebeb;
 }
@@ -39,34 +36,26 @@ body.nesewebel-mode.light-mode {
 .nesewebel-mode.light-mode #mode_dropdown #mode_dropdown_box .mode_switch:hover {
   background: #ebebeb;
 }
-.nesewebel-mode.light-mode #mode_dropdown #mode_dropdown_box #switch_nesewebel,
-.nesewebel-mode.light-mode #mode_dropdown #mode_dropdown_box #switch_daynight {
-  color: #3b5a3d;
+.nesewebel-mode.light-mode #mode_dropdown #switch_daynight::before {
+  color: black;
 }
 #head_block {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-flow: column wrap;
-  margin: auto;
-  box-shadow: 0 2px 10px 1px rgba(10, 10, 10, 0.77);
+  box-shadow: 0 2px 9px rgba(10, 10, 10, 0.77);
   background-color: #242424;
   max-width: 100vw;
   height: 410px;
   color: #a1a1a1;
-  text-align: center;
   transition: background .15s linear, box-shadow 0.15s linear;
-  /*border-left: solid 5px;
-  border-right: solid 5px;
-  border-radius: 5px;
-  border-color: mix(@header-background-color, lime, 85%);*/
 }
 #head_block #main_header {
   border: solid 11px;
   position: relative;
   transition: all .5s, color .15s;
-  animation: .8s fadein, 1.02s shiftin, 1s borderbuildup;
+  animation: .75s fadein, 1s shiftin, 1s borderbuildup;
 }
 #head_block #main_header:hover {
   color: #b2c9c7;
@@ -80,7 +69,7 @@ body.nesewebel-mode.light-mode {
   text-shadow: 1px 1px #7b7b7b, 2px 2px #7b7b7b, 3px 3px #7b7b7b, 4px 4px #7b7b7b, 5px 5px #7b7b7b, 6px 6px #7b7b7b;
   margin: 0;
   padding: 30px 30px 35px;
-  transition: all .9s, color 0s;
+  transition: all 0.3s ease-out, color 0s, transform 0.85s;
   animation: 1.2s fadein;
 }
 #head_block #main_header h1:hover {
@@ -118,47 +107,32 @@ body.nesewebel-mode.light-mode {
   background-color: transparent;
   color: #1398A9;
 }
-@media screen and (max-width: 865px) and (min-width: 721px) {
+@media (max-width: 650px) and (min-width: 436px) {
   #head_block #main_header {
-    border: solid 1.35vw;
+    border: solid 1.58vw;
   }
   #head_block #main_header h1 {
-    font-size: 12vw;
-    line-height: 9.4vw;
-    padding: 3.5vw 3.5vw 4.2vw;
+    font-size: 15.5vw;
+    line-height: 12vw;
+    padding: 4.5vw 4.5vw 5vw;
   }
-  #head_block #main_header h1::before,
-  #head_block #main_header h1::after {
-    padding: 3.5vw 3.5vw 4.2vw;
-  }
-}
-@media screen and (max-width: 720px) and (min-width: 436px) {
-  #head_block #main_header {
-    border: solid 1.6vw;
-  }
-  #head_block #main_header h1 {
-    font-size: 14vw;
-    line-height: 11vw;
-    padding: 4.2vw 4.2vw 4.7vw;
-  }
-  #head_block #main_header h1::before,
-  #head_block #main_header h1::after {
-    padding: 4.2vw 4.2vw 4.7vw;
+  #head_block #main_header h1:hover::before,
+  #head_block #main_header h1:hover::after {
+    padding: 4.5vw 4.5vw 5vw;
   }
 }
-@media screen and (max-width: 435px) {
+@media (max-width: 435px) {
   #head_block #main_header {
     border: solid 7px;
-    margin: 0 0 0 7px;
   }
   #head_block #main_header h1 {
     font-size: 65px;
-    line-height: 54px;
-    padding: 15px 15px 20px;
+    line-height: 50px;
+    padding: 17px 17px 22px;
   }
-  #head_block #main_header h1::before,
-  #head_block #main_header h1::after {
-    padding: 15px 15px 20px;
+  #head_block #main_header h1:hover::before,
+  #head_block #main_header h1:hover::after {
+    padding: 17px 17px 22px;
   }
 }
 #head_block p {
@@ -166,7 +140,7 @@ body.nesewebel-mode.light-mode {
   bottom: 30px;
   font: 19px 'Segoe UI';
   white-space: nowrap;
-  animation: 0.75s fadein2 ease-in;
+  animation: 0.63s fadein ease-in;
   transition: background .15s linear;
 }
 #head_block p::selection {
@@ -188,12 +162,7 @@ body.nesewebel-mode.light-mode {
   vertical-align: middle;
   width: 20px;
   display: inline-block;
-}
-@media screen and (max-width: 330px) {
-  #head_block p {
-    left: 0;
-    margin-left: 10px;
-  }
+  animation: 0.75s borderglide2 ease-out;
 }
 .light-mode #head_block {
   box-shadow: 0 2px 10px 1px rgba(194, 194, 194, 0.8);
@@ -339,12 +308,12 @@ body.nesewebel-mode.light-mode {
   display: inherit;
   text-decoration: none;
   color: #999999;
-  transition: all 0.75s, padding-left 0.1s, color .15s linear;
+  transition: all 0.68s, padding-left 0.1s, color .15s linear;
   line-height: 50px;
   z-index: 1;
 }
 #ultra_nav .box a:hover {
-  flex-grow: 1.7;
+  flex-grow: 1.59;
 }
 #ultra_nav .box a:hover::before {
   content: '';
@@ -461,7 +430,7 @@ body.nesewebel-mode.light-mode {
 }
 @keyframes shiftin {
   from {
-    transform: translateY(-50px);
+    transform: translateY(-45px);
   }
 }
 @keyframes shiftin2 {
@@ -487,14 +456,6 @@ body.nesewebel-mode.light-mode {
 @keyframes fadein {
   from {
     opacity: 0.1;
-  }
-}
-@keyframes fadein2 {
-  0% {
-    opacity: 0;
-  }
-  18% {
-    opacity: 0;
   }
 }
 @keyframes borderbuildup {
@@ -526,10 +487,15 @@ body.nesewebel-mode.light-mode {
     max-width: 0;
   }
 }
+@keyframes borderglide2 {
+  from {
+    width: 0;
+  }
+}
 @keyframes borderglideX {
   from {
     height: 0;
-    top: 22.5px;
+    top: 50%;
   }
 }
 @keyframes buttonshake {

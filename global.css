@@ -38,7 +38,7 @@ body.light-mode {
   padding: 5px 5px 3px;
   text-decoration: none;
   background: rgba(54, 54, 54, 0.65);
-  color: #9c9c9c;
+  color: #878787;
   display: inline-block;
   border: solid 2px;
   transition: all .8s, color .38s;
@@ -92,7 +92,7 @@ body.light-mode {
   max-width: 710px;
   border-bottom: solid 2px;
   border-radius: 150px;
-  color: #7d7d7d;
+  color: #696969;
   animation: 2s borderglide, 1.85s fadein, 1.7s shiftin2;
 }
 #mode_dropdown {
@@ -106,7 +106,7 @@ body.light-mode {
 }
 #mode_dropdown #mode_gear {
   font-size: 38px;
-  color: #869296;
+  color: #839093;
   cursor: pointer;
   transition: .475s;
 }
@@ -137,10 +137,8 @@ body.light-mode {
   font: 21px 'Roboto', sans-serif;
   white-space: nowrap;
   position: relative;
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  color: #9c9c9c;
+  padding: 10px 10px 10px 12px;
+  color: #999999;
   background: #2e2e2e;
   cursor: pointer;
   transition: all .15s linear;
@@ -157,17 +155,14 @@ body.light-mode {
   top: 7px;
   border-left: 3px solid;
   height: 70%;
-  animation: .55s borderglideX;
-}
-.light-mode #mode_dropdown #switch_daynight,
-.nesewebel-mode #mode_dropdown #switch_nesewebel,
-.nesewebel-mode.light-mode #mode_dropdown #switch_daynight {
-  padding-left: 14px;
+  animation: .52s borderglideX;
 }
 .light-mode #mode_dropdown #switch_daynight::before,
-.nesewebel-mode #mode_dropdown #switch_nesewebel::before,
-.nesewebel-mode.light-mode #mode_dropdown #switch_daynight::before {
+.nesewebel-mode #mode_dropdown #switch_nesewebel::before {
   content: '';
+}
+.light-mode #mode_dropdown #switch_daynight::before {
+  color: #17469E;
 }
 .light-mode #mode_dropdown #mode_dropdown_box {
   box-shadow: 1px 1px 10px rgba(201, 201, 201, 0.8);
@@ -182,9 +177,6 @@ body.light-mode {
 }
 .light-mode #mode_dropdown #mode_dropdown_box .mode_switch:hover {
   background: #f0f0f0;
-}
-.light-mode #mode_dropdown #mode_dropdown_box #switch_daynight {
-  color: #6e8d70;
 }
 @keyframes shiftin {
   from {
@@ -256,7 +248,7 @@ body.light-mode {
 @keyframes borderglideX {
   from {
     height: 0;
-    top: 22.5px;
+    top: 50%;
   }
 }
 @keyframes buttonshake {

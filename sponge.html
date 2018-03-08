@@ -8,11 +8,44 @@
         margin: 0;
         overflow: hidden;
       }
-      #images {
-        display: flex;
+      #spinners {
         position: absolute;
         left: 0;
         top: 0;
+        width: 100vw;
+        height: 100vh;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000000;
+      }
+      #spinners.shown {
+        display: flex;
+      }
+      #spinners > span {
+        width: calc(2vw + 2vh);
+        height: calc(2vw + 2vh);
+        border-radius: 100%;
+        margin: 18px;
+        background-color: hsl(0, 0%, 24%);
+        clip-path: circle(0);
+      }
+      #spinners > span:nth-child(1) {
+        animation: .8s alternate dot infinite ease-out, .87s alternate translateY infinite;
+      }
+      #spinners > span:nth-child(2) {
+        animation: .8s .25s alternate dot infinite ease-out, .87s .25s alternate translateY infinite;
+      }
+      #spinners > span:nth-child(3) {
+        animation: .8s .5s alternate dot infinite ease-out, .87s .5s alternate translateY infinite;
+      }
+      @keyframes dot {
+        from { clip-path: circle(0); }
+        to   { clip-path: circle(22.5px); }
+      }
+      @keyframes translateY {
+        from { transform: translateY(0); }
+        to   { transform: translateY(-10px); }
       }
       #images > div {
         position: absolute;
@@ -26,9 +59,10 @@
         width: 100vw;
         display: flex;
         justify-content: space-between;
-        background-size: 100% 100%;
         align-items: center;
-        z-index: 10000;
+        background-size: 100% 100%;
+        overflow: hidden;
+        z-index: 100000;
       }
       .arrow_container {
         display: grid;
@@ -85,16 +119,23 @@
         "url('https://cdn.discordapp.com/attachments/247841904341942273/390975389586948098/unknown.png')",
         "url('https://cdn.discordapp.com/attachments/406581280172670976/413725355933696000/unknown.png')"
       ];
-      var imgHTML = htmlTemplate(imgArray[0]);
       var currentImg = 0;
       var zIndex = 0;
-      var executed;
       window.onload = preload;
       function preload() {
+        toggleLoadingSpinner();
         htmlGeneration();
         ImageOnLoad();
+        toggleLoadingSpinner();
+      }
+    //loading spinners getting shown and hidden (because the building process does sometimes take its sweet time)
+    //maybe I've just put together crap. whatevs, deal with it lol
+      function toggleLoadingSpinner() {
+        document.getElementById('spinners').classList.toggle('shown');
       }
     //imgArray being written into HTML
+      var imgHTML = htmlTemplate(imgArray[0]);
+
       function htmlTemplate(setBackgroundImage) {
         return `
         <div style="background-image: ${setBackgroundImage}"></div>
@@ -126,6 +167,13 @@
     </script>
   </head>
   <body>
+
+    <div id="spinners">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
     <div id="images">
 
     </div>
@@ -138,5 +186,6 @@
         <div onclick="toggleForward()" class="arrow" id="arrow_right"></div>
       </div>
     </div>
+
   </body>
 </html>

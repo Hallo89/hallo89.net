@@ -131,9 +131,7 @@ body.light-mode {
       font: 21px 'Roboto', sans-serif;
       white-space: nowrap;
       position: relative;
-      display: flex;
-      align-items: center;
-      padding: 10px;
+      padding: 10px 10px 10px 12px;
       color: @mode-switch-foreground;
       background: @mode-switch-background;
       cursor: pointer;
@@ -148,18 +146,22 @@ body.light-mode {
         top: 7px;
         border-left: 3px solid;
         height: 70%;
-        animation: .55s borderglideX;
+        animation: .52s borderglideX;
       }
     }
   }
 }
 
 .light-mode #mode_dropdown #switch_daynight,
-.nesewebel-mode #mode_dropdown #switch_nesewebel,
-.nesewebel-mode.light-mode #mode_dropdown #switch_daynight {
-  padding-left: 14px;
+.nesewebel-mode #mode_dropdown #switch_nesewebel {
   &::before {
     content: '';
+  }
+}
+
+.light-mode #mode_dropdown #switch_daynight {
+  &::before {
+    color: @theme-color;
   }
 }
 
@@ -176,9 +178,6 @@ body.light-mode {
       &:hover {
         background: @mode-switch-background-hover--light;
       }
-    }
-    #switch_daynight {
-      color: @mode-switch-foreground-enabled;
     }
   }
 }
