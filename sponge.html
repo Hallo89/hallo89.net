@@ -47,7 +47,7 @@
         from { transform: translateY(0); }
         to   { transform: translateY(-10px); }
       }
-      #images > div {
+      #images > img {
         position: absolute;
         left: 0;
         height: 100vh;
@@ -106,7 +106,7 @@
       }
     </style>
     <script>
-      var imgArray = new Array ();
+      var imgArray = new Array();
       imgArray = [
         "url('https://cdn.discordapp.com/attachments/247841904341942273/392311078492569601/image.png')",
         "url('https://cdn.discordapp.com/attachments/247841904341942273/390973795428728842/unknown.png')",
@@ -119,33 +119,50 @@
         "url('https://cdn.discordapp.com/attachments/247841904341942273/390975389586948098/unknown.png')",
         "url('https://cdn.discordapp.com/attachments/406581280172670976/413725355933696000/unknown.png')"
       ];
+      var imgArrayPure = new Array();
+      var images = [];
       var currentImg = 0;
       var zIndex = 0;
+      var loaded = 0;
       window.onload = preload;
       function preload() {
-        toggleLoadingSpinner();
+        console.log('start');
+        //toggleLoadingSpinner();
+        //preloadImages();
         htmlGeneration();
         ImageOnLoad();
-        toggleLoadingSpinner();
+        //toggleLoadingSpinner();
+        console.log('end');
       }
     //loading spinners getting shown and hidden (because the building process does sometimes take its sweet time)
     //maybe I've just put together crap. whatevs, deal with it lol
-      function toggleLoadingSpinner() {
+      /*function toggleLoadingSpinner() {
         document.getElementById('spinners').classList.toggle('shown');
-      }
-    //imgArray being written into HTML
-      var imgHTML = htmlTemplate(imgArray[0]);
+        console.log('ok');
+      }*/
+    //imgArray being loaded and written into HTML
+      //var imgHTML = htmlTemplate(imgArray[0]);
 
-      function htmlTemplate(setBackgroundImage) {
+      /*function htmlTemplate(setBackgroundImage) {
         return `
-        <div style="background-image: ${setBackgroundImage}"></div>
+        <img style="background-image: ${setBackgroundImage}">
         `;
-      }
+      }*/
       function htmlGeneration() {
-        for (var int = 1; int < imgArray.length; int++) {
-          imgHTML += htmlTemplate(imgArray[int]);
-        }
-        document.getElementById('images').innerHTML = imgHTML;
+        document.getElementById('spinners').classList.add('shown');
+        for (var int = 0; int < imgArray.length; int++) {
+          imgArrayPure[int] = imgArray[int].replace("url('", "");
+          imgArrayPure[int] = imgArrayPure[int].replace("')", "");
+          images[int] = new Image();
+          images[int].src = imgArrayPure[int];
+          document.getElementById('images').appendChild(images[int]);
+          console.log(int + " loaded!");
+        }/*
+        for (var int = 0; int < imgArray.length; int++) {
+          //imgHTML += htmlTemplate(imgArray[int]);
+        }*/
+        console.log("everything successfully loaded");
+        document.getElementById('spinners').classList.remove('shown');
       }
     //set the first z-index on load
       function ImageOnLoad() {
