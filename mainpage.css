@@ -58,7 +58,6 @@ body.nesewebel-mode.light-mode {
   animation: .75s fadein, 1s shiftin, 1s borderbuildup;
 }
 #head_block #main_header:hover {
-  color: #b2c9c7;
   transform: scale(0.968);
 }
 #head_block #main_header h1 {
@@ -66,14 +65,13 @@ body.nesewebel-mode.light-mode {
   text-transform: uppercase;
   letter-spacing: 1.5px;
   line-height: 83px;
-  text-shadow: 1px 1px #7b7b7b, 2px 2px #7b7b7b, 3px 3px #7b7b7b, 4px 4px #7b7b7b, 5px 5px #7b7b7b, 6px 6px #7b7b7b;
+  text-shadow: 1px 1px #7d7d7d, 2px 2px #7d7d7d, 3px 3px #7d7d7d, 4px 4px #7d7d7d, 5px 5px #7d7d7d, 6px 6px #7d7d7d;
   margin: 0;
   padding: 30px 30px 35px;
   transition: all 0.3s ease-out, color 0s, transform 0.85s;
   animation: 1.2s fadein;
 }
 #head_block #main_header h1:hover {
-  color: #94bdc1;
   transform: scale(0.7) scale(1.47);
 }
 #head_block #main_header h1:hover::before,
@@ -97,15 +95,15 @@ body.nesewebel-mode.light-mode {
 }
 #head_block #main_header h1::selection {
   background-color: transparent;
-  color: #1398A9;
+  color: #17469E;
 }
 #head_block #main_header h1::-webkit-selection {
   background-color: transparent;
-  color: #1398A9;
+  color: #17469E;
 }
 #head_block #main_header h1::-moz-selection {
   background-color: transparent;
-  color: #1398A9;
+  color: #17469E;
 }
 @media (max-width: 650px) and (min-width: 436px) {
   #head_block #main_header {
@@ -167,35 +165,38 @@ body.nesewebel-mode.light-mode {
 .light-mode #head_block {
   box-shadow: 0 2px 10px 1px rgba(194, 194, 194, 0.8);
   background-color: #f7f7f7;
-  color: #6e6e6e;
+  color: #616161;
 }
-.light-mode #head_block #main_header:hover {
-  color: #758684;
+.light-mode #head_block #main_header h1 {
+  text-shadow: 1px 1px #858585, 2px 2px #858585, 3px 3px #858585, 4px 4px #858585, 5px 5px #858585, 6px 6px #858585;
 }
-.light-mode #head_block #main_header h1:hover {
-  color: #657d80;
-}
-.light-mode #head_block #main_header h1::selection {
-  background-color: transparent;
-  color: #1398A9;
-}
-.light-mode #head_block #main_header h1::-webkit-selection {
-  background-color: transparent;
-  color: #1398A9;
-}
-.light-mode #head_block #main_header h1::-moz-selection {
-  background-color: transparent;
-  color: #1398A9;
+.light-mode #head_block #main_header h1:hover::before {
+  color: #f7f7f7;
+  text-shadow: 7px 7px #f7f7f7, 7px -7px #f7f7f7, -7px 7px #f7f7f7, -7px -7px #f7f7f7;
 }
 .nesewebel-mode.dark-mode #head_block {
   box-shadow: 0 2px 10px 1px #141414;
   background-color: black;
   color: white;
 }
+.nesewebel-mode.dark-mode #head_block #main_header h1 {
+  text-shadow: 1px 1px #141414, 2px 2px #141414, 3px 3px #141414, 4px 4px #141414, 5px 5px #141414, 6px 6px #141414;
+}
+.nesewebel-mode.dark-mode #head_block #main_header h1:hover::before {
+  color: black;
+  text-shadow: 7px 7px black, 7px -7px black, -7px 7px black, -7px -7px black;
+}
 .nesewebel-mode.light-mode #head_block {
   box-shadow: 0 2px 10px 1px #ebebeb;
   background-color: white;
   color: black;
+}
+.nesewebel-mode.light-mode #head_block #main_header h1 {
+  text-shadow: 1px 1px #ebebeb, 2px 2px #ebebeb, 3px 3px #ebebeb, 4px 4px #ebebeb, 5px 5px #ebebeb, 6px 6px #ebebeb;
+}
+.nesewebel-mode.light-mode #head_block #main_header h1:hover::before {
+  color: white;
+  text-shadow: 7px 7px white, 7px -7px white, -7px 7px white, -7px -7px white;
 }
 #ultra_nav {
   display: grid;
@@ -288,9 +289,9 @@ body.nesewebel-mode.light-mode {
   text-transform: uppercase;
   display: inherit;
   line-height: 0;
-  color: #525252;
-  border-bottom: 3px solid #5e5e5e;
-  border-top: 3px solid #5e5e5e;
+  color: #575757;
+  border-bottom: 3px solid #5c5c5c;
+  border-top: 3px solid #5c5c5c;
   transition: border-bottom 0.15s linear, border-top 0.15s linear;
   transition: background .15s linear, color .15s linear;
 }
@@ -320,7 +321,7 @@ body.nesewebel-mode.light-mode {
   position: absolute;
   left: 0;
   height: 44px;
-  border-left: solid 5px #080808;
+  border-left: solid 5px #090909;
   border-top: solid 5px transparent;
   border-bottom: solid 5px transparent;
 }
@@ -367,22 +368,22 @@ body.nesewebel-mode.light-mode {
   box-shadow: 1.6px 1.6px 13px 1px rgba(189, 189, 189, 0.88);
 }
 .light-mode #ultra_nav .box.box_about .about_content {
-  color: #5e5e5e;
+  color: #595959;
 }
 .light-mode #ultra_nav .box .box_header .header_maintext {
-  color: #3b3b3b;
-  border-bottom: 3px solid #2b2b2b;
-  border-top: 3px solid #2b2b2b;
+  color: #6e6e6e;
+  border-bottom: 3px solid #5e5e5e;
+  border-top: 3px solid #5e5e5e;
 }
 .light-mode #ultra_nav .box .box_header .corneranimation .corner_before,
 .light-mode #ultra_nav .box .box_header .corneranimation .corner_after {
-  background: rgba(89, 89, 89, 0.9);
+  background: rgba(77, 77, 77, 0.9);
 }
 .light-mode #ultra_nav .box a {
-  color: #666666;
+  color: #595959;
 }
 .light-mode #ultra_nav .box a:hover::before {
-  border-left: solid 5px #666666;
+  border-left: solid 5px #525252;
 }
 .nesewebel-mode.dark-mode #ultra_nav .box {
   background: black;

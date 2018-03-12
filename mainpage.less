@@ -74,7 +74,6 @@ body.nesewebel-mode.light-mode {
     transition: all .5s, color .15s;
     animation: .75s fadein, 1s shiftin, 1s borderbuildup;
     &:hover {
-      color: @main-box-hover;
       transform: scale(0.968);
     }
     h1 {
@@ -94,7 +93,6 @@ body.nesewebel-mode.light-mode {
       transition: all .3s ease-out, color 0s, transform .85s;
       animation: 1.2s fadein;
       &:hover {
-        color: @main-text-hover;
         transform: scale(0.7) scale(1.47);
       }
       &:hover::before, &:hover::after {
@@ -168,14 +166,22 @@ body.nesewebel-mode.light-mode {
   background-color: @header-background-color--light;
   color: @heading-foreground-color--light;
   #main_header {
-    &:hover {
-      color: @main-box-hover--light;
-    }
     h1 {
-      &:hover {
-        color: @main-text-hover--light;
+      text-shadow:
+        1px 1px @heading-shadow--light,
+        2px 2px @heading-shadow--light,
+        3px 3px @heading-shadow--light,
+        4px 4px @heading-shadow--light,
+        5px 5px @heading-shadow--light,
+        6px 6px @heading-shadow--light;
+      &:hover::before {
+        color: @header-background-color--light;
+        text-shadow:
+          7px 7px @header-background-color--light,
+          7px -7px @header-background-color--light,
+          -7px 7px @header-background-color--light,
+          -7px -7px @header-background-color--light;
       }
-      .selection-w-color(@header-selection)
     }
   }
 }
@@ -183,11 +189,49 @@ body.nesewebel-mode.light-mode {
   box-shadow: 0 2px 10px 1px @nesewebel-shadow;
   background-color: @nesewebel-background;
   color: @nesewebel-foreground;
+  #main_header {
+    h1 {
+      text-shadow:
+        1px 1px @nesewebel-shadow,
+        2px 2px @nesewebel-shadow,
+        3px 3px @nesewebel-shadow,
+        4px 4px @nesewebel-shadow,
+        5px 5px @nesewebel-shadow,
+        6px 6px @nesewebel-shadow;
+      &:hover::before {
+        color: @nesewebel-background;
+        text-shadow:
+          7px 7px @nesewebel-background,
+          7px -7px @nesewebel-background,
+          -7px 7px @nesewebel-background,
+          -7px -7px @nesewebel-background;
+      }
+    }
+  }
 }
 .nesewebel-mode.light-mode #head_block {
   box-shadow: 0 2px 10px 1px @nesewebel-shadow--light;
   background-color: @nesewebel-background--light;
   color: @nesewebel-foreground--light;
+  #main_header {
+    h1 {
+      text-shadow:
+        1px 1px @nesewebel-shadow--light,
+        2px 2px @nesewebel-shadow--light,
+        3px 3px @nesewebel-shadow--light,
+        4px 4px @nesewebel-shadow--light,
+        5px 5px @nesewebel-shadow--light,
+        6px 6px @nesewebel-shadow--light;
+      &:hover::before {
+        color: @nesewebel-background--light;
+        text-shadow:
+          7px 7px @nesewebel-background--light,
+          7px -7px @nesewebel-background--light,
+          -7px 7px @nesewebel-background--light,
+          -7px -7px @nesewebel-background--light;
+      }
+    }
+  }
 }
 
 #ultra_nav {
