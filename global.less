@@ -58,7 +58,7 @@ body.light-mode {
       }
       &:hover {
         margin: 0 10px;
-        transition: transform 0;
+        transition: transform 0s;
         transform: scale(1.065);
         box-shadow: 1px 1px 6px @nav-border-shadow;
         animation: .34s buttonshake;
@@ -96,10 +96,12 @@ body.light-mode {
     display: block;
   }
   #mode_gear {
-    font-size: 38px;
-    color: @headline-gear;
+    width: 40px;
+    height: 40px;
     cursor: pointer;
     transition: .475s;
+    fill: currentColor;
+    color: @headline-gear;
   }
   &.enabled #mode_gear {
     transform: rotateZ(135deg);
@@ -108,7 +110,7 @@ body.light-mode {
     display: none;
     position: absolute;
     right: -29px;
-    margin: 18px 5px 5px;
+    margin: 15px 5px 5px;
     box-shadow: 1px 1px 10px @mode-dropdown-box-shadow;
     .mode-switch-transition;
     .mode-switch-transition-shadow;
@@ -116,7 +118,7 @@ body.light-mode {
     &::before {
       content: '';
       position: absolute;
-      right: 28px;
+      right: 29px;
       top: -7px;
       border: 15px solid @mode-dropdown-box;
       box-shadow: 1px 1px 10px @mode-dropdown-box-shadow;

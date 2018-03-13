@@ -54,7 +54,7 @@ body.light-mode {
 }
 #head_nav #links a:hover {
   margin: 0 10px;
-  transition: transform 0;
+  transition: transform 0s;
   transform: scale(1.065);
   box-shadow: 1px 1px 6px #121212;
   animation: .34s buttonshake;
@@ -102,10 +102,12 @@ body.light-mode {
   display: block;
 }
 #mode_dropdown #mode_gear {
-  font-size: 38px;
-  color: #839093;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
   transition: .475s;
+  fill: currentColor;
+  color: #839093;
 }
 #mode_dropdown.enabled #mode_gear {
   transform: rotateZ(135deg);
@@ -114,7 +116,7 @@ body.light-mode {
   display: none;
   position: absolute;
   right: -29px;
-  margin: 18px 5px 5px;
+  margin: 15px 5px 5px;
   box-shadow: 1px 1px 10px rgba(3, 3, 3, 0.8);
   transition: background .15s linear, box-shadow 0.15s linear;
   z-index: 1;
@@ -122,7 +124,7 @@ body.light-mode {
 #mode_dropdown #mode_dropdown_box::before {
   content: '';
   position: absolute;
-  right: 28px;
+  right: 29px;
   top: -7px;
   border: 15px solid #2e2e2e;
   box-shadow: 1px 1px 10px rgba(3, 3, 3, 0.8);

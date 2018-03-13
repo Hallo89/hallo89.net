@@ -54,7 +54,7 @@ body.nesewebel-mode.light-mode {
 #head_block #main_header {
   border: solid 11px;
   position: relative;
-  transition: all .5s, color .15s;
+  transition: all .5s, color .15s linear;
   animation: .75s fadein, 1s shiftin, 1s borderbuildup;
 }
 #head_block #main_header:hover {
@@ -68,7 +68,7 @@ body.nesewebel-mode.light-mode {
   text-shadow: 1px 1px #7d7d7d, 2px 2px #7d7d7d, 3px 3px #7d7d7d, 4px 4px #7d7d7d, 5px 5px #7d7d7d, 6px 6px #7d7d7d;
   margin: 0;
   padding: 30px 30px 35px;
-  transition: all 0.3s ease-out, color 0s, transform 0.85s;
+  transition: all 0.3s ease-out, color 0s, transform 0.85s, text-shadow 0.15s linear;
   animation: 1.2s fadein;
 }
 #head_block #main_header h1:hover {

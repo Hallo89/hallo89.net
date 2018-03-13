@@ -71,7 +71,8 @@ body.nesewebel-mode.light-mode {
   #main_header {
     border: solid 11px;
     position: relative;
-    transition: all .5s, color .15s;
+    transition+: all .5s;
+    .mode-switch-transition-color;
     animation: .75s fadein, 1s shiftin, 1s borderbuildup;
     &:hover {
       transform: scale(0.968);
@@ -90,7 +91,8 @@ body.nesewebel-mode.light-mode {
         6px 6px @heading-shadow;
       margin: 0;
       padding: 30px 30px 35px;
-      transition: all .3s ease-out, color 0s, transform .85s;
+      transition+: all .3s ease-out, color 0s, transform .85s;
+      .mode-switch-transition-textshadow;
       animation: 1.2s fadein;
       &:hover {
         transform: scale(0.7) scale(1.47);
