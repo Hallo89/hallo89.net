@@ -21,20 +21,37 @@ body.light-mode {
 }
 
 #headline {
-  position: fixed;
-  background: @headline-background;
   width: 100%;
+  height: 60px;
+  position: fixed;
+  background-color: @headline-background;
+  transform-origin: top;
+  transition: all .5s ease-out;
   z-index: 10;
-}
-
-#head_nav {
-  margin: auto;
-  padding: 13px 0 12px;
-  max-width: 615px;
-  #links {
+  display: grid;
+  grid-template-columns: 60px 1fr 60px;
+  grid-template-rows: 1fr auto;
+  grid-template-areas:
+    "image nav gear"
+    "line line line";
+  justify-items: center;
+  align-items: center;
+  #head_image {
+    grid-area: image;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    background-image: url('https://cdn.discordapp.com/attachments/363044137106276354/421804474231816204/Avatar.png');
+    background-size: contain;
+    cursor: pointer;
+  }
+  #head_nav {
+    max-width: 615px;
+    width: 100%;
     font: 21px 'Ubuntu', sans-serif;
     text-transform: uppercase;
     text-align: center;
+    grid-area: nav;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -47,7 +64,7 @@ body.light-mode {
       color: @nav-foreground-color;
       display: inline-block;
       border: solid 2px;
-      transition:  all .8s, color .38s;
+      transition:  all .8s;
       &::before, &::after {
         content: '';
         border-bottom: solid 1.5px;
@@ -58,9 +75,9 @@ body.light-mode {
       }
       &:hover {
         margin: 0 10px;
-        transition: transform 0s;
-        transform: scale(1.065);
+        transform: scale(1.07);
         box-shadow: 1px 1px 6px @nav-border-shadow;
+        transition: margin .8s, transform 0s;
         animation: .34s buttonshake;
       }
       &:hover::before, &:hover::after {
@@ -77,95 +94,113 @@ body.light-mode {
       .selection-w-color(@nav-selection);
     }
   }
-}
-#expanding_border {
-  margin: auto;
-  max-width: 710px;
-  border-bottom: solid 2px;
-  border-radius: 150px;
-  color: @nav-border;
-  animation: 2s borderglide, 1.85s fadein, 1.7s shiftin2;
-}
-
-#mode_dropdown {
-  position: absolute;
-  right: 35px;
-  top: 11px;
-  z-index: 11;
-  &.enabled #mode_dropdown_box {
-    display: block;
+  #expanding_border {
+    max-width: 710px;
+    width: 100%;
+    border-bottom: solid 2px;
+    border-radius: 150px;
+    grid-area: line;
+    color: @nav-border;
+    animation: 2s borderglide, 1.85s fadein, 1.7s shiftin2;
   }
-  #mode_gear {
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    transition: .475s;
-    fill: currentColor;
-    color: @headline-gear;
-  }
-  &.enabled #mode_gear {
-    transform: rotateZ(135deg);
-  }
-  #mode_dropdown_box {
-    display: none;
-    position: absolute;
-    right: -29px;
-    margin: 15px 5px 5px;
-    box-shadow: 1px 1px 10px @mode-dropdown-box-shadow;
-    .mode-switch-transition;
-    .mode-switch-transition-shadow;
-    z-index: 1;
-    &::before {
-      content: '';
-      position: absolute;
-      right: 29px;
-      top: -7px;
-      border: 15px solid @mode-dropdown-box;
-      box-shadow: 1px 1px 10px @mode-dropdown-box-shadow;
-      transform: rotate(45deg);
-      transition: border .15s linear, box-shadow .15s linear;
-      z-index: -1;
+  #modes {
+    font-size: 40px;
+    position: relative;
+    grid-area: gear;
+    &.enabled #mode_dropdown {
+      display: block;
     }
-    .mode_switch {
-      font: 21px 'Roboto', sans-serif;
-      white-space: nowrap;
-      position: relative;
-      padding: 10px 10px 10px 12px;
-      color: @mode-switch-foreground;
-      background: @mode-switch-background;
+    &.enabled #mode_gear {
+      transform: rotateZ(135deg);
+    }
+    #mode_gear {
+      transition: all .475s;
+      color: @headline-gear;
       cursor: pointer;
-      transition: all .15s linear; //all .53s cubic-bezier(.4,.07,.6,.93);
-      .noselect;
-      &:hover {
-        background: @mode-switch-background-hover;
-      }
+    }
+    #mode_dropdown {
+      display: none;
+      position: absolute;
+      right: -4px;
+      margin: 15px 0 0;
+      box-shadow: 1px 1px 10px @mode-dropdown-box-shadow;
+      .mode-switch-transition;
+      .mode-switch-transition-shadow;
+      z-index: 1;
       &::before {
+        content: '';
         position: absolute;
-        left: 6px;
-        top: 7px;
-        border-left: 3px solid;
-        height: 70%;
-        animation: .52s borderglideX;
+        right: 9px;
+        top: -7px;
+        border: 15px solid @mode-dropdown-box;
+        box-shadow: 1px 1px 10px @mode-dropdown-box-shadow;
+        transform: rotate(45deg);
+        transition: border .15s linear, box-shadow .15s linear;
+        z-index: -1;
+      }
+      .mode_switch {
+        font: 21px 'Roboto', sans-serif;
+        white-space: nowrap;
+        position: relative;
+        padding: 10px 10px 10px 12px;
+        color: @mode-switch-foreground;
+        background: @mode-switch-background;
+        cursor: pointer;
+        transition: all .15s linear; //all .53s cubic-bezier(.4,.07,.6,.93);
+        .noselect;
+        &:hover {
+          background: @mode-switch-background-hover;
+        }
+        &::before {
+          position: absolute;
+          left: 6px;
+          top: 7px;
+          border-left: 3px solid;
+          height: 70%;
+          animation: .52s borderglideX;
+        }
       }
     }
   }
 }
+#headline_popout {
+  width: 45px;
+  height: 45px;
+  font-size: 45px;
+  position: absolute;
+  right: 20px;
+  top: 72px;
+  color: @headline-gear;
+  animation: 2.2s headline_popout_in1, 2.27s headline_popout_in2;
+  transition: all .5s, transform 0s;
+  transform: rotate(180deg);
+  cursor: pointer;
+  z-index: 5;
+}
+.headline_hidden #headline {
+  transform: translateY(-60px) skew(8deg);
+}
+.headline_hidden #headline_popout {
+  transform: none;
+  top: 12px;
+}
 
-.light-mode #mode_dropdown #switch_daynight,
-.nesewebel-mode #mode_dropdown #switch_nesewebel {
+
+.light-mode #headline #modes #switch_daynight,
+.nesewebel-mode #headline #modes #switch_nesewebel {
   &::before {
     content: '';
   }
 }
 
-.light-mode #mode_dropdown #switch_daynight {
+.light-mode #headline #modes #switch_daynight {
   &::before {
     color: @theme-color;
   }
 }
 
-.light-mode #mode_dropdown {
-  #mode_dropdown_box {
+.light-mode #headline #modes {
+  #mode_dropdown {
     box-shadow: 1px 1px 10px @mode-dropdown-box-shadow--light;
     &::before {
       border: 15px solid @mode-dropdown-box--light;

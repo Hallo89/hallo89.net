@@ -55,6 +55,12 @@ body.nesewebel-mode.light-mode {
   }
 }
 
+#headline {
+  animation: 2s headlineclose;
+}
+#headline_popout {
+  animation: 2s headline_popout_in1 linear, 2.02s headline_popout_in2, 2s headline_popout_in3;
+}
 
 #head_block {
   position: relative;
@@ -333,7 +339,7 @@ body.nesewebel-mode.light-mode {
     .box_header {
       .header_maintext {
         padding: 38px 28px;
-        font: 1.15em 'Arial', sans-serif;
+        font-size: 1.15em;
         text-transform: uppercase;
         display: inherit;
         line-height: 0;

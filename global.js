@@ -3,20 +3,26 @@ function toggleMode() {
   document.body.classList.toggle('dark-mode');
   document.body.classList.toggle('light-mode');
 }
+//expand/hide the headline
+function toggleHeadline() {
+  document.body.classList.toggle('headline_hidden');
+}
 //theme buttons dropdown
 function toggleDropdown() {
-  console.log('pressed');
-  document.getElementById('mode_dropdown').classList.toggle('enabled');
+  document.getElementById('modes').classList.toggle('enabled');
   window.onclick = function(event) {
     if (!event.target.matches (
       [
         '.mode_gear',
         '.mode_gear_path',
+        '.mode_dropdown',
         '.mode_switch'
       ]
     ))
     {
-      document.getElementById('mode_dropdown').classList.remove('enabled');
+      if (document.getElementById('modes').classList.contains('enabled')) {
+        document.getElementById('modes').classList.remove('enabled');
+      }
     }
   }
 }

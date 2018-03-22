@@ -8,7 +8,9 @@
 @background-color--light: hsl(0, 0%, 93%);
 @foreground-color--light: hsl(0, 0%, 35%);
 
+
 @headline-background: darken(@background-color, 2.25%);
+
 @headline-gear: mix(darken(@foreground-color, 3%), #0480A4, 90%);
 
 @mode-dropdown-box: lighten(@background-color, 7%);
@@ -23,6 +25,16 @@
 @mode-switch-foreground-enabled: mix(@foreground-color--light, #75B47A, 50%);
 @mode-switch-background--light: @mode-dropdown-box--light;
 @mode-switch-background-hover--light: darken(@mode-switch-background--light, 4%);
+
+@nav-foreground-color: darken(@heading-foreground-color, 10%);
+@nav-background: fadeout(lighten(@header-background-color, 7%), 35%);
+@nav-border: darken(@heading-foreground-color, 22%);
+@nav-border-shadow: darken(@background-color, 4%);
+
+@nav-foreground-color--light: darken(@heading-foreground-color--light, 10%);
+@nav-background--light: fadeout(lighten(@header-background-color--light, 7%), 35%);
+@nav-border--light: darken(@heading-foreground-color--light, 22%);
+@nav-border-shadow--light: darken(@background-color--light, 4%);
 
 
 @heading-foreground-color: lighten(@foreground-color, 3%);
@@ -43,17 +55,6 @@
 @nav-selection: lighten(desaturate(spin(@header-selection, -40), 20%), 9%);
 
 @nav-selection--light: lighten(desaturate(spin(@header-selection, -40), 20%), 9%);
-
-
-@nav-foreground-color: darken(@heading-foreground-color, 10%);
-@nav-background: fadeout(lighten(@header-background-color, 7%), 35%);
-@nav-border: darken(@heading-foreground-color, 22%);
-@nav-border-shadow: darken(@background-color, 4%);
-
-@nav-foreground-color--light: darken(@heading-foreground-color--light, 10%);
-@nav-background--light: fadeout(lighten(@header-background-color--light, 7%), 35%);
-@nav-border--light: darken(@heading-foreground-color--light, 22%);
-@nav-border-shadow--light: darken(@background-color--light, 4%);
 
 
 @ultranav-box: lighten(@background-color, 1.7%);
@@ -85,5 +86,4 @@
 
 
 
-@tuto-aside: lighten(@background-color, 5%);
 @tuto-main: lighten(@background-color, 2%);

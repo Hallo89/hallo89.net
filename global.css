@@ -12,20 +12,36 @@ body.light-mode {
   background: #ededed;
 }
 #headline {
-  position: fixed;
-  background: #161616;
   width: 100%;
+  height: 60px;
+  position: fixed;
+  background-color: #161616;
+  transform-origin: top;
+  transition: all 0.5s ease-out;
   z-index: 10;
+  display: grid;
+  grid-template-columns: 60px 1fr 60px;
+  grid-template-rows: 1fr auto;
+  grid-template-areas: "image nav gear" "line line line";
+  justify-items: center;
+  align-items: center;
 }
-#head_nav {
-  margin: auto;
-  padding: 13px 0 12px;
+#headline #head_image {
+  grid-area: image;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  background-image: url('https://cdn.discordapp.com/attachments/363044137106276354/421804474231816204/Avatar.png');
+  background-size: contain;
+  cursor: pointer;
+}
+#headline #head_nav {
   max-width: 615px;
-}
-#head_nav #links {
+  width: 100%;
   font: 21px 'Ubuntu', sans-serif;
   text-transform: uppercase;
   text-align: center;
+  grid-area: nav;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -34,17 +50,17 @@ body.light-mode {
   -moz-user-select: none;
   user-select: none;
 }
-#head_nav #links a {
+#headline #head_nav a {
   padding: 5px 5px 3px;
   text-decoration: none;
   background: rgba(54, 54, 54, 0.65);
   color: #878787;
   display: inline-block;
   border: solid 2px;
-  transition: all .8s, color .38s;
+  transition: all .8s;
 }
-#head_nav #links a::before,
-#head_nav #links a::after {
+#headline #head_nav a::before,
+#headline #head_nav a::after {
   content: '';
   border-bottom: solid 1.5px;
   vertical-align: middle;
@@ -52,79 +68,76 @@ body.light-mode {
   display: inline-block;
   transition: all .8s;
 }
-#head_nav #links a:hover {
+#headline #head_nav a:hover {
   margin: 0 10px;
-  transition: transform 0s;
-  transform: scale(1.065);
+  transform: scale(1.07);
   box-shadow: 1px 1px 6px #121212;
+  transition: margin .8s, transform 0s;
   animation: .34s buttonshake;
 }
-#head_nav #links a:hover::before,
-#head_nav #links a:hover::after {
+#headline #head_nav a:hover::before,
+#headline #head_nav a:hover::after {
   width: 8px;
 }
 @media screen and (max-width: 430px) {
-  #head_nav #links a:hover {
+  #headline #head_nav a:hover {
     margin: 0;
   }
-  #head_nav #links a:hover::before,
-  #head_nav #links a:hover::after {
+  #headline #head_nav a:hover::before,
+  #headline #head_nav a:hover::after {
     width: 2.5px;
   }
 }
-#head_nav #links a::selection {
+#headline #head_nav a::selection {
   background-color: transparent;
   color: #34afae;
 }
-#head_nav #links a::-webkit-selection {
+#headline #head_nav a::-webkit-selection {
   background-color: transparent;
   color: #34afae;
 }
-#head_nav #links a::-moz-selection {
+#headline #head_nav a::-moz-selection {
   background-color: transparent;
   color: #34afae;
 }
-#expanding_border {
-  margin: auto;
+#headline #expanding_border {
   max-width: 710px;
+  width: 100%;
   border-bottom: solid 2px;
   border-radius: 150px;
+  grid-area: line;
   color: #696969;
   animation: 2s borderglide, 1.85s fadein, 1.7s shiftin2;
 }
-#mode_dropdown {
-  position: absolute;
-  right: 35px;
-  top: 11px;
-  z-index: 11;
+#headline #modes {
+  font-size: 40px;
+  position: relative;
+  grid-area: gear;
 }
-#mode_dropdown.enabled #mode_dropdown_box {
+#headline #modes.enabled #mode_dropdown {
   display: block;
 }
-#mode_dropdown #mode_gear {
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  transition: .475s;
-  fill: currentColor;
-  color: #839093;
-}
-#mode_dropdown.enabled #mode_gear {
+#headline #modes.enabled #mode_gear {
   transform: rotateZ(135deg);
 }
-#mode_dropdown #mode_dropdown_box {
+#headline #modes #mode_gear {
+  transition: all .475s;
+  color: #839093;
+  cursor: pointer;
+}
+#headline #modes #mode_dropdown {
   display: none;
   position: absolute;
-  right: -29px;
-  margin: 15px 5px 5px;
+  right: -4px;
+  margin: 15px 0 0;
   box-shadow: 1px 1px 10px rgba(3, 3, 3, 0.8);
   transition: background .15s linear, box-shadow 0.15s linear;
   z-index: 1;
 }
-#mode_dropdown #mode_dropdown_box::before {
+#headline #modes #mode_dropdown::before {
   content: '';
   position: absolute;
-  right: 29px;
+  right: 9px;
   top: -7px;
   border: 15px solid #2e2e2e;
   box-shadow: 1px 1px 10px rgba(3, 3, 3, 0.8);
@@ -132,7 +145,7 @@ body.light-mode {
   transition: border 0.15s linear, box-shadow 0.15s linear;
   z-index: -1;
 }
-#mode_dropdown #mode_dropdown_box .mode_switch {
+#headline #modes #mode_dropdown .mode_switch {
   font: 21px 'Roboto', sans-serif;
   white-space: nowrap;
   position: relative;
@@ -145,10 +158,10 @@ body.light-mode {
   -moz-user-select: none;
   user-select: none;
 }
-#mode_dropdown #mode_dropdown_box .mode_switch:hover {
+#headline #modes #mode_dropdown .mode_switch:hover {
   background: #383838;
 }
-#mode_dropdown #mode_dropdown_box .mode_switch::before {
+#headline #modes #mode_dropdown .mode_switch::before {
   position: absolute;
   left: 6px;
   top: 7px;
@@ -156,25 +169,46 @@ body.light-mode {
   height: 70%;
   animation: .52s borderglideX;
 }
-.light-mode #mode_dropdown #switch_daynight::before,
-.nesewebel-mode #mode_dropdown #switch_nesewebel::before {
+#headline_popout {
+  width: 45px;
+  height: 45px;
+  font-size: 45px;
+  position: absolute;
+  right: 20px;
+  top: 72px;
+  color: #839093;
+  animation: 2.2s headline_popout_in1, 2.27s headline_popout_in2;
+  transition: all .5s, transform 0s;
+  transform: rotate(180deg);
+  cursor: pointer;
+  z-index: 5;
+}
+.headline_hidden #headline {
+  transform: translateY(-60px) skew(8deg);
+}
+.headline_hidden #headline_popout {
+  transform: none;
+  top: 12px;
+}
+.light-mode #headline #modes #switch_daynight::before,
+.nesewebel-mode #headline #modes #switch_nesewebel::before {
   content: '';
 }
-.light-mode #mode_dropdown #switch_daynight::before {
+.light-mode #headline #modes #switch_daynight::before {
   color: #17469E;
 }
-.light-mode #mode_dropdown #mode_dropdown_box {
+.light-mode #headline #modes #mode_dropdown {
   box-shadow: 1px 1px 10px rgba(201, 201, 201, 0.8);
 }
-.light-mode #mode_dropdown #mode_dropdown_box::before {
+.light-mode #headline #modes #mode_dropdown::before {
   border: 15px solid #fafafa;
   box-shadow: 1px 1px 10px rgba(201, 201, 201, 0.8);
 }
-.light-mode #mode_dropdown #mode_dropdown_box .mode_switch {
+.light-mode #headline #modes #mode_dropdown .mode_switch {
   color: #595959;
   background: #fafafa;
 }
-.light-mode #mode_dropdown #mode_dropdown_box .mode_switch:hover {
+.light-mode #headline #modes #mode_dropdown .mode_switch:hover {
   background: #f0f0f0;
 }
 @keyframes shiftin {
@@ -205,6 +239,50 @@ body.light-mode {
 @keyframes fadein {
   from {
     opacity: 0.1;
+  }
+}
+@keyframes headlineclose {
+  0% {
+    transform: none;
+  }
+  67% {
+    transform: none;
+  }
+}
+@keyframes headline_popout_in1 {
+  0% {
+    opacity: .05;
+  }
+  70% {
+    opacity: .15;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes headline_popout_in2 {
+  0% {
+    transform: scale(0.85);
+  }
+  81% {
+    transform: scale(0.85);
+  }
+  90.5% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: none;
+  }
+}
+@keyframes headline_popout_in3 {
+  0% {
+    top: 72px;
+  }
+  67% {
+    top: 72px;
+  }
+  100% {
+    top: 12px;
   }
 }
 @keyframes borderbuildup {
@@ -252,10 +330,10 @@ body.light-mode {
     transform: none;
   }
   38% {
-    transform: rotateZ(2.8deg) scale(1.032);
+    transform: rotateZ(2.8deg) scale(1.0266);
   }
   62% {
-    transform: rotateZ(-3.2deg) scale(1.048);
+    transform: rotateZ(-3.2deg) scale(1.0434);
   }
   100% {
     transform: scale(1.07);

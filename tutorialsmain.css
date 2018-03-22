@@ -3,17 +3,18 @@ Written by Hallo89 using LESS CSS - http://lesscss.org
 No necessity to write this in here but Less is awesome :o
 */
 #main {
+  max-width: 1100px;
   display: flex;
-  padding: 80px 15px 15px;
+  align-items: flex-start;
+  margin: auto;
+  padding: 80px 30px 30px;
 }
 #main aside {
   position: sticky;
+  top: 80px;
   font: 30px 'Roboto', sans-serif;
-  margin-right: 30px;
+  margin-right: 50px;
   padding: 15px;
-  width: 25%;
-  height: 520px;
-  background: #383838;
 }
 #main aside a {
   margin: 8px;
@@ -22,11 +23,11 @@ No necessity to write this in here but Less is awesome :o
 #main #main_content {
   width: 100%;
   height: 2000px;
-  background: #303030;
+  background: #212121;
 }
 @keyframes shiftin {
   from {
-    transform: translateY(-60px);
+    transform: translateY(-45px);
   }
 }
 @keyframes shiftin2 {
@@ -54,17 +55,28 @@ No necessity to write this in here but Less is awesome :o
     opacity: 0.1;
   }
 }
-@keyframes fadein2 {
-  0% {
-    opacity: 0;
-  }
-  18% {
-    opacity: 0;
-  }
-}
 @keyframes borderbuildup {
   from {
     border-width: 0;
+  }
+}
+@keyframes headingcut {
+  from {
+    clip-path: polygon(100% 37%, 100% 0, 100% 0, 100% 37%);
+  }
+  to {
+    clip-path: polygon(0 58%, 0 0, 100% 0, 100% 37%);
+  }
+}
+@keyframes headingshift {
+  0% {
+    transform: translate(0);
+  }
+  30% {
+    transform: translate(0);
+  }
+  100% {
+    transform: translate(-4px);
   }
 }
 @keyframes borderglide {
@@ -72,10 +84,15 @@ No necessity to write this in here but Less is awesome :o
     max-width: 0;
   }
 }
+@keyframes borderglide2 {
+  from {
+    width: 0;
+  }
+}
 @keyframes borderglideX {
   from {
     height: 0;
-    top: 22.5px;
+    top: 50%;
   }
 }
 @keyframes buttonshake {
@@ -83,10 +100,10 @@ No necessity to write this in here but Less is awesome :o
     transform: none;
   }
   38% {
-    transform: rotateZ(2.8deg) scale(1.032);
+    transform: rotateZ(2.8deg) scale(1.0266);
   }
   62% {
-    transform: rotateZ(-3.2deg) scale(1.048);
+    transform: rotateZ(-3.2deg) scale(1.0434);
   }
   100% {
     transform: scale(1.07);
