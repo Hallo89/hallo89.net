@@ -29,15 +29,15 @@
   100% { opacity: .85; }
 }
 @keyframes headline_popout_in2 {
-  0%   { transform: scale(.85); }
-  81%  { transform: scale(.85); }
-  90.5%  { transform: scale(1.15); }
-  100% { transform: none; }
+  0%    { transform: scale(.85) rotate3d(5, 1, 2, 45deg); }
+  81%   { transform: scale(.85) rotate3d(5, 1, 2, 45deg); }
+  90.5% { transform: scale(1.15) rotate3d(5, 1, 2, 45deg); }
+  100%  { transform: rotate3d(5, 1, 2, 45deg); }
 }
 @keyframes headline_popout_in3 {
-  0%   { top: 72px; }
-  67%  { top: 72px; }
-  100% { top: 12px }
+  0%   { top: 80px; }
+  67%  { top: 80px; }
+  100% { top: 20px }
 }
 
 @keyframes borderbuildup {

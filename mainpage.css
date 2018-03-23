@@ -43,14 +43,14 @@ body.nesewebel-mode.light-mode {
   animation: 2s headlineclose;
 }
 #headline_popout {
-  animation: 2s headline_popout_in1 linear, 2.02s headline_popout_in2, 2s headline_popout_in3;
+  animation: 2s headline_popout_in1 linear, 2s headline_popout_in2, 2s headline_popout_in3;
 }
 #head_block {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 2px 9px rgba(10, 10, 10, 0.77);
+  box-shadow: 0 2px 9px rgba(5, 5, 5, 0.77);
   background-color: #242424;
   max-width: 100vw;
   height: 410px;
@@ -231,7 +231,7 @@ body.nesewebel-mode.light-mode {
   position: relative;
   overflow: hidden;
   background: #202020;
-  box-shadow: 1.4px 1.4px 11px rgba(5, 5, 5, 0.8);
+  box-shadow: 1px 2px 8px rgba(3, 3, 3, 0.8);
   transition: background .15s linear, box-shadow 0.15s linear;
 }
 #ultra_nav .box.box_about {
@@ -265,7 +265,7 @@ body.nesewebel-mode.light-mode {
 #ultra_nav .box .corneranimation .corner_before,
 #ultra_nav .box .corneranimation .corner_after {
   position: absolute;
-  background: rgba(15, 15, 15, 0.62);
+  background: rgba(10, 10, 10, 0.62);
   transition: all 0.4s ease-out;
   z-index: 3;
 }
@@ -327,7 +327,7 @@ body.nesewebel-mode.light-mode {
   position: absolute;
   left: 0;
   height: 44px;
-  border-left: solid 5px #090909;
+  border-left: solid 5px #040404;
   border-top: solid 5px transparent;
   border-bottom: solid 5px transparent;
 }
@@ -486,27 +486,27 @@ body.nesewebel-mode.light-mode {
 }
 @keyframes headline_popout_in2 {
   0% {
-    transform: scale(0.85);
+    transform: scale(0.85) rotate3d(5, 1, 2, 45deg);
   }
   81% {
-    transform: scale(0.85);
+    transform: scale(0.85) rotate3d(5, 1, 2, 45deg);
   }
   90.5% {
-    transform: scale(1.15);
+    transform: scale(1.15) rotate3d(5, 1, 2, 45deg);
   }
   100% {
-    transform: none;
+    transform: rotate3d(5, 1, 2, 45deg);
   }
 }
 @keyframes headline_popout_in3 {
   0% {
-    top: 72px;
+    top: 80px;
   }
   67% {
-    top: 72px;
+    top: 80px;
   }
   100% {
-    top: 12px;
+    top: 20px;
   }
 }
 @keyframes borderbuildup {

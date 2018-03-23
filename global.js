@@ -5,7 +5,7 @@ function toggleMode() {
 }
 //expand/hide the headline
 function toggleHeadline() {
-  document.body.classList.toggle('headline_hidden');
+  document.body.classList.toggle('headline_expanded');
 }
 //theme buttons dropdown
 function toggleDropdown() {
