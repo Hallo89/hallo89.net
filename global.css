@@ -4,18 +4,18 @@ No necessity to write this in here but Less is awesome :o
 */
 body {
   margin: 0 0 15px 0;
-  background: #1c1c1c;
+  background-color: #171717;
   font-family: Arial;
   transition: background .15s linear;
 }
 body.light-mode {
-  background: #ededed;
+  background-color: #ededed;
 }
 #headline {
   width: 100%;
   height: 60px;
   position: fixed;
-  background-color: #161616;
+  background-color: #111111;
   transform: translateY(-60px) skew(8deg);
   transition: all 0.5s ease-out;
   z-index: 10;
@@ -37,6 +37,9 @@ body.light-mode {
   background-image: url('https://cdn.discordapp.com/attachments/363044137106276354/421804474231816204/Avatar.png');
   background-size: contain;
   cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 #headline #head_nav {
   max-width: 615px;
@@ -49,15 +52,12 @@ body.light-mode {
   flex-wrap: wrap;
   justify-content: space-around;
   animation: 0.85s shiftin2 cubic-bezier(0.52, 0.51, 0.61, 0.99), 1.22s fadein;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
 }
 #headline #head_nav a {
   padding: 5px 5px 3px;
   text-decoration: none;
-  background: rgba(54, 54, 54, 0.65);
-  color: #878787;
+  background-color: rgba(41, 41, 41, 0.65);
+  color: #808080;
   display: inline-block;
   border: solid 2px;
   transition: all .8s;
@@ -74,7 +74,7 @@ body.light-mode {
 #headline #head_nav a:hover {
   margin: 0 10px;
   transform: scale(1.07);
-  box-shadow: 1px 1px 6px #121212;
+  box-shadow: 1px 1px 6px rgba(1, 1, 1, 0.85);
   transition: margin .8s, transform 0s;
   animation: .34s buttonshake;
 }
@@ -109,7 +109,7 @@ body.light-mode {
   border-bottom: solid 2px;
   border-radius: 150px;
   grid-area: line;
-  color: #696969;
+  color: #636363;
   animation: 2s borderglide, 1.85s fadein, 1.7s shiftin2;
 }
 #headline #modes {
@@ -125,7 +125,7 @@ body.light-mode {
 }
 #headline #modes #mode_gear {
   transition: all .475s;
-  color: #839093;
+  color: #3c588d;
   cursor: pointer;
 }
 #headline #modes #mode_dropdown {
@@ -133,7 +133,7 @@ body.light-mode {
   position: absolute;
   right: -4px;
   margin: 15px 0 0;
-  box-shadow: 1px 1px 10px rgba(3, 3, 3, 0.8);
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.8);
   transition: background .15s linear, box-shadow 0.15s linear;
   z-index: 1;
 }
@@ -142,8 +142,8 @@ body.light-mode {
   position: absolute;
   right: 9px;
   top: -7px;
-  border: 15px solid #2e2e2e;
-  box-shadow: 1px 1px 10px rgba(3, 3, 3, 0.8);
+  border: 15px solid #292929;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.8);
   transform: rotate(45deg);
   transition: border 0.15s linear, box-shadow 0.15s linear;
   z-index: -1;
@@ -154,7 +154,7 @@ body.light-mode {
   position: relative;
   padding: 10px 10px 10px 12px;
   color: #999999;
-  background: #2e2e2e;
+  background-color: #292929;
   cursor: pointer;
   transition: all .15s linear;
   -webkit-user-select: none;
@@ -162,7 +162,7 @@ body.light-mode {
   user-select: none;
 }
 #headline #modes #mode_dropdown .mode_switch:hover {
-  background: #383838;
+  background-color: #333333;
 }
 #headline #modes #mode_dropdown .mode_switch::before {
   position: absolute;
@@ -175,7 +175,7 @@ body.light-mode {
 #headline_popout {
   width: 51px;
   height: 51px;
-  position: absolute;
+  position: fixed;
   right: 20px;
   top: 20px;
   display: flex;
@@ -184,6 +184,7 @@ body.light-mode {
   transition: .6s;
   transform: rotate3d(5, 1, 2, 45deg);
   transform-style: preserve-3d;
+  z-index: 9;
   cursor: pointer;
 }
 .headline_expanded #headline_popout {
@@ -273,10 +274,10 @@ body.light-mode {
 }
 .light-mode #headline #modes #mode_dropdown .mode_switch {
   color: #595959;
-  background: #fafafa;
+  background-color: #fafafa;
 }
 .light-mode #headline #modes #mode_dropdown .mode_switch:hover {
-  background: #f0f0f0;
+  background-color: #f0f0f0;
 }
 @keyframes shiftin {
   from {

@@ -13,16 +13,18 @@
 
 
 .mode-switch-transition() {
-  transition+: background .15s linear;
-}
-.mode-switch-transition-shadow() {
-  transition+: box-shadow .15s linear;
-}
-.mode-switch-transition-color() {
-  transition+: color .15s linear;
-}
-.mode-switch-transition-textshadow() {
-  transition+: text-shadow .15s linear;
+  .background() {
+    transition+: background .15s linear;
+  }
+  .shadow() {
+    transition+: box-shadow .15s linear;
+  }
+  .color() {
+    transition+: color .15s linear;
+  }
+  .textshadow() {
+    transition+: text-shadow .15s linear;
+  }
 }
 
 

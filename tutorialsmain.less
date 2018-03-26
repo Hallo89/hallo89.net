@@ -8,30 +8,39 @@ No necessity to write this in here but Less is awesome :o
 @import "colors.less";
 @import "mixins.less";
 
-
+body {
+  font-family: 'Raleway', sans-serif;
+}
 #main {
-  max-width: 1100px;
   display: flex;
   align-items: flex-start;
-  margin: auto;
-  padding: 80px 30px 30px;
+  justify-content: center;
+  position: relative;
+  padding: 50px 30px 30px;
   aside {
     position: sticky;
-    top: 80px;
-    font: 30px 'Roboto', sans-serif;
-    margin-right: 50px;
-    padding: 15px;
-    a {
-      margin: 8px;
+    top: 45px;
+    font-size: 21px;
+    color: @tuto-aside-foreground;
+    margin-right: 30px;
+    span {
       display: block;
+      white-space: nowrap;
+      margin: 4px;
+    }
+    .aside_container {
+      margin: 15px 0;
+      .nested_items {
+        margin-left: 15px;
+        font-size: 19px;
+      }
     }
   }
   #main_content {
+    max-width: 950px;
+    min-width: 750px;
     width: 100%;
     height: 2000px;
     background: @tuto-main;
   }
 }
-
-
-@import "keyframes.less";

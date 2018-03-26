@@ -128,12 +128,10 @@
       var loaded = 0;
       window.onload = preload;
       function preload() {
-        console.log('start');
         toggleLoadingSpinner();
         htmlGeneration();
         ImageOnLoad();
         toggleLoadingSpinner();
-        console.log('end');
       }
     //loading spinners getting shown and hidden (because the building process does sometimes take its sweet time)
     //as it turns out I can't properly measure the image getting, so I've most likely just put together crap. whatevs, deal with it lol
@@ -153,7 +151,6 @@
           imgHTML += htmlTemplate(imgArray[int]);
         }
         document.getElementById('images').innerHTML = imgHTML;
-        console.log('everything written!');
       }
     //set the first z-index on load
       function ImageOnLoad() {

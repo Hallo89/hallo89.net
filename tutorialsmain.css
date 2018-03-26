@@ -2,135 +2,39 @@
 Written by Hallo89 using LESS CSS - http://lesscss.org
 No necessity to write this in here but Less is awesome :o
 */
+body {
+  font-family: 'Raleway', sans-serif;
+}
 #main {
-  max-width: 1100px;
   display: flex;
   align-items: flex-start;
-  margin: auto;
-  padding: 80px 30px 30px;
+  justify-content: center;
+  position: relative;
+  padding: 50px 30px 30px;
 }
 #main aside {
   position: sticky;
-  top: 80px;
-  font: 30px 'Roboto', sans-serif;
-  margin-right: 50px;
-  padding: 15px;
+  top: 45px;
+  font-size: 21px;
+  color: #8f8f8f;
+  margin-right: 30px;
 }
-#main aside a {
-  margin: 8px;
+#main aside span {
   display: block;
+  white-space: nowrap;
+  margin: 4px;
+}
+#main aside .aside_container {
+  margin: 15px 0;
+}
+#main aside .aside_container .nested_items {
+  margin-left: 15px;
+  font-size: 19px;
 }
 #main #main_content {
+  max-width: 950px;
+  min-width: 750px;
   width: 100%;
   height: 2000px;
-  background: #212121;
+  background: #1c1c1c;
 }
-@keyframes shiftin {
-  from {
-    transform: translateY(-45px);
-  }
-}
-@keyframes shiftin2 {
-  from {
-    transform: translateY(-20px);
-  }
-}
-@keyframes shiftin3 {
-  from {
-    transform: translateY(-30px);
-  }
-}
-@keyframes shiftinX {
-  from {
-    transform: translateX(-40px);
-  }
-}
-@keyframes rotateX {
-  to {
-    transform: rotateX(360deg);
-  }
-}
-@keyframes fadein {
-  from {
-    opacity: 0.1;
-  }
-}
-@keyframes borderbuildup {
-  from {
-    border-width: 0;
-  }
-}
-@keyframes headingcut {
-  from {
-    clip-path: polygon(100% 37%, 100% 0, 100% 0, 100% 37%);
-  }
-  to {
-    clip-path: polygon(0 58%, 0 0, 100% 0, 100% 37%);
-  }
-}
-@keyframes headingshift {
-  0% {
-    transform: translate(0);
-  }
-  30% {
-    transform: translate(0);
-  }
-  100% {
-    transform: translate(-4px);
-  }
-}
-@keyframes borderglide {
-  from {
-    max-width: 0;
-  }
-}
-@keyframes borderglide2 {
-  from {
-    width: 0;
-  }
-}
-@keyframes borderglideX {
-  from {
-    height: 0;
-    top: 50%;
-  }
-}
-@keyframes buttonshake {
-  0% {
-    transform: none;
-  }
-  38% {
-    transform: rotateZ(2.8deg) scale(1.0266);
-  }
-  62% {
-    transform: rotateZ(-3.2deg) scale(1.0434);
-  }
-  100% {
-    transform: scale(1.07);
-  }
-}
-/*
-@keyframes shake_horizontal {
-  0%, 100% { transform: none }
-  20%      { transform: translateX(-3px); }
-  40%      { transform: translateX(2.1px); }
-  60%      { transform: translateX(-1.3px); }
-  80%      { transform: translateX(0.5px); }
-}
-@keyframes radius_easeOutBounce {
-  0%   { border-radius: none }
-  35%  { border-radius: 17px; }
-  53%  { border-radius: 12.4px; }
-  70%  { border-radius: 17px; }
-  80%  { border-radius: 15.5px; }
-  89%  { border-radius: 17px; }
-  95%  { border-radius: 16.35px; }
-  100% { border-radius: 17px; }
-}*/
-/*@keyframes wtflol {
-  0%, 100% { transform: none }
-  20%      { transform: translateX(-450px) scale(3) rotateX(200deg); opacity: 0.5; background: red; }
-  40%      { transform: translateX(350px) scale(2) rotateX(360deg); opacity: 1; background: blue; }
-  60%      { transform: translateX(-210px) scale(5) rotateX(260deg); opacity: 0.2; background: green; }
-  80%      { transform: translateX(100px) scale(1) rotateX(90deg); opacity: 0.8; background: yellow; }
-}*/

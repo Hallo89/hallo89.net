@@ -3,10 +3,13 @@ Written by Hallo89 using LESS CSS - http://lesscss.org
 No necessity to write this in here but Less is awesome :o
 */
 body.nesewebel-mode.dark-mode {
-  background: black;
+  background-color: black;
 }
 body.nesewebel-mode.light-mode {
-  background: white;
+  background-color: white;
+}
+body {
+  background-color: #171717;
 }
 .nesewebel-mode.dark-mode #mode_dropdown #mode_dropdown_box {
   box-shadow: 1px 1px 10px #141414;
@@ -17,10 +20,10 @@ body.nesewebel-mode.light-mode {
 }
 .nesewebel-mode.dark-mode #mode_dropdown #mode_dropdown_box .mode_switch {
   color: white;
-  background: black;
+  background-color: black;
 }
 .nesewebel-mode.dark-mode #mode_dropdown #mode_dropdown_box .mode_switch:hover {
-  background: #141414;
+  background-color: #141414;
 }
 .nesewebel-mode.light-mode #mode_dropdown #mode_dropdown_box {
   box-shadow: 1px 1px 10px #ebebeb;
@@ -31,10 +34,10 @@ body.nesewebel-mode.light-mode {
 }
 .nesewebel-mode.light-mode #mode_dropdown #mode_dropdown_box .mode_switch {
   color: black;
-  background: white;
+  background-color: white;
 }
 .nesewebel-mode.light-mode #mode_dropdown #mode_dropdown_box .mode_switch:hover {
-  background: #ebebeb;
+  background-color: #ebebeb;
 }
 .nesewebel-mode.light-mode #mode_dropdown #switch_daynight::before {
   color: black;
@@ -43,7 +46,7 @@ body.nesewebel-mode.light-mode {
   animation: 2s headlineclose;
 }
 #headline_popout {
-  animation: 2s headline_popout_in1 linear, 2s headline_popout_in2, 2s headline_popout_in3;
+  animation: 1.96s headline_popout_in1 linear, 1.96s headline_popout_in2, 2s headline_popout_in3;
 }
 #head_block {
   position: relative;
@@ -51,7 +54,7 @@ body.nesewebel-mode.light-mode {
   justify-content: center;
   align-items: center;
   box-shadow: 0 2px 9px rgba(5, 5, 5, 0.77);
-  background-color: #242424;
+  background-color: #222222;
   max-width: 100vw;
   height: 410px;
   color: #a1a1a1;
@@ -89,8 +92,8 @@ body.nesewebel-mode.light-mode {
   padding: 30px 30px 35px;
 }
 #head_block #main_header h1:hover::before {
-  color: #242424;
-  text-shadow: 7px 7px #242424, 7px -7px #242424, -7px 7px #242424, -7px -7px #242424;
+  color: #222222;
+  text-shadow: 7px 7px #222222, 7px -7px #222222, -7px 7px #222222, -7px -7px #222222;
   clip-path: polygon(0 58%, 0 0, 100% 0, 100% 37%);
   animation: 0.32s headingcut ease-in;
 }
@@ -230,7 +233,7 @@ body.nesewebel-mode.light-mode {
   font-size: 30px;
   position: relative;
   overflow: hidden;
-  background: #202020;
+  background-color: #1d1d1d;
   box-shadow: 1px 2px 8px rgba(3, 3, 3, 0.8);
   transition: background .15s linear, box-shadow 0.15s linear;
 }
@@ -265,7 +268,7 @@ body.nesewebel-mode.light-mode {
 #ultra_nav .box .corneranimation .corner_before,
 #ultra_nav .box .corneranimation .corner_after {
   position: absolute;
-  background: rgba(10, 10, 10, 0.62);
+  background-color: rgba(10, 10, 10, 0.62);
   transition: all 0.4s ease-out;
   z-index: 3;
 }
@@ -341,6 +344,9 @@ body.nesewebel-mode.light-mode {
   transition: .75s linear;
   z-index: -1;
 }
+#ultra_nav .box a:hover::after {
+  filter: blur(1.5px);
+}
 #ultra_nav .box a:nth-of-type(1) {
   animation: .8s shiftinX, .75s fadein;
 }
@@ -363,14 +369,11 @@ body.nesewebel-mode.light-mode {
   content: '';
   background-image: url('https://cdn.discordapp.com/attachments/363044137106276354/414869247421054976/host.png');
 }
-#ultra_nav .box:nth-of-type(2) a:nth-of-type(1):hover::after {
-  filter: blur(1.5px);
-}
 #ultra_nav .box:nth-of-type(3) {
   animation: 1s shiftin2 ease-out;
 }
 .light-mode #ultra_nav .box {
-  background: #f7f7f7;
+  background-color: #f7f7f7;
   box-shadow: 1.6px 1.6px 13px 1px rgba(189, 189, 189, 0.88);
 }
 .light-mode #ultra_nav .box.box_about .about_content {
@@ -383,7 +386,7 @@ body.nesewebel-mode.light-mode {
 }
 .light-mode #ultra_nav .box .box_header .corneranimation .corner_before,
 .light-mode #ultra_nav .box .box_header .corneranimation .corner_after {
-  background: rgba(77, 77, 77, 0.9);
+  background-color: rgba(77, 77, 77, 0.9);
 }
 .light-mode #ultra_nav .box a {
   color: #595959;
@@ -392,7 +395,7 @@ body.nesewebel-mode.light-mode {
   border-left: solid 5px #525252;
 }
 .nesewebel-mode.dark-mode #ultra_nav .box {
-  background: black;
+  background-color: black;
   box-shadow: 1.6px 1.6px 13px 1px #141414;
 }
 .nesewebel-mode.dark-mode #ultra_nav .box.box_about .about_content {
@@ -405,7 +408,7 @@ body.nesewebel-mode.light-mode {
 }
 .nesewebel-mode.dark-mode #ultra_nav .box .box_header .corneranimation .corner_before,
 .nesewebel-mode.dark-mode #ultra_nav .box .box_header .corneranimation .corner_after {
-  background: black;
+  background-color: black;
 }
 .nesewebel-mode.dark-mode #ultra_nav .box a {
   color: white;
@@ -414,7 +417,7 @@ body.nesewebel-mode.light-mode {
   border-left: solid 5px white;
 }
 .nesewebel-mode.light-mode #ultra_nav .box {
-  background: white;
+  background-color: white;
   box-shadow: 1.6px 1.6px 13px 1px #ebebeb;
 }
 .nesewebel-mode.light-mode #ultra_nav .box.box_about .about_content {
@@ -427,7 +430,7 @@ body.nesewebel-mode.light-mode {
 }
 .nesewebel-mode.light-mode #ultra_nav .box .box_header .corneranimation .corner_before,
 .nesewebel-mode.light-mode #ultra_nav .box .box_header .corneranimation .corner_after {
-  background: white;
+  background-color: white;
 }
 .nesewebel-mode.light-mode #ultra_nav .box a {
   color: black;
@@ -435,156 +438,3 @@ body.nesewebel-mode.light-mode {
 .nesewebel-mode.light-mode #ultra_nav .box a:hover::before {
   border-left: solid 5px black;
 }
-@keyframes shiftin {
-  from {
-    transform: translateY(-45px);
-  }
-}
-@keyframes shiftin2 {
-  from {
-    transform: translateY(-20px);
-  }
-}
-@keyframes shiftin3 {
-  from {
-    transform: translateY(-30px);
-  }
-}
-@keyframes shiftinX {
-  from {
-    transform: translateX(-40px);
-  }
-}
-@keyframes rotateX {
-  to {
-    transform: rotateX(360deg);
-  }
-}
-@keyframes fadein {
-  from {
-    opacity: 0.1;
-  }
-}
-@keyframes headlineclose {
-  0% {
-    transform: none;
-  }
-  67% {
-    transform: none;
-  }
-}
-@keyframes headline_popout_in1 {
-  0% {
-    opacity: .05;
-  }
-  70% {
-    opacity: .15;
-  }
-  100% {
-    opacity: .85;
-  }
-}
-@keyframes headline_popout_in2 {
-  0% {
-    transform: scale(0.85) rotate3d(5, 1, 2, 45deg);
-  }
-  81% {
-    transform: scale(0.85) rotate3d(5, 1, 2, 45deg);
-  }
-  90.5% {
-    transform: scale(1.15) rotate3d(5, 1, 2, 45deg);
-  }
-  100% {
-    transform: rotate3d(5, 1, 2, 45deg);
-  }
-}
-@keyframes headline_popout_in3 {
-  0% {
-    top: 80px;
-  }
-  67% {
-    top: 80px;
-  }
-  100% {
-    top: 20px;
-  }
-}
-@keyframes borderbuildup {
-  from {
-    border-width: 0;
-  }
-}
-@keyframes headingcut {
-  from {
-    clip-path: polygon(100% 37%, 100% 0, 100% 0, 100% 37%);
-  }
-  to {
-    clip-path: polygon(0 58%, 0 0, 100% 0, 100% 37%);
-  }
-}
-@keyframes headingshift {
-  0% {
-    transform: translate(0);
-  }
-  30% {
-    transform: translate(0);
-  }
-  100% {
-    transform: translate(-4px);
-  }
-}
-@keyframes borderglide {
-  from {
-    max-width: 0;
-  }
-}
-@keyframes borderglide2 {
-  from {
-    width: 0;
-  }
-}
-@keyframes borderglideX {
-  from {
-    height: 0;
-    top: 50%;
-  }
-}
-@keyframes buttonshake {
-  0% {
-    transform: none;
-  }
-  38% {
-    transform: rotateZ(2.8deg) scale(1.0266);
-  }
-  62% {
-    transform: rotateZ(-3.2deg) scale(1.0434);
-  }
-  100% {
-    transform: scale(1.07);
-  }
-}
-/*
-@keyframes shake_horizontal {
-  0%, 100% { transform: none }
-  20%      { transform: translateX(-3px); }
-  40%      { transform: translateX(2.1px); }
-  60%      { transform: translateX(-1.3px); }
-  80%      { transform: translateX(0.5px); }
-}
-@keyframes radius_easeOutBounce {
-  0%   { border-radius: none }
-  35%  { border-radius: 17px; }
-  53%  { border-radius: 12.4px; }
-  70%  { border-radius: 17px; }
-  80%  { border-radius: 15.5px; }
-  89%  { border-radius: 17px; }
-  95%  { border-radius: 16.35px; }
-  100% { border-radius: 17px; }
-}*/
-/*@keyframes wtflol {
-  0%, 100% { transform: none }
-  20%      { transform: translateX(-450px) scale(3) rotateX(200deg); opacity: 0.5; background: red; }
-  40%      { transform: translateX(350px) scale(2) rotateX(360deg); opacity: 1; background: blue; }
-  60%      { transform: translateX(-210px) scale(5) rotateX(260deg); opacity: 0.2; background: green; }
-  80%      { transform: translateX(100px) scale(1) rotateX(90deg); opacity: 0.8; background: yellow; }
-}*/

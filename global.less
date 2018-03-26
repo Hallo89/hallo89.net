@@ -11,13 +11,13 @@ No necessity to write this in here but Less is awesome :o
 
 body {
   margin: 0 0 15px 0;
-  background: @background-color;
+  background-color: @background-color;
   font-family: Arial;
-  .mode-switch-transition;
+  .mode-switch-transition.background;
 }
 
 body.light-mode {
-  background: @background-color--light;
+  background-color: @background-color--light;
 }
 
 #headline {
@@ -47,6 +47,7 @@ body.light-mode {
     background-image: url('https://cdn.discordapp.com/attachments/363044137106276354/421804474231816204/Avatar.png');
     background-size: contain;
     cursor: pointer;
+    .noselect;
   }
   #head_nav {
     max-width: 615px;
@@ -59,12 +60,11 @@ body.light-mode {
     flex-wrap: wrap;
     justify-content: space-around;
     animation: .85s shiftin2 cubic-bezier(.52,.51,.61,.99), 1.22s fadein;
-    .noselect;
     a {
       padding: 5px 5px 3px;
       text-decoration: none;
-      background: @nav-background;
-      color: @nav-foreground-color;
+      background-color: @nav-background;
+      color: @nav-foreground;
       display: inline-block;
       border: solid 2px;
       transition:  all .8s;
@@ -79,7 +79,7 @@ body.light-mode {
       &:hover {
         margin: 0 10px;
         transform: scale(1.07);
-        box-shadow: 1px 1px 6px @nav-border-shadow;
+        box-shadow: 1px 1px 6px @nav-shadow;
         transition: margin .8s, transform 0s;
         animation: .34s buttonshake;
       }
@@ -103,7 +103,7 @@ body.light-mode {
     border-bottom: solid 2px;
     border-radius: 150px;
     grid-area: line;
-    color: @nav-border;
+    color: @headline-expandingborder;
     animation: 2s borderglide, 1.85s fadein, 1.7s shiftin2;
   }
   #modes {
@@ -127,8 +127,8 @@ body.light-mode {
       right: -4px;
       margin: 15px 0 0;
       box-shadow: 1px 1px 10px @mode-dropdown-box-shadow;
-      .mode-switch-transition;
-      .mode-switch-transition-shadow;
+      .mode-switch-transition.background;
+      .mode-switch-transition.shadow;
       z-index: 1;
       &::before {
         content: '';
@@ -147,12 +147,12 @@ body.light-mode {
         position: relative;
         padding: 10px 10px 10px 12px;
         color: @mode-switch-foreground;
-        background: @mode-switch-background;
+        background-color: @mode-switch-background;
         cursor: pointer;
         transition: all .15s linear; //all .53s cubic-bezier(.4,.07,.6,.93);
         .noselect;
         &:hover {
-          background: @mode-switch-background-hover;
+          background-color: @mode-switch-background-hover;
         }
         &::before {
           position: absolute;
@@ -169,7 +169,7 @@ body.light-mode {
 #headline_popout {
   width: 51px;
   height: 51px;
-  position: absolute;
+  position: fixed;
   right: 20px;
   top: 20px;
   display: flex;
@@ -178,6 +178,7 @@ body.light-mode {
   transition: .6s;
   transform: rotate3d(5, 1, 2, 45deg);
   transform-style: preserve-3d;
+  z-index: 9;
   cursor: pointer;
   .headline_expanded & {
     transform: rotate3d(5, 1, 2, 540deg);
@@ -275,9 +276,9 @@ body.light-mode {
     }
     .mode_switch {
       color: @mode-switch-foreground--light;
-      background: @mode-switch-background--light;
+      background-color: @mode-switch-background--light;
       &:hover {
-        background: @mode-switch-background-hover--light;
+        background-color: @mode-switch-background-hover--light;
       }
     }
   }
