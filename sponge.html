@@ -17,11 +17,35 @@
         display: none;
         align-items: center;
         justify-content: center;
-        background-color: hsla(0, 0%, 16%, .3);
+        background: hsla(0, 0%, 16%, .25);
         z-index: 1000000;
       }
       #spinners.shown {
         display: flex;
+      }
+      #spinners.animationout {
+        animation: .45s spinnersout cubic-bezier(.3,0,1,1);
+      }
+      @keyframes spinnersout {
+        from { clip-path: circle(100%); }
+        to   { clip-path: circle(0%); }
+      }
+      #spinners::before {
+        content: '';
+        position: absolute;
+        top: -1000px;
+        left: -1000px;
+        bottom: 0;
+        right: 0;
+        z-index: 100000;
+        transition: .75s;
+        background-image: linear-gradient(to bottom right, transparent, hsl(0, 0%, 40%) 50%);
+      }
+      #spinners.gradientout::before {
+        top: 0;
+        left: 0;
+        bottom: -10000px;
+        right: -10000px;
       }
       #spinners > span {
         width: calc(2vw + 2vh);
@@ -30,6 +54,7 @@
         margin: 18px;
         background-color: hsl(0, 0%, 24%);
         clip-path: circle(0);
+        z-index: 1000000;
       }
       #spinners > span:nth-child(1) {
         animation: .8s alternate dot infinite ease-out, .87s alternate translateY infinite;
@@ -66,41 +91,43 @@
         z-index: 100000;
       }
       .arrow_container {
-        display: grid;
+        display: flex;
         align-items: center;
+        justify-content: center;
         width: 45vw;
         height: 60vh;
-        border-radius: 100%;
+        border-radius: 27%;
         z-index: 10001;
       }
-      #container_left:hover #arrow_left {
+      /*#container_left:hover #arrow_left {
         transform: translate(26vw);
       }
       #container_right:hover #arrow_right {
         transform: translate(-26vw);
+      }*/
+      .arrow_container:hover .arrow {
+        clip-path: circle(55%);
+        transform: none;
+        font-size: calc(3vh + 3vw);
       }
       .arrow {
         width: calc(5vw + 5vh);
         height: calc(5vw + 5vh);
-        font: calc(3vh + 3vw) 'Century Gothic', sans-serif;
-        color: hsla(0, 0%, 10%, .8);
+        font-size: 0;
+        line-height: 0;
+        color: hsla(0, 0%, 14%, .85);
         display: flex;
         justify-content: center;
         align-items: center;
         border-radius: 100%;
-        background: hsla(0, 0%, 45%, 0.5);
+        background: hsla(0, 0%, 34%, 0.65);
+        clip-path: circle(0%);
+        transform: rotate(270deg);
+        transition: all .22s cubic-bezier(.45,0,.8,.8);
         cursor: pointer;
-        transition: all .2s ease;
-      }
-      #arrow_left {
-        transform: translate(-11vw);
       }
       #arrow_left::before {
         content: '\25c0'
-      }
-      #arrow_right {
-        transform: translate(11vw);
-        justify-self: end;
       }
       #arrow_right::before {
         content: '\25b6'
@@ -131,12 +158,28 @@
         toggleLoadingSpinner();
         htmlGeneration();
         ImageOnLoad();
-        toggleLoadingSpinner();
+        //toggleLoadingSpinner();
       }
     //loading spinners getting shown and hidden (because the building process does sometimes take its sweet time)
     //as it turns out I can't properly measure the image getting, so I've most likely just put together crap. whatevs, deal with it lol
-      function toggleLoadingSpinner() {
+      /*function toggleLoadingSpinner() {
         document.getElementById('spinners').classList.toggle('shown');
+      }*/
+      function toggleLoadingSpinner() {
+        setTimeout(loadingSpinnerGradient, 450);
+        setTimeout(loadingSpinnerAnimation, 900);
+        setTimeout(loadingSpinnerOff, 1350);
+      }
+      function loadingSpinnerGradient() {
+        document.getElementById('spinners').classList.add('gradientout');
+      }
+      function loadingSpinnerAnimation() {
+        document.getElementById('spinners').classList.add('animationout');
+      }
+      function loadingSpinnerOff() {
+        document.getElementById('spinners').classList.remove('shown');
+        document.getElementById('spinners').classList.remove('animationout');
+        document.getElementById('spinners').classList.remove('gradientout');
       }
     //imgArray being written into HTML
       var imgHTML = htmlTemplate(imgArray[0]);
@@ -173,7 +216,7 @@
   </head>
   <body>
 
-    <div id="spinners">
+    <div id="spinners" class="shown">
       <span></span>
       <span></span>
       <span></span>
