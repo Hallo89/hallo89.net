@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>lol</title>
+    <style>
+      body {
+        margin: 10px;
+        background-color: hsl(0, 0%, 18%);
+      }
+      #container_grid {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .function_container {
+        background: rgba(140, 177, 176, .2);
+        padding: 8px;
+        display: grid;
+        grid-template-columns: 80px 1fr;
+        grid-template-rows: 15px auto 1fr;
+        grid-gap: 10px;
+        min-width: auto;
+        min-height: 200px;
+        margin: 5px;
+        border-radius: 5px;
+      }
+      .function_container.active {
+        width: 100%;
+      }
+      .header {
+        grid-column: 1 / -1;
+        grid-row: 1 / 2;
+        justify-self: center;
+        align-self: center;
+        line-height: 0;
+        letter-spacing: 2.5px;
+        color: hsl(0, 0%, 80%);
+        font-size: 20px;
+      }
+      .button {
+        background-color: rgba(173, 157, 255, 0.15);
+        grid-row: 2 / -1;
+        border-radius: 2px;
+        cursor: pointer;
+      }
+      .function {
+        color: hsl(0, 0%, 75%);
+        border: 1px solid rgba(134, 135, 74, .5);
+        padding: 5px;
+        grid-row: 3 / -1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        border-radius: 2px;
+      }
+      .function span {
+        margin: 13px 6px;
+        border-bottom: 2px solid rgba(229, 255, 164, .1);
+        padding: 3px;
+      }
+      .input_container {
+        display: flex;
+        justify-content: space-around;
+        padding: 5px;
+      }
+      .input {
+        margin: 2px 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        width: auto;
+        background: hsla(0, 0%, 40%, .6);
+        padding: 8px;
+        border-radius: 3px;
+      }
+      .input input, .input .togglebutton {
+        border: none;
+        box-shadow: 0 1px 7px hsla(0, 0%, 20%, .35);
+        background: hsl(0, 0%, 25%);
+        color: hsl(0, 0%, 87%);
+        border-radius: 3px;
+        padding: 3px 6px;
+        height: 17px;
+        width: 140px;
+      }
+      .input .input_header {
+        margin-bottom: 3px;
+        color: hsl(0, 0%, 80%);
+      }
+      .input .togglebutton {
+        position: relative;
+        cursor: pointer;
+      }
+      .input .togglebutton::before {
+        content: '';
+        position: absolute;
+        left: 6px;
+        height: 17px;
+        width: 17px;
+        background: rgba(255, 94, 75, 0.3);
+        box-shadow: 1px 1px 5px hsla(0, 0%, 30%, .55);
+        border-radius: 50px;
+        transition: .3s;
+      }
+      .input .togglebutton.appending::before {
+        transform: translate(122px);
+        background: rgba(92, 255, 142, 0.2);
+      }
+    </style>
+    <script>
+      var randomNumbers = "";
+      function randomNumber() {
+        const amount = parseInt(document.getElementById('randomnumber_value_amount').value);
+        const start = parseInt(document.getElementById('randomnumber_value_start').value);
+        const end = parseInt(document.getElementById('randomnumber_value_end').value);
+        const aftercomma = parseInt(document.getElementById('randomnumber_value_aftercomma').value);
+        const length = end - start;
+
+        if (!document.getElementById('togglebutton_random_mode').classList.contains('appending')) {
+          randomNumbers = "";
+          document.getElementById('function_1').innerHTML = '';
+        }
+
+        for (var i = 0; i < amount; i++) {
+          randomNumbers += '<span>' + (length*Math.random() + start).toFixed(aftercomma) + '</span>';
+        }
+        document.getElementById('function_1').innerHTML = randomNumbers;
+        document.getElementById('container_grid').children[0].classList.add('active');
+      }
+      function toggleRandomMode() {
+        document.getElementById('togglebutton_random_mode').classList.toggle('appending');
+      }
+    </script>
+  </head>
+  <body>
+    <div id="container_grid">
+
+      <div class="function_container">
+        <span class="header">Random figure generator</span>
+        <div class="input_container">
+          <div class="input">
+            <span class="input_header"># random numbers</span>
+            <input type="number" id="randomnumber_value_amount">
+          </div>
+          <div class="input">
+            <span class="input_header"># digits after comma</span>
+            <input type="number" id="randomnumber_value_aftercomma">
+          </div>
+          <div class="input">
+            <span class="input_header">Start value</span>
+            <input type="number" id="randomnumber_value_start">
+          </div>
+          <div class="input">
+            <span class="input_header">End value</span>
+            <input type="number" id="randomnumber_value_end">
+          </div>
+          <div class="input">
+            <span class="input_header">Append mode</span>
+            <span class="togglebutton" onclick="toggleRandomMode()" id="togglebutton_random_mode"></span>
+          </div>
+        </div>
+        <div class="button" onclick="randomNumber()"></div>
+        <div class="function" id="function_1"></div>
+      </div>
+
+      <div class="function_container">
+        <span class="header"></span>
+        <div class="input_container">
+          <div class="input">
+            <span class="input_header">type anything you want it won't do anything lol</span>
+            <input type="number">
+          </div>
+          <div class="input">
+            <span class="input_header">coming maybe soon maybe never</span>
+            <input type="number">
+          </div>
+        </div>
+        <div class="button"></div>
+        <div class="function" id="function_2"></div>
+      </div>
+
+      <div class="function_container">
+        <span class="header"></span>
+        <div class="button"></div>
+        <div class="function" id="function_3"></div>
+      </div>
+
+    </div>
+  </body>
+</html>
