@@ -15,32 +15,75 @@ body {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  position: relative;
-  padding: 50px 30px 30px;
-  aside {
-    position: sticky;
-    top: 45px;
-    font-size: 21px;
-    color: @tuto-aside-foreground;
-    margin-right: 30px;
-    span {
-      display: block;
-      white-space: nowrap;
-      margin: 4px;
-    }
-    .aside_container {
-      margin: 15px 0;
-      .nested_items {
-        margin-left: 15px;
-        font-size: 19px;
-      }
-    }
-  }
+  padding: 70px 30px 30px;
   #main_content {
-    max-width: 950px;
+    max-width: 55%;
     min-width: 750px;
     width: 100%;
     height: 2000px;
     background: @tuto-main;
+  }
+}
+.tutorial_nav {
+  position: sticky;
+  top: 45px;
+  font-size: 21px;
+  color: @tuto-aside-foreground;
+  margin-right: 30px;
+  span {
+    display: block;
+    white-space: nowrap;
+    margin: 4px;
+  }
+  .aside_container {
+    margin: 15px 0;
+    .nested_items {
+      margin-left: 15px;
+      font-size: 19px;
+    }
+  }
+  &#headline_tutorials {
+    top: 0;
+    display: none;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 60px;
+    z-index: 8;
+    .aside_container {
+      margin: 0;
+      padding: 8px;
+      cursor: pointer;
+      transition: .22s;
+      &:hover {
+        background-color: @tuto-navheadline-hover-background;
+      }
+      .nested_items {
+        display: none;
+      }
+      &.models.enabled {
+        .nested_items {
+          display: block;
+        }
+      }
+      &.blockstates.enabled {
+        .nested_items {
+          display: block;
+        }
+      }
+    }
+    .headline_expanded & {
+      transform: translateY(60px);
+    }
+  }
+}
+
+
+
+@media (max-width: 1050px) {
+  aside.tutorial_nav {
+    display: none;
+  }
+  .tutorial_nav#headline_tutorials {
+    display: flex;
   }
 }

@@ -246,25 +246,12 @@ body {
 }
 
 #ultra_nav {
-  display: grid;
-  grid-template-columns: 400px 1fr 400px;
-  grid-template-rows: auto 400px;
-  grid-gap: 35px;
   margin: 35px auto 10px;
   max-width: 1000px;
-  @media (max-width: 865px) {
-    grid-template-columns: 400px;
-    grid-template-rows: auto repeat(2, 400px);
-    grid-auto-flow: row;
-    max-width: 400px;
-    .box {
-      grid-column: auto !important;
-      &.box_about:hover {
-        height: 740px !important; //unfortunately need to hardcode this (no transition otherwise) :/
-      }
-    }
-  }
   .box {
+    width: 400px;
+    height: 400px;
+    margin: 0 0 35px 0;
     font-size: 30px;
     position: relative;
     overflow: hidden;
@@ -276,6 +263,7 @@ body {
     &.box_about {
       height: 82px;
       width: 400px;
+      margin: 0 auto 35px auto;
       grid-column: ~"1 / -1";
       justify-self: center;
       transition+: all .92s cubic-bezier(.71,.12,.45,.81);
@@ -306,6 +294,13 @@ body {
   //end of about-box
     &:nth-of-type(2n+3) {
       grid-column: 3;
+    }
+
+    &:nth-of-type(2n+2) {
+      float: left;
+    }
+    &:nth-of-type(2n+3) {
+      float: right;
     }
   //end of media
   //corners shifting in when hovering
@@ -366,11 +361,12 @@ body {
       align-items: center;
       position: relative;
       flex: 1;
-      padding: 0 0 0 10px;
+      padding-left: 10px;
       display: inherit;
       text-decoration: none;
       color: @ultranav-boxtext-foreground;
-      transition+: all .68s, padding-left .1s;
+      overflow: hidden;
+      transition+: all .6s, background-color .5s linear;
       .mode-switch-transition.color;
       line-height: 50px;
       z-index: 1;
@@ -389,24 +385,24 @@ body {
       &::after {
         background-size: cover;
         position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        transition: .75s linear;
+        left: -5px;
+        right: -5px;
+        top: -8px;
+        bottom: -8px;
+        transition: .45s ease-in;
+        filter: blur(8.3px);
+        opacity: .39;
         z-index: -1;
       }
       &:hover::after {
-        filter: blur(1.5px);
+        filter: none;
+        opacity: 1;
       }
-      &:nth-of-type(1) {
-        animation: .8s shiftinX, .75s fadein;
-      }
-      &:nth-of-type(2) {
-        animation: 1s shiftinX, .75s fadein;
-      }
-      &:nth-of-type(3) {
-        animation: 1.2s shiftinX, .75s fadein;
+      &.bg_image {
+        background-color: @ultranav-boxtext-image-backdrop;
+        &::after {
+          content: '';
+        }
       }
     }
   //end of <a> in .box
@@ -422,7 +418,6 @@ body {
       .boxanimation(.9s);
       a:nth-of-type(1) {
         &::after {
-          content: '';
           background-image: @boxtext-background-box1span1;
         }
       }
@@ -431,7 +426,43 @@ body {
       .boxanimation(1s);
     }
   }
+  @media (max-width: 840px) {
+    .box {
+      margin: 0 auto 35px auto;
+      float: none !important;
+      &.box_about.expanded {
+        width: 400px;
+        height: 740px !important; //unfortunately need to hardcode this (no transition otherwise) :/
+      }
+    }
+  }
   //end of .box
+  @supports (display: grid) {
+    display: grid;
+    grid-template-columns: 400px 1fr 400px;
+    grid-template-rows: auto 400px;
+    grid-gap: 35px;
+    grid-auto-rows: 400px;
+    .box {
+      width: auto;
+      height: auto;
+      margin: 0 !important;
+      float: none !important;
+    }
+    @media (max-width: 890px) {
+      grid-template-columns: 400px;
+      grid-template-rows: auto repeat(2, 400px);
+      grid-auto-flow: row;
+      max-width: 400px;
+      .box {
+       grid-column: auto !important;
+        &.box_about.expanded {
+         width: auto !important;
+         height: 740px !important; //unfortunately need to hardcode this (no transition otherwise) :/
+        }
+      }
+    }
+  }
 }
 //end of #ultra_nav
 

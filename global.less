@@ -20,22 +20,17 @@ body.light-mode {
   background-color: @background-color--light;
 }
 
-#headline {
+.headline {
   width: 100%;
-  height: 60px;
   position: fixed;
+  margin: 0;
+  transition: all .5s ease-out;
+}
+#headline {
+  height: 60px;
   background-color: @headline-background;
   transform: translateY(-60px) skew(8deg);
-  transition: all .5s ease-out;
   z-index: 10;
-  display: grid;
-  grid-template-columns: 60px 1fr 60px;
-  grid-template-rows: 1fr auto;
-  grid-template-areas:
-    "image nav gear"
-    "line line line";
-  justify-items: center;
-  align-items: center;
   .headline_expanded & {
     transform: none;
   }
@@ -47,12 +42,15 @@ body.light-mode {
     background-image: url('https://cdn.discordapp.com/attachments/363044137106276354/421804474231816204/Avatar.png');
     background-size: contain;
     cursor: pointer;
+
+    float: left;
+    margin: 5px;
     .noselect;
   }
   #head_nav {
     max-width: 615px;
     width: 100%;
-    font: 21px 'Ubuntu', sans-serif;
+    font-size: 21px;
     text-transform: uppercase;
     text-align: center;
     grid-area: nav;
@@ -60,6 +58,11 @@ body.light-mode {
     flex-wrap: wrap;
     justify-content: space-around;
     animation: .85s shiftin2 cubic-bezier(.52,.51,.61,.99), 1.22s fadein;
+
+    margin: auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
     a {
       padding: 5px 5px 3px;
       text-decoration: none;
@@ -105,11 +108,19 @@ body.light-mode {
     grid-area: line;
     color: @headline-expandingborder;
     animation: 2s borderglide, 1.85s fadein, 1.7s shiftin2;
+
+    position: relative;
+    margin: auto;
+    bottom: -20px;
   }
   #modes {
     font-size: 40px;
     position: relative;
     grid-area: gear;
+
+    float: right;
+    top: -33px;
+    right: 10px;
     &.enabled #mode_dropdown {
       display: block;
     }
@@ -163,6 +174,36 @@ body.light-mode {
           animation: .52s borderglideX;
         }
       }
+    }
+  }
+  @supports (display: grid) {
+    display: grid;
+    grid-template-columns: 60px 1fr 60px;
+    grid-template-rows: 1fr auto;
+    grid-template-areas:
+      "image nav gear"
+      "line line line";
+    justify-items: center;
+    align-items: center;
+    #head_image {
+      float: none;
+      margin: 0;
+    }
+    #head_nav {
+      margin: 0;
+      position: static;
+      top: 0;
+      transform: none;
+    }
+    #expanding_border {
+      position: static;
+      margin: 0;
+      bottom: 0;
+    }
+    #modes {
+      float: none;
+      top: 0;
+      right: 0;
     }
   }
 }

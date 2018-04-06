@@ -10,7 +10,7 @@
   </head>
   <body>
 
-    <div id="headline">
+    <div id="headline" class="headline">
       <a href="https://hallo89.github.io/Some-shitty-website/" id="head_image"></a>
       <nav id="head_nav">
         <a href="https://nesewebel.de/auch" target="_blank">Nese1</a>
@@ -44,8 +44,27 @@
       <span class="face right side_end"></span>
     </div>
 
+    <div id="headline_tutorials" class="tutorial_nav headline">
+      <div class="aside_container models" onclick="toggleNavModels()" id="tutoheadline_models">
+        <span>Models</span>
+        <div class="nested_items models">
+          <span>Introduction</span>
+          <span>Models-item1</span>
+          <span>Models-item2</span>
+        </div>
+      </div>
+      <div class="aside_container blockstates" onclick="toggleNavBlockstates()" id="tutoheadline_blockstates">
+        <span>Blockstates</span>
+        <div class="nested_items blockstates">
+          <span>Introduction</span>
+          <span>Randomized Blockstates</span>
+          <span>Blockstates-item2</span>
+        </div>
+      </div>
+    </div>
+
     <div id="main">
-      <aside>
+      <aside class="tutorial_nav">
         <div class="aside_container models">
           <span>Models</span>
           <div class="nested_items models">
@@ -54,18 +73,26 @@
             <span>Models-item2</span>
           </div>
         </div>
-          <div class="aside_container blockstates">
-            <span>Blockstates</span>
-            <div class="nested_items blockstates">
-              <span>Introduction</span>
-              <span>Randomized Blockstates</span>
-              <span>Blockstates-item2</span>
-            </div>
+        <div class="aside_container blockstates">
+          <span>Blockstates</span>
+          <div class="nested_items blockstates">
+            <span>Introduction</span>
+            <span>Randomized Blockstates</span>
+            <span>Blockstates-item2</span>
           </div>
+        </div>
       </aside>
       <div id="main_content">
       </div>
     </div>
+    <script>
+      function toggleNavModels() {
+        document.getElementById('tutoheadline_models').classList.toggle('enabled');
+      }
+      function toggleNavBlockstates() {
+        document.getElementById('tutoheadline_blockstates').classList.toggle('enabled');
+      }
+    </script>
     <script src="global.js"></script>
   </body>
 </html>

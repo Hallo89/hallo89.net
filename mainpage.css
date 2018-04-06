@@ -74,7 +74,7 @@ body {
   text-transform: uppercase;
   letter-spacing: 1.5px;
   line-height: 83px;
-  text-shadow: 1px 1px #7d7d7d, 2px 2px #7d7d7d, 3px 3px #7d7d7d, 4px 4px #7d7d7d, 5px 5px #7d7d7d, 6px 6px #7d7d7d;
+  text-shadow: 1px 1px rgba(125, 125, 125, 0.95), 2px 2px rgba(125, 125, 125, 0.95), 3px 3px rgba(125, 125, 125, 0.95), 4px 4px rgba(125, 125, 125, 0.95), 5px 5px rgba(125, 125, 125, 0.95), 6px 6px rgba(125, 125, 125, 0.95);
   margin: 0;
   padding: 30px 30px 35px;
   transition: all 0.3s ease-out, color 0s, transform 0.85s, text-shadow 0.15s linear;
@@ -208,38 +208,24 @@ body {
   text-shadow: 7px 7px white, 7px -7px white, -7px 7px white, -7px -7px white;
 }
 #ultra_nav {
-  display: grid;
-  grid-template-columns: 400px 1fr 400px;
-  grid-template-rows: auto 400px;
-  grid-gap: 35px;
   margin: 35px auto 10px;
   max-width: 1000px;
 }
-@media (max-width: 865px) {
-  #ultra_nav {
-    grid-template-columns: 400px;
-    grid-template-rows: auto repeat(2, 400px);
-    grid-auto-flow: row;
-    max-width: 400px;
-  }
-  #ultra_nav .box {
-    grid-column: auto !important;
-  }
-  #ultra_nav .box.box_about:hover {
-    height: 740px !important;
-  }
-}
 #ultra_nav .box {
+  width: 400px;
+  height: 400px;
+  margin: 0 0 35px 0;
   font-size: 30px;
   position: relative;
   overflow: hidden;
   background-color: #1d1d1d;
-  box-shadow: 1px 2px 8px rgba(3, 3, 3, 0.8);
+  box-shadow: 1px 2px 8px rgba(6, 6, 6, 0.85);
   transition: background .15s linear, box-shadow 0.15s linear;
 }
 #ultra_nav .box.box_about {
   height: 82px;
   width: 400px;
+  margin: 0 auto 35px auto;
   grid-column: 1 / -1;
   justify-self: center;
   transition: all 0.92s cubic-bezier(0.71, 0.12, 0.45, 0.81), background .15s linear, box-shadow 0.15s linear;
@@ -264,6 +250,12 @@ body {
 }
 #ultra_nav .box:nth-of-type(2n+3) {
   grid-column: 3;
+}
+#ultra_nav .box:nth-of-type(2n+2) {
+  float: left;
+}
+#ultra_nav .box:nth-of-type(2n+3) {
+  float: right;
 }
 #ultra_nav .box .corneranimation .corner_before,
 #ultra_nav .box .corneranimation .corner_after {
@@ -314,11 +306,12 @@ body {
   align-items: center;
   position: relative;
   flex: 1;
-  padding: 0 0 0 10px;
+  padding-left: 10px;
   display: inherit;
   text-decoration: none;
   color: #999999;
-  transition: all 0.68s, padding-left 0.1s, color .15s linear;
+  overflow: hidden;
+  transition: all 0.6s, background-color 0.5s linear, color .15s linear;
   line-height: 50px;
   z-index: 1;
 }
@@ -337,24 +330,24 @@ body {
 #ultra_nav .box a::after {
   background-size: cover;
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  transition: .75s linear;
+  left: -5px;
+  right: -5px;
+  top: -8px;
+  bottom: -8px;
+  transition: 0.45s ease-in;
+  filter: blur(8.3px);
+  opacity: .39;
   z-index: -1;
 }
 #ultra_nav .box a:hover::after {
-  filter: blur(1.5px);
+  filter: none;
+  opacity: 1;
 }
-#ultra_nav .box a:nth-of-type(1) {
-  animation: .8s shiftinX, .75s fadein;
+#ultra_nav .box a.bg_image {
+  background-color: #747474;
 }
-#ultra_nav .box a:nth-of-type(2) {
-  animation: 1s shiftinX, .75s fadein;
-}
-#ultra_nav .box a:nth-of-type(3) {
-  animation: 1.2s shiftinX, .75s fadein;
+#ultra_nav .box a.bg_image::after {
+  content: '';
 }
 #ultra_nav .box:nth-of-type(1) {
   animation: 0.8s shiftin2 ease-out;
@@ -366,11 +359,50 @@ body {
   animation: 0.9s shiftin2 ease-out;
 }
 #ultra_nav .box:nth-of-type(2) a:nth-of-type(1)::after {
-  content: '';
   background-image: url('https://cdn.discordapp.com/attachments/363044137106276354/414869247421054976/host.png');
 }
 #ultra_nav .box:nth-of-type(3) {
   animation: 1s shiftin2 ease-out;
+}
+@media (max-width: 840px) {
+  #ultra_nav .box {
+    margin: 0 auto 35px auto;
+    float: none !important;
+  }
+  #ultra_nav .box.box_about.expanded {
+    width: 400px;
+    height: 740px !important;
+  }
+}
+@supports (display: grid) {
+  #ultra_nav {
+    display: grid;
+    grid-template-columns: 400px 1fr 400px;
+    grid-template-rows: auto 400px;
+    grid-gap: 35px;
+    grid-auto-rows: 400px;
+  }
+  #ultra_nav .box {
+    width: auto;
+    height: auto;
+    margin: 0 !important;
+    float: none !important;
+  }
+  @media (max-width: 890px) {
+    #ultra_nav {
+      grid-template-columns: 400px;
+      grid-template-rows: auto repeat(2, 400px);
+      grid-auto-flow: row;
+      max-width: 400px;
+    }
+    #ultra_nav .box {
+      grid-column: auto !important;
+    }
+    #ultra_nav .box.box_about.expanded {
+      width: auto !important;
+      height: 740px !important;
+    }
+  }
 }
 .light-mode #ultra_nav .box {
   background-color: #f7f7f7;

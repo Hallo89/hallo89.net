@@ -11,20 +11,17 @@ body {
 body.light-mode {
   background-color: #ededed;
 }
-#headline {
+.headline {
   width: 100%;
-  height: 60px;
   position: fixed;
+  margin: 0;
+  transition: all 0.5s ease-out;
+}
+#headline {
+  height: 60px;
   background-color: #111111;
   transform: translateY(-60px) skew(8deg);
-  transition: all 0.5s ease-out;
   z-index: 10;
-  display: grid;
-  grid-template-columns: 60px 1fr 60px;
-  grid-template-rows: 1fr auto;
-  grid-template-areas: "image nav gear" "line line line";
-  justify-items: center;
-  align-items: center;
 }
 .headline_expanded #headline {
   transform: none;
@@ -37,6 +34,8 @@ body.light-mode {
   background-image: url('https://cdn.discordapp.com/attachments/363044137106276354/421804474231816204/Avatar.png');
   background-size: contain;
   cursor: pointer;
+  float: left;
+  margin: 5px;
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
@@ -44,7 +43,7 @@ body.light-mode {
 #headline #head_nav {
   max-width: 615px;
   width: 100%;
-  font: 21px 'Ubuntu', sans-serif;
+  font-size: 21px;
   text-transform: uppercase;
   text-align: center;
   grid-area: nav;
@@ -52,6 +51,10 @@ body.light-mode {
   flex-wrap: wrap;
   justify-content: space-around;
   animation: 0.85s shiftin2 cubic-bezier(0.52, 0.51, 0.61, 0.99), 1.22s fadein;
+  margin: auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
 #headline #head_nav a {
   padding: 5px 5px 3px;
@@ -111,11 +114,17 @@ body.light-mode {
   grid-area: line;
   color: #636363;
   animation: 2s borderglide, 1.85s fadein, 1.7s shiftin2;
+  position: relative;
+  margin: auto;
+  bottom: -20px;
 }
 #headline #modes {
   font-size: 40px;
   position: relative;
   grid-area: gear;
+  float: right;
+  top: -33px;
+  right: 10px;
 }
 #headline #modes.enabled #mode_dropdown {
   display: block;
@@ -125,7 +134,7 @@ body.light-mode {
 }
 #headline #modes #mode_gear {
   transition: all .475s;
-  color: #3c588d;
+  color: #4b638f;
   cursor: pointer;
 }
 #headline #modes #mode_dropdown {
@@ -171,6 +180,36 @@ body.light-mode {
   border-left: 3px solid;
   height: 70%;
   animation: .52s borderglideX;
+}
+@supports (display: grid) {
+  #headline {
+    display: grid;
+    grid-template-columns: 60px 1fr 60px;
+    grid-template-rows: 1fr auto;
+    grid-template-areas: "image nav gear" "line line line";
+    justify-items: center;
+    align-items: center;
+  }
+  #headline #head_image {
+    float: none;
+    margin: 0;
+  }
+  #headline #head_nav {
+    margin: 0;
+    position: static;
+    top: 0;
+    transform: none;
+  }
+  #headline #expanding_border {
+    position: static;
+    margin: 0;
+    bottom: 0;
+  }
+  #headline #modes {
+    float: none;
+    top: 0;
+    right: 0;
+  }
 }
 #headline_popout {
   width: 51px;
