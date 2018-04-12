@@ -2,7 +2,7 @@
 
 /*
 Written by Hallo89 using LESS CSS - http://lesscss.org
-No necessity to write this in here but Less is awesome :o
+No necessity to write this in here but Less is awesome!
 */
 
 @import "colors.less";
@@ -31,6 +31,7 @@ body.light-mode {
   background-color: @headline-background;
   transform: translateY(-60px) skew(8deg);
   z-index: 10;
+  font-family: 'Arial', sans-serif;
   .headline_expanded & {
     transform: none;
   }
@@ -64,12 +65,16 @@ body.light-mode {
     top: 50%;
     transform: translateY(-50%);
     a {
-      padding: 5px 5px 3px;
+      flex: 1;
+      margin: 0 37px;
+      padding: 2px 0;
+      //padding: 5px 5px 3px;
       text-decoration: none;
-      background-color: @nav-background;
+      //background-color: @nav-background;
       color: @nav-foreground;
-      display: inline-block;
-      border: solid 2px;
+      //display: inline-block;
+      //border: solid 2px;
+      border-bottom: solid 2px @nav-border;
       transition:  all .8s;
       &::before, &::after {
         content: '';
@@ -80,14 +85,15 @@ body.light-mode {
         transition: all .8s;
       }
       &:hover {
-        margin: 0 10px;
-        transform: scale(1.07);
-        box-shadow: 1px 1px 6px @nav-shadow;
-        transition: margin .8s, transform 0s;
+        //margin: 0 10px;
+        flex: 1.41;
+        transform: scale(1.075);
+        //box-shadow: 1px 1px 6px @nav-shadow;
+        transition: /*margin .8s*/flex .8s, transform 0s;
         animation: .34s buttonshake;
       }
       &:hover::before, &:hover::after {
-        width: 8px;
+        width: 9px;
       }
       @media screen and (max-width: 430px) {
         &:hover {

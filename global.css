@@ -1,6 +1,6 @@
 /*
 Written by Hallo89 using LESS CSS - http://lesscss.org
-No necessity to write this in here but Less is awesome :o
+No necessity to write this in here but Less is awesome!
 */
 body {
   margin: 0 0 15px 0;
@@ -22,6 +22,7 @@ body.light-mode {
   background-color: #111111;
   transform: translateY(-60px) skew(8deg);
   z-index: 10;
+  font-family: 'Arial', sans-serif;
 }
 .headline_expanded #headline {
   transform: none;
@@ -57,12 +58,12 @@ body.light-mode {
   transform: translateY(-50%);
 }
 #headline #head_nav a {
-  padding: 5px 5px 3px;
+  flex: 1;
+  margin: 0 37px;
+  padding: 2px 0;
   text-decoration: none;
-  background-color: rgba(41, 41, 41, 0.65);
   color: #808080;
-  display: inline-block;
-  border: solid 2px;
+  border-bottom: solid 2px rgba(112, 112, 112, 0.6);
   transition: all .8s;
 }
 #headline #head_nav a::before,
@@ -75,15 +76,14 @@ body.light-mode {
   transition: all .8s;
 }
 #headline #head_nav a:hover {
-  margin: 0 10px;
-  transform: scale(1.07);
-  box-shadow: 1px 1px 6px rgba(1, 1, 1, 0.85);
-  transition: margin .8s, transform 0s;
+  flex: 1.41;
+  transform: scale(1.075);
+  transition: flex .8s, transform 0s;
   animation: .34s buttonshake;
 }
 #headline #head_nav a:hover::before,
 #headline #head_nav a:hover::after {
-  width: 8px;
+  width: 9px;
 }
 @media screen and (max-width: 430px) {
   #headline #head_nav a:hover {
@@ -112,7 +112,7 @@ body.light-mode {
   border-bottom: solid 2px;
   border-radius: 150px;
   grid-area: line;
-  color: #636363;
+  color: #585858;
   animation: 2s borderglide, 1.85s fadein, 1.7s shiftin2;
   position: relative;
   margin: auto;
@@ -348,6 +348,14 @@ body.light-mode {
     opacity: 0.1;
   }
 }
+@keyframes nope {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0;
+  }
+}
 @keyframes headlineclose {
   0% {
     transform: none;
@@ -446,28 +454,3 @@ body.light-mode {
     transform: scale(1.07);
   }
 }
-/*
-@keyframes shake_horizontal {
-  0%, 100% { transform: none }
-  20%      { transform: translateX(-3px); }
-  40%      { transform: translateX(2.1px); }
-  60%      { transform: translateX(-1.3px); }
-  80%      { transform: translateX(0.5px); }
-}
-@keyframes radius_easeOutBounce {
-  0%   { border-radius: none }
-  35%  { border-radius: 17px; }
-  53%  { border-radius: 12.4px; }
-  70%  { border-radius: 17px; }
-  80%  { border-radius: 15.5px; }
-  89%  { border-radius: 17px; }
-  95%  { border-radius: 16.35px; }
-  100% { border-radius: 17px; }
-}*/
-/*@keyframes wtflol {
-  0%, 100% { transform: none }
-  20%      { transform: translateX(-450px) scale(3) rotateX(200deg); opacity: 0.5; background: red; }
-  40%      { transform: translateX(350px) scale(2) rotateX(360deg); opacity: 1; background: blue; }
-  60%      { transform: translateX(-210px) scale(5) rotateX(260deg); opacity: 0.2; background: green; }
-  80%      { transform: translateX(100px) scale(1) rotateX(90deg); opacity: 0.8; background: yellow; }
-}*/

@@ -2,7 +2,7 @@
 
 /*
 Written by Hallo89 using LESS CSS - http://lesscss.org
-No necessity to write this in here but Less is awesome :o
+No necessity to write this in here but Less is awesome!
 */
 
 @import "colors.less";
@@ -77,86 +77,99 @@ body {
   color: @heading-foreground-color;
   .mode-switch-transition.background;
   .mode-switch-transition.shadow;
-  #main_header {
-    border: solid 11px;
+ // let's forget about this
+  //.header_border {
+  //  position: absolute;
+  //  border: 6px solid;
+  //}
+  //.header_border.bottom {
+  //  left: 0;
+  //  right: 0;
+  //  bottom: 0;
+  //  animation: .5s 1.25s headingbordercut ease-in reverse, 10s 1.75s nope;
+  //  /*animation: .5s headingbordercut ease-in;*/
+  //}
+  //.header_border.right {
+  //  top: 0;
+  //  bottom: 0;
+  //  right: 0;
+  //  animation: .3s .95s headingbordercut2 linear reverse, 10s 1.25s nope;
+  //  /*animation: .3s .5s headingbordercut2 linear, .5s nope;*/
+  //}
+  //.header_border.top {
+  //  left: 0;
+  //  right: 0;
+  //  top: 0;
+  //  animation: .45s .5s headingbordercut3 linear reverse, 10s .95s nope;
+  //  /*animation: .45s .8s headingbordercut3 linear, .8s nope;*/
+  //}
+  //.header_border.left {
+  //  top: 0;
+  //  bottom: 0;
+  //  left: 0;
+  //  animation: .5s headingbordercut4 ease-out reverse, 10s .5s nope;
+  //  /*animation: .5s 1.25s headingbordercut4 ease-out, 1.25s nope;*/
+  //}
+  h1 {
     position: relative;
-    transition+: all .5s;
+    font: bold 130px 'Century Gothic', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-shadow:
+      1px 1px @heading-shadow,
+      2px 2px @heading-shadow,
+      3px 3px @heading-shadow,
+      4px 4px @heading-shadow,
+      5px 5px @heading-shadow,
+      6px 6px @heading-shadow;
+    margin: 0;
+    transition+: all .45s, transform .81s;
+    .mode-switch-transition.textshadow;
     .mode-switch-transition.color;
-    animation: .75s fadein, 1s shiftin, 1s borderbuildup;
+    animation: .75s fadein linear, .9s shiftin;
     &:hover {
-      transform: scale(0.968);
+      transform: scale(0.78) scale(1.294);
     }
-    h1 {
-      font: bold 105px 'Century Gothic', sans-serif;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      line-height: 83px;
+    &:hover::before, &:hover::after {
+      content: attr(data-heading);
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    &:hover::before {
+      color: @header-background-color;
+      text-shadow:
+        7px 7px @header-background-color,
+        7px -7px @header-background-color,
+        -7px 7px @header-background-color,
+        -7px -7px @header-background-color;
+      clip-path: polygon(0 58%, 0 0, 100% 0, 100% 37%);
+      animation: .32s headingcut ease-in;
+    }
+    &:hover::after {
+     clip-path: polygon(0 57.5%, 0 0, 100% 0, 100% 36.5%);
+     transform: translate(-4px);
+     animation: .69s headingshift cubic-bezier(.85,0,1,1);
+    }
+    .selection-w-color(@header-selection);
+    @media (max-width: 670px) and (min-width: 451px) {
+      font-size: 19.44vw;
+    }
+    @media (max-width: 450px) {
+      font-size: 88px;
       text-shadow:
         1px 1px @heading-shadow,
         2px 2px @heading-shadow,
         3px 3px @heading-shadow,
         4px 4px @heading-shadow,
         5px 5px @heading-shadow,
-        6px 6px @heading-shadow;
-      margin: 0;
-      padding: 30px 30px 35px;
-      transition+: all .3s ease-out, color 0s, transform .85s;
-      .mode-switch-transition.textshadow;
-      animation: 1.2s fadein;
-      &:hover {
-        transform: scale(0.7) scale(1.47);
-      }
-      &:hover::before, &:hover::after {
-        content: attr(data-heading);
-        position: absolute;
-        top: 0;
-        left: 0;
-        padding: 30px 30px 35px;
-      }
-      &:hover::before {
-        color: @header-background-color;
-        text-shadow:
-          7px 7px @header-background-color,
-          7px -7px @header-background-color,
-          -7px 7px @header-background-color,
-          -7px -7px @header-background-color;
-        clip-path: polygon(0 58%, 0 0, 100% 0, 100% 37%);
-        animation: .32s headingcut ease-in;
-      }
-      &:hover::after {
-       clip-path: polygon(0 57.5%, 0 0, 100% 0, 100% 36.5%);
-       transform: translate(-4px);
-       animation: .69s headingshift cubic-bezier(.85,0,1,1);
-      }
-      .selection-w-color(@header-selection);
-    }
-    @media (max-width: 650px) and (min-width: 436px){
-      border: solid 1.58vw;
-      h1 {
-        font-size: 15.5vw;
-        line-height: 12vw;
-        padding: 4.5vw 4.5vw 5vw;
-        &:hover::before, &:hover::after {
-          padding: 4.5vw 4.5vw 5vw;
-        }
-      }
-    }
-    @media (max-width: 435px) {
-      border: solid 7px;
-      h1 {
-        font-size: 65px;
-        line-height: 50px;
-        padding: 17px 17px 22px;
-        &:hover::before, &:hover::after {
-          padding: 17px 17px 22px;
-        }
-      }
     }
   }
   p {  //subheader
     position: absolute;
     bottom: 30px;
-    font: 19px 'Segoe UI';
+    font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    font-size: 19px;
     white-space: nowrap;
     animation: .63s fadein ease-in;
     .selection-w-color;
@@ -167,7 +180,7 @@ body {
       vertical-align: middle;
       width: 20px;
       display: inline-block;
-      animation: .75s borderglide2 ease-out;
+      animation: .8s borderglide2 ease-out;
     }
   }
 }
@@ -255,13 +268,16 @@ body {
     font-size: 30px;
     position: relative;
     overflow: hidden;
+    border-radius: 2px;
     background-color: @ultranav-box;
-    box-shadow: 1px 2px 8px @ultranav-box-shadow;
+    border-top: 4px solid @ultranav-box-bordertop;
+    border-bottom: 4px solid @ultranav-box-borderbottom;
+    box-shadow: 0 4px 1px @ultranav-box-extreme-shadow, 1px 1px 6px @ultranav-box-shadow;
     .mode-switch-transition.background;
     .mode-switch-transition.shadow;
   //'about'-box extension
     &.box_about {
-      height: 82px;
+      height: 76px; //height hardcoding needed due to transition purposes
       width: 400px;
       margin: 0 auto 35px auto;
       grid-column: ~"1 / -1";
@@ -302,7 +318,6 @@ body {
     &:nth-of-type(2n+3) {
       float: right;
     }
-  //end of media
   //corners shifting in when hovering
     .corneranimation {
       .corner_before, .corner_after {
@@ -310,6 +325,7 @@ body {
         background-color: @ultranav-box-corners;
         transition: all .4s ease-out;
         z-index: 3;
+        opacity: .65;
       }
       .corner_before {
         height: 40px;
@@ -335,16 +351,14 @@ body {
   //end of corneranimations
   //box header
     .box_header {
-      .header_maintext {
+      background-color: @ultranav-boxheader-background;
+      .header_text {
         padding: 38px 28px;
         font-size: 1.15em;
         text-transform: uppercase;
         display: inherit;
         line-height: 0;
         color: @ultranav-boxheader-foreground;
-        border-bottom: 3px solid @ultranav-boxheader-bordertopbottom;
-        border-top: 3px solid @ultranav-boxheader-bordertopbottom;
-        transition: border-bottom .15s linear, border-top .15s linear;
         .mode-switch-transition.background;
         .mode-switch-transition.color;
       }
@@ -362,7 +376,6 @@ body {
       position: relative;
       flex: 1;
       padding-left: 10px;
-      display: inherit;
       text-decoration: none;
       color: @ultranav-boxtext-foreground;
       overflow: hidden;
@@ -390,7 +403,7 @@ body {
         top: -8px;
         bottom: -8px;
         transition: .45s ease-in;
-        filter: blur(8.3px);
+        filter: blur(9px);
         opacity: .39;
         z-index: -1;
       }
@@ -426,6 +439,7 @@ body {
       .boxanimation(1s);
     }
   }
+  //end of .box
   @media (max-width: 840px) {
     .box {
       margin: 0 auto 35px auto;
@@ -436,7 +450,7 @@ body {
       }
     }
   }
-  //end of .box
+  //end of media query, active if no grid is supported (gets overriden with below)
   @supports (display: grid) {
     display: grid;
     grid-template-columns: 400px 1fr 400px;
@@ -462,7 +476,9 @@ body {
         }
       }
     }
+    //end of media query (inside support query)
   }
+  //end of support query
 }
 //end of #ultra_nav
 
@@ -477,10 +493,8 @@ body {
       }
     }
     .box_header {
-      .header_maintext {
+      .header_text {
         color: @ultranav-boxheader-foreground--light;
-        border-bottom: 3px solid @ultranav-boxheader-bordertopbottom--light;
-        border-top: 3px solid @ultranav-boxheader-bordertopbottom--light;
       }
     //corners shifting in when hovering
       .corneranimation {
@@ -510,10 +524,8 @@ body {
       }
     }
     .box_header {
-      .header_maintext {
+      .header_text {
         color: @nesewebel-foreground;
-        border-bottom: 3px solid @nesewebel-foreground;
-        border-top: 3px solid @nesewebel-foreground;
       }
     //corners shifting in when hovering
       .corneranimation {
@@ -543,10 +555,8 @@ body {
       }
     }
     .box_header {
-      .header_maintext {
+      .header_text {
         color: @nesewebel-foreground--light;
-        border-bottom: 3px solid @nesewebel-foreground--light;
-        border-top: 3px solid @nesewebel-foreground--light;
       }
     //corners shifting in when hovering
       .corneranimation {

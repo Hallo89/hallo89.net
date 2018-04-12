@@ -1,27 +1,31 @@
 /*
 Written by Hallo89 using LESS CSS - http://lesscss.org
-No necessity to write this in here but Less is awesome :o
+No necessity to write this in here but Less is awesome!
 */
 body {
   font-family: 'Raleway', sans-serif;
+}
+#tutorial_header {
+  height: 110px;
+  width: 100%;
+  background-color: #212121;
 }
 #main {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: 70px 30px 30px;
+  padding: 0 35px 30px;
 }
 #main #main_content {
-  max-width: 55%;
-  min-width: 750px;
-  width: 100%;
+  width: 70%;
+  max-width: 1050px;
   height: 2000px;
-  background: #1c1c1c;
+  padding: 80px 35px 35px;
 }
 .tutorial_nav {
   position: sticky;
-  top: 45px;
-  font-size: 21px;
+  top: 55px;
+  font-size: 25px;
   color: #8f8f8f;
   margin-right: 30px;
 }
@@ -35,7 +39,7 @@ body {
 }
 .tutorial_nav .aside_container .nested_items {
   margin-left: 15px;
-  font-size: 19px;
+  font-size: .77em;
 }
 .tutorial_nav#headline_tutorials {
   top: 0;
@@ -67,6 +71,9 @@ body {
   transform: translateY(60px);
 }
 @media (max-width: 1050px) {
+  #main_wrapper {
+    width: 100% !important;
+  }
   aside.tutorial_nav {
     display: none;
   }
