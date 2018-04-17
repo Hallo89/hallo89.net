@@ -116,10 +116,26 @@
       </div>
     </nav>
     <script>
+      const headline = document.getElementById('headline');
+      const nav = document.getElementById('head_nav');
+      headline.addEventListener('mousemove', navWiggle);
+      function navWiggle(e) {
+        let shiftCapX = 6;
+        let shiftCapY = 2;
+        const rect = this.getBoundingClientRect();
+        let left = e.x - rect.left;
+        let top = e.y - rect.top;
+        var shiftLeft = Math.round((left / headline.offsetWidth * shiftCapX) - (shiftCapX / 2));
+        var shiftTop = Math.round((top / headline.offsetHeight * shiftCapY) - (shiftCapY / 2));
+        console.log(shiftLeft, shiftTop);
+        nav.style.transform = `translateX(${-shiftLeft}px) translateY(${-shiftTop}px)`;
+      }
+
       function toggleModeNesewebel() {
         document.body.classList.toggle('nesewebel-mode');
         document.body.classList.toggle('no-nesewebelsadface');
       }
+
       function toggleAbout() {
         document.getElementById('about_box').classList.toggle('expanded');
         window.onclick = function(event) {
