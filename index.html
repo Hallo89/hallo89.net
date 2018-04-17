@@ -127,7 +127,6 @@
         let top = e.y - rect.top;
         var shiftLeft = Math.round((left / headline.offsetWidth * shiftCapX) - (shiftCapX / 2));
         var shiftTop = Math.round((top / headline.offsetHeight * shiftCapY) - (shiftCapY / 2));
-        console.log(shiftLeft, shiftTop);
         nav.style.transform = `translateX(${-shiftLeft}px) translateY(${-shiftTop}px)`;
       }
 
