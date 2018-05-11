@@ -17,7 +17,7 @@
         display: none;
         align-items: center;
         justify-content: center;
-        background: hsla(0, 0%, 16%, .25);
+        background: hsla(0, 0%, 10%, .25);
         z-index: 1000000;
       }
       #spinners.shown {
@@ -33,19 +33,17 @@
       #spinners::before {
         content: '';
         position: absolute;
-        top: -1000px;
-        left: -1000px;
-        bottom: 0;
-        right: 0;
-        z-index: 100000;
-        transition: .75s;
-        background-image: linear-gradient(to bottom right, transparent, hsl(0, 0%, 40%) 50%);
-      }
-      #spinners.gradientout::before {
         top: 0;
         left: 0;
-        bottom: -10000px;
-        right: -10000px;
+        width: 100vw;
+        height: 100vh;
+        z-index: 100000;
+        transition: .75s;
+        background-image: url('https://cdn.discordapp.com/attachments/345689507133259777/444234369662713876/unknown.png');
+        background-size: 100% 100%;
+      }
+      #spinners.gradientout::before {
+        opacity: 0;
       }
       #spinners > span {
         width: calc(2vw + 2vh);
@@ -99,20 +97,15 @@
         border-radius: 27%;
         z-index: 10001;
       }
-      /*#container_left:hover #arrow_left {
-        transform: translate(26vw);
-      }
-      #container_right:hover #arrow_right {
-        transform: translate(-26vw);
-      }*/
       .arrow_container:hover .arrow {
-        clip-path: circle(55%);
+        width: calc(5vw + 5vh);
+        height: calc(5vw + 5vh);
         transform: none;
         font-size: calc(3vh + 3vw);
       }
       .arrow {
-        width: calc(5vw + 5vh);
-        height: calc(5vw + 5vh);
+        width: 0;
+        height: 0;
         font-size: 0;
         line-height: 0;
         color: hsla(0, 0%, 14%, .85);
@@ -121,7 +114,6 @@
         align-items: center;
         border-radius: 100%;
         background: hsla(0, 0%, 34%, 0.65);
-        clip-path: circle(0%);
         transform: rotate(270deg);
         transition: all .22s cubic-bezier(.45,0,.8,.8);
         cursor: pointer;
@@ -149,26 +141,20 @@
         "url('https://cdn.discordapp.com/attachments/340262037290745857/391390689784627200/unknown.png')"
       ];
       var imgArrayPure = new Array();
-      var images = [];
+      var imgHTML = "";
       var currentImg = 0;
       var zIndex = 0;
-      var loaded = 0;
       window.onload = preload;
       function preload() {
         toggleLoadingSpinner();
         htmlGeneration();
         ImageOnLoad();
-        //toggleLoadingSpinner();
       }
-    //loading spinners getting shown and hidden (because the building process does sometimes take its sweet time)
-    //as it turns out I can't properly measure the image getting, so I've most likely just put together crap. whatevs, deal with it lol
-      /*function toggleLoadingSpinner() {
-        document.getElementById('spinners').classList.toggle('shown');
-      }*/
+    //loading animation until approximately all images loaded
       function toggleLoadingSpinner() {
-        setTimeout(loadingSpinnerGradient, 450);
-        setTimeout(loadingSpinnerAnimation, 900);
-        setTimeout(loadingSpinnerOff, 1350);
+        setTimeout(loadingSpinnerGradient, 725);
+        setTimeout(loadingSpinnerAnimation, 950);
+        setTimeout(loadingSpinnerOff, 1400);
       }
       function loadingSpinnerGradient() {
         document.getElementById('spinners').classList.add('gradientout');
@@ -182,16 +168,10 @@
         document.getElementById('spinners').classList.remove('gradientout');
       }
     //imgArray being written into HTML
-      var imgHTML = htmlTemplate(imgArray[0]);
 
-      function htmlTemplate(setBackgroundImage) {
-        return `
-        <div style="background-image: ${setBackgroundImage}"></div>
-        `;
-      }
       function htmlGeneration() {
-        for (var int = 1; int < imgArray.length; int++) {
-          imgHTML += htmlTemplate(imgArray[int]);
+        for (var int = 0; int < imgArray.length; int++) {
+          imgHTML += '<div style="background-image: ' + imgArray[int] + '"></div>'
         }
         document.getElementById('images').innerHTML = imgHTML;
       }
