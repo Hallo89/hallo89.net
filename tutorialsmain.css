@@ -6,9 +6,26 @@ body {
   font-family: 'Raleway', sans-serif;
 }
 #tutorial_header {
+  display: flex;
+  align-items: center;
   height: 110px;
   width: 100%;
   background-color: #212121;
+}
+#tutorial_header .header_navigation {
+  font-size: 50px;
+  font-size: calc(33px + 0.9vw);
+  font-family: "Overpass Mono", sans-serif;
+  letter-spacing: -0.006em;
+  white-space: nowrap;
+  color: #999999;
+  transform: translateX(calc(-70px + 9.5vw));
+}
+@media (max-width: 834px) {
+  #tutorial_header .header_navigation {
+    transform: none;
+    margin-left: 10px;
+  }
 }
 #main {
   display: flex;
