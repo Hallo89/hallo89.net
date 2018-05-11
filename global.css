@@ -52,6 +52,7 @@ body.light-mode {
   flex-wrap: wrap;
   justify-content: space-around;
   animation: 0.85s shiftin2 cubic-bezier(0.52, 0.51, 0.61, 0.99), 1.22s fadein;
+  transition: transform .15s;
   margin: auto;
   position: relative;
   top: 50%;
@@ -134,7 +135,7 @@ body.light-mode {
 }
 #headline #modes #mode_gear {
   transition: all .475s;
-  color: #4b638f;
+  color: #435f94;
   cursor: pointer;
 }
 #headline #modes #mode_dropdown {

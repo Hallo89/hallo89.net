@@ -1,3 +1,17 @@
+const headline = document.getElementById('headline');
+const nav = document.getElementById('head_nav');
+//but why
+const shiftCapX = 6;
+const shiftCapY = 2;
+headline.addEventListener('mousemove', navWiggle);
+function navWiggle(e) {
+  const rect = this.getBoundingClientRect();
+  let left = e.x - rect.left;
+  let top = e.y - rect.top;
+  let shiftLeft = Math.round((left / headline.offsetWidth * shiftCapX) - (shiftCapX / 2));
+  let shiftTop = Math.round((top / headline.offsetHeight * shiftCapY) - (shiftCapY / 2));
+  nav.style.transform = 'translateX(' + -shiftLeft + 'px) translateY(' + -shiftTop + 'px)';
+}
 //theme changer
 function toggleMode() {
   document.body.classList.toggle('dark-mode');
