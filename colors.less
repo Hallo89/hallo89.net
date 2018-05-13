@@ -1,4 +1,4 @@
-// main: tutorialsmain.less
+// main: global.less
 
 @theme-color: #17469E;
 
@@ -11,10 +11,15 @@
 
 @headline-background: darken(@background-color, 2.5%);
 
-@headline-gear: mix(darken(@foreground-color, 10%), @theme-color, 50%);
+@headline-gear: mix(darken(@foreground-color, 8%), @theme-color, 40%);
 
-@mode-dropdown-box: lighten(@background-color, 7%);
-@mode-dropdown-box-shadow: fadeout(darken(@mode-dropdown-box, 17%), 20%);
+@mode-dropdown-box: lighten(@header-background-color, 3%);
+@mode-dropdown-bordertop: lighten(@mode-dropdown-box, 16%);
+@mode-dropdown-borderbottom: mix(@header-background-color, @mode-dropdown-box, 50%);
+@mode-dropdown-shadow: fadeout(darken(@mode-dropdown-box, 4%), 20%);
+@mode-dropdown-extreme-shadow: darken(@header-background-color, 4%);
+@mode-dropdown-header-foreground: darken(@foreground-color, 20%);
+@mode-dropdown-header-background: lighten(@mode-dropdown-box, 1.5%);
 @mode-switch-foreground: @foreground-color;
 @mode-switch-background: @mode-dropdown-box;
 @mode-switch-background-hover: lighten(@mode-switch-background, 4%);
@@ -71,7 +76,7 @@
 @ultranav-boxabout-foreground: @ultranav-boxtext-foreground;
 @ultranav-boxtext-foreground: @foreground-color;
 @ultranav-boxtext-additional-border: darken(@background-color, 7.5%);
-@ultranav-boxtext-image-backdrop: lighten(@ultranav-box, 34%);
+@ultranav-boxtext-image-backdrop: lighten(@ultranav-box, 27%);
 
 @ultranav-box--light: lighten(@background-color--light, 4%);
 @ultranav-box-corners--light: fadeout(darken(@foreground-color--light, 5%), 10%);
@@ -98,5 +103,6 @@
 
 
 @tuto-header-background: lighten(@background-color, 4%);
+@tuto-header-foreground: @foreground-color;
 @tuto-aside-foreground: darken(@foreground-color, 4%);
 @tuto-navheadline-hover-background: lighten(@background-color, 5%);

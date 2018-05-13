@@ -124,27 +124,33 @@ body.light-mode {
     font-size: 40px;
     position: relative;
     grid-area: gear;
+    border-radius: 2px;
 
     float: right;
     top: -33px;
     right: 10px;
-    &.enabled #mode_dropdown {
-      display: block;
+    &.enabled .dropdown_box {
+      //display: block;
+      clip-path: circle(150% at 198px -40px);
     }
-    &.enabled #mode_gear {
+    &.enabled .mode_gear {
       transform: rotateZ(135deg);
     }
-    #mode_gear {
+    .mode_gear {
       transition: all .475s;
       color: @headline-gear;
       cursor: pointer;
     }
-    #mode_dropdown {
-      display: none;
+    .dropdown_box {
+      //display: none;
+      clip-path: circle(0 at 198px -40px);
       position: absolute;
       right: -4px;
       margin: 15px 0 0;
-      box-shadow: 1px 1px 10px @mode-dropdown-box-shadow;
+      border-top: 3px solid @mode-dropdown-bordertop;
+      border-bottom: 3px solid @mode-dropdown-borderbottom;
+      box-shadow: 0 3px 1px @mode-dropdown-extreme-shadow, 1px 1px 5px @mode-dropdown-shadow;
+      transition+: all .25s ease-out;
       .mode-switch-transition.background;
       .mode-switch-transition.shadow;
       z-index: 1;
@@ -152,15 +158,28 @@ body.light-mode {
         content: '';
         position: absolute;
         right: 9px;
-        top: -7px;
-        border: 15px solid @mode-dropdown-box;
-        box-shadow: 1px 1px 10px @mode-dropdown-box-shadow;
+        top: -8px;
+        border: 15px solid @mode-dropdown-bordertop;
+        //box-shadow: 1px 1px 10px @mode-dropdown-box-shadow;
         transform: rotate(45deg);
-        transition: border .15s linear, box-shadow .15s linear;
+        .mode-switch-transition.border;
+        .mode-switch-transition.shadow;
         z-index: -1;
       }
+      .dropdown_header {
+        background-color: @mode-dropdown-header-background;
+        .dropdown_header_text {
+          display: inherit;
+          padding: 8px 23px;
+          font-size: .85em;
+          text-transform: uppercase;
+          color: @mode-dropdown-header-foreground;
+          .mode-switch-transition.color;
+        }
+      }
       .mode_switch {
-        font: 21px 'Roboto', sans-serif;
+        font-size: .6em;
+        display: block;
         white-space: nowrap;
         position: relative;
         padding: 10px 10px 10px 12px;
@@ -316,7 +335,7 @@ body.light-mode {
 }
 
 .light-mode #headline #modes {
-  #mode_dropdown {
+  .dropdown_box {
     box-shadow: 1px 1px 10px @mode-dropdown-box-shadow--light;
     &::before {
       border: 15px solid @mode-dropdown-box--light;

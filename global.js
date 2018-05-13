@@ -28,8 +28,9 @@ function toggleDropdown() {
     if (!event.target.matches (
       [
         '.mode_gear',
-        '.mode_gear_path',
-        '.mode_dropdown',
+        '.dropdown_box',
+        '.dropdown_header',
+        '.dropdown_header_text',
         '.mode_switch'
       ]
     ))

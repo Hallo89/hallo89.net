@@ -11,11 +11,11 @@
     <link rel="icon" href="https://cdn.discordapp.com/attachments/363044137106276354/392035652444749825/Nesewebels_geils_profilbild_in_geil_lol_geil.png.ico">
     <link rel="stylesheet" type="text/css" href="global.css">
     <link rel="stylesheet" type="text/css" href="mainpage.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Lato:700">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css">
   </head>
-  <body class="dark-mode no-nesewebelsadface">
+  <body class="dark-mode no-nesewebelsadface headline_expanded">
 
     <div id="headline" class="headline">
       <a href="https://hallo89.github.io/Some-shitty-website/" id="head_image"></a>
@@ -26,14 +26,15 @@
         <a href="https://steamcommunity.com/id/Nesewebel" target="_blank">Nese4</a>
       </nav>
       <div id="expanding_border"></div>
-      <div id="modes" class="modes">
-        <span class="mode_gear fa fa-cog" id="mode_gear" onclick="toggleDropdown()"></span>
-        <div id="mode_dropdown" class="mode_dropdown">
-          <div onclick="toggleMode()" class="mode_switch" id="switch_daynight">
-            Day/Night Theme
+      <div id="modes">
+        <span class="mode_gear fa fa-cog" onclick="toggleDropdown()"></span>
+        <div class="dropdown_box">
+          <div class="dropdown_header">
+            <span class="dropdown_header_text">modes</span>
           </div>
-          <div onclick="toggleModeNesewebel()" class="mode_switch" id="switch_nesewebel">
-            Nesewebel Theme
+          <div class="dropdown_text">
+            <span class="mode_switch" id="switch_daynight" onclick="toggleMode()"> Day/Night Theme </span>
+            <span class="mode_switch" id="switch_nesewebel" onclick="toggleModeNesewebel()"> Nesewebel Theme </span>
           </div>
         </div>
       </div>
@@ -52,8 +53,7 @@
     </div>
 
     <div id="head_block">
-      <h1 data-heading="Hallo89">Hallo89
-    </h1>
+      <h1 data-heading="Hallo89">Hallo89</h1>
       <script>
         var randomText = new Array ();
         randomText = [
@@ -116,19 +116,6 @@
       </div>
     </nav>
     <script>
-      const headline = document.getElementById('headline');
-      const nav = document.getElementById('head_nav');
-      headline.addEventListener('mousemove', navWiggle);
-      function navWiggle(e) {
-        let shiftCapX = 6;
-        let shiftCapY = 2;
-        const rect = this.getBoundingClientRect();
-        let left = e.x - rect.left;
-        let top = e.y - rect.top;
-        var shiftLeft = Math.round((left / headline.offsetWidth * shiftCapX) - (shiftCapX / 2));
-        var shiftTop = Math.round((top / headline.offsetHeight * shiftCapY) - (shiftCapY / 2));
-        nav.style.transform = `translateX(${-shiftLeft}px) translateY(${-shiftTop}px)`;
-      }
 
       function toggleModeNesewebel() {
         document.body.classList.toggle('nesewebel-mode');

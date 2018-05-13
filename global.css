@@ -123,58 +123,72 @@ body.light-mode {
   font-size: 40px;
   position: relative;
   grid-area: gear;
+  border-radius: 2px;
   float: right;
   top: -33px;
   right: 10px;
 }
-#headline #modes.enabled #mode_dropdown {
-  display: block;
+#headline #modes.enabled .dropdown_box {
+  clip-path: circle(150% at 198px -40px);
 }
-#headline #modes.enabled #mode_gear {
+#headline #modes.enabled .mode_gear {
   transform: rotateZ(135deg);
 }
-#headline #modes #mode_gear {
+#headline #modes .mode_gear {
   transition: all .475s;
   color: #435f94;
   cursor: pointer;
 }
-#headline #modes #mode_dropdown {
-  display: none;
+#headline #modes .dropdown_box {
+  clip-path: circle(0 at 198px -40px);
   position: absolute;
   right: -4px;
   margin: 15px 0 0;
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.8);
-  transition: background .15s linear, box-shadow 0.15s linear;
+  border-top: 3px solid #535353;
+  border-bottom: 3px solid #262626;
+  box-shadow: 0 3px 1px #181818, 1px 1px 5px rgba(32, 32, 32, 0.8);
+  transition: all 0.25s ease-out, background .15s linear, box-shadow 0.15s linear;
   z-index: 1;
 }
-#headline #modes #mode_dropdown::before {
+#headline #modes .dropdown_box::before {
   content: '';
   position: absolute;
   right: 9px;
-  top: -7px;
-  border: 15px solid #292929;
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.8);
+  top: -8px;
+  border: 15px solid #535353;
   transform: rotate(45deg);
-  transition: border 0.15s linear, box-shadow 0.15s linear;
+  transition: border .15s linear, box-shadow 0.15s linear;
   z-index: -1;
 }
-#headline #modes #mode_dropdown .mode_switch {
-  font: 21px 'Roboto', sans-serif;
+#headline #modes .dropdown_box .dropdown_header {
+  background-color: #2e2e2e;
+}
+#headline #modes .dropdown_box .dropdown_header .dropdown_header_text {
+  display: inherit;
+  padding: 8px 23px;
+  font-size: .85em;
+  text-transform: uppercase;
+  color: #666666;
+  transition: color .15s linear;
+}
+#headline #modes .dropdown_box .mode_switch {
+  font-size: .6em;
+  display: block;
   white-space: nowrap;
   position: relative;
   padding: 10px 10px 10px 12px;
   color: #999999;
-  background-color: #292929;
+  background-color: #2a2a2a;
   cursor: pointer;
   transition: all .15s linear;
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
 }
-#headline #modes #mode_dropdown .mode_switch:hover {
-  background-color: #333333;
+#headline #modes .dropdown_box .mode_switch:hover {
+  background-color: #343434;
 }
-#headline #modes #mode_dropdown .mode_switch::before {
+#headline #modes .dropdown_box .mode_switch::before {
   position: absolute;
   left: 6px;
   top: 7px;
@@ -305,18 +319,18 @@ body.light-mode {
 .light-mode #headline #modes #switch_daynight::before {
   color: #17469E;
 }
-.light-mode #headline #modes #mode_dropdown {
+.light-mode #headline #modes .dropdown_box {
   box-shadow: 1px 1px 10px rgba(201, 201, 201, 0.8);
 }
-.light-mode #headline #modes #mode_dropdown::before {
+.light-mode #headline #modes .dropdown_box::before {
   border: 15px solid #fafafa;
   box-shadow: 1px 1px 10px rgba(201, 201, 201, 0.8);
 }
-.light-mode #headline #modes #mode_dropdown .mode_switch {
+.light-mode #headline #modes .dropdown_box .mode_switch {
   color: #595959;
   background-color: #fafafa;
 }
-.light-mode #headline #modes #mode_dropdown .mode_switch:hover {
+.light-mode #headline #modes .dropdown_box .mode_switch:hover {
   background-color: #f0f0f0;
 }
 @keyframes shiftin {
