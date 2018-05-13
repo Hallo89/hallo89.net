@@ -62,7 +62,7 @@ body {
 }
 #head_block h1 {
   position: relative;
-  font: bold 130px 'Century Gothic', sans-serif;
+  font: bold 130px 'Century Gothic', 'Lato', sans-serif;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   text-shadow: 1px 1px rgba(125, 125, 125, 0.95), 2px 2px rgba(125, 125, 125, 0.95), 3px 3px rgba(125, 125, 125, 0.95), 4px 4px rgba(125, 125, 125, 0.95), 5px 5px rgba(125, 125, 125, 0.95), 6px 6px rgba(125, 125, 125, 0.95);
@@ -312,7 +312,7 @@ body {
   bottom: -8px;
   transition: 0.45s ease-in;
   filter: blur(9px);
-  opacity: .39;
+  opacity: .36;
   z-index: -1;
 }
 #ultra_nav .box a:hover::after {
@@ -320,7 +320,7 @@ body {
   opacity: 1;
 }
 #ultra_nav .box a.bg_image {
-  background-color: #747474;
+  background-color: #626262;
 }
 #ultra_nav .box a.bg_image::after {
   content: '';
