@@ -36,6 +36,7 @@ body.light-mode {
   background-size: contain;
   cursor: pointer;
   float: left;
+  position: absolute;
   margin: 5px;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -55,13 +56,10 @@ body.light-mode {
   transition: transform .15s;
   margin: auto;
   position: relative;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 14px;
 }
 #headline #head_nav a {
-  flex: 1;
-  margin: 0 37px;
-  padding: 2px 0;
+  padding: 2px 6px;
   text-decoration: none;
   color: #808080;
   border-bottom: solid 2px rgba(112, 112, 112, 0.6);
@@ -77,9 +75,9 @@ body.light-mode {
   transition: all .8s;
 }
 #headline #head_nav a:hover {
-  flex: 1.41;
+  margin: 0 10px;
   transform: scale(1.075);
-  transition: flex .8s, transform 0s;
+  transition: margin 0.8s /*flex .8s*/, transform 0s;
   animation: .34s buttonshake;
 }
 #headline #head_nav a:hover::before,
@@ -117,18 +115,20 @@ body.light-mode {
   animation: 2s borderglide, 1.85s fadein, 1.7s shiftin2;
   position: relative;
   margin: auto;
-  bottom: -20px;
+  bottom: -26px;
 }
 #headline #modes {
   font-size: 40px;
   position: relative;
   grid-area: gear;
   border-radius: 2px;
+  margin-top: 4px;
   float: right;
-  top: -33px;
+  top: -31px;
   right: 10px;
 }
 #headline #modes.enabled .dropdown_box {
+  clip: rect(-12px 300px 200px 0px);
   clip-path: circle(150% at 198px -40px);
 }
 #headline #modes.enabled .mode_gear {
@@ -140,6 +140,7 @@ body.light-mode {
   cursor: pointer;
 }
 #headline #modes .dropdown_box {
+  clip: rect(-12px 300px -12px 0px);
   clip-path: circle(0 at 198px -40px);
   position: absolute;
   right: -4px;
@@ -208,6 +209,7 @@ body.light-mode {
   #headline #head_image {
     float: none;
     margin: 0;
+    position: static;
   }
   #headline #head_nav {
     margin: 0;

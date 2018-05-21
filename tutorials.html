@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300|Overpass+Mono:400,600">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.3/css/all.css"> <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css">
   </head>
-  <body>
+  <body class="dark-mode">
 
     <div id="headline" class="headline">
       <a href="https://hallo89.github.io/Some-shitty-website/" id="head_image"></a>
@@ -19,14 +19,15 @@
         <a href="https://steamcommunity.com/id/Nesewebel" target="_blank">Nese4</a>
       </nav>
       <div id="expanding_border"></div>
-      <div id="modes" class="modes">
-        <span class="mode_gear fa fa-cog" id="mode_gear" onclick="toggleDropdown()"></span>
-        <div id="mode_dropdown" class="mode_dropdown">
-          <div onclick="toggleMode()" class="mode_switch" id="switch_daynight">
-            Day/Night Theme
+      <div id="modes">
+        <span class="mode_gear fa fa-cog" onclick="toggleDropdown()"></span>
+        <div class="dropdown_box">
+          <div class="dropdown_header">
+            <span class="dropdown_header_text">modes</span>
           </div>
-          <div onclick="toggleModeNesewebel()" class="mode_switch" id="switch_nesewebel">
-            Nesewebel Theme
+          <div class="dropdown_text">
+            <span class="mode_switch" id="switch_daynight" onclick="toggleMode()"> Day/Night Theme </span>
+            <span class="mode_switch" id="switch_nesewebel" onclick="toggleModeNesewebel()"> Nesewebel Theme </span>
           </div>
         </div>
       </div>

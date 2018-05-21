@@ -45,6 +45,7 @@ body.light-mode {
     cursor: pointer;
 
     float: left;
+    position: absolute;
     margin: 5px;
     .noselect;
   }
@@ -63,12 +64,13 @@ body.light-mode {
 
     margin: auto;
     position: relative;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 14px;
+    //top: 50%; //hack to place a relative element vertically centered
+    //transform: translateY(-50%);
     a {
-      flex: 1;
-      margin: 0 37px;
-      padding: 2px 0;
+      //flex: 1;
+      //margin: 0 37px;
+      padding: 2px 6px;
       //padding: 5px 5px 3px;
       text-decoration: none;
       //background-color: @nav-background;
@@ -86,11 +88,11 @@ body.light-mode {
         transition: all .8s;
       }
       &:hover {
-        //margin: 0 10px;
-        flex: 1.41;
+        margin: 0 10px;
+        //flex: 1.41;
         transform: scale(1.075);
         //box-shadow: 1px 1px 6px @nav-shadow;
-        transition: /*margin .8s*/flex .8s, transform 0s;
+        transition: margin .8s/*flex .8s*/, transform 0s;
         animation: .34s buttonshake;
       }
       &:hover::before, &:hover::after {
@@ -118,19 +120,20 @@ body.light-mode {
 
     position: relative;
     margin: auto;
-    bottom: -20px;
+    bottom: -26px;
   }
   #modes {
     font-size: 40px;
     position: relative;
     grid-area: gear;
     border-radius: 2px;
+    margin-top: 4px;
 
     float: right;
-    top: -33px;
+    top: -31px;
     right: 10px;
     &.enabled .dropdown_box {
-      //display: block;
+      clip: rect(-12px 300px 200px 0px); //this is an amazing fallback for browsers without clip-path (which are a lot)
       clip-path: circle(150% at 198px -40px);
     }
     &.enabled .mode_gear {
@@ -142,7 +145,7 @@ body.light-mode {
       cursor: pointer;
     }
     .dropdown_box {
-      //display: none;
+      clip: rect(-12px 300px -12px 0px);
       clip-path: circle(0 at 198px -40px);
       position: absolute;
       right: -4px;
@@ -214,6 +217,7 @@ body.light-mode {
     #head_image {
       float: none;
       margin: 0;
+      position: static;
     }
     #head_nav {
       margin: 0;

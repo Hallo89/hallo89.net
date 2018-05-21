@@ -1,6 +1,10 @@
 const headline = document.getElementById('headline');
 const nav = document.getElementById('head_nav');
 //but why
+//The solution for the hack to position a relative element vertically centered, which is top: 50%; transform: translateY(-50%); -> checks whether css grid is supported, if it's not (which is when the hack should be active), replace the modular translateY with the static one for the hack
+//Tho I am experimentally using a static top value
+//const checkCSSGrid = document.createElement('div');
+//checkCSSGrid.style.display = 'grid';
 const shiftCapX = 6;
 const shiftCapY = 2;
 headline.addEventListener('mousemove', navWiggle);
@@ -10,7 +14,13 @@ function navWiggle(e) {
   let top = e.y - rect.top;
   let shiftLeft = Math.round((left / headline.offsetWidth * shiftCapX) - (shiftCapX / 2));
   let shiftTop = Math.round((top / headline.offsetHeight * shiftCapY) - (shiftCapY / 2));
-  nav.style.transform = 'translateX(' + -shiftLeft + 'px) translateY(' + -shiftTop + 'px)';
+  /*if (checkCSSGrid.style.display == 'grid') {*/
+    nav.style.transform = 'translateX(' + -shiftLeft + 'px) translateY(' + -shiftTop + 'px)';
+/*  }
+  else {
+    nav.style.transform = 'translateX(' + -shiftLeft + 'px) translateY(-50%)';
+    console.log("ok2");
+  }*/
 }
 //theme changer
 function toggleMode() {
