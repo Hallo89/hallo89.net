@@ -27,7 +27,7 @@
       </nav>
       <div id="expanding_border"></div>
       <div id="modes">
-        <span class="mode_gear fa fa-cog" onclick="toggleDropdown()"></span>
+        <span class="mode_gear fa fa-cog"></span>
         <div class="dropdown_box">
           <div class="dropdown_header">
             <span class="dropdown_header_text">modes</span>
@@ -116,12 +116,18 @@
       </div>
     </nav>
     <script>
-
+      window.onload = function preload() {
+        dropdownClickDelay();
+      }
+      function dropdownClickDelay() {
+        setTimeout(function setDropdownClick() {
+          document.querySelector('.mode_gear').setAttribute('onclick', 'toggleDropdown()');
+        }, 1850);
+      }
       function toggleModeNesewebel() {
         document.body.classList.toggle('nesewebel-mode');
         document.body.classList.toggle('no-nesewebelsadface');
       }
-
       function toggleAbout() {
         document.getElementById('about_box').classList.toggle('expanded');
         window.onclick = function(event) {
