@@ -63,15 +63,17 @@
 @nav-selection--light: lighten(desaturate(spin(@header-selection, -40), 20%), 9%);
 
 
-@ultranav-box: lighten(@background-color, 2.5%);
-@ultranav-box-corners: darken(@background-color, 3%);
-@ultranav-box-shadow: fadeout(darken(@ultranav-box, 4%), 20%);
-@ultranav-box-extreme-shadow: darken(@background-color, 3%);
-@ultranav-box-bordertop: lighten(@ultranav-box, 18%);
-@ultranav-box-borderbottom: mix(@ultranav-box, @background-color, 50%);
-//
-@ultranav-boxheader-foreground: darken(@foreground-color, 26%);
-@ultranav-boxheader-background: lighten(@ultranav-box, 1%);
+@glb-box: lighten(@background-color, 2.5%);
+@glb-box-corners: darken(@background-color, 3%);
+@glb-box-shadow: fadeout(darken(@ultranav-box, 4%), 20%);
+@glb-box-extreme-shadow: darken(@background-color, 3%);
+@glb-box-bordertop: lighten(@ultranav-box, 18%);
+@glb-box-borderbottom: mix(@ultranav-box, @background-color, 50%);
+@glb-boxheader-foreground: darken(@foreground-color, 26%);
+@glb-boxheader-background: lighten(@ultranav-box, 1%);
+
+
+@ultranav-box: @glb-box;
 //
 @ultranav-boxabout-foreground: @ultranav-boxtext-foreground;
 @ultranav-boxtext-foreground: @foreground-color;
@@ -83,7 +85,6 @@
 @ultranav-box-shadow--light: fadeout(darken(@background-color--light, 19%), 12%);
 @ultranav-box-extreme-shadow--light: darken(@background-color, 3%);
 @ultranav-box-bordertopbottom--light: mix(@ultranav-box, @background-color, 50%);
-//
 @ultranav-boxheader-foreground--light: lighten(@foreground-color--light, 8%);
 @ultranav-boxheader-background--light: darken(@ultranav-box, 1%);
 //

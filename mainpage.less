@@ -262,19 +262,10 @@ body {
   margin: 35px auto 10px;
   max-width: 1000px;
   .box {
+    font-size: 30px;
     width: 400px;
     height: 400px;
     margin: 0 0 35px 0;
-    font-size: 30px;
-    position: relative;
-    overflow: hidden;
-    border-radius: 2px;
-    background-color: @ultranav-box;
-    border-top: 4px solid @ultranav-box-bordertop;
-    border-bottom: 4px solid @ultranav-box-borderbottom;
-    box-shadow: 0 4px 1px @ultranav-box-extreme-shadow, 1px 1px 6px @ultranav-box-shadow;
-    .mode-switch-transition.background;
-    .mode-switch-transition.shadow;
   //'about'-box extension
     &.box_about {
       height: 76px; //height hardcoding needed due to transition purposes
@@ -318,52 +309,6 @@ body {
     &:nth-of-type(2n+3) {
       float: right;
     }
-  //corners shifting in when hovering
-    .corneranimation {
-      .corner_before, .corner_after {
-        position: absolute;
-        background-color: @ultranav-box-corners;
-        transition: all .4s ease-out;
-        z-index: 3;
-        opacity: .65;
-      }
-      .corner_before {
-        height: 40px;
-        width: 80px;
-        left: -26px;
-        bottom: -6px;
-        transform: rotateZ(45deg) translateY(40px);
-      }
-      .corner_after {
-        height: 80px;
-        width: 40px;
-        right: -6px;
-        top: -26px;
-        transform: rotateZ(-45deg) translateX(40px);
-      }
-    }
-    &:hover .corner_before {
-      transform: rotateZ(45deg) translateY(0);
-    }
-    &:hover .corner_after {
-      transform: rotateZ(-45deg) translateX(0);
-    }
-  //end of corneranimations
-  //box header
-    .box_header {
-      background-color: @ultranav-boxheader-background;
-      .header_text {
-        padding: 38px 28px;
-        font-size: 1.15em;
-        text-transform: uppercase;
-        display: inherit;
-        line-height: 0;
-        color: @ultranav-boxheader-foreground;
-        .mode-switch-transition.background;
-        .mode-switch-transition.color;
-      }
-    }
-  //end of header
   //main text inside the boxes
     .box_text {
       display: flex;

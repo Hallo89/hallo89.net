@@ -185,18 +185,10 @@ body {
   max-width: 1000px;
 }
 #ultra_nav .box {
+  font-size: 30px;
   width: 400px;
   height: 400px;
   margin: 0 0 35px 0;
-  font-size: 30px;
-  position: relative;
-  overflow: hidden;
-  border-radius: 2px;
-  background-color: #1d1d1d;
-  border-top: 4px solid #4b4b4b;
-  border-bottom: 4px solid #1a1a1a;
-  box-shadow: 0 4px 1px #0f0f0f, 1px 1px 6px rgba(19, 19, 19, 0.8);
-  transition: background .15s linear, box-shadow 0.15s linear;
 }
 #ultra_nav .box.box_about {
   height: 76px;
@@ -232,46 +224,6 @@ body {
 }
 #ultra_nav .box:nth-of-type(2n+3) {
   float: right;
-}
-#ultra_nav .box .corneranimation .corner_before,
-#ultra_nav .box .corneranimation .corner_after {
-  position: absolute;
-  background-color: #0f0f0f;
-  transition: all 0.4s ease-out;
-  z-index: 3;
-  opacity: .65;
-}
-#ultra_nav .box .corneranimation .corner_before {
-  height: 40px;
-  width: 80px;
-  left: -26px;
-  bottom: -6px;
-  transform: rotateZ(45deg) translateY(40px);
-}
-#ultra_nav .box .corneranimation .corner_after {
-  height: 80px;
-  width: 40px;
-  right: -6px;
-  top: -26px;
-  transform: rotateZ(-45deg) translateX(40px);
-}
-#ultra_nav .box:hover .corner_before {
-  transform: rotateZ(45deg) translateY(0);
-}
-#ultra_nav .box:hover .corner_after {
-  transform: rotateZ(-45deg) translateX(0);
-}
-#ultra_nav .box .box_header {
-  background-color: #202020;
-}
-#ultra_nav .box .box_header .header_text {
-  padding: 38px 28px;
-  font-size: 1.15em;
-  text-transform: uppercase;
-  display: inherit;
-  line-height: 0;
-  color: #575757;
-  transition: background .15s linear, color .15s linear;
 }
 #ultra_nav .box .box_text {
   display: flex;
