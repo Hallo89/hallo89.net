@@ -3,189 +3,298 @@
   <head>
     <meta charset="utf-8">
     <title>lol</title>
+    <link rel="stylesheet" type="text/css" href="global.css">
     <style>
       body {
         margin: 10px;
-        background-color: hsl(0, 0%, 18%);
       }
-      #container_grid {
-        display: flex;
-        flex-wrap: wrap;
+      .box {
+        font-size: 22px;
+        display: inline-block;
+        vertical-align: top;
       }
-      .function_container {
-        background: rgba(140, 177, 176, .2);
-        padding: 8px;
-        display: grid;
-        grid-template-columns: 80px 1fr;
-        grid-template-rows: 15px auto 1fr;
-        grid-gap: 10px;
-        min-width: auto;
-        min-height: 200px;
-        margin: 5px;
-        border-radius: 5px;
-      }
-      .function_container.active {
-        width: 100%;
-      }
-      .header {
-        grid-column: 1 / -1;
-        grid-row: 1 / 2;
-        justify-self: center;
-        align-self: center;
-        line-height: 0;
-        letter-spacing: 2.5px;
-        color: hsl(0, 0%, 80%);
-        font-size: 20px;
-      }
-      .button {
-        background-color: rgba(173, 157, 255, 0.15);
-        grid-row: 2 / -1;
-        border-radius: 2px;
-        cursor: pointer;
+      .box .box_header {
+        font-size: 1.1em;
       }
       .function {
+        font-size: .75em;
         color: hsl(0, 0%, 75%);
-        border: 1px solid rgba(134, 135, 74, .5);
         padding: 5px;
-        grid-row: 3 / -1;
         display: flex;
         align-items: center;
         justify-content: center;
         flex-wrap: wrap;
         border-radius: 2px;
       }
-      .function span {
+      #function_1 span {
         margin: 13px 6px;
         border-bottom: 2px solid rgba(229, 255, 164, .1);
         padding: 3px;
       }
       .input_container {
         display: flex;
-        justify-content: space-around;
-        padding: 5px;
+        justify-content: flex-start;
+        padding: 5px 5px 7px;
+        background-color: hsl(0, 0%, 14%);
       }
-      .input {
-        margin: 2px 5px;
+      .input_box {
+        font-size: .78em;
+        margin: 0 7px 3px;
         display: flex;
         flex-direction: column;
-        justify-content: flex-end;
-        width: auto;
-        background: hsla(0, 0%, 40%, .6);
+        min-width: 150px;
         padding: 8px;
-        border-radius: 3px;
       }
-      .input input, .input .togglebutton {
+      .input {
         border: none;
-        box-shadow: 0 1px 7px hsla(0, 0%, 20%, .35);
-        background: hsl(0, 0%, 25%);
-        color: hsl(0, 0%, 87%);
-        border-radius: 3px;
+        box-shadow: 0 1px 7px hsla(0, 0%, 14%, .82);
+        background: hsl(0, 0%, 23%);
+        color: hsl(0, 0%, 77%);
+        border-radius: 2px;
         padding: 3px 6px;
         height: 17px;
-        width: 140px;
+        width: auto;
       }
-      .input .input_header {
+      .input_box .input_header {
         margin-bottom: 3px;
-        color: hsl(0, 0%, 80%);
+        color: hsl(0, 0%, 70%);
       }
-      .input .togglebutton {
+      .button {
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+        justify-content: center;
+        align-items: center;
+      }
+      .knobber {
         position: relative;
         cursor: pointer;
       }
-      .input .togglebutton::before {
+      .knobber .knob {
         content: '';
         position: absolute;
         left: 6px;
         height: 17px;
         width: 17px;
-        background: rgba(255, 94, 75, 0.3);
-        box-shadow: 1px 1px 5px hsla(0, 0%, 30%, .55);
-        border-radius: 50px;
+        box-shadow: 0 1px 5px hsla(0, 0%, 22%, .8);
+        border-radius: 100%;
         transition: .3s;
       }
-      .input .togglebutton.appending::before {
+      .togglebutton .knob {
+        background-color: rgba(255, 94, 75, 0.3);
+      }
+      .togglebutton.appending .knob {
         transform: translate(122px);
-        background: rgba(92, 255, 142, 0.2);
+        background-color: rgba(92, 255, 142, 0.2);
+      }
+      .slider {
+        padding: 3px 12px;
+      }
+      .slider .knob {
+        background-color: hsl(0, 0%, 13%);
+        left: 4.5px;
+        transition: none;
+      }
+      .slider.rotate {
+        width: 360px;
+      }
+
+      .box_content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 450px;
+        height: 450px;
+      }
+      #function_2 {
+        transform-style: preserve-3d;
+        transform: rotate3d(1, 1, 1, 94deg);
+      }
+      .face {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        outline: 1px solid transparent;
+      }
+      .front {
+        transform: translateZ(50px);
+        background-color: cyan;
+      }
+      .behind {
+        transform: rotateY(180deg) translateZ(50px);
+        background-color: deepskyblue;
+      }
+      .left {
+        transform: rotateY(90deg) translateZ(50px);
+        background-color: darkseagreen;
+      }
+      .right {
+        transform: rotateY(-90deg) translateZ(50px);
+        background-color: firebrick;
+      }
+      .bottom {
+        transform: rotateX(90deg) translateZ(50px);
+        background-color: chocolate;
+      }
+      .top {
+        transform: rotateX(-90deg) translateZ(50px);
+        background-color: azure;
       }
     </style>
-    <script>
-      var randomNumbers = "";
-      function randomNumber() {
-        const amount = parseInt(document.getElementById('randomnumber_value_amount').value);
-        const start = parseInt(document.getElementById('randomnumber_value_start').value);
-        const end = parseInt(document.getElementById('randomnumber_value_end').value);
-        const aftercomma = parseInt(document.getElementById('randomnumber_value_aftercomma').value);
-        const length = end - start;
-
-        if (!document.getElementById('togglebutton_random_mode').classList.contains('appending')) {
-          randomNumbers = "";
-          document.getElementById('function_1').innerHTML = '';
-        }
-
-        for (var i = 0; i < amount; i++) {
-          randomNumbers += '<span>' + (length*Math.random() + start).toFixed(aftercomma) + '</span>';
-        }
-        document.getElementById('function_1').innerHTML = randomNumbers;
-        document.getElementById('container_grid').children[0].classList.add('active');
-      }
-      function toggleRandomMode() {
-        document.getElementById('togglebutton_random_mode').classList.toggle('appending');
-      }
-    </script>
   </head>
   <body>
-    <div id="container_grid">
+    <div id="containers">
 
-      <div class="function_container">
-        <span class="header">Random figure generator</span>
+      <div class="box glb_box">
+        <div class="corneranimation">
+          <span class="corner_before"></span>
+          <span class="corner_after"></span>
+        </div>
+        <div class="box_header">
+          <span class="header_text">Random figure generator</span>
+        </div>
         <div class="input_container">
-          <div class="input">
+          <div class="input_box">
             <span class="input_header"># random numbers</span>
-            <input type="number" id="randomnumber_value_amount">
+            <input type="number" class="input" id="figures_amount">
           </div>
-          <div class="input">
-            <span class="input_header"># digits after comma</span>
-            <input type="number" id="randomnumber_value_aftercomma">
+          <div class="input_box">
+            <span class="input_header"># after comma</span>
+            <input type="number" class="input" id="figures_aftercomma">
           </div>
-          <div class="input">
+          <div class="input_box">
             <span class="input_header">Start value</span>
-            <input type="number" id="randomnumber_value_start">
+            <input type="number" class="input" id="figures_start">
           </div>
-          <div class="input">
+          <div class="input_box">
             <span class="input_header">End value</span>
-            <input type="number" id="randomnumber_value_end">
+            <input type="number" class="input" id="figures_end">
           </div>
-          <div class="input">
+          <div class="input_box">
             <span class="input_header">Append mode</span>
-            <span class="togglebutton" onclick="toggleRandomMode()" id="togglebutton_random_mode"></span>
+            <span class="input togglebutton knobber figures"  id="figures_append" onclick="toggleRandomMode()">
+              <span class="knob"></span>
+            </span>
+          </div>
+          <div class="input_box button" onclick="randomNumber()">
+            <span class="input_header">Go!</span>
           </div>
         </div>
-        <div class="button" onclick="randomNumber()"></div>
         <div class="function" id="function_1"></div>
       </div>
 
-      <div class="function_container">
-        <span class="header"></span>
+      <div class="box glb_box">
+        <div class="corneranimation">
+          <span class="corner_before"></span>
+          <span class="corner_after"></span>
+        </div>
+        <div class="box_header">
+          <span class="header_text">3D Magic</span>
+        </div>
         <div class="input_container">
-          <div class="input">
-            <span class="input_header">type anything you want it won't do anything lol</span>
-            <input type="number">
-          </div>
-          <div class="input">
-            <span class="input_header">coming maybe soon maybe never</span>
-            <input type="number">
+          <div class="input_box">
+            <span class="input_header">Rotate Magic</span>
+            <span class="input slider rotate knobber" id="cubes_rotate_slider">
+              <span class="knob" id="rotate_slider_knob"></span>
+            </span>
           </div>
         </div>
-        <div class="button"></div>
-        <div class="function" id="function_2"></div>
-      </div>
-
-      <div class="function_container">
-        <span class="header"></span>
-        <div class="button"></div>
-        <div class="function" id="function_3"></div>
+        <div class="box_content">
+          <div class="function" id="function_2">
+            <span class="face front"></span>
+            <span class="face behind"></span>
+            <span class="face top"></span>
+            <span class="face bottom"></span>
+            <span class="face left"></span>
+            <span class="face right"></span>
+          </div>
+        </div>
       </div>
 
     </div>
+    <script>
+      var randomNumbers = "";
+      var mouseState = 0;
+      const amount = document.getElementById('figures_amount');
+      const start = document.getElementById('figures_start');
+      const end = document.getElementById('figures_end');
+      const aftercomma = document.getElementById('figures_aftercomma');
+      const appendButton = document.getElementById('figures_append');
+      const rotateSlider = document.getElementById('cubes_rotate_slider');
+      const rotateSliderKnob = document.getElementById('rotate_slider_knob');
+      const figuresOutput = document.getElementById('function_1');
+      const cubesOutput = document.getElementById('function_2');
+      const masterContainer = document.getElementById('containers');
+      window.addEventListener('mousedown', down);
+      window.addEventListener('mouseup', up);
+      rotateSlider.addEventListener('mousemove', movingRotateSlider);
+      rotateSlider.addEventListener('mousedown', rotateSliderClick);
+      function down() {
+        mouseState++;
+      }
+      function up() {
+        mouseState--;
+      }
+      function randomNumber() {
+        let valueAmount = parseInt(amount.value);
+        let valueStart = parseInt(start.value);
+        let valueEnd = parseInt(end.value);
+        let valueAftercomma = parseInt(aftercomma.value);
+        let valueLength = valueEnd - valueStart;
+        if (!appendButton.classList.contains('appending')) {
+          randomNumbers = "";
+          figuresOutput.innerHTML = '';
+        }
+        for (var i = 0; i < valueAmount; i++) {
+          randomNumbers += '<span>' + (valueLength*Math.random() + valueStart).toFixed(valueAftercomma) + '</span>';
+        }
+        figuresOutput.innerHTML = randomNumbers;
+        masterContainer.children[0].classList.add('active');
+      }
+      function toggleRandomMode() {
+        appendButton.classList.toggle('appending');
+      }
+      function movingRotateSlider(e) {
+        const rect = this.getBoundingClientRect();
+        console.log(mouseState);
+        if (mouseState) {
+          let range = e.x - rect.left - 10;
+          if (range > 0 && range < 360) {
+            cubesOutput.style.transform = 'rotate3d(1, 1, 1, ' + range + 'deg)';
+            rotateSliderKnob.style.transform = 'translateX(' + range + 'px)'
+          }
+          else if (range < 0) {
+            range = 0;
+            cubesOutput.style.transform = 'rotate3d(1, 1, 1, ' + range + 'deg)';
+            rotateSliderKnob.style.transform = 'translateX(' + range + 'px)'
+          }
+          else if (range > 360) {
+            range = 360;
+            cubesOutput.style.transform = 'rotate3d(1, 1, 1, ' + range + 'deg)';
+            rotateSliderKnob.style.transform = 'translateX(' + range + 'px)'
+          }
+        }
+      }
+      function rotateSliderClick(e) {
+        const rect = this.getBoundingClientRect();
+        console.log(mouseState);
+        let range = e.x - rect.left - 10;
+        if (range > 0 && range < 360) {
+          cubesOutput.style.transform = 'rotate3d(1, 1, 1, ' + range + 'deg)';
+          rotateSliderKnob.style.transform = 'translateX(' + range + 'px)'
+        }
+        else if (range < 0) {
+          range = 0;
+          cubesOutput.style.transform = 'rotate3d(1, 1, 1, ' + range + 'deg)';
+          rotateSliderKnob.style.transform = 'translateX(' + range + 'px)'
+        }
+        else if (range > 360) {
+          range = 360;
+          cubesOutput.style.transform = 'rotate3d(1, 1, 1, ' + range + 'deg)';
+          rotateSliderKnob.style.transform = 'translateX(' + range + 'px)'
+        }
+      }
+    </script>
   </body>
 </html>
