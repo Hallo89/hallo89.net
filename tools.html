@@ -12,19 +12,21 @@
         font-size: 22px;
         display: inline-block;
         vertical-align: top;
+        margin: 10px;
       }
       .box .box_header {
         font-size: 1.1em;
       }
       .function {
-        font-size: .75em;
-        color: hsl(0, 0%, 75%);
-        padding: 5px;
         display: flex;
         align-items: center;
         justify-content: center;
+      }
+      .text_function {
+        font-size: .75em;
+        color: hsl(0, 0%, 75%);
+        padding: 5px;
         flex-wrap: wrap;
-        border-radius: 2px;
       }
       #function_1 span {
         margin: 13px 6px;
@@ -72,34 +74,46 @@
         cursor: pointer;
       }
       .knobber .knob {
-        content: '';
         position: absolute;
         left: 6px;
         height: 17px;
         width: 17px;
         box-shadow: 0 1px 5px hsla(0, 0%, 22%, .8);
+        background-color: hsl(0, 0%, 13%);
         border-radius: 100%;
         transition: .3s;
       }
-      .togglebutton .knob {
-        background-color: rgba(255, 94, 75, 0.3);
-      }
-      .togglebutton.appending .knob {
+      .knobber.active .knob {
         transform: translate(122px);
-        background-color: rgba(92, 255, 142, 0.2);
+        background-color: rgba(62, 147, 141, 0.4);
       }
+      .axisbutton.x.active .knob {
+        background-color: #784452;
+      }
+      .axisbutton.y.active .knob {
+        background-color: #1F6C6B;
+      }
+      .axisbutton.z.active .knob {
+        background-color: #046CA5;
+      }
+      /*body.translucentaxes .axes_container {
+        z-index: 1000;
+      }*/
       .slider {
         padding: 3px 12px;
       }
       .slider .knob {
         background-color: hsl(0, 0%, 13%);
-        left: 4.5px;
+        left: 2.5px;
         transition: none;
       }
       .slider.rotate {
         width: 360px;
       }
-
+      .face {
+        position: absolute;
+        outline: 1px solid transparent;
+      }
       .box_content {
         display: flex;
         align-items: center;
@@ -107,37 +121,80 @@
         width: 450px;
         height: 450px;
       }
-      #function_2 {
+      .container_3d {
         transform-style: preserve-3d;
-        transform: rotate3d(1, 1, 1, 94deg);
       }
-      .face {
+
+      .axes_x .axis {
+        background-color: #784452;
+      }
+      .axes_y .axis {
+        background-color: #1F6C6B;
+      }
+      .axes_z .axis {
+        background-color: #046CA5;
+      }
+      .axes_x {
+        transform: rotate3d(1, 1, 1, 0deg) translateZ(50px) translateY(50px) translatex(-50px);
+      }
+      .axes_y {
+        transform: rotate3d(1, 1, 1, 120deg) translateZ(50px) translateY(-50px) translatex(50px);
+      }
+      .axes_z {
+        transform: rotate3d(1, 1, 1, 240deg) translateZ(-50px) translateY(-50px) translatex(-50px);
+      }
+      .axis.end {
+        width: 2px;
+        height: 2px;
+      }
+      .axis.side {
+        width: 200px;
+        height: 2px;
+      }
+      .axis.front {
+        transform: rotateZ(180deg) translateZ(100px) translateX(1px) translateY(1px);
+      }
+      .axis.behind {
+        transform: rotateX(180deg) rotateZ(90deg) translateZ(100px) translateX(1px) translateY(1px);
+      }
+      .axis.left {
+        transform: rotateY(90deg) translateY(-1px) translateZ(-100px) rotateX(180deg) translateZ(1px);
+      }
+      .axis.right {
+        transform: rotateY(90deg) translateY(-1px) translateZ(-99px);
+      }
+      .axis.bottom {
+        transform: rotateX(90deg) rotateZ(90deg) translateZ(1px) rotateY(180deg) translateZ(1px) translateY(100px);
+      }
+      .axis.top {
+        transform: rotateX(90deg) rotateZ(90deg) translateZ(2px) translateY(100px);
+      }
+
+      .cube_1.face {
         width: 100px;
         height: 100px;
-        position: absolute;
-        outline: 1px solid transparent;
       }
-      .front {
+      .cube_1.front {
         transform: translateZ(50px);
         background-color: cyan;
       }
-      .behind {
+      .cube_1.behind {
         transform: rotateY(180deg) translateZ(50px);
         background-color: deepskyblue;
       }
-      .left {
+      .cube_1.left {
         transform: rotateY(90deg) translateZ(50px);
         background-color: darkseagreen;
       }
-      .right {
+      .cube_1.right {
         transform: rotateY(-90deg) translateZ(50px);
         background-color: firebrick;
       }
-      .bottom {
+      .cube_1.bottom {
         transform: rotateX(90deg) translateZ(50px);
         background-color: chocolate;
       }
-      .top {
+      .cube_1.top {
         transform: rotateX(-90deg) translateZ(50px);
         background-color: azure;
       }
@@ -173,7 +230,7 @@
           </div>
           <div class="input_box">
             <span class="input_header">Append mode</span>
-            <span class="input togglebutton knobber figures"  id="figures_append" onclick="toggleRandomMode()">
+            <span class="input appendbutton knobber" id="figures_append" onclick="toggleRandomMode()">
               <span class="knob"></span>
             </span>
           </div>
@@ -181,7 +238,7 @@
             <span class="input_header">Go!</span>
           </div>
         </div>
-        <div class="function" id="function_1"></div>
+        <div class="function text_function" id="function_1"></div>
       </div>
 
       <div class="box glb_box">
@@ -196,18 +253,70 @@
           <div class="input_box">
             <span class="input_header">Rotate Magic</span>
             <span class="input slider rotate knobber" id="cubes_rotate_slider">
-              <span class="knob" id="rotate_slider_knob"></span>
+              <span class="knob" id="rotate_slider_knob" style="transform: translateX(325px);"></span>
             </span>
           </div>
+          <div class="input_box">
+            <span class="input_header">X-Axis</span>
+            <span class="input x axisbutton knobber active" id="toggle_axis_x" onclick="toggleAxisX()">
+              <span class="knob"></span>
+            </span>
+          </div>
+          <div class="input_box">
+            <span class="input_header">Y-Axis</span>
+            <span class="input y axisbutton knobber active" id="toggle_axis_y" onclick="toggleAxisY()">
+              <span class="knob"></span>
+            </span>
+          </div>
+          <div class="input_box">
+            <span class="input_header">Z-Axis</span>
+            <span class="input z axisbutton knobber active" id="toggle_axis_z" onclick="toggleAxisZ()">
+              <span class="knob"></span>
+            </span>
+          </div>
+          <!--div class="input_box">
+            <span class="input_header">Translucent axes</span>
+            <span class="input translucentbutton knobber" id="axes_translucent" onclick="toggleTranslucentAxes()">
+              <span class="knob"></span>
+            </span>
+          </div-->
         </div>
         <div class="box_content">
-          <div class="function" id="function_2">
-            <span class="face front"></span>
-            <span class="face behind"></span>
-            <span class="face top"></span>
-            <span class="face bottom"></span>
-            <span class="face left"></span>
-            <span class="face right"></span>
+          <div class="wrapper_3d container_3d" id="function_2" style="transform: rotate3d(1, 1, 1, 325deg);">
+            <div class="axes_container container_3d">
+              <div class="axes_x container_3d">
+                <span class="face axis end front"></span>
+                <span class="face axis end behind"></span>
+                <span class="face axis side top"></span>
+                <span class="face axis side bottom"></span>
+                <span class="face axis side left"></span>
+                <span class="face axis side right"></span>
+              </div>
+              <div class="axes_y container_3d">
+                <span class="face axis end front"></span>
+                <span class="face axis end behind"></span>
+                <span class="face axis side top"></span>
+                <span class="face axis side bottom"></span>
+                <span class="face axis side left"></span>
+                <span class="face axis side right"></span>
+              </div>
+              <div class="axes_z container_3d">
+                <span class="face axis end front"></span>
+                <span class="face axis end behind"></span>
+                <span class="face axis side top"></span>
+                <span class="face axis side bottom"></span>
+                <span class="face axis side left"></span>
+                <span class="face axis side right"></span>
+              </div>
+            </div>
+            <div class="function container_3d">
+              <span class="face cube_1 front"></span>
+              <span class="face cube_1 behind"></span>
+              <span class="face cube_1 top"></span>
+              <span class="face cube_1 bottom"></span>
+              <span class="face cube_1 left"></span>
+              <span class="face cube_1 right"></span>
+            </div>
           </div>
         </div>
       </div>
@@ -216,16 +325,22 @@
     <script>
       var randomNumbers = "";
       var mouseState = 0;
+      const masterContainer = document.getElementById('containers');
+
       const amount = document.getElementById('figures_amount');
       const start = document.getElementById('figures_start');
       const end = document.getElementById('figures_end');
       const aftercomma = document.getElementById('figures_aftercomma');
-      const appendButton = document.getElementById('figures_append');
+
+      const buttonAppend = document.getElementById('figures_append');
+      const buttonAxisX = document.getElementById('toggle_axis_x');
+      const buttonAxisY = document.getElementById('toggle_axis_y');
+      const buttonAxisZ = document.getElementById('toggle_axis_z');
+
       const rotateSlider = document.getElementById('cubes_rotate_slider');
       const rotateSliderKnob = document.getElementById('rotate_slider_knob');
       const figuresOutput = document.getElementById('function_1');
-      const cubesOutput = document.getElementById('function_2');
-      const masterContainer = document.getElementById('containers');
+      const output3D = document.getElementById('function_2');
       window.addEventListener('mousedown', down);
       window.addEventListener('mouseup', up);
       rotateSlider.addEventListener('mousemove', movingRotateSlider);
@@ -242,7 +357,7 @@
         let valueEnd = parseInt(end.value);
         let valueAftercomma = parseInt(aftercomma.value);
         let valueLength = valueEnd - valueStart;
-        if (!appendButton.classList.contains('appending')) {
+        if (!buttonAppend.classList.contains('active')) {
           randomNumbers = "";
           figuresOutput.innerHTML = '';
         }
@@ -250,50 +365,72 @@
           randomNumbers += '<span>' + (valueLength*Math.random() + valueStart).toFixed(valueAftercomma) + '</span>';
         }
         figuresOutput.innerHTML = randomNumbers;
-        masterContainer.children[0].classList.add('active');
       }
       function toggleRandomMode() {
-        appendButton.classList.toggle('appending');
+        buttonAppend.classList.toggle('active');
       }
+      function toggleAxisX() {
+        buttonAxisX.classList.toggle('active');
+      }
+      function toggleAxisY() {
+        buttonAxisY.classList.toggle('active');
+      }
+      function toggleAxisZ() {
+        buttonAxisZ.classList.toggle('active');
+      }
+      //function toggleTranslucentAxes() {
+      //  document.body.classList.toggle('translucentaxes');
+      //}
       function movingRotateSlider(e) {
-        const rect = this.getBoundingClientRect();
-        console.log(mouseState);
-        if (mouseState) {
-          let range = e.x - rect.left - 10;
-          if (range > 0 && range < 360) {
-            cubesOutput.style.transform = 'rotate3d(1, 1, 1, ' + range + 'deg)';
-            rotateSliderKnob.style.transform = 'translateX(' + range + 'px)'
-          }
-          else if (range < 0) {
-            range = 0;
-            cubesOutput.style.transform = 'rotate3d(1, 1, 1, ' + range + 'deg)';
-            rotateSliderKnob.style.transform = 'translateX(' + range + 'px)'
-          }
-          else if (range > 360) {
-            range = 360;
-            cubesOutput.style.transform = 'rotate3d(1, 1, 1, ' + range + 'deg)';
-            rotateSliderKnob.style.transform = 'translateX(' + range + 'px)'
-          }
+        if (!mouseState) {
+          return;
         }
-      }
-      function rotateSliderClick(e) {
         const rect = this.getBoundingClientRect();
-        console.log(mouseState);
-        let range = e.x - rect.left - 10;
-        if (range > 0 && range < 360) {
-          cubesOutput.style.transform = 'rotate3d(1, 1, 1, ' + range + 'deg)';
-          rotateSliderKnob.style.transform = 'translateX(' + range + 'px)'
-        }
-        else if (range < 0) {
+        var x = 1;
+        var y = 1;
+        var z = 1;
+        let range = e.x - rect.left - 12;
+        if (range < 0) {
           range = 0;
-          cubesOutput.style.transform = 'rotate3d(1, 1, 1, ' + range + 'deg)';
-          rotateSliderKnob.style.transform = 'translateX(' + range + 'px)'
         }
         else if (range > 360) {
           range = 360;
-          cubesOutput.style.transform = 'rotate3d(1, 1, 1, ' + range + 'deg)';
-          rotateSliderKnob.style.transform = 'translateX(' + range + 'px)'
         }
+        if (!buttonAxisX.classList.contains('active')) {
+          x = 0;
+        }
+        if (!buttonAxisY.classList.contains('active')) {
+          y = 0;
+        }
+        if (!buttonAxisZ.classList.contains('active')) {
+          z = 0;
+        }
+        output3D.style.transform = 'rotate3d(' + x + ', ' + y + ', ' + z + ', ' + range + 'deg)';
+        rotateSliderKnob.style.transform = 'translateX(' + range + 'px)';
+      }
+      function rotateSliderClick(e) {
+        const rect = this.getBoundingClientRect();
+        var x = 1;
+        var y = 1;
+        var z = 1;
+        let range = e.x - rect.left - 12;
+        if (range < 0) {
+          range = 0;
+        }
+        else if (range > 360) {
+          range = 360;
+        }
+        if (!buttonAxisX.classList.contains('active')) {
+          x = 0;
+        }
+        if (!buttonAxisY.classList.contains('active')) {
+          y = 0;
+        }
+        if (!buttonAxisZ.classList.contains('active')) {
+          z = 0;
+        }
+        output3D.style.transform = 'rotate3d(' + x + ', ' + y + ', ' + z + ', ' + range + 'deg)';
+        rotateSliderKnob.style.transform = 'translateX(' + range + 'px)';
       }
     </script>
   </body>
