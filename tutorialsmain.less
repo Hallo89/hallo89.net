@@ -9,7 +9,11 @@ No necessity to write this in here but Less is awesome!
 @import "mixins.less";
 
 body {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Segoe UI', sans-serif;
+}
+h1, h2 {
+  font-weight: normal;
+  margin: 0;
 }
 #tutorial_header {
   display: flex;
@@ -40,7 +44,18 @@ body {
     width: 70%;
     max-width: 1050px;
     height: 2000px;
-    padding: 80px 35px 35px;
+    padding: 60px 35px 35px;
+    font-size: 21px;
+    color: @tuto-article-foreground;
+    h2 {
+      font-size: 2.5em;
+      font-family: 'Raleway', sans-serif;
+      writing-mode: sideways-lr;
+      color: @tuto-subheader-foreground;
+      margin-left: -25px;
+      margin-top: -3px;
+      float: left;
+    }
   }
 }
 .tutorial_nav {
@@ -49,6 +64,7 @@ body {
   font-size: 25px;
   color: @tuto-aside-foreground;
   margin-right: 30px;
+  font-family: 'Raleway', sans-serif;
   span {
     display: block;
     white-space: nowrap;
@@ -95,6 +111,7 @@ body {
     }
   }
 }
+
 
 @media (max-width: 1050px) {
   #main_wrapper {

@@ -3,7 +3,12 @@ Written by Hallo89 using LESS CSS - http://lesscss.org
 No necessity to write this in here but Less is awesome!
 */
 body {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Segoe UI', sans-serif;
+}
+h1,
+h2 {
+  font-weight: normal;
+  margin: 0;
 }
 #tutorial_header {
   display: flex;
@@ -37,7 +42,18 @@ body {
   width: 70%;
   max-width: 1050px;
   height: 2000px;
-  padding: 80px 35px 35px;
+  padding: 60px 35px 35px;
+  font-size: 21px;
+  color: #999999;
+}
+#main #main_content h2 {
+  font-size: 2.5em;
+  font-family: 'Raleway', sans-serif;
+  writing-mode: sideways-lr;
+  color: #919191;
+  margin-left: -25px;
+  margin-top: -3px;
+  float: left;
 }
 .tutorial_nav {
   position: sticky;
@@ -45,6 +61,7 @@ body {
   font-size: 25px;
   color: #8f8f8f;
   margin-right: 30px;
+  font-family: 'Raleway', sans-serif;
 }
 .tutorial_nav span {
   display: block;
