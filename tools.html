@@ -62,6 +62,9 @@
       .input.number {
         max-width: 150px;
       }
+      .input.file {
+        cursor: pointer;
+      }
       .input_file {
         display: none;
       }
@@ -126,6 +129,12 @@
         position: relative;
       }
 
+      .noselect {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
       .color_north {
         background-color: #A84E4E;
       }
@@ -148,15 +157,12 @@
       .legend_container {
         position: absolute;
         left: 40px;
-        top: 30px;
+        top: 25px;
         display: flex;
         flex-direction: column;
         color: hsl(0, 0%, 58%);
         font-size: .88em;
-        font-family: 'Calibri', sans-serif;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
+        font-family: Calibri, Arial, sans-serif;
       }
       .color_legend {
         margin: 1px 0 1px 5px;
@@ -169,6 +175,12 @@
         left: -1em;
         width: 1em;
         height: 1em;
+      }
+
+      .error_banner {
+        position: absolute;
+        bottom: 0;
+        left: 30px;
       }
 
       .container_3d {
@@ -514,7 +526,7 @@
           <div class="input_box file">
             <span class="input_header">JSON file</span>
             <label for="input_json" class="input file" id="input_json_label">Browse...</label>
-            <input type="file" class="input_file" accept="application/json" id="input_json">
+            <input type="file" class="input_file" accept="application/json, .json" id="input_json">
           </div>
           <div class="input_box">
             <span class="input_header">Quality | Quantity</span>
@@ -536,7 +548,7 @@
           </div>
         </div>
         <div class="box_content">
-          <div class="legend_container">
+          <div class="legend_container noselect">
             <div class="color_legend">
               <span>North</span>
               <span class="color_preview color_north"></span>
@@ -1101,6 +1113,9 @@
               <span class="face cube_1 right"></span>-->
             </div>
           </div>
+          <div class="error_banner">
+            <span class="error"></span>
+          </div>
         </div>
       </div>
 
@@ -1122,6 +1137,10 @@
       var currentLength;
       var elements;
       var updateLock = true;
+      var transformsPlusX = '';
+      var transformsPlusY = '';
+      var lock = false;
+      var transformsPlusZ = '';
       const masterContainer = document.getElementById('containers');
 
       const amount = document.getElementById('figures_amount');
@@ -1155,14 +1174,16 @@
       const containerGrid = document.getElementById('bottom_grid');
       const figuresOutput = document.getElementById('function_1');
       const output3D = document.getElementById('function_2');
+
+      const rect = rotateSlider.getBoundingClientRect();
       window.addEventListener('mousedown', down);
       window.addEventListener('mouseup', up);
-      rotateSlider.addEventListener('mousemove', movingRotateSlider);
+      window.addEventListener('mousemove', movingRotateSlider);
       rotateSlider.addEventListener('mousedown', rotateSliderClick);
       fileInput.addEventListener('change', jsonThing);
       function jsonThing() {
         let keyFile = fileInput.files[0];
-        fileLabel.innerHTML = 'Browse... ▶ ' + keyFile.name;
+        fileLabel.innerHTML = 'Browse... ➤ ' + keyFile.name;
         reader.readAsText(keyFile);
         reader.onload = function(e) {
         //oddly, this whole part executes last
@@ -1251,6 +1272,8 @@
       }
       function up() {
         mouseState--;
+        lock = false;
+        document.body.classList.remove('noselect');
       }
       function randomNumber() {
         let valueAmount = parseInt(amount.value);
@@ -1275,9 +1298,14 @@
         buttonAxisX.classList.toggle('active');
         containerAxesX.classList.toggle('nodisplay');
         if (!buttonAxisX.classList.contains('active')) {
-          rotateSliderKnobX.style.transform = 'translateX(' + lockedRangeX + 'px)';
+          //rotateSliderKnobX.style.transform = 'translateX(' + lockedRangeX + 'px)';
+          rotateSliderKnobX.style.transform = 'translateX(0)';
         }
         rotateSliderKnobX.classList.toggle('nodisplay');
+        //transformsPlusX = 'rotate3d(1, 0, 0, ' + lockedRangeX + 'deg)';
+        if (buttonAxisX.classList.contains('active')) {
+          transformsPlusX = '';
+        }
         x = switch01(x);
         updateCube();
       }
@@ -1286,9 +1314,14 @@
         buttonAxisY.classList.toggle('active');
         containerAxesY.classList.toggle('nodisplay');
         if (!buttonAxisY.classList.contains('active')) {
-          rotateSliderKnobY.style.transform = 'translateX(' + lockedRangeY + 'px)';
+          //rotateSliderKnobY.style.transform = 'translateX(' + lockedRangeY + 'px)';
+          rotateSliderKnobY.style.transform = 'translateX(3px)';
         }
         rotateSliderKnobY.classList.toggle('nodisplay');
+        //transformsPlusY = 'rotate3d(0, 1, 0, ' + lockedRangeY + 'deg)';
+        if (buttonAxisX.classList.contains('active')) {
+          transformsPlusY = '';
+        }
         y = switch01(y);
         updateCube();
       }
@@ -1297,9 +1330,14 @@
         buttonAxisZ.classList.toggle('active');
         containerAxesZ.classList.toggle('nodisplay');
         if (!buttonAxisZ.classList.contains('active')) {
-          rotateSliderKnobZ.style.transform = 'translateX(' + lockedRangeZ + 'px)';
+          //rotateSliderKnobZ.style.transform = 'translateX(' + lockedRangeZ + 'px)';
+          rotateSliderKnobZ.style.transform = 'translateX(6px)';
         }
         rotateSliderKnobZ.classList.toggle('nodisplay');
+        //transformsPlusZ = 'rotate3d(0, 0, 1, ' + lockedRangeZ + 'deg)';
+        if (buttonAxisX.classList.contains('active')) {
+          transformsPlusZ = '';
+        }
         z = switch01(z);
         updateCube();
       }
@@ -1324,10 +1362,9 @@
       //  document.body.classList.toggle('translucentaxes');
       //}
       function movingRotateSlider(e) {
-        if (mouseState <= 0) {
+        if (mouseState <= 0 || lock == false) {
           return;
         }
-        const rect = this.getBoundingClientRect();
         range = e.x - rect.left - 12;
         if (range < 0) {
           range = 0;
@@ -1338,7 +1375,8 @@
         updateCube();
       }
       function rotateSliderClick(e) {
-        const rect = this.getBoundingClientRect();
+        document.body.classList.add('noselect');
+        lock = true;
         range = e.x - rect.left - 12;
         if (range < 0) {
           range = 0;
@@ -1349,7 +1387,7 @@
         updateCube();
       }
       function updateCube() {
-        output3D.style.transform = 'rotate3d(' + x + ', ' + y + ', ' + z + ', ' + range + 'deg)';
+        output3D.style.transform = transformsPlusX + transformsPlusY + transformsPlusZ + 'rotate3d(' + x + ', ' + y + ', ' + z + ', ' + range + 'deg)';
         rotateSliderKnob.style.transform = 'translateX(' + range + 'px)';
       }
       function switch01(value) {
