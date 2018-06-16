@@ -123,7 +123,54 @@
         align-items: center;
         justify-content: center;
         height: 480px;
+        position: relative;
       }
+
+      .color_north {
+        background-color: #A84E4E;
+      }
+      .color_south {
+        background-color: #046CA5;
+      }
+      .color_west {
+        background-color: #777922;
+      }
+      .color_east {
+        background-color: #CDA544;
+      }
+      .color_up {
+        background-color: #AC724A;
+      }
+      .color_down {
+        background-color: #664D6E;
+      }
+
+      .legend_container {
+        position: absolute;
+        left: 40px;
+        top: 30px;
+        display: flex;
+        flex-direction: column;
+        color: hsl(0, 0%, 58%);
+        font-size: .88em;
+        font-family: 'Calibri', sans-serif;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+      .color_legend {
+        margin: 1px 0 1px 5px;
+        display: flex;
+        align-items: center;
+      }
+      .color_preview {
+        content: '';
+        position: absolute;
+        left: -1em;
+        width: 1em;
+        height: 1em;
+      }
+
       .container_3d {
         transform-style: preserve-3d;
         backface-visibility: hidden;
@@ -489,6 +536,32 @@
           </div>
         </div>
         <div class="box_content">
+          <div class="legend_container">
+            <div class="color_legend">
+              <span>North</span>
+              <span class="color_preview color_north"></span>
+            </div>
+            <div class="color_legend">
+              <span>South</span>
+              <span class="color_preview color_south"></span>
+            </div>
+            <div class="color_legend">
+              <span>West</span>
+              <span class="color_preview color_west"></span>
+            </div>
+            <div class="color_legend">
+              <span>East</span>
+              <span class="color_preview color_east"></span>
+            </div>
+            <div class="color_legend">
+              <span>Up</span>
+              <span class="color_preview color_up"></span>
+            </div>
+            <div class="color_legend">
+              <span>Down</span>
+              <span class="color_preview color_down"></span>
+            </div>
+          </div>
           <div class="wrapper_3d container_3d" id="function_2" style="transform: rotate3d(1, 1, 1, 325deg);">
             <div class="boundary_container_2d option_2d container_3d nodisplay" id="boundary_container_2d">
               <div class="corners container_3d">
@@ -1114,7 +1187,14 @@
             fileContent = startContent + fragContent + endContent;
             indexMarker1 = fileContent.indexOf('"', currentLength + 1);
           }
-          elements = JSON.parse(fileContent).elements;
+          try {
+            elements = JSON.parse(fileContent).elements;
+          }
+          catch (err) {
+            console.log(err.message);
+            mouseState = 0;
+            return;
+          }
           for (var i = 0; i < elements.length; i++) {
             let height = elements[i].to[1] - elements[i].from[1];
             let width = elements[i].to[0] - elements[i].from[0];
@@ -1126,27 +1206,34 @@
             let orientations = Object.getOwnPropertyNames(elements[i].faces);
             for (var n = 0; n < orientations.length; n++) {
               let basicStyle;
+              let color;
               switch (orientations[n]) {
                 case 'north':
                     basicStyle = 'transform: translateZ(' + depth * 20 + 'px) translateY(' + -height * 20 + 'px); width: ' + width * 20 + 'px; height: ' + height * 20 + 'px; background-color: #A84E4E;';
+                    color = 'color_north';
                   break;
                 case 'south':
-                    basicStyle = 'transform: translateY(' + -height * 20 + 'px); width: ' + width * 20 + 'px; height: ' + height * 20 + 'px; background-color: #046CA5;';
+                    basicStyle = 'transform: translateY(' + -height * 20 + 'px); width: ' + width * 20 + 'px; height: ' + height * 20 + 'px;';
+                    color = 'color_south';
                   break;
                 case 'east':
-                  basicStyle = 'transform: rotateY(90deg) translateY(' + -height * 20 + 'px) translateZ(' + -(depth/2 - width) * 20 + 'px) translateX(' + -depth/2 * 20 + 'px); width: ' + depth * 20 + 'px; height: ' + height * 20 + 'px; background-color: #CDA544;';
+                  basicStyle = 'transform: rotateY(90deg) translateY(' + -height * 20 + 'px) translateZ(' + -(depth/2 - width) * 20 + 'px) translateX(' + -depth/2 * 20 + 'px); width: ' + depth * 20 + 'px; height: ' + height * 20 + 'px;';
+                  color = 'color_east';
                   break;
                 case 'west':
-                    basicStyle = 'transform: rotateY(90deg) translateY(' + -height * 20 + 'px) translateZ(' + -depth/2 * 20 + 'px) translateX(' + -depth/2 * 20 + 'px); width: ' + depth * 20 + 'px; height: ' + height * 20 + 'px; background-color: #777922;';
+                    basicStyle = 'transform: rotateY(90deg) translateY(' + -height * 20 + 'px) translateZ(' + -depth/2 * 20 + 'px) translateX(' + -depth/2 * 20 + 'px); width: ' + depth * 20 + 'px; height: ' + height * 20 + 'px;';
+                    color = 'color_west';
                   break;
                 case 'up':
-                    basicStyle = 'transform: rotateX(90deg) rotateZ(90deg) translateZ(' + (width/2 + height) * 20 + 'px) translateX(' + depth/2 * 20 + 'px) translateY(' + (depth/2 - width/2) * 20 + 'px); width: ' + depth * 20 + 'px; height: ' + width * 20 + 'px; background-color: #AC724A;';
+                    basicStyle = 'transform: rotateX(90deg) rotateZ(90deg) translateZ(' + (width/2 + height) * 20 + 'px) translateX(' + depth/2 * 20 + 'px) translateY(' + (depth/2 - width/2) * 20 + 'px); width: ' + depth * 20 + 'px; height: ' + width * 20 + 'px;';
+                    color = 'color_up';
                   break;
                 case 'down':
-                    basicStyle = 'transform: rotateX(90deg) rotateZ(90deg) translateZ(' + width/2 * 20 + 'px) translateX(' + depth/2 * 20 + 'px) translateY(' + (depth/2 - width/2) * 20 + 'px); width: ' + depth * 20 + 'px; height: ' + width * 20 + 'px; background-color: #664D6E;';
+                    basicStyle = 'transform: rotateX(90deg) rotateZ(90deg) translateZ(' + width/2 * 20 + 'px) translateX(' + depth/2 * 20 + 'px) translateY(' + (depth/2 - width/2) * 20 + 'px); width: ' + depth * 20 + 'px; height: ' + width * 20 + 'px;';
+                    color = 'color_down';
                   break;
               }
-              html += '<span class="face ' + orientations[n] + '" style="'+ basicStyle + '"></span>'
+              html += '<span class="face ' + orientations[n] + ' ' + color + '" style="'+ basicStyle + '"></span>'
             }
             html += '</div>'
             containerElements.innerHTML += html;
@@ -1219,6 +1306,10 @@
       function toggleAxes() {
         buttonAxes.classList.toggle('active');
         containerAxes.classList.toggle('nodisplay');
+        if (buttonAxes.classList.contains('active')) {
+          range++;
+          updateCube();
+        }
       }
       function toggleQuantity() {
         buttonQuantity.classList.toggle('active');
