@@ -80,9 +80,6 @@
         justify-content: center;
         align-items: center;
       }
-      .nodisplay {
-        display: none;
-      }
       .knobber {
         position: relative;
         cursor: pointer;
@@ -129,6 +126,9 @@
         position: relative;
       }
 
+      .nodisplay {
+        display: none !important;
+      }
       .noselect {
         -webkit-user-select: none;
         -moz-user-select: none;
@@ -175,12 +175,29 @@
         left: -1em;
         width: 1em;
         height: 1em;
+        border-radius: 1px;
       }
 
       .error_banner {
         position: absolute;
         bottom: 0;
-        left: 30px;
+        left: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        padding: 5px;
+        color: hsl(0, 0%, 60%);
+        font-size: 1.2em;
+        border-bottom: none;
+        box-shadow: none;
+        background-color: hsl(0, 0%, 12.5%);
+      }
+      .error_banner .exclamation {
+        display: inline-block;
+        font-size: 3em;
+        padding: 5px;
+        font-family: 'Century Gothic', Calibri, Arial, sans-serif;
+        line-height: .82em;
       }
 
       .container_3d {
@@ -1113,8 +1130,9 @@
               <span class="face cube_1 right"></span>-->
             </div>
           </div>
-          <div class="error_banner">
-            <span class="error"></span>
+          <div class="error_banner glb_box nodisplay" id="error_container">
+            <span class="exclamation">!</span>
+            <span class="error" id="error_text"></span>
           </div>
         </div>
       </div>
@@ -1139,8 +1157,9 @@
       var updateLock = true;
       var transformsPlusX = '';
       var transformsPlusY = '';
-      var lock = false;
       var transformsPlusZ = '';
+      var SliderLock = false;
+      var error;
       const masterContainer = document.getElementById('containers');
 
       const amount = document.getElementById('figures_amount');
@@ -1161,6 +1180,8 @@
       const rotateSliderKnobY = document.getElementById('rotate_slider_knob_y');
       const rotateSliderKnobZ = document.getElementById('rotate_slider_knob_z');
 
+      const errorInput = document.getElementById('error_text');
+
       const fileInput = document.getElementById('input_json');
       const fileLabel = document.getElementById('input_json_label');
 
@@ -1172,6 +1193,7 @@
       const containerBounds2D = document.getElementById('boundary_container_2d');
       const containerElements = document.getElementById('elements_container');
       const containerGrid = document.getElementById('bottom_grid');
+      const containerError = document.getElementById('error_container');
       const figuresOutput = document.getElementById('function_1');
       const output3D = document.getElementById('function_2');
 
@@ -1187,9 +1209,18 @@
         reader.readAsText(keyFile);
         reader.onload = function(e) {
         //oddly, this whole part executes last
+          containerError.classList.add('nodisplay');
           containerElements.innerHTML = '';
           let fileContent = e.target.result;
-        //minify it
+          if (fileContent.indexOf('parent') >= 0 && !fileContent.indexOf('elements') >= 0) {
+            error = 'Error: missing elements; This model appears to be calling a parent. Parent feature coming soon';
+            errorInput.innerHTML = error;
+            containerError.classList.remove('nodisplay');
+            mouseState = 0;
+            updateLock = true;
+            return;
+          }
+/*        //minify it
           while (fileContent.indexOf('\n') >= 0) {
             fileContent = fileContent.replace('\n', '');
           }
@@ -1207,13 +1238,26 @@
             currentLength = (startContent + fragContent).length;
             fileContent = startContent + fragContent + endContent;
             indexMarker1 = fileContent.indexOf('"', currentLength + 1);
-          }
+          }*/
           try {
             elements = JSON.parse(fileContent).elements;
           }
           catch (err) {
-            console.log(err.message);
-            mouseState = 0;
+            error = err.message;
+            if (error.indexOf('JSON.parse: ') >= 0) {
+              error = error.slice(error.indexOf('JSON.parse: ') + 'JSON.parse: '.length);
+            }
+            error = 'Error: ' + error;
+            if (error.indexOf('expected') >= 0) {
+              error = error.slice(0, error.indexOf('expected')) + ' missing' + error.slice(error.indexOf('expected') + 'expected'.length)
+            }
+            if (error.search(/\bat\b/) >= 0) {
+              error = error.slice(0, error.search(/\bat\b/) + 'at'.length) + ' about' + error.slice(error.search(/\bat\b/) + 'at'.length);
+            }
+            errorInput.innerHTML = error;
+            containerError.classList.remove('nodisplay');
+            mouseState = 0; //do this because we return it and can't access the one at the end
+            updateLock = true; //due to reasons, we have to do this
             return;
           }
           for (var i = 0; i < elements.length; i++) {
@@ -1272,7 +1316,7 @@
       }
       function up() {
         mouseState--;
-        lock = false;
+        SliderLock = false;
         document.body.classList.remove('noselect');
       }
       function randomNumber() {
@@ -1362,7 +1406,7 @@
       //  document.body.classList.toggle('translucentaxes');
       //}
       function movingRotateSlider(e) {
-        if (mouseState <= 0 || lock == false) {
+        if (mouseState <= 0 || SliderLock == false) {
           return;
         }
         range = e.x - rect.left - 12;
@@ -1376,7 +1420,7 @@
       }
       function rotateSliderClick(e) {
         document.body.classList.add('noselect');
-        lock = true;
+        SliderLock = true;
         range = e.x - rect.left - 12;
         if (range < 0) {
           range = 0;
