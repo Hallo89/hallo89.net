@@ -287,7 +287,7 @@ body {
   animation: 0.9s shiftin2 ease-out;
 }
 #ultra_nav .box:nth-of-type(2) a:nth-of-type(1)::after {
-  background-image: url('https://cdn.discordapp.com/attachments/363044137106276354/414869247421054976/host.png');
+  background-image: url('images/main/MINECRAFT.png');
 }
 #ultra_nav .box:nth-of-type(3) {
   animation: 1s shiftin2 ease-out;
