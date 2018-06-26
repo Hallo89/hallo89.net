@@ -377,7 +377,7 @@ body.light-mode {
   background-color: #202020;
 }
 .glb_box .box_header .header_text {
-  padding: 38px 28px;
+  padding: 38px 21px 38px 28px;
   font-size: 1.15em;
   text-transform: uppercase;
   display: inherit;
