@@ -1335,9 +1335,13 @@
         distanceX = e.x - container3DRect.left - clickedX;
         distanceY = e.y - container3DRect.top - clickedY;
         if (mouseStateNav == 0) {
-          range = lockedRangeNav - distanceX;
-          //transformsPlusY = 'rotate3d(0, 1, 0, ' + (lockedRangeNav - distanceX) + 'deg)';
-          //transformsPlusX = 'rotate3d(1, 0, 0, ' + (lockedRangeNav - distanceY) + 'deg)';
+          if (buttonFun.classList.contains('active')) {
+            transformsPlusY = 'rotate3d(0, 1, 0, ' + (lockedRangeNav - distanceX) + 'deg)';
+            transformsPlusX = 'rotate3d(1, 0, 0, ' + (lockedRangeNav - distanceY) + 'deg)';
+          }
+          else {
+            range = lockedRangeNav - distanceX;
+          }
         }
         if (mouseStateNav == 2) {
           if (buttonFun.classList.contains('active')) {
