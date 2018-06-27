@@ -1,1563 +1,1745 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8">
     <title>lol</title>
     <link rel="stylesheet" type="text/css" href="global.css">
     <style>
-        body {
-            margin: 10px;
-        }
-        
-        .box {
-            font-size: 22px;
-            display: inline-block;
-            vertical-align: top;
-            margin: 10px;
-        }
-        
-        .box .box_header {
-            font-size: 1.1em;
-        }
-        
-        .function {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .text_function {
-            font-size: .75em;
-            color: hsl(0, 0%, 75%);
-            padding: 5px;
-            flex-wrap: wrap;
-        }
-        
-        #function_1 span {
-            margin: 13px 6px;
-            border-bottom: 2px solid rgba(229, 255, 164, .1);
-            padding: 3px;
-        }
-        
-        .input_container {
-            display: flex;
-            justify-content: flex-start;
-            padding: 5px 5px 7px;
-            margin-bottom: 2px;
-            background-color: hsl(0, 0%, 14%);
-        }
-        
-        .input_box {
-            font-size: .78em;
-            margin: 0 7px 3px;
-            display: flex;
-            flex-direction: column;
-            min-width: 150px;
-            padding: 8px;
-        }
-        
-        .input {
-            font-size: .81em;
-            border: none;
-            box-shadow: 0 1px 7px hsla(0, 0%, 14%, .82);
-            background: hsl(0, 0%, 23%);
-            color: hsl(0, 0%, 77%);
-            border-radius: 2px;
-            padding: 3px 6px;
-            height: 17px;
-            width: auto;
-        }
-        
-        .input.number {
-            max-width: 150px;
-        }
-        
-        .input.file {
-            cursor: pointer;
-        }
-        
-        .input_file {
-            display: none;
-        }
-        
-        .input_box .input_header {
-            margin-bottom: 3px;
-            color: hsl(0, 0%, 70%);
-        }
-        
-        .button {
-            cursor: pointer;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .knobber {
-            position: relative;
-            cursor: pointer;
-        }
-        
-        .knobber .knob {
-            position: absolute;
-            left: 6px;
-            height: 17px;
-            width: 17px;
-            box-shadow: 0 1px 5px hsla(0, 0%, 22%, .8);
-            background-color: hsl(0, 0%, 13%);
-            border-radius: 100%;
-            transition: .3s;
-        }
-        
-        .knobber.active .knob {
-            transform: translate(122px);
-            background-color: rgba(131, 170, 172, 0.45);
-        }
-        /*body.translucentaxes .axes_container {
+      body {
+        margin: 0;
+      }
+      body:not(.info_mode) {
+        background: linear-gradient(135deg, #3F2D36, #36303B);
+        animation: .35s backgroundfade ease-in;
+      }
+      @keyframes backgroundfade {
+        from { background: hsl(0, 0%, 9%); }
+        to   { background: #3A2E38; }
+      }
+      #containers {
+        max-width: 100%;
+        height: calc(100vh - 25px);
+        margin: 11px 12px 14px 12px;
+        display: grid;
+        justify-items: center;
+        grid-gap: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(470px, 1fr));
+      }
+      .box {
+        font-size: 22px;
+        transition: all .3s ease-out;
+      /*  display: inline-block;*/
+      }
+      .box .box_header {
+        font-size: 1.1em;
+      }
+      .box.active_item {
+        width: 100%;
+        animation: .3s fadein cubic-bezier(.2, 0, 1, 1), .3s heightin ease-out;
+      }
+      @keyframes fadein {
+        from { opacity: .1; }
+      }
+      @keyframes heightin {
+        from { height: 520px; }
+        to { height: calc(100% - 8px); } /* need to sustract borders */
+      }
+      .info_mode .box {
+        width: 470px;
+        height: 520px;
+        cursor: pointer;
+      }
+      .info_mode .box .input_container {
+        display: none;
+      }
+      .info_mode .box .box_content {
+        opacity: .7;
+        filter: blur(8px);
+      }
+      .info_mode #content_function_2 {
+        top: 76px;
+      }
+      .box .box_content {
+        transition: filter .33s cubic-bezier(.35, 0, .65, 1);
+      }
+      .text_function {
+        font-size: .75em;
+        color: hsl(0, 0%, 75%);
+        padding: 5px;
+        flex-wrap: wrap;
+      }
+      #function_1 {
+        position: absolute;
+        top: 151px; /* 76px header + 75px last (and first) input_box (-> without margin) */
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: auto;
+        align-content: flex-start;
+      }
+      #function_1 span {
+        position: relative;
+        padding: 17px 9px;
+      }
+      #function_1 span::before {
+        content: '';
+        position: absolute;
+        bottom: 3px;
+        left: 0;
+        right: 0;
+        border-bottom: 2px solid rgba(229, 255, 164, .1);
+        margin: 8px 6px;
+      }
+      #content_function_2 {
+        position: absolute;
+        top: calc(76px + 77px + 75px); /* Header + first input_box (with margin) (*1) + last input_box (no margin) */
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+      .input_container {
+        display: flex;
+        justify-content: flex-start;
+        padding: 5px 5px 7px;
+        margin-bottom: 2px;
+        background-color: hsl(0, 0%, 14%);
+      }
+      .input_box {
+        font-size: .78em;
+        /*margin: 0 7px 3px; ?? */
+        margin: 0 7px;
+        display: flex;
+        flex-direction: column;
+        min-width: 150px;
+        padding: 8px;
+      }
+      .input {
+        font-size: .81em;
+        border: none;
+        box-shadow: 0 1px 7px hsla(0, 0%, 14%, .82);
+        background: hsl(0, 0%, 23%);
+        color: hsl(0, 0%, 77%);
+        border-radius: 2px;
+        padding: 3px 6px;
+        height: 17px;
+        width: auto;
+      }
+      .input.number {
+        max-width: 150px;
+      }
+      .input.file {
+        cursor: pointer;
+      }
+      .input_file {
+        display: none;
+      }
+      .input_box .input_header {
+        margin-bottom: 3px;
+        color: hsl(0, 0%, 70%);
+      }
+      .button {
+        cursor: pointer;
+        justify-content: center;
+        align-items: center;
+      }
+      .knobber {
+        position: relative;
+        cursor: pointer;
+      }
+      .knobber .knob {
+        position: absolute;
+        left: 6px;
+        height: 17px;
+        width: 17px;
+        box-shadow: 0 1px 5px hsla(0, 0%, 22%, .8);
+        background-color: hsl(0, 0%, 13%);
+        border-radius: 100%;
+        transition: .3s;
+      }
+      .knobber.active .knob {
+        transform: translate(122px);
+        background-color: rgba(131, 170, 172, 0.45);
+      }
+      /*body.translucentaxes .axes_container {
         z-index: 1000;
       }*/
-        
-        .slider {
-            padding: 3px 12px;
-        }
-        
-        .slider .knob {
-            left: 2.5px;
-            transition: none;
-        }
-        
-        .slider .knob.default {
-            z-index: 10;
-        }
-        
-        .slider.rotate {
-            width: 360px;
-        }
-        
-        .face {
-            position: absolute;
-            outline: 1px solid transparent;
-        }
-        
-        .box_content {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 480px;
-            position: relative;
-        }
-        
-        .nodisplay {
-            display: none !important;
-        }
-        
-        .noselect {
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
-        
-        .color_north {
-            background-color: #A84E4E;
-        }
-        
-        .color_south {
-            background-color: #046CA5;
-        }
-        
-        .color_west {
-            background-color: #777922;
-        }
-        
-        .color_east {
-            background-color: #CDA544;
-        }
-        
-        .color_up {
-            background-color: #AC724A;
-        }
-        
-        .color_down {
-            background-color: #664D6E;
-        }
-        
-        .legend_container {
-            position: absolute;
-            left: 40px;
-            top: 25px;
-            display: flex;
-            flex-direction: column;
-            color: hsl(0, 0%, 58%);
-            font-size: .88em;
-            font-family: Calibri, Arial, sans-serif;
-        }
-        
-        .color_legend {
-            margin: 1px 0 1px 5px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .color_preview {
-            content: '';
-            position: absolute;
-            left: -1em;
-            width: 1em;
-            height: 1em;
-            border-radius: 1px;
-        }
-        
-        .error_banner {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            display: flex;
-            align-items: center;
-            padding: 5px;
-            color: hsl(0, 0%, 60%);
-            font-size: 1.2em;
-            border-bottom: none;
-            box-shadow: none;
-            background-color: hsl(0, 0%, 12.5%);
-        }
-        
-        .error_banner .exclamation {
-            display: inline-block;
-            font-size: 3em;
-            padding: 5px;
-            font-family: 'Century Gothic', Calibri, Arial, sans-serif;
-            line-height: .82em;
-        }
-        
-        .container_3d {
-            transform-style: preserve-3d;
-            backface-visibility: hidden;
-        }
-        
-        .elements_container {
-            transform: translateX(-160px) translateZ(-160px) translateY(160px);
-        }
-        
-        .aid_stripe.end {
-            width: 2px;
-            height: 2px;
-        }
-        
-        .aid_stripe.side {
-            height: 2px;
-        }
-        
-        .boundary_container_2d.option_2d .object_2d {
-            position: absolute;
-            height: 320px;
-            width: 320px;
-            opacity: .4;
-        }
-        
-        .boundary_container_2d.option_2d .var_bottom {
-            background: url('https://cdn.discordapp.com/attachments/363044137106276354/457265369640337419/enfloorment.png');
-        }
-        
-        .boundary_container_2d.option_2d .bottom_grid .var_bottom {
-            transform: rotateX(90deg) translateX(-160px);
-        }
-        
-        .boundary_container_2d.option_2d .var_corner {
-            background: url('https://cdn.discordapp.com/attachments/363044137106276354/457233787231928331/enborderment.png');
-        }
-        
-        .boundary_container_2d.option_2d .corners .object_1 {
-            transform: translateX(-160px) translateY(-160px) translateZ(160px);
-        }
-        
-        .boundary_container_2d.option_2d .corners .object_2 {
-            transform: rotateZ(90deg) translateX(-160px) translateY(160px) translateZ(-160px);
-        }
-        
-        .boundary_container_2d.option_2d .corners .object_3 {
-            transform: rotateY(90deg) rotateX(180deg) translateY(160px);
-        }
-        
-        .boundary_container_2d.option_2d .corners .object_4 {
-            transform: rotateY(90deg) translateY(-160px) translateZ(-320px);
-        }
-        
-        .boundary_container_2d.option_2d .corners .object_5 {
-            transform: rotateX(90deg) translateX(-160px);
-        }
-        
-        .boundary_container_2d.option_2d .corners .object_6 {
-            transform: rotateX(90deg) translateX(-160px) translateZ(320px);
-        }
-        
-        .boundary {
-            background-color: hsla(0, 0%, 45%, .2)
-        }
-        
-        .boundary_container .corners .corner_1 {
-            transform: translateX(-160px) translateY(160px) translateZ(160px) rotateX(90deg);
-        }
-        
-        .boundary_container .corners .corner_2 {
-            transform: rotateX(180deg) translateX(-160px) rotateY(180deg) translateY(160px) translateZ(160px) rotateY(180deg);
-        }
-        
-        .boundary_container .corners .corner_3 {
-            transform: rotateZ(180deg) translateX(-160px) translateY(160px) translateZ(160px) rotateX(90deg);
-        }
-        
-        .boundary_container .corners .corner_4 {
-            transform: rotateY(180deg) translateX(-160px) rotateY(180deg) translateY(160px) translateZ(160px) rotateY(180deg);
-        }
-        
-        .boundary_container .corners .corner_5 {
-            transform: rotateX(180deg) translateX(-160px) rotateZ(180deg) translateY(160px) translateZ(160px) rotateY(180deg);
-        }
-        
-        .boundary_container .corners .corner_6 {
-            transform: translateX(-160px) rotateX(180deg) translateY(160px) translateZ(160px) rotateX(90deg);
-        }
-        
-        .boundary_container .corners .corner_7 {
-            transform: rotateZ(180deg) translateX(-160px) rotateY(180deg) translateY(160px) translateZ(160px) rotateY(180deg)
-        }
-        
-        .boundary_container .corners .corner_8 {
-            transform: rotateZ(180deg) translateX(-160px) rotateX(180deg) translateY(160px) translateZ(160px) rotateX(90deg)
-        }
-        
-        .boundary_container .corners .stripe_1 {
-            transform: translateZ(40px);
-        }
-        
-        .boundary_container .corners .stripe_2 {
-            transform: rotateX(90deg) translateZ(40px);
-        }
-        
-        .boundary_container .corners .stripe_3 {
-            transform: rotateY(90deg) translateZ(40px);
-        }
-        
-        .boundary.var_corner.side {
-            width: 80px;
-        }
-        
-        .boundary.var_corner.front {
-            transform: rotateZ(180deg) translateZ(40px) translateX(1px) translateY(1px);
-        }
-        
-        .boundary.var_corner.behind {
-            transform: rotateX(180deg) rotateZ(90deg) translateZ(40px) translateX(1px) translateY(1px);
-        }
-        
-        .boundary.var_corner.left {
-            transform: rotateY(90deg) translateY(-1px) translateZ(-40px) rotateX(180deg) translateZ(1px);
-        }
-        
-        .boundary.var_corner.right {
-            transform: rotateY(90deg) translateY(-1px) translateZ(-39px);
-        }
-        
-        .boundary.var_corner.bottom {
-            transform: rotateX(90deg) rotateZ(90deg) translateZ(1px) rotateY(180deg) translateZ(1px) translateY(40px);
-        }
-        
-        .boundary.var_corner.top {
-            transform: rotateX(90deg) rotateZ(90deg) translateZ(2px) translateY(40px);
-        }
-        
-        .boundary_container .bottom_grid .stripe_1 {
-            transform: translateY(160px) translateX(-160px);
-        }
-        
-        .boundary_container .bottom_grid .stripe_2 {
-            transform: translateY(160px) translateX(-140px);
-        }
-        
-        .boundary_container .bottom_grid .stripe_3 {
-            transform: translateY(160px) translateX(-120px);
-        }
-        
-        .boundary_container .bottom_grid .stripe_4 {
-            transform: translateY(160px) translateX(-100px);
-        }
-        
-        .boundary_container .bottom_grid .stripe_5 {
-            transform: translateY(160px) translateX(-80px);
-        }
-        
-        .boundary_container .bottom_grid .stripe_6 {
-            transform: translateY(160px) translateX(-60px);
-        }
-        
-        .boundary_container .bottom_grid .stripe_7 {
-            transform: translateY(160px) translateX(-40px);
-        }
-        
-        .boundary_container .bottom_grid .stripe_8 {
-            transform: translateY(160px) translateX(-20px);
-        }
-        
-        .boundary_container .bottom_grid .stripe_9 {
-            transform: translateY(160px);
-        }
-        
-        .boundary_container .bottom_grid .stripe_10 {
-            transform: translateY(160px) translateX(20px);
-        }
-        
-        .boundary_container .bottom_grid .stripe_11 {
-            transform: translateY(160px) translateX(40px);
-        }
-        
-        .boundary_container .bottom_grid .stripe_12 {
-            transform: translateY(160px) translateX(60px);
-        }
-        
-        .boundary_container .bottom_grid .stripe_13 {
-            transform: translateY(160px) translateX(80px);
-        }
-        
-        .boundary_container .bottom_grid .stripe_14 {
-            transform: translateY(160px) translateX(100px);
-        }
-        
-        .boundary_container .bottom_grid .stripe_15 {
-            transform: translateY(160px) translateX(120px);
-        }
-        
-        .boundary_container .bottom_grid .stripe_16 {
-            transform: translateY(160px) translateX(140px);
-        }
-        
-        .boundary_container .bottom_grid .stripe_17 {
-            transform: translateY(160px) translateX(160px);
-        }
-        
-        .boundary_container .bottom_grid .horizontal {
-            transform: rotateY(90deg);
-        }
-        
-        .boundary.var_bottom.side {
-            width: 320px;
-        }
-        
-        .boundary.var_bottom.front {
-            transform: rotateZ(180deg) translateZ(160px) translateX(1px) translateY(1px);
-        }
-        
-        .boundary.var_bottom.behind {
-            transform: rotateX(180deg) rotateZ(90deg) translateZ(160px) translateX(1px) translateY(1px);
-        }
-        
-        .boundary.var_bottom.left {
-            transform: rotateY(90deg) translateY(-1px) translateZ(-160px) rotateX(180deg) translateZ(1px);
-        }
-        
-        .boundary.var_bottom.right {
-            transform: rotateY(90deg) translateY(-1px) translateZ(-159px);
-        }
-        
-        .boundary.var_bottom.bottom {
-            transform: rotateX(90deg) rotateZ(90deg) translateZ(1px) rotateY(180deg) translateZ(1px) translateY(160px);
-        }
-        
-        .boundary.var_bottom.top {
-            transform: rotateX(90deg) rotateZ(90deg) translateZ(2px) translateY(160px);
-        }
-        
-        .color_x,
-        .axisbutton.x.active .knob {
-            background-color: #784452 !important;
-        }
-        
-        .color_y,
-        .axisbutton.y.active .knob {
-            background-color: #1F6C6B !important;
-        }
-        
-        .color_z,
-        .axisbutton.z.active .knob {
-            background-color: #046CA5 !important;
-        }
-        
-        .axes_y {
-            transform: rotateX(90deg);
-        }
-        
-        .axes_x {
-            transform: rotateY(90deg);
-        }
-        
-        .axis.side {
-            width: 300px;
-        }
-        
-        .axis.front {
-            transform: rotateZ(180deg) translateZ(150px) translateX(1px) translateY(1px);
-        }
-        
-        .axis.behind {
-            transform: rotateX(180deg) rotateZ(90deg) translateZ(150px) translateX(1px) translateY(1px);
-        }
-        
-        .axis.left {
-            transform: rotateY(90deg) translateY(-1px) translateZ(-150px) rotateX(180deg) translateZ(1px);
-        }
-        
-        .axis.right {
-            transform: rotateY(90deg) translateY(-1px) translateZ(-149px);
-        }
-        
-        .axis.bottom {
-            transform: rotateX(90deg) rotateZ(90deg) translateZ(1px) rotateY(180deg) translateZ(1px) translateY(150px);
-        }
-        
-        .axis.top {
-            transform: rotateX(90deg) rotateZ(90deg) translateZ(2px) translateY(150px);
-        }
-        
-        .cube_1.face {
-            width: 100px;
-            height: 100px;
-        }
-        
-        .cube_1.front {
-            transform: translateZ(50px);
-            background-color: cyan;
-        }
-        
-        .cube_1.behind {
-            transform: rotateY(180deg) translateZ(50px);
-            background-color: deepskyblue;
-        }
-        
-        .cube_1.left {
-            transform: rotateY(90deg) translateZ(50px);
-            background-color: darkseagreen;
-        }
-        
-        .cube_1.right {
-            transform: rotateY(-90deg) translateZ(50px);
-            background-color: firebrick;
-        }
-        
-        .cube_1.bottom {
-            transform: rotateX(90deg) translateZ(50px);
-            background-color: chocolate;
-        }
-        
-        .cube_1.top {
-            transform: rotateX(-90deg) translateZ(50px);
-            background-color: azure;
-        }
+      .slider {
+        padding: 3px 12px;
+      }
+      .slider .knob {
+        left: 2.5px;
+        transition: none;
+      }
+      .slider .knob.default {
+        z-index: 10;
+      }
+      .slider.rotate {
+        width: 360px;
+      }
+      .slider.scale {
+        width: 100px;
+      }
+      .face {
+        position: absolute;
+        outline: 1px solid transparent;
+      }
+
+      .nodisplay {
+        display: none !important;
+      }
+      .noselect {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+      .centerflex {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .color_north {
+        background-color: #A84E4E;
+      }
+      .color_south {
+        background-color: #046CA5;
+      }
+      .color_west {
+        background-color: #777922;
+      }
+      .color_east {
+        background-color: #CDA544;
+      }
+      .color_up {
+        background-color: #AC724A;
+      }
+      .color_down {
+        background-color: #664D6E;
+      }
+
+      .legend_container {
+        position: absolute;
+        left: 40px;
+        top: 25px;
+        color: hsl(0, 0%, 58%);
+        font-size: .88em;
+        font-family: Calibri, Arial, sans-serif;
+        opacity: .8;
+      }
+      .color_legend {
+        margin: 2px 0 1px 5px;
+        display: flex;
+        align-items: center;
+      }
+      .color_preview {
+        content: '';
+        position: absolute;
+        left: -1em;
+        width: 1em;
+        height: 1em;
+        border-radius: 1px;
+      }
+
+      .error_banner {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        padding: 5px;
+        color: hsl(0, 0%, 60%);
+        font-size: 1.2em;
+        border-bottom: none;
+        box-shadow: none;
+        background-color: hsl(0, 0%, 12.5%);
+      }
+      .error_banner .exclamation {
+        display: inline-block;
+        font-size: 3em;
+        padding: 5px;
+        font-family: 'Century Gothic', Calibri, Arial, sans-serif;
+        line-height: .82em;
+      }
+
+      .container_3d {
+        transform-style: preserve-3d;
+        backface-visibility: hidden;
+      }
+
+      .elements_container {
+        transform: translateX(-160px) translateZ(-160px) translateY(160px);
+      }
+
+      .aid_stripe.end {
+        width: 2px;
+        height: 2px;
+      }
+      .aid_stripe.side {
+        height: 2px;
+      }
+
+      .boundary_container_2d.option_2d .object_2d {
+        position: absolute;
+        height: 320px;
+        width: 320px;
+        opacity: .4;
+      }
+
+      .boundary_container_2d.option_2d .var_bottom {
+        background: url('./images/tools/enfloorment.png');
+      }
+      .boundary_container_2d.option_2d .bottom_grid .var_bottom {
+         transform: rotateX(90deg) translateX(-160px);
+      }
+
+      .boundary_container_2d.option_2d .var_corner {
+        background: url('./images/tools/enborderment.png');
+      }
+      .boundary_container_2d.option_2d .corners .object_1 {
+        transform: translateX(-160px) translateY(-160px) translateZ(160px);
+      }
+      .boundary_container_2d.option_2d .corners .object_2 {
+        transform: rotateZ(90deg) translateX(-160px) translateY(160px) translateZ(-160px);
+      }
+      .boundary_container_2d.option_2d .corners .object_3 {
+        transform: rotateY(90deg) rotateX(180deg) translateY(160px);
+      }
+      .boundary_container_2d.option_2d .corners .object_4 {
+        transform: rotateY(90deg) translateY(-160px) translateZ(-320px);
+      }
+      .boundary_container_2d.option_2d .corners .object_5 {
+        transform: rotateX(90deg) translateX(-160px);
+      }
+      .boundary_container_2d.option_2d .corners .object_6 {
+        transform: rotateX(90deg) translateX(-160px) translateZ(320px);
+      }
+
+      .boundary {
+        background-color: hsla(0, 0%, 45%, .2)
+      }
+      .boundary_container .corners .corner_1 {
+        transform: translateX(-160px) translateY(160px) translateZ(160px) rotateX(90deg);
+      }
+      .boundary_container .corners .corner_2 {
+        transform: rotateX(180deg) translateX(-160px) rotateY(180deg) translateY(160px) translateZ(160px) rotateY(180deg);
+      }
+      .boundary_container .corners .corner_3 {
+        transform: rotateZ(180deg) translateX(-160px) translateY(160px) translateZ(160px) rotateX(90deg);
+      }
+      .boundary_container .corners .corner_4 {
+        transform: rotateY(180deg) translateX(-160px) rotateY(180deg) translateY(160px) translateZ(160px) rotateY(180deg);
+      }
+      .boundary_container .corners .corner_5 {
+        transform: rotateX(180deg) translateX(-160px) rotateZ(180deg) translateY(160px) translateZ(160px) rotateY(180deg);
+      }
+      .boundary_container .corners .corner_6 {
+        transform: translateX(-160px) rotateX(180deg) translateY(160px) translateZ(160px) rotateX(90deg);
+      }
+      .boundary_container .corners .corner_7 {
+        transform: rotateZ(180deg) translateX(-160px) rotateY(180deg) translateY(160px) translateZ(160px) rotateY(180deg)
+      }
+      .boundary_container .corners .corner_8 {
+        transform: rotateZ(180deg) translateX(-160px) rotateX(180deg) translateY(160px) translateZ(160px) rotateX(90deg)
+      }
+      .boundary_container .corners .stripe_1 {
+        transform: translateZ(40px);
+      }
+      .boundary_container .corners .stripe_2 {
+        transform: rotateX(90deg) translateZ(40px);
+      }
+      .boundary_container .corners .stripe_3 {
+        transform: rotateY(90deg) translateZ(40px);
+      }
+      .boundary.var_corner.side {
+        width: 80px;
+      }
+      .boundary.var_corner.front {
+        transform: rotateZ(180deg) translateZ(40px) translateX(1px) translateY(1px);
+      }
+      .boundary.var_corner.behind {
+        transform: rotateX(180deg) rotateZ(90deg) translateZ(40px) translateX(1px) translateY(1px);
+      }
+      .boundary.var_corner.left {
+        transform: rotateY(90deg) translateY(-1px) translateZ(-40px) rotateX(180deg) translateZ(1px);
+      }
+      .boundary.var_corner.right {
+        transform: rotateY(90deg) translateY(-1px) translateZ(-39px);
+      }
+      .boundary.var_corner.bottom {
+        transform: rotateX(90deg) rotateZ(90deg) translateZ(1px) rotateY(180deg) translateZ(1px) translateY(40px);
+      }
+      .boundary.var_corner.top {
+        transform: rotateX(90deg) rotateZ(90deg) translateZ(2px) translateY(40px);
+      }
+
+      .boundary_container .bottom_grid .stripe_1 {
+        transform: translateY(160px) translateX(-160px);
+      }
+      .boundary_container .bottom_grid .stripe_2 {
+        transform: translateY(160px) translateX(-140px);
+      }
+      .boundary_container .bottom_grid .stripe_3 {
+        transform: translateY(160px) translateX(-120px);
+      }
+      .boundary_container .bottom_grid .stripe_4 {
+        transform: translateY(160px) translateX(-100px);
+      }
+      .boundary_container .bottom_grid .stripe_5 {
+        transform: translateY(160px) translateX(-80px);
+      }
+      .boundary_container .bottom_grid .stripe_6 {
+        transform: translateY(160px) translateX(-60px);
+      }
+      .boundary_container .bottom_grid .stripe_7 {
+        transform: translateY(160px) translateX(-40px);
+      }
+      .boundary_container .bottom_grid .stripe_8 {
+        transform: translateY(160px) translateX(-20px);
+      }
+      .boundary_container .bottom_grid .stripe_9 {
+        transform: translateY(160px);
+      }
+      .boundary_container .bottom_grid .stripe_10 {
+        transform: translateY(160px) translateX(20px);
+      }
+      .boundary_container .bottom_grid .stripe_11 {
+        transform: translateY(160px) translateX(40px);
+      }
+      .boundary_container .bottom_grid .stripe_12 {
+        transform: translateY(160px) translateX(60px);
+      }
+      .boundary_container .bottom_grid .stripe_13 {
+        transform: translateY(160px) translateX(80px);
+      }
+      .boundary_container .bottom_grid .stripe_14 {
+        transform: translateY(160px) translateX(100px);
+      }
+      .boundary_container .bottom_grid .stripe_15 {
+        transform: translateY(160px) translateX(120px);
+      }
+      .boundary_container .bottom_grid .stripe_16 {
+        transform: translateY(160px) translateX(140px);
+      }
+      .boundary_container .bottom_grid .stripe_17 {
+        transform: translateY(160px) translateX(160px);
+      }
+      .boundary_container .bottom_grid .horizontal {
+        transform: rotateY(90deg);
+      }
+      .boundary.var_bottom.side {
+        width: 320px;
+      }
+      .boundary.var_bottom.front {
+        transform: rotateZ(180deg) translateZ(160px) translateX(1px) translateY(1px);
+      }
+      .boundary.var_bottom.behind {
+        transform: rotateX(180deg) rotateZ(90deg) translateZ(160px) translateX(1px) translateY(1px);
+      }
+      .boundary.var_bottom.left {
+        transform: rotateY(90deg) translateY(-1px) translateZ(-160px) rotateX(180deg) translateZ(1px);
+      }
+      .boundary.var_bottom.right {
+        transform: rotateY(90deg) translateY(-1px) translateZ(-159px);
+      }
+      .boundary.var_bottom.bottom {
+        transform: rotateX(90deg) rotateZ(90deg) translateZ(1px) rotateY(180deg) translateZ(1px) translateY(160px);
+      }
+      .boundary.var_bottom.top {
+        transform: rotateX(90deg) rotateZ(90deg) translateZ(2px) translateY(160px);
+      }
+
+      .color_x, .axisbutton.x.active .knob {
+        background-color: #784452 !important;
+      }
+      .color_y, .axisbutton.y.active .knob {
+        background-color: #1F6C6B !important;
+      }
+      .color_z, .axisbutton.z.active .knob {
+        background-color: #046CA5 !important;
+      }
+      .axes_y {
+        transform: rotateX(90deg);
+      }
+      .axes_x {
+        transform: rotateY(90deg);
+      }
+
+      .axis.side {
+        width: 280px;
+      }
+      .axis.front {
+        transform: rotateZ(180deg) translateZ(140px) translateX(1px) translateY(1px);
+      }
+      .axis.behind {
+        transform: rotateX(180deg) rotateZ(90deg) translateZ(140px) translateX(1px) translateY(1px);
+      }
+      .axis.left {
+        transform: rotateY(90deg) translateY(-1px) translateZ(-140px) rotateX(180deg) translateZ(1px);
+      }
+      .axis.right {
+        transform: rotateY(90deg) translateY(-1px) translateZ(-139px);
+      }
+      .axis.bottom {
+        transform: rotateX(90deg) rotateZ(90deg) translateZ(1px) rotateY(180deg) translateZ(1px) translateY(140px);
+      }
+      .axis.top {
+        transform: rotateX(90deg) rotateZ(90deg) translateZ(2px) translateY(140px);
+      }
     </style>
     <link rel="stylesheet" href="numbers.css">
     <script src="number.js"></script>
-</head>
-
-<body>
+  </head>
+  <body class="info_mode">
     <div id="containers">
 
-        <div class="box glb_box">
-            <div class="corneranimation">
-                <span class="corner_before"></span>
-                <span class="corner_after"></span>
-            </div>
-            <div class="box_header">
-                <span class="header_text">Random figure generator</span>
-            </div>
-            <div class="input_container">
-                <div class="input_box">
-                    <span class="input_header"># random numbers</span>
-                    <input type="number" class="input number" id="figures_amount">
-                </div>
-                <div class="input_box">
-                    <span class="input_header"># after comma</span>
-                    <input type="number" class="input number" id="figures_aftercomma">
-                </div>
-                <div class="input_box">
-                    <span class="input_header">Start value</span>
-                    <input type="number" class="input number" id="figures_start">
-                </div>
-                <div class="input_box">
-                    <span class="input_header">End value</span>
-                    <input type="number" class="input number" id="figures_end">
-                </div>
-                <div class="input_box">
-                    <span class="input_header">Append mode</span>
-                    <span class="input appendbutton knobber" id="figures_append" onclick="toggleRandomMode()">
-              <span class="knob"></span>
-                    </span>
-                </div>
-                <div class="input_box button" onclick="randomNumber()">
-                    <span class="input_header">Go!</span>
-                </div>
-            </div>
-            <div class="function text_function" id="function_1"></div>
+      <div class="box glb_box">
+        <div class="corneranimation">
+          <span class="corner_before"></span>
+          <span class="corner_after"></span>
         </div>
-
-        <div class="box glb_box">
-            <div class="corneranimation">
-                <span class="corner_before"></span>
-                <span class="corner_after"></span>
-            </div>
-            <div class="box_header">
-                <span class="header_text">3D Magic</span>
-            </div>
-            <div class="input_container">
-                <div class="input_box">
-                    <span class="input_header">Rotate Magic</span>
-                    <span class="input slider rotate knobber" id="cubes_rotate_slider">
-              <span class="knob default" id="rotate_slider_knob" style="transform: translateX(325px);"></span>
-                    <span class="knob color_x rotate_knob x nodisplay" id="rotate_slider_knob_x"></span>
-                    <span class="knob color_y rotate_knob y nodisplay" id="rotate_slider_knob_y"></span>
-                    <span class="knob color_z rotate_knob z nodisplay" id="rotate_slider_knob_z"></span>
-                    </span>
-                </div>
-                <div class="input_box">
-                    <span class="input_header">X-Axis</span>
-                    <span class="input x axisbutton knobber active" id="toggle_axis_x" onclick="toggleAxisX()">
+        <div class="box_header">
+          <span class="header_text">Random figure generator</span>
+        </div>
+        <div class="input_container">
+          <div class="input_box">
+            <span class="input_header"># random numbers</span>
+            <input type="number" class="input number" id="figures_amount">
+          </div>
+          <div class="input_box">
+            <span class="input_header"># after comma</span>
+            <input type="number" class="input number" id="figures_aftercomma">
+          </div>
+          <div class="input_box">
+            <span class="input_header">Start value</span>
+            <input type="number" class="input number" id="figures_start">
+          </div>
+          <div class="input_box">
+            <span class="input_header">End value</span>
+            <input type="number" class="input number" id="figures_end">
+          </div>
+          <div class="input_box">
+            <span class="input_header">Append mode</span>
+            <span class="input appendbutton knobber" id="figures_append" onclick="toggleRandomMode()">
               <span class="knob"></span>
-                    </span>
-                </div>
-                <div class="input_box">
-                    <span class="input_header">Y-Axis</span>
-                    <span class="input y axisbutton knobber active" id="toggle_axis_y" onclick="toggleAxisY()">
+            </span>
+          </div>
+          <div class="input_box button noselect" onclick="randomNumber()">
+            <span class="input_header">Go!</span>
+          </div>
+        </div>
+        <div class="box_content centerflex text_function" id="function_1"></div>
+      </div>
+      <div class="box glb_box">
+        <div class="corneranimation">
+          <span class="corner_before"></span>
+          <span class="corner_after"></span>
+        </div>
+        <div class="box_header">
+          <span class="header_text">3D Magic</span>
+        </div>
+        <div class="input_container">
+          <div class="input_box">
+            <span class="input_header">Rotate Magic</span>
+            <span class="input slider rotate knobber">
+              <span class="knob default" style="transform: translateX(325px);"></span>
+              <span class="knob color_x rotate_knob x nodisplay"></span>
+              <span class="knob color_y rotate_knob y nodisplay"></span>
+              <span class="knob color_z rotate_knob z nodisplay"></span>
+            </span>
+          </div>
+          <div class="input_box">
+            <span class="input_header">X-Axis</span>
+            <span class="input x axisbutton knobber active" onclick="toggleAxisX()">
               <span class="knob"></span>
-                    </span>
-                </div>
-                <div class="input_box">
-                    <span class="input_header">Z-Axis</span>
-                    <span class="input z axisbutton knobber active" id="toggle_axis_z" onclick="toggleAxisZ()">
+            </span>
+          </div>
+          <div class="input_box">
+            <span class="input_header">Y-Axis</span>
+            <span class="input y axisbutton knobber active" onclick="toggleAxisY()">
               <span class="knob"></span>
-                    </span>
-                </div>
-                <!--div class="input_box">
+            </span>
+          </div>
+          <div class="input_box">
+            <span class="input_header">Z-Axis</span>
+            <span class="input z axisbutton knobber active" onclick="toggleAxisZ()">
+              <span class="knob"></span>
+            </span>
+          </div>
+          <!--div class="input_box">
             <span class="input_header">Translucent axes</span>
             <span class="input translucentbutton knobber" id="axes_translucent" onclick="toggleTranslucentAxes()">
               <span class="knob"></span>
             </span>
           </div-->
-            </div>
-            <div class="input_container">
-                <div class="input_box file">
-                    <span class="input_header">JSON file</span>
-                    <label for="input_json" class="input file" id="input_json_label">Browse...</label>
-                    <input type="file" class="input_file" accept="application/json, .json" id="input_json">
-                </div>
-                <div class="input_box">
-                    <span class="input_header">Quality | Quantity</span>
-                    <span class="input qualityquantity knobber" id="toggle_quantity" onclick="toggleQuantity()">
-              <span class="knob"></span>
-                    </span>
-                </div>
-                <div class="input_box">
-                    <span class="input_header">Axes visibility</span>
-                    <span class="input axesvisibility knobber active" id="toggle_axes" onclick="toggleAxes()">
-              <span class="knob"></span>
-                    </span>
-                </div>
-                <div class="input_box">
-                    <span class="input_header">Inperformance</span>
-                    <span class="input bottomgridvisibility knobber" id="toggle_grid" onclick="toggleGrid()">
-              <span class="knob"></span>
-                    </span>
-                </div>
-            </div>
-            <div class="box_content">
-                <div class="legend_container noselect">
-                    <div class="color_legend">
-                        <span>North</span>
-                        <span class="color_preview color_north"></span>
-                    </div>
-                    <div class="color_legend">
-                        <span>South</span>
-                        <span class="color_preview color_south"></span>
-                    </div>
-                    <div class="color_legend">
-                        <span>West</span>
-                        <span class="color_preview color_west"></span>
-                    </div>
-                    <div class="color_legend">
-                        <span>East</span>
-                        <span class="color_preview color_east"></span>
-                    </div>
-                    <div class="color_legend">
-                        <span>Up</span>
-                        <span class="color_preview color_up"></span>
-                    </div>
-                    <div class="color_legend">
-                        <span>Down</span>
-                        <span class="color_preview color_down"></span>
-                    </div>
-                </div>
-                <div class="wrapper_3d container_3d" id="function_2" style="transform: rotate3d(1, 1, 1, 325deg);">
-                    <div class="boundary_container_2d option_2d container_3d nodisplay" id="boundary_container_2d">
-                        <div class="corners container_3d">
-                            <span class="object_1 var_corner object_2d"></span>
-                            <span class="object_2 var_corner object_2d"></span>
-                            <span class="object_3 var_corner object_2d"></span>
-                            <span class="object_4 var_corner object_2d"></span>
-                            <span class="object_5 var_corner object_2d"></span>
-                            <span class="object_6 var_corner object_2d"></span>
-                        </div>
-                        <div class="bottom_grid container_3d">
-                            <span class="var_bottom object_2d"></span>
-                        </div>
-                    </div>
-                    <div class="boundary_container container_3d" id="boundary_container">
-                        <div class="bottom_grid container_3d nodisplay" id="bottom_grid">
-                            <!-- don't turn this on -->
-                            <div class="vertical container_3d">
-                                <div class="stripe_1 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                                <div class="stripe_2 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                                <div class="stripe_3 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                                <div class="stripe_4 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                                <div class="stripe_5 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                                <div class="stripe_6 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                                <div class="stripe_7 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                                <div class="stripe_8 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                                <div class="stripe_9 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                                <div class="stripe_10 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                                <div class="stripe_11 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                                <div class="stripe_12 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                                <div class="stripe_13 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                                <div class="stripe_14 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                                <div class="stripe_15 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                                <div class="stripe_16 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                                <div class="stripe_17 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                            </div>
-                            <div class="horizontal container_3d">
-                                <div class="stripe_1 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                                <div class="stripe_2 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                                <div class="stripe_3 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                                <div class="stripe_4 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                                <div class="stripe_5 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                                <div class="stripe_6 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                                <div class="stripe_7 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                                <div class="stripe_8 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                                <div class="stripe_9 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                                <div class="stripe_10 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                                <div class="stripe_11 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                                <div class="stripe_12 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                                <div class="stripe_13 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                                <div class="stripe_14 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                                <div class="stripe_15 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                                <div class="stripe_16 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                                <div class="stripe_17 container_3d">
-                                    <span class="face boundary aid_stripe var_bottom end front"></span>
-                                    <span class="face boundary aid_stripe var_bottom end behind"></span>
-                                    <span class="face boundary aid_stripe var_bottom side top"></span>
-                                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                                    <span class="face boundary aid_stripe var_bottom side left"></span>
-                                    <span class="face boundary aid_stripe var_bottom side right"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="corners container_3d">
-                            <div class="corner_1 container_3d">
-                                <div class="stripe_1 container_3d">
-                                    <span class="face boundary aid_stripe var_corner end front"></span>
-                                    <span class="face boundary aid_stripe var_corner end behind"></span>
-                                    <span class="face boundary aid_stripe var_corner side top"></span>
-                                    <span class="face boundary aid_stripe var_corner side bottom"></span>
-                                    <span class="face boundary aid_stripe var_corner side left"></span>
-                                    <span class="face boundary aid_stripe var_corner side right"></span>
-                                </div>
-                                <div class="stripe_2 container_3d">
-                                    <span class="face boundary aid_stripe var_corner end front"></span>
-                                    <span class="face boundary aid_stripe var_corner end behind"></span>
-                                    <span class="face boundary aid_stripe var_corner side top"></span>
-                                    <span class="face boundary aid_stripe var_corner side bottom"></span>
-                                    <span class="face boundary aid_stripe var_corner side left"></span>
-                                    <span class="face boundary aid_stripe var_corner side right"></span>
-                                </div>
-                                <div class="stripe_3 container_3d">
-                                    <span class="face boundary aid_stripe var_corner end front"></span>
-                                    <span class="face boundary aid_stripe var_corner end behind"></span>
-                                    <span class="face boundary aid_stripe var_corner side top"></span>
-                                    <span class="face boundary aid_stripe var_corner side bottom"></span>
-                                    <span class="face boundary aid_stripe var_corner side left"></span>
-                                    <span class="face boundary aid_stripe var_corner side right"></span>
-                                </div>
-                            </div>
-                            <div class="corner_2 container_3d">
-                                <div class="stripe_1 container_3d">
-                                    <span class="face boundary aid_stripe var_corner end front"></span>
-                                    <span class="face boundary aid_stripe var_corner end behind"></span>
-                                    <span class="face boundary aid_stripe var_corner side top"></span>
-                                    <span class="face boundary aid_stripe var_corner side bottom"></span>
-                                    <span class="face boundary aid_stripe var_corner side left"></span>
-                                    <span class="face boundary aid_stripe var_corner side right"></span>
-                                </div>
-                                <div class="stripe_2 container_3d">
-                                    <span class="face boundary aid_stripe var_corner end front"></span>
-                                    <span class="face boundary aid_stripe var_corner end behind"></span>
-                                    <span class="face boundary aid_stripe var_corner side top"></span>
-                                    <span class="face boundary aid_stripe var_corner side bottom"></span>
-                                    <span class="face boundary aid_stripe var_corner side left"></span>
-                                    <span class="face boundary aid_stripe var_corner side right"></span>
-                                </div>
-                                <div class="stripe_3 container_3d">
-                                    <span class="face boundary aid_stripe var_corner end front"></span>
-                                    <span class="face boundary aid_stripe var_corner end behind"></span>
-                                    <span class="face boundary aid_stripe var_corner side top"></span>
-                                    <span class="face boundary aid_stripe var_corner side bottom"></span>
-                                    <span class="face boundary aid_stripe var_corner side left"></span>
-                                    <span class="face boundary aid_stripe var_corner side right"></span>
-                                </div>
-                            </div>
-                            <div class="corner_3 container_3d">
-                                <div class="stripe_1 container_3d">
-                                    <span class="face boundary aid_stripe var_corner end front"></span>
-                                    <span class="face boundary aid_stripe var_corner end behind"></span>
-                                    <span class="face boundary aid_stripe var_corner side top"></span>
-                                    <span class="face boundary aid_stripe var_corner side bottom"></span>
-                                    <span class="face boundary aid_stripe var_corner side left"></span>
-                                    <span class="face boundary aid_stripe var_corner side right"></span>
-                                </div>
-                                <div class="stripe_2 container_3d">
-                                    <span class="face boundary aid_stripe var_corner end front"></span>
-                                    <span class="face boundary aid_stripe var_corner end behind"></span>
-                                    <span class="face boundary aid_stripe var_corner side top"></span>
-                                    <span class="face boundary aid_stripe var_corner side bottom"></span>
-                                    <span class="face boundary aid_stripe var_corner side left"></span>
-                                    <span class="face boundary aid_stripe var_corner side right"></span>
-                                </div>
-                                <div class="stripe_3 container_3d">
-                                    <span class="face boundary aid_stripe var_corner end front"></span>
-                                    <span class="face boundary aid_stripe var_corner end behind"></span>
-                                    <span class="face boundary aid_stripe var_corner side top"></span>
-                                    <span class="face boundary aid_stripe var_corner side bottom"></span>
-                                    <span class="face boundary aid_stripe var_corner side left"></span>
-                                    <span class="face boundary aid_stripe var_corner side right"></span>
-                                </div>
-                            </div>
-                            <div class="corner_4 container_3d">
-                                <div class="stripe_1 container_3d">
-                                    <span class="face boundary aid_stripe var_corner end front"></span>
-                                    <span class="face boundary aid_stripe var_corner end behind"></span>
-                                    <span class="face boundary aid_stripe var_corner side top"></span>
-                                    <span class="face boundary aid_stripe var_corner side bottom"></span>
-                                    <span class="face boundary aid_stripe var_corner side left"></span>
-                                    <span class="face boundary aid_stripe var_corner side right"></span>
-                                </div>
-                                <div class="stripe_2 container_3d">
-                                    <span class="face boundary aid_stripe var_corner end front"></span>
-                                    <span class="face boundary aid_stripe var_corner end behind"></span>
-                                    <span class="face boundary aid_stripe var_corner side top"></span>
-                                    <span class="face boundary aid_stripe var_corner side bottom"></span>
-                                    <span class="face boundary aid_stripe var_corner side left"></span>
-                                    <span class="face boundary aid_stripe var_corner side right"></span>
-                                </div>
-                                <div class="stripe_3 container_3d">
-                                    <span class="face boundary aid_stripe var_corner end front"></span>
-                                    <span class="face boundary aid_stripe var_corner end behind"></span>
-                                    <span class="face boundary aid_stripe var_corner side top"></span>
-                                    <span class="face boundary aid_stripe var_corner side bottom"></span>
-                                    <span class="face boundary aid_stripe var_corner side left"></span>
-                                    <span class="face boundary aid_stripe var_corner side right"></span>
-                                </div>
-                            </div>
-                            <div class="corner_5 container_3d">
-                                <div class="stripe_1 container_3d">
-                                    <span class="face boundary aid_stripe var_corner end front"></span>
-                                    <span class="face boundary aid_stripe var_corner end behind"></span>
-                                    <span class="face boundary aid_stripe var_corner side top"></span>
-                                    <span class="face boundary aid_stripe var_corner side bottom"></span>
-                                    <span class="face boundary aid_stripe var_corner side left"></span>
-                                    <span class="face boundary aid_stripe var_corner side right"></span>
-                                </div>
-                                <div class="stripe_2 container_3d">
-                                    <span class="face boundary aid_stripe var_corner end front"></span>
-                                    <span class="face boundary aid_stripe var_corner end behind"></span>
-                                    <span class="face boundary aid_stripe var_corner side top"></span>
-                                    <span class="face boundary aid_stripe var_corner side bottom"></span>
-                                    <span class="face boundary aid_stripe var_corner side left"></span>
-                                    <span class="face boundary aid_stripe var_corner side right"></span>
-                                </div>
-                                <div class="stripe_3 container_3d">
-                                    <span class="face boundary aid_stripe var_corner end front"></span>
-                                    <span class="face boundary aid_stripe var_corner end behind"></span>
-                                    <span class="face boundary aid_stripe var_corner side top"></span>
-                                    <span class="face boundary aid_stripe var_corner side bottom"></span>
-                                    <span class="face boundary aid_stripe var_corner side left"></span>
-                                    <span class="face boundary aid_stripe var_corner side right"></span>
-                                </div>
-                            </div>
-                            <div class="corner_6 container_3d">
-                                <div class="stripe_1 container_3d">
-                                    <span class="face boundary aid_stripe var_corner end front"></span>
-                                    <span class="face boundary aid_stripe var_corner end behind"></span>
-                                    <span class="face boundary aid_stripe var_corner side top"></span>
-                                    <span class="face boundary aid_stripe var_corner side bottom"></span>
-                                    <span class="face boundary aid_stripe var_corner side left"></span>
-                                    <span class="face boundary aid_stripe var_corner side right"></span>
-                                </div>
-                                <div class="stripe_2 container_3d">
-                                    <span class="face boundary aid_stripe var_corner end front"></span>
-                                    <span class="face boundary aid_stripe var_corner end behind"></span>
-                                    <span class="face boundary aid_stripe var_corner side top"></span>
-                                    <span class="face boundary aid_stripe var_corner side bottom"></span>
-                                    <span class="face boundary aid_stripe var_corner side left"></span>
-                                    <span class="face boundary aid_stripe var_corner side right"></span>
-                                </div>
-                                <div class="stripe_3 container_3d">
-                                    <span class="face boundary aid_stripe var_corner end front"></span>
-                                    <span class="face boundary aid_stripe var_corner end behind"></span>
-                                    <span class="face boundary aid_stripe var_corner side top"></span>
-                                    <span class="face boundary aid_stripe var_corner side bottom"></span>
-                                    <span class="face boundary aid_stripe var_corner side left"></span>
-                                    <span class="face boundary aid_stripe var_corner side right"></span>
-                                </div>
-                            </div>
-                            <div class="corner_7 container_3d">
-                                <div class="stripe_1 container_3d">
-                                    <span class="face boundary aid_stripe var_corner end front"></span>
-                                    <span class="face boundary aid_stripe var_corner end behind"></span>
-                                    <span class="face boundary aid_stripe var_corner side top"></span>
-                                    <span class="face boundary aid_stripe var_corner side bottom"></span>
-                                    <span class="face boundary aid_stripe var_corner side left"></span>
-                                    <span class="face boundary aid_stripe var_corner side right"></span>
-                                </div>
-                                <div class="stripe_2 container_3d">
-                                    <span class="face boundary aid_stripe var_corner end front"></span>
-                                    <span class="face boundary aid_stripe var_corner end behind"></span>
-                                    <span class="face boundary aid_stripe var_corner side top"></span>
-                                    <span class="face boundary aid_stripe var_corner side bottom"></span>
-                                    <span class="face boundary aid_stripe var_corner side left"></span>
-                                    <span class="face boundary aid_stripe var_corner side right"></span>
-                                </div>
-                                <div class="stripe_3 container_3d">
-                                    <span class="face boundary aid_stripe var_corner end front"></span>
-                                    <span class="face boundary aid_stripe var_corner end behind"></span>
-                                    <span class="face boundary aid_stripe var_corner side top"></span>
-                                    <span class="face boundary aid_stripe var_corner side bottom"></span>
-                                    <span class="face boundary aid_stripe var_corner side left"></span>
-                                    <span class="face boundary aid_stripe var_corner side right"></span>
-                                </div>
-                            </div>
-                            <div class="corner_8 container_3d">
-                                <div class="stripe_1 container_3d">
-                                    <span class="face boundary aid_stripe aid_stripe var_corner end front"></span>
-                                    <span class="face boundary aid_stripe aid_stripe var_corner end behind"></span>
-                                    <span class="face boundary aid_stripe aid_stripe var_corner side top"></span>
-                                    <span class="face boundary aid_stripe aid_stripe var_corner side bottom"></span>
-                                    <span class="face boundary aid_stripe aid_stripe var_corner side left"></span>
-                                    <span class="face boundary aid_stripe aid_stripe var_corner side right"></span>
-                                </div>
-                                <div class="stripe_2 container_3d">
-                                    <span class="face boundary aid_stripe aid_stripe var_corner end front"></span>
-                                    <span class="face boundary aid_stripe aid_stripe var_corner end behind"></span>
-                                    <span class="face boundary aid_stripe aid_stripe var_corner side top"></span>
-                                    <span class="face boundary aid_stripe aid_stripe var_corner side bottom"></span>
-                                    <span class="face boundary aid_stripe aid_stripe var_corner side left"></span>
-                                    <span class="face boundary aid_stripe aid_stripe var_corner side right"></span>
-                                </div>
-                                <div class="stripe_3 container_3d">
-                                    <span class="face boundary aid_stripe aid_stripe var_corner end front"></span>
-                                    <span class="face boundary aid_stripe aid_stripe var_corner end behind"></span>
-                                    <span class="face boundary aid_stripe aid_stripe var_corner side top"></span>
-                                    <span class="face boundary aid_stripe aid_stripe var_corner side bottom"></span>
-                                    <span class="face boundary aid_stripe aid_stripe var_corner side left"></span>
-                                    <span class="face boundary aid_stripe aid_stripe var_corner side right"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container_3d" id="axes_container">
-                        <div class="axes_x container_3d" id="axes_x">
-                            <span class="face axis aid_stripe color_x end front"></span>
-                            <span class="face axis aid_stripe color_x end behind"></span>
-                            <span class="face axis aid_stripe color_x side top"></span>
-                            <span class="face axis aid_stripe color_x side bottom"></span>
-                            <span class="face axis aid_stripe color_x side left"></span>
-                            <span class="face axis aid_stripe color_x side right"></span>
-                        </div>
-                        <div class="axes_y container_3d" id="axes_y">
-                            <span class="face axis aid_stripe color_y end front"></span>
-                            <span class="face axis aid_stripe color_y end behind"></span>
-                            <span class="face axis aid_stripe color_y side top"></span>
-                            <span class="face axis aid_stripe color_y side bottom"></span>
-                            <span class="face axis aid_stripe color_y side left"></span>
-                            <span class="face axis aid_stripe color_y side right"></span>
-                        </div>
-                        <div class="axes_z container_3d" id="axes_z">
-                            <span class="face axis aid_stripe color_z end front"></span>
-                            <span class="face axis aid_stripe color_z end behind"></span>
-                            <span class="face axis aid_stripe color_z side top"></span>
-                            <span class="face axis aid_stripe color_z side bottom"></span>
-                            <span class="face axis aid_stripe color_z side left"></span>
-                            <span class="face axis aid_stripe color_z side right"></span>
-                        </div>
-                    </div>
-                    <div class="function container_3d elements_container" id="elements_container">
-                        <!--<span class="face cube_1 front"></span>
-              <span class="face cube_1 behind"></span>
-              <span class="face cube_1 top"></span>
-              <span class="face cube_1 bottom"></span>
-              <span class="face cube_1 left"></span>
-              <span class="face cube_1 right"></span>-->
-                    </div>
-                </div>
-                <div class="error_banner glb_box nodisplay" id="error_container">
-                    <span class="exclamation">!</span>
-                    <span class="error" id="error_text"></span>
-                </div>
-            </div>
         </div>
+        <div class="input_container">
+          <div class="input_box file">
+            <span class="input_header">JSON file</span>
+            <label for="input_json" class="input file" id="input_json_label">Browse...</label>
+            <input type="file" class="input_file" accept="application/json, .json" id="input_json">
+          </div>
+          <div class="input_box">
+            <span class="input_header">Quality | Quantity</span>
+            <span class="input qualityquantity knobber" onclick="toggleQuantity()">
+              <span class="knob"></span>
+            </span>
+          </div>
+          <div class="input_box">
+            <span class="input_header">Axes visibility</span>
+            <span class="input axesvisibility knobber active" onclick="toggleAxes()">
+              <span class="knob"></span>
+            </span>
+          </div>
+          <div class="input_box">
+            <span class="input_header">Inperformance</span>
+            <span class="input bottomgridvisibility knobber" onclick="toggleGrid()">
+              <span class="knob"></span>
+            </span>
+          </div>
+          <div class="input_box">
+            <span class="input_header">Fun</span>
+            <span class="input funbutton knobber" onclick="toggleFun()">
+              <span class="knob"></span>
+            </span>
+          </div>
+          <div class="input_box">
+            <span class="input_header">Scaling</span>
+            <span class="input slider scale knobber">
+              <span class="knob" style="transform: translateX(50px);"></span>
+            </span>
+          </div>
+        </div>
+        <div class="box_content centerflex" id="content_function_2">
+          <div class="legend_container noselect nodisplay">
+            <div class="color_legend">
+              <span>North</span>
+              <span class="color_preview color_north"></span>
+            </div>
+            <div class="color_legend">
+              <span>South</span>
+              <span class="color_preview color_south"></span>
+            </div>
+            <div class="color_legend">
+              <span>West</span>
+              <span class="color_preview color_west"></span>
+            </div>
+            <div class="color_legend">
+              <span>East</span>
+              <span class="color_preview color_east"></span>
+            </div>
+            <div class="color_legend">
+              <span>Up</span>
+              <span class="color_preview color_up"></span>
+            </div>
+            <div class="color_legend">
+              <span>Down</span>
+              <span class="color_preview color_down"></span>
+            </div>
+          </div>
+          <div class="wrapper_3d container_3d" id="function_2" style="transform: rotate3d(1, 1, 1, 325deg);">
+            <div class="boundary_container_2d option_2d container_3d nodisplay">
+              <div class="corners container_3d">
+                <span class="object_1 var_corner object_2d"></span>
+                <span class="object_2 var_corner object_2d"></span>
+                <span class="object_3 var_corner object_2d"></span>
+                <span class="object_4 var_corner object_2d"></span>
+                <span class="object_5 var_corner object_2d"></span>
+                <span class="object_6 var_corner object_2d"></span>
+              </div>
+              <div class="bottom_grid container_3d">
+                <span class="var_bottom object_2d"></span>
+              </div>
+            </div>
+            <div class="boundary_container container_3d">
+              <div class="bottom_grid container_3d nodisplay"> <!-- don't turn this on -->
+                <div class="vertical container_3d">
+                  <div class="stripe_1 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                  <div class="stripe_2 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                  <div class="stripe_3 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                  <div class="stripe_4 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                  <div class="stripe_5 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                  <div class="stripe_6 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                  <div class="stripe_7 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                  <div class="stripe_8 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                  <div class="stripe_9 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                  <div class="stripe_10 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                  <div class="stripe_11 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                  <div class="stripe_12 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                  <div class="stripe_13 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                  <div class="stripe_14 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                  <div class="stripe_15 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                  <div class="stripe_16 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                  <div class="stripe_17 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                </div>
+                <div class="horizontal container_3d">
+                  <div class="stripe_1 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                  <div class="stripe_2 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                  <div class="stripe_3 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                  <div class="stripe_4 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                  <div class="stripe_5 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                  <div class="stripe_6 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                  <div class="stripe_7 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                  <div class="stripe_8 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                  <div class="stripe_9 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                  <div class="stripe_10 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                  <div class="stripe_11 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                  <div class="stripe_12 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                  <div class="stripe_13 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                  <div class="stripe_14 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                  <div class="stripe_15 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                  <div class="stripe_16 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                  <div class="stripe_17 container_3d">
+                    <span class="face boundary aid_stripe var_bottom end front"></span>
+                    <span class="face boundary aid_stripe var_bottom end behind"></span>
+                    <span class="face boundary aid_stripe var_bottom side top"></span>
+                    <span class="face boundary aid_stripe var_bottom side bottom"></span>
+                    <span class="face boundary aid_stripe var_bottom side left"></span>
+                    <span class="face boundary aid_stripe var_bottom side right"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="corners container_3d">
+                <div class="corner_1 container_3d">
+                  <div class="stripe_1 container_3d">
+                    <span class="face boundary aid_stripe var_corner end front"></span>
+                    <span class="face boundary aid_stripe var_corner end behind"></span>
+                    <span class="face boundary aid_stripe var_corner side top"></span>
+                    <span class="face boundary aid_stripe var_corner side bottom"></span>
+                    <span class="face boundary aid_stripe var_corner side left"></span>
+                    <span class="face boundary aid_stripe var_corner side right"></span>
+                  </div>
+                  <div class="stripe_2 container_3d">
+                    <span class="face boundary aid_stripe var_corner end front"></span>
+                    <span class="face boundary aid_stripe var_corner end behind"></span>
+                    <span class="face boundary aid_stripe var_corner side top"></span>
+                    <span class="face boundary aid_stripe var_corner side bottom"></span>
+                    <span class="face boundary aid_stripe var_corner side left"></span>
+                    <span class="face boundary aid_stripe var_corner side right"></span>
+                  </div>
+                  <div class="stripe_3 container_3d">
+                    <span class="face boundary aid_stripe var_corner end front"></span>
+                    <span class="face boundary aid_stripe var_corner end behind"></span>
+                    <span class="face boundary aid_stripe var_corner side top"></span>
+                    <span class="face boundary aid_stripe var_corner side bottom"></span>
+                    <span class="face boundary aid_stripe var_corner side left"></span>
+                    <span class="face boundary aid_stripe var_corner side right"></span>
+                  </div>
+                </div>
+                <div class="corner_2 container_3d">
+                  <div class="stripe_1 container_3d">
+                    <span class="face boundary aid_stripe var_corner end front"></span>
+                    <span class="face boundary aid_stripe var_corner end behind"></span>
+                    <span class="face boundary aid_stripe var_corner side top"></span>
+                    <span class="face boundary aid_stripe var_corner side bottom"></span>
+                    <span class="face boundary aid_stripe var_corner side left"></span>
+                    <span class="face boundary aid_stripe var_corner side right"></span>
+                  </div>
+                  <div class="stripe_2 container_3d">
+                    <span class="face boundary aid_stripe var_corner end front"></span>
+                    <span class="face boundary aid_stripe var_corner end behind"></span>
+                    <span class="face boundary aid_stripe var_corner side top"></span>
+                    <span class="face boundary aid_stripe var_corner side bottom"></span>
+                    <span class="face boundary aid_stripe var_corner side left"></span>
+                    <span class="face boundary aid_stripe var_corner side right"></span>
+                  </div>
+                  <div class="stripe_3 container_3d">
+                    <span class="face boundary aid_stripe var_corner end front"></span>
+                    <span class="face boundary aid_stripe var_corner end behind"></span>
+                    <span class="face boundary aid_stripe var_corner side top"></span>
+                    <span class="face boundary aid_stripe var_corner side bottom"></span>
+                    <span class="face boundary aid_stripe var_corner side left"></span>
+                    <span class="face boundary aid_stripe var_corner side right"></span>
+                  </div>
+                </div>
+                <div class="corner_3 container_3d">
+                  <div class="stripe_1 container_3d">
+                    <span class="face boundary aid_stripe var_corner end front"></span>
+                    <span class="face boundary aid_stripe var_corner end behind"></span>
+                    <span class="face boundary aid_stripe var_corner side top"></span>
+                    <span class="face boundary aid_stripe var_corner side bottom"></span>
+                    <span class="face boundary aid_stripe var_corner side left"></span>
+                    <span class="face boundary aid_stripe var_corner side right"></span>
+                  </div>
+                  <div class="stripe_2 container_3d">
+                    <span class="face boundary aid_stripe var_corner end front"></span>
+                    <span class="face boundary aid_stripe var_corner end behind"></span>
+                    <span class="face boundary aid_stripe var_corner side top"></span>
+                    <span class="face boundary aid_stripe var_corner side bottom"></span>
+                    <span class="face boundary aid_stripe var_corner side left"></span>
+                    <span class="face boundary aid_stripe var_corner side right"></span>
+                  </div>
+                  <div class="stripe_3 container_3d">
+                    <span class="face boundary aid_stripe var_corner end front"></span>
+                    <span class="face boundary aid_stripe var_corner end behind"></span>
+                    <span class="face boundary aid_stripe var_corner side top"></span>
+                    <span class="face boundary aid_stripe var_corner side bottom"></span>
+                    <span class="face boundary aid_stripe var_corner side left"></span>
+                    <span class="face boundary aid_stripe var_corner side right"></span>
+                  </div>
+                </div>
+                <div class="corner_4 container_3d">
+                  <div class="stripe_1 container_3d">
+                    <span class="face boundary aid_stripe var_corner end front"></span>
+                    <span class="face boundary aid_stripe var_corner end behind"></span>
+                    <span class="face boundary aid_stripe var_corner side top"></span>
+                    <span class="face boundary aid_stripe var_corner side bottom"></span>
+                    <span class="face boundary aid_stripe var_corner side left"></span>
+                    <span class="face boundary aid_stripe var_corner side right"></span>
+                  </div>
+                  <div class="stripe_2 container_3d">
+                    <span class="face boundary aid_stripe var_corner end front"></span>
+                    <span class="face boundary aid_stripe var_corner end behind"></span>
+                    <span class="face boundary aid_stripe var_corner side top"></span>
+                    <span class="face boundary aid_stripe var_corner side bottom"></span>
+                    <span class="face boundary aid_stripe var_corner side left"></span>
+                    <span class="face boundary aid_stripe var_corner side right"></span>
+                  </div>
+                  <div class="stripe_3 container_3d">
+                    <span class="face boundary aid_stripe var_corner end front"></span>
+                    <span class="face boundary aid_stripe var_corner end behind"></span>
+                    <span class="face boundary aid_stripe var_corner side top"></span>
+                    <span class="face boundary aid_stripe var_corner side bottom"></span>
+                    <span class="face boundary aid_stripe var_corner side left"></span>
+                    <span class="face boundary aid_stripe var_corner side right"></span>
+                  </div>
+                </div>
+                <div class="corner_5 container_3d">
+                  <div class="stripe_1 container_3d">
+                    <span class="face boundary aid_stripe var_corner end front"></span>
+                    <span class="face boundary aid_stripe var_corner end behind"></span>
+                    <span class="face boundary aid_stripe var_corner side top"></span>
+                    <span class="face boundary aid_stripe var_corner side bottom"></span>
+                    <span class="face boundary aid_stripe var_corner side left"></span>
+                    <span class="face boundary aid_stripe var_corner side right"></span>
+                  </div>
+                  <div class="stripe_2 container_3d">
+                    <span class="face boundary aid_stripe var_corner end front"></span>
+                    <span class="face boundary aid_stripe var_corner end behind"></span>
+                    <span class="face boundary aid_stripe var_corner side top"></span>
+                    <span class="face boundary aid_stripe var_corner side bottom"></span>
+                    <span class="face boundary aid_stripe var_corner side left"></span>
+                    <span class="face boundary aid_stripe var_corner side right"></span>
+                  </div>
+                  <div class="stripe_3 container_3d">
+                    <span class="face boundary aid_stripe var_corner end front"></span>
+                    <span class="face boundary aid_stripe var_corner end behind"></span>
+                    <span class="face boundary aid_stripe var_corner side top"></span>
+                    <span class="face boundary aid_stripe var_corner side bottom"></span>
+                    <span class="face boundary aid_stripe var_corner side left"></span>
+                    <span class="face boundary aid_stripe var_corner side right"></span>
+                  </div>
+                </div>
+                <div class="corner_6 container_3d">
+                  <div class="stripe_1 container_3d">
+                    <span class="face boundary aid_stripe var_corner end front"></span>
+                    <span class="face boundary aid_stripe var_corner end behind"></span>
+                    <span class="face boundary aid_stripe var_corner side top"></span>
+                    <span class="face boundary aid_stripe var_corner side bottom"></span>
+                    <span class="face boundary aid_stripe var_corner side left"></span>
+                    <span class="face boundary aid_stripe var_corner side right"></span>
+                  </div>
+                  <div class="stripe_2 container_3d">
+                    <span class="face boundary aid_stripe var_corner end front"></span>
+                    <span class="face boundary aid_stripe var_corner end behind"></span>
+                    <span class="face boundary aid_stripe var_corner side top"></span>
+                    <span class="face boundary aid_stripe var_corner side bottom"></span>
+                    <span class="face boundary aid_stripe var_corner side left"></span>
+                    <span class="face boundary aid_stripe var_corner side right"></span>
+                  </div>
+                  <div class="stripe_3 container_3d">
+                    <span class="face boundary aid_stripe var_corner end front"></span>
+                    <span class="face boundary aid_stripe var_corner end behind"></span>
+                    <span class="face boundary aid_stripe var_corner side top"></span>
+                    <span class="face boundary aid_stripe var_corner side bottom"></span>
+                    <span class="face boundary aid_stripe var_corner side left"></span>
+                    <span class="face boundary aid_stripe var_corner side right"></span>
+                  </div>
+                </div>
+                <div class="corner_7 container_3d">
+                  <div class="stripe_1 container_3d">
+                    <span class="face boundary aid_stripe var_corner end front"></span>
+                    <span class="face boundary aid_stripe var_corner end behind"></span>
+                    <span class="face boundary aid_stripe var_corner side top"></span>
+                    <span class="face boundary aid_stripe var_corner side bottom"></span>
+                    <span class="face boundary aid_stripe var_corner side left"></span>
+                    <span class="face boundary aid_stripe var_corner side right"></span>
+                  </div>
+                  <div class="stripe_2 container_3d">
+                    <span class="face boundary aid_stripe var_corner end front"></span>
+                    <span class="face boundary aid_stripe var_corner end behind"></span>
+                    <span class="face boundary aid_stripe var_corner side top"></span>
+                    <span class="face boundary aid_stripe var_corner side bottom"></span>
+                    <span class="face boundary aid_stripe var_corner side left"></span>
+                    <span class="face boundary aid_stripe var_corner side right"></span>
+                  </div>
+                  <div class="stripe_3 container_3d">
+                    <span class="face boundary aid_stripe var_corner end front"></span>
+                    <span class="face boundary aid_stripe var_corner end behind"></span>
+                    <span class="face boundary aid_stripe var_corner side top"></span>
+                    <span class="face boundary aid_stripe var_corner side bottom"></span>
+                    <span class="face boundary aid_stripe var_corner side left"></span>
+                    <span class="face boundary aid_stripe var_corner side right"></span>
+                  </div>
+                </div>
+                <div class="corner_8 container_3d">
+                  <div class="stripe_1 container_3d">
+                    <span class="face boundary aid_stripe aid_stripe var_corner end front"></span>
+                    <span class="face boundary aid_stripe aid_stripe var_corner end behind"></span>
+                    <span class="face boundary aid_stripe aid_stripe var_corner side top"></span>
+                    <span class="face boundary aid_stripe aid_stripe var_corner side bottom"></span>
+                    <span class="face boundary aid_stripe aid_stripe var_corner side left"></span>
+                    <span class="face boundary aid_stripe aid_stripe var_corner side right"></span>
+                  </div>
+                  <div class="stripe_2 container_3d">
+                    <span class="face boundary aid_stripe aid_stripe var_corner end front"></span>
+                    <span class="face boundary aid_stripe aid_stripe var_corner end behind"></span>
+                    <span class="face boundary aid_stripe aid_stripe var_corner side top"></span>
+                    <span class="face boundary aid_stripe aid_stripe var_corner side bottom"></span>
+                    <span class="face boundary aid_stripe aid_stripe var_corner side left"></span>
+                    <span class="face boundary aid_stripe aid_stripe var_corner side right"></span>
+                  </div>
+                  <div class="stripe_3 container_3d">
+                    <span class="face boundary aid_stripe aid_stripe var_corner end front"></span>
+                    <span class="face boundary aid_stripe aid_stripe var_corner end behind"></span>
+                    <span class="face boundary aid_stripe aid_stripe var_corner side top"></span>
+                    <span class="face boundary aid_stripe aid_stripe var_corner side bottom"></span>
+                    <span class="face boundary aid_stripe aid_stripe var_corner side left"></span>
+                    <span class="face boundary aid_stripe aid_stripe var_corner side right"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="container_3d" id="axes_container">
+              <div class="axes_x container_3d">
+                <span class="face axis aid_stripe color_x end front"></span>
+                <span class="face axis aid_stripe color_x end behind"></span>
+                <span class="face axis aid_stripe color_x side top"></span>
+                <span class="face axis aid_stripe color_x side bottom"></span>
+                <span class="face axis aid_stripe color_x side left"></span>
+                <span class="face axis aid_stripe color_x side right"></span>
+              </div>
+              <div class="axes_y container_3d">
+                <span class="face axis aid_stripe color_y end front"></span>
+                <span class="face axis aid_stripe color_y end behind"></span>
+                <span class="face axis aid_stripe color_y side top"></span>
+                <span class="face axis aid_stripe color_y side bottom"></span>
+                <span class="face axis aid_stripe color_y side left"></span>
+                <span class="face axis aid_stripe color_y side right"></span>
+              </div>
+              <div class="axes_z container_3d">
+                <span class="face axis aid_stripe color_z end front"></span>
+                <span class="face axis aid_stripe color_z end behind"></span>
+                <span class="face axis aid_stripe color_z side top"></span>
+                <span class="face axis aid_stripe color_z side bottom"></span>
+                <span class="face axis aid_stripe color_z side left"></span>
+                <span class="face axis aid_stripe color_z side right"></span>
+              </div>
+            </div>
+            <div class="container_3d elements_container">
+            </div>
+          </div>
+          <div class="error_banner glb_box nodisplay">
+            <span class="exclamation">!</span>
+            <span class="error"></span>
+          </div>
+        </div>
+      </div>
 
     </div>
     <script>
-        var randomNumbers = '';
-        var mouseState = 0;
-        var x = 1;
-        var y = 1;
-        var z = 1;
-        var range = 325;
-        var cubeState;
-        var lockedRangeX;
-        var lockedRangeY;
-        var lockedRangeZ;
-        var reader = new FileReader();
-        var indexMarker1 = 0;
-        var indexMarker2;
-        var currentLength;
-        var elements;
-        var updateLock = true;
-        var transformsPlusX = '';
-        var transformsPlusY = '';
-        var transformsPlusZ = '';
-        var SliderLock = false;
-        var error;
-        const masterContainer = document.getElementById('containers');
+      var randomNumbers = '';
+      var mouseState = 0;
+      var x = 1;
+      var y = 1;
+      var z = 1;
+      var range = 325;
+      var rangeScale = 50;
+      var scaleFactor = ((rangeScale + 10) / 3).toFixed(3);
+      var cubeState;
+      var lockedRangeX;
+      var lockedRangeY;
+      var lockedRangeZ;
+      var lockedRangeNav;
+      var reader = new FileReader();
+      var indexMarker1 = 0;
+      var indexMarker2;
+      var currentLength;
+      var elements = [];
+      var updateLock = true;
+      var transformsPlusX = '';
+      var transformsPlusY = '';
+      var transformsPlusZ = '';
+      var quantityScale = '';
+      var translates = '';
+      var SliderLock = false;
+      var ScaleLock = false;
+      var mouseStateNav = -1;
+      var clickedX;
+      var clickedY;
+      var distanceX;
+      var distanceY;
+      var translateX = 0;
+      var translateY = 0;
+      var boxesArray = [];
+      const masterContainer = document.getElementById('containers');
 
-        const amount = document.getElementById('figures_amount');
-        const start = document.getElementById('figures_start');
-        const end = document.getElementById('figures_end');
-        const aftercomma = document.getElementById('figures_aftercomma');
+      const boxes = document.querySelectorAll('.box');
 
-        const buttonAppend = document.getElementById('figures_append');
-        const buttonAxisX = document.getElementById('toggle_axis_x');
-        const buttonAxisY = document.getElementById('toggle_axis_y');
-        const buttonAxisZ = document.getElementById('toggle_axis_z');
-        const buttonAxes = document.getElementById('toggle_axes');
-        const buttonQuantity = document.getElementById('toggle_quantity');
-        const buttonGrid = document.getElementById('toggle_grid');
-        const rotateSlider = document.getElementById('cubes_rotate_slider');
-        const rotateSliderKnob = document.getElementById('rotate_slider_knob');
-        const rotateSliderKnobX = document.getElementById('rotate_slider_knob_x');
-        const rotateSliderKnobY = document.getElementById('rotate_slider_knob_y');
-        const rotateSliderKnobZ = document.getElementById('rotate_slider_knob_z');
+      const amount = document.getElementById('figures_amount');
+      const start = document.getElementById('figures_start');
+      const end = document.getElementById('figures_end');
+      const aftercomma = document.getElementById('figures_aftercomma');
 
-        const errorInput = document.getElementById('error_text');
+      const buttonAppend = document.getElementById('figures_append');
 
-        const fileInput = document.getElementById('input_json');
-        const fileLabel = document.getElementById('input_json_label');
+      const buttonAxisX = document.querySelector('.axisbutton.x');
+      const buttonAxisY = document.querySelector('.axisbutton.y');
+      const buttonAxisZ = document.querySelector('.axisbutton.z');
+      const buttonAxes = document.querySelector('.axesvisibility');
+      const buttonQuantity = document.querySelector('.qualityquantity');
+      const buttonGrid = document.querySelector('.bottomgridvisibility');
+      const buttonFun = document.querySelector('.funbutton');
+      const rotateSlider = document.querySelector('.slider.rotate');
+      const rotateSliderKnob = document.querySelector('.slider.rotate .knob');
+      const rotateSliderKnobX = document.querySelector('.slider.rotate .knob.rotate_knob.x');
+      const rotateSliderKnobY = document.querySelector('.slider.rotate .knob.rotate_knob.y');
+      const rotateSliderKnobZ = document.querySelector('.slider.rotate .knob.rotate_knob.z');
+      const scaleSlider = document.querySelector('.slider.scale');
+      const scaleSliderKnob = document.querySelector('.slider.scale .knob');
 
-        const containerAxesX = document.getElementById('axes_x');
-        const containerAxesY = document.getElementById('axes_y');
-        const containerAxesZ = document.getElementById('axes_z');
-        const containerAxes = document.getElementById('axes_container');
-        const containerBounds = document.getElementById('boundary_container');
-        const containerBounds2D = document.getElementById('boundary_container_2d');
-        const containerElements = document.getElementById('elements_container');
-        const containerGrid = document.getElementById('bottom_grid');
-        const containerError = document.getElementById('error_container');
-        const figuresOutput = document.getElementById('function_1');
-        const output3D = document.getElementById('function_2');
+      const containerError = document.querySelector('.error_banner');
+      const errorInput = document.querySelector('.error_banner .error');
 
-        const rect = rotateSlider.getBoundingClientRect();
-        window.addEventListener('mousedown', down);
-        window.addEventListener('mouseup', up);
-        window.addEventListener('mousemove', movingRotateSlider);
-        rotateSlider.addEventListener('mousedown', rotateSliderClick);
-        fileInput.addEventListener('change', jsonThing);
+      const fileInput = document.getElementById('input_json');
+      const fileLabel = document.getElementById('input_json_label');
 
-        function jsonThing() {
-            let keyFile = fileInput.files[0];
-            fileLabel.innerHTML = 'Browse... ➤ ' + keyFile.name;
-            reader.readAsText(keyFile);
-            reader.onload = function(e) {
-                //oddly, this whole part executes last
-                containerError.classList.add('nodisplay');
-                containerElements.innerHTML = '';
-                let fileContent = e.target.result;
-                if (fileContent.indexOf('parent') >= 0 && !fileContent.indexOf('elements') >= 0) {
-                    error = 'Error: missing elements; This model appears to be calling a parent. Parent feature coming soon';
-                    errorInput.innerHTML = error;
-                    containerError.classList.remove('nodisplay');
-                    mouseState = 0;
-                    updateLock = true;
-                    return;
-                }
-                /*        //minify it
-                          while (fileContent.indexOf('\n') >= 0) {
-                            fileContent = fileContent.replace('\n', '');
-                          }
-                          while (fileContent.indexOf('	') >= 0) {
-                            fileContent = fileContent.replace('	', '');
-                          }
-                          while (indexMarker1 >= 0) {
-                            indexMarker2 = fileContent.indexOf('"', indexMarker1 + 1);
-                            let fragContent = fileContent.slice(indexMarker1 + 1, indexMarker2);
-                            let startContent = fileContent.slice(0, indexMarker1 + 1);
-                            let endContent = fileContent.slice(indexMarker2);
-                            while (fragContent.indexOf(' ') >= 0) {
-                              fragContent = fragContent.replace(' ', '');
-                            }
-                            currentLength = (startContent + fragContent).length;
-                            fileContent = startContent + fragContent + endContent;
-                            indexMarker1 = fileContent.indexOf('"', currentLength + 1);
-                          }*/
-                try {
-                    elements = JSON.parse(fileContent).elements;
-                } catch (err) {
-                    error = err.message;
-                    if (error.indexOf('JSON.parse: ') >= 0) {
-                        error = error.slice(error.indexOf('JSON.parse: ') + 'JSON.parse: '.length);
-                    }
-                    error = 'Error: ' + error;
-                    if (error.indexOf('expected') >= 0) {
-                        error = error.slice(0, error.indexOf('expected')) + ' missing' + error.slice(error.indexOf('expected') + 'expected'.length)
-                    }
-                    if (error.search(/\bat\b/) >= 0) {
-                        error = error.slice(0, error.search(/\bat\b/) + 'at'.length) + ' about' + error.slice(error.search(/\bat\b/) + 'at'.length);
-                    }
-                    errorInput.innerHTML = error;
-                    containerError.classList.remove('nodisplay');
-                    mouseState = 0; //do this because we return it and can't access the one at the end
-                    updateLock = true; //due to reasons, we have to do this
-                    return;
-                }
-                for (var i = 0; i < elements.length; i++) {
-                    let height = elements[i].to[1] - elements[i].from[1];
-                    let width = elements[i].to[0] - elements[i].from[0];
-                    let depth = elements[i].to[2] - elements[i].from[2];
-                    let positionX = elements[i].from[0];
-                    let positionY = elements[i].from[1];
-                    let positionZ = elements[i].from[2];
-                    let html = '<div class="element container_3d" id="cube_' + i + '" style="transform: translateX(' + positionX * 20 + 'px) translateY(' + -positionY * 20 + 'px) translateZ(' + positionZ * 20 + 'px)">';
-                    let orientations = Object.getOwnPropertyNames(elements[i].faces);
-                    for (var n = 0; n < orientations.length; n++) {
-                        let basicStyle;
-                        let color;
-                        switch (orientations[n]) {
-                            case 'north':
-                                basicStyle = 'transform: translateZ(' + depth * 20 + 'px) translateY(' + -height * 20 + 'px); width: ' + width * 20 + 'px; height: ' + height * 20 + 'px; background-color: #A84E4E;';
-                                color = 'color_north';
-                                break;
-                            case 'south':
-                                basicStyle = 'transform: translateY(' + -height * 20 + 'px); width: ' + width * 20 + 'px; height: ' + height * 20 + 'px;';
-                                color = 'color_south';
-                                break;
-                            case 'east':
-                                basicStyle = 'transform: rotateY(90deg) translateY(' + -height * 20 + 'px) translateZ(' + -(depth / 2 - width) * 20 + 'px) translateX(' + -depth / 2 * 20 + 'px); width: ' + depth * 20 + 'px; height: ' + height * 20 + 'px;';
-                                color = 'color_east';
-                                break;
-                            case 'west':
-                                basicStyle = 'transform: rotateY(90deg) translateY(' + -height * 20 + 'px) translateZ(' + -depth / 2 * 20 + 'px) translateX(' + -depth / 2 * 20 + 'px); width: ' + depth * 20 + 'px; height: ' + height * 20 + 'px;';
-                                color = 'color_west';
-                                break;
-                            case 'up':
-                                basicStyle = 'transform: rotateX(90deg) rotateZ(90deg) translateZ(' + (width / 2 + height) * 20 + 'px) translateX(' + depth / 2 * 20 + 'px) translateY(' + (depth / 2 - width / 2) * 20 + 'px); width: ' + depth * 20 + 'px; height: ' + width * 20 + 'px;';
-                                color = 'color_up';
-                                break;
-                            case 'down':
-                                basicStyle = 'transform: rotateX(90deg) rotateZ(90deg) translateZ(' + width / 2 * 20 + 'px) translateX(' + depth / 2 * 20 + 'px) translateY(' + (depth / 2 - width / 2) * 20 + 'px); width: ' + depth * 20 + 'px; height: ' + width * 20 + 'px;';
-                                color = 'color_down';
-                                break;
-                        }
-                        html += '<span class="face ' + orientations[n] + ' ' + color + '" style="' + basicStyle + '"></span>'
-                    }
-                    html += '</div>'
-                    containerElements.innerHTML += html;
-                }
-                if (updateLock == true) {
-                    range++;
-                    updateCube();
-                    updateLock = false;
-                }
-                mouseState = 0; //normalize mouseState because it detects a button constantly pressed after a file is chosen (¯\_(ツ)_/¯)
-            }
+      const boundaryCorner1 = document.querySelector('.boundary_container .corners .corner_1');
+      const boundaryCorner2 = document.querySelector('.boundary_container .corners .corner_2');
+      const boundaryCorner3 = document.querySelector('.boundary_container .corners .corner_3');
+      const boundaryCorner4 = document.querySelector('.boundary_container .corners .corner_4');
+      const boundaryCorner5 = document.querySelector('.boundary_container .corners .corner_5');
+      const boundaryCorner6 = document.querySelector('.boundary_container .corners .corner_6');
+      const boundaryCorner7 = document.querySelector('.boundary_container .corners .corner_7');
+      const boundaryCorner8 = document.querySelector('.boundary_container .corners .corner_8');
+      const boundaryStripes1 = document.querySelectorAll('.boundary_container .corners .stripe_1');
+      const boundaryStripes2 = document.querySelectorAll('.boundary_container .corners .stripe_2');
+      const boundaryStripes3 = document.querySelectorAll('.boundary_container .corners .stripe_3');
+      const boundaryFacesFront = document.querySelectorAll('.boundary_container .corners .front');
+      const boundaryFacesBehind = document.querySelectorAll('.boundary_container .corners .behind');
+      const boundaryFacesLeft = document.querySelectorAll('.boundary_container .corners .left');
+      const boundaryFacesRight = document.querySelectorAll('.boundary_container .corners .right');
+      const boundaryFacesTop = document.querySelectorAll('.boundary_container .corners .top');
+      const boundaryFacesBottom = document.querySelectorAll('.boundary_container .corners .bottom');
+
+      const axesFacesFront = document.querySelectorAll('#axes_container .front');
+      const axesFacesBehind = document.querySelectorAll('#axes_container .behind');
+      const axesFacesLeft = document.querySelectorAll('#axes_container .left');
+      const axesFacesRight = document.querySelectorAll('#axes_container .right');
+      const axesFacesTop = document.querySelectorAll('#axes_container .top');
+      const axesFacesBottom = document.querySelectorAll('#axes_container .bottom');
+
+      const containerAxesX = document.querySelector('#axes_container .axes_x');
+      const containerAxesY = document.querySelector('#axes_container .axes_y');
+      const containerAxesZ = document.querySelector('#axes_container .axes_z');
+      const containerAxes = document.getElementById('axes_container');
+      const containerBounds = document.querySelector('.boundary_container');
+      const containerBounds2D = document.querySelector('.boundary_container_2d');
+      const containerElements = document.querySelector('.elements_container');
+      const containerGrid = document.querySelector('.boundary_container .bottom_grid');
+      const container3D = document.getElementById('content_function_2');
+      const figuresOutput = document.getElementById('function_1');
+      const output3D = document.getElementById('function_2');
+
+      const rotateRect = rotateSlider.getBoundingClientRect();
+      const container3DRect = container3D.getBoundingClientRect();
+      window.addEventListener('mousedown', down);
+      window.addEventListener('mouseup', up);
+      window.addEventListener('mousemove', movingRotateSlider);
+      window.addEventListener('mousemove', movingScaleSlider);
+      container3D.addEventListener('mousemove', navigate);
+      container3D.addEventListener('mousedown', navigateMouseDown);
+      container3D.addEventListener('contextmenu', handleContext);
+      rotateSlider.addEventListener('mousedown', rotateSliderClick);
+      scaleSlider.addEventListener('mousedown', scaleSliderClick);
+      fileInput.addEventListener('change', getJSON);
+      for (i = 0; i < boxes.length; i++) { //ForEach not valid due to IE support
+        boxes[i].addEventListener('mousedown', choseItem);
+      }
+      function choseItem() {
+        let thisRect = this.getBoundingClientRect();
+        let styles = window.getComputedStyle(masterContainer);
+      // convert nodeList of all boxes to an array
+        for (i = 0; i < boxes.length; i++) {
+          boxesArray.push(boxes[i]);
         }
-
-        function down() {
-            mouseState++;
+        if (boxesArray.indexOf(this) >= -1) {
+          boxesArray.splice(boxesArray.indexOf(this), 1);
         }
-
-        function up() {
-            mouseState--;
-            SliderLock = false;
-            document.body.classList.remove('noselect');
+      //end of converting
+        for (i = 0; i < boxesArray.length; i++) {
+          boxesArray[i].classList.add('nodisplay');
         }
-
-        function randomNumber() {
-            let valueAmount = parseInt(amount.value);
-            let valueStart = parseInt(start.value);
-            let valueEnd = parseInt(end.value);
-            let valueAftercomma = parseInt(aftercomma.value);
-            let valueLength = valueEnd - valueStart;
-            if (!buttonAppend.classList.contains('active')) {
-                randomNumbers = "";
-                figuresOutput.innerHTML = '';
-            }
-            for (var i = 0; i < valueAmount; i++) {
-                randomNumbers += '<span>' + (valueLength * Math.random() + valueStart).toFixed(valueAftercomma) + '</span>';
-            }
-            figuresOutput.innerHTML = randomNumbers;
+        this.classList.add('active_item')
+        //setTimeout(function() {
+        //  document.body.classList.remove('info_mode');
+        //}, 400);
+        document.body.classList.remove('info_mode');
+      }
+      function handleContext(e) {
+        e.preventDefault();
+      }
+      function navigateMouseDown(e) {
+        mouseStateNav = e.button;
+        clickedX = e.x - container3DRect.left;
+        clickedY = e.y - container3DRect.top;
+        lockedRangeNav = range;
+        document.body.classList.add('noselect');
+      }
+      function navigate(e) {
+        if (mouseState <= 0 || mouseStateNav < 0) {
+          return;
         }
-
-        function toggleRandomMode() {
-            buttonAppend.classList.toggle('active');
+        distanceX = e.x - container3DRect.left - clickedX;
+        distanceY = e.y - container3DRect.top - clickedY;
+        if (mouseStateNav == 0) {
+          range = lockedRangeNav - distanceX;
+          //transformsPlusY = 'rotate3d(0, 1, 0, ' + (lockedRangeNav - distanceX) + 'deg)';
+          //transformsPlusX = 'rotate3d(1, 0, 0, ' + (lockedRangeNav - distanceY) + 'deg)';
         }
-
-        function toggleAxisX() {
-            lockedRangeX = range;
-            buttonAxisX.classList.toggle('active');
-            containerAxesX.classList.toggle('nodisplay');
-            if (!buttonAxisX.classList.contains('active')) {
-                //rotateSliderKnobX.style.transform = 'translateX(' + lockedRangeX + 'px)';
-                rotateSliderKnobX.style.transform = 'translateX(0)';
+        if (mouseStateNav == 2) {
+          if (buttonFun.classList.contains('active')) {
+            translateX += distanceX;
+            translateY += distanceY;
+            translates = 'translateX(' + translateX + 'px) translateY(' + translateY + 'px)';
+          }
+          else {
+            translates = 'translateX(' + distanceX + 'px) translateY(' + distanceY + 'px)';
+          }
+        }
+        updateCube();
+      }
+      function getJSON() {
+        let keyFile = fileInput.files[0];
+        fileLabel.innerHTML = 'Browse... ➤ ' + keyFile.name;
+        reader.readAsText(keyFile);
+        reader.onload = function(e) {
+        //oddly, this whole part executes last
+          let fileContent = e.target.result;
+          containerElements.innerHTML = '';
+          if (fileContent.indexOf('parent') >= 0 && fileContent.indexOf('elements') < 0) {
+            errorMessage('Error: missing elements; This model appears to be calling a parent. Parent feature coming soon');
+            return;
+          }
+          if (fileContent.indexOf('parent') < 0 && fileContent.indexOf('elements') < 0) {
+            errorMessage('Error: missing recognizable structures; This model appears not to be a valid json model format');
+            return;
+          }
+/*        //minify it
+          while (fileContent.indexOf('\n') >= 0) {
+            fileContent = fileContent.replace('\n', '');
+          }
+          while (fileContent.indexOf('	') >= 0) {
+            fileContent = fileContent.replace('	', '');
+          }
+          while (indexMarker1 >= 0) {
+            indexMarker2 = fileContent.indexOf('"', indexMarker1 + 1);
+            let fragContent = fileContent.slice(indexMarker1 + 1, indexMarker2);
+            let startContent = fileContent.slice(0, indexMarker1 + 1);
+            let endContent = fileContent.slice(indexMarker2);
+            while (fragContent.indexOf(' ') >= 0) {
+              fragContent = fragContent.replace(' ', '');
             }
-            rotateSliderKnobX.classList.toggle('nodisplay');
-            //transformsPlusX = 'rotate3d(1, 0, 0, ' + lockedRangeX + 'deg)';
-            if (buttonAxisX.classList.contains('active')) {
-                transformsPlusX = '';
+            currentLength = (startContent + fragContent).length;
+            fileContent = startContent + fragContent + endContent;
+            indexMarker1 = fileContent.indexOf('"', currentLength + 1);
+          }*/
+          try {
+            elements = JSON.parse(fileContent).elements;
+          }
+          catch (err) {
+            let error = err.message;
+            if (error.indexOf('JSON.parse: ') >= 0) {
+              error = error.slice(error.indexOf('JSON.parse: ') + 'JSON.parse: '.length);
             }
-            x = switch01(x);
+            error = 'Error: ' + error;
+            if (error.indexOf('expected') >= 0) {
+              error = error.slice(0, error.indexOf('expected')) + ' missing' + error.slice(error.indexOf('expected') + 'expected'.length)
+            }
+            if (error.search(/\bat\b/) >= 0) {
+              error = error.slice(0, error.search(/\bat\b/) + 'at'.length) + ' about' + error.slice(error.search(/\bat\b/) + 'at'.length);
+            }
+            errorMessage(error);
+            return;
+          }
+          containerError.classList.add('nodisplay');
+          for (var i = 0; i < elements.length; i++) {
+            let height = elements[i].to[1] - elements[i].from[1];
+            let width = elements[i].to[0] - elements[i].from[0];
+            let depth = elements[i].to[2] - elements[i].from[2];
+            let positionX = elements[i].from[0];
+            let positionY = elements[i].from[1];
+            let positionZ = elements[i].from[2];
+            let html = '<div class="element container_3d" id="cube_' + i + '" style="transform: translateX(' + positionX * scaleFactor + 'px) translateY(' + -positionY * scaleFactor + 'px) translateZ(' + positionZ * scaleFactor + 'px)">';
+            let orientations = Object.getOwnPropertyNames(elements[i].faces);
+            for (var n = 0; n < orientations.length; n++) {
+              let basicStyle;
+              let color;
+              switch (orientations[n]) {
+                case 'north':
+                    basicStyle = 'transform: translateZ(' + depth * scaleFactor + 'px) translateY(' + -height * scaleFactor + 'px); width: ' + width * scaleFactor + 'px; height: ' + height * scaleFactor + 'px; background-color: #A84E4E;';
+                    color = 'color_north';
+                  break;
+                case 'south':
+                    basicStyle = 'transform: translateY(' + -height * scaleFactor + 'px); width: ' + width * scaleFactor + 'px; height: ' + height * scaleFactor + 'px;';
+                    color = 'color_south';
+                  break;
+                case 'east':
+                  basicStyle = 'transform: rotateY(90deg) translateY(' + -height * scaleFactor + 'px) translateZ(' + -(depth/2 - width) * scaleFactor + 'px) translateX(' + -depth/2 * scaleFactor + 'px); width: ' + depth * scaleFactor + 'px; height: ' + height * scaleFactor + 'px;';
+                  color = 'color_east';
+                  break;
+                case 'west':
+                    basicStyle = 'transform: rotateY(90deg) translateY(' + -height * scaleFactor + 'px) translateZ(' + -depth/2 * scaleFactor + 'px) translateX(' + -depth/2 * scaleFactor + 'px); width: ' + depth * scaleFactor + 'px; height: ' + height * scaleFactor + 'px;';
+                    color = 'color_west';
+                  break;
+                case 'up':
+                    basicStyle = 'transform: rotateX(90deg) rotateZ(90deg) translateZ(' + (width/2 + height) * scaleFactor + 'px) translateX(' + depth/2 * scaleFactor + 'px) translateY(' + (depth/2 - width/2) * scaleFactor + 'px); width: ' + depth * scaleFactor + 'px; height: ' + width * scaleFactor + 'px;';
+                    color = 'color_up';
+                  break;
+                case 'down':
+                    basicStyle = 'transform: rotateX(90deg) rotateZ(90deg) translateZ(' + width/2 * scaleFactor + 'px) translateX(' + depth/2 * scaleFactor + 'px) translateY(' + (depth/2 - width/2) * scaleFactor + 'px); width: ' + depth * scaleFactor + 'px; height: ' + width * scaleFactor + 'px;';
+                    color = 'color_down';
+                  break;
+              }
+              html += '<span class="face ' + orientations[n] + ' ' + color + '" style="'+ basicStyle + '"></span>'
+            }
+            html += '</div>'
+            containerElements.innerHTML += html;
+          }
+          if (updateLock == true) {
+            range++;
             updateCube();
+            updateLock = false;
+          }
+          mouseState = 0; //normalize mouseState because it detects a button constantly pressed after a file is chosen (¯\_(ツ)_/¯)
+        }
+      }
+      function down() {
+        mouseState++;
+      }
+      function up() {
+        mouseState--;
+        SliderLock = false;
+        ScaleLock = false;
+        mouseStateNav = -1;
+        document.body.classList.remove('noselect');
+      }
+      function randomNumber() {
+        let valueAmount = parseInt(amount.value);
+        let valueStart = parseInt(start.value);
+        let valueEnd = parseInt(end.value);
+        let valueAftercomma = parseInt(aftercomma.value);
+        let valueLength = valueEnd - valueStart;
+        if (!buttonAppend.classList.contains('active')) {
+          randomNumbers = "";
+          figuresOutput.innerHTML = '';
+        }
+        for (var i = 0; i < valueAmount; i++) {
+          randomNumbers += '<span>' + (valueLength*Math.random() + valueStart).toFixed(valueAftercomma) + '</span>';
+        }
+        figuresOutput.innerHTML = randomNumbers;
+      }
+      function toggleRandomMode() {
+        buttonAppend.classList.toggle('active');
+      }
+      function toggleAxisX() {
+        lockedRangeX = range;
+        buttonAxisX.classList.toggle('active');
+        containerAxesX.classList.toggle('nodisplay');
+        if (!buttonAxisX.classList.contains('active')) {
+          //rotateSliderKnobX.style.transform = 'translateX(' + lockedRangeX + 'px)';
+          rotateSliderKnobX.style.transform = 'translateX(0)';
+        }
+        rotateSliderKnobX.classList.toggle('nodisplay');
+        //transformsPlusX = 'rotate3d(1, 0, 0, ' + lockedRangeX + 'deg)';
+        if (buttonAxisX.classList.contains('active')) {
+          transformsPlusX = '';
+        }
+        x = switch01(x);
+        updateCube();
+      }
+      function toggleAxisY() {
+        lockedRangeY = range;
+        buttonAxisY.classList.toggle('active');
+        containerAxesY.classList.toggle('nodisplay');
+        if (!buttonAxisY.classList.contains('active')) {
+          //rotateSliderKnobY.style.transform = 'translateX(' + lockedRangeY + 'px)';
+          rotateSliderKnobY.style.transform = 'translateX(3px)';
+        }
+        rotateSliderKnobY.classList.toggle('nodisplay');
+        //transformsPlusY = 'rotate3d(0, 1, 0, ' + lockedRangeY + 'deg)';
+        if (buttonAxisX.classList.contains('active')) {
+          transformsPlusY = '';
+        }
+        y = switch01(y);
+        updateCube();
+      }
+      function toggleAxisZ() {
+        lockedRangeZ = range;
+        buttonAxisZ.classList.toggle('active');
+        containerAxesZ.classList.toggle('nodisplay');
+        if (!buttonAxisZ.classList.contains('active')) {
+          //rotateSliderKnobZ.style.transform = 'translateX(' + lockedRangeZ + 'px)';
+          rotateSliderKnobZ.style.transform = 'translateX(6px)';
+        }
+        rotateSliderKnobZ.classList.toggle('nodisplay');
+        //transformsPlusZ = 'rotate3d(0, 0, 1, ' + lockedRangeZ + 'deg)';
+        if (buttonAxisX.classList.contains('active')) {
+          transformsPlusZ = '';
+        }
+        z = switch01(z);
+        updateCube();
+      }
+      function toggleAxes() {
+        buttonAxes.classList.toggle('active');
+        containerAxes.classList.toggle('nodisplay');
+        if (buttonAxes.classList.contains('active')) {
+          range++;
+          updateCube();
+        }
+      }
+      function toggleQuantity() {
+        buttonQuantity.classList.toggle('active');
+        containerBounds.classList.toggle('nodisplay');
+        containerBounds2D.classList.toggle('nodisplay');
+      }
+      function toggleGrid() {
+        buttonGrid.classList.toggle('active');
+        containerGrid.classList.toggle('nodisplay');
+      }
+      function toggleFun() {
+        buttonFun.classList.toggle('active');
+      }
+      function errorMessage(error) {
+        errorInput.innerHTML = error;
+        containerError.classList.remove('nodisplay');
+        mouseState = 0;
+        updateLock = true;
+      }
+      //function toggleTranslucentAxes() {
+      //  document.body.classList.toggle('translucentaxes');
+      //}
+      function movingRotateSlider(e) {
+        if (mouseState <= 0 || SliderLock == false) {
+          return;
+        }
+        range = e.x - rotateRect.left - 12;
+        if (range < 0) {
+          range = 0;
+        }
+        else if (range > 360) {
+          range = 360;
+        }
+        updateCube();
+      }
+      function rotateSliderClick(e) {
+        document.body.classList.add('noselect');
+        SliderLock = true;
+        range = e.x - rotateRect.left - 12;
+        if (range < 0) {
+          range = 0;
+        }
+        else if (range > 360) {
+          range = 360;
+        }
+        updateCube();
+      }
+      function movingScaleSlider(e) {
+        if (mouseState <= 0 || ScaleLock == false) {
+          return;
+        }
+        let currentScale = scaleFactor
+        let scaleRect = scaleSlider.getBoundingClientRect();
+        rangeScale = e.x - scaleRect.left - 12;
+        if (rangeScale < 0) {
+          rangeScale = 0;
+        }
+        else if (rangeScale > 100) {
+          rangeScale = 100;
+        }
+        scaleSliderKnob.style.transform = 'translateX(' + rangeScale + 'px)';
+        scaleFactor = ((rangeScale + 10) / 3).toFixed(3);
+        quantityScale = 'scale(' + scaleFactor / currentScale + ')';
+        updateScale();
+        //setTimeout(timeoutScale, 1000);
+      }
+      function scaleSliderClick(e) {
+        document.body.classList.add('noselect');
+        ScaleLock = true;
+        let currentScale = scaleFactor
+        let scaleRect = scaleSlider.getBoundingClientRect();
+        rangeScale = e.x - scaleRect.left - 12;
+        if (rangeScale < 0) {
+          rangeScale = 0;
+        }
+        else if (rangeScale > 100) {
+          rangeScale = 100;
+        }
+        scaleSliderKnob.style.transform = 'translateX(' + rangeScale + 'px)';
+        scaleFactor = ((rangeScale + 10) / 3).toFixed(3);
+        quantityScale = 'scale(' + scaleFactor / currentScale + ')';
+        updateScale();
+        //setTimeout(timeoutScale, 1000);
+      }
+      function timeoutScale() {
+        quantityScale = '';
+        updateCube();
+        updateScale();
+      }
+      function updateCube() {
+        output3D.style.transform = quantityScale + transformsPlusX + transformsPlusY + transformsPlusZ + translates + ' rotate3d(' + x + ', ' + y + ', ' + z + ', ' + range + 'deg)';
+        rotateSliderKnob.style.transform = 'translateX(' + range + 'px)';
+      }
+      function updateScale() {
+        let boundaryScale = scaleFactor * 8;
+        let stripesScale = scaleFactor * 2;
+        let stripesWidth = stripesScale * 2;
+        let axesScale = scaleFactor * 7;
+        let axesWidth = axesScale * 2;
+
+        containerElements.style.transform = 'translateX(' + -boundaryScale + 'px) translateZ(' + -boundaryScale + 'px) translateY(' + boundaryScale + 'px)';
+
+        if (!buttonQuantity.classList.contains('active')) {
+          boundaryCorner1.style.transform = 'translateX(' + -boundaryScale + 'px) translateY(' + boundaryScale + 'px) translateZ(' + boundaryScale + 'px) rotateX(90deg)';
+          boundaryCorner2.style.transform = 'rotateX(180deg) translateX(' + -boundaryScale + 'px) rotateY(180deg) translateY(' + boundaryScale + 'px) translateZ(' + boundaryScale + 'px) rotateY(180deg)';
+          boundaryCorner3.style.transform = 'rotateZ(180deg) translateX(' + -boundaryScale + 'px) translateY(' + boundaryScale + 'px) translateZ(' + boundaryScale + 'px) rotateX(90deg)';
+          boundaryCorner4.style.transform = 'rotateY(180deg) translateX(' + -boundaryScale + 'px) rotateY(180deg) translateY(' + boundaryScale + 'px) translateZ(' + boundaryScale + 'px) rotateY(180deg)';
+          boundaryCorner5.style.transform = ' rotateX(180deg) translateX(' + -boundaryScale + 'px) rotateZ(180deg) translateY(' + boundaryScale + 'px) translateZ(' + boundaryScale + 'px) rotateY(180deg)';
+          boundaryCorner6.style.transform = 'translateX(' + -boundaryScale + 'px) rotateX(180deg) translateY(' + boundaryScale + 'px) translateZ(' + boundaryScale + 'px) rotateX(90deg)';
+          boundaryCorner7.style.transform = 'rotateZ(180deg) translateX(' + -boundaryScale + 'px) rotateY(180deg) translateY(' + boundaryScale + 'px) translateZ(' + boundaryScale + 'px) rotateY(180deg)';
+          boundaryCorner8.style.transform = 'rotateZ(180deg) translateX(' + -boundaryScale + 'px) rotateX(180deg) translateY(' + boundaryScale + 'px) translateZ(' + boundaryScale + 'px) rotateX(90deg)';
+
+          for (var i = 0; i < boundaryStripes1.length; i++) {
+            boundaryStripes1[i].style.transform = 'translateZ(' + stripesScale + 'px)';
+            boundaryStripes2[i].style.transform = 'rotateX(90deg) translateZ(' + stripesScale + 'px)';
+            boundaryStripes3[i].style.transform = 'rotateY(90deg) translateZ(' + stripesScale + 'px)';
+          }
+
+
+          for (var i = 0; i < boundaryFacesFront.length; i++) {
+            boundaryFacesFront[i].style.transform = 'rotateZ(180deg) translateZ(' + stripesScale + 'px) translateX(1px) translateY(1px)';
+            boundaryFacesBehind[i].style.transform = 'rotateX(180deg) rotateZ(90deg) translateZ(' + stripesScale + 'px) translateX(1px) translateY(1px)';
+            boundaryFacesLeft[i].style.transform = 'rotateY(90deg) translateY(-1px) translateZ(' + -stripesScale + 'px) rotateX(180deg) translateZ(1px)';
+            boundaryFacesRight[i].style.transform = 'rotateY(90deg) translateY(-1px) translateZ(' + -(stripesScale - 1) + 'px)';
+            boundaryFacesTop[i].style.transform = 'rotateX(90deg) rotateZ(90deg) translateZ(2px) translateY(' + stripesScale + 'px)';
+            boundaryFacesBottom[i].style.transform = 'rotateX(90deg) rotateZ(90deg) translateZ(1px) rotateY(180deg) translateZ(1px) translateY(' + stripesScale + 'px)';
+            boundaryFacesLeft[i].style.width = stripesWidth + 'px';
+            boundaryFacesRight[i].style.width = stripesWidth + 'px';
+            boundaryFacesTop[i].style.width = stripesWidth + 'px';
+            boundaryFacesBottom[i].style.width = stripesWidth + 'px';
+          }
         }
 
-        function toggleAxisY() {
-            lockedRangeY = range;
-            buttonAxisY.classList.toggle('active');
-            containerAxesY.classList.toggle('nodisplay');
-            if (!buttonAxisY.classList.contains('active')) {
-                //rotateSliderKnobY.style.transform = 'translateX(' + lockedRangeY + 'px)';
-                rotateSliderKnobY.style.transform = 'translateX(3px)';
-            }
-            rotateSliderKnobY.classList.toggle('nodisplay');
-            //transformsPlusY = 'rotate3d(0, 1, 0, ' + lockedRangeY + 'deg)';
-            if (buttonAxisX.classList.contains('active')) {
-                transformsPlusY = '';
-            }
-            y = switch01(y);
-            updateCube();
+        for (var i = 0; i < axesFacesFront.length; i++) {
+          axesFacesFront[i].style.transform = 'rotateZ(180deg) translateZ(' + axesScale + 'px) translateX(1px) translateY(1px)';
+          axesFacesBehind[i].style.transform = 'rotateX(180deg) rotateZ(90deg) translateZ(' + axesScale + 'px) translateX(1px) translateY(1px)';
+          axesFacesLeft[i].style.transform = 'rotateY(90deg) translateY(-1px) translateZ(' + -axesScale + 'px) rotateX(180deg) translateZ(1px)';
+          axesFacesRight[i].style.transform = 'rotateY(90deg) translateY(-1px) translateZ(' + -(axesScale - 1) + 'px)';
+          axesFacesTop[i].style.transform = 'rotateX(90deg) rotateZ(90deg) translateZ(2px) translateY(' + axesScale + 'px)';
+          axesFacesBottom[i].style.transform = 'rotateX(90deg) rotateZ(90deg) translateZ(1px) rotateY(180deg) translateZ(1px) translateY(' + axesScale + 'px)';
+          axesFacesLeft[i].style.width = axesWidth + 'px';
+          axesFacesRight[i].style.width = axesWidth + 'px';
+          axesFacesTop[i].style.width = axesWidth + 'px';
+          axesFacesBottom[i].style.width = axesWidth + 'px';
         }
 
-        function toggleAxisZ() {
-            lockedRangeZ = range;
-            buttonAxisZ.classList.toggle('active');
-            containerAxesZ.classList.toggle('nodisplay');
-            if (!buttonAxisZ.classList.contains('active')) {
-                //rotateSliderKnobZ.style.transform = 'translateX(' + lockedRangeZ + 'px)';
-                rotateSliderKnobZ.style.transform = 'translateX(6px)';
+        if (containerElements.innerHTML != '') {
+          containerElements.innerHTML = '';
+          for (var i = 0; i < elements.length; i++) {
+            let height = elements[i].to[1] - elements[i].from[1];
+            let width = elements[i].to[0] - elements[i].from[0];
+            let depth = elements[i].to[2] - elements[i].from[2];
+            let positionX = elements[i].from[0];
+            let positionY = elements[i].from[1];
+            let positionZ = elements[i].from[2];
+            let html = '<div class="element container_3d" id="cube_' + i + '" style="transform: translateX(' + positionX * scaleFactor + 'px) translateY(' + -positionY * scaleFactor + 'px) translateZ(' + positionZ * scaleFactor + 'px)">';
+            let orientations = Object.getOwnPropertyNames(elements[i].faces);
+            for (var n = 0; n < orientations.length; n++) {
+              let basicStyle;
+              let color;
+              switch (orientations[n]) {
+                case 'north':
+                    basicStyle = 'transform: translateZ(' + depth * scaleFactor + 'px) translateY(' + -height * scaleFactor + 'px); width: ' + width * scaleFactor + 'px; height: ' + height * scaleFactor + 'px; background-color: #A84E4E;';
+                    color = 'color_north';
+                  break;
+                case 'south':
+                    basicStyle = 'transform: translateY(' + -height * scaleFactor + 'px); width: ' + width * scaleFactor + 'px; height: ' + height * scaleFactor + 'px;';
+                    color = 'color_south';
+                  break;
+                case 'east':
+                  basicStyle = 'transform: rotateY(90deg) translateY(' + -height * scaleFactor + 'px) translateZ(' + -(depth/2 - width) * scaleFactor + 'px) translateX(' + -depth/2 * scaleFactor + 'px); width: ' + depth * scaleFactor + 'px; height: ' + height * scaleFactor + 'px;';
+                  color = 'color_east';
+                  break;
+                case 'west':
+                    basicStyle = 'transform: rotateY(90deg) translateY(' + -height * scaleFactor + 'px) translateZ(' + -depth/2 * scaleFactor + 'px) translateX(' + -depth/2 * scaleFactor + 'px); width: ' + depth * scaleFactor + 'px; height: ' + height * scaleFactor + 'px;';
+                    color = 'color_west';
+                  break;
+                case 'up':
+                    basicStyle = 'transform: rotateX(90deg) rotateZ(90deg) translateZ(' + (width/2 + height) * scaleFactor + 'px) translateX(' + depth/2 * scaleFactor + 'px) translateY(' + (depth/2 - width/2) * scaleFactor + 'px); width: ' + depth * scaleFactor + 'px; height: ' + width * scaleFactor + 'px;';
+                    color = 'color_up';
+                  break;
+                case 'down':
+                    basicStyle = 'transform: rotateX(90deg) rotateZ(90deg) translateZ(' + width/2 * scaleFactor + 'px) translateX(' + depth/2 * scaleFactor + 'px) translateY(' + (depth/2 - width/2) * scaleFactor + 'px); width: ' + depth * scaleFactor + 'px; height: ' + width * scaleFactor + 'px;';
+                    color = 'color_down';
+                  break;
+              }
+              html += '<span class="face ' + orientations[n] + ' ' + color + '" style="'+ basicStyle + '"></span>'
             }
-            rotateSliderKnobZ.classList.toggle('nodisplay');
-            //transformsPlusZ = 'rotate3d(0, 0, 1, ' + lockedRangeZ + 'deg)';
-            if (buttonAxisX.classList.contains('active')) {
-                transformsPlusZ = '';
-            }
-            z = switch01(z);
-            updateCube();
+            html += '</div>'
+            containerElements.innerHTML += html;
+          }
         }
-
-        function toggleAxes() {
-            buttonAxes.classList.toggle('active');
-            containerAxes.classList.toggle('nodisplay');
-            if (buttonAxes.classList.contains('active')) {
-                range++;
-                updateCube();
-            }
+      }
+      function switch01(value) {
+        if (value == 1) {
+          return value = 0;
         }
-
-        function toggleQuantity() {
-            buttonQuantity.classList.toggle('active');
-            containerBounds.classList.toggle('nodisplay');
-            containerBounds2D.classList.toggle('nodisplay');
+        else {
+          return value = 1;
         }
-
-        function toggleGrid() {
-            buttonGrid.classList.toggle('active');
-            containerGrid.classList.toggle('nodisplay');
-        }
-        //function toggleTranslucentAxes() {
-        //  document.body.classList.toggle('translucentaxes');
-        //}
-        function movingRotateSlider(e) {
-            if (mouseState <= 0 || SliderLock == false) {
-                return;
-            }
-            range = e.x - rect.left - 12;
-            if (range < 0) {
-                range = 0;
-            } else if (range > 360) {
-                range = 360;
-            }
-            updateCube();
-        }
-
-        function rotateSliderClick(e) {
-            document.body.classList.add('noselect');
-            SliderLock = true;
-            range = e.x - rect.left - 12;
-            if (range < 0) {
-                range = 0;
-            } else if (range > 360) {
-                range = 360;
-            }
-            updateCube();
-        }
-
-        function updateCube() {
-            output3D.style.transform = transformsPlusX + transformsPlusY + transformsPlusZ + 'rotate3d(' + x + ', ' + y + ', ' + z + ', ' + range + 'deg)';
-            rotateSliderKnob.style.transform = 'translateX(' + range + 'px)';
-        }
-
-        function switch01(value) {
-            if (value == 1) {
-                return value = 0;
-            } else {
-                return value = 1;
-            }
-        }
+      }
     </script>
-</body>
-
+  </body>
 </html>
