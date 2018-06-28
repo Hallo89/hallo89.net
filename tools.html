@@ -19,22 +19,52 @@
       #containers {
         max-width: 100%;
         height: calc(100vh - 25px);
-        margin: 11px 12px 14px 12px;
-        display: grid;
-        justify-items: center;
+        margin: 11px 12px 14px;
         grid-gap: 20px;
         grid-template-columns: repeat(auto-fit, minmax(470px, 1fr));
+      }
+      .info_mode #containers {
+        justify-items: center;
+      }
+    /* overrides if no grid is present */
+      .info_mode .box:nth-of-type(2n+1) {
+        float: left;
+      }
+      .info_mode .box:nth-of-type(2n+2) {
+        float: right;
+      }
+      .info_mode #containers {
+        margin: 11px calc(10vw - 60px) 14px;
+      }
+      @media (max-width: 1055px) {
+        .info_mode .box {
+          float: none !important;
+          margin: 0 auto 20px;
+        }
+      }
+      @supports (display: grid) {
+        #containers {
+          display: grid;
+          margin: 11px 12px 14px !important;
+        }
+        .box {
+          float: none;
+        }
+        .info_mode .box {
+          margin: auto !important;
+        }
       }
       .box {
         font-size: 22px;
         transition: all .3s ease-out;
-      /*  display: inline-block;*/
+        margin: auto;
       }
       .box .box_header {
         font-size: 1.1em;
       }
       .box.active_item {
         width: 100%;
+        height: calc(100% - 8px);
         animation: .3s fadein cubic-bezier(.2, 0, 1, 1), .3s heightin ease-out;
       }
       @keyframes fadein {
@@ -42,7 +72,7 @@
       }
       @keyframes heightin {
         from { height: 520px; }
-        to { height: calc(100% - 8px); } /* need to sustract borders */
+        to   { height: calc(100% - 8px); } /* need to sustract borders */
       }
       .info_mode .box {
         width: 470px;
