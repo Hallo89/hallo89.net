@@ -1,0 +1,513 @@
+body {
+  margin: 0;
+}
+body:not(.info_mode) {
+  background: linear-gradient(135deg, #3F2D36, #36303B);
+  animation: .35s backgroundfade ease-in;
+}
+@keyframes backgroundfade {
+  from { background: hsl(0, 0%, 9%); }
+  to   { background: #3A2E38; }
+}
+#containers {
+  max-width: 100%;
+  height: calc(100vh - 25px);
+  margin: 11px 12px 14px;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(470px, 1fr));
+}
+.info_mode #containers {
+  justify-items: center;
+}
+/* overrides if no grid is present */
+.info_mode .box:nth-of-type(2n+1) {
+  float: left;
+}
+.info_mode .box:nth-of-type(2n+2) {
+  float: right;
+}
+.info_mode #containers {
+  margin: 11px calc(10vw - 60px) 14px;
+}
+@media (max-width: 1055px) {
+  .info_mode .box {
+    float: none !important;
+    margin: 0 auto 20px;
+  }
+}
+@supports (display: grid) {
+  #containers {
+    display: grid;
+    margin: 11px 12px 14px !important;
+  }
+  .box {
+    float: none;
+  }
+  .info_mode .box {
+    margin: auto !important;
+  }
+}
+.box {
+  font-size: 22px;
+  transition: all .3s ease-out;
+  margin: auto;
+}
+.box .box_header {
+  font-size: 1.1em;
+}
+.box.active_item {
+  width: 100%;
+  height: calc(100% - 8px);
+  animation: .3s fadein cubic-bezier(.2, 0, 1, 1), .3s heightin ease-out;
+}
+@keyframes fadein {
+  from { opacity: .1; }
+}
+@keyframes heightin {
+  from { height: 520px; }
+  to   { height: calc(100% - 8px); } /* need to sustract borders */
+}
+.info_mode .box {
+  width: 470px;
+  height: 520px;
+  cursor: pointer;
+}
+.info_mode .box .input_container {
+  display: none;
+}
+.info_mode .box .box_content {
+  opacity: .7;
+  filter: blur(8px);
+}
+.info_mode #content_function_2 {
+  top: 76px;
+}
+.box .box_content {
+  transition: filter .33s cubic-bezier(.35, 0, .65, 1);
+  /*would love to add another transition (in order for it to translate down) but it makes literally everything extremely laggy*/
+}
+.text_function {
+  font-size: .75em;
+  color: hsl(0, 0%, 75%);
+  padding: 5px;
+  flex-wrap: wrap;
+}
+#function_1 {
+  position: absolute;
+  top: 151px; /* 76px header + 75px last (and first) input_box (-> without margin) */
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: auto;
+  align-content: flex-start;
+}
+#function_1 span {
+  position: relative;
+  padding: 17px 9px;
+}
+#function_1 span::before {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  left: 0;
+  right: 0;
+  border-bottom: 2px solid rgba(229, 255, 164, .1);
+  margin: 8px 6px;
+}
+#content_function_2 {
+  position: absolute;
+  top: calc(76px + 77px + 75px); /* Header + first input_box (with margin) (*1) + last input_box (no margin) */
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.input_container {
+  display: flex;
+  justify-content: flex-start;
+  padding: 5px 5px 7px;
+  margin-bottom: 2px;
+  background-color: hsl(0, 0%, 14%);
+}
+.input_box {
+  font-size: .78em;
+  /*margin: 0 7px 3px; ?? */
+  margin: 0 7px;
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+  padding: 8px;
+}
+.input {
+  font-size: .81em;
+  border: none;
+  box-shadow: 0 1px 7px hsla(0, 0%, 14%, .82);
+  background: hsl(0, 0%, 23%);
+  color: hsl(0, 0%, 77%);
+  border-radius: 2px;
+  padding: 3px 6px;
+  height: 17px;
+  width: auto;
+}
+.input.number {
+  max-width: 150px;
+}
+.input.file {
+  cursor: pointer;
+}
+.input_file {
+  display: none;
+}
+.input_box .input_header {
+  margin-bottom: 3px;
+  color: hsl(0, 0%, 70%);
+}
+.button {
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+}
+.knobber {
+  position: relative;
+  cursor: pointer;
+}
+.knobber .knob {
+  position: absolute;
+  left: 6px;
+  height: 17px;
+  width: 17px;
+  box-shadow: 0 1px 5px hsla(0, 0%, 22%, .8);
+  background-color: hsl(0, 0%, 13%);
+  border-radius: 100%;
+  transition: .3s;
+}
+.knobber.active .knob {
+  transform: translate(122px);
+  background-color: rgba(131, 170, 172, 0.45);
+}
+/*body.translucentaxes .axes_container {
+  z-index: 1000;
+}*/
+.slider {
+  padding: 3px 12px;
+}
+.slider .knob {
+  left: 2.5px;
+  transition: none;
+}
+.slider .knob.default {
+  z-index: 10;
+}
+.slider.rotate {
+  width: 360px;
+}
+.slider.scale {
+  width: 100px;
+}
+.face {
+  position: absolute;
+  outline: 1px solid transparent;
+}
+
+.nodisplay {
+  display: none !important;
+}
+.noselect {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.centerflex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.color_north {
+  background-color: #A84E4E;
+}
+.color_south {
+  background-color: #046CA5;
+}
+.color_west {
+  background-color: #777922;
+}
+.color_east {
+  background-color: #CDA544;
+}
+.color_up {
+  background-color: #AC724A;
+}
+.color_down {
+  background-color: #664D6E;
+}
+
+.legend_container {
+  position: absolute;
+  left: 40px;
+  top: 25px;
+  color: hsl(0, 0%, 58%);
+  font-size: .88em;
+  font-family: Calibri, Arial, sans-serif;
+  opacity: .8;
+}
+.color_legend {
+  margin: 2px 0 1px 5px;
+  display: flex;
+  align-items: center;
+}
+.color_preview {
+  content: '';
+  position: absolute;
+  left: -1em;
+  width: 1em;
+  height: 1em;
+  border-radius: 1px;
+}
+
+.error_banner {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  color: hsl(0, 0%, 60%);
+  font-size: 1.2em;
+  border-bottom: none;
+  box-shadow: none;
+  background-color: hsl(0, 0%, 12.5%);
+}
+.error_banner .exclamation {
+  display: inline-block;
+  font-size: 3em;
+  padding: 5px;
+  font-family: 'Century Gothic', Calibri, Arial, sans-serif;
+  line-height: .82em;
+}
+
+.container_3d {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.elements_container {
+  transform: translateX(-160px) translateZ(-160px) translateY(160px);
+}
+
+.aid_stripe.end {
+  width: 2px;
+  height: 2px;
+}
+.aid_stripe.side {
+  height: 2px;
+}
+
+.boundary_container_2d.option_2d .object_2d {
+  position: absolute;
+  height: 320px;
+  width: 320px;
+  opacity: .4;
+}
+
+.boundary_container_2d.option_2d .var_bottom {
+  background: url('./images/tools/enfloorment.png');
+}
+.boundary_container_2d.option_2d .bottom_grid .var_bottom {
+   transform: rotateX(90deg) translateX(-160px);
+}
+
+.boundary_container_2d.option_2d .var_corner {
+  background: url('./images/tools/enborderment.png');
+}
+.boundary_container_2d.option_2d .corners .object_1 {
+  transform: translateX(-160px) translateY(-160px) translateZ(160px);
+}
+.boundary_container_2d.option_2d .corners .object_2 {
+  transform: rotateZ(90deg) translateX(-160px) translateY(160px) translateZ(-160px);
+}
+.boundary_container_2d.option_2d .corners .object_3 {
+  transform: rotateY(90deg) rotateX(180deg) translateY(160px);
+}
+.boundary_container_2d.option_2d .corners .object_4 {
+  transform: rotateY(90deg) translateY(-160px) translateZ(-320px);
+}
+.boundary_container_2d.option_2d .corners .object_5 {
+  transform: rotateX(90deg) translateX(-160px);
+}
+.boundary_container_2d.option_2d .corners .object_6 {
+  transform: rotateX(90deg) translateX(-160px) translateZ(320px);
+}
+
+.boundary {
+  background-color: hsla(0, 0%, 45%, .2)
+}
+.boundary_container .corners .corner_1 {
+  transform: translateX(-160px) translateY(160px) translateZ(160px) rotateX(90deg);
+}
+.boundary_container .corners .corner_2 {
+  transform: rotateX(180deg) translateX(-160px) rotateY(180deg) translateY(160px) translateZ(160px) rotateY(180deg);
+}
+.boundary_container .corners .corner_3 {
+  transform: rotateZ(180deg) translateX(-160px) translateY(160px) translateZ(160px) rotateX(90deg);
+}
+.boundary_container .corners .corner_4 {
+  transform: rotateY(180deg) translateX(-160px) rotateY(180deg) translateY(160px) translateZ(160px) rotateY(180deg);
+}
+.boundary_container .corners .corner_5 {
+  transform: rotateX(180deg) translateX(-160px) rotateZ(180deg) translateY(160px) translateZ(160px) rotateY(180deg);
+}
+.boundary_container .corners .corner_6 {
+  transform: translateX(-160px) rotateX(180deg) translateY(160px) translateZ(160px) rotateX(90deg);
+}
+.boundary_container .corners .corner_7 {
+  transform: rotateZ(180deg) translateX(-160px) rotateY(180deg) translateY(160px) translateZ(160px) rotateY(180deg)
+}
+.boundary_container .corners .corner_8 {
+  transform: rotateZ(180deg) translateX(-160px) rotateX(180deg) translateY(160px) translateZ(160px) rotateX(90deg)
+}
+.boundary_container .corners .stripe_1 {
+  transform: translateZ(40px);
+}
+.boundary_container .corners .stripe_2 {
+  transform: rotateX(90deg) translateZ(40px);
+}
+.boundary_container .corners .stripe_3 {
+  transform: rotateY(90deg) translateZ(40px);
+}
+.boundary.var_corner.side {
+  width: 80px;
+}
+.boundary.var_corner.front {
+  transform: rotateZ(180deg) translateZ(40px) translateX(1px) translateY(1px);
+}
+.boundary.var_corner.behind {
+  transform: rotateX(180deg) rotateZ(90deg) translateZ(40px) translateX(1px) translateY(1px);
+}
+.boundary.var_corner.left {
+  transform: rotateY(90deg) translateY(-1px) translateZ(-40px) rotateX(180deg) translateZ(1px);
+}
+.boundary.var_corner.right {
+  transform: rotateY(90deg) translateY(-1px) translateZ(-39px);
+}
+.boundary.var_corner.bottom {
+  transform: rotateX(90deg) rotateZ(90deg) translateZ(1px) rotateY(180deg) translateZ(1px) translateY(40px);
+}
+.boundary.var_corner.top {
+  transform: rotateX(90deg) rotateZ(90deg) translateZ(2px) translateY(40px);
+}
+
+.boundary_container .bottom_grid .stripe_1 {
+  transform: translateY(160px) translateX(-160px);
+}
+.boundary_container .bottom_grid .stripe_2 {
+  transform: translateY(160px) translateX(-140px);
+}
+.boundary_container .bottom_grid .stripe_3 {
+  transform: translateY(160px) translateX(-120px);
+}
+.boundary_container .bottom_grid .stripe_4 {
+  transform: translateY(160px) translateX(-100px);
+}
+.boundary_container .bottom_grid .stripe_5 {
+  transform: translateY(160px) translateX(-80px);
+}
+.boundary_container .bottom_grid .stripe_6 {
+  transform: translateY(160px) translateX(-60px);
+}
+.boundary_container .bottom_grid .stripe_7 {
+  transform: translateY(160px) translateX(-40px);
+}
+.boundary_container .bottom_grid .stripe_8 {
+  transform: translateY(160px) translateX(-20px);
+}
+.boundary_container .bottom_grid .stripe_9 {
+  transform: translateY(160px);
+}
+.boundary_container .bottom_grid .stripe_10 {
+  transform: translateY(160px) translateX(20px);
+}
+.boundary_container .bottom_grid .stripe_11 {
+  transform: translateY(160px) translateX(40px);
+}
+.boundary_container .bottom_grid .stripe_12 {
+  transform: translateY(160px) translateX(60px);
+}
+.boundary_container .bottom_grid .stripe_13 {
+  transform: translateY(160px) translateX(80px);
+}
+.boundary_container .bottom_grid .stripe_14 {
+  transform: translateY(160px) translateX(100px);
+}
+.boundary_container .bottom_grid .stripe_15 {
+  transform: translateY(160px) translateX(120px);
+}
+.boundary_container .bottom_grid .stripe_16 {
+  transform: translateY(160px) translateX(140px);
+}
+.boundary_container .bottom_grid .stripe_17 {
+  transform: translateY(160px) translateX(160px);
+}
+.boundary_container .bottom_grid .horizontal {
+  transform: rotateY(90deg);
+}
+.boundary.var_bottom.side {
+  width: 320px;
+}
+.boundary.var_bottom.front {
+  transform: rotateZ(180deg) translateZ(160px) translateX(1px) translateY(1px);
+}
+.boundary.var_bottom.behind {
+  transform: rotateX(180deg) rotateZ(90deg) translateZ(160px) translateX(1px) translateY(1px);
+}
+.boundary.var_bottom.left {
+  transform: rotateY(90deg) translateY(-1px) translateZ(-160px) rotateX(180deg) translateZ(1px);
+}
+.boundary.var_bottom.right {
+  transform: rotateY(90deg) translateY(-1px) translateZ(-159px);
+}
+.boundary.var_bottom.bottom {
+  transform: rotateX(90deg) rotateZ(90deg) translateZ(1px) rotateY(180deg) translateZ(1px) translateY(160px);
+}
+.boundary.var_bottom.top {
+  transform: rotateX(90deg) rotateZ(90deg) translateZ(2px) translateY(160px);
+}
+
+.color_x, .axisbutton.x.active .knob {
+  background-color: #784452 !important;
+}
+.color_y, .axisbutton.y.active .knob {
+  background-color: #1F6C6B !important;
+}
+.color_z, .axisbutton.z.active .knob {
+  background-color: #046CA5 !important;
+}
+.axes_y {
+  transform: rotateX(90deg);
+}
+.axes_x {
+  transform: rotateY(90deg);
+}
+
+.axis.side {
+  width: 280px;
+}
+.axis.front {
+  transform: rotateZ(180deg) translateZ(140px) translateX(1px) translateY(1px);
+}
+.axis.behind {
+  transform: rotateX(180deg) rotateZ(90deg) translateZ(140px) translateX(1px) translateY(1px);
+}
+.axis.left {
+  transform: rotateY(90deg) translateY(-1px) translateZ(-140px) rotateX(180deg) translateZ(1px);
+}
+.axis.right {
+  transform: rotateY(90deg) translateY(-1px) translateZ(-139px);
+}
+.axis.bottom {
+  transform: rotateX(90deg) rotateZ(90deg) translateZ(1px) rotateY(180deg) translateZ(1px) translateY(140px);
+}
+.axis.top {
+  transform: rotateX(90deg) rotateZ(90deg) translateZ(2px) translateY(140px);
+}
