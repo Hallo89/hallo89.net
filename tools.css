@@ -144,17 +144,48 @@ body:not(.info_mode) {
   background: hsl(0, 0%, 23%);
   color: hsl(0, 0%, 77%);
   border-radius: 2px;
-  padding: 3px 6px;
+  padding: 3px 0 3px 6px;
   height: 17px;
   width: auto;
 }
-.input.number {
-  max-width: 150px;
+.input_number_container {
+  position: relative;
+  height: 23px;
 }
-.input.file {
+.change_number {
+  position: absolute;
+  right: 0px;
+  height: 12px;
+  width: 20px;
+  line-height: 12px;
+  font-size: .6em;
+  text-align: center;
+  color: hsl(0, 0%, 63%);
+  background-color: hsl(0, 0%, 32%);
   cursor: pointer;
 }
-.input_file {
+.change_number.increment {
+  top: 0;
+  border-top-right-radius: 2px;
+}
+.change_number.decrement {
+  bottom: 0;
+  border-bottom-right-radius: 2px;
+}
+.input.number {
+  max-width: 150px;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+input.number::-webkit-inner-spin-button,
+input.number::-webkit-outer-spin-button {
+   -webkit-appearance: none;
+    margin: 0;
+}
+.input.file { /* input[type=file] label */
+  cursor: pointer;
+}
+.input_file { /* input[type=file] */
   display: none;
 }
 .input_box .input_header {
@@ -249,7 +280,7 @@ body:not(.info_mode) {
   color: hsl(0, 0%, 58%);
   font-size: .88em;
   font-family: Calibri, Arial, sans-serif;
-  opacity: .8;
+  opacity: .85;
 }
 .color_legend {
   margin: 2px 0 1px 5px;

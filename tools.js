@@ -5,30 +5,34 @@ var y = 1;
 var z = 1;
 var range = 325;
 var rangeScale = 50;
-var scaleFactor = ((rangeScale + 10) / 3).toFixed(3);
+var scaleFactor = parseInt(((rangeScale + 10) / 3).toFixed(3));
 var cubeState;
 var lockedRangeX;
 var lockedRangeY;
 var lockedRangeZ;
-var lockedRangeNav;
 var reader = new FileReader();
 var indexMarker1 = 0;
 var indexMarker2;
 var currentLength;
 var elements = [];
 var updateLock = true;
-var transformsPlusX = '';
-var transformsPlusY = '';
-var transformsPlusZ = '';
-var quantityScale = '';
-var translates = '';
-var SliderLock = false;
-var ScaleLock = false;
-var mouseStateNav = -1;
 var clickedX;
 var clickedY;
-var distanceX;
-var distanceY;
+var transformRangeX = 325;
+var transformRangeY = 325;
+var rotateLockedX;
+var rotateLockedY;
+var translateRangeX = 0;
+var translateRangeY = 0;
+var translateLockedX;
+var translateLockedY;
+var scaleRange = 1;
+var scaleLocked;
+var transformsPlusZ = '';
+var quantityScale = '';
+var SliderLock = false;
+var ScaleLock = false;
+var mouseButton = -1;
 var translateX = 0;
 var translateY = 0;
 var boxesArray = [];
@@ -40,6 +44,10 @@ const amount = document.getElementById('figures_amount');
 const start = document.getElementById('figures_start');
 const end = document.getElementById('figures_end');
 const aftercomma = document.getElementById('figures_aftercomma');
+
+const buttonsChangeNumber = document.querySelectorAll('.buttons_change_number');
+const buttonsIncrement = document.querySelectorAll('.change_number.increment');
+const buttonsDecrement = document.querySelectorAll('.change_number.decrement');
 
 const buttonAppend = document.getElementById('figures_append');
 
@@ -57,6 +65,8 @@ const rotateSliderKnobY = document.querySelector('.slider.rotate .knob.rotate_kn
 const rotateSliderKnobZ = document.querySelector('.slider.rotate .knob.rotate_knob.z');
 const scaleSlider = document.querySelector('.slider.scale');
 const scaleSliderKnob = document.querySelector('.slider.scale .knob');
+
+const colorLegend = document.querySelector('.legend_container');
 
 const containerError = document.querySelector('.error_banner');
 const errorInput = document.querySelector('.error_banner .error');
@@ -101,24 +111,39 @@ const container3D = document.getElementById('content_function_2');
 const figuresOutput = document.getElementById('function_1');
 const output3D = document.getElementById('function_2');
 
-const rotateRect = rotateSlider.getBoundingClientRect();
-const container3DRect = container3D.getBoundingClientRect();
 window.addEventListener('mousedown', down);
 window.addEventListener('mouseup', up);
 window.addEventListener('mousemove', movingRotateSlider);
 window.addEventListener('mousemove', movingScaleSlider);
-container3D.addEventListener('mousemove', navigate);
-container3D.addEventListener('mousedown', navigateMouseDown);
 container3D.addEventListener('contextmenu', handleContext);
 rotateSlider.addEventListener('mousedown', rotateSliderClick);
 scaleSlider.addEventListener('mousedown', scaleSliderClick);
 fileInput.addEventListener('change', getJSON);
-for (i = 0; i < boxes.length; i++) { //ForEach not valid due to IE support
+//ForEach not valid due to IE support
+for (i = 0; i < buttonsIncrement.length; i++) {
+  buttonsIncrement[i].addEventListener('mousedown', inputIncrement);
+}
+for (i = 0; i < buttonsDecrement.length; i++) {
+  buttonsDecrement[i].addEventListener('mousedown', inputDecrement);
+}
+for (i = 0; i < buttonsChangeNumber.length; i++) {
+  buttonsChangeNumber[i].addEventListener('wheel', inputNumberScroll);
+}
+for (i = 0; i < boxes.length; i++) {
   boxes[i].addEventListener('mousedown', choseItem);
 }
+function inputNumberScroll(e) {
+  let scrollY = e.deltaY;
+  let thisInput = this.parentNode.children[0];
+  if (scrollY > 0) {
+    thisInput.value--;
+  }
+  else if (scrollY < 0) {
+    thisInput.value++;
+  }
+  thisInput.focus();
+}
 function choseItem() {
-  let thisRect = this.getBoundingClientRect();
-  let styles = window.getComputedStyle(masterContainer);
 // convert nodeList of all boxes to an array
   for (i = 0; i < boxes.length; i++) {
     boxesArray.push(boxes[i]);
@@ -127,51 +152,77 @@ function choseItem() {
     boxesArray.splice(boxesArray.indexOf(this), 1);
   }
 //end of converting
+  document.body.classList.add('noselect');
   for (i = 0; i < boxesArray.length; i++) {
     boxesArray[i].classList.add('nodisplay');
   }
   this.classList.add('active_item')
-  //setTimeout(function() {
-  //  document.body.classList.remove('info_mode');
-  //}, 400);
   document.body.classList.remove('info_mode');
+
+  container3D.addEventListener('mousemove', navigate);
+  container3D.addEventListener('mousedown', navigateMouseDown);
+  //container3D.addEventListener('mouseup', navigateMouseUp);
+  container3D.addEventListener('wheel', navigateWheel);
+
+  for (i = 0; i < boxes.length; i++) {
+    boxes[i].removeEventListener('mousedown', choseItem);
+  }
 }
 function handleContext(e) {
   e.preventDefault();
 }
 function navigateMouseDown(e) {
-  mouseStateNav = e.button;
+  document.body.classList.add('noselect');
+  let container3DRect = container3D.getBoundingClientRect();
+  mouseButton = e.button;
   clickedX = e.x - container3DRect.left;
   clickedY = e.y - container3DRect.top;
-  lockedRangeNav = range;
-  document.body.classList.add('noselect');
+  rotateLockedX = transformRangeX;
+  rotateLockedY = transformRangeY;
+  translateLockedX = translateRangeX;
+  translateLockedY = translateRangeY;
+  scaleLocked = scaleRange;
 }
 function navigate(e) {
-  if (mouseState <= 0 || mouseStateNav < 0) {
+  if (mouseState <= 0 || mouseButton < 0) {
     return;
   }
-  distanceX = e.x - container3DRect.left - clickedX;
-  distanceY = e.y - container3DRect.top - clickedY;
-  if (mouseStateNav == 0) {
-    if (buttonFun.classList.contains('active')) {
-      transformsPlusY = 'rotate3d(0, 1, 0, ' + (lockedRangeNav - distanceX) + 'deg)';
-      transformsPlusX = 'rotate3d(1, 0, 0, ' + (lockedRangeNav - distanceY) + 'deg)';
-    }
-    else {
-      range = lockedRangeNav - distanceX;
-    }
+  let container3DRect = container3D.getBoundingClientRect();
+  let distanceX = e.x - container3DRect.left - clickedX;
+  let distanceY = e.y - container3DRect.top - clickedY;
+  if (mouseButton == 0) {
+    transformRangeX = (distanceX / 3) + rotateLockedX;
+    transformRangeY = -(distanceY / 4) + rotateLockedY;
   }
-  if (mouseStateNav == 2) {
+/*  if (mouseButton == 1) {
+    scaleRange = distanceX / 100 + 1;
+  }*/
+  if (mouseButton == 2) {
     if (buttonFun.classList.contains('active')) {
-      translateX += distanceX;
-      translateY += distanceY;
-      translates = 'translateX(' + translateX + 'px) translateY(' + translateY + 'px)';
+      translateRangeX += distanceX;
+      translateRangeY += distanceY;
     }
     else {
-      translates = 'translateX(' + distanceX + 'px) translateY(' + distanceY + 'px)';
+      translateRangeX = distanceX + translateLockedX;
+      translateRangeY = distanceY + translateLockedY;
     }
   }
   updateCube();
+}
+/*function navigateMouseUp() {
+  if (mouseButton == 1) {
+    scaleFactor = scaleRange;
+    updateScale();
+  }
+}*/
+function navigateWheel(e) {
+  let scrollY = e.deltaY;
+  let currentScale = scaleFactor;
+  scaleFactor -= scrollY;
+  if (scaleFactor <= 0) {
+    scaleFactor = 1;
+  }
+  updateScale();
 }
 function getJSON() {
   let keyFile = fileInput.files[0];
@@ -275,6 +326,7 @@ function getJSON() {
       updateCube();
       updateLock = false;
     }
+    colorLegend.classList.remove('nodisplay');
     mouseState = 0; //normalize mouseState because it detects a button constantly pressed after a file is chosen (¯\_(ツ)_/¯)
   }
 }
@@ -285,7 +337,7 @@ function up() {
   mouseState--;
   SliderLock = false;
   ScaleLock = false;
-  mouseStateNav = -1;
+  mouseButton = -1;
   document.body.classList.remove('noselect');
 }
 function randomNumber() {
@@ -305,6 +357,14 @@ function randomNumber() {
 }
 function toggleRandomMode() {
   buttonAppend.classList.toggle('active');
+}
+function inputIncrement() {
+  let thisInput = this.parentNode.parentNode.children[0];
+  thisInput.value++;
+}
+function inputDecrement() {
+  let thisInput = this.parentNode.parentNode.children[0];
+  thisInput.value--;
 }
 function toggleAxisX() {
   lockedRangeX = range;
@@ -387,6 +447,7 @@ function movingRotateSlider(e) {
   if (mouseState <= 0 || SliderLock == false) {
     return;
   }
+  let rotateRect = rotateSlider.getBoundingClientRect();
   range = e.x - rotateRect.left - 12;
   if (range < 0) {
     range = 0;
@@ -397,6 +458,7 @@ function movingRotateSlider(e) {
   updateCube();
 }
 function rotateSliderClick(e) {
+  let rotateRect = rotateSlider.getBoundingClientRect();
   document.body.classList.add('noselect');
   SliderLock = true;
   range = e.x - rotateRect.left - 12;
@@ -441,17 +503,17 @@ function scaleSliderClick(e) {
   }
   scaleSliderKnob.style.transform = 'translateX(' + rangeScale + 'px)';
   scaleFactor = ((rangeScale + 10) / 3).toFixed(3);
-  quantityScale = 'scale(' + scaleFactor / currentScale + ')';
+  scaleRange = scaleFactor / currentScale;
   updateScale();
   //setTimeout(timeoutScale, 1000);
 }
-function timeoutScale() {
+/*function timeoutScale() {
   quantityScale = '';
   updateCube();
   updateScale();
-}
+}*/
 function updateCube() {
-  output3D.style.transform = quantityScale + transformsPlusX + transformsPlusY + transformsPlusZ + translates + ' rotate3d(' + x + ', ' + y + ', ' + z + ', ' + range + 'deg)';
+  output3D.style.transform = 'translateX(' + translateRangeX + 'px) translateY(' + translateRangeY + 'px) rotate3d(1, 0, 0, ' + transformRangeY + 'deg) rotate3d(0, 1, 0, ' + transformRangeX + 'deg) scale(' + scaleRange + ')' + transformsPlusZ;
   rotateSliderKnob.style.transform = 'translateX(' + range + 'px)';
 }
 function updateScale() {
@@ -561,4 +623,16 @@ function switch01(value) {
   else {
     return value = 1;
   }
+}// I don't fucking know why but it doesn't work with mousedown
+function focusStart() {
+  start.focus();
+}
+function focusEnd() {
+  end.focus();
+}
+function focusAmount() {
+  amount.focus();
+}
+function focusPostcomma() {
+  aftercomma.focus();
 }
