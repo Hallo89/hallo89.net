@@ -40,6 +40,7 @@ body.light-mode {
   margin: 5px;
   -webkit-user-select: none;
   -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
 #headline #head_nav {
@@ -184,6 +185,7 @@ body.light-mode {
   transition: all .15s linear;
   -webkit-user-select: none;
   -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
 #headline #modes .dropdown_box .mode_switch:hover {
@@ -379,6 +381,7 @@ body.light-mode {
 .glb_box .box_header .header_text {
   padding: 38px 21px 38px 28px;
   font-size: 1.15em;
+  font-family: Arial, sans-serif;
   text-transform: uppercase;
   display: inherit;
   line-height: 0;
