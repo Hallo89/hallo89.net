@@ -60,6 +60,12 @@ body:not(.info_mode) {
   height: calc(100% - 8px);
   animation: .3s fadein cubic-bezier(.2, 0, 1, 1), .3s heightin ease-out;
 }
+.info_description {
+  color: hsl(0, 0%, 52%);
+  font-size: 1.3em;
+  font-family: Calibri, 'Times New Roman', sans-serif;
+  padding: 15px;
+}
 @keyframes fadein {
   from { opacity: .1; }
 }
@@ -76,11 +82,12 @@ body:not(.info_mode) {
   display: none;
 }
 .info_mode .box .box_content {
-  opacity: .7;
+  opacity: .75;
   filter: blur(8px);
 }
 .info_mode #content_function_2 {
   top: 76px;
+  overflow: hidden; /* TODO: Hidden overflow at the general function_content_2 */
 }
 .box .box_content {
   transition: filter .33s cubic-bezier(.35, 0, .65, 1);
@@ -90,16 +97,16 @@ body:not(.info_mode) {
   font-size: .75em;
   color: hsl(0, 0%, 75%);
   padding: 5px;
-  flex-wrap: wrap;
-}
-#function_1 {
   position: absolute;
-  top: 151px; /* 76px header + 75px last (and first) input_box (-> without margin) */
   bottom: 0;
   left: 0;
   right: 0;
   overflow: auto;
+  display: flex;
+  align-items: flex-start;
   align-content: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 #function_1 span {
   position: relative;
@@ -121,6 +128,9 @@ body:not(.info_mode) {
   left: 0;
   right: 0;
 }
+.one_input_container {
+  top: 151px; /* 76px header + 75px last (and first) input_box (-> without margin) */
+}
 .input_container {
   display: flex;
   justify-content: flex-start;
@@ -129,8 +139,8 @@ body:not(.info_mode) {
   background-color: hsl(0, 0%, 14%);
 }
 .input_box {
+  position: relative;
   font-size: .78em;
-  /*margin: 0 7px 3px; ?? */
   margin: 0 7px;
   display: flex;
   flex-direction: column;
@@ -188,6 +198,9 @@ input.number::-webkit-outer-spin-button {
 .input_file { /* input[type=file] */
   display: none;
 }
+label.file {
+  padding-right: 6px;
+}
 .input_box .input_header {
   margin-bottom: 3px;
   color: hsl(0, 0%, 70%);
@@ -215,9 +228,6 @@ input.number::-webkit-outer-spin-button {
   transform: translate(122px);
   background-color: rgba(131, 170, 172, 0.45);
 }
-/*body.translucentaxes .axes_container {
-  z-index: 1000;
-}*/
 .slider {
   padding: 3px 12px;
 }
@@ -234,6 +244,39 @@ input.number::-webkit-outer-spin-button {
 .slider.scale {
   width: 100px;
 }
+.tipper .tooltip {
+  position: absolute;
+  bottom: -23px;
+  color: hsl(0, 0%, 63%);
+  white-space: nowrap;
+  background-color: hsl(0, 0%, 7%);
+  padding: 2px 18px;
+  border-radius: 2px;
+  z-index: 1;
+}
+.tipper.actual_tip .tooltip {
+  animation: .15s tipopen;
+  /*clip-path: polygon(-5px 150%, 13px -50%, 100% -50%, 100% 150.00%);*/
+  /*polygon(-5px 150%, 13px -50%, 132px -> width + 5 -50%, 114px -> width - 13 150.00%)*/
+}/*
+@keyframes clipopen {
+  from { clip-path: polygon(10px 150%, 28px -50%, 28px -50%, 10px 150%); }
+  to   { clip-path: polygon(-5px 150%, 13px -50%, 112.5% -50%, 100% 150%) }
+}*/
+@keyframes tipopen {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.tipper .tooltip::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 30px;
+  border: solid 7px hsl(0, 0%, 7%);
+  transform: rotate(45deg);
+  z-index: -1;
+}
+
 .face {
   position: absolute;
   outline: 1px solid transparent;
@@ -321,6 +364,10 @@ input.number::-webkit-outer-spin-button {
 .container_3d {
   transform-style: preserve-3d;
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.container_only_3d {
+  transform-style: preserve-3d;
 }
 
 .elements_container {
@@ -335,39 +382,69 @@ input.number::-webkit-outer-spin-button {
   height: 2px;
 }
 
-.boundary_container_2d.option_2d .object_2d {
+.boundary_container_2d .object_2d {
   position: absolute;
   height: 320px;
   width: 320px;
+}
+.boundary_container_2d .boundary {
   opacity: .4;
 }
 
-.boundary_container_2d.option_2d .var_bottom {
-  background: url('./images/tools/enfloorment.png');
+.boundary_container_2d .bottom_grid .var_bottom {
+  background: url('../images/tools/enfloorment.png');
 }
-.boundary_container_2d.option_2d .bottom_grid .var_bottom {
+.boundary_container_2d .bottom_grid .var_bottom {
    transform: rotateX(90deg) translateX(-160px);
 }
 
-.boundary_container_2d.option_2d .var_corner {
-  background: url('./images/tools/enborderment.png');
+.boundary_container_2d .axes .var_axis.x {
+  background: url('../images/tools/enaxesxness.png');
 }
-.boundary_container_2d.option_2d .corners .object_1 {
+.boundary_container_2d .axes .var_axis.y {
+  background: url('../images/tools/enaxesyness.png');
+}
+.boundary_container_2d .axes .var_axis.z {
+  background: url('../images/tools/enaxeszness.png');
+}
+.boundary_container_2d .axes .var_axis.x.ver_1 {
+  transform: translateX(-160px) translateY(-160px);
+}
+.boundary_container_2d .axes .var_axis.y.ver_1 {
+  transform: translateX(-160px) translateY(-160px);
+}
+.boundary_container_2d .axes .var_axis.z.ver_1 {
+  transform: translateX(-160px) translateY(-160px) rotateY(90deg);
+}
+.boundary_container_2d .axes .var_axis.x.ver_2 {
+  transform: translateX(-160px) translateY(-160px) rotateX(90deg);
+}
+.boundary_container_2d .axes .var_axis.y.ver_2 {
+  transform: translateX(-160px) translateY(-160px) rotateY(90deg);
+}
+.boundary_container_2d .axes .var_axis.z.ver_2 {
+  transform: translateX(-160px) translateY(-160px) rotateY(90deg) rotateX(90deg);
+}
+
+.boundary_container_2d .var_corner {
+  background: url('../images/tools/enborderment.png');
+}
+.boundary_container_2d .corners .object_1 {
   transform: translateX(-160px) translateY(-160px) translateZ(160px);
 }
-.boundary_container_2d.option_2d .corners .object_2 {
+.boundary_container_2d .corners .object_2 {
   transform: rotateZ(90deg) translateX(-160px) translateY(160px) translateZ(-160px);
 }
-.boundary_container_2d.option_2d .corners .object_3 {
+.boundary_container_2d .corners .object_3 {
   transform: rotateY(90deg) rotateX(180deg) translateY(160px);
 }
-.boundary_container_2d.option_2d .corners .object_4 {
+.boundary_container_2d .corners .object_4 {
   transform: rotateY(90deg) translateY(-160px) translateZ(-320px);
 }
-.boundary_container_2d.option_2d .corners .object_5 {
+.boundary_container_2d .corners .object_5 {
   transform: rotateX(90deg) translateX(-160px);
 }
-.boundary_container_2d.option_2d .corners .object_6 {
+.boundary_container_2d .corners .object_6 {
   transform: rotateX(90deg) translateX(-160px) translateZ(320px);
 }
 

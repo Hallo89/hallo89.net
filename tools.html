@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>lol</title>
     <link rel="stylesheet" type="text/css" href="global.css">
-    <link rel="stylesheet" type="text/css" href="tools.css">
+    <link rel="stylesheet" type="text/css" href="./tools/tools.css">
   </head>
   <body class="info_mode">
     <div id="containers">
@@ -17,8 +17,11 @@
         <div class="box_header">
           <span class="header_text">Random figure generator</span>
         </div>
+        <div class="info_description">
+          A tool to generate random numbers. Amount of random numbers, starting and ending point and the length of one figure after its comma is customizable
+        </div>
         <div class="input_container">
-          <div class="input_box">
+          <div class="input_box tipper">
             <span class="input_header"># random numbers</span>
             <div class="input_number_container">
               <input type="number" class="input number" value="1" id="figures_amount">
@@ -27,8 +30,9 @@
                 <span class="change_number decrement noselect">▼</span>
               </div>
             </div>
+            <span class="tooltip noselect nodisplay">The amount of random numbers to generate</span>
           </div>
-          <div class="input_box">
+          <div class="input_box tipper">
             <span class="input_header"># after comma</span>
             <div class="input_number_container">
               <input type="number" class="input number" value="0" id="figures_aftercomma">
@@ -37,8 +41,9 @@
                 <span class="change_number decrement noselect">▼</span>
               </div>
             </div>
+            <span class="tooltip noselect nodisplay">The amount of digits after the comma</span>
           </div>
-          <div class="input_box">
+          <div class="input_box tipper">
             <span class="input_header">Start value</span>
             <div class="input_number_container">
               <input type="number" class="input number" value="1" id="figures_start">
@@ -47,8 +52,9 @@
                 <span class="change_number decrement noselect">▼</span>
               </div>
             </div>
+            <span class="tooltip noselect nodisplay">The starting cap of every number</span>
           </div>
-          <div class="input_box">
+          <div class="input_box tipper">
             <span class="input_header">End value</span>
             <div class="input_number_container">
               <input type="number" class="input number" value="1" id="figures_end">
@@ -57,18 +63,20 @@
                 <span class="change_number decrement noselect">▼</span>
               </div>
             </div>
+            <span class="tooltip noselect nodisplay">The ending cap of every number</span>
           </div>
-          <div class="input_box">
+          <div class="input_box tipper">
             <span class="input_header">Append mode</span>
             <span class="input appendbutton knobber" id="figures_append" onclick="toggleRandomMode()">
               <span class="knob"></span>
             </span>
+            <span class="tooltip noselect nodisplay">Toggling this will not delete previous generations</span>
           </div>
           <div class="input_box button noselect" onclick="randomNumber()">
             <span class="input_header">Go!</span>
           </div>
         </div>
-        <div class="box_content centerflex text_function" id="function_1"></div>
+        <div class="box_content text_function one_input_container" id="function_1"></div>
       </div>
 
       <div class="box glb_box">
@@ -79,15 +87,15 @@
         <div class="box_header">
           <span class="header_text">3D Magic</span>
         </div>
+        <div class="info_description">
+          A tool which displays minecraft models from their JSON format and let's you view them from any angle (more to come)
+        </div>
         <div class="input_container">
-          <div class="input_box">
-            <span class="input_header">Rotate Magic</span>
-            <span class="input slider rotate knobber">
-              <span class="knob default" style="transform: translateX(325px);"></span>
-              <span class="knob color_x rotate_knob x nodisplay"></span>
-              <span class="knob color_y rotate_knob y nodisplay"></span>
-              <span class="knob color_z rotate_knob z nodisplay"></span>
-            </span>
+          <div class="input_box file tipper">
+            <span class="input_header">JSON file</span>
+            <label for="input_json_model" class="input file" id="json_model_label">Browse...</label>
+            <input type="file" class="input_file" accept="application/json, .json" id="input_json_model">
+            <span class="tooltip noselect nodisplay">Choose a minecraft model .json to get everything running</span>
           </div>
           <div class="input_box">
             <span class="input_header">X-Axis</span>
@@ -107,6 +115,13 @@
               <span class="knob"></span>
             </span>
           </div>
+          <div class="input_box tipper">
+            <span class="input_header">Scaling</span>
+            <span class="input slider scale knobber">
+              <span class="knob" style="transform: translateX(50px);"></span>
+            </span>
+            <span class="tooltip noselect nodisplay">Scale the element. Kinda broken atm</span>
+          </div>
           <!--div class="input_box">
             <span class="input_header">Translucent axes</span>
             <span class="input translucentbutton knobber" id="axes_translucent" onclick="toggleTranslucentAxes()">
@@ -115,40 +130,33 @@
           </div-->
         </div>
         <div class="input_container">
-          <div class="input_box file">
-            <span class="input_header">JSON file</span>
-            <label for="input_json" class="input file" id="input_json_label">Browse...</label>
-            <input type="file" class="input_file" accept="application/json, .json" id="input_json">
-          </div>
-          <div class="input_box">
-            <span class="input_header">Quality | Quantity</span>
+          <div class="input_box tipper">
+            <span class="input_header">Quantity | Quality</span>
             <span class="input qualityquantity knobber" onclick="toggleQuantity()">
               <span class="knob"></span>
             </span>
+            <span class="tooltip noselect nodisplay">Toggle a more inperformant, but better looking boundary and axes</span>
           </div>
-          <div class="input_box">
+          <div class="input_box tipper">
             <span class="input_header">Axes visibility</span>
             <span class="input axesvisibility knobber active" onclick="toggleAxes()">
               <span class="knob"></span>
             </span>
+            <span class="tooltip noselect nodisplay">Toggle the visibility of the visual axes (also kinda broken my god)</span>
           </div>
-          <div class="input_box">
+          <div class="input_box tipper">
             <span class="input_header">Inperformance</span>
             <span class="input bottomgridvisibility knobber" onclick="toggleGrid()">
               <span class="knob"></span>
             </span>
+            <span class="tooltip noselect nodisplay">With Quality mode enabled, toggle a grid-aid which is most-likely inperformant</span>
           </div>
-          <div class="input_box">
+          <div class="input_box tipper">
             <span class="input_header">Fun</span>
             <span class="input funbutton knobber" onclick="toggleFun()">
               <span class="knob"></span>
             </span>
-          </div>
-          <div class="input_box">
-            <span class="input_header">Scaling</span>
-            <span class="input slider scale knobber">
-              <span class="knob" style="transform: translateX(50px);"></span>
-            </span>
+            <span class="tooltip noselect nodisplay">Toggle fun. Have fun. Now.</span>
           </div>
         </div>
         <div class="box_content centerflex" id="content_function_2">
@@ -178,21 +186,29 @@
               <span class="color_preview color_down"></span>
             </div>
           </div>
-          <div class="wrapper_3d container_3d" id="function_2" style="transform: rotate3d(1, 1, 1, 325deg);">
-            <div class="boundary_container_2d option_2d container_3d nodisplay">
+          <div class="wrapper_3d container_3d" id="function_2" style="transform: rotate3d(1, 0, 0, -20deg) rotate3d(0, 1, 0, 20deg);">
+            <div class="boundary_container_2d container_3d">
               <div class="corners container_3d">
-                <span class="object_1 var_corner object_2d"></span>
-                <span class="object_2 var_corner object_2d"></span>
-                <span class="object_3 var_corner object_2d"></span>
-                <span class="object_4 var_corner object_2d"></span>
-                <span class="object_5 var_corner object_2d"></span>
-                <span class="object_6 var_corner object_2d"></span>
+                <span class="object_1 var_corner boundary object_2d"></span>
+                <span class="object_2 var_corner boundary object_2d"></span>
+                <span class="object_3 var_corner boundary object_2d"></span>
+                <span class="object_4 var_corner boundary object_2d"></span>
+                <span class="object_5 var_corner boundary object_2d"></span>
+                <span class="object_6 var_corner boundary object_2d"></span>
               </div>
               <div class="bottom_grid container_3d">
-                <span class="var_bottom object_2d"></span>
+                <span class="var_bottom boundary object_2d"></span>
+              </div>
+              <div class="axes container_only_3d">
+                <span class="var_axis x ver_1 object_2d"></span>
+                <span class="var_axis y ver_1 object_2d"></span>
+                <span class="var_axis z ver_1 object_2d"></span>
+                <span class="var_axis x ver_2 object_2d"></span>
+                <span class="var_axis y ver_2 object_2d"></span>
+                <span class="var_axis z ver_2 object_2d"></span>
               </div>
             </div>
-            <div class="boundary_container container_3d">
+            <div class="boundary_container container_3d nodisplay">
               <div class="bottom_grid container_3d nodisplay"> <!-- don't turn this on -->
                 <div class="vertical container_3d">
                   <div class="stripe_1 container_3d">
@@ -682,7 +698,7 @@
                 </div>
               </div>
             </div>
-            <div class="container_3d" id="axes_container">
+            <div class="container_3d nodisplay" id="axes_container">
               <div class="axes_x container_3d">
                 <span class="face axis aid_stripe color_x end front"></span>
                 <span class="face axis aid_stripe color_x end behind"></span>
@@ -718,7 +734,35 @@
         </div>
       </div>
 
+      <!--div class="box glb_box">
+        <div class="corneranimation">
+          <span class="corner_before"></span>
+          <span class="corner_after"></span>
+        </div>
+        <div class="box_header">
+          <span class="header_text">JSON minificator</span>
+        </div>
+        <div class="info_description">
+          Description
+        </div>
+        <div class="input_container">
+          <div class="input_box file tipper">
+            <span class="input_header">JSON file</span>
+            <label for="minify_json" class="input file" id="minify_json_label">Browse...</label>
+            <input type="file" class="input_file" accept="application/json, .json" id="minify_json">
+            <span class="tooltip noselect">Choose a .json file to minify!</span>
+          </div>
+          <div class="input_box button noselect" onclick="minifyJson()">
+            <span class="input_header">Go!</span>
+          </div>
+        </div>
+        <div class="box_content centerflex text_function one_input_container" id="function_3"></div>
+      </div-->
+
     </div>
-    <script src="tools.js"></script>
+    <script src="./tools/base.js"></script>
+    <script src="./tools/rng.js"></script>
+    <script src="./tools/3D.js"></script>
+    <script src="./tools/minify.js"></script>
   </body>
 </html>
