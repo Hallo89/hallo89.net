@@ -43,7 +43,7 @@ h2 {
   max-width: 1050px;
   height: 2000px;
   padding: 60px 35px 35px;
-  font-size: 21px;
+  font-size: 22px;
   color: #999999;
 }
 #main #main_content h2 {
@@ -52,8 +52,11 @@ h2 {
   writing-mode: sideways-lr;
   color: #919191;
   margin-left: -25px;
-  margin-top: -3px;
+  margin-top: -1px;
   float: left;
+}
+#main #main_content p {
+  line-height: 1.41em;
 }
 .tutorial_nav {
   position: sticky;
