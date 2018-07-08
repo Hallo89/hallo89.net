@@ -47,6 +47,10 @@ body:not(.info_mode) {
     margin: auto !important;
   }
 }
+.info_mode .box .box_header {
+  position: static;
+  background-color: hsl(0, 0%, 12.5%);
+}
 .box {
   font-size: 22px;
   transition: all .3s ease-out;
@@ -54,6 +58,11 @@ body:not(.info_mode) {
 }
 .box .box_header {
   font-size: 1.1em;
+}
+.box .floating_header {
+  position: absolute;
+  right: 15px;
+  background-color: transparent;
 }
 .box.active_item {
   width: 100%;
