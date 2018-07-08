@@ -30,7 +30,7 @@
                 <span class="change_number decrement noselect">▼</span>
               </div>
             </div>
-            <span class="tooltip noselect nodisplay">The amount of random numbers to generate</span>
+            <span class="tooltip default noselect nodisplay">The amount of random numbers to generate</span>
           </div>
           <div class="input_box tipper">
             <span class="input_header"># after comma</span>
@@ -41,7 +41,7 @@
                 <span class="change_number decrement noselect">▼</span>
               </div>
             </div>
-            <span class="tooltip noselect nodisplay">The amount of digits after the comma</span>
+            <span class="tooltip default noselect nodisplay">The amount of digits after the comma</span>
           </div>
           <div class="input_box tipper">
             <span class="input_header">Start value</span>
@@ -52,7 +52,7 @@
                 <span class="change_number decrement noselect">▼</span>
               </div>
             </div>
-            <span class="tooltip noselect nodisplay">The starting cap of every number</span>
+            <span class="tooltip default noselect nodisplay">The starting cap of every number</span>
           </div>
           <div class="input_box tipper">
             <span class="input_header">End value</span>
@@ -63,14 +63,14 @@
                 <span class="change_number decrement noselect">▼</span>
               </div>
             </div>
-            <span class="tooltip noselect nodisplay">The ending cap of every number</span>
+            <span class="tooltip default noselect nodisplay">The ending cap of every number</span>
           </div>
           <div class="input_box tipper">
             <span class="input_header">Append mode</span>
             <span class="input appendbutton knobber" id="figures_append" onclick="toggleRandomMode()">
               <span class="knob"></span>
             </span>
-            <span class="tooltip noselect nodisplay">Toggling this will not delete previous generations</span>
+            <span class="tooltip default noselect nodisplay">Toggling this will not delete previous generations</span>
           </div>
           <div class="input_box button noselect" onclick="randomNumber()">
             <span class="input_header">Go!</span>
@@ -95,38 +95,36 @@
             <span class="input_header">JSON file</span>
             <label for="input_json_model" class="input file" id="json_model_label">Browse...</label>
             <input type="file" class="input_file" accept="application/json, .json" id="input_json_model">
-            <span class="tooltip noselect nodisplay">Choose a minecraft model .json to get everything running</span>
+            <span class="tooltip default noselect nodisplay">Choose a minecraft model .json to get everything running</span>
           </div>
-          <div class="input_box">
-            <span class="input_header">X-Axis</span>
-            <span class="input x axisbutton knobber active" onclick="toggleAxisX()">
+          <div class="input_box tipper multiple">
+             <span class="tooltip multiple noselect"><span class="color_mark_none">None</span> | <span class="color_mark_x">X-Axis</span> | <span class="color_mark_y">Y-Axis</span> | <span class="color_mark_z">Z-Axis</span></span>
+            <span class="input_header">Limit to one axis</span>
+            <span class="input axisbutton knobber">
               <span class="knob"></span>
+              <div class="mark_container">
+                <div class="marker none currentchoice">
+                  <span class="mark"></span>
+                </div>
+                <div class="marker axis x">
+                  <span class="mark color_x"></span>
+                </div>
+                <div class="marker axis y">
+                  <span class="mark color_y"></span>
+                </div>
+                <div class="marker axis z">
+                  <span class="mark color_z"></span>
+                </div>
+              </div>
             </span>
+            <span class="tooltip default noselect nodisplay">Limit the perspective of the element to one specific axis</span>
           </div>
-          <div class="input_box">
-            <span class="input_header">Y-Axis</span>
-            <span class="input y axisbutton knobber active" onclick="toggleAxisY()">
-              <span class="knob"></span>
-            </span>
-          </div>
-          <div class="input_box">
-            <span class="input_header">Z-Axis</span>
-            <span class="input z axisbutton knobber active" onclick="toggleAxisZ()">
-              <span class="knob"></span>
-            </span>
-          </div>
-          <div class="input_box tipper">
+          <!--div class="input_box tipper">
             <span class="input_header">Scaling</span>
             <span class="input slider scale knobber">
               <span class="knob" style="transform: translateX(50px);"></span>
             </span>
-            <span class="tooltip noselect nodisplay">Scale the element. Kinda broken atm</span>
-          </div>
-          <!--div class="input_box">
-            <span class="input_header">Translucent axes</span>
-            <span class="input translucentbutton knobber" id="axes_translucent" onclick="toggleTranslucentAxes()">
-              <span class="knob"></span>
-            </span>
+            <span class="tooltip default noselect nodisplay">Scale the element. Kinda broken atm</span>
           </div-->
         </div>
         <div class="input_container">
@@ -135,28 +133,35 @@
             <span class="input qualityquantity knobber" onclick="toggleQuantity()">
               <span class="knob"></span>
             </span>
-            <span class="tooltip noselect nodisplay">Toggle a more inperformant, but better looking boundary and axes</span>
+            <span class="tooltip default noselect nodisplay">Toggle a more inperformant, but better looking boundary and axes</span>
           </div>
           <div class="input_box tipper">
             <span class="input_header">Axes visibility</span>
             <span class="input axesvisibility knobber active" onclick="toggleAxes()">
               <span class="knob"></span>
             </span>
-            <span class="tooltip noselect nodisplay">Toggle the visibility of the visual axes (also kinda broken my god)</span>
+            <span class="tooltip default noselect nodisplay">Toggle the visibility of the visual axes (also kinda broken my god)</span>
           </div>
           <div class="input_box tipper">
-            <span class="input_header">Inperformance</span>
+            <span class="input_header">Quality Grid</span>
             <span class="input bottomgridvisibility knobber" onclick="toggleGrid()">
               <span class="knob"></span>
             </span>
-            <span class="tooltip noselect nodisplay">With Quality mode enabled, toggle a grid-aid which is most-likely inperformant</span>
+            <span class="tooltip default noselect nodisplay">With Quality mode enabled, toggle a grid-aid which is most-likely inperformant</span>
           </div>
+          <!--div class="input_box tipper">
+            <span class="input_header">Anti-aliasing</span>
+            <span class="input outlinebutton knobber" onclick="toggleOutline()">
+              <span class="knob"></span>
+            </span>
+            <span class="tooltip default noselect nodisplay">Anti-alias jagged 3D-elements. Causes inperformance on large models or quality mode. Most-likely only a problem on Firefox</span>
+          </div-->
           <div class="input_box tipper">
             <span class="input_header">Fun</span>
             <span class="input funbutton knobber" onclick="toggleFun()">
               <span class="knob"></span>
             </span>
-            <span class="tooltip noselect nodisplay">Toggle fun. Have fun. Now.</span>
+            <span class="tooltip default noselect nodisplay">Toggle fun. Have fun. Now.</span>
           </div>
         </div>
         <div class="box_content centerflex" id="content_function_2">
@@ -750,7 +755,7 @@
             <span class="input_header">JSON file</span>
             <label for="minify_json" class="input file" id="minify_json_label">Browse...</label>
             <input type="file" class="input_file" accept="application/json, .json" id="minify_json">
-            <span class="tooltip noselect">Choose a .json file to minify!</span>
+            <span class="tooltip default noselect">Choose a .json file to minify!</span>
           </div>
           <div class="input_box button noselect" onclick="minifyJson()">
             <span class="input_header">Go!</span>

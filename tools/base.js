@@ -1,9 +1,10 @@
 var boxesArray = []; //Holding the '.box' items after they have been converted from a nodeList to an array
-var timeoutLock = true;
+var timeoutLock = [];
+var it = 0;
 
 const boxes = document.querySelectorAll('.box'); //all boxes
 const tooltipTrigger = document.querySelectorAll('.tipper'); //all elements which trigger a tooltip (which are '.input_box'es)
-const tooltips = document.querySelectorAll('.tooltip'); //all tooltips
+const tooltips = document.querySelectorAll('.tooltip.default'); //all tooltips
 
 const containersInput = document.querySelectorAll('.input_container'); //all '.input_container's
 
@@ -56,8 +57,8 @@ function choseItem() {
   this.classList.add('active_item');
   this.children[2].classList.add('nodisplay'); //info_description
   document.body.classList.remove('info_mode');
-
-  container3D.addEventListener('mousemove', navigate);
+//adding late event listeners which aren't allowed to run during the info_mode phase
+  //container3D.addEventListener('mousemove', navigate);
   container3D.addEventListener('mousedown', navigateMouseDown);
   //container3D.addEventListener('mouseup', navigateMouseUp);
   container3D.addEventListener('wheel', navigateWheel);
@@ -70,26 +71,22 @@ function choseItem() {
 //Tooltips when having hovered over a specific element (most-likely every input_box) for a specific amount of time
  //Execution of the procedure once the mouse has entered the target
 function tooltipIn() {
-  timeoutLock = true;
   let eventTarget = this;
+  timeoutLock[it] = eventTarget;
   setTimeout(function() {
-    console.log(timeoutLock);
-    if (timeoutLock == true) {
-      console.log("true!");
+    if (timeoutLock[it] == eventTarget) {
       eventTarget.lastElementChild.classList.remove('nodisplay');
       eventTarget.classList.add('actual_tip');
     }
-  }, 800);
+  }, 700);
 }
  //Termination of the procedure once the mouse has exited the target
 function tooltipOut() {
-  timeoutLock = false;
+  timeoutLock[it] = null;
+  it++;
   let eventTarget = this;
-  this.lastElementChild.classList.add('nodisplay');
-  setTimeout(function() {
-    eventTarget.lastElementChild.classList.add('nodisplay');
-    eventTarget.classList.remove('actual_tip');
-  }, 800);
+  eventTarget.lastElementChild.classList.add('nodisplay');
+  eventTarget.classList.remove('actual_tip');
 }
 
 //computing the right corner of tooltips and placing them
