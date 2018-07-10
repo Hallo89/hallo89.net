@@ -1,15 +1,9 @@
 body {
   margin: 0;
-}
-body:not(.info_mode) {
-  background: linear-gradient(135deg, #3F2D36, #36303B);
-  animation: .35s backgroundfade ease-in;
-}
-@keyframes backgroundfade {
-  from { background: hsl(0, 0%, 9%); }
-  to   { background: #3A2E38; }
+  background: linear-gradient(to bottom right, #1D5857, #534059); /* #1C5150, #4D3C52 */
 }
 #containers {
+  opacity: .95;
   max-width: 100%;
   height: calc(100vh - 25px);
   margin: 11px 12px 14px;
@@ -132,7 +126,7 @@ body:not(.info_mode) {
 }
 #content_function_2 {
   position: absolute;
-  top: calc(76px + 77px + 75px); /* Header + first input_box (with margin) (*1) + last input_box (no margin) */
+  top: calc(77px + 75px); /* first input_box (with margin) (*1) + last input_box (no margin) */
   bottom: 0;
   left: 0;
   right: 0;
@@ -223,6 +217,7 @@ label.file {
   cursor: pointer;
   justify-content: center;
   align-items: center;
+  padding: 12px 8px 8px;
 }
 .knobber {
   position: relative;
@@ -324,6 +319,7 @@ label.file {
 }
 .tipper .tooltip.default {
   bottom: -25px;
+  left: 8px;
 }
 .tipper .tooltip.default::before {
   top: -6px;
@@ -346,6 +342,19 @@ label.file {
 
 .face {
   position: absolute;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.face.outline {
+  outline: 1px solid hsl(0, 0%, 30%);
+}
+.container_3d {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.container_only_3d {
+  transform-style: preserve-3d;
 }
 
 .nodisplay {
@@ -370,10 +379,10 @@ label.file {
   background-color: #046CA5;
 }
 .color_west {
-  background-color: #777922;
+  background-color: #CDA544;
 }
 .color_east {
-  background-color: #CDA544;
+  background-color: #777922;
 }
 .color_up {
   background-color: #AC724A;
@@ -425,15 +434,6 @@ label.file {
   padding: 5px;
   font-family: 'Century Gothic', Calibri, Arial, sans-serif;
   line-height: .82em;
-}
-
-.container_3d {
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-.container_only_3d {
-  transform-style: preserve-3d;
 }
 
 .elements_container {
@@ -516,7 +516,7 @@ label.file {
 }
 
 .boundary {
-  background-color: hsla(0, 0%, 45%, .2)
+  background-color: hsla(0, 0%, 45%, .35)
 }
 .boundary_container .corners .corner_1 {
   transform: translateX(-200px) translateY(200px) translateZ(200px) rotateX(90deg);
@@ -657,6 +657,10 @@ label.file {
 }
 .color_z, .axisbutton.z.active .knob {
   background-color: #046CA5 !important;
+}
+
+.axes_container {
+  transform: rotateX(180deg);
 }
 .axes_y {
   transform: rotateX(90deg);

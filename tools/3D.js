@@ -1,4 +1,6 @@
 //predefined file-global variables
+var reader = new FileReader(); //The FileReader reading the file. Makes sense right?
+var keyFile; //The initial variable having stored the not-human-readable file which has been chosen
 var elements = []; //Array of the model elements via the parameter "elements" in the original file
 var updateLock = true; //TODO improve this
 var clickedX; //The X-coordinate of the point where a click has taken place in container3D in order to navigate
@@ -91,7 +93,7 @@ const axesFacesTop = document.querySelectorAll('#axes_container .top');
 const axesFacesBottom = document.querySelectorAll('#axes_container .bottom');
 
 //Event-listeners which do stuff
-fileInput.addEventListener('change', getJSON); //The brain of the program
+fileInput.addEventListener('change', initializeJSON); //The brain of the program
 window.addEventListener('mouseup', up); //reset various variables once the mouse has been released
 window.addEventListener('mousemove', handleMousemove);  //movingScaleSlider);
 //rotateSlider.addEventListener('mousedown', rotateSliderClick);
@@ -100,105 +102,129 @@ choiceRestrictAxis.addEventListener('mousedown', restrictAxisClick);
 container3D.addEventListener('contextmenu', handleContext); //preventing the context menu from showing up in the function's boundaries
 
 //Functions
-//Brain
-function getJSON() {
-  let reader = new FileReader();
-  let keyFile = fileInput.files[0];
+//Pre-brain. Handles one-time-per-input things after a file input
+function initializeJSON() {
+  keyFile = fileInput.files[0];
   fileLabel.innerHTML = 'Browse... ► ' + keyFile.name;
+  handleJSON();
+}
+
+function handleJSON() {
   reader.readAsText(keyFile);
-  reader.onload = function(e) {
-    //oddly, this whole part executes last
-    let fileContent = e.target.result;
-    containerElements.innerHTML = '';
-    if (fileContent.indexOf('parent') >= 0 && fileContent.indexOf('elements') < 0) {
-      errorMessage('Error: missing elements; This model appears to be calling a parent. Parent feature coming soon');
-      return;
-    }
-    if (fileContent.indexOf('parent') < 0 && fileContent.indexOf('elements') < 0) {
-      errorMessage('Error: missing recognizable structures; This model appears not to be a valid json model format');
-      return;
-    }
-    try {
-      elements = JSON.parse(fileContent).elements;
-    }
-    catch (err) {
-      let error = err.message;
-      if (error.indexOf('JSON.parse: ') >= 0) {
-        error = error.slice(error.indexOf('JSON.parse: ') + 'JSON.parse: '.length);
-      }
-      error = 'Error: ' + error;
-      if (error.indexOf('expected') >= 0) {
-        error = error.slice(0, error.indexOf('expected')) + ' missing' + error.slice(error.indexOf('expected') + 'expected'.length)
-      }
-      if (error.search(/\bat\b/) >= 0) {
-        error = error.slice(0, error.search(/\bat\b/) + 'at'.length) + ' about' + error.slice(error.search(/\bat\b/) + 'at'.length);
-      }
-      errorMessage(error);
-      return;
-    }
-    containerError.classList.add('nodisplay');
-    for (var i = 0; i < elements.length; i++) {
-      let height = elements[i].to[1] - elements[i].from[1];
-      let width = elements[i].to[0] - elements[i].from[0];
-      let depth = elements[i].to[2] - elements[i].from[2];
-      let positionX = elements[i].from[0];
-      let positionY = elements[i].from[1];
-      let positionZ = elements[i].from[2];
-      let html = '<div class="element container_3d" id="cube_' + i + '" style="transform: translateX(' + positionX * scaleFactor + 'px) translateY(' + -positionY * scaleFactor + 'px) translateZ(' + positionZ * scaleFactor + 'px)">';
-      let orientations = Object.getOwnPropertyNames(elements[i].faces);
-      for (var n = 0; n < orientations.length; n++) {
-        let basicStyle;
-        let color;
-        switch (orientations[n]) {
-          case 'north':
-            basicStyle = 'transform: translateZ(' + depth * scaleFactor + 'px) translateY(' + -height * scaleFactor + 'px); width: ' + width * scaleFactor + 'px; height: ' + height * scaleFactor + 'px; background-color: #A84E4E;';
-            color = 'color_north';
-            break;
-          case 'south':
-            basicStyle = 'transform: translateY(' + -height * scaleFactor + 'px); width: ' + width * scaleFactor + 'px; height: ' + height * scaleFactor + 'px;';
-            color = 'color_south';
-            break;
-          case 'east':
-            basicStyle = 'transform: rotateY(90deg) translateY(' + -height * scaleFactor + 'px) translateZ(' + -(depth/2 - width) * scaleFactor + 'px) translateX(' + -depth/2 * scaleFactor + 'px); width: ' + depth * scaleFactor + 'px; height: ' + height * scaleFactor + 'px;';
-            color = 'color_east';
-            break;
-          case 'west':
-            basicStyle = 'transform: rotateY(90deg) translateY(' + -height * scaleFactor + 'px) translateZ(' + -depth/2 * scaleFactor + 'px) translateX(' + -depth/2 * scaleFactor + 'px); width: ' + depth * scaleFactor + 'px; height: ' + height * scaleFactor + 'px;';
-            color = 'color_west';
-            break;
-          case 'up':
-            basicStyle = 'transform: rotateX(90deg) rotateZ(90deg) translateZ(' + (width/2 + height) * scaleFactor + 'px) translateX(' + depth/2 * scaleFactor + 'px) translateY(' + (depth/2 - width/2) * scaleFactor + 'px); width: ' + depth * scaleFactor + 'px; height: ' + width * scaleFactor + 'px;';
-            color = 'color_up';
-            break;
-          case 'down':
-            basicStyle = 'transform: rotateX(90deg) rotateZ(90deg) translateZ(' + width/2 * scaleFactor + 'px) translateX(' + depth/2 * scaleFactor + 'px) translateY(' + (depth/2 - width/2) * scaleFactor + 'px); width: ' + depth * scaleFactor + 'px; height: ' + width * scaleFactor + 'px;';
-            color = 'color_down';
-            break;
-        }
-        html += '<span class="face ' + orientations[n] + ' ' + color + '" style="'+ basicStyle + '"></span>'
-      }
-      html += '</div>'
-      containerElements.innerHTML += html;
-    }
-    if (updateLock == true) { //Only refresh when necessary
-      refreshCube();
-      updateLock = false;
-    }
-    colorLegend.classList.remove('nodisplay');
+}
+
+//Brain
+reader.onload = function(e) {
+  //oddly, this whole part executes last
+  let fileContent = e.target.result;
+  containerElements.innerHTML = '';
+  if (fileContent.indexOf('parent') >= 0 && fileContent.indexOf('elements') < 0) {
+    errorMessage('Error: missing elements; This model appears to be calling a parent. Parent feature coming soon');
+    return;
   }
+  if (fileContent.indexOf('parent') < 0 && fileContent.indexOf('elements') < 0) {
+    errorMessage('Error: missing recognizable structures; This model appears not to be a valid json model format');
+    return;
+  }
+  try {
+    elements = JSON.parse(fileContent).elements;
+  }
+  catch (err) {
+    let error = err.message;
+    if (error.indexOf('JSON.parse: ') >= 0) {
+      error = error.slice(error.indexOf('JSON.parse: ') + 'JSON.parse: '.length);
+    }
+    error = 'Error: ' + error;
+    if (error.indexOf('expected') >= 0) {
+      error = error.slice(0, error.indexOf('expected')) + ' missing' + error.slice(error.indexOf('expected') + 'expected'.length)
+    }
+    if (error.search(/\bat\b/) >= 0) {
+      error = error.slice(0, error.search(/\bat\b/) + 'at'.length) + ' about' + error.slice(error.search(/\bat\b/) + 'at'.length);
+    }
+    errorMessage(error);
+    return;
+  }
+  containerError.classList.add('nodisplay');
+  for (var i = 0; i < elements.length; i++) {
+    let height = elements[i].to[1] - elements[i].from[1];
+    let width = elements[i].to[0] - elements[i].from[0];
+    let depth = elements[i].to[2] - elements[i].from[2];
+    let positionX = elements[i].from[0];
+    let positionY = elements[i].from[1];
+    let positionZ = elements[i].from[2];
+    let rotationOriginX;
+    let rotationOriginY;
+    let rotationOriginZ;
+    let rotationAxis;
+    let rotationAngle;
+    if (elements[i].rotation) {
+      rotationOriginX = elements[i].rotation.origin[0];
+      rotationOriginY = elements[i].rotation.origin[1];
+      rotationOriginZ = elements[i].rotation.origin[2];
+      rotationAxis = elements[i].rotation.axis;
+      rotationAngle = elements[i].rotation.angle;
+    }
+    else {
+      rotationOriginX = 8;
+      rotationOriginY = 8;
+      rotationOriginZ = 8;
+      rotationAxis = "X";
+      rotationAngle = 0;
+    }
+    //Axes: rotateX(180deg) translateX( + x + ) translateY( + (-)z + ) translateZ( + z + ) rotate + axis + ( + angle + ); whereas 8 = 0, 16 = max/2, 0 = -max/2
+    let html = '<div class="element container_3d" id="cube_' + i + '" style="transform: rotate' + rotationAxis +'(' + rotationAngle + 'deg) translateX(' + (16 * scaleFactor - width * scaleFactor - positionX * scaleFactor) + 'px) translateY(' + -positionY * scaleFactor + 'px) translateZ(' + (16 * scaleFactor - depth * scaleFactor - positionZ * scaleFactor) + 'px); transform-origin: ' + (16 * scaleFactor - rotationOriginX * scaleFactor) + 'px ' + -(rotationOriginY * scaleFactor) + 'px ' + (16 * scaleFactor - rotationOriginZ * scaleFactor) + 'px">';
+    let orientations = Object.getOwnPropertyNames(elements[i].faces);
+    for (var n = 0; n < orientations.length; n++) {
+      let basicStyle;
+      let color;
+      switch (orientations[n]) {
+        case 'north':
+          basicStyle = 'transform: translateZ(' + depth * scaleFactor + 'px) translateY(' + -height * scaleFactor + 'px); width: ' + width * scaleFactor + 'px; height: ' + height * scaleFactor + 'px;';
+          color = 'color_north';
+          break;
+        case 'south':
+          basicStyle = 'transform: translateY(' + -height * scaleFactor + 'px) rotateY(180deg); width: ' + width * scaleFactor + 'px; height: ' + height * scaleFactor + 'px;';
+          color = 'color_south';
+          break;
+        case 'west':
+          basicStyle = 'transform: rotateY(90deg) translateY(' + -height * scaleFactor + 'px) translateZ(' + -(depth/2 - width) * scaleFactor + 'px) translateX(' + -depth/2 * scaleFactor + 'px); width: ' + depth * scaleFactor + 'px; height: ' + height * scaleFactor + 'px;';
+          color = 'color_west';
+          break;
+        case 'east':
+          basicStyle = 'transform: rotateY(90deg) translateY(' + -height * scaleFactor + 'px) translateZ(' + -depth/2 * scaleFactor + 'px) translateX(' + -depth/2 * scaleFactor + 'px) rotateY(180deg); width: ' + depth * scaleFactor + 'px; height: ' + height * scaleFactor + 'px;';
+          color = 'color_east';
+          break;
+        case 'up':
+          basicStyle = 'transform: rotateX(90deg) rotateZ(90deg) translateZ(' + (width/2 + height) * scaleFactor + 'px) translateX(' + depth/2 * scaleFactor + 'px) translateY(' + (depth/2 - width/2) * scaleFactor + 'px); width: ' + depth * scaleFactor + 'px; height: ' + width * scaleFactor + 'px;';
+          color = 'color_up';
+          break;
+        case 'down':
+          basicStyle = 'transform: rotateX(90deg) rotateZ(90deg) translateZ(' + width/2 * scaleFactor + 'px) translateX(' + depth/2 * scaleFactor + 'px) translateY(' + (depth/2 - width/2) * scaleFactor + 'px) rotateY(180deg); width: ' + depth * scaleFactor + 'px; height: ' + width * scaleFactor + 'px;';
+          color = 'color_down';
+          break;
+      }
+      html += '<span class="face ' + orientations[n] + ' ' + color + '" style="'+ basicStyle + '"></span>'
+    }
+    html += '</div>'
+    containerElements.innerHTML += html;
+  }
+  if (updateLock == true) { //Only refresh when necessary
+    refreshCube();
+    updateLock = false;
+  }
+  colorLegend.classList.remove('nodisplay');
 }
 //Heart
 function updateCube() {
-  output3D.style.transform = 'scale(' + scaleRange + ') translateX(' + translateRangeX + 'px) translateY(' + translateRangeY + 'px) rotate3d(1, 0, 0, ' + transformRangeY + 'deg) rotate3d(0, 1, 0, ' + transformRangeX + 'deg) rotate3D(0, 0, 1, ' + transformRangeZ + 'deg)';
+  output3D.style.transform = 'scale(' + scaleRange + ') translateX(' + translateRangeX + 'px) translateY(' + translateRangeY + 'px) rotateX(' + transformRangeY + 'deg) rotateY(' + transformRangeX + 'deg) rotateZ(' + transformRangeZ + 'deg)';
   //rotateSliderKnob.style.transform = 'translateX(' + range + 'px)';
 }
 
 //Beautification of the whole thing - Refreshes the element in order for toggled elements to show (Bug in various browsers)
 function refreshCube() {
-  scaleRange = scaleRange.toString();
-  scaleRange += '.00001';
+  scaleRange += .00001;
   updateCube();
-  scaleRange = parseInt(scaleRange);
+  scaleRange -= .00001;
 }
 
 
