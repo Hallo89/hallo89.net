@@ -1,0 +1,35 @@
+/*
+
+A custom theme created by Hallo89 using the color palette by Neoncube,
+most commonly known in the minecraft resource pack "Dandelion"
+
+Built for my minecraft model creator,
+hence why this theme is solely for JSON
+
+*/
+.cm-s-neoncube-json { background-color: hsl(0, 0%, 10%); color: #dcdccc; }
+.cm-s-neoncube-json .CodeMirror-gutters { background: hsl(0, 0%, 15%) !important; border: none; }
+.cm-s-neoncube-json .CodeMirror-linenumber { padding: 0 5px 0 3px; }
+.cm-s-neoncube-json .CodeMirror-cursor { border: 1px solid #CDC6D3; border-top: none; border-bottom: none; }
+
+.cm-s-neoncube-json span.cm-atom { color: #C1604D; } /* boolean */
+.cm-s-neoncube-json span.cm-string { color: #26A4AD/*#1398A9*/; }
+.cm-s-neoncube-json span.cm-number { color: /*#AB629C*/ #BF8953; }
+.cm-s-neoncube-json span.cm-property { color: #469870; }
+
+.cm-s-neoncube-json.CodeMirror-focused .CodeMirror-selected { background: rgba(47, 44, 50, .9); }
+.cm-s-neoncube-json .CodeMirror-selected { background: rgba(44, 41, 46, .55); }
+
+.CodeMirror-line::selection, .CodeMirror-line > span::selection, .CodeMirror-line > span > span::selection {
+  background: rgba(30, 53, 65, .85);
+}
+.CodeMirror-line::-webkit-selection, .CodeMirror-line > span::-webkit-selection, .CodeMirror-line > span > span::-webkit-selection {
+  background: rgba(30, 53, 65, .85);
+}
+.CodeMirror-line::-moz-selection, .CodeMirror-line > span::-moz-selection, .CodeMirror-line > span > span::-moz-selection {
+  background: rgba(30, 53, 65, .85);
+}
+
+.cm-s-neoncube-json .CodeMirror-overlayscroll-horizontal div, .CodeMirror-overlayscroll-vertical div { background: hsl(0, 0%, 30%); transition: background .15s; right: 2px }
+.cm-s-neoncube-json .CodeMirror-overlayscroll-horizontal div:hover, .CodeMirror-overlayscroll-vertical div:hover { background: hsl(0, 0%, 35%); }
+.cm-s-neoncube-json .CodeMirror-overlayscroll-horizontal, .CodeMirror-overlayscroll-vertical { width: 7px; }

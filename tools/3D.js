@@ -1,8 +1,12 @@
 //predefined file-global variables
 var reader = new FileReader(); //The FileReader reading the file. Makes sense right?
 var keyFile; //The initial variable having stored the not-human-readable file which has been chosen
-var elements = []; //Array of the model elements via the parameter "elements" in the original file
-var updateLock = true; //TODO improve this
+var elements = []; //Array-Object of the model elements via the parameter "elements" in the original file
+//var textures = []; //Object of the texture files expressed in their path via the parameter "textures" in the original file
+//var images = new Object();
+var updateLock = true; //A lock stating whether the model has to be reloaded
+var firstInputsWidth = 756; //The total length of all items inside the first input_container + header (static due to knowing the beginning width), changing when a file is chosing
+var secondInputsWidth = 370;//The total length of all items inside the second input_container; static due to knowing the beginning width
 var clickedX; //The X-coordinate of the point where a click has taken place in container3D in order to navigate
 var clickedY; //The Y-coordinate of the point where a click has taken place in container3D in order to navigate
 var transformRangeX = 20; //The absolute rotation of the x-coordinate
@@ -16,41 +20,72 @@ var translateLockedX; //Same as above for the current translation of the x-coord
 var translateLockedY; //Same as above; Y-coordinate
 //var rangeScale = 50; //Something to do with the scale slider TODO pls improve all of this
 var scaleFactor = 25 //The final value needed for updateScale() TODO pls improve all of this
-var scaleRange = 1; //One of the hundred variables for the scale-mechanism, this one for the final scale() in updateCube()
-/*var quantityScale = ''; //initally used for the same as above - needed??*/
-/*var scaleLocked //needed???*/
-var SliderLock = false; //Used to terminate the slider function via mouse dragging if the initial function via click has not taken place
-var ScaleLock = false; //Same as above for the scale slider. Seems to be a thing with sliders
+var scaleRange = 1; //One of the hundred variables for the scale-mechanism, this one is the ultra absolute scale the final scale() in updateCube()
+//var quantityScale = ''; //initally used for the same as above - needed??
+//var scaleLocked //needed???
+//var SliderLock = false; //Used to terminate the slider function via mouse dragging if the initial function via click has not taken place
+//var ScaleLock = false; //Same as above for the scale slider. Seems to be a thing with sliders
+var resizeCodeLock = false;
+var resizeOverflowLock = false;
+var resizeCodeClicked;
+var resizeButtonLock = {
+  'code': null,
+  'exe': null
+};
+var codeSizeLocked;
+var prePopoutScale;
 var navigateButton = -1; //A value adapting to the currently clicked mouse button, used in the navigation-mechanism
 var rotateLock = ''; //A String for navigate() to check whether the x-axis should be the only rotate-able axis
-var axesChoice = document.querySelector('.axisbutton .currentchoice'); //The current chosen choice at the first multiple-choice, "Axis-Restriction", button
+/* var axesChoice = document.querySelector('.axischoice .currentchoice'); //The current chosen choice at the first multiple-choice, "Axis-Restriction", button */
+var codeChangeInterval;
+var codeChangeLock = true;
 
 //consts filled with elements which are used in this file
+const thisBox = document.getElementById('box_3d');
+
+const thisHeader = document.querySelector('#box_3d .box_header');
+
 const fileInput = document.getElementById('input_json_model'); //The <input> which processes the file which has been.. well, input
 const fileLabel = document.getElementById('json_model_label'); //The label of above, on which the user clicks
 
 const buttonAxes = document.querySelector('.axesvisibility'); //The button which toggles the visibility of the centered axes
 const buttonQuantity = document.querySelector('.qualityquantity'); //The button which toggles the 2-Dimensional boundary-aids
 const buttonGrid = document.querySelector('.bottomgridvisibility'); //The button which causes inperformance (and toggles the 3D bottom grid-aid)
-const buttonOutline = document.querySelector('.outlinebutton'); //The button which causes inperformance but only in combination with many other 3D-elements by anit-aliasing them but only in Firefox wow
+//const buttonOutline = document.querySelector('.outlinebutton'); //The button which yet doesn't do anything
 const buttonFun = document.querySelector('.funbutton'); //The button which toggles fun
+const buttonRestoreCode = document.querySelector('.floating_button.restore_code'); //The button which magically reverts the split windows' position to its pre-magic-button-pressed state
+const buttonRestoreExecute = document.querySelector('.floating_button.restore_execute'); //Same as above but even more magically (same amount of magic) with an even more magic element (other window)
+const buttonExpandCode = document.querySelector('.floating_button.expand_code'); //The button which magically expands the code area to its full extent but without magic
+const buttonExpandExecute = document.querySelector('.floating_button.expand_execute'); //The button which executes a full resize of execute beep boop
 
 //const rotateSlider = document.querySelector('.slider.rotate'); //The slider which doesn't do anything (but formerly rotated the element)
 //const rotateSliderKnob = document.querySelector('.slider.rotate .knob'); //The draggable knob of the slider which doesn't do anything
 //const scaleSlider = document.querySelector('.slider.scale'); //The slider which scales the element but not for long anymore
 //const scaleSliderKnob = document.querySelector('.slider.scale .knob'); //The knob of the slider which scales the element but not for long anymore
 
-const choiceRestrictAxis = document.querySelector('.axisbutton'); //The button which formerly toggled the X axis. Now it's an axis restriction toggle
-const choiceRestrictAxisKnob = document.querySelector('.axisbutton .knob'); //The knob for above
-const restrictAxisChoiceNone = document.querySelector('.axisbutton .marker.none'); //The first mark for above - effectively doing nothing
-const restrictAxisChoiceX = document.querySelector('.axisbutton .marker.axis.x'); //The second mark for above - limiting to the x axis
-const restrictAxisChoiceY = document.querySelector('.axisbutton .marker.axis.y'); //The third mark for above - limiting to the y axis
-const restrictAxisChoiceZ = document.querySelector('.axisbutton .marker.axis.z'); //The fourth mark for above - limiting to the z axis
+const choiceButtons = document.querySelectorAll('.multiple .input'); //All multiple-choice buttons, an event listener to be applied
+
+const restrictAxisChoiceNone = document.querySelector('.axischoice .marker.none'); //The first mark for the axis restriction choice - effectively doing nothing
+const restrictAxisChoiceX = document.querySelector('.axischoice .marker.axis.x'); //The second mark for the axis restriction choice - limiting to the x axis
+const restrictAxisChoiceY = document.querySelector('.axischoice .marker.axis.y'); //The third mark for the axis restriction choice - limiting to the y axis
+const restrictAxisChoiceZ = document.querySelector('.axischoice .marker.axis.z'); //The fourth mark for the axis restriction choice - limiting to the z axis
+
+const popoutChoiceBox = document.getElementById('popoutchoice_box'); //The input_box of the multiple-choice popout mode button
+const popoutModeChoiceNone = document.querySelector('.popoutchoice .marker.default'); //The first mark for the popout mode choice - the default style
+const popoutModeChoiceOpaque = document.querySelector('.popoutchoice .marker.opaque'); //The second mark for the popout mode choice - making the popout fully opaque
+const popoutModeChoiceCollapsed = document.querySelector('.popoutchoice .marker.collapsed'); //The third mark for the choice - collapsing the popout
+const popoutModeChoiceGone = document.querySelector('.popoutchoice .marker.disabled'); //The fourth mark for the popout mode choice - disabling the popout
+
+const codeResizer = document.querySelector('.code_container .resize_bar'); //the (invisible) bar to resize the code area
 
 const colorLegend = document.querySelector('.legend_container'); //The container containing the color-legend to the cardinal points of the model - to be enabled once a model has been loaded
 const containerError = document.querySelector('.error_banner'); //The error container
 const errorInput = document.querySelector('.error_banner .error'); //The container for the actual error message
 
+const containerCode = document.querySelector('.code_container'); //The very well distinguishable container of a textarea which is not a textarea yet it is
+const containerExecute = document.querySelector('.execute_container'); //The other very well distinguishable container of an inperformant model which is the reason why this const is here I should write less in comments lol
+const containersInputExecute = document.querySelectorAll('.execute_container .input_container');
+const containerInputCode = document.querySelector('.code_container .input_container');
 const containerAxes = document.getElementById('axes_container'); //The container containg all of the centered visual axes
 const containerAxesX = document.querySelector('#axes_container .axes_x'); //The container containg the visual X-axis
 const containerAxesY = document.querySelector('#axes_container .axes_y'); //Same as above, Y-axis
@@ -59,8 +94,8 @@ const containerBounds = document.querySelector('.boundary_container'); //Contain
 const containerBounds2D = document.querySelector('.boundary_container_2d'); //Container containing all of the 2-Dimensional boundary aids
 const containerGrid = document.querySelector('.boundary_container .bottom_grid'); //The massively inperformant 3D boundary-aid which is a grid at the bottom
 const containerElements = document.querySelector('.elements_container'); //The heart of the whole program. The container where everything takes place
-const output3D = document.getElementById('function_2'); //The body containing the heart where every movement takes place
-const container3D = document.getElementById('content_function_2'); //the body containg the body containg the heart where every boundary takes place
+const output3D = document.getElementById('function_3d'); //The body containing the heart where every movement takes place
+const container3D = document.getElementById('content_function_3d'); //the body containg the body containg the heart where every boundary takes place
 
  //The separate boundary-aid elements, used in the scaling mechanism
   //The separate corners of the rectangle boundary-box
@@ -96,10 +131,43 @@ const axesFacesBottom = document.querySelectorAll('#axes_container .bottom');
 fileInput.addEventListener('change', initializeJSON); //The brain of the program
 window.addEventListener('mouseup', up); //reset various variables once the mouse has been released
 window.addEventListener('mousemove', handleMousemove);  //movingScaleSlider);
+codeResizer.addEventListener('mousedown', resizeCodeClick);
 //rotateSlider.addEventListener('mousedown', rotateSliderClick);
-choiceRestrictAxis.addEventListener('mousedown', restrictAxisClick);
+for (i = 0; i < choiceButtons.length; i++) {
+  choiceButtons[i].addEventListener('mousedown', choiceButtonsClick);
+}
 //scaleSlider.addEventListener('mousedown', scaleSliderClick);
 container3D.addEventListener('contextmenu', handleContext); //preventing the context menu from showing up in the function's boundaries
+window.addEventListener('resize', resizeContainer3D);
+
+//initializing the third-party text-editor
+var codeArea = CodeMirror(containerCode, {
+  mode: 'application/json',
+  theme: 'neoncube-json',
+  lineWrapping: true,
+  undoDepth: 100,
+  lineNumbers: true,
+  scrollbarStyle: 'overlay',
+  indentUnit: 4
+});
+//On change, run a construct that only calls buildJSON if the user has stopped to mofidy the code for 850ms
+codeArea.on('change', function() {
+  if (codeChangeLock == false) {
+    clearTimeout(codeChangeInterval)
+  }
+  codeChange();
+});
+function codeChange() {
+  codeChangeLock = false;
+  codeChangeInterval = setTimeout(function() {
+    codeChangeLock = true;
+      buildJSON(codeArea.getValue());
+  }, 850);
+}
+
+const codeMirror = document.querySelector('.CodeMirror');
+codeMirror.style.width = '800px';
+
 
 //Functions
 //Pre-brain. Handles one-time-per-input things after a file input
@@ -107,27 +175,38 @@ function initializeJSON() {
   keyFile = fileInput.files[0];
   fileLabel.innerHTML = 'Browse... ► ' + keyFile.name;
   handleJSON();
+  firstInputsWidth = 0;
+  for (var i = 0; i < containersInputExecute[0].children.length; i++) {
+    firstInputsWidth += containersInputExecute[0].children[i].clientWidth;
+  }
+  firstInputsWidth += thisHeader.clientWidth;
+  firstInputsWidth += 35; //a simple margin
+  computeContainer3D();
 }
 
 function handleJSON() {
   reader.readAsText(keyFile);
 }
-
 //Brain
 reader.onload = function(e) {
-  //oddly, this whole part executes last
-  let fileContent = e.target.result;
+  codeArea.setValue(e.target.result);
+  buildJSON(e.target.result);
+  colorLegend.classList.remove('nodisplay');
+}
+/*  let index = 0;
+  let index2 = 0;
+  while (index < fileContent.lastIndexOf('\n')) {
+    array[index2] = fileContent.slice(index).indexOf('\n') + index;
+    index += fileContent.slice(index).indexOf('\n') + 1;
+    index2++;
+  }*/
+function buildJSON(fileContent) {
+  let contentArray;
+  containerError.classList.add('nodisplay');
   containerElements.innerHTML = '';
-  if (fileContent.indexOf('parent') >= 0 && fileContent.indexOf('elements') < 0) {
-    errorMessage('Error: missing elements; This model appears to be calling a parent. Parent feature coming soon');
-    return;
-  }
-  if (fileContent.indexOf('parent') < 0 && fileContent.indexOf('elements') < 0) {
-    errorMessage('Error: missing recognizable structures; This model appears not to be a valid json model format');
-    return;
-  }
+  updateCube();
   try {
-    elements = JSON.parse(fileContent).elements;
+    contentArray = JSON.parse(fileContent);
   }
   catch (err) {
     let error = err.message;
@@ -135,7 +214,7 @@ reader.onload = function(e) {
       error = error.slice(error.indexOf('JSON.parse: ') + 'JSON.parse: '.length);
     }
     error = 'Error: ' + error;
-    if (error.indexOf('expected') >= 0) {
+    if (error.indexOf('/\bexpected\b/') >= 0) {
       error = error.slice(0, error.indexOf('expected')) + ' missing' + error.slice(error.indexOf('expected') + 'expected'.length)
     }
     if (error.search(/\bat\b/) >= 0) {
@@ -144,7 +223,22 @@ reader.onload = function(e) {
     errorMessage(error);
     return;
   }
-  containerError.classList.add('nodisplay');
+  if (fileContent.indexOf('parent') >= 0 && fileContent.indexOf('elements') < 0) {
+    errorMessage('Error: missing elements; This model appears to be calling a parent. Parent feature coming soon');
+    return;
+  }
+  if (fileContent.indexOf('parent') < 0 && fileContent.indexOf('elements') < 0) {
+    errorMessage('Error: missing recognizable structures; This model appears not to be a valid json model format');
+    return;
+  }
+  textures = contentArray.textures;
+  if (textures == null) {
+    errorMessage('Warning: missing parameter "texture". Even if empty, this should be present');
+  }/*
+  else if (Object.getOwnPropertyNames(textures).length == 0) {
+    errorMessage('Warning: No texture defined. Consider giving the model a particle texture at least');
+  }*/
+  elements = contentArray.elements;
   for (var i = 0; i < elements.length; i++) {
     let height = elements[i].to[1] - elements[i].from[1];
     let width = elements[i].to[0] - elements[i].from[0];
@@ -175,6 +269,7 @@ reader.onload = function(e) {
     let html = '<div class="element container_3d" id="cube_' + i + '" style="transform: rotate' + rotationAxis +'(' + rotationAngle + 'deg) translateX(' + (16 * scaleFactor - width * scaleFactor - positionX * scaleFactor) + 'px) translateY(' + -positionY * scaleFactor + 'px) translateZ(' + (16 * scaleFactor - depth * scaleFactor - positionZ * scaleFactor) + 'px); transform-origin: ' + (16 * scaleFactor - rotationOriginX * scaleFactor) + 'px ' + -(rotationOriginY * scaleFactor) + 'px ' + (16 * scaleFactor - rotationOriginZ * scaleFactor) + 'px">';
     let orientations = Object.getOwnPropertyNames(elements[i].faces);
     for (var n = 0; n < orientations.length; n++) {
+      //let texture = elements[i].faces[orientations[n]].texture.slice(1);
       let basicStyle;
       let color;
       switch (orientations[n]) {
@@ -212,41 +307,127 @@ reader.onload = function(e) {
     refreshCube();
     updateLock = false;
   }
-  colorLegend.classList.remove('nodisplay');
 }
 //Heart
 function updateCube() {
-  output3D.style.transform = 'scale(' + scaleRange + ') translateX(' + translateRangeX + 'px) translateY(' + translateRangeY + 'px) rotateX(' + transformRangeY + 'deg) rotateY(' + transformRangeX + 'deg) rotateZ(' + transformRangeZ + 'deg)';
+  output3D.style.transform = 'translateX(' + translateRangeX + 'px) translateY(' + translateRangeY + 'px) scale(' + scaleRange + ') rotateX(' + transformRangeY + 'deg) rotateY(' + transformRangeX + 'deg) rotateZ(' + transformRangeZ + 'deg)';
   //rotateSliderKnob.style.transform = 'translateX(' + range + 'px)';
 }
 
 //Beautification of the whole thing - Refreshes the element in order for toggled elements to show (Bug in various browsers)
 function refreshCube() {
-  scaleRange += .00001;
+  scaleRange += 0.00001;
   updateCube();
-  scaleRange -= .00001;
+  scaleRange -= 0.00001;
 }
 
 
-//Coordination of every mouse procedures
- //Termination of various function-global variables and procedures
+//Coordination of every mouse procedures -> Termination of various function-global variables and procedures
 function up() {
-  SliderLock = false;
-  ScaleLock = false;
+  //SliderLock = false;
+  //ScaleLock = false;
+  if (resizeCodeLock == true) {
+    codeArea.refresh();
+    resizeCodeLock = false;
+  }
   navigateButton = -1;
   document.body.classList.remove('noselect');
 }
 
-//display an error when one exists [-> getJSON()]
+//Display an error when one exists
 function errorMessage(error) {
   errorInput.innerHTML = error;
   containerError.classList.remove('nodisplay');
   updateLock = true;
 }
 
-//prevent context menu of showing up in the 3D-container for the purpose of mouse movement
+//Prevent context menu of showing up in the 3D-container for the purpose of mouse movement
 function handleContext(e) {
   e.preventDefault();
+}
+
+//To-be-called function to resize the code area
+function resizeCode(width) {
+  codeMirror.style.width = width + 'px';
+}
+
+function togglePopout(popoutState) {
+  if (popoutState == 'removing') {
+    container3D.classList.remove('popout');
+    containerInputCode.classList.add('nodisplay');
+    scaleRange = prePopoutScale;
+  }
+  else if (popoutState == 'adding') {
+    container3D.classList.add('popout');
+    containerInputCode.classList.remove('nodisplay');
+    prePopoutScale = scaleRange;
+    scaleRange = 0.6;
+  }
+  else {
+    console.error('Error: popoutState containing not recognizable structures: ' + popoutState);
+    return;
+  }
+  updateCube();
+}
+
+//The function called from the 'resize' event. Redirecting to the actual function to escape the event argument as the actual function needs an argument as well
+function resizeContainer3D() {
+  computeContainer3D();
+}
+
+//Adapting diverse features when various events take place which is triggered by resizing the window and code area but also by other tasks
+function computeContainer3D(thisWidth = containerExecute.clientWidth) {
+  //thisWidth: the final width of container3D. If a transition is present, a computed final width has to be parsed
+
+  //If container3D is shrunk to a given extent, the second input container is hidden
+  if (thisWidth > secondInputsWidth) {
+    containersInputExecute[1].classList.remove('nodisplay');
+  }
+  else {
+    containersInputExecute[1].classList.add('nodisplay');
+  }
+
+  //If the width of the first inputs exceeds the width of container3D, hide the floating header
+  if (firstInputsWidth >= thisWidth && !document.body.classList.contains('info_mode')) {
+    thisHeader.classList.add('hidden');
+  }
+  else if (firstInputsWidth < thisWidth && !document.body.classList.contains('info_mode')) {
+    thisHeader.classList.remove('hidden');
+  }
+
+  //If the width of containerCode exceeds the total width minus 8px resize_bar threshold, lock the size with an extremely convenient CSS value
+  if (containerCode.clientWidth > thisBox.clientWidth - 8 && resizeOverflowLock == false && resizeButtonLock['code'] == null) {
+    resizeButtonLock['code'] = containerCode.clientWidth;
+    codeMirror.style.width = 'calc(100vw - 32px)';
+    buttonExpandCode.classList.add('hidden');
+    buttonRestoreCode.classList.remove('hidden');
+    resizeOverflowLock = true;
+  }
+  else if (thisBox.clientWidth - 8 >= resizeButtonLock['code'] && resizeOverflowLock == true) {
+    resizeCode(resizeButtonLock['code']);
+    buttonRestoreCode.classList.add('hidden');
+    buttonExpandCode.classList.remove('hidden');
+    resizeButtonLock['code'] = null;
+    resizeOverflowLock = false;
+  }
+
+  //Overrides if CSS Grid is not supported (erf)
+  if (!CSS.supports('display', 'grid')) {
+    container3D.classList.add('nogrid');
+    if (thisWidth <= 369) {
+      containersInputExecute[1].classList.add('nodisplay');
+      container3D.style.top = '184px';
+    }
+    else if (thisWidth <= 583) {
+      container3D.style.top = '278px';
+    }
+    else if (thisWidth <= 729) {
+      container3D.style.top = '215px';
+    }
+    else if (thisWidth > 583 ) {
+      container3D.style.top = null;
+    }
+  }
 }
 
 function handleMousemove(e) {
@@ -256,7 +437,7 @@ function handleMousemove(e) {
     let distanceX = e.x - container3DRect.left - clickedX;
     let distanceY = e.y - container3DRect.top - clickedY;
     if (navigateButton == 0) {
-      //Navigation methods set by the multiple-choice "Axis-restriction" button. Please don't use Z
+      //Navigation methods (also set by the multiple-choice "Axis-restriction" button) Please don't use Z
       if (rotateLock == 'x') {
         transformRangeX = (distanceX / 3.4) + rotateLockedX;
       }
@@ -280,11 +461,50 @@ function handleMousemove(e) {
         translateRangeY += distanceY;
       }
       else {
-        translateRangeX = distanceX / scaleRange + translateLockedX;
-        translateRangeY = distanceY / scaleRange + translateLockedY;
+        translateRangeX = distanceX + translateLockedX;
+        translateRangeY = distanceY + translateLockedY;
       }
     }
     updateCube();
+  }
+//movingResizeCode()
+  else if (resizeCodeLock == true) {
+    let distance = e.x - resizeCodeClicked;
+    let width = codeSizeLocked + distance;
+    if (width <= 0) {
+      if (resizeButtonLock['exe'] != null) {
+        return;
+      }
+      width = 0;
+      buttonExpandExecute.classList.add('hidden');
+      buttonRestoreExecute.classList.remove('hidden');
+      resizeButtonLock['exe'] = resizeCodeClicked;
+    }
+    else if (width >= thisBox.clientWidth - 8) {
+      if (resizeButtonLock['code'] != null) {
+        return;
+      }
+      codeMirror.style.width = 'calc(100vw - 32px)';
+      buttonExpandCode.classList.add('hidden');
+      buttonRestoreCode.classList.remove('hidden');
+      resizeButtonLock['code'] = resizeCodeClicked;
+      togglePopout('adding');
+      return;
+    }
+    else if (resizeButtonLock['exe'] != null) {
+      resizeButtonLock['exe'] = null;
+      codeMirror.classList.remove('nodisplay')
+      buttonRestoreExecute.classList.add('hidden');
+      buttonExpandExecute.classList.remove('hidden');
+    }
+    else if (resizeButtonLock['code'] != null) {
+      resizeButtonLock['code'] = null;
+      togglePopout('removing');
+      buttonRestoreCode.classList.add('hidden');
+      buttonExpandCode.classList.remove('hidden');
+    }
+    resizeCode(width);
+    computeContainer3D();
   }
 //movingScaleSlider()
 /*  else if (ScaleLock == true) {
@@ -305,8 +525,8 @@ function handleMousemove(e) {
   }*/
 }
 
-// navigation and territorial modification of the model via mouse buttons
- //initialization of mouse movement via click
+//Navigation and territorial modification of the model via mouse buttons
+ //Initialization of mouse movement via click
 function navigateMouseDown(e) {
   document.body.classList.add('noselect');
   let container3DRect = container3D.getBoundingClientRect();
@@ -327,10 +547,10 @@ function navigateWheel(e) {
   }
   let scrollY = e.deltaY;
   if (scrollY > 1) {
-    scaleRange -= 0.085;
+    scaleRange -= 0.085 * (0.17 * (scaleRange - 3.2) + 1);
   }
   else if (scrollY < 1) {
-    scaleRange += 0.085;
+    scaleRange += 0.085 * (0.17 * (scaleRange - 3.2) + 1);
   }
   if (scaleRange <= 0.1) {
     scaleRange = 0.1;
@@ -372,30 +592,85 @@ function toggleAxes() {
   containerAxes.classList.toggle('nodisplay');
 }
  //Functions of the first multiple-choice "Axis_Restriction" button
-  //First choice which resets to default -> effectively does nothing
-function choiceAxisNothing() {
-  rotateLock = '';
+function choiceAxis(lock) {
+  rotateLock = lock;
 }
-  //Second choice which limits the rotation to the X-Axis
-function choiceAxisX() {
-  rotateLock = 'x';
-}
-  //Third choice which limits the rotation to the Y-Axis
-function choiceAxisY() {
-  rotateLock = 'y';
-}
-  //Fourth choice which limits the rotation to the Z-Axis
-function choiceAxisZ() {
-  rotateLock = 'z';
+ //Functions for the second multiple-choice "popout mode" button;
+function choicePopout(choiceActive, choice2, choice3, choice4) {
+  container3D.classList.add(choiceActive);
+  container3D.classList.remove(choice2);
+  container3D.classList.remove(choice3);
+  container3D.classList.remove(choice4);
 }
 
+ //Floating buttons at the bottom corners of the specific areas
+  //Expand the code area to its full extent
+function expandCode() {
+  codeMirror.classList.add('resizing');
+  resizeButtonLock['code'] = parseInt(codeMirror.style.width.replace('px', ''));
+  codeMirror.style.width = 'calc(100vw - 32px)';
+  buttonExpandCode.classList.add('hidden');
+  buttonRestoreCode.classList.remove('hidden');
+  thisHeader.classList.add('hidden');
+  setTimeout(function() {
+    togglePopout('adding');
+    codeArea.refresh();
+  }, 220);
+}
+  //Expand the execute area to its full extent
+function expandExecute() {
+  codeMirror.classList.add('resizing');
+  resizeButtonLock['exe'] = parseInt(codeMirror.style.width.replace('px', ''));
+  resizeCode(0);
+  buttonExpandExecute.classList.add('hidden');
+  buttonRestoreExecute.classList.remove('hidden');
+  container3D.style.top = null;
+  computeContainer3D(containers.clientWidth);
+  setTimeout(function() {
+    codeMirror.classList.add('nodisplay');
+  }, 230);
+}
+  //Restore the pre-expanded state of the code area or if the code area has been expanded to its full extent, reset both windows to their defaults
+function restoreCode() {
+  let thisLock = resizeButtonLock['code'];
+  togglePopout('removing');
+  codeMirror.classList.add('resizing');
+  if (thisLock > thisBox.clientWidth - 8) {
+    resizeCode(thisBox.clientWidth / 2); //Fallback if the window has gotten smaller
+  }
+  else {
+    resizeCode(thisLock);
+  }
+  buttonRestoreCode.classList.add('hidden');
+  buttonExpandCode.classList.remove('hidden');
+  computeContainer3D(containers.clientWidth - thisLock);
+  resizeButtonLock['code'] = null;
+  setTimeout(function() {
+    codeArea.refresh();
+  }, 230);
+}
+  //Restore the pre-expanded state of the execute area or if the code area has been collapsed to its full extent, reset everything back to normal
+function restoreExecute() {
+  let thisLock = resizeButtonLock['exe'];
+  codeMirror.classList.remove('nodisplay');
+  codeMirror.classList.add('resizing');
+  if (thisLock > thisBox.clientWidth - 8) {
+    resizeCode(thisBox.clientWidth / 2); //Fallback if the window has gotten smaller
+  }
+  else {
+    resizeCode(thisLock);
+  }
+  buttonRestoreExecute.classList.add('hidden');
+  buttonExpandExecute.classList.remove('hidden');
+  computeContainer3D(containers.clientWidth - thisLock);
+  resizeButtonLock['exe'] = null;
+}
 
-//Fomerly various sliders, now various initiating click events as the mousemove executions have been assembled into one event
- //Execution of the multiple-choice axis restriction procedure
-function restrictAxisClick(e) {
+//Execution of any multiple-choice procedure
+function choiceButtonsClick(e) {
   document.body.classList.add('noselect');
   let mark;
-  if (e.target.classList.contains('currentchoice') || e.target.classList.contains('knob')) {
+  if (e.target.classList.contains('currentchoice') || e.target.classList.contains('knob') || !e.target.classList.contains('mark') && e.target.children[0].classList.contains('currentchoice')) {
     return;
   }
   else if (e.target.classList.contains('marker')) {
@@ -404,25 +679,59 @@ function restrictAxisClick(e) {
   else {
     mark = e.target;
   }
-  choiceRestrictAxisKnob.style.transform = 'translateX(' + (mark.offsetLeft - 14 - (choiceRestrictAxisKnob.offsetWidth - mark.offsetWidth) / 2) + 'px)';
-  axesChoice.classList.remove('currentchoice');
-  axesChoice = mark;
-  axesChoice.classList.add('currentchoice');
-  switch (axesChoice.parentNode) {
+  if (mark.parentNode.parentNode.parentNode.classList.contains('popoutchoice') && !container3D.classList.contains('popout')) {
+    console.warn('Warning: Tried to allocate popout-related options to container3D without popout mode being present. Execution terminated');
+    return;
+  }
+  let knob = mark.parentNode.parentNode.parentNode.children[0];
+  knob.style.transform = 'translateX(' + (mark.offsetLeft - 14 - (knob.offsetWidth - mark.offsetWidth) / 2) + 'px)';
+  for (var i = 0; i < mark.parentNode.parentNode.children.length; i++) {
+    if (mark.parentNode.parentNode.children[i].classList.contains('currentchoice')) {
+      mark.parentNode.parentNode.children[i].classList.remove('currentchoice');
+    }
+  }
+  mark.parentNode.classList.add('currentchoice');
+  switch (mark.parentNode) {
     case restrictAxisChoiceNone:
-      choiceAxisNothing();
+      choiceAxis('');
       break;
     case restrictAxisChoiceX:
-      choiceAxisX();
+      choiceAxis('x');
       break;
     case restrictAxisChoiceY:
-      choiceAxisY();
+      choiceAxis('y');
       break;
     case restrictAxisChoiceZ:
-      choiceAxisZ();
+      choiceAxis('z');
+      break;
+    case popoutModeChoiceNone:
+      choicePopout('default', 'opaque', 'collapsed', 'disabled');
+      break;
+    case popoutModeChoiceOpaque:
+      choicePopout('opaque', 'default', 'collapsed', 'disabled');
+      break;
+    case popoutModeChoiceCollapsed:
+      choicePopout('collapsed', 'opaque', 'default', 'disabled');
+      break;
+    case popoutModeChoiceGone:
+      choicePopout('disabled', 'opaque', 'collapsed', 'default');
       break;
   }
 }
+ //initialization of the procedure resizing the code area by dragging
+function resizeCodeClick(e) {
+  document.body.classList.add('noselect');
+  codeMirror.classList.remove('resizing');
+  resizeCodeLock = true;
+  resizeCodeClicked = e.x;
+  if (codeMirror.style.width == 'calc(100vw - 32px)' || codeMirror.style.width == 'calc(-32px + 100vw)' /*Aparrently it gets converted*/) {
+    codeSizeLocked = thisBox.clientWidth - 8;
+  }
+  else {
+    codeSizeLocked = parseInt(codeMirror.style.width.replace('px', ''));
+  }
+}
+
  //The first of it's kind - a slider to rotate the element, pretty much deprecated as well - TODO: What to make out of this?
  //TODO: fine-tuning!
   //Both initialization of mouse dragging and standalone execution of the rotation procedure
@@ -454,7 +763,7 @@ function restrictAxisClick(e) {
   }
   updateCube();
 }*/
- //A slider to scale the element - will most likely be replaced by a mouse navigation
+ //A slider to scale the element - will most likely be replaced by a mouse navigation TODO: fine tuning?
   //Both initialization of mouse dragging and standalone execution of the scale procedure
 /*function scaleSliderClick(e) {
   document.body.classList.add('noselect');
@@ -475,7 +784,7 @@ function restrictAxisClick(e) {
   //setTimeout(timeoutScale, 1000);
 }*/
 
-//~A very costy~ An extremely massively vehemently resource intensive way of resizing the element which is unfortunately necessary for good visuals
+//~A very costy~ An extremely massively vehemently resource intensive way of resizing the element which I thought was necessary for good visuals but then I disabled outline. Wow.
 function updateScale() {
   let boundaryScale = scaleFactor * 8;
   let stripesScale = scaleFactor * 2;
