@@ -89,8 +89,10 @@ body {
   filter: blur(8px);
 }
 /* During the info-mode-phase, set the absolute-positioned 3d-content of 3DMagic higher (deprecated when grid is present) */
+/* Also make the overflow visible so that there is still a blurry preview in the info-mode-phase */
 .info_mode #content_function_3d {
   top: 76px;
+  overflow: visible;
 }
 /* During the info-mode-phase, hide the inner function of the mocking tool as it doesn't look good in its info-mode form */
 .info_mode #function_mocking {
