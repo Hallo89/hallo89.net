@@ -10,7 +10,7 @@ const aftercomma = document.getElementById('figures_aftercomma');
 
 const buttonAppend = document.getElementById('figures_append'); //the append button
 
-const figuresOutput = document.getElementById('function_1'); //The heart of the program where everything takes place
+const figuresOutput = document.getElementById('function_rng'); //The heart of the program where everything takes place
 
 //Both heart and brain
 function randomNumber() {
