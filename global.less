@@ -362,7 +362,8 @@ body.light-mode {
   background-color: @glb-box;
   border-top: 4px solid @glb-box-bordertop;
   border-bottom: 4px solid @glb-box-borderbottom;
-  box-shadow: 0 4px 1px @glb-box-extreme-shadow, 1px 1px 6px @glb-box-shadow;
+  box-shadow: 0 4px 1px @glb-box-extreme-shadow, 1px 2px 6px @glb-box-shadow;
+  box-sizing: border-box;
   .mode-switch-transition.background;
   .mode-switch-transition.shadow;
 //corners shifting in when hovering
@@ -371,7 +372,7 @@ body.light-mode {
       position: absolute;
       background-color: @glb-box-corners;
       transition: all .4s ease-out;
-      z-index: 3;
+      z-index: 10;
       opacity: .65;
     }
     .corner_before {
