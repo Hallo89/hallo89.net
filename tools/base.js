@@ -3,6 +3,7 @@ var timeoutLock = [];
 var it = 0;
 
 const boxes = document.querySelectorAll('.box'); //all boxes
+
 const tooltipTrigger = document.querySelectorAll('.tipper'); //all elements which trigger a tooltip (which are '.input_box'es)
 const tooltips = document.querySelectorAll('.tooltip.default'); //all tooltips
 
@@ -35,11 +36,6 @@ for (i = 0; i < buttonsChangeNumber.length; i++) {
   buttonsChangeNumber[i].addEventListener('wheel', inputNumberScroll);
 }
 
-//functions to execute on pageload
-window.onload = function onload() {
-  computeTooltips();
-}
-
 //activation of the clicked item in the main menu
 function choseItem() {
 // convert nodeList of all boxes to an array -> boxesArray
@@ -54,9 +50,15 @@ function choseItem() {
   for (i = 0; i < boxesArray.length; i++) {
     boxesArray[i].classList.add('nodisplay');
   }
+  document.body.classList.remove('info_mode');
   this.classList.add('active_item');
   this.children[2].classList.add('nodisplay'); //info_description
-  document.body.classList.remove('info_mode');
+//computing the right corner of tooltips
+  containerInputCode.classList.remove('nodisplay');
+  for (i = 0; i < tooltips.length; i++) {
+    tooltips[i].style.clipPath = 'polygon(-5px 150%, 13px -50%, ' + (tooltips[i].offsetWidth + 5) + 'px -50%, ' + (tooltips[i].offsetWidth - 13) + 'px 150%)';
+  }
+  containerInputCode.classList.add('nodisplay');
 //adding late event listeners which aren't allowed to run during the info_mode phase
   //container3D.addEventListener('mousemove', navigate);
   container3D.addEventListener('mousedown', navigateMouseDown);
@@ -66,6 +68,10 @@ function choseItem() {
   for (i = 0; i < boxes.length; i++) {
     boxes[i].removeEventListener('mousedown', choseItem);
   }
+  setTimeout(function() {
+    computeContainer3D();
+    codeArea.refresh();
+  }, 300);
 }
 
 //Tooltips when having hovered over a specific element (most-likely every input_box) for a specific amount of time
@@ -75,8 +81,7 @@ function tooltipIn() {
   timeoutLock[it] = eventTarget;
   setTimeout(function() {
     if (timeoutLock[it] == eventTarget) {
-      eventTarget.lastElementChild.classList.remove('nodisplay');
-      eventTarget.classList.add('actual_tip');
+      eventTarget.classList.add('active_tip');
     }
   }, 700);
 }
@@ -85,20 +90,7 @@ function tooltipOut() {
   timeoutLock[it] = null;
   it++;
   let eventTarget = this;
-  eventTarget.lastElementChild.classList.add('nodisplay');
-  eventTarget.classList.remove('actual_tip');
-}
-
-//computing the right corner of tooltips and placing them
-function computeTooltips() {
-  document.body.classList.remove('info_mode');
-  for (i = 0; i < tooltips.length; i++) {
-    tooltips[i].classList.remove('nodisplay');
-    thisWidth = tooltips[i].offsetWidth;
-    tooltips[i].style.clipPath = 'polygon(-5px 150%, 13px -50%, ' + (thisWidth + 5) + 'px -50%, ' + (thisWidth - 13) + 'px 150%)';
-    tooltips[i].classList.add('nodisplay');
-  }
-  document.body.classList.add('info_mode');
+  eventTarget.classList.remove('active_tip');
 }
 
 //Increment / decrement of input[type=number] on the specific buttons - global for all input[type=number]
