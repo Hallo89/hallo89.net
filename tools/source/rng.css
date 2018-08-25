@@ -1,0 +1,88 @@
+body {
+  background: linear-gradient(to bottom right, #7A5B34, #65373D);     /*#B28142, #904851 */
+  animation: clipin .4s cubic-bezier(.4, .15, .7, 1);
+}
+@keyframes clipin {
+  from { clip-path: polygon(0 -30px, 0 -30px, 0 -30px); }
+  to   { clip-path: polygon(0 -30px, 0 202%, 202% -30px); }
+}
+
+#wrapper {
+  margin: 30px 10vw;
+  height: calc(100vh - 60px);
+  animation: marginin .6s ease;
+}
+@keyframes marginin {
+  0% { margin: 30px 11.35vw; }
+  45% { margin: 30px 9.68vw; }
+  100% { margin: 30px 10vw; }
+}
+
+.box {
+  height: 100%;
+  box-shadow: 4px 8px 45px hsla(0, 0%, 6%, 0.5);
+}
+
+.box_header {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.utility_buttons {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin-right: 12px;
+  opacity: .8;
+}
+.utility_buttons .util_button {
+  border: 13px solid;
+  border-radius: 100%;
+  margin: 0 2px;
+  cursor: pointer;
+  transition: all .2s, clip-path .08s cubic-bezier(.15,0,.85,1);
+  clip-path: circle(10px);
+}
+.utility_buttons .util_button:hover {
+  clip-path: circle(13px);
+}
+.utility_buttons .button_green {
+  border-color: hsl(0, 0%, 28%);
+}
+.utility_buttons .button_yellow {
+  border-color: hsl(0, 0%, 25%);
+}
+.utility_buttons .button_red {
+  border-color: hsl(0, 0%, 22%);
+}
+.utility_buttons .button_green:hover {
+  border-color: #20806A;
+}
+.utility_buttons .button_yellow:hover {
+  border-color: #945F3C;
+}
+.utility_buttons .button_red:hover {
+  border-color: #904851;
+}
+
+#output {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+#output span {
+  position: relative;
+  padding: 17px 9px;
+}
+#output span::before {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  left: 0;
+  right: 0;
+  border-bottom: 2px solid rgba(229, 255, 164, .1);
+  margin: 8px 6px;
+}

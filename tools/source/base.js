@@ -1,23 +1,14 @@
-var boxesArray = []; //Holding the '.box' items after they have been converted from a nodeList to an array
-var timeoutLock = [];
+var timeoutLock = []; //To be used with the iterator 'it'; a variable to individualize every mouse-over triggering a tooltip
 var it = 0;
-
-const boxes = document.querySelectorAll('.box'); //all boxes
 
 const tooltipTrigger = document.querySelectorAll('.tipper'); //all elements which trigger a tooltip (which are '.input_box'es)
 const tooltips = document.querySelectorAll('.tooltip.default'); //all tooltips
-
-const containersInput = document.querySelectorAll('.input_container'); //all '.input_container's
 
 const buttonsChangeNumber = document.querySelectorAll('.buttons_change_number'); //All containers for the increment/decrement buttons - used by scroll
 const buttonsIncrement = document.querySelectorAll('.change_number.increment'); //All increment-buttons for input[type=number]
 const buttonsDecrement = document.querySelectorAll('.change_number.decrement'); //All decrement-buttons for input[type=number]
 
 //Event-listeners which do stuff - ForEach not valid due to IE support
- //Execution of the procedure of choosing an item in the main menu
-for (i = 0; i < boxes.length; i++) {
-  boxes[i].addEventListener('mousedown', choseItem);
-}
  //Procedure of tooltips showing and hiding when the mouse has entered or left the specified area
 for (i = 0; i < tooltipTrigger.length; i++ ) {
   tooltipTrigger[i].addEventListener('mouseenter', tooltipIn);
@@ -36,42 +27,9 @@ for (i = 0; i < buttonsChangeNumber.length; i++) {
   buttonsChangeNumber[i].addEventListener('wheel', inputNumberScroll);
 }
 
-//activation of the clicked item in the main menu
-function choseItem() {
-// convert nodeList of all boxes to an array -> boxesArray
-  for (i = 0; i < boxes.length; i++) {
-    boxesArray.push(boxes[i]);
-  }
-  if (boxesArray.indexOf(this) >= -1) {
-    boxesArray.splice(boxesArray.indexOf(this), 1);
-  }
-//end of converting
-  document.body.classList.add('noselect');
-  for (i = 0; i < boxesArray.length; i++) {
-    boxesArray[i].classList.add('nodisplay');
-  }
-  document.body.classList.remove('info_mode');
-  this.classList.add('active_item');
-  this.children[2].classList.add('nodisplay'); //info_description
-//computing the right corner of tooltips
-  containerInputCode.classList.remove('nodisplay');
-  for (i = 0; i < tooltips.length; i++) {
-    tooltips[i].style.clipPath = 'polygon(-5px 150%, 13px -50%, ' + (tooltips[i].offsetWidth + 5) + 'px -50%, ' + (tooltips[i].offsetWidth - 13) + 'px 150%)';
-  }
-  containerInputCode.classList.add('nodisplay');
-//adding late event listeners which aren't allowed to run during the info_mode phase
-  //container3D.addEventListener('mousemove', navigate);
-  container3D.addEventListener('mousedown', navigateMouseDown);
-  //container3D.addEventListener('mouseup', navigateMouseUp);
-  container3D.addEventListener('wheel', navigateWheel);
-
-  for (i = 0; i < boxes.length; i++) {
-    boxes[i].removeEventListener('mousedown', choseItem);
-  }
-  setTimeout(function() {
-    computeContainer3D();
-    codeArea.refresh();
-  }, 300);
+//computing tooltips
+for (i = 0; i < tooltips.length; i++) {
+  tooltips[i].style.clipPath = 'polygon(-5px 150%, 13px -50%, ' + (tooltips[i].offsetWidth + 5) + 'px -50%, ' + (tooltips[i].offsetWidth - 13) + 'px 150%)';
 }
 
 //Tooltips when having hovered over a specific element (most-likely every input_box) for a specific amount of time

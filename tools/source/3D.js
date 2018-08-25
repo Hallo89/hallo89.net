@@ -1,10 +1,12 @@
 //predefined file-global variables
 var reader = new FileReader(); //The FileReader reading the file. Makes sense right?
 var keyFile; //The initial variable having stored the not-human-readable file which has been chosen
+var keyImages; //The initial variable having stored the not-human-readable images which have been chosen
 var elements = []; //Array-Object of the model elements via the parameter "elements" in the original file
-//var textures = []; //Object of the texture files expressed in their path via the parameter "textures" in the original file
-//var images = new Object();
+var textures = {}; //Object of the texture files expressed in their path via the parameter "textures" in the original file without anything before the '/'
+var images = {};
 var updateLock = true; //A lock stating whether the model has to be reloaded
+var initialLock = true; //A lock for preventing the initial codeMirror load from calling buildJSON() again
 var firstInputsWidth = 756; //The total length of all items inside the first input_container + header (static due to knowing the beginning width), changing when a file is chosing
 var secondInputsWidth = 370;//The total length of all items inside the second input_container; static due to knowing the beginning width
 var clickedX; //The X-coordinate of the point where a click has taken place in container3D in order to navigate
@@ -40,6 +42,7 @@ var rotateLock = ''; //A String for navigate() to check whether the x-axis shoul
 var codeChangeInterval;
 var codeChangeLock = true;
 
+
 //consts filled with elements which are used in this file
 const thisBox = document.getElementById('box_3d');
 
@@ -47,6 +50,9 @@ const thisHeader = document.querySelector('#box_3d .box_header');
 
 const fileInput = document.getElementById('input_json_model'); //The <input> which processes the file which has been.. well, input
 const fileLabel = document.getElementById('json_model_label'); //The label of above, on which the user clicks
+
+const imageInput = document.getElementById('input_images'); //The <input> which processes the images which have been input
+const imageLabel = document.getElementById('images_label'); //The label of above, on which the user clicks
 
 const buttonAxes = document.querySelector('.axesvisibility'); //The button which toggles the visibility of the centered axes
 const buttonQuantity = document.querySelector('.qualityquantity'); //The button which toggles the 2-Dimensional boundary-aids
@@ -129,16 +135,22 @@ const axesFacesBottom = document.querySelectorAll('#axes_container .bottom');
 
 //Event-listeners which do stuff
 fileInput.addEventListener('change', initializeJSON); //The brain of the program
+imageInput.addEventListener('change', handleImages); //Applying textures
 window.addEventListener('mouseup', up); //reset various variables once the mouse has been released
-window.addEventListener('mousemove', handleMousemove);  //movingScaleSlider);
+window.addEventListener('mousemove', handleMousemove);
 codeResizer.addEventListener('mousedown', resizeCodeClick);
-//rotateSlider.addEventListener('mousedown', rotateSliderClick);
 for (i = 0; i < choiceButtons.length; i++) {
   choiceButtons[i].addEventListener('mousedown', choiceButtonsClick);
 }
-//scaleSlider.addEventListener('mousedown', scaleSliderClick);
 container3D.addEventListener('contextmenu', handleContext); //preventing the context menu from showing up in the function's boundaries
+container3D.addEventListener('mousedown', navigateMouseDown);
+container3D.addEventListener('wheel', navigateWheel);
 window.addEventListener('resize', resizeContainer3D);
+window.onload = function() {
+  computeContainer3D();
+  codeArea.refresh();
+};
+
 
 //initializing the third-party text-editor
 var codeArea = CodeMirror(containerCode, {
@@ -152,6 +164,9 @@ var codeArea = CodeMirror(containerCode, {
 });
 //On change, run a construct that only calls buildJSON if the user has stopped to mofidy the code for 850ms
 codeArea.on('change', function() {
+  if (initialLock == true) {
+    return;
+  }
   if (codeChangeLock == false) {
     clearTimeout(codeChangeInterval)
   }
@@ -162,7 +177,7 @@ function codeChange() {
   codeChangeInterval = setTimeout(function() {
     codeChangeLock = true;
       buildJSON(codeArea.getValue());
-  }, 850);
+  }, 800);
 }
 
 const codeMirror = document.querySelector('.CodeMirror');
@@ -170,10 +185,22 @@ codeMirror.style.width = '800px';
 
 
 //Functions
+function handleImages() {
+  keyImages = imageInput.files;
+  for (var i = 0; i < keyImages.length; i++) {
+    let thisIt = i;
+    let thisReader = new FileReader();
+    thisReader.readAsDataURL(keyImages[i]);
+    thisReader.onload = function(e) {
+      images[keyImages[thisIt].name.slice(0, -4)] = e.target.result;
+    }
+  }
+}
+
 //Pre-brain. Handles one-time-per-input things after a file input
 function initializeJSON() {
-  keyFile = fileInput.files[0];
-  fileLabel.innerHTML = 'Browse... ► ' + keyFile.name;
+  keyFile = fileInput.files;
+  fileLabel.innerHTML = 'Browse... ► ' + keyFile[0].name;
   handleJSON();
   firstInputsWidth = 0;
   for (var i = 0; i < containersInputExecute[0].children.length; i++) {
@@ -182,16 +209,22 @@ function initializeJSON() {
   firstInputsWidth += thisHeader.clientWidth;
   firstInputsWidth += 35; //a simple margin
   computeContainer3D();
+  initialLock = true;
 }
 
 function handleJSON() {
-  reader.readAsText(keyFile);
+  reader.readAsText(keyFile[0]);
 }
 //Brain
 reader.onload = function(e) {
-  codeArea.setValue(e.target.result);
-  buildJSON(e.target.result);
-  colorLegend.classList.remove('nodisplay');
+  if (keyFile[0].type == 'application/json') {
+    codeArea.setValue(e.target.result);
+    buildJSON(e.target.result);
+    colorLegend.classList.remove('nodisplay');
+  }
+  else {
+    errorMessage('Error: A non-compatible file has been chosen. Only a .json file is valid');
+  }
 }
 /*  let index = 0;
   let index2 = 0;
@@ -231,11 +264,15 @@ function buildJSON(fileContent) {
     errorMessage('Error: missing recognizable structures; This model appears not to be a valid json model format');
     return;
   }
-  textures = contentArray.textures;
+  let texturesNames = Object.keys(contentArray.textures);
+  let texturesValues = Object.values(contentArray.textures);
+  for (var i = 0; i < texturesValues.length; i++) {
+    textures[texturesNames[i]] = texturesValues[i].slice(texturesValues[i].indexOf('/') + 1);
+  }
   if (textures == null) {
-    errorMessage('Warning: missing parameter "texture". Even if empty, this should be present');
-  }/*
-  else if (Object.getOwnPropertyNames(textures).length == 0) {
+    errorMessage('Warning: missing parameter "texture". Even if empty, this should be present with at least the paramater "particle" unless the model is a sole parent');
+  }
+  /*  else if (Object.getOwnPropertyNames(textures).length == 0) {
     errorMessage('Warning: No texture defined. Consider giving the model a particle texture at least');
   }*/
   elements = contentArray.elements;
@@ -265,40 +302,41 @@ function buildJSON(fileContent) {
       rotationAxis = "X";
       rotationAngle = 0;
     }
-    //Axes: rotateX(180deg) translateX( + x + ) translateY( + (-)z + ) translateZ( + z + ) rotate + axis + ( + angle + ); whereas 8 = 0, 16 = max/2, 0 = -max/2
     let html = '<div class="element container_3d" id="cube_' + i + '" style="transform: rotate' + rotationAxis +'(' + rotationAngle + 'deg) translateX(' + (16 * scaleFactor - width * scaleFactor - positionX * scaleFactor) + 'px) translateY(' + -positionY * scaleFactor + 'px) translateZ(' + (16 * scaleFactor - depth * scaleFactor - positionZ * scaleFactor) + 'px); transform-origin: ' + (16 * scaleFactor - rotationOriginX * scaleFactor) + 'px ' + -(rotationOriginY * scaleFactor) + 'px ' + (16 * scaleFactor - rotationOriginZ * scaleFactor) + 'px">';
     let orientations = Object.getOwnPropertyNames(elements[i].faces);
     for (var n = 0; n < orientations.length; n++) {
-      //let texture = elements[i].faces[orientations[n]].texture.slice(1);
+      let texture = elements[i].faces[orientations[n]].texture.slice(1);
+      let texturePath = images[textures[texture]];
+      let textureStartX = elements[i].faces[orientations[n]].uv[0];
+      let textureStartY = elements[i].faces[orientations[n]].uv[1];
+      let textureWidthX = elements[i].faces[orientations[n]].uv[2] - textureStartX;
+      let textureWidthY = elements[i].faces[orientations[n]].uv[3] - textureStartY;
       let basicStyle;
+      let textureStyle;
       let color;
       switch (orientations[n]) {
         case 'north':
           basicStyle = 'transform: translateZ(' + depth * scaleFactor + 'px) translateY(' + -height * scaleFactor + 'px); width: ' + width * scaleFactor + 'px; height: ' + height * scaleFactor + 'px;';
-          color = 'color_north';
           break;
         case 'south':
           basicStyle = 'transform: translateY(' + -height * scaleFactor + 'px) rotateY(180deg); width: ' + width * scaleFactor + 'px; height: ' + height * scaleFactor + 'px;';
-          color = 'color_south';
           break;
         case 'west':
           basicStyle = 'transform: rotateY(90deg) translateY(' + -height * scaleFactor + 'px) translateZ(' + -(depth/2 - width) * scaleFactor + 'px) translateX(' + -depth/2 * scaleFactor + 'px); width: ' + depth * scaleFactor + 'px; height: ' + height * scaleFactor + 'px;';
-          color = 'color_west';
           break;
         case 'east':
           basicStyle = 'transform: rotateY(90deg) translateY(' + -height * scaleFactor + 'px) translateZ(' + -depth/2 * scaleFactor + 'px) translateX(' + -depth/2 * scaleFactor + 'px) rotateY(180deg); width: ' + depth * scaleFactor + 'px; height: ' + height * scaleFactor + 'px;';
-          color = 'color_east';
           break;
         case 'up':
-          basicStyle = 'transform: rotateX(90deg) rotateZ(90deg) translateZ(' + (width/2 + height) * scaleFactor + 'px) translateX(' + depth/2 * scaleFactor + 'px) translateY(' + (depth/2 - width/2) * scaleFactor + 'px); width: ' + depth * scaleFactor + 'px; height: ' + width * scaleFactor + 'px;';
-          color = 'color_up';
+          basicStyle = 'transform: rotateX(90deg) rotateZ(180deg) translateZ(' + (depth/2 + height) * scaleFactor + 'px) translateY(' + -depth/2 * scaleFactor + 'px); width: ' + width * scaleFactor + 'px; height: ' + depth * scaleFactor + 'px;';
           break;
         case 'down':
-          basicStyle = 'transform: rotateX(90deg) rotateZ(90deg) translateZ(' + width/2 * scaleFactor + 'px) translateX(' + depth/2 * scaleFactor + 'px) translateY(' + (depth/2 - width/2) * scaleFactor + 'px) rotateY(180deg); width: ' + depth * scaleFactor + 'px; height: ' + width * scaleFactor + 'px;';
-          color = 'color_down';
+          basicStyle = 'transform: rotateX(90deg) rotateY(180deg) translateZ(' + -depth/2 * scaleFactor + 'px) translateY(' + depth/2 * scaleFactor + 'px); width: ' + width * scaleFactor + 'px; height: ' + depth * scaleFactor + 'px;';
           break;
       }
-      html += '<span class="face ' + orientations[n] + ' ' + color + '" style="'+ basicStyle + '"></span>'
+      color = 'color_' + orientations[n];
+      textureStyle = texturePath != null ? 'background-image: url(' + texturePath + '); background-size: ' + (1600/textureWidthX).toFixed(3) + '% ' + (1600/textureWidthY).toFixed(3) + '%; background-position:' + (textureStartX/(16 - textureWidthX) * 100).toFixed(3) + '% ' + (textureStartY/(16 - textureWidthY) * 100).toFixed(3) + '%;' : '';
+      html += '<span class="face ' + orientations[n] + ' ' + color + '" style="' + basicStyle + textureStyle + '"></span>';
     }
     html += '</div>'
     containerElements.innerHTML += html;
@@ -307,6 +345,7 @@ function buildJSON(fileContent) {
     refreshCube();
     updateLock = false;
   }
+  initialLock = false;
 }
 //Heart
 function updateCube() {
@@ -398,7 +437,7 @@ function computeContainer3D(thisWidth = containerExecute.clientWidth) {
   //If the width of containerCode exceeds the total width minus 8px resize_bar threshold, lock the size with an extremely convenient CSS value
   if (containerCode.clientWidth > thisBox.clientWidth - 8 && resizeOverflowLock == false && resizeButtonLock['code'] == null) {
     resizeButtonLock['code'] = containerCode.clientWidth;
-    codeMirror.style.width = 'calc(100vw - 32px)';
+    codeMirror.style.width = '100vw';
     buttonExpandCode.classList.add('hidden');
     buttonRestoreCode.classList.remove('hidden');
     resizeOverflowLock = true;
@@ -471,7 +510,7 @@ function handleMousemove(e) {
   else if (resizeCodeLock == true) {
     let distance = e.x - resizeCodeClicked;
     let width = codeSizeLocked + distance;
-    if (width <= 0) {
+    if (width <= 7) {
       if (resizeButtonLock['exe'] != null) {
         return;
       }
@@ -484,7 +523,7 @@ function handleMousemove(e) {
       if (resizeButtonLock['code'] != null) {
         return;
       }
-      codeMirror.style.width = 'calc(100vw - 32px)';
+      codeMirror.style.width = '100vw';
       buttonExpandCode.classList.add('hidden');
       buttonRestoreCode.classList.remove('hidden');
       resizeButtonLock['code'] = resizeCodeClicked;
@@ -496,6 +535,9 @@ function handleMousemove(e) {
       codeMirror.classList.remove('nodisplay')
       buttonRestoreExecute.classList.add('hidden');
       buttonExpandExecute.classList.remove('hidden');
+      setTimeout(function() {
+        codeArea.refresh();
+      }, 10);
     }
     else if (resizeButtonLock['code'] != null) {
       resizeButtonLock['code'] = null;
@@ -608,7 +650,7 @@ function choicePopout(choiceActive, choice2, choice3, choice4) {
 function expandCode() {
   codeMirror.classList.add('resizing');
   resizeButtonLock['code'] = parseInt(codeMirror.style.width.replace('px', ''));
-  codeMirror.style.width = 'calc(100vw - 32px)';
+  codeMirror.style.width = '100vw';
   buttonExpandCode.classList.add('hidden');
   buttonRestoreCode.classList.remove('hidden');
   thisHeader.classList.add('hidden');
@@ -625,7 +667,7 @@ function expandExecute() {
   buttonExpandExecute.classList.add('hidden');
   buttonRestoreExecute.classList.remove('hidden');
   container3D.style.top = null;
-  computeContainer3D(containers.clientWidth);
+  computeContainer3D(thisBox.clientWidth);
   setTimeout(function() {
     codeMirror.classList.add('nodisplay');
   }, 230);
@@ -643,7 +685,7 @@ function restoreCode() {
   }
   buttonRestoreCode.classList.add('hidden');
   buttonExpandCode.classList.remove('hidden');
-  computeContainer3D(containers.clientWidth - thisLock);
+  computeContainer3D(thisBox.clientWidth - thisLock);
   resizeButtonLock['code'] = null;
   setTimeout(function() {
     codeArea.refresh();
@@ -662,7 +704,7 @@ function restoreExecute() {
   }
   buttonRestoreExecute.classList.add('hidden');
   buttonExpandExecute.classList.remove('hidden');
-  computeContainer3D(containers.clientWidth - thisLock);
+  computeContainer3D(thisBox.clientWidth - thisLock);
   resizeButtonLock['exe'] = null;
 }
 
@@ -724,7 +766,7 @@ function resizeCodeClick(e) {
   codeMirror.classList.remove('resizing');
   resizeCodeLock = true;
   resizeCodeClicked = e.x;
-  if (codeMirror.style.width == 'calc(100vw - 32px)' || codeMirror.style.width == 'calc(-32px + 100vw)' /*Aparrently it gets converted*/) {
+  if (codeMirror.style.width == '100vw') {
     codeSizeLocked = thisBox.clientWidth - 8;
   }
   else {

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Random number generator - Tools | Hallo89</title>
+    <link rel="stylesheet" type="text/css" href="../global.css">
+    <link rel="stylesheet" type="text/css" href="./source/base.css">
+    <link rel="stylesheet" type="text/css" href="./source/rng.css">
+  </head>
+  <body>
+    <div id="wrapper">
+
+      <div class="box info_box glb_box">
+        <div class="box_header">
+          <span class="header_text">Random figure generator</span>
+          <div class="utility_buttons">
+            <span class="util_button button_green"></span>
+            <span class="util_button button_yellow"></span>
+            <span class="util_button button_red"></span>
+          </div>
+        </div>
+        <div class="input_container">
+          <div class="input_box tipper">
+            <span class="input_header"># random numbers</span>
+            <div class="input_number_container">
+              <input type="number" class="input number" value="1" id="figures_amount">
+              <div class="buttons_change_number" onclick="focusAmount()">
+                <span class="change_number increment noselect">▲</span>
+                <span class="change_number decrement noselect">▼</span>
+              </div>
+            </div>
+            <span class="tooltip default noselect">The amount of random numbers to generate</span>
+          </div>
+          <div class="input_box tipper">
+            <span class="input_header"># after comma</span>
+            <div class="input_number_container">
+              <input type="number" class="input number" value="0" id="figures_aftercomma">
+              <div class="buttons_change_number" onclick="focusPostcomma()">
+                <span class="change_number increment noselect">▲</span>
+                <span class="change_number decrement noselect">▼</span>
+              </div>
+            </div>
+            <span class="tooltip default noselect">The amount of digits after the comma</span>
+          </div>
+          <div class="input_box tipper">
+            <span class="input_header">Start value</span>
+            <div class="input_number_container">
+              <input type="number" class="input number" value="1" id="figures_start">
+              <div class="buttons_change_number" onclick="focusStart()">
+                <span class="change_number increment noselect">▲</span>
+                <span class="change_number decrement noselect">▼</span>
+              </div>
+            </div>
+            <span class="tooltip default noselect">The starting cap of every number</span>
+          </div>
+          <div class="input_box tipper">
+            <span class="input_header">End value</span>
+            <div class="input_number_container">
+              <input type="number" class="input number" value="1" id="figures_end">
+              <div class="buttons_change_number" onclick="focusEnd()">
+                <span class="change_number increment noselect">▲</span>
+                <span class="change_number decrement noselect">▼</span>
+              </div>
+            </div>
+            <span class="tooltip default noselect">The ending cap of every number</span>
+          </div>
+          <div class="input_box tipper">
+            <span class="input_header">Append mode</span>
+            <span class="input appendbutton knobber" id="figures_append" onclick="toggleRandomMode()">
+              <span class="knob"></span>
+            </span>
+            <span class="tooltip default noselect">Toggling this will not delete previous generations</span>
+          </div>
+          <div class="input_box button noselect" onclick="randomNumber()">
+            <span class="input_header">Go!</span>
+          </div>
+        </div>
+        <div class="box_content text_function text_box one_input_container" id="output"></div>
+      </div>
+
+    </div>
+
+    <script src="./source/base.js"></script>
+    <script src="./source/rng.js"></script>
+  </body>
+</html>

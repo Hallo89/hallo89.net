@@ -1,245 +1,39 @@
-body {
-  margin: 0;
-  background: linear-gradient(to bottom right, #1D5857, #534059); /* #1C5150, #4D3C52 */
+/* The absolute legend, now being another legend */
+#wrapper {
+  width: 100vw;
+  height: 100vh;
 }
 
-/* The absolute legend, being the wrapper of everything (literally everything)*/
-
-#containers {
-  opacity: .95;
-  max-width: 100%;
-  height: calc(100vh - 25px);
-  margin: 11px 12px 14px;
-  grid-gap: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(470px, 1fr));
-}
-
-/* styles being applied during the 'info_mode'-phase, the initial phase when opening the website */
-
-/* overrides if no grid is present */
-.info_mode .box:nth-of-type(2n+1) {
-  float: left;
-}
-.info_mode .box:nth-of-type(2n+2) {
-  float: right;
-}
-/* Pseudo grid-like-display; pseudo auto-margin if no grid is present, getting smaller when the screen is resized */
-.info_mode #containers {
-  opacity: 1;
-  justify-items: center;
-  margin: 11px calc(10vw - 60px) 14px;
-  height: auto;
-  min-height: calc(100vh - 25px);
-}
-/* If a specific width is reached, stop auto-resizing the margin, stop floating; wrap (still if no grid) */
-@media (max-width: 1055px) {
-  .info_mode .box {
-    float: none !important;
-    margin: 0 auto 20px;
-  }
-}
-/* If grid is present, normalize all code stated above and apply grid */
-/* (The various states of margin with the different priorities applied by the !important keywords are very complicated)*/
-@supports (display: grid) {
-  #containers {
-    display: grid;
-    margin: 11px 12px 14px !important;
-  }
-  .box {
-    float: none;
-  }
-  .info_mode .box {
-    margin: auto !important;
-  }
-}
-/* During the info-mode-phase, remove the columned flow from the 3DMagic box */
-.info_mode #box_3d {
-  display: block;
-}
-/* During the info-mode-phase, don't show the code area for obvious reasons */
-.info_mode #box_3d .code_container {
-  display: none;
-}
-/* During the info-mode-phase, remove a relative positioning from the execute container */
-.info_mode #box_3d .execute_container {
-  position: static;
-}
-/* During the info-mode-phase, reverse floating headers (only at 3DMagic atm) to their original state */
-.info_mode .box .floating_header {
-  position: static;
-  background-color: hsl(0, 0%, 12.5%);
-}
-/* During the info-mode-phase, hide the floating buttons from 3DMagic */
-.info_mode .floating_button {
-  display: none;
-}
-/* During the info-mode-phase, resize the boxes and show them als whole-clickable. Self-explanatory */
-.info_mode .box {
-  width: 470px;
-  height: 520px;
-  cursor: pointer;
-}
-/* During the info-mode-phase, hide the input_containers */
-.info_mode .box .input_container {
-  display: none;
-}
-/* During the info-mode-phase, lower the opacity of the box functions and blur them (only used at 3DMagic atm) */
-.info_mode .box .box_content {
-  opacity: .75;
-  filter: blur(8px);
-}
-/* During the info-mode-phase, set the absolute-positioned 3d-content of 3DMagic higher (deprecated when grid is present) */
-/* Also make the overflow visible so that there is still a blurry preview in the info-mode-phase */
-.info_mode #content_function_3d {
-  top: 76px;
-  overflow: visible;
-}
-/* During the info-mode-phase, hide the inner function of the mocking tool as it doesn't look good in its info-mode form */
-.info_mode #function_mocking {
-  display: none;
-}
-/* global values for the boxes, mainly for the info-mode-to-active-box transition */
-.box {
-  font-size: 22px;
-  transition: all .3s ease-out;
-  margin: auto;
-}
-.box .box_content {
-  transition: filter .33s cubic-bezier(.35, 0, .65, 1);
-  /*would love to add another transition (in order for it to translate down) but it makes 3DMagic extremely laggy*/
-}
 #box_3d {
-   display: flex;
-   flex-direction: row;
-}
-#box_mocking {
-  display: grid;
-  grid-template-rows: auto auto auto 1fr;
-}
-.box .box_header {
-  font-size: 1.1em;
-}
-.box .floating_header {
-  position: absolute;
-  right: 15px;
-  background-color: transparent;
-  z-index: 2;
-  opacity: 1;
-  transition: all .13s;
-}
-.box .floating_header.hidden {
-  visibility: hidden;
-  opacity: 0;
-}
-.box.active_item {
+  display: flex;
   width: 100%;
   height: 100%;
-  animation: .3s fadein cubic-bezier(.2, 0, 1, 1), .3s heightin ease-out;
-}
-.info_description {
-  color: hsl(0, 0%, 52%);
-  font-size: 1.3em;
-  font-family: Calibri, 'Times New Roman', sans-serif;
-  padding: 15px;
-}
-@keyframes fadein {
-  from { opacity: .1; }
-}
-@keyframes heightin {
-  from { height: 520px; }
-  to   { height: 100%; }
+  background-color: hsl(0, 0%, 11.4%);
+  flex-direction: row;
+  overflow: hidden;
+  position: relative;
 }
 
-/* Many styles for various text formatting methods */
+/* The glb_box header but just a header isn't worth loading it all */
 
-.text_function {
-  font-size: .75em;
-  color: hsl(0, 0%, 75%);
-  display: flex;
-}
-.text_box {
-  padding: 5px;
-  overflow: auto;
-  display: flex;
-  align-items: flex-start;
-  align-content: flex-start;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.text_wrapper {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-.text_container {
-  display: flex;
-  flex-direction: column;
-  padding: 3px 8px;
-  overflow: auto;
-}
-.text_input.text_container {
-  grid-row: 1 / -1;
-  grid-column: 1 / 2;
-  margin-right: 2px;
-}
-.text_output.text_container {
-  margin-bottom: 2px;
-  flex: 1;
-}
-.text_container .text_box {
-  letter-spacing: 1px;
-  height: 100%;
-  display: block;
-}
-.text_container .text_box_header {
-  font-size: 1.2em;
-  color: hsl(0, 0%, 40%);
-  padding: 5px 0 3px;
-  display: inline-block;
-}
-.text_container.text_input .text_box {
-  resize: none;
-  border: none;
-  background-color: transparent;
-  color: hsl(0, 0%, 75%);
-  box-sizing: border-box;
+.box_header .header_text {
+  padding: 38px 21px 38px 28px;
   font-size: 1.15em;
   font-family: Arial, sans-serif;
-}
-
-/* Various tool-specific values like the most crucial global display type */
-
-#function_rng {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-#function_rng span {
-  position: relative;
-  padding: 17px 9px;
-}
-#function_rng span::before {
-  content: '';
-  position: absolute;
-  bottom: 3px;
-  left: 0;
-  right: 0;
-  border-bottom: 2px solid rgba(229, 255, 164, .1);
-  margin: 8px 6px;
-}
-#function_mocking {
-  display: flex;
-  flex-direction: row;
-  overflow: auto;
+  text-transform: uppercase;
+  display: inherit;
+  line-height: 0;
+  color: #575757;
 }
 
 /* This is the absolute 3D-executing container in 3DMagic */
 
 #content_function_3d {
   position: relative;
-  z-index: 2;
+  z-index: 5;
   overflow: hidden; /*woooaaah*/
+  grid-row: -3 / -2;
+  perspective: 2500px /*wooooooaaaaahh*/
 }
 #content_function_3d.nogrid {
   position: absolute;
@@ -247,12 +41,6 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-}
-
-/* A thing to make the functions bearable without grid (absolute erf) */
-
-.one_input_container {
-  top: 151px; /* 76px header + 75px last (and first) input_box (-> without margin) */
 }
 
 /* The 2 separations of 3DMagic, code_container for the editor, execute_container for the executables */
@@ -263,17 +51,13 @@ body {
 .execute_container {
   position: relative;
   width: 100%;
-  grid-template-rows: auto auto 1fr;
+  grid-template-rows: auto auto 1fr auto;
 }
 .code_container {
   position: relative;
   height: 100%;
   font-size: 18px;
   grid-template-rows: auto 1fr;
-  margin-left: 4px;
-}
-#content_function_3d, .CodeMirror {
-  grid-row: -2 / -1;
 }
 .code_container .floating_button {
   background-color: hsl(0, 0%, 17%);
@@ -303,17 +87,17 @@ body {
   width: 8px;
   transition: .15s ease-out;
   cursor: ew-resize;
-  z-index: 5;
+  z-index: 6;
 }
 .code_container .resize_bar:hover {
   background-color: hsl(0, 0%, 7.5%);
   opacity: .7;
 }
 .code_container .CodeMirror {
-  /*height: 100%;*/
-  height: auto; /*TODOTODOTODOTODOTODOTODOTODO*/
+  height: auto; /*TODOTODOTODOTODOTODOTODOTODO HALLO TELL WHATS WRONG OR I WILL NEVER DO ANYTHING BECAUSE I DONT KNOW WHAT IT WAS*/
   width: 800px;
-  border-radius: 2px;
+  grid-row: -2 / -1;
+  font-family: 'Courier New', monospace;
 }
 .code_container .CodeMirror.resizing {
   transition: .22s cubic-bezier(0,0,.4,1);
@@ -349,8 +133,8 @@ body {
 #content_function_3d.popout.collapsed {
   width: 0;
   height: 0;
-  left: -210px;
-  top: 289px !important;
+  left: -50vw;
+  top: 50vh !important;
   overflow: visible;
 }
 #content_function_3d.popout.disabled {
@@ -411,162 +195,6 @@ body {
   left: -2.6px;
 }
 
-/* The container for every input every (The big line they are in) */
-
-.input_container {
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  padding: 5px 5px 7px;
-  margin-bottom: 2px;
-  background-color: hsl(0, 0%, 14%);
-}
-.input_container.uncrucial {
-  margin: 0;
-}
-
-/* The very global style for every input ever */
- /* The very global style for the wrapping of every input ever */
-.input_box .input_header {
-  margin-bottom: 3px;
-  color: hsl(0, 0%, 70%);
-}
-.input_box {
-  position: relative;
-  font-size: 17.2px;
-  margin: 0 7px;
-  display: flex;
-  flex-direction: column;
-  min-width: 150px;
-  padding: 8px;
-}
- /* The very global style for every input ever now for real */
-.input {
-  font-size: .81em;
-  border: none;
-  box-shadow: 0 1px 7px hsla(0, 0%, 14%, .82);
-  background: hsl(0, 0%, 23%);
-  color: hsl(0, 0%, 77%);
-  border-radius: 2px;
-  padding: 3px 6px;
-  height: 17px;
-  width: auto;
-}
- /* The very global style for every input ever (The one with knobs okay) */
-.knobber {
-  position: relative;
-  cursor: pointer;
-}
-.knobber .knob {
-  position: absolute;
-  left: 6px;
-  height: 17px;
-  width: 17px;
-  box-shadow: 0 1px 5px hsla(0, 0%, 21%, .8);
-  background-color: hsl(0, 0%, 13%);
-  border-radius: 100%;
-  transition: .3s;
-  z-index: 1;
-}
-
-/* The number input with its specific (very fancy) change-number buttons */
-
-.input.number {
-  padding: 3px 0 3px 6px;
-}
-.input_number_container {
-  position: relative;
-  height: 23px;
-}
-.change_number {
-  position: absolute;
-  right: 0px;
-  height: 12px;
-  width: 20px;
-  line-height: 12px;
-  font-size: .6em;
-  text-align: center;
-  color: hsl(0, 0%, 63%);
-  background-color: hsl(0, 0%, 32%);
-  cursor: pointer;
-}
-.change_number.increment {
-  top: 0;
-  border-top-right-radius: 2px;
-}
-.change_number.decrement {
-  bottom: 0;
-  border-bottom-right-radius: 2px;
-}
-/* Remove the default browser-side style */
-.input.number {
-  max-width: 150px;
-  -moz-appearance: textfield;
-  appearance: textfield;
-}
-input.number::-webkit-inner-spin-button,
-input.number::-webkit-outer-spin-button {
-   -webkit-appearance: none;
-    margin: 0;
-}
-
-/* The file input */
-
-.input.file { /* input[type=file] label */
-  cursor: pointer;
-  padding-right: 6px;
-}
-.input_file { /* input[type=file] */
-  display: none;
-}
-
-/* The button input */
-
-.button {
-  cursor: pointer;
-  justify-content: center;
-  align-items: center;
-  padding: 12px 8px 8px;
-}
-.knobber.active .knob {
-  transform: translate(122px);
-  background-color: rgba(131, 170, 172, 0.45);
-}
-
-/* The multiple-choice input */
-
-.multiple .input {
-  padding: 0;
-  height: 23px;
-}
-.multiple .knob {
-  top: 3px;
-  left: 14px;
-}
-.multiple .mark_container {
-  height: 100%;
-  display: flex;
-}
-.multiple .marker {
-  min-width: 46px;
-  padding: 3px 0;
-  display: flex;
-  justify-content: center;
-  transition: all .3s;
-}
-.multiple .mark {
-  width: 11px;
-  background-color: hsl(0, 0%, 35%);
-  border-radius: 2px;
-  opacity: 1;
-}
-.currentchoice {
-  opacity: 0 !important;
-}
-.color_mark_none {
-  color: hsl(0, 0%, 45%);
-}
-
 /* Specific values for the multiple-choice input */
 .color_mark_x {
   color: #A84E4E;
@@ -576,87 +204,6 @@ input.number::-webkit-outer-spin-button {
 }
 .color_mark_z {
   color: #1398A9;
-}
-
-/* The slider input. Not used anywhere atm but it's here */
-
-.slider {
-  padding: 3px 12px;
-}
-.slider .knob {
-  left: 2.5px;
-  transition: none;
-}
-.slider .knob.default {
-  z-index: 10;
-}
-.slider.rotate {
-  width: 360px;
-}
-.slider.scale {
-  width: 100px;
-}
-
-/* Tooltips */
-
-.tipper .tooltip {
-  position: absolute;
-  color: hsl(0, 0%, 62%);
-  white-space: nowrap;
-  background-color: hsl(0, 0%, 6%);
-  padding: 3px 18px;
-  z-index: 5;
-
-  visibility: hidden;
-  opacity: 0;
-  transition: all .12s;
-}
-.tipper .tooltip::before {
-  content: '';
-  position: absolute;
-  left: 30px;
-  border: solid 7px hsl(0, 0%, 6%);
-  transform: rotate(45deg);
-  z-index: -1;
-}
-.tipper .tooltip.default {
-  bottom: -25px;
-  left: 8px;
-}
-.tipper .tooltip.default::before {
-  top: -6px;
-}
-.tipper .tooltip.multiple_tip {
-  top: -2px;
-  left: -15px;
-  border-radius: 4px;
-  padding: 3px 10px;
-  opacity: 0;
-}
-.tipper .tooltip.multiple_tip::before {
-  bottom: -7px;
-  left: 35px;
-}
-.tipper:hover .tooltip.multiple_tip, .tipper.active_tip .tooltip.default {
-  visibility: visible;
-  opacity: 1;
-}
-
-/* Ultra-global values, being classes */
-
-.nodisplay {
-  display: none !important;
-}
-.noselect {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-.centerflex {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 /* Ultra-global values specifically for 3DMagic (or any other project using 3D but I don't think that will happen) */
@@ -723,18 +270,14 @@ input.number::-webkit-outer-spin-button {
 }
 
 .error_banner {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
   display: flex;
   align-items: center;
-  padding: 5px;
+  grid-row: -2 / -1;
+  padding: 5px 5px 5px 36px;
   color: hsl(0, 0%, 60%);
   font-size: 1.2em;
-  border-bottom: none;
-  box-shadow: none;
   background-color: hsl(0, 0%, 12.5%);
+  border-top: 3px solid hsl(0, 0%, 27%);
 }
 .error_banner .exclamation {
   display: inline-block;
@@ -746,6 +289,12 @@ input.number::-webkit-outer-spin-button {
 
 .elements_container {
   transform: translateX(-200px) translateZ(-200px) translateY(200px);
+}
+
+/* Stuff for the actual model and its surroundings */
+
+.element .face {
+  image-rendering: -moz-crisp-edges;
 }
 
 .aid_stripe.end {

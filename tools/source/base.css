@@ -1,0 +1,351 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: 22px;
+}
+
+.box .header_text {
+  font-size: 28px;
+}
+
+.box .floating_header {
+  position: absolute;
+  right: 15px;
+  background-color: transparent;
+  z-index: 2;
+  opacity: 1;
+  transition: all .13s;
+}
+.box .floating_header.hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+/* Many styles for various text formatting methods */
+
+.text_function {
+  font-size: .75em;
+  color: hsl(0, 0%, 75%);
+  display: flex;
+}
+.text_box {
+  padding: 5px;
+  overflow: auto;
+  display: flex;
+  align-items: flex-start;
+  align-content: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.text_wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.text_container {
+  display: flex;
+  flex-direction: column;
+  padding: 3px 8px;
+  overflow: auto;
+}
+.text_input.text_container {
+  grid-row: 1 / -1;
+  grid-column: 1 / 2;
+  margin-right: 2px;
+}
+.text_output.text_container {
+  margin-bottom: 2px;
+  flex: 1;
+}
+.text_container .text_box {
+  letter-spacing: 1px;
+  height: 100%;
+  display: block;
+}
+.text_container .text_box_header {
+  font-size: 1.2em;
+  color: hsl(0, 0%, 40%);
+  padding: 5px 0 3px;
+  display: inline-block;
+}
+.text_container.text_input .text_box {
+  resize: none;
+  border: none;
+  background-color: transparent;
+  color: hsl(0, 0%, 75%);
+  box-sizing: border-box;
+  font-size: 1.15em;
+  font-family: Arial, sans-serif;
+}
+
+/* Various tool-specific values like the most crucial global display type */
+
+#function_rng {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+#function_rng span {
+  position: relative;
+  padding: 17px 9px;
+}
+#function_rng span::before {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  left: 0;
+  right: 0;
+  border-bottom: 2px solid rgba(229, 255, 164, .1);
+  margin: 8px 6px;
+}
+#function_mocking {
+  display: flex;
+  flex-direction: row;
+  overflow: auto;
+}
+
+/* A thing to make the functions bearable without grid (absolute erf) */
+
+.one_input_container {
+  top: 151px; /* 76px header + 75px last (and first) input_box (-> without margin) */
+}
+
+/* The container for every input every (The big line they are in) */
+
+.input_container {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  font-family: Calibri, Arial, sans-serif;
+  font-size: 18.5px;
+  padding: 5px 5px 7px;
+  margin-bottom: 2px;
+  background-color: hsl(0, 0%, 14%);
+}
+.input_container.uncrucial {
+  margin: 0;
+}
+
+/* The very global style for every input ever */
+ /* The very global style for the wrapping of every input ever */
+.input_box .input_header {
+  margin-bottom: 3px;
+  color: hsl(0, 0%, 70%);
+}
+.input_box {
+  position: relative;
+  margin: 0 7px;
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+  padding: 8px;
+}
+ /* The very global style for every input ever now for real */
+.input {
+  font-size: .81em;
+  border: none;
+  box-shadow: 0 1px 7px hsla(0, 0%, 14%, .82);
+  background: hsl(0, 0%, 23%);
+  color: hsl(0, 0%, 77%);
+  border-radius: 2px;
+  padding: 3px 6px;
+  height: 17px;
+  width: auto;
+}
+ /* The very global style for every input ever (The one with knobs okay) */
+.knobber {
+  position: relative;
+  cursor: pointer;
+}
+.knobber .knob {
+  position: absolute;
+  left: 6px;
+  height: 17px;
+  width: 17px;
+  box-shadow: 0 1px 5px hsla(0, 0%, 21%, .8);
+  background-color: hsl(0, 0%, 13%);
+  border-radius: 100%;
+  transition: all .3s ease;
+  z-index: 1;
+}
+
+/* The number input with its specific (very fancy) change-number buttons */
+
+.input.number {
+  padding: 3px 0 3px 6px;
+}
+.input_number_container {
+  position: relative;
+  height: 23px;
+}
+.change_number {
+  position: absolute;
+  right: 0px;
+  height: 12px;
+  width: 20px;
+  line-height: 12px;
+  font-size: .6em;
+  text-align: center;
+  color: hsl(0, 0%, 63%);
+  background-color: hsl(0, 0%, 32%);
+  cursor: pointer;
+}
+.change_number.increment {
+  top: 0;
+  border-top-right-radius: 2px;
+}
+.change_number.decrement {
+  bottom: 0;
+  border-bottom-right-radius: 2px;
+}
+/* Remove the default browser-side style */
+.input.number {
+  max-width: 150px;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+input.number::-webkit-inner-spin-button,
+input.number::-webkit-outer-spin-button {
+   -webkit-appearance: none;
+    margin: 0;
+}
+
+/* The file input */
+
+.input.file { /* input[type=file] label */
+  cursor: pointer;
+  padding-right: 6px;
+  font-family: 'Consolas', 'Courier New', 'Courier', monospace;
+}
+.input_file { /* input[type=file] */
+  display: none;
+}
+
+/* The button input */
+
+.button {
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 8px 8px;
+}
+.knobber.active .knob {
+  transform: translate(122px);
+  background-color: hsl(0, 0%, 47%);
+}
+
+/* The multiple-choice input */
+
+.multiple .input {
+  padding: 0;
+  height: 23px;
+}
+.multiple .knob {
+  top: 3px;
+  left: 14px;
+}
+.multiple .mark_container {
+  height: 100%;
+  display: flex;
+}
+.multiple .marker {
+  min-width: 46px;
+  padding: 3px 0;
+  display: flex;
+  justify-content: center;
+  transition: all .3s;
+}
+.multiple .mark {
+  width: 11px;
+  background-color: hsl(0, 0%, 35%);
+  border-radius: 2px;
+  opacity: 1;
+}
+.currentchoice {
+  opacity: 0 !important;
+}
+.color_mark_none {
+  color: hsl(0, 0%, 45%);
+}
+
+/* The slider input. Not used anywhere atm but it's here */
+
+.slider {
+  padding: 3px 12px;
+}
+.slider .knob {
+  left: 2.5px;
+  transition: none;
+}
+.slider .knob.default {
+  z-index: 10;
+}
+.slider.rotate {
+  width: 360px;
+}
+.slider.scale {
+  width: 100px;
+}
+
+/* Tooltips */
+
+.tipper .tooltip {
+  position: absolute;
+  color: hsl(0, 0%, 62%);
+  white-space: nowrap;
+  background-color: hsl(0, 0%, 6%);
+  padding: 3px 18px;
+  z-index: 5;
+
+  visibility: hidden;
+  opacity: 0;
+  transition: all .12s;
+}
+.tipper .tooltip::before {
+  content: '';
+  position: absolute;
+  left: 30px;
+  border: solid 7px hsl(0, 0%, 6%);
+  transform: rotate(45deg);
+  z-index: -1;
+}
+.tipper .tooltip.default {
+  bottom: -25px;
+  left: 8px;
+}
+.tipper .tooltip.default::before {
+  top: -6px;
+}
+.tipper .tooltip.multiple_tip {
+  top: -2px;
+  left: -15px;
+  border-radius: 4px;
+  padding: 3px 10px;
+  opacity: 0;
+}
+.tipper .tooltip.multiple_tip::before {
+  bottom: -7px;
+  left: 35px;
+}
+.tipper:hover .tooltip.multiple_tip, .tipper.active_tip .tooltip.default {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Ultra-global values, being classes */
+
+.nodisplay {
+  display: none !important;
+}
+.noselect {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.centerflex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

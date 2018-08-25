@@ -1,0 +1,78 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: 22px;
+  background: linear-gradient(to bottom right, #1F6C6B, #664D6E); /* #1D5857, #534059 */ /* #1C5150, #4D3C52 */
+}
+
+/* The absolute legend, being the wrapper of everything (literally everything)*/
+/* Pseudo grid-like-display; pseudo auto-margin if no grid is present, getting smaller when the screen is resized */
+#containers {
+  justify-items: center;
+  margin: 20px calc(10vw - 60px);
+  height: auto;
+  min-height: calc(100vh - 40px);
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(470px, 1fr));
+  align-items: center;
+}
+
+/* styles being applied during the 'info_mode'-phase, the initial phase when opening the website */
+
+/* overrides if no grid is present */
+.box:nth-of-type(2n+1) {
+  float: left;
+}
+.box:nth-of-type(2n+2) {
+  float: right;
+}
+
+/* If a specific width is reached, stop auto-resizing the margin, stop floating; wrap (still if no grid) */
+@media (max-width: 1055px) {
+  .box {
+    float: none !important;
+    margin: 20px auto;
+  }
+}
+/* If grid is present, normalize all code stated above and apply grid */
+/* (The various states of margin with the different priorities applied by the !important keywords are very complicated)*/
+@supports (display: grid) {
+  #containers {
+    display: grid;
+    margin: 20px 0 !important;
+  }
+  .box {
+    float: none;
+  }
+}
+/* The tools being repesentated by small clickable boxes. Self-explanatory */
+.box {
+  width: 465px;
+  height: 520px;
+  cursor: pointer;
+  box-shadow: 2px 4px 18px hsla(0, 0%, 5%, 0.30);
+}
+/* The box header having a fixed font size */
+.box .header_text {
+  font-size: 28px;
+}
+/* The info description being cool */
+.box .info_description {
+  color: hsl(0, 0%, 52%);
+  font-size: 1.3em;
+  font-family: Calibri, 'Times New Roman', sans-serif;
+  line-height: 1.19;
+  padding: 15px;
+}
+/* During the info-mode-phase, hide the input_containers */
+.box .input_container {
+  display: none;
+}
+/* global values for the boxes, mainly for the info-mode-to-active-box transition */
+.hyperbox {
+  text-decoration: none;
+}
+/* Normalizing (-> removing) the dotted outline when going to the last page while having clicked onto an <a> in Firefox */
+.hyperbox:any-link {
+  color: transparent;
+}
