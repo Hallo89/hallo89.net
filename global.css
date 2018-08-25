@@ -344,7 +344,7 @@ body.light-mode {
   background-color: #1d1d1d;
   border-top: 4px solid #4b4b4b;
   border-bottom: 4px solid #1a1a1a;
-  box-shadow: 0 4px 1px #0f0f0f, 1px 2px 6px rgba(19, 19, 19, 0.8);
+  box-shadow: 0 4px 1px rgba(15, 15, 15, 0.9), 1px 2px 6px rgba(19, 19, 19, 0.8);
   box-sizing: border-box;
   transition: background .15s linear, box-shadow 0.15s linear;
 }
@@ -380,8 +380,7 @@ body.light-mode {
   background-color: #202020;
 }
 .glb_box .box_header .header_text {
-  padding: 38px 21px 38px 28px;
-  font-size: 1.15em;
+  padding: 38px 21px 38px 22px;
   font-family: Arial, sans-serif;
   text-transform: uppercase;
   display: inherit;

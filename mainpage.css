@@ -184,11 +184,14 @@ body {
   margin: 35px auto 10px;
   max-width: 1000px;
 }
-.box {
+#ultra_nav .box {
   font-size: 30px;
   width: 400px;
   height: 400px;
   margin: 0 0 35px 0;
+}
+#ultra_nav .box .box_header {
+  font-size: 33px;
 }
 #ultra_nav .box.box_about {
   height: 76px;
@@ -277,7 +280,7 @@ body {
 #ultra_nav .box a.bg_image::after {
   content: '';
 }
-.box:nth-of-type(1) {
+#ultra_nav .box:nth-of-type(1) {
   animation: 0.8s shiftin2 ease-out;
 }
 #ultra_nav .box:nth-of-type(1) .box_header {
@@ -310,9 +313,9 @@ body {
     grid-gap: 35px;
     grid-auto-rows: 400px;
   }
-  .box {
-    /*! width: auto; */
-    /*! height: auto; */
+  #ultra_nav .box {
+    width: auto;
+    height: auto;
     margin: 0 !important;
     float: none !important;
   }
