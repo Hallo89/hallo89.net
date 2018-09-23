@@ -4,37 +4,33 @@
     <meta charset="utf-8">
     <meta name="theme-color" content="#17469E">
     <meta property="og:title" content="Hallo89">
-    <meta property="og:description" content="ebenfalls">
+    <meta property="og:description" content="Hallo89.">
     <meta property="og:url" content="https://hallo89.github.io/Some-shitty-website/">
-    <meta property="og:image" content="https://cdn.discordapp.com/attachments/363044137106276354/421804474231816204/Avatar.png">
-    <title>Nesewebel fanclub </title>
-    <link rel="icon" href="https://cdn.discordapp.com/attachments/363044137106276354/392035652444749825/Nesewebels_geils_profilbild_in_geil_lol_geil.png.ico">
+    <meta property="og:image" content="./images/main/Avatar.png">
+    <title>Hallo89</title>
+    <link rel="icon" href="./images/roundedicon.ico">
     <link rel="stylesheet" type="text/css" href="global.css">
     <link rel="stylesheet" type="text/css" href="mainpage.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Lato:700">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css">
   </head>
   <body class="dark-mode no-nesewebelsadface">
 
-    <div id="headline" class="headline">
-      <a href="https://hallo89.github.io/Some-shitty-website/" id="head_image"></a>
-      <nav id="head_nav">
-        <a href="https://nesewebel.de/auch" target="_blank">Nese1</a>
-        <a href="https://nesewebel.de/mockbob" target="_blank">Nese2</a>
-        <a href="https://twitter.com/Nesewebel" target="_blank">Nese3</a>
-        <a href="https://steamcommunity.com/id/Nesewebel" target="_blank">Nese4</a>
+    <div id="headline">
+      <a href="https://hallo89.github.io/Some-shitty-website/" class="head_image"></a>
+      <nav class="head_nav">
+        <a href="https://nesewebel.de/auch">Nese1</a>
+        <a href="https://nesewebel.de/mockbob">Nese2</a>
+        <a href="https://twitter.com/Nesewebel">Nese3</a>
+        <a href="https://steamcommunity.com/id/Nesewebel">Nese4</a>
       </nav>
-      <div id="expanding_border"></div>
-      <div id="modes">
+      <div class="modes">
         <span class="mode_gear fa fa-cog"></span>
         <div class="dropdown_box">
           <div class="dropdown_header">
             <span class="dropdown_header_text">modes</span>
           </div>
           <div class="dropdown_text">
-            <span class="mode_switch" id="switch_daynight" onclick="toggleMode()"> Day/Night Theme </span>
-            <span class="mode_switch" id="switch_nesewebel" onclick="toggleModeNesewebel()"> Nesewebel Theme </span>
+            <span class="mode_switch switch_daynight" onclick="toggleMode()"> Light Theme </span>
+            <span class="mode_switch switch_nesewebel" onclick="toggleModeNesewebel()"> Nesewebel Theme </span>
           </div>
         </div>
       </div>
@@ -55,66 +51,83 @@
     <div id="head_block">
       <h1 data-heading="Hallo89">Hallo89</h1>
       <script>
-        var randomText = new Array ();
-        randomText = [
-          "Eine Ode an den Nesewebel",
-          "Ein Gesang an den Nesewebel",
-          "Ein Gedicht an den Nesewebel",
-          "Eine Geschichte an den Nesewebel",
-          "Eine Erzählung an den Nesewebel",
-          "Ein Buch an den Nesewebel",
-          "Eine Memoire an den Nesewebel",
-          "Ein Bericht an den Nesewebel",
-          "Eine Mitteilung an den Nesewebel",
-          "Eine Legende des Nesewebels"
+        var randomSubheader = [
+          "An ode to Nesewebel",
+    		  "A tale of Sparxdev",
+    		  "Rectangulous precipitation",
+    		  "Numerical apparatus",
+    		  "An acceptable website",
+    		  "Geometrical calculation",
+    		  "Graphical utilization",
+    		  "Resourceful bundling"
         ];
-        var i = Math.floor(randomText.length*Math.random());
-        document.write('<p>' + randomText[i] + '</p>');
+        document.write('<p>' + randomSubheader[Math.floor(randomSubheader.length*Math.random())] + '</p>');
       </script>
     </div>
 
-    <nav id="ultra_nav">
-      <div class="box box_about glb_box" id="about_box">
-        <div class="corneranimation">
-          <span class="corner_before corner_about"></span>
-          <span class="corner_after corner_about"></span>
-        </div>
-        <div class="box_header header_box1" onclick="toggleAbout()">
-          <span class="header_text"> About Nesewebel </span>
-        </div>
-        <div class="about_content">
-          <span class="actual_about_content"> Nesewebel is pretty lit yeah what should I now write in here hmm it's pretty difficult because I actually want to replace the 'Lorem Ipsum' text by Atom because it wasn't Nesewebel-y enough. So Nesewebel is pretty lit, as I said, he is a very cool guy haha that was actually a lie he's the shittiest person on earth but is this really true hmm I don't know so decide whether he's cool or not :thinking:. Please gift him a CPU cooler he needs it desperately actually please gift him everything you have because he is very awesome. <br> ALSO SORRY THAT I DIDN'T BUY THAT BOX FOR YOU D::::: ;________; SOB </span>
-        </div>
-      </div>
-
-      <div class="box glb_box">
+    <nav id="box_nav">
+      <a href="https://minecraft.curseforge.com/projects/dandelion-with-mods" class="box glb_box hyperbox imager dwm">
         <div class="corneranimation">
           <span class="corner_before"></span>
           <span class="corner_after"></span>
         </div>
-        <div class="box_header header_box1">
-          <span class="header_text"> Nesey Projects </span>
+        <div class="box_header">
+          <span class="header_text">Dandelion With Mods</span>
         </div>
-        <div class="box_text">
-          <a href="http://nesewebel.de" class="bg_image"> Dandelion With Nese </a>
-          <a href="http://nesewebel.de"> This Nesey site lol </a>
+        <div class="description box_text">
+          <span>
+            A minecraft resource pack, forked from the original resource pack 'Dandelion', featuring mod support, many improved and new vanilla items & models and 1.13. <br>
+            Although not worked on extensively anymore, I consider it one of my main projects
+          </span>
         </div>
-      </div>
-      <div class="box glb_box">
+      </a>
+      <a href="./tools.html" class="box glb_box hyperbox">
         <div class="corneranimation">
           <span class="corner_before"></span>
           <span class="corner_after"></span>
         </div>
-        <div class="box_header header_box2">
-          <span class="header_text"> Other Neses </span>
+        <div class="box_header">
+          <span class="header_text">tools</span>
         </div>
-        <div class="box_text">
-          <a href="./sponge.html"> Nese1 </a>
-          <a href="./tutorials.html"> Nese2 </a>
-          <a href="./tools.html"> Nese3 </a>
+        <div class="description box_text">
+          <span>
+            A variety of useful tools, currently featuring a random number generator and an extensive minecraft model creator. <br>
+            Along with Dandelion With Mods and this website in general, it is one of my main projects
+          </span>
+        </div>
+      </a>
+      <div class="box glb_box multiplebox">
+        <div class="corneranimation">
+          <span class="corner_before"></span>
+          <span class="corner_after"></span>
+        </div>
+        <div class="box_header">
+          <span class="header_text">WebGL Experiments</span>
+        </div>
+        <div class="description box_text">
+          <span>A WebGL 2 learning log</span>
+        </div>
+        <div class="links box_text">
+          <a class="imager triangles" href="./webgl/triangles.html">Triangles</a>
+        </div>
+      </div>
+      <div class="box glb_box multiplebox">
+        <div class="corneranimation">
+          <span class="corner_before"></span>
+          <span class="corner_after"></span>
+        </div>
+        <div class="box_header">
+          <span class="header_text">Other stuff</span>
+        </div>
+        <div class="links box_text">
+          <a href="./sponge.html">Useful thing</a>
+          <a href="./tutorials.html">Empty thing</a>
         </div>
       </div>
     </nav>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css">
     <script>
       window.onload = function preload() {
         dropdownClickDelay();
@@ -127,26 +140,6 @@
       function toggleModeNesewebel() {
         document.body.classList.toggle('nesewebel-mode');
         document.body.classList.toggle('no-nesewebelsadface');
-      }
-      function toggleAbout() {
-        document.getElementById('about_box').classList.toggle('expanded');
-        window.onclick = function(event) {
-          if (!event.target.matches(
-            [
-              '.box_about',
-              '.about_content',
-              '.actual_about_content',
-              '.header_text',
-              '.corner_before.corner_about',
-              '.corner_after.corner_about'
-            ]
-          ))
-          {
-            if(document.getElementById('about_box').classList.contains('expanded')) {
-              document.getElementById('about_box').classList.remove('expanded');
-            }
-          }
-        }
       }
     </script>
     <script src="global.js"></script>

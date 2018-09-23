@@ -2,6 +2,11 @@
 Written by Hallo89 using LESS CSS - http://lesscss.org
 No necessity to write this in here but Less is awesome!
 */
+/* @mode-dropdown-box--light: lighten(@background-color--light, 5%);
+@mode-dropdown-box-shadow--light: fadeout(darken(@mode-dropdown-box--light, 19%), 20%);
+@mode-switch-foreground--light: @foreground-color--light;
+@mode-switch-background--light: @mode-dropdown-box--light;
+@mode-switch-background-hover--light: darken(@mode-switch-background--light, 4%); */
 body.nesewebel-mode.dark-mode {
   background-color: black;
 }
@@ -11,35 +16,35 @@ body.nesewebel-mode.light-mode {
 body {
   background-color: #171717;
 }
-.nesewebel-mode.dark-mode #mode_dropdown #mode_dropdown_box {
+.nesewebel-mode.dark-mode .mode_dropdown .mode_dropdown_box {
   box-shadow: 1px 1px 10px #141414;
 }
-.nesewebel-mode.dark-mode #mode_dropdown #mode_dropdown_box::before {
+.nesewebel-mode.dark-mode .mode_dropdown .mode_dropdown_box::before {
   border: 15px solid black;
   box-shadow: 2px 2px 20px #141414;
 }
-.nesewebel-mode.dark-mode #mode_dropdown #mode_dropdown_box .mode_switch {
+.nesewebel-mode.dark-mode .mode_dropdown .mode_dropdown_box .mode_switch {
   color: white;
   background-color: black;
 }
-.nesewebel-mode.dark-mode #mode_dropdown #mode_dropdown_box .mode_switch:hover {
+.nesewebel-mode.dark-mode .mode_dropdown .mode_dropdown_box .mode_switch:hover {
   background-color: #141414;
 }
-.nesewebel-mode.light-mode #mode_dropdown #mode_dropdown_box {
+.nesewebel-mode.light-mode .mode_dropdown .mode_dropdown_box {
   box-shadow: 1px 1px 10px #ebebeb;
 }
-.nesewebel-mode.light-mode #mode_dropdown #mode_dropdown_box::before {
+.nesewebel-mode.light-mode .mode_dropdown .mode_dropdown_box::before {
   border: 15px solid white;
   box-shadow: 1px 1px 10px #ebebeb;
 }
-.nesewebel-mode.light-mode #mode_dropdown #mode_dropdown_box .mode_switch {
+.nesewebel-mode.light-mode .mode_dropdown .mode_dropdown_box .mode_switch {
   color: black;
   background-color: white;
 }
-.nesewebel-mode.light-mode #mode_dropdown #mode_dropdown_box .mode_switch:hover {
+.nesewebel-mode.light-mode .mode_dropdown .mode_dropdown_box .mode_switch:hover {
   background-color: #ebebeb;
 }
-.nesewebel-mode.light-mode #mode_dropdown #switch_daynight::before {
+.nesewebel-mode.light-mode .mode_dropdown .switch_daynight::before {
   color: black;
 }
 #headline {
@@ -53,19 +58,17 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 2px 9px rgba(13, 13, 13, 0.78);
-  background-color: #222222;
-  max-width: 100vw;
-  height: 410px;
-  color: #a1a1a1;
+  box-shadow: 0 2px 13px rgba(15, 15, 15, 0.75);
+  background-color: #212121;
+  height: calc(8vw + 12vh + 141px);
+  color: #9f9f9f;
   transition: background .15s linear, box-shadow 0.15s linear;
 }
 #head_block h1 {
-  position: relative;
-  font: bold 130px 'Century Gothic', 'Lato', sans-serif;
+  font: bold 130px 'Century Gothic', 'Segoe UI', 'Nirmala UI', sans-serif;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  text-shadow: 1px 1px rgba(125, 125, 125, 0.95), 2px 2px rgba(125, 125, 125, 0.95), 3px 3px rgba(125, 125, 125, 0.95), 4px 4px rgba(125, 125, 125, 0.95), 5px 5px rgba(125, 125, 125, 0.95), 6px 6px rgba(125, 125, 125, 0.95);
+  text-shadow: 1px 1px #7c7c7c, 2px 2px #7c7c7c, 3px 3px #7c7c7c, 4px 4px #7c7c7c, 5px 5px #7c7c7c, 6px 6px #7c7c7c;
   margin: 0;
   transition: all .45s, transform .76s, text-shadow 0.15s linear, color .15s linear;
   animation: .75s fadein linear, .9s shiftin;
@@ -81,15 +84,15 @@ body {
   left: 0;
 }
 #head_block h1:hover::before {
-  color: #222222;
-  text-shadow: 7px 7px #222222, 7px -7px #222222, -7px 7px #222222, -7px -7px #222222;
+  color: #212121;
+  text-shadow: 7px 7px #212121, 7px -7px #212121, -7px 7px #212121, -7px -7px #212121;
   clip-path: polygon(0 58%, 0 0, 100% 0, 100% 37%);
-  animation: 0.32s headingcut ease-in;
+  animation: 0.3s headingcut ease-in;
 }
 #head_block h1:hover::after {
   clip-path: polygon(0 57.5%, 0 0, 100% 0, 100% 36.5%);
   transform: translate(-4px);
-  animation: 0.69s headingshift cubic-bezier(0.85, 0, 1, 1);
+  animation: 0.68s headingshift cubic-bezier(0.85, 0, 1, 1);
 }
 #head_block h1::selection {
   background-color: transparent;
@@ -111,17 +114,19 @@ body {
 @media (max-width: 450px) {
   #head_block h1 {
     font-size: 88px;
-    text-shadow: 1px 1px rgba(125, 125, 125, 0.95), 2px 2px rgba(125, 125, 125, 0.95), 3px 3px rgba(125, 125, 125, 0.95), 4px 4px rgba(125, 125, 125, 0.95), 5px 5px rgba(125, 125, 125, 0.95);
+    text-shadow: 1px 1px #7c7c7c, 2px 2px #7c7c7c, 3px 3px #7c7c7c, 4px 4px #7c7c7c, 5px 5px #7c7c7c;
   }
 }
 #head_block p {
   position: absolute;
-  bottom: 30px;
-  font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+  bottom: calc((8vw + 12vh + 141px)/4 - 38px);
+  font-family: 'Segoe UI', 'Arial', sans-serif;
   font-size: 19px;
+  font-style: italic;
+  margin: 0;
   white-space: nowrap;
-  animation: 0.63s fadein ease-in;
-  transition: background .15s linear;
+  animation: 0.6s fadein ease-in;
+  transition: background .15s linear, color .15s linear;
 }
 #head_block p::selection {
   background-color: transparent;
@@ -135,36 +140,33 @@ body {
   background-color: transparent;
   color: #DB968C;
 }
-#head_block p::before,
-#head_block p::after {
-  content: '';
-  border-bottom: solid 1px;
-  vertical-align: middle;
-  width: 20px;
-  display: inline-block;
-  animation: 0.8s borderglide2 ease-out;
-}
 .light-mode #head_block {
-  box-shadow: 0 2px 10px 1px rgba(194, 194, 194, 0.8);
+  box-shadow: 0 2px 13px rgba(194, 194, 194, 0.8);
   background-color: #f7f7f7;
-  color: #616161;
+  color: #757575;
 }
-.light-mode #head_block #main_header h1 {
-  text-shadow: 1px 1px #858585, 2px 2px #858585, 3px 3px #858585, 4px 4px #858585, 5px 5px #858585, 6px 6px #858585;
+.light-mode #head_block h1 {
+  text-shadow: 1px 1px #999999, 2px 2px #999999, 3px 3px #999999, 4px 4px #999999, 5px 5px #999999, 6px 6px #999999;
 }
-.light-mode #head_block #main_header h1:hover::before {
+.light-mode #head_block h1:hover::before {
   color: #f7f7f7;
   text-shadow: 7px 7px #f7f7f7, 7px -7px #f7f7f7, -7px 7px #f7f7f7, -7px -7px #f7f7f7;
+}
+@media (max-width: 450px) {
+  .light-mode #head_block h1 {
+    font-size: 88px;
+    text-shadow: 1px 1px #999999, 2px 2px #999999, 3px 3px #999999, 4px 4px #999999, 5px 5px #999999;
+  }
 }
 .nesewebel-mode.dark-mode #head_block {
   box-shadow: 0 2px 10px 1px #141414;
   background-color: black;
   color: white;
 }
-.nesewebel-mode.dark-mode #head_block #main_header h1 {
+.nesewebel-mode.dark-mode #head_block h1 {
   text-shadow: 1px 1px #141414, 2px 2px #141414, 3px 3px #141414, 4px 4px #141414, 5px 5px #141414, 6px 6px #141414;
 }
-.nesewebel-mode.dark-mode #head_block #main_header h1:hover::before {
+.nesewebel-mode.dark-mode #head_block h1:hover::before {
   color: black;
   text-shadow: 7px 7px black, 7px -7px black, -7px 7px black, -7px -7px black;
 }
@@ -173,225 +175,309 @@ body {
   background-color: white;
   color: black;
 }
-.nesewebel-mode.light-mode #head_block #main_header h1 {
+.nesewebel-mode.light-mode #head_block h1 {
   text-shadow: 1px 1px #ebebeb, 2px 2px #ebebeb, 3px 3px #ebebeb, 4px 4px #ebebeb, 5px 5px #ebebeb, 6px 6px #ebebeb;
 }
-.nesewebel-mode.light-mode #head_block #main_header h1:hover::before {
+.nesewebel-mode.light-mode #head_block h1:hover::before {
   color: white;
   text-shadow: 7px 7px white, 7px -7px white, -7px 7px white, -7px -7px white;
 }
+#box_nav {
+  display: grid;
+  justify-items: center;
+  margin: 35px 20px 20px;
+  grid-gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(410px, 1fr));
+  align-items: center;
+}
+#box_nav .box {
+  width: 410px;
+  height: 450px;
+}
+#box_nav .box:nth-child(1) {
+  animation: 0.5s shiftinBox ease-out;
+}
+#box_nav .box:nth-child(2) {
+  animation: 0.58s shiftinBox ease-out;
+}
+#box_nav .box:nth-child(3) {
+  animation: 0.66s shiftinBox ease-out;
+}
+#box_nav .box:nth-child(4) {
+  animation: 0.74s shiftinBox ease-out;
+}
+#box_nav .dwm::before {
+  background-image: url('images/main/MINECRAFT.png');
+}
+#box_nav .triangles::before {
+  background-image: url('images/main/triangles.png');
+}
+/*
 #ultra_nav {
   margin: 35px auto 10px;
   max-width: 1000px;
-}
-#ultra_nav .box {
-  font-size: 30px;
-  width: 400px;
-  height: 400px;
-  margin: 0 0 35px 0;
-}
-#ultra_nav .box .box_header {
-  font-size: 33px;
-}
-#ultra_nav .box.box_about {
-  height: 76px;
-  width: 400px;
-  margin: 0 auto 35px auto;
-  grid-column: 1 / -1;
-  justify-self: center;
-  transition: all 0.92s cubic-bezier(0.71, 0.12, 0.45, 0.81), background .15s linear, box-shadow 0.15s linear;
-}
-#ultra_nav .box.box_about.expanded {
-  height: 400px;
-  width: 100%;
-  transition: all .7s, background .15s linear, box-shadow 0.15s linear;
-}
-#ultra_nav .box.box_about.expanded .about_content {
-  transform: scale(1);
-  opacity: 1;
-  transition: all 0.45s;
-}
-#ultra_nav .box.box_about .about_content {
-  font: 25px 'Roboto', sans-serif;
-  color: #999999;
-  margin: 15px;
-  opacity: 0;
-  transform: scale(0);
-  transition: all 0.7s cubic-bezier(0.8, 0, 0.79, 0.74), opacity 0.525s ease, color .15s linear;
-}
-#ultra_nav .box:nth-of-type(2n+3) {
-  grid-column: 3;
-}
-#ultra_nav .box:nth-of-type(2n+2) {
-  float: left;
-}
-#ultra_nav .box:nth-of-type(2n+3) {
-  float: right;
-}
-#ultra_nav .box .box_text {
-  display: flex;
-  flex-direction: column;
-  height: calc(100% - 86px);
-}
-#ultra_nav .box a {
-  display: flex;
-  align-items: center;
-  position: relative;
-  flex: 1;
-  padding-left: 10px;
-  text-decoration: none;
-  color: #999999;
-  overflow: hidden;
-  transition: all 0.6s, background-color 0.5s linear, color .15s linear;
-  line-height: 50px;
-  z-index: 1;
-}
-#ultra_nav .box a:hover {
-  flex-grow: 1.59;
-}
-#ultra_nav .box a:hover::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  height: 44px;
-  border-left: solid 5px #040404;
-  border-top: solid 5px transparent;
-  border-bottom: solid 5px transparent;
-}
-#ultra_nav .box a::after {
-  background-size: cover;
-  position: absolute;
-  left: -5px;
-  right: -5px;
-  top: -8px;
-  bottom: -8px;
-  transition: 0.45s ease-in;
-  filter: blur(9px);
-  opacity: .36;
-  z-index: -1;
-}
-#ultra_nav .box a:hover::after {
-  filter: none;
-  opacity: 1;
-}
-#ultra_nav .box a.bg_image {
-  background-color: #626262;
-}
-#ultra_nav .box a.bg_image::after {
-  content: '';
-}
-#ultra_nav .box:nth-of-type(1) {
-  animation: 0.8s shiftin2 ease-out;
-}
-#ultra_nav .box:nth-of-type(1) .box_header {
-  cursor: pointer;
-}
-#ultra_nav .box:nth-of-type(2) {
-  animation: 0.9s shiftin2 ease-out;
-}
-#ultra_nav .box:nth-of-type(2) a:nth-of-type(1)::after {
-  background-image: url('images/main/MINECRAFT.png');
-}
-#ultra_nav .box:nth-of-type(3) {
-  animation: 1s shiftin2 ease-out;
-}
-@media (max-width: 840px) {
-  #ultra_nav .box {
-    margin: 0 auto 35px auto;
-    float: none !important;
-  }
-  #ultra_nav .box.box_about.expanded {
+  .box {
+    font-size: 30px;
     width: 400px;
-    height: 740px !important;
+    height: 400px;
+    margin: 0 0 35px 0;
+    .box_header {
+      font-size: 33px;
+    }
+  //'about'-box extension
+    &.box_about {
+      height: 76px; //height hardcoding needed due to transition purposes
+      width: 400px;
+      margin: 0 auto 35px auto;
+      grid-column: ~"1 / -1";
+      justify-self: center;
+      transition+: all .92s cubic-bezier(.71,.12,.45,.81);
+      .mode-switch-transition.background;
+      .mode-switch-transition.shadow;
+      &.expanded {
+        height: 400px;
+        width: 100%;
+        transition+: all .7s;
+        .mode-switch-transition.background;
+        .mode-switch-transition.shadow;
+      }
+      &.expanded .about_content {
+        transform: scale(1);
+        opacity: 1;
+        transition: all .45s
+      }
+      .about_content {
+        font: 25px 'Roboto', sans-serif;
+        color: @ultranav-boxabout-foreground;
+        margin: 15px;
+        opacity: 0;
+        transform: scale(0);
+        transition+: all .7s cubic-bezier(.8,0,.79,.74), opacity .525s ease;
+        .mode-switch-transition.color;
+      }
+    }
+  //end of about-box
+    &:nth-of-type(2n+3) {
+      grid-column: 3;
+    }
+
+    &:nth-of-type(2n+2) {
+      float: left;
+    }
+    &:nth-of-type(2n+3) {
+      float: right;
+    }
+  //main text inside the boxes
+    .box_text {
+      display: flex;
+      flex-direction: column;
+      height: ~"calc(100% - 86px)";
+      font-family: Calibri, Arial, sans-serif;
+      font-size: 1.05em;
+    }
+    a {
+      display: flex;
+      align-items: center;
+      position: relative;
+      flex: 1;
+      padding-left: 10px;
+      text-decoration: none;
+      color: @ultranav-boxtext-foreground;
+      overflow: hidden;
+      transition+: all .6s, background-color .5s linear;
+      .mode-switch-transition.color;
+      line-height: 50px;
+      z-index: 1;
+      &:hover {
+        flex-grow: 1.59;
+      }
+      &:hover::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        height: 44px;
+        border-left: solid 5px @ultranav-boxtext-additional-border;
+        border-top: solid 5px transparent;
+        border-bottom: solid 5px transparent;
+      }
+      &::after {
+        background-size: cover;
+        position: absolute;
+        left: -5px;
+        right: -5px;
+        top: -8px;
+        bottom: -8px;
+        transition: .45s ease-in;
+        filter: blur(9px);
+        opacity: .36;
+        z-index: -1;
+      }
+      &:hover::after {
+        filter: none;
+        opacity: 1;
+      }
+      &.bg_image {
+        background-color: @ultranav-boxtext-image-backdrop;
+        &::after {
+          content: '';
+        }
+      }
+    }
+  //end of <a> in .box
+
+  //individual arguments (still nested in .box)
+    &:nth-of-type(1) {
+      .boxanimation(.8s);
+      .box_header {
+        cursor: pointer;
+      }
+    }
+    &:nth-of-type(2) {
+      .boxanimation(.9s);
+      a:nth-of-type(1) {
+        &::after {
+          background-image: @boxtext-background-box1span1;
+        }
+      }
+    }
+    &:nth-of-type(3) {
+      .boxanimation(1s);
+    }
   }
-}
-@supports (display: grid) {
-  #ultra_nav {
+  //end of .box
+  @media (max-width: 840px) {
+    .box {
+      margin: 0 auto 35px auto;
+      float: none !important;
+      &.box_about.expanded {
+        width: 400px;
+        height: 740px !important; //unfortunately need to hardcode this (no transition otherwise) :/
+      }
+    }
+  }
+  //end of media query, active if no grid is supported (gets overriden with below)
+  @supports (display: grid) {
     display: grid;
     grid-template-columns: 400px 1fr 400px;
     grid-template-rows: auto 400px;
     grid-gap: 35px;
     grid-auto-rows: 400px;
-  }
-  #ultra_nav .box {
-    width: auto;
-    height: auto;
-    margin: 0 !important;
-    float: none !important;
-  }
-  @media (max-width: 890px) {
-    #ultra_nav {
+    .box {
+      width: auto;
+      height: auto;
+      margin: 0 !important;
+      float: none !important;
+    }
+    @media (max-width: 890px) {
       grid-template-columns: 400px;
       grid-template-rows: auto repeat(2, 400px);
       grid-auto-flow: row;
       max-width: 400px;
+      .box {
+       grid-column: auto !important;
+        &.box_about.expanded {
+         width: auto !important;
+         height: 740px !important; //unfortunately need to hardcode this (no transition otherwise) :/
+        }
+      }
     }
-    #ultra_nav .box {
-      grid-column: auto !important;
+    //end of media query (inside support query)
+  }
+  //end of support query
+}
+//end of #ultra_nav
+ */
+/* .light-mode #ultra_nav {
+  .box {
+    background-color: @ultranav-box--light;
+    box-shadow: 1.6px 1.6px 13px 1px @ultranav-box-shadow--light;
+    &.box_about {
+      .about_content {
+        color: @ultranav-boxabout-foreground--light;
+      }
     }
-    #ultra_nav .box.box_about.expanded {
-      width: auto !important;
-      height: 740px !important;
+    .box_header {
+      .header_text {
+        color: @ultranav-boxheader-foreground--light;
+      }
+    //corners shifting in when hovering
+      .corneranimation {
+        .corner_before, .corner_after {
+          background-color: @ultranav-box-corners--light;
+        }
+      }
+    //end of corneranimation
+    }
+  //end of header
+  //main text inside the boxes
+    a {
+      color: @ultranav-boxtext-foreground--light;
+      &:hover::before {
+        border-left: solid 5px @ultranav-boxtext-additional-border--light;
+      }
     }
   }
 }
-.light-mode #ultra_nav .box {
-  background-color: #f7f7f7;
-  box-shadow: 1.6px 1.6px 13px 1px rgba(189, 189, 189, 0.88);
+.nesewebel-mode.dark-mode #ultra_nav {
+  .box {
+    background-color: @nesewebel-background;
+    box-shadow: 1.6px 1.6px 13px 1px @nesewebel-shadow;
+    &.box_about {
+      .about_content {
+        color: @nesewebel-foreground;
+      }
+    }
+    .box_header {
+      .header_text {
+        color: @nesewebel-foreground;
+      }
+    //corners shifting in when hovering
+      .corneranimation {
+        .corner_before, .corner_after {
+          background-color: @nesewebel-background;
+        }
+      }
+    //end of corneranimation
+    }
+  //end of header
+  //main text inside the boxes
+    a {
+      color: @nesewebel-foreground;
+      &:hover::before {
+        border-left: solid 5px @nesewebel-foreground;
+      }
+    }
+  }
 }
-.light-mode #ultra_nav .box.box_about .about_content {
-  color: #595959;
+.nesewebel-mode.light-mode #ultra_nav {
+  .box {
+    background-color: @nesewebel-background--light;
+    box-shadow: 1.6px 1.6px 13px 1px @nesewebel-shadow--light;
+    &.box_about {
+      .about_content {
+        color: @nesewebel-foreground--light;
+      }
+    }
+    .box_header {
+      .header_text {
+        color: @nesewebel-foreground--light;
+      }
+    //corners shifting in when hovering
+      .corneranimation {
+        .corner_before, .corner_after {
+          background-color: @nesewebel-background--light;
+        }
+      }
+    //end of corneranimation
+    }
+  //end of header
+  //main text inside the boxes
+    a {
+      color: @nesewebel-foreground--light;
+      &:hover::before {
+        border-left: solid 5px @nesewebel-foreground--light;
+      }
+    }
+  }
 }
-.light-mode #ultra_nav .box .box_header .header_text {
-  color: #6e6e6e;
-}
-.light-mode #ultra_nav .box .box_header .corneranimation .corner_before,
-.light-mode #ultra_nav .box .box_header .corneranimation .corner_after {
-  background-color: rgba(77, 77, 77, 0.9);
-}
-.light-mode #ultra_nav .box a {
-  color: #595959;
-}
-.light-mode #ultra_nav .box a:hover::before {
-  border-left: solid 5px #525252;
-}
-.nesewebel-mode.dark-mode #ultra_nav .box {
-  background-color: black;
-  box-shadow: 1.6px 1.6px 13px 1px #141414;
-}
-.nesewebel-mode.dark-mode #ultra_nav .box.box_about .about_content {
-  color: white;
-}
-.nesewebel-mode.dark-mode #ultra_nav .box .box_header .header_text {
-  color: white;
-}
-.nesewebel-mode.dark-mode #ultra_nav .box .box_header .corneranimation .corner_before,
-.nesewebel-mode.dark-mode #ultra_nav .box .box_header .corneranimation .corner_after {
-  background-color: black;
-}
-.nesewebel-mode.dark-mode #ultra_nav .box a {
-  color: white;
-}
-.nesewebel-mode.dark-mode #ultra_nav .box a:hover::before {
-  border-left: solid 5px white;
-}
-.nesewebel-mode.light-mode #ultra_nav .box {
-  background-color: white;
-  box-shadow: 1.6px 1.6px 13px 1px #ebebeb;
-}
-.nesewebel-mode.light-mode #ultra_nav .box.box_about .about_content {
-  color: black;
-}
-.nesewebel-mode.light-mode #ultra_nav .box .box_header .header_text {
-  color: black;
-}
-.nesewebel-mode.light-mode #ultra_nav .box .box_header .corneranimation .corner_before,
-.nesewebel-mode.light-mode #ultra_nav .box .box_header .corneranimation .corner_after {
-  background-color: white;
-}
-.nesewebel-mode.light-mode #ultra_nav .box a {
-  color: black;
-}
-.nesewebel-mode.light-mode #ultra_nav .box a:hover::before {
-  border-left: solid 5px black;
-}
+ */

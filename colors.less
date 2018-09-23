@@ -8,32 +8,42 @@
 @background-color--light: hsl(0, 0%, 93%);
 @foreground-color--light: hsl(0, 0%, 35%);
 
+@header-selection: @theme-color;
+@subheader-selection: #DB968C;
+@nav-selection: #664D6E;
 
 @headline-background: darken(@background-color, 2.5%);
+@headline-gear: mix(darken(@foreground-color, 5%), @theme-color, 30%); //#3A5B99
 
-@headline-gear: mix(darken(@foreground-color, 8%), @theme-color, 40%);
-
-@mode-dropdown-box: lighten(@header-background-color, 3%);
-@mode-dropdown-bordertop: lighten(@mode-dropdown-box, 16%);
-@mode-dropdown-borderbottom: mix(@header-background-color, @mode-dropdown-box, 50%);
+@mode-dropdown-box: lighten(@header-background-color, 2.8%);
 @mode-dropdown-shadow: fadeout(darken(@mode-dropdown-box, 4%), 20%);
-@mode-dropdown-extreme-shadow: darken(@header-background-color, 4%);
-@mode-dropdown-header-foreground: darken(@foreground-color, 20%);
-@mode-dropdown-header-background: lighten(@mode-dropdown-box, 1.5%);
-@mode-switch-foreground: @foreground-color;
+@mode-dropdown-extreme-shadow: fadeout(darken(@header-background-color, 3%), 10%);
+@mode-dropdown-bordertop: lighten(@mode-dropdown-box, 17%);
+@mode-dropdown-borderbottom: mix(@header-background-color, @mode-dropdown-box, 50%);
+@mode-dropdown-header-foreground: darken(@foreground-color, 17%);
+@mode-dropdown-header-background: lighten(@mode-dropdown-box, 1%);
+@mode-switch-foreground: darken(@foreground-color, 1%);
 @mode-switch-background: @mode-dropdown-box;
-@mode-switch-background-hover: lighten(@mode-switch-background, 4%);
+@mode-switch-background-hover: lighten(@mode-switch-background, 3%);
 
-@mode-dropdown-box--light: lighten(@background-color--light, 5%);
+@mode-dropdown-box--light: lighten(@header-background-color--light, 2%);
+@mode-dropdown-shadow--light: fadeout(darken(@mode-dropdown-box--light, 4%), 20%);
+@mode-dropdown-extreme-shadow--light: fadeout(darken(@header-background-color--light, 9%), 10%);
+@mode-dropdown-bordertop--light: lighten(@mode-dropdown-box--light, 17%);
+@mode-dropdown-borderbottom--light: mix(@header-background-color--light, @mode-dropdown-box--light, 50%);
+@mode-dropdown-header-foreground--light: lighten(@foreground-color--light, 17%);
+@mode-dropdown-header-background--light: lighten(@mode-dropdown-box--light, 1%);
+@mode-switch-foreground--light: @foreground-color--light;
+@mode-switch-background--light: @mode-dropdown-box--light;
+@mode-switch-background-hover--light: lighten(@mode-switch-background--light, 3%);
+
+/* @mode-dropdown-box--light: lighten(@background-color--light, 5%);
 @mode-dropdown-box-shadow--light: fadeout(darken(@mode-dropdown-box--light, 19%), 20%);
 @mode-switch-foreground--light: @foreground-color--light;
 @mode-switch-background--light: @mode-dropdown-box--light;
-@mode-switch-background-hover--light: darken(@mode-switch-background--light, 4%);
+@mode-switch-background-hover--light: darken(@mode-switch-background--light, 4%); */
 
 @nav-foreground: darken(@foreground-color, 10%);
-//@nav-background: fadeout(lighten(@background-color, 7%), 35%);
-//@nav-shadow: fadeout(darken(@headline-background, 6%), 15%);
-@nav-border: fadeout(darken(@nav-foreground, 6%), 40%);
 
 @nav-foreground--light: darken(@heading-foreground-color--light, 10%);
 @nav-background--light: fadeout(lighten(@header-background-color--light, 7%), 35%);
@@ -43,54 +53,37 @@
 @headline-expandingborder--light: darken(@heading-foreground-color--light, 22%);
 
 
-@heading-foreground-color: lighten(@foreground-color, 3%);
-@heading-shadow: fadeout(darken(@heading-foreground-color, 14%), 5%);
+@heading-foreground-color: lighten(@foreground-color, 2.5%);
+@heading-shadow: darken(@heading-foreground-color, 14%);
 
-@heading-foreground-color--light: lighten(@foreground-color--light, 3%);
+@heading-foreground-color--light: lighten(@foreground-color--light, 11%);
 @heading-shadow--light: lighten(@heading-foreground-color--light, 14%);
 
-@header-background-color: lighten(@background-color, 4.5%);
-@header-shadow: fadeout(darken(@background-color, 4%), 22%);
+@header-background-color: lighten(@background-color, 4%);
+@header-shadow: fadeout(darken(@background-color, 3%), 25%);
 
 @header-background-color--light: lighten(@background-color--light, 4%);
 @header-shadow--light: fadeout(darken(@background-color--light, 17%), 20%);
 
-
-@header-selection: @theme-color;
-@subheader-selection: #DB968C;
-@nav-selection: lighten(desaturate(spin(@header-selection, -40), 20%), 9%);
-
-@nav-selection--light: lighten(desaturate(spin(@header-selection, -40), 20%), 9%);
-
-
 @glb-box: lighten(@background-color, 2.5%);
 @glb-box-corners: darken(@background-color, 3%);
-@glb-box-shadow: fadeout(darken(@ultranav-box, 4%), 20%);
+@glb-box-shadow: fadeout(darken(@glb-box, 4%), 20%);
 @glb-box-extreme-shadow: fadeout(darken(@background-color, 3%), 10%);
-@glb-box-bordertop: lighten(@ultranav-box, 18%);
-@glb-box-borderbottom: mix(@ultranav-box, @background-color, 50%);
-@glb-boxheader-foreground: darken(@foreground-color, 26%);
-@glb-boxheader-background: lighten(@ultranav-box, 1%);
+@glb-box-bordertop: lighten(@glb-box, 17%);
+@glb-box-borderbottom: mix(@glb-box, @background-color, 50%);
+@glb-box-header-foreground: darken(@foreground-color, 26%);
+@glb-box-header-background: lighten(@glb-box, 1%);
+@glb-box-description-foreground: darken(@foreground-color, 7%);
 
-
-@ultranav-box: @glb-box;
-//
-@ultranav-boxabout-foreground: @ultranav-boxtext-foreground;
-@ultranav-boxtext-foreground: @foreground-color;
-@ultranav-boxtext-additional-border: darken(@background-color, 7.5%);
-@ultranav-boxtext-image-backdrop: lighten(@ultranav-box, 27%);
-
-@ultranav-box--light: lighten(@background-color--light, 4%);
-@ultranav-box-corners--light: fadeout(darken(@foreground-color--light, 5%), 10%);
-@ultranav-box-shadow--light: fadeout(darken(@background-color--light, 19%), 12%);
-@ultranav-box-extreme-shadow--light: darken(@background-color, 3%);
-@ultranav-box-bordertopbottom--light: mix(@ultranav-box, @background-color, 50%);
-@ultranav-boxheader-foreground--light: lighten(@foreground-color--light, 8%);
-@ultranav-boxheader-background--light: darken(@ultranav-box, 1%);
-//
-@ultranav-boxabout-foreground--light: @ultranav-boxtext-foreground--light;
-@ultranav-boxtext-foreground--light: @foreground-color--light;
-@ultranav-boxtext-additional-border--light: darken(@foreground-color--light, 3%);
+@glb-box--light: lighten(@background-color--light, 3%);
+@glb-box-corners--light: lighten(@foreground-color--light, 20%);
+@glb-box-shadow--light: fadeout(darken(@glb-box--light, 6%), 20%);
+@glb-box-extreme-shadow--light: fadeout(darken(@background-color--light, 9%), 10%);
+@glb-box-bordertop--light: lighten(@glb-box--light, 17%);
+@glb-box-borderbottom--light: mix(@glb-box--light, @background-color--light, 50%);
+@glb-box-header-foreground--light: lighten(@foreground-color--light, 26%);
+@glb-box-header-background--light: lighten(@glb-box--light, 1.5%);
+@glb-box-description-foreground--light: @foreground-color--light;
 
 
 @nesewebel-background: black;
