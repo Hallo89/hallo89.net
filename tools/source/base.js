@@ -8,6 +8,10 @@ const buttonsChangeNumber = document.querySelectorAll('.buttons_change_number');
 const buttonsIncrement = document.querySelectorAll('.change_number.increment'); //All increment-buttons for input[type=number]
 const buttonsDecrement = document.querySelectorAll('.change_number.decrement'); //All decrement-buttons for input[type=number]
 
+const buttonMinimize = document.querySelector('.util_button.button_smallscreen'); //The utility button to make the tool a snazzy window
+const buttonMaximize = document.querySelector('.util_button.button_fullscreen'); //The utility button to not make the tool a snazzy window (aka fullscreen)
+const buttonClose = document.querySelector('.util_button.button_close'); //The utility button to close the tool and go back to the menu
+
 //Event-listeners which do stuff - ForEach not valid due to IE support
  //Procedure of tooltips showing and hiding when the mouse has entered or left the specified area
 for (i = 0; i < tooltipTrigger.length; i++ ) {
@@ -16,18 +20,46 @@ for (i = 0; i < tooltipTrigger.length; i++ ) {
 }
  //Incrementing the specific input after the increment button has been pressed
 for (i = 0; i < buttonsIncrement.length; i++) {
-  buttonsIncrement[i].addEventListener('mousedown', inputIncrement);
+  buttonsIncrement[i].addEventListener('click', inputIncrement);
 }
  //Decrementing the specific input after the decrement button has been pressed
 for (i = 0; i < buttonsDecrement.length; i++) {
-  buttonsDecrement[i].addEventListener('mousedown', inputDecrement);
+  buttonsDecrement[i].addEventListener('click', inputDecrement);
 }
  //Adding an eventListener for a trigger of the scroll wheel on the increment/decrement buttons
 for (i = 0; i < buttonsChangeNumber.length; i++) {
   buttonsChangeNumber[i].addEventListener('wheel', inputNumberScroll);
 }
+ //Adding eventlisteners for the specific use-cases of the utility buttons
+buttonMinimize.addEventListener('click', minimizeTool);
+buttonMaximize.addEventListener('click', maximizeTool);
+buttonClose.addEventListener('click', closeTool);
 
-//computing tooltips
+//Functions for the utility buttons
+ //Making the tool a cool window
+function minimizeTool() {
+  if (!this.classList.contains('active')) {
+    document.body.classList.remove('fullscreen')
+	buttonMaximize.classList.remove('active');
+	this.classList.add('active');
+  }
+}
+ //Making the tool fullscreen
+function maximizeTool() {
+  if (!this.classList.contains('active')) {
+    document.body.classList.add('fullscreen')
+	buttonMinimize.classList.remove('active');
+	this.classList.add('active');
+  }
+}
+function closeTool() {
+  document.body.classList.add('closing');
+  setTimeout(function() {
+    window.location = '../tools.html';
+  }, 400);
+}
+
+//Computing tooltips
 for (i = 0; i < tooltips.length; i++) {
   tooltips[i].style.clipPath = 'polygon(-5px 150%, 13px -50%, ' + (tooltips[i].offsetWidth + 5) + 'px -50%, ' + (tooltips[i].offsetWidth - 13) + 'px 150%)';
 }

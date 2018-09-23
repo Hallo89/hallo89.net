@@ -6,13 +6,10 @@
     <link rel="stylesheet" type="text/css" href="./source/base.css">
     <link rel="stylesheet" type="text/css" href="./source/3D.css">
   </head>
-  <body>
+  <body class="">
     <div id="wrapper">
 
-      <div class="box" id="box_3d">
-        <div class="box_header floating_header">
-          <span class="header_text">3D Magic</span>
-        </div>
+      <div class="box">
         <div class="code_container">
           <div class="input_container uncrucial nodisplay">
             <div class="input_box tipper multiple" id="popoutchoice_box">
@@ -51,52 +48,57 @@
             <span class="to_right">⭲</span>
             <span class="to_left">⭰</span>
           </span>
-          <div class="input_container">
-            <div class="input_box file tipper">
-              <span class="input_header">JSON file</span>
-              <label for="input_json_model" class="input file" id="json_model_label">Browse...</label>
-              <input type="file" class="input_file" accept="application/json, .json" id="input_json_model">
-              <span class="tooltip default noselect">Choose a minecraft model .json to get everything running</span>
-            </div>
-            <div class="input_box file tipper">
-              <span class="input_header">texture files</span>
-              <label for="input_images" class="input file" id="images_label">Browse...</label>
-              <input type="file" multiple="true" class="input_file" accept="image/png, .png" id="input_images">
-              <span class="tooltip default noselect">Choose textures which the model uses. Only png allowed</span>
-            </div>
-            <div class="input_box button tipper noselect" onclick="handleJSON()">
-              <span class="input_header">Refresh file</span>
-              <span class="tooltip default noselect">If selected file has been modified from outside, refresh it! Only works for changing values</span>
-            </div>
-            <div class="input_box tipper multiple">
-              <span class="tooltip multiple_tip noselect"><span class="color_mark_none">None</span> | <span class="color_mark_x">X-Axis</span> | <span class="color_mark_y">Y-Axis</span> | <span class="color_mark_z">Z-Axis</span></span>
-              <span class="input_header">Limit to one axis</span>
-              <span class="input axischoice knobber">
-                <span class="knob"></span>
-                <div class="mark_container">
-                  <div class="marker none currentchoice">
-                    <span class="mark"></span>
+          <div class="input_container compactor">
+            <div class="input_container">
+              <div class="input_box file tipper">
+                <span class="input_header">JSON file</span>
+                <label for="input_json_model" class="input file" id="json_model_label">Browse...</label>
+                <input type="file" class="input_file" accept="application/json, .json" id="input_json_model">
+                <span class="tooltip default noselect">Choose a minecraft model .json to get everything running</span>
+              </div>
+              <div class="input_box file tipper">
+                <span class="input_header">texture files</span>
+                <label for="input_images" class="input file" id="images_label">Browse...</label>
+                <input type="file" multiple="true" class="input_file" accept="image/png, .png" id="input_images">
+                <span class="tooltip default noselect">Choose textures which the model uses. Only png allowed</span>
+              </div>
+              <div class="input_box button tipper noselect" onclick="handleJSON()">
+                <span class="input_header">Refresh file</span>
+                <span class="tooltip default noselect">If selected file has been modified from outside, refresh it! Only works for changing values</span>
+              </div>
+              <div class="input_box tipper multiple">
+                <span class="tooltip multiple_tip noselect"><span class="color_mark_none">None</span> | <span class="color_mark_x">X-Axis</span> | <span class="color_mark_y">Y-Axis</span> | <span class="color_mark_z">Z-Axis</span></span>
+                <span class="input_header">Limit to one axis</span>
+                <span class="input axischoice knobber">
+                  <span class="knob"></span>
+                  <div class="mark_container">
+                    <div class="marker none currentchoice">
+                      <span class="mark"></span>
+                    </div>
+                    <div class="marker axis x">
+                      <span class="mark color_x"></span>
+                    </div>
+                    <div class="marker axis y">
+                      <span class="mark color_y"></span>
+                    </div>
+                    <div class="marker axis z">
+                      <span class="mark color_z"></span>
+                    </div>
                   </div>
-                  <div class="marker axis x">
-                    <span class="mark color_x"></span>
-                  </div>
-                  <div class="marker axis y">
-                    <span class="mark color_y"></span>
-                  </div>
-                  <div class="marker axis z">
-                    <span class="mark color_z"></span>
-                  </div>
-                </div>
-              </span>
-              <span class="tooltip default noselect">Limit the perspective of the element to one specific axis</span>
+                </span>
+                <span class="tooltip default noselect">Limit the perspective of the element to one specific axis</span>
+              </div>
             </div>
-            <!--div class="input_box tipper">
-              <span class="input_header">Scaling</span>
-              <span class="input slider scale knobber">
-                <span class="knob" style="transform: translateX(50px);"></span>
-              </span>
-              <span class="tooltip default noselect nodisplay">Scale the element. Kinda broken atm</span>
-            </div-->
+            <div class="compact_container">
+              <div class="box_header compact">
+                <span class="header_text">3D Magic</span>
+              </div>
+              <div class="utility_buttons compact">
+                <span class="util_button button_smallscreen active"></span>
+                <span class="util_button button_fullscreen"></span>
+                <span class="util_button button_close"></span>
+              </div>
+            </div>
           </div>
           <div class="input_container uncrucial">
             <div class="input_box tipper">
@@ -135,7 +137,7 @@
               <span class="tooltip default noselect">Toggle fun. Have fun. Now.</span>
             </div>
           </div>
-          <div class="box_content centerflex default" id="content_function_3d">
+          <div class="box_content centerflex default" id="output_container">
             <div class="legend_container noselect nodisplay">
               <div class="color_legend">
                 <span>North</span>
@@ -162,7 +164,7 @@
                 <span class="color_preview color_down"></span>
               </div>
             </div>
-            <div class="container_3d" id="function_3d" style="transform: rotate3d(1, 0, 0, -20deg) rotate3d(0, 1, 0, 20deg);">
+            <div class="container_3d" id="output" style="transform: rotate3d(1, 0, 0, -20deg) rotate3d(0, 1, 0, 20deg);">
               <div class="boundary_container_2d container_3d">
                 <div class="corners container_3d">
                   <span class="object_1 var_corner boundary object_2d"></span>

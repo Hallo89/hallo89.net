@@ -7,8 +7,8 @@ var textures = {}; //Object of the texture files expressed in their path via the
 var images = {};
 var updateLock = true; //A lock stating whether the model has to be reloaded
 var initialLock = true; //A lock for preventing the initial codeMirror load from calling buildJSON() again
-var firstInputsWidth = 756; //The total length of all items inside the first input_container + header (static due to knowing the beginning width), changing when a file is chosing
-var secondInputsWidth = 370;//The total length of all items inside the second input_container; static due to knowing the beginning width
+var firstInputsWidth; //The total length of all items of the first input_container + compact_container
+var secondInputsWidth = 370; //The total length of all items inside the second input_container; static due to knowing the beginning width
 var clickedX; //The X-coordinate of the point where a click has taken place in container3D in order to navigate
 var clickedY; //The Y-coordinate of the point where a click has taken place in container3D in order to navigate
 var transformRangeX = 20; //The absolute rotation of the x-coordinate
@@ -44,9 +44,9 @@ var codeChangeLock = true;
 
 
 //consts filled with elements which are used in this file
-const thisBox = document.getElementById('box_3d');
+const thisBox = document.querySelector('.box');
 
-const thisHeader = document.querySelector('#box_3d .box_header');
+const thisHeader = document.querySelector('.box_header');
 
 const fileInput = document.getElementById('input_json_model'); //The <input> which processes the file which has been.. well, input
 const fileLabel = document.getElementById('json_model_label'); //The label of above, on which the user clicks
@@ -89,9 +89,10 @@ const containerError = document.querySelector('.error_banner'); //The error cont
 const errorInput = document.querySelector('.error_banner .error'); //The container for the actual error message
 
 const containerCode = document.querySelector('.code_container'); //The very well distinguishable container of a textarea which is not a textarea yet it is
-const containerExecute = document.querySelector('.execute_container'); //The other very well distinguishable container of an inperformant model which is the reason why this const is here I should write less in comments lol
-const containersInputExecute = document.querySelectorAll('.execute_container .input_container');
+const containerExecute = document.querySelector('.execute_container'); //The other very well distinguishable container of an inperformant model which is the reason why this const is here I should write less into comments lol
+const containersInputExecute = document.querySelectorAll('.execute_container .input_container:not(.compactor)');
 const containerInputCode = document.querySelector('.code_container .input_container');
+const containerCompact = document.querySelector('.compact_container'); //The container inside the first input_container containing both header and utility buttons
 const containerAxes = document.getElementById('axes_container'); //The container containg all of the centered visual axes
 const containerAxesX = document.querySelector('#axes_container .axes_x'); //The container containg the visual X-axis
 const containerAxesY = document.querySelector('#axes_container .axes_y'); //Same as above, Y-axis
@@ -100,8 +101,8 @@ const containerBounds = document.querySelector('.boundary_container'); //Contain
 const containerBounds2D = document.querySelector('.boundary_container_2d'); //Container containing all of the 2-Dimensional boundary aids
 const containerGrid = document.querySelector('.boundary_container .bottom_grid'); //The massively inperformant 3D boundary-aid which is a grid at the bottom
 const containerElements = document.querySelector('.elements_container'); //The heart of the whole program. The container where everything takes place
-const output3D = document.getElementById('function_3d'); //The body containing the heart where every movement takes place
-const container3D = document.getElementById('content_function_3d'); //the body containg the body containg the heart where every boundary takes place
+const output3D = document.getElementById('output'); //The body containing the heart where every movement takes place
+const container3D = document.getElementById('output_container'); //the body containg the body containg the heart where every boundary takes place
 
  //The separate boundary-aid elements, used in the scaling mechanism
   //The separate corners of the rectangle boundary-box
@@ -151,6 +152,8 @@ window.onload = function() {
   codeArea.refresh();
 };
 
+computeFirstInputsWidth();
+console.log(firstInputsWidth);
 
 //initializing the third-party text-editor
 var codeArea = CodeMirror(containerCode, {
@@ -181,7 +184,7 @@ function codeChange() {
 }
 
 const codeMirror = document.querySelector('.CodeMirror');
-codeMirror.style.width = '800px';
+codeMirror.style.width = '500px';
 
 
 //Functions
@@ -202,12 +205,7 @@ function initializeJSON() {
   keyFile = fileInput.files;
   fileLabel.innerHTML = 'Browse... ► ' + keyFile[0].name;
   handleJSON();
-  firstInputsWidth = 0;
-  for (var i = 0; i < containersInputExecute[0].children.length; i++) {
-    firstInputsWidth += containersInputExecute[0].children[i].clientWidth;
-  }
-  firstInputsWidth += thisHeader.clientWidth;
-  firstInputsWidth += 35; //a simple margin
+  computeFirstInputsWidth();
   computeContainer3D();
   initialLock = true;
 }
@@ -385,6 +383,16 @@ function handleContext(e) {
   e.preventDefault();
 }
 
+//A function to compute the width of the items inside the first input container + compact_container
+function computeFirstInputsWidth() {
+  firstInputsWidth = 0;
+  for (var i = 0; i < containersInputExecute[0].children.length; i++) {
+    firstInputsWidth += containersInputExecute[0].children[i].clientWidth;
+  }
+  firstInputsWidth += containerCompact.clientWidth;
+  firstInputsWidth += 70; //a simple margin
+}
+
 //To-be-called function to resize the code area
 function resizeCode(width) {
   codeMirror.style.width = width + 'px';
@@ -426,12 +434,12 @@ function computeContainer3D(thisWidth = containerExecute.clientWidth) {
     containersInputExecute[1].classList.add('nodisplay');
   }
 
-  //If the width of the first inputs exceeds the width of container3D, hide the floating header
-  if (firstInputsWidth >= thisWidth && !document.body.classList.contains('info_mode')) {
-    thisHeader.classList.add('hidden');
+  //If the width of the first inputs exceeds the width of container3D, hide the header inside the compact_container
+  if (firstInputsWidth >= thisWidth) {
+    thisHeader.classList.add('nodisplay');
   }
-  else if (firstInputsWidth < thisWidth && !document.body.classList.contains('info_mode')) {
-    thisHeader.classList.remove('hidden');
+  else if (firstInputsWidth < thisWidth) {
+    thisHeader.classList.remove('nodisplay');
   }
 
   //If the width of containerCode exceeds the total width minus 8px resize_bar threshold, lock the size with an extremely convenient CSS value
@@ -653,7 +661,7 @@ function expandCode() {
   codeMirror.style.width = '100vw';
   buttonExpandCode.classList.add('hidden');
   buttonRestoreCode.classList.remove('hidden');
-  thisHeader.classList.add('hidden');
+  thisHeader.classList.add('nodisplay');
   setTimeout(function() {
     togglePopout('adding');
     codeArea.refresh();

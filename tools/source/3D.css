@@ -1,10 +1,9 @@
-/* The absolute legend, now being another legend */
-#wrapper {
-  width: 100vw;
-  height: 100vh;
+body {
+  /* darkest purple with 60/255 one step lighter purple, darkest 'gray' with 80/255 darkest red */
+  background: linear-gradient(to bottom right, #68402F, #483F50); /* #483F50, #553A47 */ /* #4F4257, #493639 */
 }
 
-#box_3d {
+.box {
   display: flex;
   width: 100%;
   height: 100%;
@@ -17,8 +16,7 @@
 /* The glb_box header but just a header isn't worth loading it all */
 
 .box_header .header_text {
-  padding: 38px 21px 38px 28px;
-  font-size: 1.15em;
+  padding: 38px 21px;
   font-family: Arial, sans-serif;
   text-transform: uppercase;
   display: inherit;
@@ -28,14 +26,14 @@
 
 /* This is the absolute 3D-executing container in 3DMagic */
 
-#content_function_3d {
+#output_container {
   position: relative;
   z-index: 5;
   overflow: hidden; /*woooaaah*/
   grid-row: -3 / -2;
   perspective: 2500px /*wooooooaaaaahh*/
 }
-#content_function_3d.nogrid {
+#output_container.nogrid {
   position: absolute;
   top: 152px; /* calc(77px + 75px); -> first input_box (with margin) (*1) + last input_box (no margin) */
   bottom: 0;
@@ -60,16 +58,16 @@
   grid-template-rows: auto 1fr;
 }
 .code_container .floating_button {
-  background-color: hsl(0, 0%, 17%);
+  background-color: hsl(0, 0%, 16.4%);
   color: hsl(0, 0%, 59%);
-  border-top: 2px solid hsl(0, 0%, 22%);
+  border-top: 2px solid hsl(0, 0%, 20%);
   border-bottom: 2px solid hsl(0, 0%, 15.4%);
   box-shadow: 1px 1px 2px hsla(0, 0%, 11%, 0.83);
 }
 .execute_container .floating_button {
-  background-color: hsl(0, 0%, 18%);
+  background-color: hsl(0, 0%, 17%);
   color: hsl(0, 0%, 60%);
-  border-top: 2px solid hsl(0, 0%, 23%);
+  border-top: 2px solid hsl(0, 0%, 21%);
   border-bottom: 2px solid hsl(0, 0%, 16.4%);
   box-shadow: 1px 1px 2px hsla(0, 0%, 10.3%, 0.83);
 }
@@ -94,8 +92,8 @@
   opacity: .7;
 }
 .code_container .CodeMirror {
-  height: auto; /*TODOTODOTODOTODOTODOTODOTODO HALLO TELL WHATS WRONG OR I WILL NEVER DO ANYTHING BECAUSE I DONT KNOW WHAT IT WAS*/
-  width: 800px;
+  height: auto;
+  width: 500px;
   grid-row: -2 / -1;
   font-family: 'Courier New', monospace;
 }
@@ -105,7 +103,7 @@
 
 /* The popout appearing when the code area is fully extended */
 
-#content_function_3d.popout {
+#output_container.popout {
   left: -390px;
   top: 107px !important; /*TODO: but only if the screen is actually wide enough*/
   width: 360px;
@@ -120,27 +118,27 @@
   from { transform: scale(0); }
   to   { transform: scale(1); }
 }
-#content_function_3d.popout.default {
+#output_container.popout.default {
   background-color: hsla(0, 0%, 13%, .7);
   border-top: 2px solid hsla(0, 0%, 29%, .7);
   border-bottom: 2px solid hsla(0, 0%, 10.5%, .7);
 }
-#content_function_3d.popout.opaque {
+#output_container.popout.opaque {
   background-color: hsl(0, 0%, 12%);
   border-top: 2px solid hsl(0, 0%, 26%);
   border-bottom: 2px solid hsl(0, 0%, 11%);
 }
-#content_function_3d.popout.collapsed {
+#output_container.popout.collapsed {
   width: 0;
   height: 0;
   left: -50vw;
   top: 50vh !important;
   overflow: visible;
 }
-#content_function_3d.popout.disabled {
+#output_container.popout.disabled {
   display: none;
 }
-#content_function_3d.popout .legend_container {
+#output_container.popout .legend_container {
   display: none;
 }
 
@@ -153,7 +151,7 @@
   height: 25px;
   font-size: 25px;
   line-height: 0;
-  border-radius: 2px;
+  border-radius: 1px;
   box-sizing: border-box;
   z-index: 11;
   cursor: pointer;
