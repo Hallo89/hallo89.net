@@ -330,6 +330,7 @@ body.light-mode {
 .glb_box.multiplebox .links a {
   display: flex;
   align-items: center;
+  position: relative;
   color: inherit;
   flex: 1;
   padding: 15px;
@@ -342,6 +343,7 @@ body.light-mode {
 .glb_box .imager {
   z-index: 1;
   position: relative;
+  overflow: hidden;
 }
 .glb_box.imager.hyperbox::before,
 .glb_box .imager.hyperbox::before {
@@ -432,7 +434,7 @@ body.light-mode {
 .light-mode .glb_box .box_header .header_text {
   color: #9c9c9c;
 }
-.light-mode .glb_box .description {
+.light-mode .glb_box .box_text {
   color: #595959;
 }
 @keyframes shiftin {

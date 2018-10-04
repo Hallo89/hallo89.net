@@ -329,6 +329,7 @@ body.light-mode {
       a {
         display: flex;
         align-items: center;
+        position: relative;
         color: inherit;
         flex: 1;
         padding: 15px;
@@ -345,6 +346,7 @@ body.light-mode {
     }
     z-index: 1;
     position: relative;
+    overflow: hidden;
     &::before {
       content: '';
       position: absolute;
@@ -436,7 +438,7 @@ body.light-mode {
       color: @glb-box-header-foreground--light;
     }
   }
-  .description {
+  .box_text {
     color: @glb-box-description-foreground--light;
   }
 }
