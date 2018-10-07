@@ -312,6 +312,7 @@ body.light-mode {
   .mode-switch-transition.shadow;
   .mode-switch-transition.border;
   &.hyperbox {
+    display: block;
     cursor: pointer;
     text-decoration: none;
    // Normalizing (-> removing) the dotted outline when going to the last page while having clicked onto an <a> in Firefox
@@ -333,6 +334,8 @@ body.light-mode {
         color: inherit;
         flex: 1;
         padding: 15px;
+        text-decoration: none;
+        font-style: italic;
         transition: flex .2s cubic-bezier(.2, .2, .55, 1);
         &:hover {
           flex: 1.3;
