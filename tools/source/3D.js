@@ -153,7 +153,6 @@ window.onload = function() {
 };
 
 computeFirstInputsWidth();
-console.log(firstInputsWidth);
 
 //initializing the third-party text-editor
 var codeArea = CodeMirror(containerCode, {
@@ -171,7 +170,7 @@ codeArea.on('change', function() {
     return;
   }
   if (codeChangeLock == false) {
-    clearTimeout(codeChangeInterval)
+    clearTimeout(codeChangeInterval);
   }
   codeChange();
 });
