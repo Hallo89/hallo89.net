@@ -32,17 +32,3 @@ function randomNumber() {
 function toggleRandomMode() {
   buttonAppend.classList.toggle('active');
 }
-
-//I don't fucking know why but it doesn't work with mousedown
-function focusStart() {
-  start.focus();
-}
-function focusEnd() {
-  end.focus();
-}
-function focusAmount() {
-  amount.focus();
-}
-function focusPostcomma() {
-  aftercomma.focus();
-}

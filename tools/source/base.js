@@ -88,10 +88,12 @@ function tooltipOut() {
 function inputIncrement() {
   let thisInput = this.parentNode.parentNode.children[0];
   thisInput.value++;
+  thisInput.focus();
 }
 function inputDecrement() {
   let thisInput = this.parentNode.parentNode.children[0];
   thisInput.value--;
+  thisInput.focus();
 }
  //Execution via a scroll wheel event
 function inputNumberScroll(e) {

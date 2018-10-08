@@ -1,6 +1,6 @@
 body {
-  /* darkest purple with 60/255 one step lighter purple, darkest 'gray' with 80/255 darkest red */
-  background: linear-gradient(to bottom right, #68402F, #483F50); /* #483F50, #553A47 */ /* #4F4257, #493639 */
+  /* outdated: darkest purple with 60/255 one step lighter purple, darkest 'gray' with 80/255 darkest red */
+  background: linear-gradient(to bottom right, #483F50, #68402F); /* #483F50, #553A47 */ /* #4F4257, #493639 */
 }
 
 .box {
