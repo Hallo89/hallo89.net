@@ -181,7 +181,7 @@ body.fullscreen #wrapper {
 .input.text {
   resize: none;
   font-size: 20px;
-  font-family: serif;
+  font-family: sans-serif;
   min-height: 48px;
   margin: 0;
 }
