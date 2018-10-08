@@ -28,8 +28,9 @@ function mockingText() {
       outputValue += Math.round(Math.random()) == 1 ? value[i].toUpperCase() : value[i].toLowerCase();
     }
   }
-  while (value.indexOf('\n') >= 0) {
-    value = value.replace('\n', '<br>');
+  console.log(outputValue);
+  while (outputValue.indexOf('\n') >= 0) {
+    outputValue = outputValue.replace('\n', '<br>');
   }
   output.innerHTML = outputValue;
 }

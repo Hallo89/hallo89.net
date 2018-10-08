@@ -170,8 +170,13 @@ body.fullscreen #wrapper {
   flex-wrap: wrap;
 }
 .text_content {
+  display: block;
   font-size: .65em;
   line-height: 1.4;
+  -webkit-user-select: all;
+  -moz-user-select: all;
+  -ms-user-select: all;
+  user-select: all;
 }
 /* The input box being a 100% width <textarea> input box */
 .input_box.text_input {
