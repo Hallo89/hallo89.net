@@ -18,6 +18,9 @@ resizeInput();
 //functions
 function mockingText() {
   let value = input.value;
+  if (value = '') {
+    return;
+  }
   let outputValue = '';
   for (i = 0; i < value.length; i++) {
     if (i > 1 && outputValue[i-1] == outputValue[i-1].toUpperCase() && outputValue[i-2] == outputValue[i-2].toUpperCase()) {
@@ -28,7 +31,6 @@ function mockingText() {
       outputValue += Math.round(Math.random()) == 1 ? value[i].toUpperCase() : value[i].toLowerCase();
     }
   }
-  console.log(outputValue);
   while (outputValue.indexOf('\n') >= 0) {
     outputValue = outputValue.replace('\n', '<br>');
   }
