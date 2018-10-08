@@ -10,6 +10,7 @@ const input2 = document.querySelector('.box .input_container:nth-child(3)');
 
 //Event listeners
 input.addEventListener('input', resizeInput);
+input.addEventListener('keydown', recordEnter);
 
 //Being executed on pageload
 resizeInput();
@@ -36,4 +37,10 @@ function mockingText() {
 function resizeInput() {
   input.style.height = null;
   input.style.height = input.scrollHeight - 6 + 'px';
+}
+
+function recordEnter(e) {
+  if (e.key == 'Enter' && e.ctrlKey) {
+    mockingText();
+  }
 }
