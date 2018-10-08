@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Mocking text generator - Tools | Hallo89</title>
+    <link rel="stylesheet" type="text/css" href="../global.css">
+    <link rel="stylesheet" type="text/css" href="./source/base.css">
+    <link rel="stylesheet" type="text/css" href="./source/mocking.css">
+  </head>
+  <body>
+    <div id="wrapper">
+
+      <div class="box info_box glb_box">
+        <div class="box_header">
+          <span class="header_text">Mocking generator</span>
+          <div class="utility_buttons">
+            <span class="util_button button_smallscreen active"></span>
+            <span class="util_button button_fullscreen"></span>
+            <span class="util_button button_close"></span>
+          </div>
+        </div>
+        <div class="input_container">
+          <div class="input_box text_input">
+            <div class="input_header">Input</div>
+            <textarea class="input text" autocomplete="off" spellcheck="false"></textarea>
+          </div>
+        </div>
+        <div class="input_container">
+          <div class="input_box button noselect" onclick="mockingText()">
+            <span class="input_header">Go!</span>
+          </div>
+        </div>
+        <div class="text_function text_box text_content" id="output">
+        </div>
+      </div>
+
+    </div>
+
+    <script src="./source/base.js"></script>
+    <script src="./source/mOCkiNg.js"></script>
+  </body>
+</html>
