@@ -18,7 +18,8 @@ resizeInput();
 //functions
 function mockingText() {
   let value = input.value;
-  if (value = '') {
+  if (value == '') {
+    output.innerHTML = '';
     return;
   }
   let outputValue = '';
