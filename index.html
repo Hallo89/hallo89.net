@@ -17,10 +17,8 @@
     <div id="headline">
       <a href="https://hallo89.github.io/Some-shitty-website/" class="head_image"></a>
       <nav class="head_nav">
-        <a href="https://nesewebel.de/auch">Nese1</a>
-        <a href="https://nesewebel.de/mockbob">Nese2</a>
-        <a href="https://twitter.com/Nesewebel">Nese3</a>
-        <a href="https://steamcommunity.com/id/Nesewebel">Nese4</a>
+        <a href="tools.html" class="link">Tools</a>
+        <a href="https://nesewebel.de" class="link">Nesewebel</a>
       </nav>
       <div class="modes">
         <span class="mode_gear fa fa-cog"></span>
@@ -109,6 +107,7 @@
         </div>
         <div class="links box_text">
           <a class="imager triangles" href="./webgl/triangles.html">Triangles</a>
+          <a class="imager matrix_3d" href="./webgl/webgl.html">Matrices & 3D</a>
         </div>
       </div>
       <div class="box glb_box multiplebox">
@@ -129,9 +128,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css">
     <script>
-      window.onload = function preload() {
-        dropdownClickDelay();
-      }
+      dropdownClickDelay();
       function dropdownClickDelay() {
         setTimeout(function setDropdownClick() {
           document.querySelector('.mode_gear').setAttribute('onclick', 'toggleDropdown()');

@@ -55,7 +55,7 @@ body.light-mode {
     flex-wrap: wrap;
     animation: .4s fadein ease-in-out;
     transition: transform .15s linear;
-    a {
+    .link {
       flex: 1;
       text-align: center;
       text-decoration: none;
@@ -127,6 +127,7 @@ body.light-mode {
       }
       .dropdown_header {
         background-color: @mode-dropdown-header-background;
+        font-family: 'Arial', sans-serif;
         .mode-switch-transition.background;
         .dropdown_header_text {
           display: inherit;
@@ -359,6 +360,7 @@ body.light-mode {
       right: 0;
       z-index: -1;
       background-size: cover;
+      background-position: 0 50%;
       filter: blur(5px);
       opacity: 0.2;
       transition: all 0.25s cubic-bezier(0, 0, .75, 1);

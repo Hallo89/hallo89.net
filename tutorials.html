@@ -6,28 +6,24 @@
     <link rel="stylesheet" type="text/css" href="global.css">
     <link rel="stylesheet" type="text/css" href="tutorialsmain.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300|Overpass+Mono:400">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.3/css/all.css"> <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css">
   </head>
   <body class="dark-mode">
 
-    <div id="headline" class="headline">
-      <a href="https://hallo89.github.io/Some-shitty-website/" id="head_image"></a>
-      <nav id="head_nav">
-        <a href="https://nesewebel.de/auch" target="_blank">Nese1</a>
-        <a href="https://nesewebel.de/mockbob" target="_blank">Nese2</a>
-        <a href="https://twitter.com/Nesewebel" target="_blank">Nese3</a>
-        <a href="https://steamcommunity.com/id/Nesewebel" target="_blank">Nese4</a>
+    <div id="headline">
+      <a href="https://hallo89.github.io/Some-shitty-website/" class="head_image"></a>
+      <nav class="head_nav">
+        <a href="tools.html" class="link">Tools</a>
+        <a href="https://nesewebel.de" class="link">Nesewebel</a>
       </nav>
-      <div id="expanding_border"></div>
-      <div id="modes">
+      <div class="modes">
         <span class="mode_gear fa fa-cog" onclick="toggleDropdown()"></span>
         <div class="dropdown_box">
           <div class="dropdown_header">
             <span class="dropdown_header_text">modes</span>
           </div>
           <div class="dropdown_text">
-            <span class="mode_switch" id="switch_daynight" onclick="toggleMode()"> Day/Night Theme </span>
-            <span class="mode_switch" id="switch_nesewebel" onclick="toggleModeNesewebel()"> Nesewebel Theme </span>
+            <span class="mode_switch switch_daynight" onclick="toggleMode()"> Light Theme </span>
+            <span class="mode_switch switch_nesewebel" onclick="toggleModeNesewebel()"> Nesewebel Theme </span>
           </div>
         </div>
       </div>
@@ -94,6 +90,8 @@
         <p>Good day! This is a lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum text to fill a little bit of this page. I am going to build a few tutorials regarding minecraft resourcepackmaking, highly focused on the technical side of things, json that is, to help people understand how minecraft's json system works, in regards to its model and blockstate system</p>
       </article>
     </div>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css">
     <script>
       window.onload = function preload() {
         pathCollapseOnload();
