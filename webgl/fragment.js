@@ -3,10 +3,10 @@ var fragmentSource = `#version 300 es
 
 precision mediump float;
 
-uniform vec4 color;
+in vec4 fragColor;
 out vec4 fragOut;
 
 void main() {
-   fragOut = color;
+   fragOut = fragColor;
 }
 `;
