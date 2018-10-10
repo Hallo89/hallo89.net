@@ -4,127 +4,6 @@
     <meta charset="utf-8">
     <title>Triangles - WebGL experiments | Hallo89</title>
     <style>
-      body {
-        background-color: hsl(0, 0%, 10%);
-    		margin: 0;
-    		overflow: hidden;
-      }
-      body.expanded .inputs {
-        transform: none;
-      }
-  	  canvas {
-  	    width: 100vw;
-    		height: 100vh;
-  	  }
-      button {
-        cursor: pointer;
-        border: none;
-      }
-      /* Don't know if that works */
-      button::-moz-focus-inner {
-        border: none;
-      }
-      .inputs {
-        position: absolute;
-        top: 0;
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        background-color: hsl(0, 0%, 10%);
-        padding: 10px 12px;
-        box-sizing: border-box;
-        z-index: 2;
-        transform: translateY(-100%);
-        transition: all .2s ease;
-        animation: 1.5s initialVisibility ease;
-      }
-      @keyframes initialVisibility {
-        0% { transform: none; }
-        85% { transform: none; }
-        100% { transform: translateY(-100%); }
-      }
-      .input_box {
-        margin: 0 8px;
-      }
-      .input_wrapper {
-        display: flex;
-        flex-direction: row;
-      }
-      .input {
-        border: none;
-        padding: 3px 5px 1px;
-        background-color: hsl(0, 0%, 19%);
-        color: hsl(0, 0%, 70%);
-        font-family: monospace;
-        font-size: 18px;
-        font-weight: bold;
-        max-width: 150px;
-        height: 25px;
-        box-sizing: border-box;
-      }
-      .input:invalid {
-        background-color: hsl(0, 37%, 25%);
-        box-shadow: 0 0 0 1px hsl(0, 60%, 30%);
-      }
-      .input_header {
-        color: hsl(0, 0%, 70%);
-        font-family: 'Calibri', serif;
-        font-size: 20px;
-        display: block
-      }
-
-      .input_box.checker {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-      }
-      .input_box.checker .checker {
-        position: relative;
-        cursor: pointer;
-        width: 25px;
-      }
-      .input_box.checker .checkmark {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        clip-path: polygon(0 14px, 4px 10px, 4px 10px, 0px 14px, 9.5px 24px);
-        transform: scale(0.85);
-        transition: all .18s ease;
-        opacity: .8;
-      }
-      .input_box.checker.active .checkmark {
-        animation: .25s checkerIn ease;
-        transform: none;
-        opacity: 1;
-        clip-path: polygon(26px 7px, 22px 3px, 4px 10px, 0px 14px, 10px 24px);
-      }
-      @keyframes checkerIn {
-        0%   { clip-path: polygon(0 14px, 4px 10px, 4px 10px, 0px 14px, 9.5px 24px); }
-        30%  { clip-path: polygon(9.5px 24px, 9.5px 16px, 4px 10px, 0px 14px, 9.5px 24px); }
-        100% { clip-path: polygon(26px 7px, 22px 3px, 4px 10px, 0px 14px, 10px 24px); }
-      }
-      .input_box.checker .mark {
-        position: absolute;
-        height: 3px;
-        background-color: hsl(0, 0%, 70%);
-        border-radius: 2px;
-        transition: all .3s ease;
-      }
-      .input_box.checker .mark.lower {
-        transform: rotate(45deg);
-        width: 11px;
-        left: 1px;
-        bottom: 7px;
-      }
-      .input_box.checker .mark.upper {
-        transform: rotate(-45deg);
-        width: 20px;
-        left: 6px;
-        bottom: 10.5px;
-      }
-
       .input_box.colors {
         margin: 0 5px;
       }
@@ -217,6 +96,17 @@
         padding: 8px;
       }
 
+      .input_box.lightnessstart .input {
+        width: 114px;
+      }
+      .input_box.lightnessstart .input .slider_knob {
+        transform: translateX(10px);
+      }
+
+      .input_box.lightnessthreshold .input {
+        width: 164px;
+      }
+
       .inputs_expander {
         position: absolute;
         top: 0;
@@ -286,47 +176,10 @@
       body.size_warning .size_alert_wrapper {
         display: flex;
       }
-
-      .input.number {
-        -moz-appearance: textfield;
-        appearance: textfield;
-      }
-      input.number::-webkit-inner-spin-button,
-      input.number::-webkit-outer-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-      }
-      .number_wrapper {
-        position: relative;
-      }
-      .crement {
-        position: absolute;
-        right: 0px;
-        height: 50%;
-        width: 20px;
-        font-size: .6em;
-        color: hsl(0, 0%, 63%);
-        background-color: hsl(0, 0%, 27%);
-        padding: 0;
-      }
-      .crement_buttons.small .crement {
-        width: 16px;
-      }
-      .crement.plus {
-        top: 0;
-      }
-      .crement.minus {
-        bottom: 0;
-      }
-      .noselect {
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
     </style>
+    <link rel="stylesheet" type="text/css" href="base.css">
   </head>
-  <body class="">
+  <body class="expanded">
     <div class="inputs">
       <div class="input_box colors colorpicker">
         <input type="color" value="#17469E" class="input color">
@@ -407,8 +260,22 @@
         </div>
         <span class="input_header">line mode</span>
       </div>
+      <div class="input_box lightnessstart slider">
+        <div class="input slider" data-comma="1" data-function="triangledraw">
+          <span class="slider_knob"></span>
+          <span class="slider_tooltip right hidden noselect">10</span>
+        </div>
+        <span class="input_header">lightness start</span>
+      </div>
+      <div class="input_box lightnessthreshold slider">
+        <div class="input slider" data-comma="3" data-function="triangledraw">
+          <span class="slider_knob"></span>
+          <span class="slider_tooltip right hidden noselect"></span>
+        </div>
+        <span class="input_header">lightness threshold</span>
+      </div>
+      <a href="../index.html" class="mainref">Hallo89</a>
     </div>
-    <div class="inputs_expander"></div>
     <div class="size_alert_wrapper">
       <div class="size_alert">
         <p class="alert_text alert_header">A large quantity of triangles is set to generate</p>
@@ -420,15 +287,12 @@
     <canvas width="800" height="800"></canvas>
 
     <script>
-      const crementButtonsUp = document.querySelectorAll('.crement.plus');
-      const crementButtonsDown = document.querySelectorAll('.crement.minus');
-      const crementContainer = document.querySelectorAll('.crement_buttons');
-
       const inputsRGB = document.querySelectorAll('.input_box.rgb .input');
       const inputColor = document.querySelector('.input_box.colorpicker .input');
       const inputHEX = document.querySelector('.input_box.hex .input');
 
-      const inputsChecker = document.querySelectorAll('.input_box.checker .input.checker');
+      const inputLightness = document.querySelector('.input_box.lightnessstart .input');
+      const inputThreshold = document.querySelector('.input_box.lightnessthreshold .input');
 
       //for triangles.js
       const inputSize = document.querySelector('.box_wrapper.size .input');
@@ -438,33 +302,15 @@
       const inputs = document.querySelector('.inputs');
       const expander = document.querySelector('.inputs_expander');
 
-      inputs.addEventListener('mouseleave', toggleInputs);
-      expander.addEventListener('mouseenter', toggleInputs);
       inputColor.addEventListener('change', pickerChange);
       inputHEX.addEventListener('input', hexChange);
       for (var i = 0; i < inputsRGB.length; i++) {
         inputsRGB[i].addEventListener('change', rgbChange);
       }
-      for (var i = 0; i < crementContainer.length; i++) {
-        crementContainer[i].addEventListener('wheel', crementScroll);
-      }
-      for (var i = 0; i < crementButtonsUp.length; i++) {
-        crementButtonsUp[i].addEventListener('click', increment);
-      }
-      for (var i = 0; i < crementButtonsDown.length; i++) {
-        crementButtonsDown[i].addEventListener('click', decrement);
-      }
-      for (var i = 0; i < inputsChecker.length; i++) {
-        inputsChecker[i].addEventListener('click', handleChecker);
-      }
 
       function enableLines() {
         document.body.classList.toggle('linemode');
         generate();
-      }
-
-      function toggleInputs() {
-        document.body.classList.toggle('expanded');
       }
 
       function decoupleSize() {
@@ -543,59 +389,8 @@
         let fillB = b < 16 ? '0' : '';
         return '#' + fillR + (r).toString(16) + fillG + (g).toString(16) + fillB + (b).toString(16);
       }
-
-      function handleChecker() {
-        this.parentNode.classList.toggle('active');
-      }
-
-      function increment() {
-        const input = this.parentNode.previousElementSibling;
-        if (input.max != '' && parseInt(input.value) < parseInt(input.max)) {
-          input.value++;
-        } else if (input.max == '') {
-          input.value++;
-        }
-        input.focus();
-        if (input.classList.contains('rgb')) {
-          rgbChange();
-        }
-      }
-      function decrement() {
-        const input = this.parentNode.previousElementSibling;
-        if (input.min != '' && parseInt(input.value) > parseInt(input.min)) {
-          input.value--;
-        } else if (input.min == '') {
-          input.value--;
-        }
-        input.focus();
-        if (input.classList.contains('rgb')) {
-          rgbChange();
-        }
-      }
-      function crementScroll(e) {
-        let scrollY = e.deltaY;
-        if (scrollY != 0) {
-          const input = this.parentNode.children[0];
-          if (scrollY > 0) {
-            if (input.min != '' && parseInt(input.value) > parseInt(input.min)) {
-              input.value--;
-            } else if (input.min == '') {
-              input.value--;
-            }
-          } else if (scrollY < 0) {
-            if (input.max != '' && parseInt(input.value) < parseInt(input.max)) {
-              input.value++;
-            } else if (input.max == '') {
-              input.value++;
-            }
-          }
-          input.focus();
-          if (input.classList.contains('rgb')) {
-            rgbChange();
-          }
-        }
-      }
     </script>
+    <script src="base.js"></script>
     <script src="boiler.js"></script>
     <script src="triangles.js"></script>
   </body>

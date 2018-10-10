@@ -80,19 +80,22 @@ gl.vertexAttribPointer(locationPosition, size, type, normalize, stride, offset);
 //Tell WebGL to use our program which is called 'program'
 gl.useProgram(program);
 
+resizeCanvas();
+computeSizes();
+inputLightness.dataset.value = 10;
+inputLightness.dataset.maxValue = (amountX + amountY) * 3.2;
+inputThreshold.dataset.value = amountX + amountY;
+inputThreshold.dataset.maxValue = amountX + amountY;
+for (var i = 0; i < inputsSlider.length; i++) {
+  syncSlider(inputsSlider[i]);
+}
 
 generate();
 
 function generate() {
-  let scrHeight = screenHeight;
-  let scrWidth = screenWidth;
-  let triWidth = triangleWidth;
-  let triHeight = triangleHeight;
   computeSizes();
   if (!document.body.classList.contains('size_warning') && amountX + amountY >= 1200) {
     document.body.classList.add('size_warning');
-  } else if (scrHeight == screenHeight && scrWidth == screenWidth && triWidth == triangleWidth && triHeight == triangleHeight) {
-    draw();
   } else if (!document.body.classList.contains('size_warning') && amountX + amountY < 1200) {
     resizeCanvas();
     createBuffer();
@@ -202,14 +205,16 @@ function draw() {
     'g': document.querySelector('.input.g').value,
     'b': document.querySelector('.input.b').value
   };
+  recomputeSlider(inputLightness, (amountX + amountY) * 3.2);
+  recomputeSlider(inputThreshold, amountX + amountY);
   fixedColors = new Float32Array(amountX*amountY*2);
   let iteration = 0;
   for (i = 0; i < amountY; i++) {
     for (u = 0; u < amountX; u++) {
       for (n = 0; n < 2; n++) {
-        let lightness = (Math.random() + 0.25) * 2 * (u + i + 10) / (amountY+amountX);
-        fixedColors[iteration] = lightness;
-        //fixedColors.push(lightness);
+        let randomMethod = (Math.random() + 0.25) * 2;
+        let lightness = randomMethod * (u + i + Number(inputLightness.dataset.value)) / Number(inputThreshold.dataset.value);
+        fixedColors[iteration] = randomMethod;
         gl.uniform4f(colorPosition,
           (colorRGB.r/255 * lightness).toFixed(2),
           (colorRGB.g/255 * lightness).toFixed(2),
@@ -224,12 +229,19 @@ function draw() {
 }
 
 function fixedDraw(rgb) {
+  if (!rgb) {
+    rgb = {
+      'r': document.querySelector('.input.r').value,
+      'g': document.querySelector('.input.g').value,
+      'b': document.querySelector('.input.b').value
+    };
+  }
   let drawMethod = document.body.classList.contains('linemode') ? gl.LINE_LOOP : gl.TRIANGLES;
   let iteration = 0;
   for (i = 0; i < amountY; i++) {
     for (u = 0; u < amountX; u++) {
       for (n = 0; n < 2; n++) {
-        let lightness = fixedColors[iteration];
+        let lightness = fixedColors[iteration] * (u + i + Number(inputLightness.dataset.value)) / Number(inputThreshold.dataset.value);
         gl.uniform4f(colorPosition,
           (rgb.r/255 * lightness).toFixed(2),
           (rgb.g/255 * lightness).toFixed(2),
