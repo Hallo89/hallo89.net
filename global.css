@@ -2,11 +2,6 @@
 Written by Hallo89 using LESS CSS - http://lesscss.org
 No necessity to write this in here but Less is awesome!
 */
-/* @mode-dropdown-box--light: lighten(@background-color--light, 5%);
-@mode-dropdown-box-shadow--light: fadeout(darken(@mode-dropdown-box--light, 19%), 20%);
-@mode-switch-foreground--light: @foreground-color--light;
-@mode-switch-background--light: @mode-dropdown-box--light;
-@mode-switch-background-hover--light: darken(@mode-switch-background--light, 4%); */
 body {
   margin: 0 0 15px 0;
   background-color: #171717;
@@ -95,9 +90,6 @@ body.light-mode {
   color: #664D6E;
 }
 #headline .modes {
-  width: 41px;
-  height: 48px;
-  font-size: 41px;
   position: relative;
   margin: 1px 10px 0 0;
 }
@@ -109,6 +101,7 @@ body.light-mode {
   transform: rotateZ(135deg);
 }
 #headline .modes .mode_gear {
+  font-size: 41px;
   transition: all .475s;
   color: #3a5b99;
   cursor: pointer;

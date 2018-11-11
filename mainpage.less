@@ -78,6 +78,7 @@ body {
   .mode-switch-transition.shadow;
   h1 {
     font: bold 130px 'Century Gothic', 'Segoe UI', 'Nirmala UI', sans-serif;
+	//font-size: calc(3vw + 1.5vh + 60px)
     text-transform: uppercase;
     letter-spacing: 1.5px;
     text-shadow:
@@ -132,8 +133,10 @@ body {
   }
   p {  //subheader
     position: absolute;
+	//height of the header divided by 4 minus an unpredictable number to actually center it
     bottom: ~'calc((8vw + 12vh + 141px)/4 - 38px)';
     font-family: 'Segoe UI', 'Arial', sans-serif;
+	//font-size: calc(0.3vw + 0.15vh + 14px)
     font-size: 19px;
     font-style: italic;
     margin: 0;
@@ -233,6 +236,8 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(410px, 1fr));
   align-items: center;
   .box {
+    //width: calc(3.5vw + 1vh + 335px);
+    //height: calc(3.5vw + 1vh + 380px);
     width: 410px;
     height: 450px;
     &:nth-child(1) {
@@ -246,6 +251,9 @@ body {
     }
     &:nth-child(4) {
       .boxanimation(.74s);
+    }
+    &:nth-child(5) {
+      .boxanimation(.82s);
     }
   }
   .dwm::before {

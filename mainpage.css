@@ -2,11 +2,6 @@
 Written by Hallo89 using LESS CSS - http://lesscss.org
 No necessity to write this in here but Less is awesome!
 */
-/* @mode-dropdown-box--light: lighten(@background-color--light, 5%);
-@mode-dropdown-box-shadow--light: fadeout(darken(@mode-dropdown-box--light, 19%), 20%);
-@mode-switch-foreground--light: @foreground-color--light;
-@mode-switch-background--light: @mode-dropdown-box--light;
-@mode-switch-background-hover--light: darken(@mode-switch-background--light, 4%); */
 body.nesewebel-mode.dark-mode {
   background-color: black;
 }
@@ -208,6 +203,9 @@ body {
 }
 #box_nav .box:nth-child(4) {
   animation: 0.74s shiftinBox ease-out;
+}
+#box_nav .box:nth-child(5) {
+  animation: 0.82s shiftinBox ease-out;
 }
 #box_nav .dwm::before {
   background-image: url('images/main/MINECRAFT.png');
