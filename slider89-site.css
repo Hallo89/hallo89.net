@@ -1,0 +1,282 @@
+body {
+  font-size: calc(.1vw + .05vh + 16.61px);
+}
+
+button {
+  cursor: pointer;
+}
+
+#id_nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-color: hsl(0, 0%, 13.5%);
+  color: hsl(0, 0%, 68%);
+  padding: 15px 30px;
+  font-family: 'San Francisco Monospaced', 'Consolas', monospace;
+}
+#id_nav h1 {
+  font-size: 2.37em;
+  margin: 0;
+  color: hsl(0, 0%, 60%);
+}
+#id_nav .links {
+  flex: 1;
+  padding: 0 10px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  font-size: 1.3em;
+}
+#id_nav .links a {
+  color: hsl(0, 0%, 65%);
+  text-decoration: none;
+  margin: 9px 10px;
+  border-bottom: 2px solid hsl(0, 0%, 45%);
+  white-space: nowrap;
+  transition: all .15s ease-in-out;
+}
+#id_nav .links a:hover {
+  color: hsl(0, 0%, 70%);
+  border-color: hsl(0, 0%, 55%);
+}
+
+#main_article {
+  max-width: 1000px;
+  margin: calc(2vh + .75vw + 16.29px) auto 200px;
+  padding: 0 .63em;
+  color: hsl(0, 0%, 68%);
+  line-height: 1.56;
+}
+#main_article section {
+  margin: auto;
+  max-width: 900px;
+  /* Ensuring a minimum amount of indent when the viewport width gehts smaller */
+  padding: 0 1.45em;
+}
+
+#main_article h2 {
+  font-size: 2.11em;
+  font-family: 'San Francisco Monospaced', 'Consolas', monospace;
+  color: hsl(0, 0%, 66%)
+}
+#main_article h3 {
+  color: hsl(0, 0%, 70%);
+  font-family: 'Calibri', sans-serif;
+  margin: .6em 0;
+}
+#main_article hr {
+  border-bottom: none;
+  border-top: 3px solid hsl(0, 0%, 35%);
+  margin: .8em 0 .7em;
+}
+#main_article h3, #main_article hr {
+  font-size: 1.9em;
+}
+
+#main_article a:not(.icon_anchor) {
+  text-decoration: none;
+  position: relative;
+  padding: 1px;
+  color: #1398A9;
+  transition: background-color .08s, color .08s, border-bottom .08s;
+  border-bottom: 1px solid;
+}
+#main_article a:not(.icon_anchor):hover {
+  border-bottom: 2px solid;
+  /* #1398A9 in rgba */
+  background-color: rgba(19, 152, 170, .19);
+}
+#main_article a:not(.icon_anchor):visited {
+  color: #469870;
+}
+#main_article a:not(.icon_anchor):hover:visited {
+  /* #469870 in rgba */
+  background-color: rgba(70, 152, 112, .18);
+}
+#main_article a:not(.icon_anchor):active {
+  color: #A84E4E;
+}
+#main_article a:not(.icon_anchor):hover:active {
+  /* #A84E4E in rgba */
+  background-color: rgba(168, 78, 78, .18);
+}
+
+#main_article code a {
+  color: hsl(0, 0%, 73%);
+  font-style: italic;
+}
+#main_article code a:hover {
+  background-color: hsla(0, 0%, 72%, .18);
+}
+#main_article code a:visited {
+  color: hsl(0, 0%, 64%);
+}
+#main_article code a:hover:visited {
+  background-color: hsla(0, 0%, 60%, .18);
+}
+/* Above color mixed with 180/255 60% lightness */
+#main_article code a:active {
+  color: #9D8282;
+}
+#main_article code a:hover:active {
+  /* #9D8282 in rgba */
+  background-color: rgba(157, 130, 130, .18);
+}
+
+#main_article code {
+  padding: 2px 3px;
+}
+#main_article code, .codeblock {
+  font-family: 'San Francisco Monospaced', 'Consolas', monospace;
+  color: hsl(0, 0%, 70%);
+  background-color: hsl(0, 0%, 13.5%);
+  border-radius: 1px;
+}
+.codeblock {
+  padding: 3px 8px;
+  margin: .25em 0;
+  overflow: auto;
+}
+#section_docs dt code {
+  font-size: 1.1em;
+  color: hsl(0, 0%, 78%);
+  background-color: hsl(0, 0%, 18.5%);
+  padding: 2px 9px;
+  border-radius: 100px;
+}
+#section_docs dt code, .doc_list .info_item, #main_article code a, #main_article h4, .list_container .expand_button {
+  font-family: 'Source Code Pro', 'DejaVu Sans Mono', 'Fira Code', 'San Francisco Monospaced', 'Consolas', monospace;
+}
+
+#main_article h2:hover .icon_anchor, #main_article h3:hover .icon_anchor, #main_article h4:hover .icon_anchor {
+  opacity: 1;
+}
+.icon_anchor {
+  margin: 0 14px 0 -39px;
+  padding: 0 2px;
+  color: hsl(0, 0%, 60%);
+  text-decoration: none;
+  font-family: 'Consolas', 'San Francisco Monospaced', sans-serif;
+  opacity: .25;
+  transition: all .1s ease-in-out;
+}
+h4 .icon_anchor {
+  margin: 0 0 0 10px;
+}
+
+#main_article h4 {
+  font-size: 1.58em;
+  margin: 1.2em 0;
+  color: hsl(0, 0%, 65%);
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.list_container .expand_button {
+  position: absolute;
+  left: -1.166em;
+  height: .833em;
+  width: .833em;
+  border: none;
+  background-color: hsl(0, 0%, 18%);
+  color: hsl(0, 0%, 55%);
+  font-size: 1em;
+  font-family: 'Source Code Pro', 'Lucida Console', 'DejaVu Sans Mono', 'Century', 'Century Gothic', 'Consolas', 'San Francisco Monospaced', sans-serif;
+  padding: 0;
+  border-radius: 100px;
+}
+.list_container .expand_button .symbols {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all .55s ease;
+}
+.list_container .expand_button .symbol {
+  position: absolute;
+  transition: all .38s cubic-bezier(.35,.1,.35,1);
+}
+.list_container .expand_button .symbol.plus {
+  visibility: hidden;
+  transform: Scale(0);
+}
+.list_container .expand_button .symbol.minus {
+}
+.list_container .expand_button.active .symbols {
+  transform: rotateZ(360deg);
+}
+.list_container .expand_button.active .symbol.minus {
+  transform: Scale(0);
+  visibility: hidden;
+  animation: preventHidden .8s linear;
+}
+.list_container .expand_button.active .symbol.plus {
+  transform: Scale(1);
+  visibility: visible;
+}
+@keyframes preventHidden {
+  from { visibility: visible; }
+  to   { visibility: visible; }
+}
+
+.list_container .collapsible.collapsed {
+  height: 0;
+  display: none;
+}
+
+.doc_list {
+  list-style-type: none;
+  padding-left: 20px;
+  margin: 1.3em 0;
+}
+.doc_list .list_item {
+  margin: .75em 0;
+  padding: .75em 0;
+}
+.doc_list dt {
+  margin-bottom: 3px;
+}
+.doc_list .doc_item {
+  margin-left: 25px;
+}
+.doc_list .info_item.state {
+  color: #904851;
+}
+.doc_list .info_item {
+  position: relative;
+  margin-left: 70px;
+  text-indent: -15px;
+}
+.doc_list .info_item::before, .doc_list .info_item::after {
+  content: '';
+  position: absolute;
+  left: -32px;
+}
+.doc_list .info_item::before {
+  border-left: 1.5px solid hsl(0, 0%, 55%);
+  top: 0;
+  bottom: 0;
+}
+.doc_list .info_item:nth-last-of-type(1)::before {
+  top: 0;
+  bottom: 50%;
+}
+.doc_list .info_item::after {
+  border-top: 1.5px solid hsl(0, 0%, 55%);
+  top: 50%;
+  width: 13px;
+}
+
+.nodisplay {
+  display: none;
+}
+
+.demo_block {
+  display: flex;
+  justify-content: center;
+}
+.demo_block .slider89 .slider {
+  background-color: hsl(0, 0%, 18%);
+}

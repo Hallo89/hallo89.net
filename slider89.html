@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Slider89 | Hallo89</title>
+    <link rel="stylesheet" type="text/css" href="global.css">
+    <link rel="stylesheet" type="text/css" href="slider89-site.css">
+  </head>
+  <body>
+    <nav id="id_nav">
+      <h1>Slider89</h1>
+      <div class="links">
+        <a href="#what">What is this?</a>
+        <a href="#starting">Getting started</a>
+        <a href="#properties">Properties</a>
+        <a href="#functions">Methods</a>
+        <a href="#structure">HTML structure</a>
+      </div>
+    </nav>
+    <main id="main_article">
+      <h2 id="intro">
+        <a href="#intro" class="icon_anchor">#</a>Introduction
+      </h2>
+      <section>
+        <p>
+          If you have at some point needed an input type=range while developing a website you'll know that they are awesome. They fit with a lot of use cases and are very convenient to both interact with as user and deal with as developer.<br>
+          However, the restriction of not being able to style it very well is a point which isn't easy to ignore. People tell me that there are many ways to style a range input, to which I answer with the question whether approximately 80 lines of css (for cross-browser support) solely for one range input is worth it.
+        </p>
+        <p>
+          This is why I wrote a framework to solve this very problem: <em>Slider89</em>, which also happened to solve a lot more problems and make life much easier. How convenient!
+        </p>
+
+        <hr>
+
+        <h3 id="what">
+          <a href="#what" class="icon_anchor">#</a>What is this?
+        </h3>
+        <p>
+          Slider89 is a very simple framework for easily creating css sliders (range inputs). Being based on javascript and custom elements with CSS instead of a built-in browser-side &lt;input&gt;-element, it features full styling customizability but allows for rich configuration on the technical side as well. It is very useful for modifying values on the go, as an example.</p>
+        <p>
+          A basic slider can look like this (Its background-color is a bit darker but otherwise this is an all-default slider):
+        </p>
+        <div class="demo_block" id="demo_plain"></div>
+        <p>
+          The values are automatically computed based on the slider's minimum and maximum values
+        </p>
+
+        <hr>
+
+        <h3 id="starting">
+          <a href="#starting" class="icon_anchor">#</a>Getting started
+        </h3>
+        <p>
+          Like usual when needing external resources, you first need to fetch the necessary files and load them up into your HTML document.<br>
+          There's two ways of doing this: you can either download them from the github repository, <a href="https://github.com/Hallo89/Slider89">https://github.com/Hallo89/Slider89</a>, or fetch the files from the repository's website as seen below to <em>always</em> get the latest available version.<br>
+          In both cases only two files are needed: <code>slider89.js</code> and <code>slider89.css</code><br>
+          You'll then need to link them in your HTML file like so:
+        </p>
+        <div class="codeblock">
+          <code>
+            &lt;script src="<em>yourpath</em>/slider89.js"&gt;&lt;/script&gt;<br>
+            &lt;link rel="stylesheet" href="<em>yourpath</em>/slider89.css"&gt;
+          </code>
+        </div>
+        <p>
+          or, fetching from the website:
+        </p>
+        <div class="codeblock">
+          <code>
+            &lt;script src="https://hallo89.github.io/Slider89/slider89.js"&gt;&lt;/script&gt;<br>
+            &lt;link rel="stylesheet" href="https://hallo89.github.io/Slider89/slider89.css"&gt;
+          </code>
+        </div>
+        <p>
+          Tip: I prefer to load both the script and style at the end of the document to squeeze an extra bit of speed out of the page because, given that the scripts are also at the end of the document which is usual practice, one will not need them before.
+        </p>
+        <p>
+          Now that everything is loaded up, we can start to create sliderz. All you have to know is the initialization method; everything else can be taken from the <a href="#doc">documentation</a> section.<br>
+          To create one instance of a slider, we do the following in our javascript:
+        </p>
+        <div class="codeblock">
+          <code>var mySlider = new Slider89(targetElement);</code>
+        </div>
+        <p>
+          This is pretty straightforward: we create a new instance of the <code>Slider89</code> class with the <code>new</code> operator and pass the HTML-element we want the slider to be created in as paramter into the function.<br>
+          Lastly, we obviously have to store the slider in a variable to be able to access it in future code (it is also valid not to use a variable, I'm doing this with the demos on this page for example, but this is a very rare case as you cannot do anything with it after initialization).<br>
+          An all-default slider initialized plainly like this will look like the example you see above:
+        </p>
+        <div class="demo_block" id="demo_1_plain"></div>
+        <p>
+          However, what would a framework be without means of configuration? To configure it we pass an additional parameter as object into the <a href="#functions-constructor">Slider89 constructor </a> which we fill with <a href="#properties-config">configuration-properties</a>. Here's an example:
+        </p>
+        <pre class="codeblock"><code>var mySlider = new Slider89(targetElement, {
+  min: -50,
+  max: 175,
+  value: 80
+});</code></pre>
+        <p>Which would turn out into this:</p>
+        <div class="demo_block" id="demo_2_configged"></div>
+      </section>
+
+      <h2 id="doc">
+        <a href="#doc" class="icon_anchor">#</a>Documentation
+      </h2>
+
+      <section id="section_docs">
+        <p>This chapter will introduce all available methods, variables etc. with a thorough explanation</p>
+
+        <hr>
+
+        <h3 id="properties">
+          <a href="#properties" class="icon_anchor">#</a>Properties
+        </h3>
+        <p>
+          These are the key to reading values from the slider and defining its properties.<br>
+          Every property's value is accessed using <code>&lt;sliderInstance&gt;.&lt;property&gt;</code>
+        </p>
+        </ul>
+        <div class="list_container" id="properties-config">
+          <h4>Configuration properties
+            <button class="expand_button">
+              <div class="symbols">
+                <span class="symbol plus">+</span>
+                <span class="symbol minus">-</span>
+              </div>
+            </button>
+            <a href="#properties-config" class="icon_anchor">#</a>
+          </h4>
+          <div class="collapsible">
+            <p>Define the slider's configuration as properties of an object passed as a parameter into <a href="#functions">various functions</a>.</p>
+            <dl class="doc_list">
+              <div id="property-min" class="list_item">
+                <dt><code>min</code></dt>
+                <dd class="doc_item description">The minimum value of the slider's range</dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>type: <code>number</code></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>influencing: <code><a href="#property-width">width</a> at 'auto'</code></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">└ </span>default: <code>0</code></dd>
+              </div>
+
+              <div id="property-max" class="list_item">
+                <dt><code>max</code></dt>
+                <dd class="doc_item description">The maximum value of the slider's range</dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>type: <code>number</code></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>influencing: <code><a href="#property-width">width</a> at 'auto'</code></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">└ </span>default: <code>100</code></dd>
+              </div>
+
+              <div id="property-value" class="list_item">
+                <dt><code>value</code></dt>
+                <dd class="doc_item description">Used to specify the value the slider and its knob should start at</dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>type: <code>number</code></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">└ </span>default: <code>min</code></dd>
+              </div>
+
+              <div id="property-comma" class="list_item">
+                <dt><code>comma</code></dt>
+                <dd class="doc_item description">How many digits the value should have after its decimal place</dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>type: <code>int</code></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">└ </span>default: <code>0</code></dd>
+              </div>
+
+              <div id="property-width" class="list_item">
+                <dt><code>width</code></dt>
+                <dd class="doc_item description">
+                  The final width of the slider.<br>
+                  A number represents the width in pixels regardless of the slider's range, whereas the keyword 'auto' computes the width automatically from the slider's range in a 1:1 ratio.<br>
+                  If the property <a href="#property-absWidth">absWidth</a> is false, which is default, the width is implicit; it is expanded by a small amount resembling the padding at the sides of the slider (The default padding is half of the slider knob's width either side) in order to get an expected result
+                </dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>type: <code>number</code></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>unit: <code>px</code></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>influences: <code><a href="#property-absWidth">absWidth</a></code>, <code><a href="#property-min">min</a></code>, <code><a href="#property-max">max</a></code></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>available keywords: <code>'auto'</code></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">└ </span>default: <code>'auto'</code></dd>
+              </div>
+
+              <div id="property-caption" class="list_item">
+                <dt><code>caption</code></dt>
+                <dd class="doc_item description">The caption you see below the slider</dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>type: <code>string</code></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">└ </span>default: <code>''</code></dd>
+              </div>
+
+              <div id="property-classList" class="list_item">
+                <dt><code>classList</code></dt>
+                <dd class="doc_item description">An array containing CSS classes to be added to the slider's <a href="#structure">HTML-structure</a></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>type: <code>array&lt;string&gt;</code></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>influencing: <code><a href="#structure">HTML-structure</a></code></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">└ </span>default: <code>[]</code></dd>
+              </div>
+
+              <div id="property-task" class="list_item">
+                <dt><code>task</code></dt>
+                <dd class="doc_item description">This value takes a function to be executed every time the slider is moved. The function must be declared without parenthesis</dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>type: <code>function</code></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">└ </span>default: <code>undefined</code></dd>
+              </div>
+
+              <div id="property-replaceNode" class="list_item">
+                <dt><code>replaceNode</code></dt>
+                <dd class="doc_item description">If set to true, the slider instance will replace the <code><a href="#function-Slider89">targetNode</a></code> instead of being appended as a child inside it</dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>type: <code>boolean</code></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>influencing: <code><a href="#function-Slider89">Slider89</a></code></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">└ </span>default: <code>false</code></dd>
+              </div>
+
+              <div id="property-absWidth" class="list_item">
+                <dt><code>absWidth</code></dt>
+                <dd class="doc_item description">'Absolute width'; setting this to true computes the slider's width explicitly without taking the slider's padding into account</dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>type: <code>boolean</code></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>influencing: <code><a href="#property-width">width</a></code></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">└ </span>default: <code>false</code></dd>
+              </div>
+
+              <div id="property-trimComma" class="list_item">
+                <dt><code>trimComma</code></dt>
+                <dd class="doc_item description">
+                  If true, a value's digits after its decimal place are culled if they are 0. This is an aesthethik config property noticable at the value-displaying tooltip.<br>
+                  Example: 6.000 is trimmed to 6
+                </dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>type: <code>boolean</code></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">└ </span>default: <code>true</code></dd>
+              </div>
+
+              <div id="property-tipDuration" class="list_item">
+                <dt><code>tipDuration</code></dt>
+                <dd class="doc_item description">A duration after how long the value tooltip should vanish when the slider hasn't been interacted with</dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>type: <code>number</code></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>unit: <code>ms</code></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">└ </span>default: <code>250</code></dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+
+        <div class="list_container" id="properties-readonly">
+          <h4>Read-only
+            <button class="expand_button">
+              <div class="symbols">
+                <span class="symbol plus">+</span>
+                <span class="symbol minus">-</span>
+              </div>
+            </button>
+            <a href="#properties-readonly" class="icon_anchor">#</a>
+          </h4>
+
+          <div class="collapsible">
+            <p>The following properties are read only and may not be used as configuration properties</p>
+            <dl class="doc_list">
+              <div id="property-element" class="list_item">
+                <dt><code>element</code></dt>
+                <dd class="doc_item description">The HTML element (see <a href="#structure">HTML structure</a>) of the final slider instance after initialization</dd>
+                <dd class="doc_item info_item state"><span class="nodisplay">├ </span><strong>READ ONLY</strong></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>type: <code>HTML element</code></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">└ </span>default: <code>undefined</code></dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+
+        <div class="list_container" id="properties-internal">
+          <h4>Internal
+            <button class="expand_button active">
+              <div class="symbols">
+                <span class="symbol plus">+</span>
+                <span class="symbol minus">-</span>
+              </div>
+            </button>
+            <a href="#properties-internal" class="icon_anchor">#</a>
+          </h4>
+
+          <div class="collapsible collapsed">
+            <p>Below listed are properties which are internal to the framework and serve no purpose for the user but maybe you want to hack the framework idk but feel free to</p>
+            <dl class="doc_list">
+              <div id="property-taskLock" class="list_item">
+                <dt><code>taskLock</code></dt>
+                <dd class="doc_item description">While dragging the slider, if the previous and new value are equal to each other, the specified <code><a href="#property-task">task</a></code> is executed once and <code>taskLock</code> is set to true, which prevents further executions of <code>task</code> if the value has still not changed. If the value has changed again, <code>taskLock</code> is set to false</dd>
+                <dd class="doc_item info_item state"><span class="nodisplay">├ </span><strong>INTERNAL</strong></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>type: <code>boolean</code></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>influences: <code><a href="#function-executeSlider">executeSlider</a></code></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">└ </span>default: <code>false</code></dd>
+              </div>
+
+              <div id="property-tipTimer" class="list_item">
+                <dt><code>tipTimer</code></dt>
+                <dd class="doc_item description">The current <code>timeout</code> instance used for the value-tooltip which is terminated when the slider is dragged anew while a previous timeout instance was still running</dd>
+                <dd class="doc_item info_item state"><span class="nodisplay">├ </span><strong>INTERNAL</strong></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>type: <code>timeout</code></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>influences: <code><a href="#function-executeSlider">executeSlider</a></code></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">└ </span>default: <code>undefined</code></dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+
+        <hr>
+
+        <h3 id="functions">
+          <a href="#functions" class="icon_anchor">#</a>Methods (functions)
+        </h3>
+
+        <div class="list_container" id="functions-constructor">
+          <h4>Constructor
+            <button class="expand_button">
+              <div class="symbols">
+                <span class="symbol plus">+</span>
+                <span class="symbol minus">-</span>
+              </div>
+            </button>
+            <a href="#functions-constructor" class="icon_anchor">#</a>
+          </h4>
+          <div class="collapsible">
+            <dl class="doc_list">
+              <div id="function-Slider89" class="list_item">
+                <dt><code>Slider89(targetNode, [&lt;configProperties&gt;])</code></dt>
+                <dd class="doc_item description">
+                  The slider object constructor; initialize a slider instance by using the <code>new</code> keyword in front of it and binding it to a variable.<br>
+                  Example:
+                  <div class="codeblock"><code>var myInstance = new Slider89(someElement);</code></div>
+                  or:
+                  <pre class="codeblock"><code>var myInstance = new Slider89(someElement, {
+  configProperty1: configPropertyValue1,
+  configProperty2: configPropertyValue2
+});</code></pre>
+                </dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>influences: <code><a href="#property-replaceNode">replaceNode</a></code></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>targetNode = HTML element the instance will be created in</dd>
+                <dd class="doc_item info_item"><span class="nodisplay">└ </span>configProperties = <a href="#properties-config">configuration properties</a></dd>
+              </div>
+            </div>
+          </div>
+
+          <div class="list_container" id="functions-instance">
+            <h4>Instance functions
+              <button class="expand_button">
+                <div class="symbols">
+                  <span class="symbol plus">+</span>
+                  <span class="symbol minus">-</span>
+                </div>
+              </button>
+              <a href="#functions-instance" class="icon_anchor">#</a>
+            </h4>
+            <div class="collapsible">
+              <p>Functions under this category are called on a slider instance</p>
+              <dl class="doc_list">
+                <div id="function-newValues" class="list_item">
+                  <dt><code>&lt;sliderInstance&gt;.newValues(&lt;configProperties&gt;)</code></dt>
+                  <dd class="doc_item description">
+                    This function takes configuration properties and restructures the slider based on its new properties.<br>
+                    Although properties <strong>could</strong> be overriden using <code>&lt;sliderInstance&gt;.&lt;configProperty&gt; = &lt;newValue&gt;</code>, this function ensures every dependent and dependency is restructured as well.<br>
+                    Examples: it writes a new caption into the element; it sets a new width of the element; etc.<br>
+                    Additionally, if <code>min</code> or <code>max</code> is changed, the value recomputes itself based on the previous min-max-ratio
+                  </dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">└ </span>sliderInstance = An instance of a slider constructed via the <code><a href="#function-Slider89">Slider89</a></code> constructor</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+
+          <div class="list_container" id="functions-object">
+            <h4>
+              <span>The <code>slider89</code> object</span>
+              <button class="expand_button">
+                <div class="symbols">
+                  <span class="symbol plus">+</span>
+                  <span class="symbol minus">-</span>
+                </div>
+              </button>
+              <a href="#functions-object" class="icon_anchor">#</a>
+            </h4>
+            <div class="collapsible">
+              <p>'<code>slider89</code>' (take notice that it's a lowercase "s"!) is a standalone object used for functions which are called without a reference to a slider instance</p>
+              <dl class="doc_list">
+                <div id="function-defaultValues" class="list_item">
+                  <dt><code>slider89.defaultValues(&lt;configProperties&gt;)</code></dt>
+                  <dd class="doc_item description">Called before a slider is created, it sets default values for every instance to apply</dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">└ </span>slider89 = standalone object</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+
+          <div class="list_container" id="functions-internal">
+            <h4>Internal
+              <button class="expand_button active">
+                <div class="symbols">
+                  <span class="symbol plus">+</span>
+                  <span class="symbol minus">-</span>
+                </div>
+              </button>
+              <a href="#functions-internal" class="icon_anchor">#</a>
+            </h4>
+            <div class="collapsible collapsed">
+              <p>As with the <a href="#properties-internal">internal properties</a>, these values serve no purpose for the user but are listed here to give the user (and hacker) full transparency</p>
+              <dl class="doc_list">
+                <div id="function-buildElement" class="list_item">
+                  <dt><code>&lt;sliderInstance&gt;.buildElement(targetNode, <a href="#property-replaceNode">replaceNode</a>)</code><br>-> <code>HTML element</code></dt>
+                  <dd class="doc_item description">
+                    Builds the slider's <a href="#structure">HTML structure</a> into the specified <code>targetNode</code>, adding additional classes from the <code><a href="#property-classList">classList</a></code> property, if present. If <code><a href="#property-replaceNode">replaceNode</a></code> is true, it replaces <code>targetNode</code>.<br>
+                    The function returns the created element to be written into a variable (-> <code><a href="#property-element">element</a></code>)
+                  </dd>
+                  <dd class="doc_item info_item state"><span class="nodisplay">├ </span><strong>INTERNAL</strong></dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">├ </span>influences: <code><a href="#property-replaceNode">replaceNode</a></code>, <code><a href="#property-classList">classList</a></code></dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">└ </span>influencing: <code><a href="#structure">HTML structure</a></code></dd>
+                </div>
+
+                <div id="function-executeSlider" class="list_item">
+                  <dt><code>&lt;sliderInstance&gt;.executeSlider(clickedCoordinate)</code></dt>
+                  <dd class="doc_item description">
+                    This function is executed every time the <code>mousemove</code> event, and more specifically, the <code><a href="#function-mouseMove">mouseMove</a></code> function is fired and handles the value, its tooltip and the specified <code><a href="#property-task">task</a></code> function
+                  </dd>
+                  <dd class="doc_item info_item state"><span class="nodisplay">├ </span><strong>INTERNAL</strong></dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">├ </span>clickedCoordinate = an <code>int</code> representing a screen-related x-coordinate where the mouse has been clicked</dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">├ </span>influences: <code><a href="#property-element">element</a></code>, <code><a href="#property-task">task</a></code></dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">└ </span>influencing: <code><a href="#property-value">value</a></code>, <code><a href="#property-tipTimer">tipTimer</a></code>, <code><a href="#property-taskLock">taskLock</a></code></dd>
+                </div>
+
+                <div id="function-setTask" class="list_item">
+                  <dt><code>&lt;sliderInstance&gt;.setTask(objectTarget, task)</code></dt>
+                  <dd class="doc_item description">
+                    A function evaluation whether an input <code><a href="#property-task">task</a></code>, which is also handed over into this function, is valid. If it is, write it into the specified <code>objectTarget</code><br>
+                    If the task is no valid function, for example declared <em>with</em> parenthesis, throw an error into the console
+                  </dd>
+                  <dd class="doc_item info_item state"><span class="nodisplay">├ </span><strong>INTERNAL</strong></dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">├ </span>objectTarget = The object to write into; either the slider instance (<a href="#functions-constructor">constructor</a>) or the <code><a href="#functions-object">slider89</a></code> object</dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">└ </span>influencing: <code><a href="#property-task">task</a></code></dd>
+                </div>
+
+                <div id="function-computeWidth" class="list_item">
+                  <dt><code>&lt;sliderInstance&gt;.computeWidth(valueObject)</code><br>-> <code>int</code></dt>
+                  <dd class="doc_item description">
+                    If the <code>valueObject</code>'s <code><a href="#property-width">width</a></code> is <code>'auto'</code>, compute the width automatically based on <code><a href="#property-min">min</a></code> and <code><a href="#property-max">max</a></code>, if it isn't, set the valueObject's width to its own width but take <code><a href="#property-absWidth">absWidth</a></code> into account
+                  </dd>
+                  <dd class="doc_item info_item state"><span class="nodisplay">├ </span><strong>INTERNAL</strong></dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">├ </span>valueObject = an object preferably carrying values for <code><a href="#property-width">width</a></code>, <code><a href="#property-min">min</a></code>, <code><a href="#property-max">max</a></code> and <code><a href="#property-absWidth">absWidth</a></code></dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">├ </span>influences: <code><a href="#property-min">min</a></code>, <code><a href="#property-max">max</a></code>, <code><a href="#property-absWidth">absWidth</a></code></dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">└ </span>influencing: <code><a href="#property-width">width</a></code></dd>
+                </div>
+
+                <div id="function-mouseMove" class="list_item">
+                  <dt><code>&lt;sliderInstance&gt;.mouseMove(event)</code></dt>
+                  <dd class="doc_item description">
+                    Is executed by the mousemove event, being its own function for the ability to remove the event listener afterwards, and executing <code><a href="#function-executeSlider">executeSlider</a></code>, parsing event.x
+                  </dd>
+                  <dd class="doc_item info_item state"><span class="nodisplay">├ </span><strong>INTERNAL</strong></dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">├ </span>event = The event parameter handed over by the event listener</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+
+        <hr>
+
+        <h3 id="structure">
+          <a href="#structure" class="icon_anchor">#</a>HTML structure
+        </h3>
+        <pre class="codeblock"><code>&lt;div class="slider89 [{<a href="#property-classList">additional classes</a>}]"&gt;
+  &lt;div class="slider" style="width: {<a href="#property-width">width</a>}px"&gt;
+    &lt;span class="slider_knob" style="transform: translateX({<a href="#property-value">value</a>}px)"&gt;&lt;/span&gt;
+    &lt;span class="slider_tooltip right hidden noselect"&gt;{value}&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;span class="slider_header"&gt;{<a href="#property-caption">caption</a>}&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+      </section>
+    </main>
+
+    <link rel="stylesheet" href="https://hallo89.github.io/Slider89/slider89.css"> 
+    <script src="https://hallo89.github.io/Slider89/slider89.js"></script>
+    <script>
+      new Slider89(document.getElementById('demo_plain'));
+      new Slider89(document.getElementById('demo_1_plain'));
+      new Slider89(document.getElementById('demo_2_configged'), {min: -50, max: 175, value: 80});
+
+      const h4s = document.querySelectorAll('h4');
+
+      for (var i = 0; i < h4s.length; i++) {
+        h4s[i].addEventListener('click', toggleCollapsible);
+      }
+
+      function toggleCollapsible(e) {
+        if (e.target.classList.contains('icon_anchor')) return;
+        this.children[this.children.length - 2].classList.toggle('active');
+        this.nextElementSibling.classList.toggle('collapsed');
+      }
+    </script>
+  </body>
+</html>
