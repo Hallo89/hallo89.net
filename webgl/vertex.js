@@ -6,7 +6,7 @@ in vec3 color;
 
 out vec4 fragColor;
 
-uniform mat4 matrixOrtho;
+uniform mat4 matrixPerspective;
 uniform mat4 matrixTranslate;
 uniform mat4 matrixRotateX;
 uniform mat4 matrixRotateY;
@@ -15,7 +15,7 @@ uniform mat4 matrixScale;
 
 void main() {
     fragColor = vec4(color, 1);
-    mat4 finalMatrix = matrixOrtho * matrixTranslate * matrixRotateX * matrixRotateY * matrixRotateZ * matrixScale;
+    mat4 finalMatrix = matrixPerspective * matrixTranslate * matrixRotateX * matrixRotateY * matrixRotateZ * matrixScale;
 
     gl_Position = finalMatrix * position;
 }

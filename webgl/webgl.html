@@ -4,83 +4,9 @@
     <meta charset="utf-8">
     <title>Matrices & 3D - WebGL experiments | Hallo89</title>
     <link rel="stylesheet" type="text/css" href="base.css">
-    <style>
-      .input_box.slider.rotate .input.slider {
-        width: 160px;
-      }
-      .input_box.slider.translate .input.slider {
-        width: 130px;
-      }
-      .input_box.slider.scale .input.slider {
-        width: 150px;
-      }
-    </style>
   </head>
   <body>
     <div class="inputs">
-      <div class="input_box rotateX rotate slider">
-        <div class="input slider" data-max-value="360" data-function="cubedraw" data-value="0">
-          <span class="slider_knob"></span>
-          <span class="slider_tooltip right hidden noselect">0</span>
-        </div>
-        <span class="input_header">Rotate: X-axis</span>
-      </div>
-      <div class="input_box rotateY rotate slider">
-        <div class="input slider" data-max-value="360" data-function="cubedraw" data-value="0">
-          <span class="slider_knob"></span>
-          <span class="slider_tooltip right hidden noselect"></span>
-        </div>
-        <span class="input_header">Rotate: Y-axis</span>
-      </div>
-      <div class="input_box rotateZ rotate slider">
-        <div class="input slider" data-max-value="360" data-function="cubedraw" data-value="0">
-          <span class="slider_knob"></span>
-          <span class="slider_tooltip right hidden noselect"></span>
-        </div>
-        <span class="input_header">Rotate: Z-axis</span>
-      </div>
-      <div class="input_box translateX translate slider">
-        <div class="input slider" data-max-value="1000" data-min-value="-1000" data-function="cubedraw" data-value="0">
-          <span class="slider_knob"></span>
-          <span class="slider_tooltip right hidden noselect"></span>
-        </div>
-        <span class="input_header">Translate: X-axis</span>
-      </div>
-      <div class="input_box translateY translate slider">
-        <div class="input slider" data-max-value="800" data-min-value="-800" data-function="cubedraw" data-value="0">
-          <span class="slider_knob"></span>
-          <span class="slider_tooltip right hidden noselect"></span>
-        </div>
-        <span class="input_header">Translate: Y-axis</span>
-      </div>
-      <div class="input_box translateZ translate slider">
-        <div class="input slider" data-max-value="1000" data-min-value="-1000" data-function="cubedraw" data-value="0">
-          <span class="slider_knob"></span>
-          <span class="slider_tooltip right hidden noselect"></span>
-        </div>
-        <span class="input_header">Translate: Z-axis</span>
-      </div>
-      <div class="input_box scaleX scale slider">
-        <div class="input slider" data-max-value="5" data-min-value="-5" data-function="cubedraw" data-comma="2" data-value="1">
-          <span class="slider_knob"></span>
-          <span class="slider_tooltip right hidden noselect"></span>
-        </div>
-        <span class="input_header">Scale: X-axis</span>
-      </div>
-      <div class="input_box scaleY scale slider">
-        <div class="input slider" data-max-value="5" data-min-value="-5" data-function="cubedraw" data-comma="2" data-value="1">
-          <span class="slider_knob"></span>
-          <span class="slider_tooltip right hidden noselect"></span>
-        </div>
-        <span class="input_header">Scale: Y-axis</span>
-      </div>
-      <div class="input_box scaleZ scale slider" >
-        <div class="input slider" data-max-value="5" data-min-value="-5" data-function="cubedraw" data-comma="2" data-value="1">
-          <span class="slider_knob"></span>
-          <span class="slider_tooltip right hidden noselect"></span>
-        </div>
-        <span class="input_header">Scale: Z-axis</span>
-      </div>
       <a href="../index.html" class="mainref">Hallo89</a>
     </div>
 
@@ -88,6 +14,11 @@
       <canvas width="800" height="800"></canvas>
     </div>
 
+    <script>
+      const preserveBuffer = false;
+    </script>
+    <link rel="stylesheet" href="https://hallo89.github.io/Slider89/slider89.css">
+    <script src="https://hallo89.github.io/Slider89/slider89.js"></script>
     <script src="base.js"></script>
     <script src="fragment.js"></script>
     <script src="vertex.js"></script>

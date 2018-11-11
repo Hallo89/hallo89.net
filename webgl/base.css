@@ -24,8 +24,9 @@ button::-moz-focus-inner {
   width: 100%;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   background-color: hsl(0, 0%, 10%);
-  padding: 10px 12px;
+  padding: 0 12px 10px;
   box-sizing: border-box;
   z-index: 2;
   transform: translateY(-100%);
@@ -48,7 +49,7 @@ button::-moz-focus-inner {
   z-index: -1; /* Temporary solution until grdidgridigigrid */
 }
 .input_box {
-  margin: 0 8px;
+  margin: 10px 8px 0;
 }
 .input_wrapper {
   display: flex;
@@ -126,38 +127,15 @@ button::-moz-focus-inner {
   left: 6px;
   bottom: 10.5px;
 }
-.input_box.slider .slider {
-  position: relative;
-  padding: 0;
-}
-.input_box.slider .slider_knob {
-  position: absolute;
-  cursor: pointer;
-  left: 0;
-  height: 25px;
-  width: 14px;
-  background-color: hsl(0, 0%, 27%);
-  z-index: 1;
-}
-.input_box.slider .slider_tooltip {
-  position: absolute;
+.input_box.button .input {
+  height: 100%;
   display: flex;
   align-items: center;
-  padding: 1px 3px 0;
-  color: hsl(0, 0%, 45%);
-  height: 100%;
-  cursor: default;
-  opacity: 1;
-  transition: .2s ease-out;
+  padding: 8px;
+  cursor: pointer;
 }
-.input_box.slider .slider_tooltip.left {
-  left: 0;
-}
-.input_box.slider .slider_tooltip.right {
-  right: 0;
-}
-.input_box.slider .slider_tooltip.hidden {
-  opacity: 0;
+.input_box.button.ref .input {
+  text-decoration: none;
 }
 .input.number {
   -moz-appearance: textfield;

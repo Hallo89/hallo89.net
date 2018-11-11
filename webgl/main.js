@@ -1,12 +1,68 @@
-const inputRotateX = document.querySelector('.input_box.slider.rotateX .input');
-const inputRotateY = document.querySelector('.input_box.slider.rotateY .input');
-const inputRotateZ = document.querySelector('.input_box.slider.rotateZ .input');
-const inputTranslateX = document.querySelector('.input_box.slider.translateX .input');
-const inputTranslateY = document.querySelector('.input_box.slider.translateY .input');
-const inputTranslateZ = document.querySelector('.input_box.slider.translateZ .input');
-const inputScaleX = document.querySelector('.input_box.slider.scaleX .input');
-const inputScaleY = document.querySelector('.input_box.slider.scaleY .input');
-const inputScaleZ = document.querySelector('.input_box.slider.scaleZ .input');
+slider89.defaultValues({
+  task: draw,
+  classList: ['input_box'],
+});
+slider89.defaultValues({
+  max: 360,
+  width: 180,
+});
+var sliderRotateX = new Slider89(inputs, {
+  caption: 'Rotate: X-axis'
+});
+var sliderRotateY = new Slider89(inputs, {
+  caption: 'Rotate: Y-axis'
+});
+var sliderRotateZ = new Slider89(inputs, {
+  caption: 'Rotate: Z-axis'
+});
+
+slider89.defaultValues({
+  max: 1000,
+  min: -1000,
+  value: 0,
+  width: 120,
+});
+var sliderTranslateX = new Slider89(inputs, {
+  caption: 'Translate: X-axis'
+});
+var sliderTranslateY = new Slider89(inputs, {
+  caption: 'Translate: Y-axis'
+});
+var sliderTranslateZ = new Slider89(inputs, {
+  min: -2000,
+  max: 0,
+  value: -1000,
+  caption: 'Translate: Z-axis'
+});
+
+slider89.defaultValues({
+  max: 5,
+  min: -5,
+  comma: 2,
+  value: 1,
+  width: 150,
+  trimComma: false,
+});
+var sliderScaleX = new Slider89(inputs, {
+  caption: 'Scale: X-axis'
+});
+var sliderScaleY = new Slider89(inputs, {
+  caption: 'Scale: Y-axis'
+});
+var sliderScaleZ = new Slider89(inputs, {
+  value: -1,
+  caption: 'Scale: Z-axis'
+});
+
+var sliderFov = new Slider89(inputs, {
+  min: 0,
+  value: 90,
+  comma: 0,
+  trimComma: true,
+  max: 360,
+  width: 180,
+  caption: 'Field of view'
+});
 
 
 //making the inner webgl pixel canvas size the size it is displayed as
@@ -25,7 +81,7 @@ var program = createProgram();
 var locationPosition = gl.getAttribLocation(program, 'position');
 var locationColor = gl.getAttribLocation(program, 'color');
 
-var matrixOrthoPosition = gl.getUniformLocation(program, 'matrixOrtho');
+var matrixPerspectivePosition = gl.getUniformLocation(program, 'matrixPerspective');
 var matrixTranslatePosition = gl.getUniformLocation(program, 'matrixTranslate');
 var matrixRotateXPosition = gl.getUniformLocation(program, 'matrixRotateX');
 var matrixRotateYPosition = gl.getUniformLocation(program, 'matrixRotateY');
@@ -46,47 +102,47 @@ gl.bindBuffer(gl.ARRAY_BUFFER, bufferPosition);
 
 var positions = new Float32Array([
   //back
-  0, 0, 250,
-  300, 400, 250,
-  0, 400, 250,
-  0, 0, 250,
-  300, 0, 250,
-  300, 400, 250,
+  0, 0, -250,
+  -300, -400, -250,
+  0, -400, -250,
+  0, 0, -250,
+  -300, 0, -250,
+  -300, -400, -250,
   //left
   0, 0, 0,
-  0, 0, 250,
-  0, 400, 0,
-  0, 0, 250,
-  0, 400, 250,
-  0, 400, 0,
+  0, 0, -250,
+  0, -400, 0,
+  0, 0, -250,
+  0, -400, -250,
+  0, -400, 0,
   //bottom
-  0, 400, 0,
-  0, 400, 250,
-  300, 400, 0,
-  300, 400, 0,
-  0, 400, 250,
-  300, 400, 250,
+  0, -400, 0,
+  0, -400, -250,
+  -300, -400, 0,
+  -300, -400, 0,
+  0, -400, -250,
+  -300, -400, -250,
   //right
-  300, 0, 0,
-  300, 400, 0,
-  300, 0, 250,
-  300, 400, 0,
-  300, 400, 250,
-  300, 0, 250,
+  -300, 0, 0,
+  -300, -400, 0,
+  -300, 0, -250,
+  -300, -400, 0,
+  -300, -400, -250,
+  -300, 0, -250,
   //top
   0, 0, 0,
-  300, 0, 0,
-  300, 0, 250,
+  -300, 0, 0,
+  -300, 0, -250,
   0, 0, 0,
-  300, 0, 250,
-  0, 0, 250,
+  -300, 0, -250,
+  0, 0, -250,
   //front
   0, 0, 0,
-  0, 400, 0,
-  300, 400, 0,
+  0, -400, 0,
+  -300, -400, 0,
   0, 0, 0,
-  300, 400, 0,
-  300, 0, 0
+  -300, -400, 0,
+  -300, 0, 0
 ]);
 //Writing data into that buffer
 gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);
@@ -149,48 +205,66 @@ gl.enable(gl.CULL_FACE);
 
 draw();
 function draw() {
-  /* 2 / (right - left), 0, 0, 0,
+/*
+  2 / (right - left), 0, 0, 0,
   0, 2 / (top - bottom), 0, 0,
   0, 0, 2 / (near - far), 0,
 
   (left + right) / (left - right),
   (bottom + top) / (bottom - top),
   (near + far) / (near - far),
-  1, */
-  gl.uniformMatrix4fv(matrixOrthoPosition, false, [
+  1,
+*//*
+    gl.uniformMatrix4fv(matrixOrthoPosition, false, [
     2 / (canvas.width - 0), 0, 0, 0,
     0, 2 / (0 - canvas.height), 0, 0,
     0, 0, 2 / (-1000 - 1000), 0,
     (-canvas.width/2 + canvas.width)/(-canvas.width/2 - canvas.width), (canvas.height + -canvas.height/2)/(canvas.height - -canvas.height/2), (-1000 + 1000)/(-1000 - 1000), 1
   ]);
+*/
+/*
+  f = Math.tan(Math.PI * 0.5 - 0.5 * fieldOfViewInRadians);
+  rangeInv = 1.0 / (near - far);
+
+  f / aspect, 0, 0, 0,
+  0, f, 0, 0,
+  0, 0, (near + far) * rangeInv, -1,
+  0, 0, near * far * rangeInv * 2, 0
+*/
+  gl.uniformMatrix4fv(matrixPerspectivePosition, false, [
+    Math.tan(Math.PI * 0.5 - 0.5 * (sliderFov.value * Math.PI / 180)) * canvas.height / canvas.width, 0, 0, 0,
+    0, Math.tan(Math.PI * 0.5 - 0.5 * (sliderFov.value * Math.PI / 180)), 0, 0,
+    0, 0, (1 + 2000) * (1.0 / (1 - 2000)), -1,
+    0, 0, (1 * 2000) * (1.0 / (1 - 2000)) * 2, 0
+  ]);
   gl.uniformMatrix4fv(matrixTranslatePosition, false, [
     1, 0, 0, 0,
     0, 1, 0, 0,
     0, 0, 1, 0,
-    inputTranslateX.dataset.value, inputTranslateY.dataset.value, inputTranslateZ.dataset.value, 1
+    sliderTranslateX.value, sliderTranslateY.value, sliderTranslateZ.value, 1
   ]);
   gl.uniformMatrix4fv(matrixRotateXPosition, false, [
     1, 0, 0, 0,
-    0, Math.cos(inputRotateX.dataset.value * Math.PI / 180), -Math.sin(inputRotateX.dataset.value * Math.PI / 180), 0,
-    0, Math.sin(inputRotateX.dataset.value * Math.PI / 180), Math.cos(inputRotateX.dataset.value * Math.PI / 180), 0,
+    0, Math.cos(sliderRotateX.value * Math.PI / 180), -Math.sin(sliderRotateX.value * Math.PI / 180), 0,
+    0, Math.sin(sliderRotateX.value * Math.PI / 180), Math.cos(sliderRotateX.value * Math.PI / 180), 0,
     0, 0, 0, 1
   ]);
   gl.uniformMatrix4fv(matrixRotateYPosition, false, [
-    Math.cos(inputRotateY.dataset.value * Math.PI / 180), 0, Math.sin(inputRotateY.dataset.value * Math.PI / 180), 0,
+    Math.cos(sliderRotateY.value * Math.PI / 180), 0, Math.sin(sliderRotateY.value * Math.PI / 180), 0,
     0, 1, 0, 0,
-    -Math.sin(inputRotateY.dataset.value * Math.PI / 180), 0, Math.cos(inputRotateY.dataset.value * Math.PI / 180), 0,
+    -Math.sin(sliderRotateY.value * Math.PI / 180), 0, Math.cos(sliderRotateY.value * Math.PI / 180), 0,
     0, 0, 0, 1
   ]);
   gl.uniformMatrix4fv(matrixRotateZPosition, false, [
-    Math.cos(inputRotateZ.dataset.value * Math.PI / 180), -Math.sin(inputRotateZ.dataset.value * Math.PI / 180), 0, 0,
-    Math.sin(inputRotateZ.dataset.value * Math.PI / 180), Math.cos(inputRotateZ.dataset.value * Math.PI / 180), 0, 0,
+    Math.cos(sliderRotateZ.value * Math.PI / 180), -Math.sin(sliderRotateZ.value * Math.PI / 180), 0, 0,
+    Math.sin(sliderRotateZ.value * Math.PI / 180), Math.cos(sliderRotateZ.value * Math.PI / 180), 0, 0,
     0, 0, 1, 0,
     0, 0, 0, 1
   ]);
   gl.uniformMatrix4fv(matrixScalePosition, false, [
-    inputScaleX.dataset.value, 0, 0, 0,
-    0, inputScaleY.dataset.value, 0, 0,
-    0, 0, inputScaleZ.dataset.value, 0,
+    sliderScaleX.value, 0, 0, 0,
+    0, sliderScaleY.value, 0, 0,
+    0, 0, sliderScaleZ.value, 0,
     0, 0, 0, 1
   ]);
   //primitiveType, offsetExecute, count
