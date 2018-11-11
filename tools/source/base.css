@@ -168,6 +168,7 @@ body.fullscreen #wrapper {
   align-content: flex-start;
   justify-content: center;
   flex-wrap: wrap;
+  word-wrap: break-word;
 }
 .text_content {
   display: block;

@@ -159,12 +159,12 @@ var codeArea = CodeMirror(containerCode, {
   mode: 'application/json',
   theme: 'neoncube-json',
   lineWrapping: true,
-  undoDepth: 100,
+  undoDepth: 120,
   lineNumbers: true,
   scrollbarStyle: 'overlay',
   indentUnit: 4
 });
-//On change, run a construct that only calls buildJSON if the user has stopped to mofidy the code for 850ms
+//On change, run a construct that only calls buildJSON if the user has stopped to modify the code for 850ms
 codeArea.on('change', function() {
   if (initialLock == true) {
     return;
