@@ -5,7 +5,7 @@
     <title>Triangles - WebGL experiments | Hallo89</title>
     <style>
       .input_box.colors {
-        margin: 0 5px;
+        margin: 10px 5px 0;
       }
 
       .input_box.rgb .number_wrapper:nth-child(2) {
@@ -87,24 +87,6 @@
       @keyframes preventHidden {
         from { visibility: visible; }
         to   { visibility: visible; }
-      }
-
-      .input_box.run .input.generate {
-        height: 100%;
-        display: flex;
-        align-items: center;
-        padding: 8px;
-      }
-
-      .input_box.lightnessstart .input {
-        width: 114px;
-      }
-      .input_box.lightnessstart .input .slider_knob {
-        transform: translateX(10px);
-      }
-
-      .input_box.lightnessthreshold .input {
-        width: 164px;
       }
 
       .inputs_expander {
@@ -212,7 +194,7 @@
         <span class="input_header">Color value in R, G, B</span>
       </div>
       <div class="input_box colors hex">
-        <input type="text" value="#17469E" class="input text" minlength="4" maxlength="7" size="7" pattern="[#][A-Fa-f0-9]{3}|[#][A-Fa-f0-9]{6}">
+        <input type="text" value="#17469E" class="input text" minlength="4" maxlength="7" size="7" pattern="#[\dA-Fa-f]{3}|#[\dA-Fa-f]{6}">
         <span class="input_header">Color in HEX</span>
       </div>
       <div class="input_box dimensions">
@@ -248,8 +230,8 @@
           <span class="input_header">Height</span>
         </div>
       </div>
-      <div class="input_box run">
-        <button class="input generate" onclick="generate();">Regenerate</button>
+      <div class="input_box button">
+        <button class="input" onclick="generate();">Regenerate</button>
       </div>
       <div class="input_box lines checker">
         <div class="input checker" onclick="enableLines();">
@@ -260,19 +242,10 @@
         </div>
         <span class="input_header">line mode</span>
       </div>
-      <div class="input_box lightnessstart slider">
-        <div class="input slider" data-comma="1" data-function="triangledraw">
-          <span class="slider_knob"></span>
-          <span class="slider_tooltip right hidden noselect">10</span>
-        </div>
-        <span class="input_header">lightness start</span>
-      </div>
-      <div class="input_box lightnessthreshold slider">
-        <div class="input slider" data-comma="3" data-function="triangledraw">
-          <span class="slider_knob"></span>
-          <span class="slider_tooltip right hidden noselect"></span>
-        </div>
-        <span class="input_header">lightness threshold</span>
+      <div id="slider_lightness"></div>
+      <div id="slider_threshold"></div>
+      <div class="input_box button ref download_canvas">
+        <a class="input" download="triangles.png" onclick="downloadCanvas()">Download image</a>
       </div>
       <a href="../index.html" class="mainref">Hallo89</a>
     </div>
@@ -286,20 +259,21 @@
     </div>
     <canvas width="800" height="800"></canvas>
 
+    <link rel="stylesheet" href="https://hallo89.github.io/Slider89/slider89.css">
     <script>
+      const preserveBuffer = true;
+
       const inputsRGB = document.querySelectorAll('.input_box.rgb .input');
       const inputColor = document.querySelector('.input_box.colorpicker .input');
       const inputHEX = document.querySelector('.input_box.hex .input');
 
-      const inputLightness = document.querySelector('.input_box.lightnessstart .input');
-      const inputThreshold = document.querySelector('.input_box.lightnessthreshold .input');
+      const inputDownload = document.querySelector('.input_box.download_canvas .input');
 
       //for triangles.js
       const inputSize = document.querySelector('.box_wrapper.size .input');
       const inputWidth = document.querySelector('.box_wrapper.width .input');
       const inputHeight = document.querySelector('.box_wrapper.height .input');
 
-      const inputs = document.querySelector('.inputs');
       const expander = document.querySelector('.inputs_expander');
 
       inputColor.addEventListener('change', pickerChange);
@@ -311,6 +285,10 @@
       function enableLines() {
         document.body.classList.toggle('linemode');
         generate();
+      }
+
+      function downloadCanvas() {
+        inputDownload.href = canvas.toDataURL();
       }
 
       function decoupleSize() {
@@ -390,6 +368,7 @@
         return '#' + fillR + (r).toString(16) + fillG + (g).toString(16) + fillB + (b).toString(16);
       }
     </script>
+    <script src="https://hallo89.github.io/Slider89/slider89.js"></script>
     <script src="base.js"></script>
     <script src="boiler.js"></script>
     <script src="triangles.js"></script>

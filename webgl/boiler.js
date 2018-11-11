@@ -6,8 +6,17 @@
 
 const canvas = document.querySelector('canvas'); //The body of this, being the thing I work with
 
-const gl = canvas.getContext('webgl2'); //The absolute legend being the heart of everything (literally everything)
-if (!gl) console.error('It seems like WebGL2 is not supported');
+//The absolute legend being the heart of everything (literally everything)
+var gl;
+if (preserveBuffer) {
+  gl = canvas.getContext('webgl2', {preserveDrawingBuffer: true});
+} else {
+  gl = canvas.getContext('webgl2');
+}
+if (!gl) {
+  console.error('It seems like WebGL2 is not supported');
+  document.body.innerHTML = 'It seems like WebGL2 is not supported';
+}
 
 
 //The function compiling either one of the shaders, where 'shaderSource' is obvious and shaderType is either FRAGMENT_SHADER or VERTEX_SHADER
@@ -18,8 +27,7 @@ function compileShader(source, type) {
   gl.shaderSource(shader, source);
   gl.compileShader(shader);
  //get the status. If not correct, throw an error
-  let success = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
-  if (!success) {
+  if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
     console.error('Error: could not compile shader: ' + gl.getShaderInfoLog(shader));
   }
  //return the now compiled shader, which is only either one
@@ -36,9 +44,8 @@ function createProgram() {
  //linking the program. I don't know what this does. I think it links, as in merges, both just-attached shaders together into the final thing
   gl.linkProgram(program);
  //get the LINK_STATUS which is the status (mind = blown). If not correct, throw an error
-  var success = gl.getProgramParameter(program, gl.LINK_STATUS);
-  if (!success) {
-    console.error('Error: program failed to link: ' + gl.getProgramInfoLog (program));
+  if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+    console.error('Error: program failed to link: ' + gl.getProgramInfoLog(program));
   }
  //return the now finished (as in linked) program
   return program;

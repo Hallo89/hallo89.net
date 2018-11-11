@@ -1,13 +1,3 @@
-//Content input by the user
-var colorRGB = {
-  'r': document.querySelector('.input.r').value,
-  'g': document.querySelector('.input.g').value,
-  'b': document.querySelector('.input.b').value
-}
-
-var triangleWidth;
-var triangleHeight;
-
 //The absolute legend being the code for the vertex shader which is the one computing the position and stuff for one object
 var vertexSource = `#version 300 es
 
@@ -34,6 +24,15 @@ void main() {
    fragOut = color;
 }
 `;
+
+var colorRGB = {
+  'r': document.querySelector('.input.r').value,
+  'g': document.querySelector('.input.g').value,
+  'b': document.querySelector('.input.b').value
+}
+
+var triangleWidth;
+var triangleHeight;
 
 var screenWidth = canvas.clientWidth;
 var screenHeight = canvas.clientHeight;
@@ -82,13 +81,27 @@ gl.useProgram(program);
 
 resizeCanvas();
 computeSizes();
-inputLightness.dataset.value = 10;
-inputLightness.dataset.maxValue = (amountX + amountY) * 3.2;
-inputThreshold.dataset.value = amountX + amountY;
-inputThreshold.dataset.maxValue = amountX + amountY;
-for (var i = 0; i < inputsSlider.length; i++) {
-  syncSlider(inputsSlider[i]);
-}
+
+slider89.defaultValues({
+  trimComma: false,
+  task: fixedDraw,
+  classList: ['input_box'],
+  replaceNode: true,
+});
+var sliderLightness = new Slider89(document.getElementById('slider_lightness'), {
+  value: 10,
+  max: (amountX + amountY) * 3.2,
+  comma: 1,
+  width: 120,
+  caption: 'Lightness start'
+});
+var sliderThreshold = new Slider89(document.getElementById('slider_threshold'), {
+  value: amountX + amountY,
+  max: amountX + amountY,
+  comma: 3,
+  width: 160,
+  caption: 'Lightness threshold'
+});
 
 generate();
 
@@ -98,6 +111,7 @@ function generate() {
     document.body.classList.add('size_warning');
   } else if (!document.body.classList.contains('size_warning') && amountX + amountY < 1200) {
     resizeCanvas();
+    clearCanvas();
     createBuffer();
     draw();
   } else if (document.body.classList.contains('size_warning') && amountX + amountY < 1200) {
@@ -105,6 +119,7 @@ function generate() {
     //The timeout is necessary due to the warning not properly hiding before the generation starts
     setTimeout(function () {
       resizeCanvas();
+      clearCanvas();
       createBuffer();
       draw();
     }, 20);
@@ -114,6 +129,8 @@ function generate() {
 function run() {
   //Resize the canvas to the dimensions of the screen and pass it to WebGL
   resizeCanvas();
+  //Wipe the canvas with a wet rag and paint it newly afterwards
+  clearCanvas();
   //Compute the final size of the triangles and how many it needs to generate
   computeSizes();
   //Build the array needed to draw and write it into the buffer
@@ -122,15 +139,9 @@ function run() {
   draw();
 }
 
-function clearColor() {
-  colorRGB = {
-    'r': document.querySelector('.input.r').value,
-    'g': document.querySelector('.input.g').value,
-    'b': document.querySelector('.input.b').value
-  }
-  //setting the canvas background color
-  gl.clearColor(colorRGB.r/255, colorRGB.g/255, colorRGB.b/255, 1);
-  gl.clear(gl.COLOR_BUFFER_BIT);
+function clearCanvas() {
+  //As the previous buffer does not get preserved, meaning overriden by a fresh one, we need to clear the buffer manually
+  gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 }
 
 function resizeCanvas() {
@@ -205,15 +216,16 @@ function draw() {
     'g': document.querySelector('.input.g').value,
     'b': document.querySelector('.input.b').value
   };
-  recomputeSlider(inputLightness, (amountX + amountY) * 3.2);
-  recomputeSlider(inputThreshold, amountX + amountY);
+  sliderLightness.newValues({max: (amountX + amountY) * 3.2});
+  sliderThreshold.newValues({max: amountX + amountY});
+
   fixedColors = new Float32Array(amountX*amountY*2);
   let iteration = 0;
   for (i = 0; i < amountY; i++) {
     for (u = 0; u < amountX; u++) {
       for (n = 0; n < 2; n++) {
         let randomMethod = (Math.random() + 0.25) * 2;
-        let lightness = randomMethod * (u + i + Number(inputLightness.dataset.value)) / Number(inputThreshold.dataset.value);
+        let lightness = randomMethod * (u + i + sliderLightness.value) / sliderThreshold.value;
         fixedColors[iteration] = randomMethod;
         gl.uniform4f(colorPosition,
           (colorRGB.r/255 * lightness).toFixed(2),
@@ -241,7 +253,7 @@ function fixedDraw(rgb) {
   for (i = 0; i < amountY; i++) {
     for (u = 0; u < amountX; u++) {
       for (n = 0; n < 2; n++) {
-        let lightness = fixedColors[iteration] * (u + i + Number(inputLightness.dataset.value)) / Number(inputThreshold.dataset.value);
+        let lightness = fixedColors[iteration] * (u + i + sliderLightness.value) / sliderThreshold.value;
         gl.uniform4f(colorPosition,
           (rgb.r/255 * lightness).toFixed(2),
           (rgb.g/255 * lightness).toFixed(2),
