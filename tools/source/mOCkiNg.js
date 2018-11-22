@@ -16,21 +16,40 @@ function mockingText() {
     output.innerHTML = '';
     return;
   }
-  let processValue = inputValue.replace(/\n/g, '');
   let outputValue = '';
-  for (let i = 0; i < processValue.length; i++) {
-    if (i > 1 && outputValue[i-1] == outputValue[i-1].toUpperCase() && outputValue[i-2] == outputValue[i-2].toUpperCase()) {
-      outputValue += processValue[i].toLowerCase();
-    } else if (i > 1 && outputValue[i-1] == outputValue[i-1].toLowerCase() && outputValue[i-2] == outputValue[i-2].toLowerCase()) {
-      outputValue += processValue[i].toUpperCase();
+  for (let i = 0; i < inputValue.length; i++) {
+    let ln1 = i-1;
+    let ln2 = i-2;
+    while (true) {
+      if (inputValue[ln1] == '\n') {
+        ln1--;
+        ln2--;
+      }
+      if (inputValue[ln2] == '\n') {
+        ln2--;
+      }
+      if (inputValue[ln1] != '\n' && inputValue[ln2] != '\n') {
+        break;
+      }
+    }
+    if (inputValue[i] != '\n') {
+      outputValue += mockify(inputValue, outputValue, i, ln1, ln2);
     } else {
-      outputValue += Math.round(Math.random()) == 1 ? processValue[i].toUpperCase() : processValue[i].toLowerCase();
+      outputValue += inputValue[i];
     }
   }
-  for (let i = 0; i < inputValue.match(/\n/g).length; i++) {
-    outputValue = outputValue.slice(0, inputValue.indexOf('\n') + 5*i) + '<br>' + outputValue.slice(inputValue.indexOf('\n') + 5*i);
-  }
+  outputValue = outputValue.replace(/\n/g, '<br>');
   output.innerHTML = outputValue;
+}
+
+function mockify(inputText, outputText, index1, index2, index3) {
+  if (outputText[index2] && outputText[index3] && outputText[index2] == outputText[index2].toUpperCase() && outputText[index3] == outputText[index3].toUpperCase()) {
+    return inputText[index1].toLowerCase();
+  } else if (outputText[index2] && outputText[index3] && outputText[index2] == outputText[index2].toLowerCase() && outputText[index3] == outputText[index3].toLowerCase()) {
+    return inputText[index1].toUpperCase();
+  } else {
+    return Math.round(Math.random()) == 1 ? inputText[index1].toUpperCase() : inputText[index1].toLowerCase();
+  }
 }
 
 function resizeInput() {
