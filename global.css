@@ -370,7 +370,7 @@ body.light-mode {
 .glb_box .corneranimation .corner_after {
   position: absolute;
   background-color: #0f0f0f;
-  transition: all 0.4s ease-out;
+  transition: all 0.4s ease-out, background .15s linear;
   z-index: 10;
   opacity: .65;
 }
@@ -424,7 +424,7 @@ body.light-mode {
 }
 .light-mode .glb_box .corneranimation .corner_before,
 .light-mode .glb_box .corneranimation .corner_after {
-  background-color: #8c8c8c;
+  background-color: #dedede;
 }
 .light-mode .glb_box .box_header {
   background-color: #f9f9f9;

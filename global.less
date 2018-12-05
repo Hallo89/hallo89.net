@@ -373,9 +373,10 @@ body.light-mode {
     .corner_before, .corner_after {
       position: absolute;
       background-color: @glb-box-corners;
-      transition: all .4s ease-out;
+      transition+: all .4s ease-out;
       z-index: 10;
       opacity: .65;
+      .mode-switch-transition.background;
     }
     .corner_before {
       height: 40px;
