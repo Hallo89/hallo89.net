@@ -78,13 +78,14 @@ button {
 #main_article a:not(.icon_anchor) {
   text-decoration: none;
   position: relative;
-  padding: 1px;
+  padding: 1px 1px 2px;
   color: #1398A9;
-  transition: background-color .08s, color .08s, border-bottom .08s;
+  transition: all .08s;
   border-bottom: 1px solid;
 }
 #main_article a:not(.icon_anchor):hover {
   border-bottom: 2px solid;
+  padding: 1px;
   /* #1398A9 in rgba */
   background-color: rgba(19, 152, 170, .19);
 }
@@ -104,25 +105,25 @@ button {
 }
 
 #main_article code a {
-  color: hsl(0, 0%, 73%);
+  color: hsl(0, 0%, 73%) !important;
   font-style: italic;
 }
 #main_article code a:hover {
-  background-color: hsla(0, 0%, 72%, .18);
+  background-color: hsla(0, 0%, 72%, .18) !important;
 }
 #main_article code a:visited {
-  color: hsl(0, 0%, 64%);
+  color: hsl(0, 0%, 64%) !important;
 }
 #main_article code a:hover:visited {
-  background-color: hsla(0, 0%, 60%, .18);
+  background-color: hsla(0, 0%, 60%, .18) !important;
 }
 /* Above color mixed with 180/255 60% lightness */
 #main_article code a:active {
-  color: #9D8282;
+  color: #9D8282 !important;
 }
 #main_article code a:hover:active {
   /* #9D8282 in rgba */
-  background-color: rgba(157, 130, 130, .18);
+  background-color: rgba(157, 130, 130, .18) !important;
 }
 
 #main_article code {

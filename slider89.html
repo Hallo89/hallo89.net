@@ -115,7 +115,6 @@
           These are the key to reading values from the slider and defining its properties.<br>
           Every property's value is accessed using <code>&lt;sliderInstance&gt;.&lt;property&gt;</code>
         </p>
-        </ul>
         <div class="list_container" id="properties-config">
           <h4>Configuration properties
             <button class="expand_button">
@@ -311,7 +310,7 @@
           <div class="collapsible">
             <dl class="doc_list">
               <div id="function-Slider89" class="list_item">
-                <dt><code>Slider89(targetNode, [&lt;configProperties&gt;])</code></dt>
+                <dt><code>Slider89(&lt;targetNode&gt;[, &lt;configProperties&gt;])</code></dt>
                 <dd class="doc_item description">
                   The slider object constructor; initialize a slider instance by using the <code>new</code> keyword in front of it and binding it to a variable.<br>
                   Example:
@@ -326,8 +325,9 @@
                 <dd class="doc_item info_item"><span class="nodisplay">├ </span>targetNode = HTML element the instance will be created in</dd>
                 <dd class="doc_item info_item"><span class="nodisplay">└ </span>configProperties = <a href="#properties-config">configuration properties</a></dd>
               </div>
-            </div>
+            </dl>
           </div>
+        </div>
 
           <div class="list_container" id="functions-instance">
             <h4>Instance functions
@@ -393,7 +393,7 @@
               <p>As with the <a href="#properties-internal">internal properties</a>, these values serve no purpose for the user but are listed here to give the user (and hacker) full transparency</p>
               <dl class="doc_list">
                 <div id="function-buildElement" class="list_item">
-                  <dt><code>&lt;sliderInstance&gt;.buildElement(targetNode, <a href="#property-replaceNode">replaceNode</a>)</code><br>-> <code>HTML element</code></dt>
+                  <dt><code>&lt;sliderInstance&gt;.buildElement(&lt;targetNode&gt;, replaceNode)</code><br>-> <code>HTML element</code></dt>
                   <dd class="doc_item description">
                     Builds the slider's <a href="#structure">HTML structure</a> into the specified <code>targetNode</code>, adding additional classes from the <code><a href="#property-classList">classList</a></code> property, if present. If <code><a href="#property-replaceNode">replaceNode</a></code> is true, it replaces <code>targetNode</code>.<br>
                     The function returns the created element to be written into a variable (-> <code><a href="#property-element">element</a></code>)
@@ -404,7 +404,7 @@
                 </div>
 
                 <div id="function-executeSlider" class="list_item">
-                  <dt><code>&lt;sliderInstance&gt;.executeSlider(clickedCoordinate)</code></dt>
+                  <dt><code>&lt;sliderInstance&gt;.executeSlider(&lt;clickedCoordinate&gt;)</code></dt>
                   <dd class="doc_item description">
                     This function is executed every time the <code>mousemove</code> event, and more specifically, the <code><a href="#function-mouseMove">mouseMove</a></code> function is fired and handles the value, its tooltip and the specified <code><a href="#property-task">task</a></code> function
                   </dd>
@@ -415,7 +415,7 @@
                 </div>
 
                 <div id="function-setTask" class="list_item">
-                  <dt><code>&lt;sliderInstance&gt;.setTask(objectTarget, task)</code></dt>
+                  <dt><code>&lt;sliderInstance&gt;.setTask(&lt;objectTarget&gt;, &lt;task&gt;)</code></dt>
                   <dd class="doc_item description">
                     A function evaluation whether an input <code><a href="#property-task">task</a></code>, which is also handed over into this function, is valid. If it is, write it into the specified <code>objectTarget</code><br>
                     If the task is no valid function, for example declared <em>with</em> parenthesis, throw an error into the console
@@ -426,7 +426,7 @@
                 </div>
 
                 <div id="function-computeWidth" class="list_item">
-                  <dt><code>&lt;sliderInstance&gt;.computeWidth(valueObject)</code><br>-> <code>int</code></dt>
+                  <dt><code>&lt;sliderInstance&gt;.computeWidth(&lt;valueObject&gt;)</code><br>-> <code>int</code></dt>
                   <dd class="doc_item description">
                     If the <code>valueObject</code>'s <code><a href="#property-width">width</a></code> is <code>'auto'</code>, compute the width automatically based on <code><a href="#property-min">min</a></code> and <code><a href="#property-max">max</a></code>, if it isn't, set the valueObject's width to its own width but take <code><a href="#property-absWidth">absWidth</a></code> into account
                   </dd>
@@ -463,7 +463,7 @@
       </section>
     </main>
 
-    <link rel="stylesheet" href="https://hallo89.github.io/Slider89/slider89.css"> 
+    <link rel="stylesheet" href="https://hallo89.github.io/Slider89/slider89.css">
     <script src="https://hallo89.github.io/Slider89/slider89.js"></script>
     <script>
       new Slider89(document.getElementById('demo_plain'));
