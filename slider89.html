@@ -163,7 +163,7 @@
                 <dd class="doc_item description">
                   The final width of the slider.<br>
                   A number represents the width in pixels regardless of the slider's range, whereas the keyword 'auto' computes the width automatically from the slider's range in a 1:1 ratio.<br>
-                  If the property <a href="#property-absWidth">absWidth</a> is false, which is default, the width is implicit; it is expanded by a small amount resembling the padding at the sides of the slider (The default padding is half of the slider knob's width either side) in order to get an expected result
+                  If the property <code><a href="#property-absWidth">absWidth</a></code> is false, which is default, the width is implicit; it is expanded by a small amount resembling the padding at the sides of the slider (The default padding is half of the slider knob's width either side) in order to get an expected result
                 </dd>
                 <dd class="doc_item info_item"><span class="nodisplay">├ </span>type: <code>number</code></dd>
                 <dd class="doc_item info_item"><span class="nodisplay">├ </span>unit: <code>px</code></dd>
@@ -189,17 +189,16 @@
 
               <div id="property-task" class="list_item">
                 <dt><code>task</code></dt>
-                <dd class="doc_item description">This value takes a function to be executed every time the slider is moved. The function must be declared without parenthesis</dd>
+                <dd class="doc_item description">This value takes a function to be executed every time the slider is moved. The function must be declared without parenthesis, or be an inline anonymous function</dd>
                 <dd class="doc_item info_item"><span class="nodisplay">├ </span>type: <code>function</code></dd>
                 <dd class="doc_item info_item"><span class="nodisplay">└ </span>default: <code>undefined</code></dd>
               </div>
 
-              <div id="property-replaceNode" class="list_item">
-                <dt><code>replaceNode</code></dt>
-                <dd class="doc_item description">If set to true, the slider instance will replace the <code><a href="#function-Slider89">targetNode</a></code> instead of being appended as a child inside it</dd>
-                <dd class="doc_item info_item"><span class="nodisplay">├ </span>type: <code>boolean</code></dd>
-                <dd class="doc_item info_item"><span class="nodisplay">├ </span>influencing: <code><a href="#function-Slider89">Slider89</a></code></dd>
-                <dd class="doc_item info_item"><span class="nodisplay">└ </span>default: <code>false</code></dd>
+              <div id="property-taskMouseUp" class="list_item">
+                <dt><code>taskMouseUp</code></dt>
+                <dd class="doc_item description">This is the same as <code><a href="#property-task">task</a></code>, taking a function, which is, however, executed only every time the mouse button is released after the slider has been interacted with</dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>type: <code>function</code></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">└ </span>default: <code>undefined</code></dd>
               </div>
 
               <div id="property-absWidth" class="list_item">
@@ -226,6 +225,15 @@
                 <dd class="doc_item info_item"><span class="nodisplay">├ </span>type: <code>number</code></dd>
                 <dd class="doc_item info_item"><span class="nodisplay">├ </span>unit: <code>ms</code></dd>
                 <dd class="doc_item info_item"><span class="nodisplay">└ </span>default: <code>250</code></dd>
+              </div>
+
+              <div id="property-replaceNode" class="list_item">
+                <dt><code>replaceNode</code></dt>
+                <dd class="doc_item description">If set to true, the slider instance will replace the <code><a href="#function-Slider89">targetNode</a></code> instead of being appended as a child inside it</dd>
+                <dd class="doc_item info_item state"><span class="nodisplay">├ </span><strong>WRITE ONLY</strong></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>type: <code>boolean</code></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>influencing: <code><a href="#function-Slider89">Slider89</a></code></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">└ </span>default: <code>false</code></dd>
               </div>
             </dl>
           </div>
@@ -321,9 +329,9 @@
   configProperty2: configPropertyValue2
 });</code></pre>
                 </dd>
-                <dd class="doc_item info_item"><span class="nodisplay">├ </span>influences: <code><a href="#property-replaceNode">replaceNode</a></code></dd>
                 <dd class="doc_item info_item"><span class="nodisplay">├ </span>targetNode = HTML element the instance will be created in</dd>
-                <dd class="doc_item info_item"><span class="nodisplay">└ </span>configProperties = <a href="#properties-config">configuration properties</a></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>configProperties = <a href="#properties-config">configuration properties</a></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">└ </span>influences: <code><a href="#property-replaceNode">replaceNode</a></code></dd>
               </div>
             </dl>
           </div>
@@ -414,15 +422,14 @@
                   <dd class="doc_item info_item"><span class="nodisplay">└ </span>influencing: <code><a href="#property-value">value</a></code>, <code><a href="#property-tipTimer">tipTimer</a></code>, <code><a href="#property-taskLock">taskLock</a></code></dd>
                 </div>
 
-                <div id="function-setTask" class="list_item">
-                  <dt><code>&lt;sliderInstance&gt;.setTask(&lt;objectTarget&gt;, &lt;task&gt;)</code></dt>
+                <div id="function-checkTask" class="list_item">
+                  <dt><code>&lt;sliderInstance&gt;.checkTask(&lt;task&gt;)</code><br>-> <code>&lt;task&gt; | false</code></dt>
                   <dd class="doc_item description">
-                    A function evaluation whether an input <code><a href="#property-task">task</a></code>, which is also handed over into this function, is valid. If it is, write it into the specified <code>objectTarget</code><br>
-                    If the task is no valid function, for example declared <em>with</em> parenthesis, throw an error into the console
+                    A function evaluation whether a handed-over <code>task</code> is valid:<br>
+                    If it is, plainly return it without doing anything, if not, for example because it has been declared <em>with</em> parenthesis (which javascript cannot explicitly check), throw an error into the console and return <code>false</code>
                   </dd>
                   <dd class="doc_item info_item state"><span class="nodisplay">├ </span><strong>INTERNAL</strong></dd>
-                  <dd class="doc_item info_item"><span class="nodisplay">├ </span>objectTarget = The object to write into; either the slider instance (<a href="#functions-constructor">constructor</a>) or the <code><a href="#functions-object">slider89</a></code> object</dd>
-                  <dd class="doc_item info_item"><span class="nodisplay">└ </span>influencing: <code><a href="#property-task">task</a></code></dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">└ </span>influencing: <code><a href="#property-task">task</a> / <a href="#property-taskMouseUp">taskMouseUp</a></code></dd>
                 </div>
 
                 <div id="function-computeWidth" class="list_item">
