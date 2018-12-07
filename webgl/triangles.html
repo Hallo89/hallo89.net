@@ -47,6 +47,7 @@
         overflow: hidden;
         transition: all .4s ease;
         margin: 0;
+        animation: none;
       }
       .input_box.dimensions .input {
         width: 100%;
@@ -84,11 +85,6 @@
         font-size: .6em !important;
       }
 
-      @keyframes preventHidden {
-        from { visibility: visible; }
-        to   { visibility: visible; }
-      }
-
       .inputs_expander {
         position: absolute;
         top: 0;
@@ -120,6 +116,16 @@
       }
       .size_alert .alert_text {
         text-align: center;
+      }
+      .size_alert .alert_caption {
+        margin: 0 0 calc(.85vh + 7px);
+        padding: 0 0 calc(.85vh + 7px);
+        width: 100%;
+        border-bottom: calc(.25vh + 6px) solid hsl(0, 0%, 23%);
+        color: hsl(0, 0%, 55%);
+        font-size: calc(0.22vw + 20px);
+        font-weight: bold;
+        letter-spacing: 1px;
       }
       .size_alert .alert_header {
         margin: 0;
@@ -158,6 +164,61 @@
       body.size_warning .size_alert_wrapper {
         display: flex;
       }
+
+      .tooltips {
+        position: absolute;
+        right: 0;
+        bottom: 25%;
+        font-size: calc(.2vw + .1vh + 13.3px);
+        color: hsl(0, 0%, 58%);
+      }
+      .tooltips .tip_wrapper {
+        width: calc(10vw + 330px);
+        background-color: hsl(0, 0%, 16%);
+        overflow: hidden;
+        transform: translateX(100%);
+        visibility: hidden;
+        opacity: .8;
+        animation: .27s preventHidden linear;
+        transition: transform .27s cubic-bezier(.28,0,0,1), opacity .2s ease;
+      }
+      .tooltips .tip_wrapper.active {
+        visibility: visible;
+        opacity: 1;
+        animation: none;
+        transform: translateX(0);
+      }
+      .tooltips .tip_wrapper.active .tip_inner {
+        transform: translateX(0);
+      }
+      .tooltips .tip_wrapper.active .tip_header, .tooltips .tip_wrapper.active .tip_description {
+        transform: translateX(0);
+      }
+      .tooltips .tip_inner {
+        padding: 8px 7px 8px 14px;
+        background-color: hsl(0, 0%, 10%);
+        transition: transform .31s .04s cubic-bezier(.29,.08,.05,1);
+        transform: translateX(100%);
+      }
+      .tooltip .tip_text {
+        transition: transform .36s .08s cubic-bezier(.30,.13,.1,1);
+        transform: translateX(100%);
+      }
+      .tooltips .tip_text.tip_header {
+        font-size: 1.2em;
+        font-weight: bold;
+        margin-bottom: 4px;
+        color: hsl(0, 0%, 65%);
+      }
+      .tooltips .tip_text.tip_description {
+        font-family: 'Consolas', 'San Francisco Monospaced', monospace;
+      }
+
+      @keyframes preventHidden {
+        from { visibility: visible; }
+        to   { visibility: visible; }
+      }
+
     </style>
     <link rel="stylesheet" type="text/css" href="base.css">
   </head>
@@ -233,6 +294,8 @@
       <div class="input_box button">
         <button class="input" onclick="generate();">Regenerate</button>
       </div>
+      <div id="slider_lightness"></div>
+      <div id="slider_threshold"></div>
       <div class="input_box lines checker">
         <div class="input checker" onclick="enableLines();">
           <div class="checkmark">
@@ -240,17 +303,39 @@
             <span class="mark upper"></span>
           </div>
         </div>
-        <span class="input_header">line mode</span>
+        <span class="input_header">Line mode</span>
       </div>
-      <div id="slider_lightness"></div>
-      <div id="slider_threshold"></div>
+      <div class="input_box lines checker">
+        <div class="input checker" onclick="switchScript();">
+          <div class="checkmark">
+            <span class="mark lower"></span>
+            <span class="mark upper"></span>
+          </div>
+        </div>
+        <span class="input_header">Legacy system</span>
+      </div>
+      <div class="input_box button">
+        <button class="input" onclick="resetHash();">Reset values</button>
+      </div>
       <div class="input_box button ref download_canvas">
         <a class="input" download="triangles.png" onclick="downloadCanvas()">Download image</a>
       </div>
-      <a href="../index.html" class="mainref">Hallo89</a>
+      <div class="additional">
+        <span>v2.0 | </span>
+        <a href="../index.html" class="mainref">Hallo89</a>
+      </div>
+    </div>
+    <div class="tooltips">
+      <div class="tip_wrapper tip_legacy">
+        <div class="tip_inner">
+          <div class="tip_text tip_header">Legacy system</div>
+          <div class="tip_text tip_description">The program used prior to v2.0, using a slightly more random random-method, although most definitely no difference will be noticable. However, extremely inperformant</div>
+        </div>
+      </div>
     </div>
     <div class="size_alert_wrapper">
       <div class="size_alert">
+        <p class="alert_text alert_caption">Legacy mode is enabled</p>
         <p class="alert_text alert_header">A large quantity of triangles is set to generate</p>
         <p class="alert_text alert_info">While this has no significant negative effects, it can take pretty long</p>
         <button class="alert_button yes" onclick="hideWarning(); setTimeout(function(){run()}, 20);">Go!</button>
@@ -261,11 +346,20 @@
 
     <link rel="stylesheet" href="https://hallo89.github.io/Slider89/slider89.css">
     <script>
+      var lineMode = false;
+      var legacyMode = false;
+      var tipLock = false;
+      //Clicking the crement buttons, continuously the blur event is fired.
+      //To prevent spamming the history with the hash, only update it after 500ms of no further blur
+      var rgbTimer;
+
       const preserveBuffer = true;
 
       const inputsRGB = document.querySelectorAll('.input_box.rgb .input');
       const inputColor = document.querySelector('.input_box.colorpicker .input');
       const inputHEX = document.querySelector('.input_box.hex .input');
+
+      const inputLines = document.querySelector('.input_box.lines');
 
       const inputDownload = document.querySelector('.input_box.download_canvas .input');
 
@@ -274,16 +368,34 @@
       const inputWidth = document.querySelector('.box_wrapper.width .input');
       const inputHeight = document.querySelector('.box_wrapper.height .input');
 
+      const tipLegacy = document.querySelector('.tooltips .tip_legacy');
+
       const expander = document.querySelector('.inputs_expander');
 
-      inputColor.addEventListener('change', pickerChange);
+      inputColor.addEventListener('input', pickerChange);
       inputHEX.addEventListener('input', hexChange);
-      for (var i = 0; i < inputsRGB.length; i++) {
-        inputsRGB[i].addEventListener('change', rgbChange);
+      for (let i = 0; i < inputsRGB.length; i++) {
+        inputsRGB[i].addEventListener('input', rgbChange);
+        inputsRGB[i].addEventListener('blur', rgbBlur);
       }
+      // window.addEventListener('hashchange', hashChange);
 
       function enableLines() {
-        document.body.classList.toggle('linemode');
+        lineMode = !lineMode;
+        generate();
+        updateHash({linemode: lineMode});
+      }
+
+      function switchScript() {
+        legacyMode = !legacyMode;
+        gl.useProgram(legacyMode ? programAlt : program);
+        if (!tipLock) {
+          tipLegacy.classList.add('active');
+          setTimeout(function() {
+            tipLegacy.classList.remove('active');
+          }, 5500);
+          tipLock = true;
+        }
         generate();
       }
 
@@ -304,68 +416,179 @@
       }
 
       function pickerChange() {
-        let value = inputColor.value;
-        let valueRGB = hexToRgb(value)
-        updateRGB(valueRGB);
-        updateHex(value);
-        fixedDraw(valueRGB);
+        const value = checkHex(inputColor.value);
+        if (value != null) {
+          updateColors(value, 'picker');
+          draw(true, hexToRgb(value));
+          updateHash({color: value.slice(1)});
+        }
       }
       function rgbChange() {
-        let value = {
-          'r': inputsRGB[0].value,
-          'g': inputsRGB[1].value,
-          'b': inputsRGB[2].value
-        };
-        let valueHex = rgbToHex(value);
-        updatePicker(valueHex)
-        updateHex(valueHex);
-        fixedDraw(value);
+        const value = checkRgb({
+          r: inputsRGB[0].value,
+          g: inputsRGB[1].value,
+          b: inputsRGB[2].value
+        });
+        if (value != null) {
+          updateColors(rgbToHex(value), 'rgb');
+          draw(true, value);
+        }
       }
       function hexChange() {
-        let value = inputHEX.value
-        if (value.length == 4) {
-          value = hex3ToHex6(value);
-        }
-        if (value.length == 7) {
-          updateRGB(hexToRgb(value));
-          updatePicker(value);
-          fixedDraw(hexToRgb(value));
+        const value = checkHex(inputHEX.value);
+        if (value != null) {
+          updateColors(value, 'hex');
+          draw(true, hexToRgb(value));
+          updateHash({color: value.slice(1)});
         }
       }
+      function rgbBlur() {
+        clearTimeout(rgbTimer);
+        rgbTimer = setTimeout(function() {
+          const value = checkRgb({
+            r: inputsRGB[0].value,
+            g: inputsRGB[1].value,
+            b: inputsRGB[2].value
+          });
+          if (value != null) {
+            updateHash({color: rgbToHex(value).slice(1)});
+          }
+        }, 250);
+      }
 
-      function updateRGB(rgb) {
-        inputsRGB[0].value = rgb.r;
-        inputsRGB[1].value = rgb.g;
-        inputsRGB[2].value = rgb.b;
-      }
-      function updatePicker(hex) {
-        inputColor.value = hex;
-      }
-      function updateHex(hex) {
-        inputHEX.value = hex;
-      }
-
-      function hex3ToHex6(hex3) {
-        let r = hex3.slice(1, 2);
-        let g = hex3.slice(2, 3);
-        let b = hex3.slice(3, 4);
-        return '#' + r + r + g + g + b + b;
-      }
-      function hexToRgb(hex) {
-        return rgb = {
-          'r': parseInt(hex.slice(1, 3), 16),
-          'g': parseInt(hex.slice(3, 5), 16),
-          'b': parseInt(hex.slice(5, 7), 16),
+      function resetHash() {
+        const params = {
+          color: '17469E',
+          width: '50',
+          height: '50',
+          lightness: ((amountX + amountY) * 3.2) / 16,
+          threshold: (amountX + amountY) * 3.2,
+          linemode: false
         };
+        updateHash(params);
+        updateInputs(params);
+      }
+      function getHashParam(param) {
+        const hash = location.hash;
+        const indexParam = hash.indexOf(param);
+        const suffix = hash.slice(indexParam).indexOf('#');
+        return suffix >= 0 ? hash.slice(indexParam + param.length + 1, suffix + indexParam) : hash.slice(indexParam + param.length + 1);
+      }
+      function updateHash(values = {}) {
+        values = {
+          color: values.color != null ? values.color : getHashParam('color'),
+          size: !document.body.classList.contains('decoupledsize') ? (values.size != null ? values.size : getHashParam('size')) : null,
+          width: document.body.classList.contains('decoupledsize') ? (values.width != null ? values.width : getHashParam('width')) : null,
+          height: document.body.classList.contains('decoupledsize') ? (values.height != null ? values.height : getHashParam('height')) : null,
+          lightness: values.lightness != null ? values.lightness : getHashParam('lightness'),
+          threshold: values.threshold != null ? values.threshold : getHashParam('threshold'),
+          linemode: values.linemode != null ? values.linemode : getHashParam('linemode')
+        }
+        let params = '';
+        const valueNames = Object.keys(values);
+        for (let i = 0; i < valueNames.length; i++) {
+          if (values[valueNames[i]] != null) params += '#' + valueNames[i] + '=' + values[valueNames[i]];
+        }
+        location.replace(location.href.includes('#') ? location.href.slice(0, location.href.indexOf('#')) + params : location.href + params);
+      }
+
+      function updateInputs(values) {
+        //Set the inputs for each parameter to its value
+        if (values.color != null) updateColors(checkHex(values.color));
+        if (values.size) {
+          inputSize.value = values.size;
+        }
+        if (values.width) {
+          inputWidth.value = values.width;
+        }
+        if (values.height) {
+          inputHeight.value = values.height;
+        }
+        if (values.lightness != null) sliderLightness.newValues({value: values.lightness});
+        if (values.threshold != null) sliderThreshold.newValues({value: values.threshold});
+        if (values.linemode != null) {
+          lineMode = values.linemode;
+          if (lineMode == true) {
+            inputLines.classList.add('active');
+          } else {
+            inputLines.classList.remove('active');
+          }
+        }
+      }
+
+      function updateColors(hex, source = '') {
+        if (hex) {
+          if (source != 'rgb') {
+            const rgb = hexToRgb(hex);
+            if (rgb != null) {
+              inputsRGB[0].value = rgb.r;
+              inputsRGB[1].value = rgb.g;
+              inputsRGB[2].value = rgb.b;
+            }
+          }
+          if (source != 'picker') inputColor.value = hex;
+          if (source != 'hex') inputHEX.value = hex;
+        }
+      }
+
+      function checkHex(hex) {
+        const prefixed = hex.includes('#');
+        const prefix = !hex.includes('#') ? '#' : '';
+        if (!/[\dA-Fa-f]{3}|[\dA-Fa-f]{6}/.test(prefix + hex)) {
+          return null;
+        } else if (hex.length + !prefixed == 7) {
+          return prefix + hex;
+        } else if (hex.length + !prefixed == 4) {
+          return prefix + hex;
+        } else {
+          return null;
+        }
+      }
+      function checkRgb(rgb) {
+        rgb = {
+          r: parseInt(rgb.r),
+          g: parseInt(rgb.g),
+          b: parseInt(rgb.b)
+        };
+        //Regex is not made for range validation
+        if (rgb.r >= 0 && rgb.r <= 255 && rgb.r != null && rgb.r != '' && rgb.g >= 0 && rgb.g <= 255 && rgb.g != null && rgb.g != '' && rgb.b >= 0 && rgb.b <= 255 && rgb.b != null && rgb.b != '') {
+          return rgb;
+        } else {
+          return null;
+        }
+      }
+
+      function hexToRgb(hex) {
+        //Security items theoretically not needed as checkHex exists, but this way it is possible to do hexToRgb without doing checkHex
+        const prefix = !hex.includes('#');
+        if (hex.length + prefix == 7) {
+          return {
+            r: parseInt(hex.slice(1 - prefix, 3 - prefix), 16),
+            g: parseInt(hex.slice(3 - prefix, 5 - prefix), 16),
+            b: parseInt(hex.slice(5 - prefix, 7 - prefix), 16),
+          };
+        } else if (hex.length + prefix == 4) {
+          return {
+            r: parseInt(hex.slice(1 - prefix, 2 - prefix) + hex.slice(1 - prefix, 2 - prefix), 16),
+            g: parseInt(hex.slice(2 - prefix, 3 - prefix) + hex.slice(2 - prefix, 3 - prefix), 16),
+            b: parseInt(hex.slice(3 - prefix, 4 - prefix) + hex.slice(3 - prefix, 4 - prefix), 16),
+          };
+        } else {
+          return null;
+        }
       }
       function rgbToHex(rgb) {
-        let r = parseInt(rgb.r);
-        let g = parseInt(rgb.g);
-        let b = parseInt(rgb.b);
-        let fillR = r < 16 ? '0' : '';
-        let fillG = g < 16 ? '0' : '';
-        let fillB = b < 16 ? '0' : '';
-        return '#' + fillR + (r).toString(16) + fillG + (g).toString(16) + fillB + (b).toString(16);
+        const hex = {
+          r: parseInt(rgb.r),
+          g: parseInt(rgb.g),
+          b: parseInt(rgb.b)
+        };
+        const fill = {
+          r: hex.r < 16 ? '0' : '',
+          g: hex.g < 16 ? '0' : '',
+          b: hex.b < 16 ? '0' : ''
+        };
+        return '#' + fill.r + (hex.r).toString(16) + fill.g + (hex.g).toString(16) + fill.b + (hex.b).toString(16);
       }
     </script>
     <script src="https://hallo89.github.io/Slider89/slider89.js"></script>

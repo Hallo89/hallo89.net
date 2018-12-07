@@ -38,15 +38,19 @@ button::-moz-focus-inner {
   85% { transform: none; }
   100% { transform: translateY(-100%); }
 }
-.mainref {
+/* Very lazy solution which I will improve in the future */
+.additional {
   position: absolute;
   right: 6px;
   font: 21px 'Century Gothic', 'Segoe UI', 'Nirmala UI', sans-serif;
   color: hsl(0, 0%, 30%);
-  text-decoration: none;
   line-height: 0;
-  padding: 24px 5px;
+  padding: 34.5px 5px;
   z-index: -1; /* Temporary solution until grdidgridigigrid */
+}
+.mainref {
+  text-decoration: none;
+  color: inherit;
 }
 .input_box {
   margin: 10px 8px 0;
