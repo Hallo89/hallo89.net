@@ -1,3 +1,4 @@
+//oh gott roman
 //predefined file-global variables
 var reader = new FileReader(); //The FileReader reading the file. Makes sense right?
 var keyFile; //The initial variable having stored the not-human-readable file which has been chosen
@@ -933,3 +934,4 @@ function updateScale() {
     }
   }
 }
+//du bist mal wieder so unreif
