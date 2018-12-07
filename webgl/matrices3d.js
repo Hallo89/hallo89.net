@@ -65,6 +65,43 @@ var sliderFov = new Slider89(inputs, {
 });
 
 
+//The absolute legend being the code for the fragment shader which is the one computing the color for every vertex processed
+var fragmentSource = `#version 300 es
+
+precision mediump float;
+
+in vec4 fragColor;
+out vec4 fragOut;
+
+void main() {
+   fragOut = fragColor;
+}
+`;
+
+//The absolute legend being the code for the vertex shader which is the one computing the position and stuff for one object
+var vertexSource = `#version 300 es
+
+in vec4 position;
+in vec3 color;
+
+out vec4 fragColor;
+
+uniform mat4 matrixPerspective;
+uniform mat4 matrixTranslate;
+uniform mat4 matrixRotateX;
+uniform mat4 matrixRotateY;
+uniform mat4 matrixRotateZ;
+uniform mat4 matrixScale;
+
+void main() {
+    fragColor = vec4(color, 1);
+    mat4 finalMatrix = matrixPerspective * matrixTranslate * matrixRotateX * matrixRotateY * matrixRotateZ * matrixScale;
+
+    gl_Position = finalMatrix * position;
+}
+`;
+
+
 //making the inner webgl pixel canvas size the size it is displayed as
 canvas.width = canvas.clientWidth;
 canvas.height = canvas.clientHeight;
@@ -76,7 +113,7 @@ gl.viewport(0, 0, canvas.width, canvas.height);
 //gl.clear(gl.COLOR_BUFFER_BIT);
 
 //creating a shader program from both shaders
-var program = createProgram();
+var program = webgl.constructProgram(vertexSource, fragmentSource);
 //get the position of the "position" and "color" atrribute ("in")
 var locationPosition = gl.getAttribLocation(program, 'position');
 var locationColor = gl.getAttribLocation(program, 'color');
@@ -102,46 +139,46 @@ gl.bindBuffer(gl.ARRAY_BUFFER, bufferPosition);
 
 var positions = new Float32Array([
   //back
-  0, 0, -250,
-  -300, -400, -250,
-  0, -400, -250,
-  0, 0, -250,
-  -300, 0, -250,
-  -300, -400, -250,
+  0, 0, -300,
+  -300, -300, -300,
+  0, -300, -300,
+  0, 0, -300,
+  -300, 0, -300,
+  -300, -300, -300,
   //left
   0, 0, 0,
-  0, 0, -250,
-  0, -400, 0,
-  0, 0, -250,
-  0, -400, -250,
-  0, -400, 0,
+  0, 0, -300,
+  0, -300, 0,
+  0, 0, -300,
+  0, -300, -300,
+  0, -300, 0,
   //bottom
-  0, -400, 0,
-  0, -400, -250,
-  -300, -400, 0,
-  -300, -400, 0,
-  0, -400, -250,
-  -300, -400, -250,
+  0, -300, 0,
+  0, -300, -300,
+  -300, -300, 0,
+  -300, -300, 0,
+  0, -300, -300,
+  -300, -300, -300,
   //right
   -300, 0, 0,
-  -300, -400, 0,
-  -300, 0, -250,
-  -300, -400, 0,
-  -300, -400, -250,
-  -300, 0, -250,
+  -300, -300, 0,
+  -300, 0, -300,
+  -300, -300, 0,
+  -300, -300, -300,
+  -300, 0, -300,
   //top
   0, 0, 0,
   -300, 0, 0,
-  -300, 0, -250,
+  -300, 0, -300,
   0, 0, 0,
-  -300, 0, -250,
-  0, 0, -250,
+  -300, 0, -300,
+  0, 0, -300,
   //front
   0, 0, 0,
-  0, -400, 0,
-  -300, -400, 0,
+  0, -300, 0,
+  -300, -300, 0,
   0, 0, 0,
-  -300, -400, 0,
+  -300, -300, 0,
   -300, 0, 0
 ]);
 //Writing data into that buffer
@@ -161,12 +198,12 @@ var colors = new Float32Array([
   20/255, 40/255, 60/255,
   20/255, 40/255, 60/255,
 
-  80/255, 90/255, 100/255,
-  80/255, 90/255, 100/255,
-  80/255, 90/255, 100/255,
-  80/255, 90/255, 100/255,
-  80/255, 90/255, 100/255,
-  80/255, 90/255, 100/255,
+  60/255, 90/255, 140/255,
+  60/255, 90/255, 140/255,
+  60/255, 90/255, 140/255,
+  60/255, 90/255, 140/255,
+  60/255, 90/255, 140/255,
+  60/255, 90/255, 140/255,
 
   20/255, 60/255, 100/255,
   20/255, 60/255, 100/255,
