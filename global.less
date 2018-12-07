@@ -9,6 +9,19 @@ No necessity to write this in here but Less is awesome!
 @import "mixins.less";
 
 
+html {
+  scrollbar-color: @scrollbar-thumb @scrollbar-track;
+}
+html.light-mode {
+  scrollbar-color: auto;
+}
+html.nesewebel-mode.dark-mode {
+  scrollbar-color: @nesewebel-foreground @nesewebel-background;
+}
+html.nesewebel-mode.light-mode {
+  scrollbar-color: @nesewebel-foreground--light @nesewebel-background--light;
+}
+
 body {
   margin: 0 0 15px 0;
   background-color: @background-color;
@@ -16,7 +29,7 @@ body {
   .mode-switch-transition.background;
 }
 
-body.light-mode {
+html.light-mode body {
   background-color: @background-color--light;
 }
 
@@ -164,20 +177,20 @@ body.light-mode {
   }
 }
 
-.light-mode #headline .modes .switch_daynight,
-.nesewebel-mode #headline .modes .switch_nesewebel {
+html.light-mode #headline .modes .switch_daynight,
+html.nesewebel-mode #headline .modes .switch_nesewebel {
   &::before {
     content: '';
   }
 }
 
-.light-mode #headline .modes .switch_daynight {
+html.light-mode #headline .modes .switch_daynight {
   &::before {
     color: @theme-color;
   }
 }
 
-.light-mode #headline {
+html.light-mode #headline {
   background-color: @headline-background;
   .head_nav a {
     color: @nav-foreground--light;
@@ -426,7 +439,7 @@ body.light-mode {
 //end of header
 }
 
-.light-mode .glb_box {
+html.light-mode .glb_box {
   background-color: @glb-box--light;
   border-top: 4px solid @glb-box-bordertop--light;
   border-bottom: 4px solid @glb-box-borderbottom--light;

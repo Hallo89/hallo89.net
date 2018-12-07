@@ -2,44 +2,44 @@
 Written by Hallo89 using LESS CSS - http://lesscss.org
 No necessity to write this in here but Less is awesome!
 */
-body.nesewebel-mode.dark-mode {
-  background-color: black;
-}
-body.nesewebel-mode.light-mode {
-  background-color: white;
-}
 body {
   background-color: #171717;
 }
-.nesewebel-mode.dark-mode .mode_dropdown .mode_dropdown_box {
+html.nesewebel-mode.dark-mode body {
+  background-color: black;
+}
+html.nesewebel-mode.light-mode body {
+  background-color: white;
+}
+html.nesewebel-mode.dark-mode .mode_dropdown .mode_dropdown_box {
   box-shadow: 1px 1px 10px #141414;
 }
-.nesewebel-mode.dark-mode .mode_dropdown .mode_dropdown_box::before {
+html.nesewebel-mode.dark-mode .mode_dropdown .mode_dropdown_box::before {
   border: 15px solid black;
   box-shadow: 2px 2px 20px #141414;
 }
-.nesewebel-mode.dark-mode .mode_dropdown .mode_dropdown_box .mode_switch {
+html.nesewebel-mode.dark-mode .mode_dropdown .mode_dropdown_box .mode_switch {
   color: white;
   background-color: black;
 }
-.nesewebel-mode.dark-mode .mode_dropdown .mode_dropdown_box .mode_switch:hover {
+html.nesewebel-mode.dark-mode .mode_dropdown .mode_dropdown_box .mode_switch:hover {
   background-color: #141414;
 }
-.nesewebel-mode.light-mode .mode_dropdown .mode_dropdown_box {
+html.nesewebel-mode.light-mode .mode_dropdown .mode_dropdown_box {
   box-shadow: 1px 1px 10px #ebebeb;
 }
-.nesewebel-mode.light-mode .mode_dropdown .mode_dropdown_box::before {
+html.nesewebel-mode.light-mode .mode_dropdown .mode_dropdown_box::before {
   border: 15px solid white;
   box-shadow: 1px 1px 10px #ebebeb;
 }
-.nesewebel-mode.light-mode .mode_dropdown .mode_dropdown_box .mode_switch {
+html.nesewebel-mode.light-mode .mode_dropdown .mode_dropdown_box .mode_switch {
   color: black;
   background-color: white;
 }
-.nesewebel-mode.light-mode .mode_dropdown .mode_dropdown_box .mode_switch:hover {
+html.nesewebel-mode.light-mode .mode_dropdown .mode_dropdown_box .mode_switch:hover {
   background-color: #ebebeb;
 }
-.nesewebel-mode.light-mode .mode_dropdown .switch_daynight::before {
+html.nesewebel-mode.light-mode .mode_dropdown .switch_daynight::before {
   color: black;
 }
 #headline {
@@ -135,45 +135,45 @@ body {
   background-color: transparent;
   color: #DB968C;
 }
-.light-mode #head_block {
+html.light-mode #head_block {
   box-shadow: 0 2px 13px rgba(194, 194, 194, 0.8);
   background-color: #f7f7f7;
   color: #757575;
 }
-.light-mode #head_block h1 {
+html.light-mode #head_block h1 {
   text-shadow: 1px 1px #999999, 2px 2px #999999, 3px 3px #999999, 4px 4px #999999, 5px 5px #999999, 6px 6px #999999;
 }
-.light-mode #head_block h1:hover::before {
+html.light-mode #head_block h1:hover::before {
   color: #f7f7f7;
   text-shadow: 7px 7px #f7f7f7, 7px -7px #f7f7f7, -7px 7px #f7f7f7, -7px -7px #f7f7f7;
 }
 @media (max-width: 450px) {
-  .light-mode #head_block h1 {
+  html.light-mode #head_block h1 {
     font-size: 88px;
     text-shadow: 1px 1px #999999, 2px 2px #999999, 3px 3px #999999, 4px 4px #999999, 5px 5px #999999;
   }
 }
-.nesewebel-mode.dark-mode #head_block {
+html.nesewebel-mode.dark-mode #head_block {
   box-shadow: 0 2px 10px 1px #141414;
   background-color: black;
   color: white;
 }
-.nesewebel-mode.dark-mode #head_block h1 {
+html.nesewebel-mode.dark-mode #head_block h1 {
   text-shadow: 1px 1px #141414, 2px 2px #141414, 3px 3px #141414, 4px 4px #141414, 5px 5px #141414, 6px 6px #141414;
 }
-.nesewebel-mode.dark-mode #head_block h1:hover::before {
+html.nesewebel-mode.dark-mode #head_block h1:hover::before {
   color: black;
   text-shadow: 7px 7px black, 7px -7px black, -7px 7px black, -7px -7px black;
 }
-.nesewebel-mode.light-mode #head_block {
+html.nesewebel-mode.light-mode #head_block {
   box-shadow: 0 2px 10px 1px #ebebeb;
   background-color: white;
   color: black;
 }
-.nesewebel-mode.light-mode #head_block h1 {
+html.nesewebel-mode.light-mode #head_block h1 {
   text-shadow: 1px 1px #ebebeb, 2px 2px #ebebeb, 3px 3px #ebebeb, 4px 4px #ebebeb, 5px 5px #ebebeb, 6px 6px #ebebeb;
 }
-.nesewebel-mode.light-mode #head_block h1:hover::before {
+html.nesewebel-mode.light-mode #head_block h1:hover::before {
   color: white;
   text-shadow: 7px 7px white, 7px -7px white, -7px 7px white, -7px -7px white;
 }

@@ -9,18 +9,18 @@ No necessity to write this in here but Less is awesome!
 @import "mixins.less";
 
 
-body.nesewebel-mode.dark-mode {
-  background-color: @nesewebel-background;
-}
-body.nesewebel-mode.light-mode {
-  background-color: @nesewebel-background--light;
-}
 body {
   background-color: @background-color;
 }
+html.nesewebel-mode.dark-mode body {
+  background-color: @nesewebel-background;
+}
+html.nesewebel-mode.light-mode body {
+  background-color: @nesewebel-background--light;
+}
 
 
-.nesewebel-mode.dark-mode .mode_dropdown {
+html.nesewebel-mode.dark-mode .mode_dropdown {
   .mode_dropdown_box {
     box-shadow: 1px 1px 10px  @nesewebel-shadow;
     &::before {
@@ -36,7 +36,7 @@ body {
     }
   }
 }
-.nesewebel-mode.light-mode .mode_dropdown {
+html.nesewebel-mode.light-mode .mode_dropdown {
   .mode_dropdown_box {
     box-shadow: 1px 1px 10px @nesewebel-shadow--light;
     &::before {
@@ -148,7 +148,7 @@ body {
   }
 }
 
-.light-mode #head_block {
+html.light-mode #head_block {
   box-shadow: 0 2px 13px @header-shadow--light;
   background-color: @header-background-color--light;
   color: @heading-foreground-color--light;
@@ -179,7 +179,7 @@ body {
     }
   }
 }
-.nesewebel-mode.dark-mode #head_block {
+html.nesewebel-mode.dark-mode #head_block {
   box-shadow: 0 2px 10px 1px @nesewebel-shadow;
   background-color: @nesewebel-background;
   color: @nesewebel-foreground;
@@ -202,7 +202,7 @@ body {
   }
 
 }
-.nesewebel-mode.light-mode #head_block {
+html.nesewebel-mode.light-mode #head_block {
   box-shadow: 0 2px 10px 1px @nesewebel-shadow--light;
   background-color: @nesewebel-background--light;
   color: @nesewebel-foreground--light;
