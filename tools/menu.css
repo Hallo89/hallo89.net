@@ -7,7 +7,7 @@ body {
 
 /* The absolute legend, being the wrapper of everything (literally everything)*/
 #containers {
-  /* No grid fallback */
+  /* No-grid fallback */
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
