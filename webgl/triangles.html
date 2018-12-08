@@ -551,7 +551,7 @@
           b: parseInt(rgb.b)
         };
         //Regex is not made for range validation
-        if (rgb.r >= 0 && rgb.r <= 255 && rgb.r != null && rgb.r != '' && rgb.g >= 0 && rgb.g <= 255 && rgb.g != null && rgb.g != '' && rgb.b >= 0 && rgb.b <= 255 && rgb.b != null && rgb.b != '') {
+        if (rgb.r >= 0 && rgb.r <= 255 && rgb.r != null && rgb.g >= 0 && rgb.g <= 255 && rgb.g != null && rgb.b >= 0 && rgb.b <= 255 && rgb.b != null) {
           return rgb;
         } else {
           return null;
