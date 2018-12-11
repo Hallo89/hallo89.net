@@ -10,10 +10,9 @@ body {
   /* No-grid fallback */
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
 
   display: grid;
-  margin: 20px 0;
+  margin: calc(1.8vh + .7vw + 20px) 0;
   justify-items: center;
   height: auto;
   min-height: calc(100vh - 40px);

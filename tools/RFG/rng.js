@@ -27,8 +27,3 @@ function randomNumber() {
   }
   figuresOutput.innerHTML = randomNumbers;
 }
-
-//Toggle append mode which is self-explanatory
-function toggleRandomMode() {
-  buttonAppend.classList.toggle('active');
-}

@@ -1,6 +1,6 @@
 body {
-  /* outdated: darkest purple with 60/255 one step lighter purple, darkest 'gray' with 80/255 darkest red */
-  background: linear-gradient(to bottom right, #483F50, #68402F); /* #483F50, #553A47 */ /* #4F4257, #493639 */
+  /* step 1 purple with 75/255 step 2 purple */ /* Step 1 brown brown with 35/255 step 2 brown brown */
+  background: linear-gradient(to bottom right, #504358, #6A412F); /* #483F50, #553A47 */ /* #4F4257, #493639 */
 }
 
 .box {
@@ -98,7 +98,7 @@ body {
   font-family: 'Courier New', monospace;
 }
 .code_container .CodeMirror.resizing {
-  transition: .22s cubic-bezier(0,0,.4,1);
+  transition: .22s cubic-bezier(0,0,.4,1); /* .2s cubic-bezier(.3, .1, .2, 1) */
 }
 
 /* The popout appearing when the code area is fully extended */

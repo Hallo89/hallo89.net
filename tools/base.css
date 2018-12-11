@@ -19,9 +19,9 @@ body.fullscreen {
 
 body.closing #wrapper {
   width: 0;
-  animation: out .4s cubic-bezier(.2,0,.4,1);
+  animation: windowOut .4s cubic-bezier(.25, 0, .4, .95) !important;
 }
-@keyframes out {
+@keyframes windowOut {
   0% { width: 80vw; }
   30% { width: 81.7vw; }
   90% { width: 0; }
@@ -30,8 +30,17 @@ body.closing #wrapper {
 body.closing .input_container {
   flex-wrap: nowrap;
 }
+body.fullscreen.closing #wrapper {
+  clip-path: polygon(100vw 100vh, 100vw 100vh, 100vw 100vh);
+  animation: fullscreenOut .4s cubic-bezier(.25, .05, .1, 1) !important;
+}
+@keyframes fullscreenOut {
+  0%   { clip-path: polygon(100vw 100vh, -100% 100vh, 100vw -100%); }
+  90%  { clip-path: polygon(100vw 100vh, 100vw 100vh, 100vw 100vh); }
+  100% { clip-path: polygon(100vw 100vh, 100vw 100vh, 100vw 100vh); }
+}
 
-body #wrapper {
+body:not(.fullscreen) #wrapper {
   margin: 32px auto;
   height: calc(100vh - 64px);
   width: 80vw;
@@ -46,11 +55,13 @@ body.fullscreen #wrapper {
   margin: 0;
   height: 100vh;
   width: 100vw;
-  animation: .25s prevention;
 }
-@keyframes prevention {
-  from { margin: 32px 10vw; height: calc(100vh - 64px); width: 80vw; }
-  to   { margin: 32px 10vw; height: calc(100vh - 64px); width: 80vw; }
+body.delayfull #wrapper {
+  animation: .25s fullscreenDelay linear;
+}
+@keyframes fullscreenDelay {
+  from { margin: 32px auto; height: calc(100vh - 64px); width: 80vw; }
+  to   { margin: 32px auto; height: calc(100vh - 64px); width: 80vw; }
 }
 
 .utility_buttons {
@@ -174,6 +185,7 @@ body.fullscreen #wrapper {
   display: block;
   font-size: .65em;
   line-height: 1.4;
+  white-space: pre-wrap;
   -webkit-user-select: all;
   -moz-user-select: all;
   -ms-user-select: all;
@@ -256,6 +268,13 @@ body.fullscreen #wrapper {
   z-index: 1;
 }
 
+/* The toggle input */
+
+.toggle.active .knob {
+  transform: translate(120px);
+  background-color: hsl(0, 0%, 41%);
+}
+
 /* The number input with its specific (very fancy) change-number buttons */
 
 .input.number {
@@ -314,10 +333,6 @@ input.number::-webkit-outer-spin-button {
   justify-content: center;
   align-items: center;
   padding: 12px 8px 8px;
-}
-.knobber.active .knob {
-  transform: translate(120px);
-  background-color: hsl(0, 0%, 41%);
 }
 
 /* The multiple-choice input */

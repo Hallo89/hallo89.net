@@ -618,27 +618,16 @@ function navigateWheel(e) {
 //various buttons
  //Toggle 2-Dimensional boundary aids as the 3D ones are costy
 function toggleQuantity() {
-  buttonQuantity.classList.toggle('active');
   containerBounds.classList.toggle('nodisplay');
   containerBounds2D.classList.toggle('nodisplay');
   containerAxes.classList.toggle('nodisplay');
 }
  //Toggle the 3-Dimensional extremely costy grid-aid at the bottom of the element's space - TODO: remove? Default 2D
 function toggleGrid() {
-  buttonGrid.classList.toggle('active');
   containerGrid.classList.toggle('nodisplay');
-}
- //Toggle anti-aliasing of 3D-objects in Firefox
-function toggleOutline() {
-  buttonOutline.classList.toggle('active');
-}
- //Toggle extremely funny fun-mode haha
-function toggleFun() {
-  buttonFun.classList.toggle('active');
 }
  //Toggle the visibility of the (3-Dimensional) axes centered at the element's space
 function toggleAxes() {
-  buttonAxes.classList.toggle('active');
   containerAxes.classList.toggle('nodisplay');
 }
  //Functions of the first multiple-choice "Axis_Restriction" button
