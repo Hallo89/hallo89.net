@@ -275,6 +275,12 @@ body.delayfull #wrapper {
   background-color: hsl(0, 0%, 41%);
 }
 
+/* The one-line text input */
+
+.input.chars {
+  max-width: 150px;
+}
+
 /* The number input with its specific (very fancy) change-number buttons */
 
 .input.number {
