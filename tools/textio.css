@@ -1,0 +1,22 @@
+/* Global CSS for 'text-io' structure, used by mocking and spacing, is stored in textio.css */
+
+.box {
+  display: grid;
+  grid-template-rows: auto auto auto 1fr;
+}
+
+/* The max height of the input textarea brings the output area to the same height as everything else*/
+.input_box.text_input .input.text {
+  /* half of the viewport, top margin in windowed mode, top border, bottom border, header, input_container padding, input_box padding, input_header height and margin, second input_container height and padding */
+  max-height: calc(50vh - 32px - 8px - 6px - 76px - 13px - 16px - 26px - 58px);
+}
+
+body.fullscreen .input_box.text_input .input.text {
+  max-height: calc(50vh - 8px - 6px - 76px - 13px - 16px - 26px - 58px);
+  animation: preventInputExpand .25s;
+}
+
+@keyframes preventInputExpand {
+  from { max-height: calc(50vh - 32px - 8px - 6px - 76px - 13px - 16px - 26px - 58px); }
+  to   { max-height: calc(50vh - 32px - 8px - 6px - 76px - 13px - 16px - 26px - 58px); }
+}

@@ -1,15 +1,9 @@
-//consts filled with elements which are used in this file
-const input = document.querySelector('.input_box.text_input .input.text'); //The input textarea everything begins with
-const output = document.getElementById('output');
+//Global js for 'text-input-output' infrastructure (used by mocking and spacing) is stored in textio.js
 
-//Event listeners
-input.addEventListener('input', resizeInput);
-input.addEventListener('keydown', recordEnter);
+function execute() {
+  mockingText();
+}
 
-//Being executed on pageload
-resizeInput();
-
-//functions
 function mockingText() {
   let inputValue = input.value;
   if (inputValue == '') {
@@ -49,17 +43,6 @@ function mockify(inputText, outputText, index1, index2, index3) {
     return inputText[index1].toUpperCase();
   } else {
     return Math.round(Math.random()) == 1 ? inputText[index1].toUpperCase() : inputText[index1].toLowerCase();
-  }
-}
-
-function resizeInput() {
-  input.style.height = null;
-  input.style.height = input.scrollHeight - 6 + 'px';
-}
-
-function recordEnter(e) {
-  if (e.key == 'Enter' && e.ctrlKey) {
-    mockingText();
   }
 }
 
