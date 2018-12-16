@@ -1,0 +1,4 @@
+body {
+  /* Step 1 new blue with 40/255 other corner purple */ /* Step 2 purple with 35/255 step 1 purple */
+  background: linear-gradient(to bottom right, #1B6E87, #614B69);
+}

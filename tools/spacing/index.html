@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Spacy text generator - Tools | Hallo89</title>
+    <link rel="stylesheet" href="../../global.css">
+    <link rel="stylesheet" href="../base.css">
+    <link rel="stylesheet" href="../textio.css">
+    <link rel="stylesheet" href="spacing.css">
+  </head>
+  <body>
+    <div id="wrapper">
+
+      <div class="box info_box glb_box">
+        <div class="box_header">
+          <span class="header_text">Spacing generator</span>
+          <div class="utility_buttons">
+            <span class="util_button button_smallscreen active"></span>
+            <span class="util_button button_fullscreen"></span>
+            <span class="util_button button_close"></span>
+          </div>
+        </div>
+        <div class="input_container">
+          <div class="input_box text_input">
+            <div class="input_header">Input</div>
+            <textarea class="input text" autocomplete="off" spellcheck="false"></textarea>
+          </div>
+        </div>
+        <div class="input_container">
+          <!-- <div id="slider_spacesamount"></div> -->
+          <div class="input_box tipper">
+            <span class="input_header">Filler</span>
+            <input type="text" class="input chars filler" value=" ">
+            <span class="tooltip default noselect">What will be in between the characters</span>
+          </div>
+          <div class="input_box tipper">
+            <span class="input_header">Filler amount</span>
+            <div class="input_number_container">
+              <input type="number" class="input number spacesamount" min="0" value="1">
+              <div class="buttons_change_number">
+                <span class="change_number increment noselect">▲</span>
+                <span class="change_number decrement noselect">▼</span>
+              </div>
+            </div>
+            <span class="tooltip default noselect">How many fillers should be between two chars</span>
+          </div>
+          <div class="input_box tipper">
+            <span class="input_header">Ignore input spaces</span>
+            <span class="input toggle extraspaces knobber active">
+              <span class="knob"></span>
+            </span>
+            <span class="tooltip default noselect">If active, fillers are distributed evenly</span>
+          </div>
+          <div class="input_box button noselect" onclick="spacify()">
+            <span class="input_header">Go!</span>
+          </div>
+        </div>
+        <div class="text_function text_box text_content" id="output"></div>
+      </div>
+
+    </div>
+
+    <!-- <link rel="stylesheet" href="https://hallo89.github.io/Slider89/slider89.css"> -->
+    <!-- <script src="https://hallo89.github.io/Slider89/slider89.js"></script> -->
+    <!-- <script src="../../../../../Slider89/slider89.js"></script> -->
+    <script src="../base.js"></script>
+    <script src="../textio.js"></script>
+    <script src="s_p_a_c_i_n_g.js"></script>
+  </body>
+</html>
