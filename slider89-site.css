@@ -1,9 +1,13 @@
 body {
-  font-size: calc(.1vw + .05vh + 16.61px);
+  font-size: calc(.12vw + .06vh + 15.64px);
 }
 
 button {
   cursor: pointer;
+}
+
+a {
+  text-decoration: none;
 }
 
 #id_nav {
@@ -31,7 +35,6 @@ button {
 }
 #id_nav .links a {
   color: hsl(0, 0%, 65%);
-  text-decoration: none;
   margin: 9px 10px;
   border-bottom: 2px solid hsl(0, 0%, 45%);
   white-space: nowrap;
@@ -75,55 +78,63 @@ button {
   font-size: 1.9em;
 }
 
-#main_article a:not(.icon_anchor) {
-  text-decoration: none;
+#main_article a {
+  color: inherit;
+}
+
+#main_article p a, #main_article dd a, #main_article code a {
   position: relative;
   padding: 1px 1px 2px;
-  color: #1398A9;
   transition: all .08s;
   border-bottom: 1px solid;
 }
-#main_article a:not(.icon_anchor):hover {
+#main_article p a:hover, #main_article dd a:hover, #main_article code a:hover {
   border-bottom: 2px solid;
   padding: 1px;
+}
+
+#main_article p a, #main_article dd a {
+  color: #1398A9;
+}
+#main_article p a:hover, #main_article dd a:hover {
   /* #1398A9 in rgba */
   background-color: rgba(19, 152, 170, .19);
 }
-#main_article a:not(.icon_anchor):visited {
+#main_article p a:visited, #main_article dd a:visited {
   color: #469870;
 }
-#main_article a:not(.icon_anchor):hover:visited {
+#main_article p a:hover:visited, #main_article dd a:hover:visited {
   /* #469870 in rgba */
   background-color: rgba(70, 152, 112, .18);
 }
-#main_article a:not(.icon_anchor):active {
+#main_article p a:active, #main_article dd a:active {
   color: #A84E4E;
 }
-#main_article a:not(.icon_anchor):hover:active {
+#main_article p a:hover:active, #main_article dd a:hover:active {
   /* #A84E4E in rgba */
   background-color: rgba(168, 78, 78, .18);
 }
 
 #main_article code a {
-  color: hsl(0, 0%, 73%) !important;
+  color: hsl(0, 0%, 73%);
   font-style: italic;
 }
 #main_article code a:hover {
-  background-color: hsla(0, 0%, 72%, .18) !important;
+  background-color: hsla(0, 0%, 72%, .18);
 }
 #main_article code a:visited {
-  color: hsl(0, 0%, 64%) !important;
+  color: hsl(0, 0%, 64%);
 }
 #main_article code a:hover:visited {
-  background-color: hsla(0, 0%, 60%, .18) !important;
+  background-color: hsla(0, 0%, 60%, .18);
 }
 /* Above color mixed with 180/255 60% lightness */
 #main_article code a:active {
-  color: #9D8282 !important;
+  color: #9D8282;
 }
 #main_article code a:hover:active {
   /* #9D8282 in rgba */
-  background-color: rgba(157, 130, 130, .18) !important;
+  background-color: rgba(157, 130, 130, .18);
 }
 
 #main_article code {
