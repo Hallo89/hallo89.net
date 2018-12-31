@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Spacy text generator - Tools | Hallo89</title>
     <link rel="stylesheet" href="../../global.css">
+    <link rel="stylesheet" href="https://hallo89.github.io/Slider89/slider89.css">
     <link rel="stylesheet" href="../base.css">
     <link rel="stylesheet" href="../textio.css">
     <link rel="stylesheet" href="spacing.css">
@@ -27,23 +28,12 @@
           </div>
         </div>
         <div class="input_container">
-          <!-- <div id="slider_spacesamount"></div> -->
           <div class="input_box tipper">
             <span class="input_header">Filler</span>
             <input type="text" class="input chars filler" value=" ">
             <span class="tooltip default noselect">What will be in between the characters</span>
           </div>
-          <div class="input_box tipper">
-            <span class="input_header">Filler amount</span>
-            <div class="input_number_container">
-              <input type="number" class="input number spacesamount" min="0" value="1">
-              <div class="buttons_change_number">
-                <span class="change_number increment noselect">▲</span>
-                <span class="change_number decrement noselect">▼</span>
-              </div>
-            </div>
-            <span class="tooltip default noselect">How many fillers should be between two chars</span>
-          </div>
+          <div id="slider_spacesamount"></div>
           <div class="input_box tipper">
             <span class="input_header">Ignore input spaces</span>
             <span class="input toggle extraspaces knobber active">
@@ -60,9 +50,20 @@
 
     </div>
 
-    <!-- <link rel="stylesheet" href="https://hallo89.github.io/Slider89/slider89.css"> -->
-    <!-- <script src="https://hallo89.github.io/Slider89/slider89.js"></script> -->
-    <!-- <script src="../../../../../Slider89/slider89.js"></script> -->
+    <script src="https://hallo89.github.io/Slider89/slider89.js"></script>
+    <script>
+      const inputAmount = new Slider89(document.getElementById('slider_spacesamount'), {
+        replaceNode: true,
+        max: 10,
+        value: 1,
+        width: 150,
+        absWidth: true,
+        classList: ['input_box', 'tipper'],
+        tipDuration: false,
+        structure: '<caption !class(input_header)><tip span class(tooltip, default, noselect) "How many fillers should be between two chars"><wrapper class(input)><knob><tooltip></wrapper>',
+        caption: 'Filler amount'
+      });
+    </script>
     <script src="../base.js"></script>
     <script src="../textio.js"></script>
     <script src="s_p_a_c_i_n_g.js"></script>
