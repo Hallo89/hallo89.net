@@ -375,23 +375,18 @@ input.number::-webkit-outer-spin-button {
   color: hsl(0, 0%, 45%);
 }
 
-/* The slider input. Not used anywhere atm but it's here */
+/* Slider89 */
 
-.slider {
-  padding: 3px 12px;
+.input.slider .slider_knob {
+  background-color: hsl(0, 0%, 38%);
+  border-radius: 2px;
 }
-.slider .knob {
-  left: 2.5px;
-  transition: none;
+.input.slider, .input.slider .slider_knob, .input.slider .slider_tooltip {
+  height: 24px;
 }
-.slider .knob.default {
-  z-index: 10;
-}
-.slider.rotate {
-  width: 360px;
-}
-.slider.scale {
-  width: 100px;
+.input.slider .slider_tooltip {
+  color: hsl(0, 0%, 55%);
+  font-size: 1.05em;
 }
 
 /* Tooltips */
