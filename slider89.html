@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>Slider89 | Hallo89</title>
-    <link rel="stylesheet" type="text/css" href="global.css">
-    <link rel="stylesheet" type="text/css" href="slider89-site.css">
+    <link rel="stylesheet" href="global.css">
+    <link rel="stylesheet" href="slider89-site.css">
   </head>
   <body>
     <nav id="id_nav">
@@ -24,7 +24,7 @@
       <section>
         <p>
           If you have at some point needed an input type=range while developing a website you'll know that they are awesome. They fit with a lot of use cases and are very convenient to both interact with as user and deal with as developer.<br>
-          However, the restriction of not being able to style it very well is a point which isn't easy to ignore. People tell me that there are many ways to style a range input, to which I answer with the question whether approximately 80 lines of css (for cross-browser support) solely for one range input is worth it.
+          However, the restriction of not being able to style it very well is a point which isn't easy to ignore. People tell me that there are many ways to style a range input, to which I answer with the question whether approximately 80 lines of css (cross-browser support included) solely for one range input is worth it.
         </p>
         <p>
           This is why I wrote a framework to solve this very problem: <em>Slider89</em>, which also happened to solve a lot more problems and make life much easier. How convenient!
@@ -52,7 +52,7 @@
         </h3>
         <p>
           Like usual when needing external resources, you first need to fetch the necessary files and load them up into your HTML document.<br>
-          There's two ways of doing this: you can either download them from the github repository, <a href="https://github.com/Hallo89/Slider89">https://github.com/Hallo89/Slider89</a>, or fetch the files from the repository's website as seen below to <em>always</em> get the latest available version.<br>
+          There are two ways of doing this: you can either download them from the github repository, <a href="https://github.com/Hallo89/Slider89">https://github.com/Hallo89/Slider89</a>, or fetch the files from the repository's website as seen below to <em>always</em> get the latest available version.<br>
           In both cases only two files are needed: <code>slider89.js</code> and <code>slider89.css</code><br>
           You'll then need to link them in your HTML file like so:
         </p>
@@ -104,6 +104,14 @@
       </h2>
 
       <section id="section_docs">
+        <div class="version_switch">
+          <strong>Version-select: </strong>
+          <span class="versions">
+            <button class="version v0_2_0 active">0.2.0</button>
+            <button class="version v0_1_1">0.1.1</button>
+            <button class="version v0_1_0">0.1.0</button>
+          </span>
+        </div>
         <p>This chapter will introduce all available methods, variables etc. with a thorough explanation</p>
 
         <hr>
@@ -194,11 +202,38 @@
                 <dd class="doc_item info_item"><span class="nodisplay">└ </span>default: <code>undefined</code></dd>
               </div>
 
-              <div id="property-taskMouseUp" class="list_item">
-                <dt><a href="#property-taskMouseUp"><code>taskMouseUp</code></a></dt>
-                <dd class="doc_item description">This is the same as <code><a href="#property-task">task</a></code>, taking a function, which is, however, executed only every time the mouse button is released after the slider has been interacted with</dd>
-                <dd class="doc_item info_item"><span class="nodisplay">├ </span>type: <code>function</code></dd>
-                <dd class="doc_item info_item"><span class="nodisplay">└ </span>default: <code>undefined</code></dd>
+              <div id="property-taskMouseUp" class="list_item version_list">
+                <div class="version v0_1_1 active enabled">
+                  <strong class="indicator noselect">0.1.1</strong>
+                  <dt><a href="#property-taskMouseUp"><code>taskMouseUp</code></a></dt>
+                  <dd class="doc_item description">This is the same as <code><a href="#property-task">task</a></code>, taking a function, which is, however, executed only every time the mouse button is released after the slider has been interacted with</dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">├ </span>type: <code>function</code></dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">└ </span>default: <code>undefined</code></dd>
+                </div>
+              </div>
+
+              <div id="property-structure" class="list_item version_list">
+                <div class="version v0_2_0 active enabled newest">
+                  <strong class="indicator noselect">0.2.0</strong>
+                  <dt><a href="#property-structure"><code>structure</code></a></dt>
+                  <dd class="doc_item description">
+                    An XML-like layout resulting in the final HTML structure of the slider.<br>
+                    (For now) necessary components: <code>&lt;wrapper&gt;</code>, <code>&lt;knob&gt;</code>, <code>&lt;tooltip&gt;</code>, <code>&lt;caption&gt;</code>, where every tag except <code>wrapper</code> is a non-closing one-line tag.<br>
+                    Definition of attributes: <code>[!]attributeName(value1[, value2[, ...]])</code>, where an exclamation mark in front of the attribute overwrites potential framework-side pre-defined values.<br>
+                    For additional elements, insert a new uniquely-named tag and, if needed, specifiy the HTML tag type after that.<br>
+                    Additionally, inner text is created by simply placing it inside the tag in quotation marks.<br>
+                    Example:
+                    <pre class="codeblock"><code>&lt;caption !class(input_header)&gt;
+&lt;text span class(char_info, default) "Text appearing inside the element"&gt;
+&lt;wrapper class(input)&gt;
+  &lt;knob style(height: 50px)&gt;
+  &lt;tooltip&gt;
+&lt;/wrapper&gt;</code></pre>
+                  </dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">├ </span>type: <code>string</code></dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">├ </span>influencing: <code><a href="#structure">HTML structure</a></code></dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">└ </span>default: <code>'&lt;wrapper&gt;&lt;knob&gt;&lt;tooltip&gt;&lt;/wrapper&gt;&lt;caption&gt;'</code></dd>
+                </div>
               </div>
 
               <div id="property-absWidth" class="list_item">
@@ -219,12 +254,26 @@
                 <dd class="doc_item info_item"><span class="nodisplay">└ </span>default: <code>true</code></dd>
               </div>
 
-              <div id="property-tipDuration" class="list_item">
-                <dt><a href="#property-tipDuration"><code>tipDuration</code></a></dt>
-                <dd class="doc_item description">A duration after how long the value tooltip should vanish when the slider hasn't been interacted with</dd>
-                <dd class="doc_item info_item"><span class="nodisplay">├ </span>type: <code>number</code></dd>
-                <dd class="doc_item info_item"><span class="nodisplay">├ </span>unit: <code>ms</code></dd>
-                <dd class="doc_item info_item"><span class="nodisplay">└ </span>default: <code>250</code></dd>
+              <div id="property-tipDuration" class="list_item version_list">
+                <div class="version v0_2_0 newest active enabled">
+                  <strong class="indicator noselect">0.2.0</strong>
+                  <dt><a href="#property-tipDuration"><code>tipDuration</code></a></dt>
+                  <dd class="doc_item description">
+                    The duration after how long the value tooltip should vanish when the slider hasn't been interacted with.<br>
+                    Setting it to <code>false</code> disables the timer, making the value never disappear
+                  </dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">├ </span>type: <code>number</code> | <code>boolean&lt;false&gt;</code></dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">├ </span>unit: <code>ms</code></dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">└ </span>default: <code>250</code></dd>
+                </div>
+                <div class="version v0_1_0">
+                  <strong class="indicator noselect">0.1.0</strong>
+                  <dt><a href="#property-tipDuration"><code>tipDuration</code></a></dt>
+                  <dd class="doc_item description">The duration after how long the value tooltip should vanish when the slider hasn't been interacted with</dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">├ </span>type: <code>number</code></dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">├ </span>unit: <code>ms</code></dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">└ </span>default: <code>250</code></dd>
+                </div>
               </div>
 
               <div id="property-replaceNode" class="list_item">
@@ -253,12 +302,25 @@
           <div class="collapsible">
             <p>The following properties are read only and may not be used as configuration properties</p>
             <dl class="doc_list">
-              <div id="property-element" class="list_item">
-                <dt><a href="#property-element"><code>element</code></a></dt>
-                <dd class="doc_item description">The HTML element (see <a href="#structure">HTML structure</a>) of the final slider instance after initialization</dd>
-                <dd class="doc_item info_item state"><span class="nodisplay">├ </span><strong>READ ONLY</strong></dd>
-                <dd class="doc_item info_item"><span class="nodisplay">├ </span>type: <code>HTML element</code></dd>
-                <dd class="doc_item info_item"><span class="nodisplay">└ </span>default: <code>undefined</code></dd>
+              <div id="property-element" class="list_item version_list">
+                <div class="version v0_2_0 active enabled newest">
+                  <strong class="indicator noselect">0.2.0</strong>
+                  <dt><a href="#property-element"><code>element</code></a></dt>
+                  <dd class="doc_item description">An object containing all nodes of the final <a href="#structure">HTML structure</a> after the slider instance's initialization</dd>
+                  <dd class="doc_item info_item state"><span class="nodisplay">├ </span><strong>READ ONLY</strong></dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">├ </span>type: <code>object&lt;HTMLnodes&gt;</code></dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">├ </span>influences: <code><a href="#function-buildElement">buildElement</a></code></dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">└ </span>default: <code>undefined</code></dd>
+                </div>
+                <div class="version v0_1_0">
+                  <strong class="indicator noselect">0.1.0</strong>
+                  <dt><a href="#property-element"><code>element</code></a></dt>
+                  <dd class="doc_item description">The HTML element (see <a href="#structure">HTML structure</a>) of the final slider instance after initialization</dd>
+                  <dd class="doc_item info_item state"><span class="nodisplay">├ </span><strong>READ ONLY</strong></dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">├ </span>type: <code>HTML element</code></dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">├ </span>influences: <code><a href="#function-buildElement">buildElement</a></code></dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">└ </span>default: <code>undefined</code></dd>
+                </div>
               </div>
             </dl>
           </div>
@@ -337,70 +399,83 @@
           </div>
         </div>
 
-          <div class="list_container" id="functions-instance">
-            <h4>Instance functions
-              <button class="expand_button">
-                <div class="symbols">
-                  <span class="symbol plus">+</span>
-                  <span class="symbol minus">-</span>
-                </div>
-              </button>
-              <a href="#functions-instance" class="icon_anchor">#</a>
-            </h4>
-            <div class="collapsible">
-              <p>Functions under this category are called on a slider instance</p>
-              <dl class="doc_list">
-                <div id="function-newValues" class="list_item">
-                  <dt><a href="#function-newValues"><code>&lt;sliderInstance&gt;.newValues(&lt;configProperties&gt;)</code></a></dt>
+        <div class="list_container" id="functions-instance">
+          <h4>Instance functions
+            <button class="expand_button">
+              <div class="symbols">
+                <span class="symbol plus">+</span>
+                <span class="symbol minus">-</span>
+              </div>
+            </button>
+            <a href="#functions-instance" class="icon_anchor">#</a>
+          </h4>
+          <div class="collapsible">
+            <p>Functions under this category are called on a slider instance</p>
+            <dl class="doc_list">
+              <div id="function-newValues" class="list_item">
+                <dt><a href="#function-newValues"><code>&lt;sliderInstance&gt;.newValues(&lt;configProperties&gt;)</code></a></dt>
+                <dd class="doc_item description">
+                  This function takes configuration properties and restructures the slider based on its new properties.<br>
+                  Although properties <strong>could</strong> be overriden using <code>&lt;sliderInstance&gt;.&lt;configProperty&gt; = &lt;newValue&gt;</code>, this function ensures every dependent and dependency is restructured as well.<br>
+                  Examples: it writes a new caption into the element; it sets a new width of the element; etc.<br>
+                  Additionally, if <code>min</code> or <code>max</code> is changed, the value recomputes itself based on the previous min-max-ratio
+                </dd>
+                <dd class="doc_item info_item"><span class="nodisplay">└ </span>sliderInstance = An instance of a slider constructed via the <code><a href="#function-Slider89">Slider89</a></code> constructor</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+
+        <div class="list_container" id="functions-object">
+          <h4>
+            <span>The <code>slider89</code> object</span>
+            <button class="expand_button">
+              <div class="symbols">
+                <span class="symbol plus">+</span>
+                <span class="symbol minus">-</span>
+              </div>
+            </button>
+            <a href="#functions-object" class="icon_anchor">#</a>
+          </h4>
+          <div class="collapsible">
+            <p>'<code>slider89</code>' (take notice that it's a lowercase "s"!) is a standalone object used for functions which are called without a reference to a slider instance</p>
+            <dl class="doc_list">
+              <div id="function-defaultValues" class="list_item">
+                <dt><a href="#function-defaultValues"><code>slider89.defaultValues(&lt;configProperties&gt;)</code></a></dt>
+                <dd class="doc_item description">Called before a slider is created, it sets default values for every instance to apply</dd>
+                <dd class="doc_item info_item"><span class="nodisplay">└ </span>slider89 = standalone object</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+
+        <div class="list_container" id="functions-internal">
+          <h4>Internal
+            <button class="expand_button active">
+              <div class="symbols">
+                <span class="symbol plus">+</span>
+                <span class="symbol minus">-</span>
+              </div>
+            </button>
+            <a href="#functions-internal" class="icon_anchor">#</a>
+          </h4>
+          <div class="collapsible collapsed">
+            <p>As with the <a href="#properties-internal">internal properties</a>, these values serve no purpose for the user but are listed here to give the user (and hacker) full transparency</p>
+            <dl class="doc_list">
+              <div id="function-buildElement" class="list_item version_list">
+                <div class="version v0_2_0 active enabled newest">
+                  <strong class="indicator noselect">0.2.0</strong>
+                  <dt><a href="#function-buildElement"><code>&lt;sliderInstance&gt;.buildElement(&lt;targetNode&gt;, replaceNode)</code><br>-> <code>object&lt;HTMLnodes&gt;</code></a></dt>
                   <dd class="doc_item description">
-                    This function takes configuration properties and restructures the slider based on its new properties.<br>
-                    Although properties <strong>could</strong> be overriden using <code>&lt;sliderInstance&gt;.&lt;configProperty&gt; = &lt;newValue&gt;</code>, this function ensures every dependent and dependency is restructured as well.<br>
-                    Examples: it writes a new caption into the element; it sets a new width of the element; etc.<br>
-                    Additionally, if <code>min</code> or <code>max</code> is changed, the value recomputes itself based on the previous min-max-ratio
+                    Builds the slider's <a href="#structure">HTML structure</a> into the specified <code>targetNode</code>, adding additional classes from the <code><a href="#property-classList">classList</a></code> property, if present. If <code><a href="#property-replaceNode">replaceNode</a></code> is true, it replaces <code>targetNode</code>.<br>
+                    The object containing all HTML elements of the final HTML, which is beforehand acquired from <code><a href="#function-parseHTML">parseHTML</a></code>, is returned to be written into <code><a href="#property-element">element</a></code>
                   </dd>
-                  <dd class="doc_item info_item"><span class="nodisplay">└ </span>sliderInstance = An instance of a slider constructed via the <code><a href="#function-Slider89">Slider89</a></code> constructor</dd>
+                  <dd class="doc_item info_item state"><span class="nodisplay">├ </span><strong>INTERNAL</strong></dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">├ </span>influences: <code><a href="#property-replaceNode">replaceNode</a></code>, <code><a href="#function-parseHTML">parseHTML</a></code>, <code><a href="#property-classList">classList</a></code></dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">└ </span>influencing: <code><a href="#structure">HTML structure</a></code>, <code><a href="#property-element">element</a></code></dd>
                 </div>
-              </dl>
-            </div>
-          </div>
-
-          <div class="list_container" id="functions-object">
-            <h4>
-              <span>The <code>slider89</code> object</span>
-              <button class="expand_button">
-                <div class="symbols">
-                  <span class="symbol plus">+</span>
-                  <span class="symbol minus">-</span>
-                </div>
-              </button>
-              <a href="#functions-object" class="icon_anchor">#</a>
-            </h4>
-            <div class="collapsible">
-              <p>'<code>slider89</code>' (take notice that it's a lowercase "s"!) is a standalone object used for functions which are called without a reference to a slider instance</p>
-              <dl class="doc_list">
-                <div id="function-defaultValues" class="list_item">
-                  <dt><a href="#function-defaultValues"><code>slider89.defaultValues(&lt;configProperties&gt;)</code></a></dt>
-                  <dd class="doc_item description">Called before a slider is created, it sets default values for every instance to apply</dd>
-                  <dd class="doc_item info_item"><span class="nodisplay">└ </span>slider89 = standalone object</dd>
-                </div>
-              </dl>
-            </div>
-          </div>
-
-          <div class="list_container" id="functions-internal">
-            <h4>Internal
-              <button class="expand_button active">
-                <div class="symbols">
-                  <span class="symbol plus">+</span>
-                  <span class="symbol minus">-</span>
-                </div>
-              </button>
-              <a href="#functions-internal" class="icon_anchor">#</a>
-            </h4>
-            <div class="collapsible collapsed">
-              <p>As with the <a href="#properties-internal">internal properties</a>, these values serve no purpose for the user but are listed here to give the user (and hacker) full transparency</p>
-              <dl class="doc_list">
-                <div id="function-buildElement" class="list_item">
+                <div class="version v0_1_0">
+                  <strong class="indicator noselect">0.1.0</strong>
                   <dt><a href="#function-buildElement"><code>&lt;sliderInstance&gt;.buildElement(&lt;targetNode&gt;, replaceNode)</code><br>-> <code>HTML element</code></a></dt>
                   <dd class="doc_item description">
                     Builds the slider's <a href="#structure">HTML structure</a> into the specified <code>targetNode</code>, adding additional classes from the <code><a href="#property-classList">classList</a></code> property, if present. If <code><a href="#property-replaceNode">replaceNode</a></code> is true, it replaces <code>targetNode</code>.<br>
@@ -408,21 +483,24 @@
                   </dd>
                   <dd class="doc_item info_item state"><span class="nodisplay">├ </span><strong>INTERNAL</strong></dd>
                   <dd class="doc_item info_item"><span class="nodisplay">├ </span>influences: <code><a href="#property-replaceNode">replaceNode</a></code>, <code><a href="#property-classList">classList</a></code></dd>
-                  <dd class="doc_item info_item"><span class="nodisplay">└ </span>influencing: <code><a href="#structure">HTML structure</a></code></dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">└ </span>influencing: <code><a href="#structure">HTML structure</a></code>, <code><a href="#property-element">element</a></code></dd>
                 </div>
+              </div>
 
-                <div id="function-executeSlider" class="list_item">
-                  <dt><a href="#function-executeSlider"><code>&lt;sliderInstance&gt;.executeSlider(&lt;clickedCoordinate&gt;)</code></a></dt>
-                  <dd class="doc_item description">
-                    This function is executed every time the <code>mousemove</code> event, and more specifically, the <code><a href="#function-mouseMove">mouseMove</a></code> function is fired and handles the value, its tooltip and the specified <code><a href="#property-task">task</a></code> function
-                  </dd>
-                  <dd class="doc_item info_item state"><span class="nodisplay">├ </span><strong>INTERNAL</strong></dd>
-                  <dd class="doc_item info_item"><span class="nodisplay">├ </span>clickedCoordinate = an <code>int</code> representing a screen-related x-coordinate where the mouse has been clicked</dd>
-                  <dd class="doc_item info_item"><span class="nodisplay">├ </span>influences: <code><a href="#property-element">element</a></code>, <code><a href="#property-task">task</a></code></dd>
-                  <dd class="doc_item info_item"><span class="nodisplay">└ </span>influencing: <code><a href="#property-value">value</a></code>, <code><a href="#property-tipTimer">tipTimer</a></code>, <code><a href="#property-taskLock">taskLock</a></code></dd>
-                </div>
+              <div id="function-executeSlider" class="list_item">
+                <dt><a href="#function-executeSlider"><code>&lt;sliderInstance&gt;.executeSlider(&lt;clickedCoordinate&gt;)</code></a></dt>
+                <dd class="doc_item description">
+                  This function is executed every time the <code>mousemove</code> event, and more specifically, the <code><a href="#function-mouseMove">mouseMove</a></code> function is fired and handles the value, its tooltip and the specified <code><a href="#property-task">task</a></code> function
+                </dd>
+                <dd class="doc_item info_item state"><span class="nodisplay">├ </span><strong>INTERNAL</strong></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>clickedCoordinate = an <code>int</code> representing a screen-related x-coordinate where the mouse has been clicked</dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>influences: <code><a href="#property-element">element</a></code>, <code><a href="#property-task">task</a></code></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">└ </span>influencing: <code><a href="#property-value">value</a></code>, <code><a href="#property-tipTimer">tipTimer</a></code>, <code><a href="#property-taskLock">taskLock</a></code></dd>
+              </div>
 
-                <div id="function-checkTask" class="list_item">
+              <div id="function-checkTask" class="list_item version_list">
+                <div class="version v_0_1_1 active">
+                  <strong class="indicator noselect">0.1.1</strong>
                   <dt><a href="#function-checkTask"><code>&lt;sliderInstance&gt;.checkTask(&lt;task&gt;)</code><br>-> <code>&lt;task&gt; | false</code></a></dt>
                   <dd class="doc_item description">
                     A function evaluation whether a handed-over <code>task</code> is valid:<br>
@@ -431,56 +509,314 @@
                   <dd class="doc_item info_item state"><span class="nodisplay">├ </span><strong>INTERNAL</strong></dd>
                   <dd class="doc_item info_item"><span class="nodisplay">└ </span>influencing: <code><a href="#property-task">task</a> / <a href="#property-taskMouseUp">taskMouseUp</a></code></dd>
                 </div>
-
-                <div id="function-computeWidth" class="list_item">
-                  <dt><a href="#function-computeWidth"><code>&lt;sliderInstance&gt;.computeWidth(&lt;valueObject&gt;)</code><br>-> <code>int</code></a></dt>
+                <div class="version v0_1_0">
+                  <strong class="indicator noselect">0.1.0</strong>
+                  <dt><code>&lt;sliderInstance&gt;.setTask(objectTarget, task)</code></dt>
                   <dd class="doc_item description">
-                    If the <code>valueObject</code>'s <code><a href="#property-width">width</a></code> is <code>'auto'</code>, compute the width automatically based on <code><a href="#property-min">min</a></code> and <code><a href="#property-max">max</a></code>, if it isn't, set the valueObject's width to its own width but take <code><a href="#property-absWidth">absWidth</a></code> into account
+                    A function evaluation whether an input <code><a href="#property-task">task</a></code>, which is also handed over into this function, is valid. If it is, write it into the specified <code>objectTarget</code><br>
+                    If the task is no valid function, for example declared <em>with</em> parenthesis, throw an error into the console
                   </dd>
                   <dd class="doc_item info_item state"><span class="nodisplay">├ </span><strong>INTERNAL</strong></dd>
-                  <dd class="doc_item info_item"><span class="nodisplay">├ </span>valueObject = an object preferably carrying values for <code><a href="#property-width">width</a></code>, <code><a href="#property-min">min</a></code>, <code><a href="#property-max">max</a></code> and <code><a href="#property-absWidth">absWidth</a></code></dd>
-                  <dd class="doc_item info_item"><span class="nodisplay">├ </span>influences: <code><a href="#property-min">min</a></code>, <code><a href="#property-max">max</a></code>, <code><a href="#property-absWidth">absWidth</a></code></dd>
-                  <dd class="doc_item info_item"><span class="nodisplay">└ </span>influencing: <code><a href="#property-width">width</a></code></dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">├ </span>objectTarget = The object to write into; either the slider instance (<a href="#functions-constructor">constructor</a>) or the <code><a href="#functions-object">slider89</a></code> object</dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">└ </span>influencing: <code><a href="#property-task">task</a></code></dd>
                 </div>
+              </div>
 
-                <div id="function-mouseMove" class="list_item">
-                  <dt><a href="#function-mouseMove"><code>&lt;sliderInstance&gt;.mouseMove(event)</code></a></dt>
+              <div id="function-computeWidth" class="list_item">
+                <dt><a href="#function-computeWidth"><code>&lt;sliderInstance&gt;.computeWidth(&lt;valueObject&gt;)</code><br>-> <code>int</code></a></dt>
+                <dd class="doc_item description">
+                  If the <code>valueObject</code>'s <code><a href="#property-width">width</a></code> is <code>'auto'</code>, compute the width automatically based on <code><a href="#property-min">min</a></code> and <code><a href="#property-max">max</a></code>, if it isn't, set the valueObject's width to its own width but take <code><a href="#property-absWidth">absWidth</a></code> into account
+                </dd>
+                <dd class="doc_item info_item state"><span class="nodisplay">├ </span><strong>INTERNAL</strong></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>valueObject = an object preferably carrying values for <code><a href="#property-width">width</a></code>, <code><a href="#property-min">min</a></code>, <code><a href="#property-max">max</a></code> and <code><a href="#property-absWidth">absWidth</a></code></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">├ </span>influences: <code><a href="#property-min">min</a></code>, <code><a href="#property-max">max</a></code>, <code><a href="#property-absWidth">absWidth</a></code></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">└ </span>influencing: <code><a href="#property-width">width</a></code></dd>
+              </div>
+
+              <div id="function-parseHTML" class="list_item version_list">
+                <div class="version v0_2_0 enabled active newest">
+                  <strong class="indicator noselect">0.2.0</strong>
+                  <dt><a href="#function-parseHTML"><code>&lt;sliderInstance&gt;.parseHTML(structure)</code><br>-> <code>object&lt;structureNodes&gt;</code></a></dt>
                   <dd class="doc_item description">
-                    Is executed by the mousemove event, being its own function for the ability to remove the event listener afterwards, and executing <code><a href="#function-executeSlider">executeSlider</a></code>, parsing event.x
+                    This function will parse a given <code><a href="#property-structure">structure</a></code> into valid HTML, taking every attribute, innerHTML, etc. into account.<br>
+                    It will return every HTML node created as an object, with the in <code>structure</code> specified tag name as object name
                   </dd>
                   <dd class="doc_item info_item state"><span class="nodisplay">├ </span><strong>INTERNAL</strong></dd>
-                  <dd class="doc_item info_item"><span class="nodisplay">├ </span>event = The event parameter handed over by the event listener</dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">├ </span>influences: <code><a href="#property-structure">structure</a></code></dd>
+                  <dd class="doc_item info_item"><span class="nodisplay">└ </span>influencing: <code><a href="#function-buildElement">buildElement</a></code>, <code><a href="#structure">HTML structure</a></code></dd>
                 </div>
-              </dl>
-            </div>
+              </div>
+
+              <div id="function-mouseMove" class="list_item">
+                <dt><a href="#function-mouseMove"><code>&lt;sliderInstance&gt;.mouseMove(event)</code></a></dt>
+                <dd class="doc_item description">
+                  Is executed by the mousemove event, being its own function for the ability to remove the event listener afterwards, and executing <code><a href="#function-executeSlider">executeSlider</a></code>, parsing event.x
+                </dd>
+                <dd class="doc_item info_item state"><span class="nodisplay">├ </span><strong>INTERNAL</strong></dd>
+                <dd class="doc_item info_item"><span class="nodisplay">└ </span>event = The event parameter handed over by the event listener</dd>
+              </div>
+            </dl>
           </div>
+        </div>
 
         <hr>
 
         <h3 id="structure">
-          <a href="#structure" class="icon_anchor">#</a>HTML structure
+          <a href="#structure" class="icon_anchor">#</a>HTML & CSS structure
         </h3>
-        <pre class="codeblock"><code>&lt;div class="slider89 [{<a href="#property-classList">additional classes</a>}]"&gt;
+        <div class="doc_list">
+          <p>As of version <code>0.2.0</code> (with the introduction of the <code><a href="#property-structure">structure system</a></code>), CSS has been split into two sections: crucial and non-crucial. Crucial CSS is declared with a strict <code>.slider89 .slider_{sliderPart}</code>, whereas uncrucial styles are matched with the new class <code>.slider89_{sliderPart}</code>. This ensures a good stylability of the slider without the user having to nest their selectors to overcome the strict selectors.</p>
+          <div class="list_item version_list">
+            <div class="version v0_2_0 active enabled newest">
+              <strong class="indicator noselect">0.2.0</strong>
+              <pre class="codeblock"><code>&lt;div class="slider89 [{<a href="#property-classList">additional classes</a>}]"&gt;
+  &lt;div class="slider slider89_wrapper" style="width: {<a href="#property-width">width</a>}px"&gt;
+    &lt;div class="slider_knob slider89_knob" style="transform: translateX({<a href="#property-value">value</a>}px)"&gt;&lt;/div&gt;
+    &lt;div class="slider_tooltip slider89_tooltip right hidden noselect"&gt;{value}&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="slider_header slider89_header"&gt;{<a href="#property-caption">caption</a>}&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+            <div class="version v0_1_0">
+              <strong class="indicator noselect">0.1.0</strong>
+              <pre class="codeblock"><code>&lt;div class="slider89 [{<a href="#property-classList">additional classes</a>}]"&gt;
   &lt;div class="slider" style="width: {<a href="#property-width">width</a>}px"&gt;
     &lt;span class="slider_knob" style="transform: translateX({<a href="#property-value">value</a>}px)"&gt;&lt;/span&gt;
     &lt;span class="slider_tooltip right hidden noselect"&gt;{value}&lt;/span&gt;
   &lt;/div&gt;
   &lt;span class="slider_header"&gt;{<a href="#property-caption">caption</a>}&lt;/span&gt;
 &lt;/div&gt;</code></pre>
+            </div>
+          </div>
+          <div class="list_item version_list">
+            <div class="version v0_2_0 active enabled newest">
+              <strong class="indicator noselect">0.2.0</strong>
+              <pre class="codeblock"><code>.slider89 {
+  display: inline-block;
+}
+.slider89 .slider {
+  position: relative;
+  font-family: monospace;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 0;
+}
+.slider89_wrapper {
+  background-color: hsl(0, 0%, 19%);
+  height: 25px;
+}
+.slider89 .slider_knob {
+  position: absolute;
+  cursor: pointer;
+  left: 0;
+  z-index: 1;
+}
+.slider89_knob {
+  height: 25px;
+  width: 14px;
+  background-color: hsl(0, 0%, 27%);
+}
+.slider89 .slider_tooltip {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  cursor: default;
+  opacity: 1;
+  transition: .2s ease-out;
+}
+.slider89_tooltip {
+  color: hsl(0, 0%, 45%);
+  padding: 1px 3px 0;
+}
+.slider89 .slider_tooltip.left {
+  left: 0;
+}
+.slider89 .slider_tooltip.right {
+  right: 0;
+}
+.slider89 .slider_tooltip.hidden {
+  opacity: 0;
+}
+.slider89_header {
+  color: hsl(0, 0%, 70%);
+  font-family: 'Calibri', serif;
+  font-size: 20px;
+}
+
+.noselect {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+            </code></pre>
+            </div>
+            <div class="version v0_1_0">
+              <strong class="indicator noselect">0.1.0</strong>
+              <pre class="codeblock"><code>.slider89 {
+  display: inline-block;
+}
+.slider89 .slider {
+  position: relative;
+  padding: 0;
+  background-color: hsl(0, 0%, 19%);
+  font-family: monospace;
+  font-size: 18px;
+  font-weight: bold;
+  height: 25px;
+}
+.slider89 .slider_knob {
+  position: absolute;
+  cursor: pointer;
+  left: 0;
+  height: 25px;
+  width: 14px;
+  background-color: hsl(0, 0%, 27%);
+  z-index: 1;
+}
+.slider89 .slider_tooltip {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  padding: 1px 3px 0;
+  color: hsl(0, 0%, 45%);
+  height: 100%;
+  cursor: default;
+  opacity: 1;
+  transition: .2s ease-out;
+}
+.slider89 .slider_tooltip.left {
+  left: 0;
+}
+.slider89 .slider_tooltip.right {
+  right: 0;
+}
+.slider89 .slider_tooltip.hidden {
+  opacity: 0;
+}
+
+.slider89 .slider_header {
+  color: hsl(0, 0%, 70%);
+  font-family: 'Calibri', serif;
+  font-size: 20px;
+  display: block;
+}
+
+.noselect {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+            </code></pre>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
 
-    <link rel="stylesheet" href="https://hallo89.github.io/Slider89/slider89.css">
-    <script src="https://hallo89.github.io/Slider89/slider89.js"></script>
     <script>
-      new Slider89(document.getElementById('demo_plain'));
-      new Slider89(document.getElementById('demo_1_plain'));
-      new Slider89(document.getElementById('demo_2_configged'), {min: -50, max: 175, value: 80});
+      var version = 'v0_2_0';
 
       const h4s = document.querySelectorAll('h4');
+      const versions = document.querySelectorAll('.version_switch .version');
+      const versionLists = document.querySelectorAll('.version_list');
+      const versionItems = document.querySelectorAll('.version_list .version');
+      const stylesheet = document.createElement('style');
+
+      document.head.appendChild(stylesheet);
 
       for (var i = 0; i < h4s.length; i++) {
         h4s[i].addEventListener('click', toggleCollapsible);
+      }
+      for (var i = 0; i < versions.length; i++) {
+        versions[i].addEventListener('click', versionSelect);
+      }
+      for (var i = 0; i < versionItems.length; i++) {
+        versionItems[i].addEventListener('click', swapItem);
+      }
+
+      //IIFE adding styles to the style sheet corresponding with the version cards
+      (function() {
+        for (var i = 0; i < versionLists.length; i++) {
+          let childLen = versionLists[i].children.length;
+          versionLists[i].classList.add('versions_' + childLen);
+          for (var n = 1; n < childLen; n++) {
+            stylesheet.sheet.insertRule('.version_list.versions_' + childLen + ' .version:nth-child(' + (n+1) + ').enabled { transform: translateX(' + 45*n + 'px) }');
+            stylesheet.sheet.insertRule('.version_list.versions_' + childLen + ' .version:nth-child(' + (n+1) + '):not(.enabled) { transform: translateX(calc(100% - ' + 40*(childLen - n) + 'px)) }');
+          }
+        }
+      })();
+
+      function swapItem() {
+        if (!this.classList.contains('active')) {
+          let thisChildren = this.parentNode.children;
+          if (!this.classList.contains('enabled')) {
+            let thisIndex;
+            for (var i = thisChildren.length - 1; i >= 0; i--) {
+              const thisChild = thisChildren[i];
+              if (thisChild == this) {
+                thisIndex = i;
+                thisChild.classList.add('enabled');
+              }
+              if (thisIndex != null && i < thisIndex) {
+                thisChild.classList.add('enabled');
+              }
+            }
+          } else {
+            let thisIndex;
+            for (var i = 0; i < thisChildren.length; i++) {
+              const thisChild = thisChildren[i];
+              if (thisChild == this) {
+                thisIndex = i;
+              }
+              if (thisIndex != null && i > thisIndex) {
+                thisChild.classList.remove('enabled');
+              }
+            }
+          }
+          let thisList;
+          for (var i = 0; i < thisChildren.length; i++) {
+            if (thisChildren[i].classList.contains('active')) thisChildren[i].classList.remove('active');
+          }
+          this.classList.add('active');
+        }
+      }
+
+      function versionSelect() {
+        if (this.classList[1] != version) {
+          document.querySelector('.version_switch .' + version).classList.remove('active');
+          this.classList.add('active');
+          version = this.classList[1];
+          for (var i = 0; i < versionLists.length; i++) {
+            let limitIndex;
+            for (var n = 0; n < versionLists[i].children.length; n++) {
+              const preChild = versionLists[i].children[(versionLists[i].children.length - n - 1)];
+              const postChild = versionLists[i].children[n];
+              if (preChild.classList.contains(version)) {
+                limitIndex = (versionLists[i].children.length - n - 1);
+                preChild.classList.add('enabled');
+              } else if (postChild.classList.contains(version)) {
+                limitIndex = n;
+              }
+              if (limitIndex != null && (versionLists[i].children.length - n - 1) < limitIndex) {
+                preChild.classList.add('enabled');
+              }
+              if (limitIndex != null && n > limitIndex) {
+                postChild.classList.remove('enabled');
+              }
+            }
+          }
+          let activeCards = document.querySelectorAll('.version_list .version.active');
+          for (var i = 0; i < activeCards.length; i++) {
+            activeCards[i].classList.remove('active');
+          }
+          let versionCards = document.querySelectorAll('.version_list .version.' + version);
+          for (var i = 0; i < versionCards.length; i++) {
+            versionCards[i].classList.add('active');
+          }
+        }
       }
 
       function toggleCollapsible(e) {
@@ -488,6 +824,13 @@
         this.children[this.children.length - 2].classList.toggle('active');
         this.nextElementSibling.classList.toggle('collapsed');
       }
+    </script>
+    <link rel="stylesheet" href="https://hallo89.github.io/Slider89/slider89.css">
+    <script src="https://hallo89.github.io/Slider89/slider89.js"></script>
+    <script>
+      new Slider89(document.getElementById('demo_plain'));
+      new Slider89(document.getElementById('demo_1_plain'));
+      new Slider89(document.getElementById('demo_2_configged'), {min: -50, max: 175, value: 80});
     </script>
   </body>
 </html>
