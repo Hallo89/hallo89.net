@@ -32,7 +32,7 @@ function toggleDropdown() {
 }
 
 window.onclick = function(e) {
-  if (modes.classList.contains('enabled') && !e.target.matches ([
+  if (modes.classList.contains('enabled') && !e.target.matches([
     '.mode_gear',
     '.dropdown_box',
     '.dropdown_header',
