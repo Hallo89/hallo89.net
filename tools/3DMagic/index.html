@@ -35,16 +35,16 @@
               <span class="tooltip default noselect">Customize the appearance of the code area model-popout</span>
             </div>
           </div>
-          <span class="floating_button expand expand_code centerflex noselect" onclick="expandCode()">⭲</span>
-          <span class="floating_button restore restore_code centerflex noselect hidden" onclick="restoreCode()">
+          <span class="floating_button expand expand_code centerflex noselect">⭲</span>
+          <span class="floating_button restore restore_code centerflex noselect hidden">
             <span class="to_right">⭲</span>
             <span class="to_left">⭰</span>
           </span>
           <div class="resize_bar"></div>
         </div>
         <div class="execute_container">
-          <span class="floating_button expand expand_execute centerflex noselect" onclick="expandExecute()">⭰</span>
-          <span class="floating_button restore restore_execute centerflex noselect hidden" onclick="restoreExecute()">
+          <span class="floating_button expand expand_execute centerflex noselect">⭰</span>
+          <span class="floating_button restore restore_execute centerflex noselect hidden">
             <span class="to_right">⭲</span>
             <span class="to_left">⭰</span>
           </span>
@@ -62,7 +62,7 @@
                 <input type="file" multiple="true" class="input_file" accept="image/png, .png" id="input_images">
                 <span class="tooltip default noselect">Choose textures which the model uses. Only png allowed</span>
               </div>
-              <div class="input_box button tipper noselect" onclick="handleJSON()">
+              <div class="input_box button refresh tipper noselect">
                 <span class="input_header">Refresh file</span>
                 <span class="tooltip default noselect">If selected file has been modified from outside, refresh it! Only works for changing values</span>
               </div>
@@ -103,31 +103,24 @@
           <div class="input_container uncrucial">
             <div class="input_box tipper">
               <span class="input_header">Quantity | Quality</span>
-              <span class="input toggle qualityquantity knobber" onclick="toggleQuantity()">
+              <span class="input toggle qualityquantity knobber">
                 <span class="knob"></span>
               </span>
               <span class="tooltip default noselect">Toggle a more inperformant, but better looking boundary and axes</span>
             </div>
             <div class="input_box tipper">
               <span class="input_header">Axes visibility</span>
-              <span class="input toggle axesvisibility knobber active" onclick="toggleAxes()">
+              <span class="input toggle axesvisibility knobber active">
                 <span class="knob"></span>
               </span>
-              <span class="tooltip default noselect">Toggle the visibility of the visual axes (also kinda broken my god)</span>
+              <span class="tooltip default noselect">Toggle the visibility of the visual axes</span>
             </div>
             <div class="input_box tipper">
               <span class="input_header">Quality Grid</span>
-              <span class="input toggle bottomgridvisibility knobber" onclick="toggleGrid()">
+              <span class="input toggle bottomgridvisibility knobber">
                 <span class="knob"></span>
               </span>
               <span class="tooltip default noselect">With Quality mode enabled, toggle a grid-aid. Possibly slightly inperformant</span>
-            </div>
-            <div class="input_box tipper">
-              <span class="input_header">Fun</span>
-              <span class="input toggle funbutton knobber">
-                <span class="knob"></span>
-              </span>
-              <span class="tooltip default noselect">Toggle fun. Have fun. Now.</span>
             </div>
           </div>
           <div class="centerflex default" id="output_container">
@@ -710,12 +703,12 @@
     <script src="codemirror/lib/codemirror.js"></script>
     <script src="codemirror/mode/javascript/javascript.js"></script>
     <script src="codemirror/addon/scroll/simplescrollbars.js"></script>
+    <link rel="stylesheet" href="codemirror/lib/codemirror.css">
+    <link rel="stylesheet" href="codemirror/addon/scroll/simplescrollbars.css">
+    <link rel="stylesheet" href="codemirror/theme/neoncube-json.css">
 
     <script src="../base.js"></script>
     <script src="3D.js"></script>
 
-    <link rel="stylesheet" href="codemirror/lib/codemirror.css">
-    <link rel="stylesheet" href="codemirror/addon/scroll/simplescrollbars.css">
-    <link rel="stylesheet" href="codemirror/theme/neoncube-json.css">
   </body>
 </html>

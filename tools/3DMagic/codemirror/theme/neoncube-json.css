@@ -21,15 +21,15 @@ hence why this theme is solely for JSON
 .cm-s-neoncube-json .CodeMirror-selected { background: rgba(44, 41, 46, .55); }
 
 .CodeMirror-line::selection, .CodeMirror-line > span::selection, .CodeMirror-line > span > span::selection {
-  background: rgba(30, 53, 65, .85);
+  background: rgb(73, 93, 105);
 }
 .CodeMirror-line::-webkit-selection, .CodeMirror-line > span::-webkit-selection, .CodeMirror-line > span > span::-webkit-selection {
-  background: rgba(30, 53, 65, .85);
+  background: rgb(73, 93, 105);
 }
 .CodeMirror-line::-moz-selection, .CodeMirror-line > span::-moz-selection, .CodeMirror-line > span > span::-moz-selection {
-  background: rgba(30, 53, 65, .85);
+  background: rgb(73, 93, 105);
 }
 
-.cm-s-neoncube-json .CodeMirror-overlayscroll-horizontal div, .CodeMirror-overlayscroll-vertical div { background: hsl(0, 0%, 30%); transition: background .15s; right: 2px }
+.cm-s-neoncube-json .CodeMirror-overlayscroll-horizontal div, .CodeMirror-overlayscroll-vertical div { background: hsl(0, 0%, 30%); transition: background .15s; }
 .cm-s-neoncube-json .CodeMirror-overlayscroll-horizontal div:hover, .CodeMirror-overlayscroll-vertical div:hover { background: hsl(0, 0%, 35%); }
-.cm-s-neoncube-json .CodeMirror-overlayscroll-horizontal, .CodeMirror-overlayscroll-vertical { width: 7px; }
+.cm-s-neoncube-json .CodeMirror-overlayscroll-horizontal, .CodeMirror-overlayscroll-vertical { width: 8px; }

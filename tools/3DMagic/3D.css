@@ -83,13 +83,23 @@ body {
   bottom: 0;
   top: 0;
   width: 8px;
-  transition: .15s ease-out;
+  transition: .15s cubic-bezier(.15, .08, .3, 1);
   cursor: ew-resize;
   z-index: 6;
 }
+.code_container.docked .resize_bar {
+  background-color: hsl(0, 0%, 8%);
+  opacity: .74;
+}
+.code_container.docked.left .resize_bar {
+  right: -8px;
+}
+.code_container.docked.right .resize_bar {
+  right: 0;
+}
 .code_container .resize_bar:hover {
-  background-color: hsl(0, 0%, 7.5%);
-  opacity: .7;
+  background-color: hsl(0, 0%, 7%);
+  opacity: .74;
 }
 .code_container .CodeMirror {
   height: auto;
@@ -99,6 +109,12 @@ body {
 }
 .code_container .CodeMirror.resizing {
   transition: .22s cubic-bezier(0,0,.4,1); /* .2s cubic-bezier(.3, .1, .2, 1) */
+}
+.code_container .CodeMirror .CodeMirror-overlayscroll-vertical {
+  right: 4px;
+}
+.code_container.docked.right .CodeMirror .CodeMirror-overlayscroll-vertical {
+  right: 8px;
 }
 
 /* The popout appearing when the code area is fully extended */
@@ -314,20 +330,20 @@ body {
 }
 
 .boundary_container_2d .bottom_grid .var_bottom {
-  background: url('../images/tools/enfloorment.png');
+  background: url('../../images/tools/enfloorment.png');
 }
 .boundary_container_2d .bottom_grid .var_bottom {
    transform: rotateX(90deg) translateX(-200px);
 }
 
 .boundary_container_2d .axes .var_axis.x {
-  background: url('../images/tools/enaxesxness.png');
+  background: url('../../images/tools/enaxesxness.png');
 }
 .boundary_container_2d .axes .var_axis.y {
-  background: url('../images/tools/enaxesyness.png');
+  background: url('../../images/tools/enaxesyness.png');
 }
 .boundary_container_2d .axes .var_axis.z {
-  background: url('../images/tools/enaxeszness.png');
+  background: url('../../images/tools/enaxeszness.png');
 }
 .boundary_container_2d .axes .var_axis.x.ver_1 {
   transform: translateX(-200px) translateY(-200px);
@@ -349,7 +365,7 @@ body {
 }
 
 .boundary_container_2d .var_corner {
-  background: url('../images/tools/enborderment.png');
+  background: url('../../images/tools/enborderment.png');
 }
 .boundary_container_2d .corners .object_1 {
   transform: translateX(-200px) translateY(-200px) translateZ(200px);
