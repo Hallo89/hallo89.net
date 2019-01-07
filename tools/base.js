@@ -1,10 +1,10 @@
 var tipTimer; //The timeout instance for the current active tooltip
 
-const tooltipTrigger = document.querySelectorAll('.tipper'); //All elements which trigger a tooltip (which are '.input_box'es)
+const tooltipTrigger = document.getElementsByClassName('tipper'); //All elements which trigger a tooltip (which are '.input_box'es)
 const tooltips = document.querySelectorAll('.tooltip.default'); //All (default) tooltips
 
 //The crement buttons attached to input[type=number]
-const buttonsChangeNumber = document.querySelectorAll('.buttons_change_number');
+const buttonsChangeNumber = document.getElementsByClassName('buttons_change_number');
 const buttonsIncrement = document.querySelectorAll('.change_number.increment');
 const buttonsDecrement = document.querySelectorAll('.change_number.decrement');
 
