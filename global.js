@@ -36,7 +36,6 @@ window.onclick = function(e) {
     '.mode_gear',
     '.dropdown_box',
     '.dropdown_header',
-    '.dropdown_header_text',
     '.mode_switch'
   ])) {
     modes.classList.remove('enabled');

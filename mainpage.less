@@ -11,49 +11,66 @@ No necessity to write this in here but Less is awesome!
 
 body {
   background-color: @background-color;
-}
-html.nesewebel-mode.dark-mode body {
-  background-color: @nesewebel-background;
-}
-html.nesewebel-mode.light-mode body {
-  background-color: @nesewebel-background--light;
-}
-
-
-html.nesewebel-mode.dark-mode .mode_dropdown {
-  .mode_dropdown_box {
-    box-shadow: 1px 1px 10px  @nesewebel-shadow;
-    &::before {
-      border: 15px solid @nesewebel-background;
-      box-shadow: 2px 2px 20px  @nesewebel-shadow;
-    }
-    .mode_switch {
-      color: @nesewebel-foreground;
-      background-color: @nesewebel-background;
-      &:hover {
-        background-color: @nesewebel-shadow;
-      }
-    }
+  font-size: ~'calc(.05vw + .025vh + 17.82px)';
+  html.nesewebel-mode.dark-mode & {
+    background-color: @nesewebel-background;
+  }
+  html.nesewebel-mode.light-mode & {
+    background-color: @nesewebel-background--light;
   }
 }
-html.nesewebel-mode.light-mode .mode_dropdown {
-  .mode_dropdown_box {
-    box-shadow: 1px 1px 10px @nesewebel-shadow--light;
-    &::before {
-      border: 15px solid @nesewebel-background--light;
-      box-shadow: 1px 1px 10px @nesewebel-shadow--light;
-    }
-    .mode_switch {
-      color: @nesewebel-background;
-      background-color: @nesewebel-background--light;
-      &:hover {
-        background-color: @nesewebel-shadow--light;
+
+#headline {
+  html.nesewebel-mode.dark-mode & {
+    .modes {
+      .dropdown_box {
+        border-top: 3px solid @nesewebel-box-bordertop;
+        border-bottom: 3px solid @nesewebel-box-borderbottom;
+        box-shadow: 0 3px 1px @nesewebel-background, 1px 1px 5px @nesewebel-box-shadow;
+        &::before {
+          border: 15px solid @nesewebel-box-bordertop;
+        }
+        .dropdown_header {
+          background-color: @nesewebel-background;
+          color: @nesewebel-foreground;
+        }
+        .mode_switch {
+          color: @nesewebel-foreground;
+          background-color: @nesewebel-background;
+          &:hover {
+            background-color: @nesewebel-box-hover;
+          }
+        }
       }
     }
+    .head_image {
+      background-image: url('./images/main/Avatar_black_white.png');
+    }
   }
-  .switch_daynight {
-    &::before {
-      color: @nesewebel-foreground--light;
+  html.nesewebel-mode.light-mode & {
+    .modes {
+      .dropdown_box {
+        border-top: 3px solid @nesewebel-box-bordertop--light;
+        border-bottom: 3px solid @nesewebel-box-borderbottom--light;
+        box-shadow: 0 3px 1px @nesewebel-background--light, 1px 1px 5px @nesewebel-box-shadow--light;
+        &::before {
+          border: 15px solid @nesewebel-box-bordertop--light;
+        }
+        .dropdown_header {
+          background-color: @nesewebel-background--light;
+          color: @nesewebel-foreground--light;
+        }
+        .mode_switch {
+          color: @nesewebel-foreground--light;
+          background-color: @nesewebel-background--light;
+          &:hover {
+            background-color: @nesewebel-box-hover--light;
+          }
+        }
+      }
+    }
+    .head_image {
+      background-image: url('./images/main/Avatar_white_black.png');
     }
   }
 }
@@ -72,27 +89,20 @@ html.nesewebel-mode.light-mode .mode_dropdown {
   align-items: center;
   box-shadow: 0 2px 13px @header-shadow;
   background-color: @header-background-color;
-  height: ~'calc(8vw + 12vh + 141px)';
+  height: ~'calc(8vw + 16vh + 103px)'; // manual dependent -> .sub_header - bottom
   color: @heading-foreground-color;
   .mode-switch-transition.background;
   .mode-switch-transition.shadow;
   h1 {
-    font: bold 130px 'Century Gothic', 'Segoe UI', 'Nirmala UI', sans-serif;
-	//font-size: calc(3vw + 1.5vh + 60px)
+    font: bold 6.9em 'Century Gothic', 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', sans-serif;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    text-shadow:
-      1px 1px @heading-shadow,
-      2px 2px @heading-shadow,
-      3px 3px @heading-shadow,
-      4px 4px @heading-shadow,
-      5px 5px @heading-shadow,
-      6px 6px @heading-shadow;
+    .text-shadow.drop(6, @heading-shadow);
     margin: 0;
-    transition+: all .45s, transform .76s;
+    transition+: transform .76s;
     .mode-switch-transition.textshadow;
     .mode-switch-transition.color;
-    animation: .75s fadein linear, .9s shiftin;
+    animation: .75s fadein linear, .9s shiftin, .4s shadowIn cubic-bezier(.43, .1, .15, 1.1);
     &:hover {
       transform: scale(0.78) scale(1.294);
     }
@@ -104,11 +114,7 @@ html.nesewebel-mode.light-mode .mode_dropdown {
     }
     &:hover::before {
       color: @header-background-color;
-      text-shadow:
-        7px 7px @header-background-color,
-        7px -7px @header-background-color,
-        -7px 7px @header-background-color,
-        -7px -7px @header-background-color;
+      .text-shadow.around(7, @header-background-color);
       clip-path: polygon(0 58%, 0 0, 100% 0, 100% 37%);
       animation: .3s headingcut ease-in;
     }
@@ -117,110 +123,61 @@ html.nesewebel-mode.light-mode .mode_dropdown {
      transform: translate(-4px);
      animation: .68s headingshift cubic-bezier(.85,0,1,1);
     }
-    .selection-w-color(@header-selection);
-    @media (max-width: 670px) and (min-width: 451px) {
-      font-size: 19.44vw;
-    }
-    @media (max-width: 450px) {
-      font-size: 88px;
-      text-shadow:
-        1px 1px @heading-shadow,
-        2px 2px @heading-shadow,
-        3px 3px @heading-shadow,
-        4px 4px @heading-shadow,
-        5px 5px @heading-shadow,
+    &::selection, &::-moz-selection {
+      background-color: transparent;
+      color: @header-selection;
+      .text-shadow.drop(6, #518AD6);
     }
   }
-  p {  //subheader
+  .sub_header {
     position: absolute;
-	//height of the header divided by 4 minus an unpredictable number to actually center it
-    bottom: ~'calc((8vw + 12vh + 141px)/4 - 38px)';
+	//height of the header divided by 4 minus the header height brought back to the body font size times 2
+    bottom: ~'calc((8vw + 16vh + 103px)/4 - 2em)';
     font-family: 'Segoe UI', 'Arial', sans-serif;
-	//font-size: calc(0.3vw + 0.15vh + 14px)
-    font-size: 19px;
+    font-size: 1em;
     font-style: italic;
     margin: 0;
     white-space: nowrap;
     animation: .6s fadein ease-in;
-    .selection-w-color;
+    .selection(@subheader-selection);
     .mode-switch-transition.background;
     .mode-switch-transition.color;
   }
-}
 
-html.light-mode #head_block {
-  box-shadow: 0 2px 13px @header-shadow--light;
-  background-color: @header-background-color--light;
-  color: @heading-foreground-color--light;
-  h1 {
-    text-shadow:
-      1px 1px @heading-shadow--light,
-      2px 2px @heading-shadow--light,
-      3px 3px @heading-shadow--light,
-      4px 4px @heading-shadow--light,
-      5px 5px @heading-shadow--light,
-      6px 6px @heading-shadow--light;
-    &:hover::before {
-      color: @header-background-color--light;
-      text-shadow:
-        7px 7px @header-background-color--light,
-        7px -7px @header-background-color--light,
-        -7px 7px @header-background-color--light,
-        -7px -7px @header-background-color--light;
-    }
-    @media (max-width: 450px) {
-      font-size: 88px;
-      text-shadow:
-        1px 1px @heading-shadow--light,
-        2px 2px @heading-shadow--light,
-        3px 3px @heading-shadow--light,
-        4px 4px @heading-shadow--light,
-        5px 5px @heading-shadow--light,
+  html.light-mode & {
+    box-shadow: 0 2px 13px @header-shadow--light;
+    background-color: @header-background-color--light;
+    color: @heading-foreground-color--light;
+    h1 {
+      .text-shadow.drop(6, @heading-shadow--light);
+      &:hover::before {
+        color: @header-background-color--light;
+        .text-shadow.around(7, @header-background-color--light);
+      }
     }
   }
-}
-html.nesewebel-mode.dark-mode #head_block {
-  box-shadow: 0 2px 10px 1px @nesewebel-shadow;
-  background-color: @nesewebel-background;
-  color: @nesewebel-foreground;
-  h1 {
-    text-shadow:
-      1px 1px @nesewebel-shadow,
-      2px 2px @nesewebel-shadow,
-      3px 3px @nesewebel-shadow,
-      4px 4px @nesewebel-shadow,
-      5px 5px @nesewebel-shadow,
-      6px 6px @nesewebel-shadow;
-    &:hover::before {
-      color: @nesewebel-background;
-      text-shadow:
-        7px 7px @nesewebel-background,
-        7px -7px @nesewebel-background,
-        -7px 7px @nesewebel-background,
-        -7px -7px @nesewebel-background;
+  html.nesewebel-mode.dark-mode & {
+    box-shadow: 0 2px 13px @nesewebel-header-shadow;
+    background-color: @nesewebel-background;
+    color: @nesewebel-foreground;
+    h1 {
+      .text-shadow.drop(6, @nesewebel-heading-shadow);
+      &:hover::before {
+        color: @nesewebel-background;
+        .text-shadow.around(7, @nesewebel-background);
+      }
     }
   }
-
-}
-html.nesewebel-mode.light-mode #head_block {
-  box-shadow: 0 2px 10px 1px @nesewebel-shadow--light;
-  background-color: @nesewebel-background--light;
-  color: @nesewebel-foreground--light;
-  h1 {
-    text-shadow:
-      1px 1px @nesewebel-shadow--light,
-      2px 2px @nesewebel-shadow--light,
-      3px 3px @nesewebel-shadow--light,
-      4px 4px @nesewebel-shadow--light,
-      5px 5px @nesewebel-shadow--light,
-      6px 6px @nesewebel-shadow--light;
-    &:hover::before {
-      color: @nesewebel-background--light;
-      text-shadow:
-        7px 7px @nesewebel-background--light,
-        7px -7px @nesewebel-background--light,
-        -7px 7px @nesewebel-background--light,
-        -7px -7px @nesewebel-background--light;
+  html.nesewebel-mode.light-mode & {
+    box-shadow: 0 2px 13px @nesewebel-header-shadow--light;
+    background-color: @nesewebel-background--light;
+    color: @nesewebel-foreground--light;
+    h1 {
+      .text-shadow.drop(6, @nesewebel-heading-shadow--light);
+      &:hover::before {
+        color: @nesewebel-background--light;
+        .text-shadow.around(7, @nesewebel-background--light);
+      }
     }
   }
 }
@@ -231,38 +188,117 @@ html.nesewebel-mode.light-mode #head_block {
   justify-content: space-around;
   display: grid;
   justify-items: center;
-  margin: 35px 20px 20px;
-  grid-gap: 40px;
-  grid-template-columns: repeat(auto-fit, minmax(410px, 1fr));
+  margin: 1.842em 1.053em 1.053em;
+  grid-gap: 2.105em;
+  grid-template-columns: repeat(auto-fit, minmax(21.579em, 1fr));
   align-items: center;
   .box {
-    //width: calc(3.5vw + 1vh + 335px);
-    //height: calc(3.5vw + 1vh + 380px);
-    width: 410px;
-    height: 450px;
-    &:nth-child(1) {
-      .boxanimation(.5s);
+    width: 14.9em;
+    height: 16.34em;
+    .box_header .header_text {
+      padding: 0.871em 0.762em;
+      line-height: 1.016em;
     }
-    &:nth-child(2) {
-      .boxanimation(.58s);
+    .box-animation-loop();
+    .box-animation-loop(@amount: 5, @seconds: .5s, @it: 1) when (@it < @amount + 1) {
+      &:nth-child(@{it}) {
+        .boxanimation(@seconds);
+      }
+      .box-animation-loop(@amount, @seconds + .08s, @it + 1);
     }
-    &:nth-child(3) {
-      .boxanimation(.66s);
+    .dwm::before {
+      background-image: url('./images/main/MINECRAFT.png');
     }
-    &:nth-child(4) {
-      .boxanimation(.74s);
+    .triangles::before {
+      background-image: url('./images/main/triangles.png');
     }
-    &:nth-child(5) {
-      .boxanimation(.82s);
+    .matrix_3d::before {
+      background-image: url('./images/main/cube.png');
+    }
+    html.nesewebel-mode.dark-mode & {
+      background-color: @nesewebel-background;
+      border-top: 4px solid @nesewebel-box-bordertop;
+      border-bottom: 4px solid @nesewebel-box-borderbottom;
+      box-shadow: 0 4px 1px @nesewebel-background, 1px 2px 6px @nesewebel-box-shadow;
+      .corneranimation {
+        &::before, &::after {
+          background-color: @nesewebel-box-corners;
+        }
+      }
+      .box_header {
+        background-color: @nesewebel-background;
+        color: @nesewebel-foreground;
+      }
+      .box_text {
+        color: @nesewebel-foreground;
+      }
+    }
+    html.nesewebel-mode.light-mode & {
+      background-color: @nesewebel-background--light;
+      border-top: 4px solid @nesewebel-box-bordertop--light;
+      border-bottom: 4px solid @nesewebel-box-borderbottom--light;
+      box-shadow: 0 4px 1px @nesewebel-background--light, 1px 2px 6px @nesewebel-box-shadow--light;
+      .corneranimation {
+        &::before, &::after {
+          background-color: @nesewebel-box-corners--light;
+        }
+      }
+      .box_header {
+        background-color: @nesewebel-background--light;
+        color: @nesewebel-foreground--light;
+      }
+      .box_text {
+        color: @nesewebel-foreground--light;
+      }
     }
   }
-  .dwm::before {
-    background-image: url('./images/main/MINECRAFT.png');
+}
+
+@media (max-width: 640px) {
+  body {
+    font-size: ~'calc(1.1vw + 11.28px)';
   }
-  .triangles::before {
-    background-image: url('./images/main/triangles.png');
+  #head_block {
+    height: ~'calc(24vw + 12vh + 32.8px)';
+    h1 {
+      font-size: ~'calc(17.5vw + 2vh + -1.62px)';
+    }
+    .sub_header {
+      bottom: ~'calc((24vw + 12vh + 32.8px)/4 - ((17.5vw + 2vh + -1.62px) * 0.145) * 2)';
+    }
   }
-  .matrix_3d::before {
-    background-image: url('./images/main/cube.png');
+}
+#head_block h1 {
+  .media-loop();
+  .media-loop(@start: 550px, @it: 5, @trail: true) when (@it > 3) {
+    @media (max-width: @start) {
+      .text-shadow.drop(@it, @heading-shadow, @trail);
+      html.light-mode & {
+        .text-shadow.drop(@it, @heading-shadow--light, @trail);
+      }
+      html.nesewebel-mode.dark-mode & {
+        .text-shadow.drop(@it, @nesewebel-heading-shadow--light, @trail);
+      }
+      html.nesewebel-mode.light-mode & {
+        .text-shadow.drop(@it, @nesewebel-heading-shadow--light, @trail);
+      }
+    }
+    & when (@trail = true) {
+      .media-loop(@start - 60px, @it, false);
+    }
+    & when (@trail = false) {
+      .media-loop(@start - 60px, @it - 1, true);
+    }
+  }
+}
+
+@media (max-width: 330px) {
+  #head_block {
+    h1 {
+      font-size: ~'calc(10vw + 1vh + 31.13px)';
+    }
+    .sub_header {
+      bottom: ~'calc((24vw + 12vh + 32.8px)/4 - ((10vw + 1vh + 31.13px) * 0.145) * 2)';
+    }
   }
 }

@@ -63,15 +63,15 @@ html.light-mode body {
   animation: 0.4s fadein ease-in-out;
   transition: transform .15s linear;
 }
-#headline .head_nav .link {
+#headline .head_nav a {
   flex: 1;
   text-align: center;
   text-decoration: none;
   color: #808080;
   transition: all .75s;
 }
-#headline .head_nav .link::before,
-#headline .head_nav .link::after {
+#headline .head_nav a::before,
+#headline .head_nav a::after {
   content: '';
   border-bottom: solid 1px;
   border-top: solid 1px;
@@ -81,25 +81,13 @@ html.light-mode body {
   display: inline-block;
   transition: all .6s;
 }
-#headline .head_nav .link:hover {
+#headline .head_nav a:hover {
   flex: 1.25;
   transform: scale(1.08);
 }
-#headline .head_nav .link:hover::before,
-#headline .head_nav .link:hover::after {
+#headline .head_nav a:hover::before,
+#headline .head_nav a:hover::after {
   width: 8px;
-}
-#headline .head_nav .link::selection {
-  background-color: transparent;
-  color: #664D6E;
-}
-#headline .head_nav .link::-webkit-selection {
-  background-color: transparent;
-  color: #664D6E;
-}
-#headline .head_nav .link::-moz-selection {
-  background-color: transparent;
-  color: #664D6E;
 }
 #headline .modes {
   position: relative;
@@ -107,20 +95,20 @@ html.light-mode body {
 }
 #headline .modes.enabled .dropdown_box {
   clip: rect(-12px 300px 200px 0px);
-  clip-path: circle(150% at 182.5px -40px);
+  clip-path: circle(150% at 197px -35.5px);
 }
 #headline .modes.enabled .mode_gear {
   transform: rotateZ(135deg);
 }
 #headline .modes .mode_gear {
   font-size: 41px;
-  transition: all .475s;
+  transition: all 0.45s cubic-bezier(0.52, 0.15, 0.16, 1.2);
   color: #3a5b99;
   cursor: pointer;
 }
 #headline .modes .dropdown_box {
   clip: rect(-12px 300px -12px 0px);
-  clip-path: circle(0 at 182.5px -40px);
+  clip-path: circle(0 at 197px -35.5px);
   position: absolute;
   font-size: 30px;
   right: -4px;
@@ -128,7 +116,7 @@ html.light-mode body {
   border-top: 3px solid #545454;
   border-bottom: 3px solid #252525;
   box-shadow: 0 3px 1px rgba(26, 26, 26, 0.9), 1px 1px 5px rgba(30, 30, 30, 0.8);
-  transition: all 0.25s ease-out, background .15s linear, box-shadow 0.15s linear, border .15s linear;
+  transition: all 0.45s cubic-bezier(0.52, 0.15, 0.16, 1.2), background .15s linear, box-shadow 0.15s linear, border .15s linear;
   z-index: 1;
 }
 #headline .modes .dropdown_box::before {
@@ -143,15 +131,11 @@ html.light-mode body {
 }
 #headline .modes .dropdown_box .dropdown_header {
   background-color: #2b2b2b;
-  font-family: 'Arial', sans-serif;
-  transition: background .15s linear;
-}
-#headline .modes .dropdown_box .dropdown_header .dropdown_header_text {
-  display: inherit;
   padding: 9px 18px;
+  font-family: 'Arial', sans-serif;
   text-transform: uppercase;
   color: #6e6e6e;
-  transition: color .15s linear;
+  transition: color .15s linear, background .15s linear;
 }
 #headline .modes .dropdown_box .mode_switch {
   font-size: .89em;
@@ -192,7 +176,7 @@ html.light-mode #headline {
   background-color: #111111;
 }
 html.light-mode #headline .head_nav a {
-  color: #5c5c5c;
+  color: #575757;
 }
 html.light-mode #headline .modes .dropdown_box {
   border-top: 3px solid #ffffff;
@@ -204,8 +188,6 @@ html.light-mode #headline .modes .dropdown_box::before {
 }
 html.light-mode #headline .modes .dropdown_box .dropdown_header {
   background-color: #ffffff;
-}
-html.light-mode #headline .modes .dropdown_box .dropdown_header .dropdown_header_text {
   color: #858585;
 }
 html.light-mode #headline .modes .dropdown_box .mode_switch {
@@ -306,8 +288,7 @@ html.light-mode #headline .modes .dropdown_box .mode_switch:hover {
   background-color: #5c5c5c;
 }
 .glb_box {
-  font-size: 27.6px;
-  position: relative;
+  font-size: 1.45em;
   overflow: hidden;
   border-radius: 2px;
   background-color: #1d1d1d;
@@ -315,10 +296,10 @@ html.light-mode #headline .modes .dropdown_box .mode_switch:hover {
   border-bottom: 4px solid #1a1a1a;
   box-shadow: 0 4px 1px rgba(15, 15, 15, 0.9), 1px 2px 6px rgba(19, 19, 19, 0.8);
   box-sizing: border-box;
+  position: relative;
   transition: background .15s linear, box-shadow 0.15s linear, border .15s linear;
 }
 .glb_box.hyperbox {
-  display: block;
   cursor: pointer;
   text-decoration: none;
 }
@@ -326,18 +307,17 @@ html.light-mode #headline .modes .dropdown_box .mode_switch:hover {
   color: transparent;
 }
 .glb_box.multiplebox {
-  display: grid;
-  grid-template-rows: auto auto auto 1fr;
+  display: flex;
+  flex-direction: column;
 }
 .glb_box.multiplebox .links {
-  grid-row: -1 / -2;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
 }
 .glb_box.multiplebox .links a {
   display: flex;
   align-items: center;
-  position: relative;
   color: inherit;
   flex: 1;
   padding: 15px;
@@ -348,17 +328,17 @@ html.light-mode #headline .modes .dropdown_box .mode_switch:hover {
 .glb_box.multiplebox .links a:hover {
   flex: 1.3;
 }
-.glb_box.imager,
+.glb_box.imager {
+  display: flex;
+  flex-direction: column;
+}
+.glb_box.imager .image_container,
 .glb_box .imager {
-  z-index: 1;
   position: relative;
-  overflow: hidden;
+  flex-grow: 1;
+  z-index: 1;
 }
-.glb_box.imager.hyperbox::before,
-.glb_box .imager.hyperbox::before {
-  top: 76px;
-}
-.glb_box.imager::before,
+.glb_box.imager .image_container::before,
 .glb_box .imager::before {
   content: '';
   position: absolute;
@@ -373,60 +353,62 @@ html.light-mode #headline .modes .dropdown_box .mode_switch:hover {
   opacity: 0.2;
   transition: all 0.25s cubic-bezier(0, 0, 0.75, 1);
 }
-.glb_box.imager:hover::before,
+.glb_box.imager:hover .image_container::before,
 .glb_box .imager:hover::before {
   filter: none;
   opacity: .5;
 }
-.glb_box .corneranimation .corner_before,
-.glb_box .corneranimation .corner_after {
+.glb_box .corneranimation::before,
+.glb_box .corneranimation::after {
+  content: '';
   position: absolute;
   background-color: #0f0f0f;
   transition: all 0.4s ease-out, background .15s linear;
-  z-index: 10;
+  z-index: 2;
   opacity: .65;
 }
-.glb_box .corneranimation .corner_before {
+.glb_box .corneranimation::before {
   height: 40px;
   width: 80px;
   left: -26px;
   bottom: -6px;
   transform: rotateZ(45deg) translateY(40px);
 }
-.glb_box .corneranimation .corner_after {
+.glb_box .corneranimation::after {
   height: 80px;
   width: 40px;
   right: -6px;
   top: -26px;
   transform: rotateZ(-45deg) translateX(40px);
 }
-.glb_box:hover .corner_before {
+.glb_box:hover .corneranimation::before {
   transform: rotateZ(45deg) translateY(0);
 }
-.glb_box:hover .corner_after {
+.glb_box:hover .corneranimation::after {
   transform: rotateZ(-45deg) translateX(0);
 }
 .glb_box .box_header {
   background-color: #202020;
-  transition: background .15s linear;
-}
-.glb_box .box_header .header_text {
-  padding: 38px 21px;
+  padding: 24px 21px;
+  margin: 0;
   font-family: Arial, sans-serif;
+  font-weight: normal;
+  font-size: 1em;
   text-transform: uppercase;
-  display: inherit;
-  line-height: 0;
   color: #575757;
-  transition: color .15s linear;
+  line-height: 28px;
+  transition: background .15s linear, color .15s linear;
 }
 .glb_box .box_text {
   color: #878787;
+  transition: color .15s linear;
 }
 .glb_box .description {
   font-family: Calibri, 'Times New Roman', serif;
   font-size: 1.04em;
   line-height: 1.19;
   padding: 15px;
+  margin: 0;
 }
 html.light-mode .glb_box {
   background-color: #f5f5f5;
@@ -434,14 +416,12 @@ html.light-mode .glb_box {
   border-bottom: 4px solid #f1f1f1;
   box-shadow: 0 4px 1px rgba(214, 214, 214, 0.9), 1px 2px 6px rgba(230, 230, 230, 0.8);
 }
-html.light-mode .glb_box .corneranimation .corner_before,
-html.light-mode .glb_box .corneranimation .corner_after {
+html.light-mode .glb_box .corneranimation::before,
+html.light-mode .glb_box .corneranimation::after {
   background-color: #dedede;
 }
 html.light-mode .glb_box .box_header {
   background-color: #f9f9f9;
-}
-html.light-mode .glb_box .box_header .header_text {
   color: #9c9c9c;
 }
 html.light-mode .glb_box .box_text {
@@ -468,6 +448,11 @@ html.light-mode .glb_box .box_text {
   }
   to {
     opacity: 0;
+  }
+}
+@keyframes shadowIn {
+  from {
+    text-shadow: 1px 1px #7c7c7c, 1.5px 1.5px #7c7c7c, 2px 2px #7c7c7c;
   }
 }
 @keyframes headlineclose {

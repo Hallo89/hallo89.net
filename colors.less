@@ -15,8 +15,7 @@
 @scrollbar-track--light: lighten(@background-color, 9%);
 
 @header-selection: @theme-color;
-@subheader-selection: #DB968C;
-@nav-selection: #664D6E;
+@subheader-selection: #469870;
 
 @headline-background: darken(@background-color, 2.5%);
 @headline-gear: mix(darken(@foreground-color, 5%), @theme-color, 30%);
@@ -56,7 +55,7 @@
 @heading-foreground-color: lighten(@foreground-color, 2.5%);
 @heading-shadow: darken(@heading-foreground-color, 14%);
 
-@heading-foreground-color--light: lighten(@foreground-color--light, 11%);
+@heading-foreground-color--light: lighten(@foreground-color--light, 9%);
 @heading-shadow--light: lighten(@heading-foreground-color--light, 14%);
 
 @header-background-color: lighten(@background-color, 4%);
@@ -88,12 +87,23 @@
 
 @nesewebel-background: black;
 @nesewebel-foreground: white;
-@nesewebel-shadow: lighten(@nesewebel-background, 8%);
+@nesewebel-header-shadow: fadeout(lighten(@nesewebel-background, 15%), 20%);
+@nesewebel-heading-shadow: darken(@nesewebel-foreground, 25%);
+@nesewebel-box-shadow: fadeout(lighten(@nesewebel-background, 4%), 25%);
+@nesewebel-box-corners: lighten(@nesewebel-background, 6%);
+@nesewebel-box-bordertop: lighten(@nesewebel-background, 14%);
+@nesewebel-box-borderbottom: lighten(@nesewebel-background, 2.5%);
+@nesewebel-box-hover: lighten(@nesewebel-background, 5%);
 
 @nesewebel-background--light: @nesewebel-foreground;
 @nesewebel-foreground--light: @nesewebel-background;
-@nesewebel-shadow--light: darken(@nesewebel-background--light, 8%);
-
+@nesewebel-header-shadow--light: fadeout(darken(@nesewebel-background--light, 12%), 20%);
+@nesewebel-heading-shadow--light: lighten(@nesewebel-foreground--light, 35%);
+@nesewebel-box-shadow--light: fadeout(darken(@nesewebel-background--light, 4%), 25%);
+@nesewebel-box-corners--light: darken(@nesewebel-background--light, 6%);
+@nesewebel-box-bordertop--light: darken(@nesewebel-background--light, 10%);
+@nesewebel-box-borderbottom--light: darken(@nesewebel-background--light, 2.5%);
+@nesewebel-box-hover--light: darken(@nesewebel-background--light, 2%);
 
 
 @tuto-header-background: lighten(@background-color, 4%);

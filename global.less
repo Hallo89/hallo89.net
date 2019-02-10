@@ -11,15 +11,15 @@ No necessity to write this in here but Less is awesome!
 
 html {
   scrollbar-color: @scrollbar-thumb @scrollbar-track;
-}
-html.light-mode {
-  scrollbar-color: auto;
-}
-html.nesewebel-mode.dark-mode {
-  scrollbar-color: @nesewebel-foreground @nesewebel-background;
-}
-html.nesewebel-mode.light-mode {
-  scrollbar-color: @nesewebel-foreground--light @nesewebel-background--light;
+  &.light-mode {
+    scrollbar-color: auto;
+  }
+  &.nesewebel-mode.dark-mode {
+    scrollbar-color: @nesewebel-foreground @nesewebel-background;
+  }
+  &.nesewebel-mode.light-mode {
+    scrollbar-color: @nesewebel-foreground--light @nesewebel-background--light;
+  }
 }
 
 body {
@@ -27,10 +27,9 @@ body {
   background-color: @background-color;
   font-family: Arial;
   .mode-switch-transition.background;
-}
-
-html.light-mode body {
-  background-color: @background-color--light;
+  html.light-mode & {
+    background-color: @background-color--light;
+  }
 }
 
 #headline {
@@ -68,7 +67,7 @@ html.light-mode body {
     flex-wrap: wrap;
     animation: .4s fadein ease-in-out;
     transition: transform .15s linear;
-    .link {
+    a {
       flex: 1;
       text-align: center;
       text-decoration: none;
@@ -91,7 +90,6 @@ html.light-mode body {
       &:hover::before, &:hover::after {
         width: 8px;
       }
-      .selection-w-color(@nav-selection);
     }
   }
   .modes {
@@ -99,20 +97,20 @@ html.light-mode body {
     margin: 1px 10px 0 0;
     &.enabled .dropdown_box {
       clip: rect(-12px 300px 200px 0px); //this is an amazing fallback for browsers without clip-path (which are a lot)
-      clip-path: circle(150% at 182.5px -40px);
+      clip-path: circle(150% at 197px -35.5px);
     }
     &.enabled .mode_gear {
       transform: rotateZ(135deg);
     }
     .mode_gear {
       font-size: 41px;
-      transition: all .475s;
+      transition: all .45s cubic-bezier(.52,.15,.16,1.2);
       color: @headline-gear;
       cursor: pointer;
     }
     .dropdown_box {
       clip: rect(-12px 300px -12px 0px);
-      clip-path: circle(0 at 182.5px -40px);
+      clip-path: circle(0 at 197px -35.5px);
       position: absolute;
       font-size: 30px;
       right: -4px;
@@ -120,7 +118,7 @@ html.light-mode body {
       border-top: 3px solid @mode-dropdown-bordertop;
       border-bottom: 3px solid @mode-dropdown-borderbottom;
       box-shadow: 0 3px 1px @mode-dropdown-extreme-shadow, 1px 1px 5px @mode-dropdown-shadow;
-      transition+: all .25s ease-out;
+      transition+: all .45s cubic-bezier(.52,.15,.16,1.2);
       .mode-switch-transition.background;
       .mode-switch-transition.shadow;
       .mode-switch-transition.border;
@@ -131,22 +129,18 @@ html.light-mode body {
         right: 9px;
         top: -8px;
         border: 15px solid @mode-dropdown-bordertop;
-        //box-shadow: 1px 1px 10px @mode-dropdown-box-shadow;
         transform: rotate(45deg);
         .mode-switch-transition.border;
         z-index: -1;
       }
       .dropdown_header {
         background-color: @mode-dropdown-header-background;
+        padding: 9px 18px;
         font-family: 'Arial', sans-serif;
+        text-transform: uppercase;
+        color: @mode-dropdown-header-foreground;
+        .mode-switch-transition.color;
         .mode-switch-transition.background;
-        .dropdown_header_text {
-          display: inherit;
-          padding: 9px 18px;
-          text-transform: uppercase;
-          color: @mode-dropdown-header-foreground;
-          .mode-switch-transition.color;
-        }
       }
       .mode_switch {
         font-size: .89em;
@@ -174,46 +168,41 @@ html.light-mode body {
         }
       }
     }
-  }
-}
-
-html.light-mode #headline .modes .switch_daynight,
-html.nesewebel-mode #headline .modes .switch_nesewebel {
-  &::before {
-    content: '';
-  }
-}
-
-html.light-mode #headline .modes .switch_daynight {
-  &::before {
-    color: @theme-color;
-  }
-}
-
-html.light-mode #headline {
-  background-color: @headline-background;
-  .head_nav a {
-    color: @nav-foreground--light;
-  }
-  .modes {
-    .dropdown_box {
-      border-top: 3px solid @mode-dropdown-bordertop--light;
-      border-bottom: 3px solid @mode-dropdown-borderbottom--light;
-      box-shadow: 0 3px 1px @mode-dropdown-extreme-shadow--light, 1px 1px 5px @mode-dropdown-shadow--light;
+    html.light-mode & .switch_daynight,
+    html.nesewebel-mode & .switch_nesewebel {
       &::before {
-        border: 15px solid @mode-dropdown-bordertop--light;
+        content: '';
       }
-      .dropdown_header {
-        background-color: @mode-dropdown-header-background--light;
-        .dropdown_header_text {
+    }
+    html.light-mode & .switch_daynight {
+      &::before {
+        color: @theme-color;
+      }
+    }
+  }
+  html.light-mode & {
+    background-color: @headline-background;
+    .head_nav a {
+      color: @nav-foreground--light;
+    }
+    .modes {
+      .dropdown_box {
+        border-top: 3px solid @mode-dropdown-bordertop--light;
+        border-bottom: 3px solid @mode-dropdown-borderbottom--light;
+        box-shadow: 0 3px 1px @mode-dropdown-extreme-shadow--light, 1px 1px 5px @mode-dropdown-shadow--light;
+        &::before {
+          border: 15px solid @mode-dropdown-bordertop--light;
+        }
+        .dropdown_header {
+          background-color: @mode-dropdown-header-background--light;
           color: @mode-dropdown-header-foreground--light;
         }
-      }
-      .mode_switch {
-        color: @mode-switch-foreground--light;
-        background-color: @mode-switch-background--light;
-        &:hover {
-          background-color: @mode-switch-background-hover--light;
+        .mode_switch {
+          color: @mode-switch-foreground--light;
+          background-color: @mode-switch-background--light;
+          &:hover {
+            background-color: @mode-switch-background-hover--light;
+          }
         }
       }
     }
@@ -311,8 +300,7 @@ html.light-mode #headline {
 
 
 .glb_box {
-  font-size: 27.6px;
-  position: relative;
+  font-size: 1.45em;
   overflow: hidden;
   border-radius: 2px;
   background-color: @glb-box;
@@ -320,29 +308,28 @@ html.light-mode #headline {
   border-bottom: 4px solid @glb-box-borderbottom;
   box-shadow: 0 4px 1px @glb-box-extreme-shadow, 1px 2px 6px @glb-box-shadow;
   box-sizing: border-box;
+  position: relative;
   .mode-switch-transition.background;
   .mode-switch-transition.shadow;
   .mode-switch-transition.border;
   &.hyperbox {
-    display: block;
     cursor: pointer;
     text-decoration: none;
-   // Normalizing (-> removing) the dotted outline when going to the last page while having clicked onto an <a> in Firefox
     &:any-link {
+      // Normalizing (-> removing) the dotted outline when going to the last page while having clicked onto an <a> in Firefox
       color: transparent;
     }
   }
   &.multiplebox {
-    display: grid;
-    grid-template-rows: auto auto auto 1fr;
+    display: flex;
+    flex-direction: column;
     .links {
-      grid-row: ~'-1 / -2';
+      flex-grow: 1;
       display: flex;
       flex-direction: column;
       a {
         display: flex;
         align-items: center;
-        position: relative;
         color: inherit;
         flex: 1;
         padding: 15px;
@@ -355,13 +342,14 @@ html.light-mode #headline {
       }
     }
   }
-  &.imager, .imager {
-    &.hyperbox::before {
-      top: 76px;
-    }
-    z-index: 1;
+  &.imager {
+    display: flex;
+    flex-direction: column;
+  }
+  &.imager .image_container, .imager {
     position: relative;
-    overflow: hidden;
+    flex-grow: 1;
+    z-index: 1;
     &::before {
       content: '';
       position: absolute;
@@ -376,29 +364,32 @@ html.light-mode #headline {
       opacity: 0.2;
       transition: all 0.25s cubic-bezier(0, 0, .75, 1);
     }
-    &:hover::before {
+  }
+  &.imager:hover .image_container, .imager:hover {
+    &::before {
       filter: none;
       opacity: .5;
     }
   }
 //corners shifting in when hovering
   .corneranimation {
-    .corner_before, .corner_after {
+    &::before, &::after {
+      content: '';
       position: absolute;
       background-color: @glb-box-corners;
       transition+: all .4s ease-out;
-      z-index: 10;
+      z-index: 2;
       opacity: .65;
       .mode-switch-transition.background;
     }
-    .corner_before {
+    &::before {
       height: 40px;
       width: 80px;
       left: -26px;
       bottom: -6px;
       transform: rotateZ(45deg) translateY(40px);
     }
-    .corner_after {
+    &::after {
       height: 80px;
       width: 40px;
       right: -6px;
@@ -406,58 +397,58 @@ html.light-mode #headline {
       transform: rotateZ(-45deg) translateX(40px);
     }
   }
-  &:hover .corner_before {
+  &:hover .corneranimation::before {
     transform: rotateZ(45deg) translateY(0);
   }
-  &:hover .corner_after {
+  &:hover .corneranimation::after {
     transform: rotateZ(-45deg) translateX(0);
   }
 //end of corneranimations
 //box header
   .box_header {
     background-color: @glb-box-header-background;
+    padding: 24px 21px;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    font-weight: normal;
+    font-size: 1em;
+    text-transform: uppercase;
+    color: @glb-box-header-foreground;
+    line-height: 28px;
     .mode-switch-transition.background;
-    .header_text {
-      padding: 38px 21px;
-	    font-family: Arial, sans-serif;
-      text-transform: uppercase;
-      display: inherit;
-      line-height: 0;
-      color: @glb-box-header-foreground;
-      .mode-switch-transition.color;
-    }
+    .mode-switch-transition.color;
   }
   .box_text {
     color: @glb-box-description-foreground;
+    .mode-switch-transition.color;
   }
   .description {
     font-family: Calibri, 'Times New Roman', serif;
     font-size: 1.04em;
     line-height: 1.19;
     padding: 15px;
+    margin: 0;
   }
-//end of header
-}
 
-html.light-mode .glb_box {
-  background-color: @glb-box--light;
-  border-top: 4px solid @glb-box-bordertop--light;
-  border-bottom: 4px solid @glb-box-borderbottom--light;
-  box-shadow: 0 4px 1px @glb-box-extreme-shadow--light, 1px 2px 6px @glb-box-shadow--light;
-  .corneranimation {
-    .corner_before, .corner_after {
-      background-color: @glb-box-corners--light;
+  html.light-mode & {
+    background-color: @glb-box--light;
+    border-top: 4px solid @glb-box-bordertop--light;
+    border-bottom: 4px solid @glb-box-borderbottom--light;
+    box-shadow: 0 4px 1px @glb-box-extreme-shadow--light, 1px 2px 6px @glb-box-shadow--light;
+    .corneranimation {
+      &::before, &::after {
+        background-color: @glb-box-corners--light;
+      }
     }
-  }
-  .box_header {
-    background-color: @glb-box-header-background--light;
-    .header_text {
+    .box_header {
+      background-color: @glb-box-header-background--light;
       color: @glb-box-header-foreground--light;
     }
-  }
-  .box_text {
-    color: @glb-box-description-foreground--light;
+    .box_text {
+      color: @glb-box-description-foreground--light;
+    }
   }
 }
+
 
 @import "keyframes.less";

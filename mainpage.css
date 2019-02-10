@@ -4,6 +4,7 @@ No necessity to write this in here but Less is awesome!
 */
 body {
   background-color: #171717;
+  font-size: calc(.05vw + .025vh + 17.82px);
 }
 html.nesewebel-mode.dark-mode body {
   background-color: black;
@@ -11,36 +12,49 @@ html.nesewebel-mode.dark-mode body {
 html.nesewebel-mode.light-mode body {
   background-color: white;
 }
-html.nesewebel-mode.dark-mode .mode_dropdown .mode_dropdown_box {
-  box-shadow: 1px 1px 10px #141414;
+html.nesewebel-mode.dark-mode #headline .modes .dropdown_box {
+  border-top: 3px solid #242424;
+  border-bottom: 3px solid #060606;
+  box-shadow: 0 3px 1px black, 1px 1px 5px rgba(10, 10, 10, 0.75);
 }
-html.nesewebel-mode.dark-mode .mode_dropdown .mode_dropdown_box::before {
-  border: 15px solid black;
-  box-shadow: 2px 2px 20px #141414;
+html.nesewebel-mode.dark-mode #headline .modes .dropdown_box::before {
+  border: 15px solid #242424;
 }
-html.nesewebel-mode.dark-mode .mode_dropdown .mode_dropdown_box .mode_switch {
+html.nesewebel-mode.dark-mode #headline .modes .dropdown_box .dropdown_header {
+  background-color: black;
+  color: white;
+}
+html.nesewebel-mode.dark-mode #headline .modes .dropdown_box .mode_switch {
   color: white;
   background-color: black;
 }
-html.nesewebel-mode.dark-mode .mode_dropdown .mode_dropdown_box .mode_switch:hover {
-  background-color: #141414;
+html.nesewebel-mode.dark-mode #headline .modes .dropdown_box .mode_switch:hover {
+  background-color: #0d0d0d;
 }
-html.nesewebel-mode.light-mode .mode_dropdown .mode_dropdown_box {
-  box-shadow: 1px 1px 10px #ebebeb;
+html.nesewebel-mode.dark-mode #headline .head_image {
+  background-image: url('images/main/Avatar_black_white.png');
 }
-html.nesewebel-mode.light-mode .mode_dropdown .mode_dropdown_box::before {
-  border: 15px solid white;
-  box-shadow: 1px 1px 10px #ebebeb;
+html.nesewebel-mode.light-mode #headline .modes .dropdown_box {
+  border-top: 3px solid #e6e6e6;
+  border-bottom: 3px solid #f9f9f9;
+  box-shadow: 0 3px 1px white, 1px 1px 5px rgba(245, 245, 245, 0.75);
 }
-html.nesewebel-mode.light-mode .mode_dropdown .mode_dropdown_box .mode_switch {
+html.nesewebel-mode.light-mode #headline .modes .dropdown_box::before {
+  border: 15px solid #e6e6e6;
+}
+html.nesewebel-mode.light-mode #headline .modes .dropdown_box .dropdown_header {
+  background-color: white;
+  color: black;
+}
+html.nesewebel-mode.light-mode #headline .modes .dropdown_box .mode_switch {
   color: black;
   background-color: white;
 }
-html.nesewebel-mode.light-mode .mode_dropdown .mode_dropdown_box .mode_switch:hover {
-  background-color: #ebebeb;
+html.nesewebel-mode.light-mode #headline .modes .dropdown_box .mode_switch:hover {
+  background-color: #fafafa;
 }
-html.nesewebel-mode.light-mode .mode_dropdown .switch_daynight::before {
-  color: black;
+html.nesewebel-mode.light-mode #headline .head_image {
+  background-image: url('images/main/Avatar_white_black.png');
 }
 #headline {
   animation: 2s headlineclose;
@@ -55,18 +69,31 @@ html.nesewebel-mode.light-mode .mode_dropdown .switch_daynight::before {
   align-items: center;
   box-shadow: 0 2px 13px rgba(15, 15, 15, 0.75);
   background-color: #212121;
-  height: calc(8vw + 12vh + 141px);
+  height: calc(8vw + 16vh + 103px);
   color: #9f9f9f;
   transition: background .15s linear, box-shadow 0.15s linear;
 }
 #head_block h1 {
-  font: bold 130px 'Century Gothic', 'Segoe UI', 'Nirmala UI', sans-serif;
+  font: bold 6.9em 'Century Gothic', 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', sans-serif;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  text-shadow: 1px 1px #7c7c7c, 2px 2px #7c7c7c, 3px 3px #7c7c7c, 4px 4px #7c7c7c, 5px 5px #7c7c7c, 6px 6px #7c7c7c;
+  text-shadow: 
+        0px 0px #7c7c7c,
+        0.5px 0.5px #7c7c7c, 
+        1px 1px #7c7c7c,
+        1.5px 1.5px #7c7c7c, 
+        2px 2px #7c7c7c,
+        2.5px 2.5px #7c7c7c, 
+        3px 3px #7c7c7c,
+        3.5px 3.5px #7c7c7c, 
+        4px 4px #7c7c7c,
+        4.5px 4.5px #7c7c7c, 
+        5px 5px #7c7c7c,
+        5.5px 5.5px #7c7c7c, 
+        6px 6px #7c7c7c;
   margin: 0;
-  transition: all .45s, transform .76s, text-shadow 0.15s linear, color .15s linear;
-  animation: .75s fadein linear, .9s shiftin;
+  transition: transform .76s, text-shadow 0.15s linear, color .15s linear;
+  animation: 0.75s fadein linear, 0.9s shiftin, 0.4s shadowIn cubic-bezier(0.43, 0.1, 0.15, 1.1);
 }
 #head_block h1:hover {
   transform: scale(0.78) scale(1.294);
@@ -89,89 +116,111 @@ html.nesewebel-mode.light-mode .mode_dropdown .switch_daynight::before {
   transform: translate(-4px);
   animation: 0.68s headingshift cubic-bezier(0.85, 0, 1, 1);
 }
-#head_block h1::selection {
-  background-color: transparent;
-  color: #17469E;
-}
-#head_block h1::-webkit-selection {
-  background-color: transparent;
-  color: #17469E;
-}
+#head_block h1::selection,
 #head_block h1::-moz-selection {
   background-color: transparent;
   color: #17469E;
+  text-shadow: 
+        0px 0px #518AD6,
+        0.5px 0.5px #518AD6, 
+        1px 1px #518AD6,
+        1.5px 1.5px #518AD6, 
+        2px 2px #518AD6,
+        2.5px 2.5px #518AD6, 
+        3px 3px #518AD6,
+        3.5px 3.5px #518AD6, 
+        4px 4px #518AD6,
+        4.5px 4.5px #518AD6, 
+        5px 5px #518AD6,
+        5.5px 5.5px #518AD6, 
+        6px 6px #518AD6;
 }
-@media (max-width: 670px) and (min-width: 451px) {
-  #head_block h1 {
-    font-size: 19.44vw;
-  }
-}
-@media (max-width: 450px) {
-  #head_block h1 {
-    font-size: 88px;
-    text-shadow: 1px 1px #7c7c7c, 2px 2px #7c7c7c, 3px 3px #7c7c7c, 4px 4px #7c7c7c, 5px 5px #7c7c7c;
-  }
-}
-#head_block p {
+#head_block .sub_header {
   position: absolute;
-  bottom: calc((8vw + 12vh + 141px)/4 - 38px);
+  bottom: calc((8vw + 16vh + 103px)/4 - 2em);
   font-family: 'Segoe UI', 'Arial', sans-serif;
-  font-size: 19px;
+  font-size: 1em;
   font-style: italic;
   margin: 0;
   white-space: nowrap;
   animation: 0.6s fadein ease-in;
   transition: background .15s linear, color .15s linear;
 }
-#head_block p::selection {
+#head_block .sub_header::selection,
+#head_block .sub_header::-moz-selection {
   background-color: transparent;
-  color: #DB968C;
-}
-#head_block p::-webkit-selection {
-  background-color: transparent;
-  color: #DB968C;
-}
-#head_block p::-moz-selection {
-  background-color: transparent;
-  color: #DB968C;
+  color: #469870;
 }
 html.light-mode #head_block {
   box-shadow: 0 2px 13px rgba(194, 194, 194, 0.8);
   background-color: #f7f7f7;
-  color: #757575;
+  color: #707070;
 }
 html.light-mode #head_block h1 {
-  text-shadow: 1px 1px #999999, 2px 2px #999999, 3px 3px #999999, 4px 4px #999999, 5px 5px #999999, 6px 6px #999999;
+  text-shadow: 
+        0px 0px #949494,
+        0.5px 0.5px #949494, 
+        1px 1px #949494,
+        1.5px 1.5px #949494, 
+        2px 2px #949494,
+        2.5px 2.5px #949494, 
+        3px 3px #949494,
+        3.5px 3.5px #949494, 
+        4px 4px #949494,
+        4.5px 4.5px #949494, 
+        5px 5px #949494,
+        5.5px 5.5px #949494, 
+        6px 6px #949494;
 }
 html.light-mode #head_block h1:hover::before {
   color: #f7f7f7;
   text-shadow: 7px 7px #f7f7f7, 7px -7px #f7f7f7, -7px 7px #f7f7f7, -7px -7px #f7f7f7;
 }
-@media (max-width: 450px) {
-  html.light-mode #head_block h1 {
-    font-size: 88px;
-    text-shadow: 1px 1px #999999, 2px 2px #999999, 3px 3px #999999, 4px 4px #999999, 5px 5px #999999;
-  }
-}
 html.nesewebel-mode.dark-mode #head_block {
-  box-shadow: 0 2px 10px 1px #141414;
+  box-shadow: 0 2px 13px rgba(38, 38, 38, 0.8);
   background-color: black;
   color: white;
 }
 html.nesewebel-mode.dark-mode #head_block h1 {
-  text-shadow: 1px 1px #141414, 2px 2px #141414, 3px 3px #141414, 4px 4px #141414, 5px 5px #141414, 6px 6px #141414;
+  text-shadow: 
+        0px 0px #bfbfbf,
+        0.5px 0.5px #bfbfbf, 
+        1px 1px #bfbfbf,
+        1.5px 1.5px #bfbfbf, 
+        2px 2px #bfbfbf,
+        2.5px 2.5px #bfbfbf, 
+        3px 3px #bfbfbf,
+        3.5px 3.5px #bfbfbf, 
+        4px 4px #bfbfbf,
+        4.5px 4.5px #bfbfbf, 
+        5px 5px #bfbfbf,
+        5.5px 5.5px #bfbfbf, 
+        6px 6px #bfbfbf;
 }
 html.nesewebel-mode.dark-mode #head_block h1:hover::before {
   color: black;
   text-shadow: 7px 7px black, 7px -7px black, -7px 7px black, -7px -7px black;
 }
 html.nesewebel-mode.light-mode #head_block {
-  box-shadow: 0 2px 10px 1px #ebebeb;
+  box-shadow: 0 2px 13px rgba(224, 224, 224, 0.8);
   background-color: white;
   color: black;
 }
 html.nesewebel-mode.light-mode #head_block h1 {
-  text-shadow: 1px 1px #ebebeb, 2px 2px #ebebeb, 3px 3px #ebebeb, 4px 4px #ebebeb, 5px 5px #ebebeb, 6px 6px #ebebeb;
+  text-shadow: 
+        0px 0px #595959,
+        0.5px 0.5px #595959, 
+        1px 1px #595959,
+        1.5px 1.5px #595959, 
+        2px 2px #595959,
+        2.5px 2.5px #595959, 
+        3px 3px #595959,
+        3.5px 3.5px #595959, 
+        4px 4px #595959,
+        4.5px 4.5px #595959, 
+        5px 5px #595959,
+        5.5px 5.5px #595959, 
+        6px 6px #595959;
 }
 html.nesewebel-mode.light-mode #head_block h1:hover::before {
   color: white;
@@ -183,14 +232,18 @@ html.nesewebel-mode.light-mode #head_block h1:hover::before {
   justify-content: space-around;
   display: grid;
   justify-items: center;
-  margin: 35px 20px 20px;
-  grid-gap: 40px;
-  grid-template-columns: repeat(auto-fit, minmax(410px, 1fr));
+  margin: 1.842em 1.053em 1.053em;
+  grid-gap: 2.105em;
+  grid-template-columns: repeat(auto-fit, minmax(21.579em, 1fr));
   align-items: center;
 }
 #box_nav .box {
-  width: 410px;
-  height: 450px;
+  width: 14.9em;
+  height: 16.34em;
+}
+#box_nav .box .box_header .header_text {
+  padding: 0.871em 0.762em;
+  line-height: 1.016em;
 }
 #box_nav .box:nth-child(1) {
   animation: 0.5s shiftinBox ease-out;
@@ -207,12 +260,292 @@ html.nesewebel-mode.light-mode #head_block h1:hover::before {
 #box_nav .box:nth-child(5) {
   animation: 0.82s shiftinBox ease-out;
 }
-#box_nav .dwm::before {
+#box_nav .box .dwm::before {
   background-image: url('images/main/MINECRAFT.png');
 }
-#box_nav .triangles::before {
+#box_nav .box .triangles::before {
   background-image: url('images/main/triangles.png');
 }
-#box_nav .matrix_3d::before {
+#box_nav .box .matrix_3d::before {
   background-image: url('images/main/cube.png');
+}
+html.nesewebel-mode.dark-mode #box_nav .box {
+  background-color: black;
+  border-top: 4px solid #242424;
+  border-bottom: 4px solid #060606;
+  box-shadow: 0 4px 1px black, 1px 2px 6px rgba(10, 10, 10, 0.75);
+}
+html.nesewebel-mode.dark-mode #box_nav .box .corneranimation::before,
+html.nesewebel-mode.dark-mode #box_nav .box .corneranimation::after {
+  background-color: #0f0f0f;
+}
+html.nesewebel-mode.dark-mode #box_nav .box .box_header {
+  background-color: black;
+  color: white;
+}
+html.nesewebel-mode.dark-mode #box_nav .box .box_text {
+  color: white;
+}
+html.nesewebel-mode.light-mode #box_nav .box {
+  background-color: white;
+  border-top: 4px solid #e6e6e6;
+  border-bottom: 4px solid #f9f9f9;
+  box-shadow: 0 4px 1px white, 1px 2px 6px rgba(245, 245, 245, 0.75);
+}
+html.nesewebel-mode.light-mode #box_nav .box .corneranimation::before,
+html.nesewebel-mode.light-mode #box_nav .box .corneranimation::after {
+  background-color: #f0f0f0;
+}
+html.nesewebel-mode.light-mode #box_nav .box .box_header {
+  background-color: white;
+  color: black;
+}
+html.nesewebel-mode.light-mode #box_nav .box .box_text {
+  color: black;
+}
+@media (max-width: 640px) {
+  body {
+    font-size: calc(1.1vw + 11.28px);
+  }
+  #head_block {
+    height: calc(24vw + 12vh + 32.8px);
+  }
+  #head_block h1 {
+    font-size: calc(17.5vw + 2vh + -1.62px);
+  }
+  #head_block .sub_header {
+    bottom: calc((24vw + 12vh + 32.8px)/4 - ((17.5vw + 2vh + -1.62px) * 0.145) * 2);
+  }
+}
+@media (max-width: 550px) {
+  #head_block h1 {
+    text-shadow: 
+        0px 0px #7c7c7c,
+        0.5px 0.5px #7c7c7c, 
+        1px 1px #7c7c7c,
+        1.5px 1.5px #7c7c7c, 
+        2px 2px #7c7c7c,
+        2.5px 2.5px #7c7c7c, 
+        3px 3px #7c7c7c,
+        3.5px 3.5px #7c7c7c, 
+        4px 4px #7c7c7c,
+        4.5px 4.5px #7c7c7c, 
+        5px 5px #7c7c7c, 
+          5.5px 5.5px #7c7c7c;
+  }
+  html.light-mode #head_block h1 {
+    text-shadow: 
+        0px 0px #949494,
+        0.5px 0.5px #949494, 
+        1px 1px #949494,
+        1.5px 1.5px #949494, 
+        2px 2px #949494,
+        2.5px 2.5px #949494, 
+        3px 3px #949494,
+        3.5px 3.5px #949494, 
+        4px 4px #949494,
+        4.5px 4.5px #949494, 
+        5px 5px #949494, 
+          5.5px 5.5px #949494;
+  }
+  html.nesewebel-mode.dark-mode #head_block h1 {
+    text-shadow: 
+        0px 0px #595959,
+        0.5px 0.5px #595959, 
+        1px 1px #595959,
+        1.5px 1.5px #595959, 
+        2px 2px #595959,
+        2.5px 2.5px #595959, 
+        3px 3px #595959,
+        3.5px 3.5px #595959, 
+        4px 4px #595959,
+        4.5px 4.5px #595959, 
+        5px 5px #595959, 
+          5.5px 5.5px #595959;
+  }
+  html.nesewebel-mode.light-mode #head_block h1 {
+    text-shadow: 
+        0px 0px #595959,
+        0.5px 0.5px #595959, 
+        1px 1px #595959,
+        1.5px 1.5px #595959, 
+        2px 2px #595959,
+        2.5px 2.5px #595959, 
+        3px 3px #595959,
+        3.5px 3.5px #595959, 
+        4px 4px #595959,
+        4.5px 4.5px #595959, 
+        5px 5px #595959, 
+          5.5px 5.5px #595959;
+  }
+}
+@media (max-width: 490px) {
+  #head_block h1 {
+    text-shadow: 
+        0px 0px #7c7c7c,
+        0.5px 0.5px #7c7c7c, 
+        1px 1px #7c7c7c,
+        1.5px 1.5px #7c7c7c, 
+        2px 2px #7c7c7c,
+        2.5px 2.5px #7c7c7c, 
+        3px 3px #7c7c7c,
+        3.5px 3.5px #7c7c7c, 
+        4px 4px #7c7c7c,
+        4.5px 4.5px #7c7c7c, 
+        5px 5px #7c7c7c;
+  }
+  html.light-mode #head_block h1 {
+    text-shadow: 
+        0px 0px #949494,
+        0.5px 0.5px #949494, 
+        1px 1px #949494,
+        1.5px 1.5px #949494, 
+        2px 2px #949494,
+        2.5px 2.5px #949494, 
+        3px 3px #949494,
+        3.5px 3.5px #949494, 
+        4px 4px #949494,
+        4.5px 4.5px #949494, 
+        5px 5px #949494;
+  }
+  html.nesewebel-mode.dark-mode #head_block h1 {
+    text-shadow: 
+        0px 0px #595959,
+        0.5px 0.5px #595959, 
+        1px 1px #595959,
+        1.5px 1.5px #595959, 
+        2px 2px #595959,
+        2.5px 2.5px #595959, 
+        3px 3px #595959,
+        3.5px 3.5px #595959, 
+        4px 4px #595959,
+        4.5px 4.5px #595959, 
+        5px 5px #595959;
+  }
+  html.nesewebel-mode.light-mode #head_block h1 {
+    text-shadow: 
+        0px 0px #595959,
+        0.5px 0.5px #595959, 
+        1px 1px #595959,
+        1.5px 1.5px #595959, 
+        2px 2px #595959,
+        2.5px 2.5px #595959, 
+        3px 3px #595959,
+        3.5px 3.5px #595959, 
+        4px 4px #595959,
+        4.5px 4.5px #595959, 
+        5px 5px #595959;
+  }
+}
+@media (max-width: 430px) {
+  #head_block h1 {
+    text-shadow: 
+        0px 0px #7c7c7c,
+        0.5px 0.5px #7c7c7c, 
+        1px 1px #7c7c7c,
+        1.5px 1.5px #7c7c7c, 
+        2px 2px #7c7c7c,
+        2.5px 2.5px #7c7c7c, 
+        3px 3px #7c7c7c,
+        3.5px 3.5px #7c7c7c, 
+        4px 4px #7c7c7c, 
+          4.5px 4.5px #7c7c7c;
+  }
+  html.light-mode #head_block h1 {
+    text-shadow: 
+        0px 0px #949494,
+        0.5px 0.5px #949494, 
+        1px 1px #949494,
+        1.5px 1.5px #949494, 
+        2px 2px #949494,
+        2.5px 2.5px #949494, 
+        3px 3px #949494,
+        3.5px 3.5px #949494, 
+        4px 4px #949494, 
+          4.5px 4.5px #949494;
+  }
+  html.nesewebel-mode.dark-mode #head_block h1 {
+    text-shadow: 
+        0px 0px #595959,
+        0.5px 0.5px #595959, 
+        1px 1px #595959,
+        1.5px 1.5px #595959, 
+        2px 2px #595959,
+        2.5px 2.5px #595959, 
+        3px 3px #595959,
+        3.5px 3.5px #595959, 
+        4px 4px #595959, 
+          4.5px 4.5px #595959;
+  }
+  html.nesewebel-mode.light-mode #head_block h1 {
+    text-shadow: 
+        0px 0px #595959,
+        0.5px 0.5px #595959, 
+        1px 1px #595959,
+        1.5px 1.5px #595959, 
+        2px 2px #595959,
+        2.5px 2.5px #595959, 
+        3px 3px #595959,
+        3.5px 3.5px #595959, 
+        4px 4px #595959, 
+          4.5px 4.5px #595959;
+  }
+}
+@media (max-width: 370px) {
+  #head_block h1 {
+    text-shadow: 
+        0px 0px #7c7c7c,
+        0.5px 0.5px #7c7c7c, 
+        1px 1px #7c7c7c,
+        1.5px 1.5px #7c7c7c, 
+        2px 2px #7c7c7c,
+        2.5px 2.5px #7c7c7c, 
+        3px 3px #7c7c7c,
+        3.5px 3.5px #7c7c7c, 
+        4px 4px #7c7c7c;
+  }
+  html.light-mode #head_block h1 {
+    text-shadow: 
+        0px 0px #949494,
+        0.5px 0.5px #949494, 
+        1px 1px #949494,
+        1.5px 1.5px #949494, 
+        2px 2px #949494,
+        2.5px 2.5px #949494, 
+        3px 3px #949494,
+        3.5px 3.5px #949494, 
+        4px 4px #949494;
+  }
+  html.nesewebel-mode.dark-mode #head_block h1 {
+    text-shadow: 
+        0px 0px #595959,
+        0.5px 0.5px #595959, 
+        1px 1px #595959,
+        1.5px 1.5px #595959, 
+        2px 2px #595959,
+        2.5px 2.5px #595959, 
+        3px 3px #595959,
+        3.5px 3.5px #595959, 
+        4px 4px #595959;
+  }
+  html.nesewebel-mode.light-mode #head_block h1 {
+    text-shadow: 
+        0px 0px #595959,
+        0.5px 0.5px #595959, 
+        1px 1px #595959,
+        1.5px 1.5px #595959, 
+        2px 2px #595959,
+        2.5px 2.5px #595959, 
+        3px 3px #595959,
+        3.5px 3.5px #595959, 
+        4px 4px #595959;
+  }
+}
+@media (max-width: 330px) {
+  #head_block h1 {
+    font-size: calc(10vw + 1vh + 31.13px);
+  }
+  #head_block .sub_header {
+    bottom: calc((24vw + 12vh + 32.8px)/4 - ((10vw + 1vh + 31.13px) * 0.145) * 2);
+  }
 }

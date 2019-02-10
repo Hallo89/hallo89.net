@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html class="dark-mode no-nesewebelsadface">
   <head>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1">
     <meta charset="utf-8">
     <meta name="theme-color" content="#17469E">
     <meta property="og:title" content="Hallo89">
@@ -17,21 +18,19 @@
     <div id="headline">
       <a href="https://hallo89.github.io/Some-shitty-website/" class="head_image"></a>
       <nav class="head_nav">
-        <a href="tools.html" class="link">Tools</a>
-        <a href="https://nesewebel.de" class="link">Nesewebel</a>
+        <a href="tools">Tools</a>
+        <a href="https://nesewebel.de">Nesewebel</a>
       </nav>
-      <div class="modes">
+      <aside class="modes">
         <span class="mode_gear fa fa-cog"></span>
         <div class="dropdown_box">
-          <div class="dropdown_header">
-            <span class="dropdown_header_text">modes</span>
-          </div>
+          <div class="dropdown_header">modes</div>
           <div class="dropdown_text">
-            <span class="mode_switch switch_daynight" onclick="toggleMode()"> Light Theme </span>
-            <span class="mode_switch switch_nesewebel" onclick="toggleModeNesewebel()"> Nesewebel Theme </span>
+            <span class="mode_switch switch_daynight" onclick="toggleMode()">Light Theme</span>
+            <span class="mode_switch switch_nesewebel" onclick="toggleModeNesewebel()">Nesewebel Theme</span>
           </div>
         </div>
-      </div>
+      </aside>
     </div>
     <div id="headline_popout" onclick="toggleHeadline()">
       <span class="face left front"></span>
@@ -46,7 +45,7 @@
       <span class="face right side_end"></span>
     </div>
 
-    <div id="head_block">
+    <header id="head_block">
       <h1 data-heading="Hallo89">Hallo89</h1>
       <script>
         var randomSubheader = [
@@ -57,81 +56,51 @@
     		  "An acceptable website",
     		  "Geometrical calculation",
     		  "Graphical utilization",
-    		  "Resourceful bundling"
+    		  "Resourceful bundling",
+    		  "Component-relative outlaying"
         ];
-        document.write('<p>' + randomSubheader[Math.floor(randomSubheader.length*Math.random())] + '</p>');
+        document.write('<p class="sub_header">' + randomSubheader[Math.floor(randomSubheader.length*Math.random())] + '</p>');
       </script>
-    </div>
+    </header>
 
     <nav id="box_nav">
-      <a href="https://minecraft.curseforge.com/projects/dandelion-with-mods" class="box glb_box hyperbox imager dwm">
-        <div class="corneranimation">
-          <span class="corner_before"></span>
-          <span class="corner_after"></span>
-        </div>
-        <div class="box_header">
-          <span class="header_text">Dandelion With Mods</span>
-        </div>
-        <div class="description box_text">
-          <span>
+      <a href="https://minecraft.curseforge.com/projects/dandelion-with-mods" class="box glb_box hyperbox imager">
+        <b class="corneranimation"></b>
+        <h2 class="box_header">Dandelion With Mods</h2>
+        <div class="image_container dwm">
+          <p class="description box_text">
             A minecraft resource pack, forked from the original resource pack 'Dandelion', featuring mod support, many improved and new vanilla items & models and 1.13. <br>
             Although not worked on extensively anymore, I consider it one of my main projects
-          </span>
+          </p>
         </div>
       </a>
       <a href="tools" class="box glb_box hyperbox">
-        <div class="corneranimation">
-          <span class="corner_before"></span>
-          <span class="corner_after"></span>
-        </div>
-        <div class="box_header">
-          <span class="header_text">tools</span>
-        </div>
-        <div class="description box_text">
-          <span>
-            A variety of useful tools, currently featuring a random number generator and an extensive minecraft model creator. <br>
-            Along with Dandelion With Mods and this website in general, it is one of my main projects
-          </span>
-        </div>
+        <b class="corneranimation"></b>
+        <h2 class="box_header">tools</h2>
+        <p class="description box_text">
+          A variety of useful tools, currently featuring a random number generator and an extensive minecraft model creator. <br>
+          Along with Dandelion With Mods and this website in general, it is one of my main projects
+        </p>
       </a>
       <a href="./slider89.html" class="box glb_box hyperbox">
-        <div class="corneranimation">
-          <span class="corner_before"></span>
-          <span class="corner_after"></span>
-        </div>
-        <div class="box_header">
-          <span class="header_text">Slider89</span>
-        </div>
-        <div class="description box_text">
-          <span>
-            Slider89 is a framework for easily creating and manipulating fully customizable CSS sliders for your website, featuring functions and practices for every purpose
-          </span>
-        </div>
+        <b class="corneranimation"></b>
+        <h2 class="box_header">Slider89</h2>
+        <p class="description box_text">
+          Slider89 is a framework for easily creating and manipulating fully customizable CSS sliders for your website, featuring functions and practices for every purpose
+        </p>
       </a>
       <div class="box glb_box multiplebox">
-        <div class="corneranimation">
-          <span class="corner_before"></span>
-          <span class="corner_after"></span>
-        </div>
-        <div class="box_header">
-          <span class="header_text">WebGL Experiments</span>
-        </div>
-        <div class="description box_text">
-          <span>A WebGL 2 learning log</span>
-        </div>
+        <b class="corneranimation"></b>
+        <h2 class="box_header">WebGL Experiments</h2>
+        <p class="description box_text">A WebGL 2 learning log</p>
         <div class="links box_text">
           <a class="imager triangles" href="./webgl/triangles.html">Triangles</a>
           <a class="imager matrix_3d" href="./webgl/matrices3d.html">Matrices & 3D</a>
         </div>
       </div>
       <div class="box glb_box multiplebox">
-        <div class="corneranimation">
-          <span class="corner_before"></span>
-          <span class="corner_after"></span>
-        </div>
-        <div class="box_header">
-          <span class="header_text">Other stuff</span>
-        </div>
+        <b class="corneranimation"></b>
+        <h2 class="box_header">Other stuff</h2>
         <div class="links box_text">
           <a href="./sponge.html">Useful thing</a>
           <a href="./tutorials.html">Empty thing</a>
