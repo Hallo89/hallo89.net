@@ -1,5 +1,5 @@
 body {
-  font-size: calc(.12vw + .06vh + 15.64px);
+  font-size: calc(.12vw + .06vh + 15.14px);
 }
 
 button {
@@ -86,19 +86,19 @@ a {
   position: relative;
   padding: 1px 1px 2px;
   transition: background-color .08s;
-  border-bottom: 1px solid;
 }
 #main_article p a:hover, #main_article dd a:hover, #main_article code a:hover {
-  border-bottom: 2px solid;
   padding: 1px;
 }
 
 #main_article p a, #main_article dd a {
   color: #1398A9;
+  border-bottom: 1px solid;
 }
 #main_article p a:hover, #main_article dd a:hover {
   /* #1398A9 in rgba */
   background-color: rgba(19, 152, 170, .19);
+  border-bottom: 2px solid;
 }
 #main_article p a:visited, #main_article dd a:visited {
   color: #469870;
@@ -116,14 +116,15 @@ a {
 }
 
 #main_article code a {
-  color: hsl(0, 0%, 73%);
-  font-style: italic;
+  color: hsl(0, 0%, 76%);
+  border-bottom: 1px solid hsl(0, 0%, 50%);
 }
 #main_article code a:hover {
-  background-color: hsla(0, 0%, 72%, .18);
+  background-color: hsla(0, 0%, 60%, .1);
+  border-bottom: 2px solid hsl(0, 0%, 50%);
 }
 #main_article code a:visited {
-  color: hsl(0, 0%, 64%);
+  color: inherit;
 }
 #main_article code a:hover:visited {
   background-color: hsla(0, 0%, 60%, .18);
@@ -153,6 +154,80 @@ a {
   padding: 3px 8px;
   margin: .25em 0;
   overflow: auto;
+}
+.code_wrapper.copyable {
+  display: flex;
+}
+.code_wrapper.copyable .codeblock {
+  width: 100%;
+}
+.code_wrapper.copyable .copy_icon {
+  position: relative;
+  background-color: hsl(0, 0%, 17%);
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  margin: .25em 0;
+  box-shadow: -1px 0 10px hsla(0, 0%, 12%, .2);
+  color: inherit;
+  border: none;
+  overflow: hidden;
+  font-size: 1.15em;
+  font-family: 'Consolas', 'San Francisco Monospaced', sans-serif;
+  transition: all .3s ease;
+}
+.code_wrapper.copyable .copy_icon:hover, .code_wrapper.copyable .copy_icon.active {
+  padding: 0 15px;
+  box-shadow: -1px 0 15px hsla(0, 0%, 10%, .25);
+  background-color: hsl(0, 0%, 18%);
+}
+.code_wrapper.copyable .copy_icon .text {
+  transition: all .18s ease;
+}
+.code_wrapper.copyable .copy_icon.active .text {
+  transform: translateX(100%);
+  opacity: 0;
+}
+.code_wrapper.copyable .copy_icon .checkbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(16% 50%, 24% 43%, 24% 43%, 24% 43%, 16% 50%, 16% 50%);
+  transition: all .18s ease;
+  transform: translateX(-100%);
+  opacity: 0;
+}
+.code_wrapper.copyable .copy_icon.active .checkbox {
+  animation: .3s checkmarkIn ease;
+  transform: none;
+  opacity: 1;
+  clip-path: polygon(85% 31%, 77% 23%, 41% 60%, 24% 43%, 16% 50%, 41% 76%);
+}
+@keyframes checkmarkIn {
+  0%   { clip-path: polygon(16% 50%, 24% 43%, 24% 43%, 24% 43%, 16% 50%, 16% 50%); }
+  30%  { clip-path: polygon(41% 76%, 41% 60%, 41% 60%, 24% 43%, 16% 50%, 41% 76%); }
+  100% { clip-path: polygon(85% 31%, 77% 23%, 41% 60%, 24% 43%, 16% 50%, 41% 76%); }
+}
+/* PLEASE IMPROVE */
+.code_wrapper.copyable .copy_icon .checkbox .mark {
+  position: absolute;
+  height: 4px;
+  bottom: 32%;
+  left: 45.5%;
+  transform-origin: bottom left;
+  background-color: hsl(0, 0%, 70%);
+  border-radius: 1px;
+  transition: all .3s ease;
+}
+.code_wrapper.copyable .copy_icon .checkbox .mark.lower {
+  transform: rotate(-135deg);
+  width: 19px;
+}
+.code_wrapper.copyable .copy_icon .checkbox .mark.upper {
+  transform: rotate(-45deg) translateX(-4px);
+  width: 35px;
 }
 #section_docs dt code {
   font-size: 1.1em;
@@ -245,12 +320,12 @@ h4 .icon_anchor {
   font-size: 1.3em;
   display: flex;
 }
-.version_switch .versions {
+.version_switch .version_buttons {
   display: flex;
   justify-content: space-evenly;
   flex: 1;
 }
-.version_switch .version {
+.version_switch button {
   position: relative;
   background-color: unset;
   border: none;
@@ -261,7 +336,7 @@ h4 .icon_anchor {
   padding: 6px 10px;
   transition: all .2s ease;
 }
-.version_switch .version::before {
+.version_switch button::before {
   content: '';
   position: absolute;
   left: 0;
@@ -272,10 +347,10 @@ h4 .icon_anchor {
   background-color: hsl(0, 0%, 80%);
   transition: all .2s ease;
 }
-.version_switch .version:hover, .version_switch .version.active {
+.version_switch button:hover, .version_switch button.active {
   color: hsl(0, 0%, 16%);
 }
-.version_switch .version:hover::before, .version_switch .version.active::before {
+.version_switch button:hover::before, .version_switch button.active::before {
   height: 100%;
 }
 
