@@ -3,9 +3,6 @@ body {
   margin: 0;
   overflow: hidden;
 }
-body.expanded .inputs {
-  transform: none;
-}
 canvas {
   width: 100vw;
   height: 100vh;
@@ -14,43 +11,45 @@ button {
   cursor: pointer;
   border: none;
 }
+a {
+  text-decoration: none;
+  color: inherit;
+}
 /* Don't know if that works */
 button::-moz-focus-inner {
   border: none;
 }
-.inputs {
+.toolbar {
   position: absolute;
   top: 0;
   width: 100%;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
   background-color: hsl(0, 0%, 10%);
   padding: 0 12px 10px;
   box-sizing: border-box;
-  z-index: 2;
   transform: translateY(-100%);
   transition: all .2s ease;
   animation: 1.5s initialVisibility ease;
+}
+body.expanded .toolbar {
+  transform: none;
 }
 @keyframes initialVisibility {
   0% { transform: none; }
   85% { transform: none; }
   100% { transform: translateY(-100%); }
 }
-/* Very lazy solution which I will improve in the future */
-.additional {
-  position: absolute;
-  right: 6px;
-  font: 21px 'Century Gothic', 'Segoe UI', 'Nirmala UI', sans-serif;
-  color: hsl(0, 0%, 30%);
-  line-height: 0;
-  padding: 34.5px 5px;
-  z-index: -1; /* Temporary solution until grdidgridigigrid */
+.toolbar .inputs {
+  display: flex;
+  flex-wrap: wrap;
 }
-.mainref {
-  text-decoration: none;
-  color: inherit;
+.toolbar .info_flag {
+  font: 21px 'Century Gothic', 'Segoe UI', 'Nirmala UI', sans-serif;
+  color: hsl(0, 0%, 34%);
+  padding: 21.5px 0 11.5px 5px;
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
 }
 .input_box {
   margin: 10px 8px 0;

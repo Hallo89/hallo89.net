@@ -223,106 +223,109 @@
     <link rel="stylesheet" type="text/css" href="base.css">
   </head>
   <body class="expanded">
-    <div class="inputs">
-      <div class="input_box colors colorpicker">
-        <input type="color" value="#17469E" class="input color">
-        <span class="input_header">Color picker</span>
-      </div>
-      <div class="input_box colors rgb">
-        <div class="input_wrapper">
-          <div class="number_wrapper">
-            <input type="number" value="23" max="255" min="0" class="input number rgb r">
-            <div class="crement_buttons small">
-              <button class="crement plus noselect">▲</button>
-              <button class="crement minus noselect">▼</button>
+    <div class="toolbar">
+      <div class="inputs">
+        <div class="input_box colors colorpicker">
+          <input type="color" value="#17469E" class="input color">
+          <span class="input_header">Color picker</span>
+        </div>
+        <div class="input_box colors rgb">
+          <div class="input_wrapper">
+            <div class="number_wrapper">
+              <input type="number" value="23" max="255" min="0" class="input number rgb r">
+              <div class="crement_buttons small">
+                <button class="crement plus noselect">▲</button>
+                <button class="crement minus noselect">▼</button>
+              </div>
+            </div>
+            <div class="number_wrapper">
+              <input type="number" value="70" max="255" min="0" class="input number rgb g">
+              <div class="crement_buttons small">
+                <button class="crement plus noselect">▲</button>
+                <button class="crement minus noselect">▼</button>
+              </div>
+            </div>
+            <div class="number_wrapper">
+              <input type="number" value="158" max="255" min="0" class="input number rgb b">
+              <div class="crement_buttons small">
+                <button class="crement plus noselect">▲</button>
+                <button class="crement minus noselect">▼</button>
+              </div>
             </div>
           </div>
-          <div class="number_wrapper">
-            <input type="number" value="70" max="255" min="0" class="input number rgb g">
-            <div class="crement_buttons small">
-              <button class="crement plus noselect">▲</button>
-              <button class="crement minus noselect">▼</button>
+          <span class="input_header">Color value in R, G, B</span>
+        </div>
+        <div class="input_box colors hex">
+          <input type="text" value="#17469E" class="input text" minlength="4" maxlength="7" size="7" pattern="#[\dA-Fa-f]{3}|#[\dA-Fa-f]{6}">
+          <span class="input_header">Color in HEX</span>
+        </div>
+        <div class="input_box dimensions">
+          <div class="box_wrapper size">
+            <div class="number_wrapper">
+              <input type="number" value="50" class="input number" min="1">
+              <div class="crement_buttons">
+                <button class="crement plus noselect">▲</button>
+                <button class="crement minus noselect">▼</button>
+              </div>
+            </div>
+            <span class="input_header">Triangle Size</span>
+          </div>
+          <button class="size_decoupler" onclick="decoupleSize();">⮂</button>
+          <div class="box_wrapper decoupled_sizes width">
+            <div class="number_wrapper">
+              <input type="number" value="50" class="input number" min="1">
+              <div class="crement_buttons small">
+                <button class="crement plus noselect">▲</button>
+                <button class="crement minus noselect">▼</button>
+              </div>
+            </div>
+            <span class="input_header">Width</span>
+          </div>
+          <div class="box_wrapper decoupled_sizes height">
+            <div class="number_wrapper">
+              <input type="number" value="50" class="input number" min="1">
+              <div class="crement_buttons small">
+                <button class="crement plus noselect">▲</button>
+                <button class="crement minus noselect">▼</button>
+              </div>
+            </div>
+            <span class="input_header">Height</span>
+          </div>
+        </div>
+        <div class="input_box button">
+          <button class="input" onclick="generate();">Regenerate</button>
+        </div>
+        <div id="slider_lightness"></div>
+        <div id="slider_threshold"></div>
+        <div class="input_box lines checker">
+          <div class="input checker" onclick="enableLines();">
+            <div class="checkmark">
+              <span class="mark lower"></span>
+              <span class="mark upper"></span>
             </div>
           </div>
-          <div class="number_wrapper">
-            <input type="number" value="158" max="255" min="0" class="input number rgb b">
-            <div class="crement_buttons small">
-              <button class="crement plus noselect">▲</button>
-              <button class="crement minus noselect">▼</button>
+          <span class="input_header">Line mode</span>
+        </div>
+        <div class="input_box lines checker">
+          <div class="input checker" onclick="switchScript();">
+            <div class="checkmark">
+              <span class="mark lower"></span>
+              <span class="mark upper"></span>
             </div>
           </div>
+          <span class="input_header">Legacy system</span>
         </div>
-        <span class="input_header">Color value in R, G, B</span>
-      </div>
-      <div class="input_box colors hex">
-        <input type="text" value="#17469E" class="input text" minlength="4" maxlength="7" size="7" pattern="#[\dA-Fa-f]{3}|#[\dA-Fa-f]{6}">
-        <span class="input_header">Color in HEX</span>
-      </div>
-      <div class="input_box dimensions">
-        <div class="box_wrapper size">
-          <div class="number_wrapper">
-            <input type="number" value="50" class="input number" min="1">
-            <div class="crement_buttons">
-              <button class="crement plus noselect">▲</button>
-              <button class="crement minus noselect">▼</button>
-            </div>
-          </div>
-          <span class="input_header">Triangle Size</span>
+        <div class="input_box button">
+          <button class="input" onclick="resetHash();">Reset values</button>
         </div>
-        <button class="size_decoupler" onclick="decoupleSize();">⮂</button>
-        <div class="box_wrapper decoupled_sizes width">
-          <div class="number_wrapper">
-            <input type="number" value="50" class="input number" min="1">
-            <div class="crement_buttons small">
-              <button class="crement plus noselect">▲</button>
-              <button class="crement minus noselect">▼</button>
-            </div>
-          </div>
-          <span class="input_header">Width</span>
-        </div>
-        <div class="box_wrapper decoupled_sizes height">
-          <div class="number_wrapper">
-            <input type="number" value="50" class="input number" min="1">
-            <div class="crement_buttons small">
-              <button class="crement plus noselect">▲</button>
-              <button class="crement minus noselect">▼</button>
-            </div>
-          </div>
-          <span class="input_header">Height</span>
-        </div>
-      </div>
-      <div class="input_box button">
-        <button class="input" onclick="generate();">Regenerate</button>
-      </div>
-      <div id="slider_lightness"></div>
-      <div id="slider_threshold"></div>
-      <div class="input_box lines checker">
-        <div class="input checker" onclick="enableLines();">
-          <div class="checkmark">
-            <span class="mark lower"></span>
-            <span class="mark upper"></span>
-          </div>
-        </div>
-        <span class="input_header">Line mode</span>
-      </div>
-      <div class="input_box lines checker">
-        <div class="input checker" onclick="switchScript();">
-          <div class="checkmark">
-            <span class="mark lower"></span>
-            <span class="mark upper"></span>
-          </div>
-        </div>
-        <span class="input_header">Legacy system</span>
-      </div>
-      <div class="input_box button">
-        <button class="input" onclick="resetHash();">Reset values</button>
-      </div>
-      <div class="input_box button ref download_canvas">
+        <div class="input_box button ref download_canvas">
         <a class="input" download="triangles.png" onclick="downloadCanvas()">Download image</a>
       </div>
-      <div class="additional">
-        <span>v2.0 | </span>
-        <a href="../index.html" class="mainref">Hallo89</a>
+      </div>
+      <div class="info_flag">
+        <div>
+          <span>v2.0 | </span><a href="../index.html" class="mainref">Hallo89</a>
+        </div>
       </div>
     </div>
     <div class="tooltips">

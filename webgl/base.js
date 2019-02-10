@@ -1,4 +1,4 @@
-const inputs = document.querySelector('.inputs');
+const toolbar = document.querySelector('.toolbar');
 
 const crementButtonsUp = document.querySelectorAll('.crement.plus');
 const crementButtonsDown = document.querySelectorAll('.crement.minus');
@@ -23,9 +23,9 @@ window.addEventListener('mousemove', handleMouseMove);
 
 
 function handleMouseMove(e) {
-  if (e.y <= 90 && !document.body.classList.contains('expanded')) {
+  if (e.y <= toolbar.clientHeight + 20 && !document.body.classList.contains('expanded')) {
     document.body.classList.add('expanded');
-  } else if (e.y > 90 && document.body.classList.contains('expanded')) {
+  } else if (e.y > toolbar.clientHeight + 20 && document.body.classList.contains('expanded')) {
     document.body.classList.remove('expanded');
   }
 }
