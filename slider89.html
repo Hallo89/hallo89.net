@@ -782,7 +782,10 @@
         document.execCommand('copy');
         range.detach();
         selection.removeAllRanges();
-        for (let l of ranges) selection.addRange(l);
+        for (let i of ranges) {
+          selection.addRange(i);
+          i.detach();
+        }
         this.classList.add('active');
         const that = this;
         setTimeout(function() {
