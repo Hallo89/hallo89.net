@@ -1,4 +1,4 @@
-const html = document.querySelector('html');
+const html = document.documentElement;
 const headline = document.getElementById('headline');
 const nav = document.querySelector('.head_nav');
 const modes = document.querySelector('.modes');

@@ -101,6 +101,9 @@ html.light-mode body {
   transform: rotateZ(135deg);
 }
 #headline .modes .mode_gear {
+  background-color: transparent;
+  border: none;
+  padding: 0;
   font-size: 41px;
   transition: all 0.45s cubic-bezier(0.52, 0.15, 0.16, 1.2);
   color: #3a5b99;
