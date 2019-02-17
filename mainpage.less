@@ -103,27 +103,38 @@ body {
     .mode-switch-transition.textshadow;
     .mode-switch-transition.color;
     animation: .75s fadein linear, .9s shiftin, .4s shadowIn cubic-bezier(.43, .1, .15, 1.1);
-    &:hover {
+    &:not(.nohover):hover {
       transform: scale(0.78) scale(1.294);
     }
-    &:hover::before, &:hover::after {
-      content: attr(data-heading);
+    .cut_after {
+      display: none;
+    }
+    &::before {
+      color: @header-background-color;
+      .text-shadow.around(7, @header-background-color);
+    }
+    &::before, .cut_after {
       position: absolute;
       top: 0;
       left: 0;
     }
-    &:hover::before {
-      color: @header-background-color;
-      .text-shadow.around(7, @header-background-color);
+    &:not(.nohover):hover::before {
+      content: attr(data-heading);
       clip-path: polygon(0 58%, 0 0, 100% 0, 100% 37%);
       animation: .3s headingcut ease-in;
     }
-    &:hover::after {
-     clip-path: polygon(0 57.5%, 0 0, 100% 0, 100% 36.5%);
-     transform: translate(-4px);
-     animation: .68s headingshift cubic-bezier(.85,0,1,1);
+    &:not(.nohover):hover .cut_after {
+      display: block;
+      clip-path: polygon(0 57.5%, 0 0, 100% 0, 100% 36.5%);
+      transform: translate(-4px);
+      animation: .68s headingshift cubic-bezier(.85,0,1,1);
     }
-    &::selection, &::-moz-selection {
+    span::selection {
+      background-color: transparent;
+      color: @header-selection;
+      .text-shadow.drop(6, #518AD6);
+    }
+    span::-moz-selection {
       background-color: transparent;
       color: @header-selection;
       .text-shadow.drop(6, #518AD6);
