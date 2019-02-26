@@ -330,20 +330,20 @@ body {
 }
 
 .boundary_container_2d .bottom_grid .var_bottom {
-  background: url('../../images/tools/enfloorment.png');
+  background: url('../../resources/images/tools/enfloorment.png');
 }
 .boundary_container_2d .bottom_grid .var_bottom {
    transform: rotateX(90deg) translateX(-200px);
 }
 
 .boundary_container_2d .axes .var_axis.x {
-  background: url('../../images/tools/enaxesxness.png');
+  background: url('../../resources/images/tools/enaxesxness.png');
 }
 .boundary_container_2d .axes .var_axis.y {
-  background: url('../../images/tools/enaxesyness.png');
+  background: url('../../resources/images/tools/enaxesyness.png');
 }
 .boundary_container_2d .axes .var_axis.z {
-  background: url('../../images/tools/enaxeszness.png');
+  background: url('../../resources/images/tools/enaxeszness.png');
 }
 .boundary_container_2d .axes .var_axis.x.ver_1 {
   transform: translateX(-200px) translateY(-200px);
@@ -365,7 +365,7 @@ body {
 }
 
 .boundary_container_2d .var_corner {
-  background: url('../../images/tools/enborderment.png');
+  background: url('../../resources/images/tools/enborderment.png');
 }
 .boundary_container_2d .corners .object_1 {
   transform: translateX(-200px) translateY(-200px) translateZ(200px);
