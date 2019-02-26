@@ -9,37 +9,23 @@
   </head>
   <body>
 
-    <div id="headline">
-      <a href="https://hallo89.github.io/Some-shitty-website/" class="head_image"></a>
-      <nav class="head_nav">
-        <a href="tools.html" class="link">Tools</a>
-        <a href="https://nesewebel.de" class="link">Nesewebel</a>
-      </nav>
-      <div class="modes">
-        <span class="mode_gear fa fa-cog" onclick="toggleDropdown()"></span>
+    <div id="navbar">
+      <div class="text">
+        <a href="/"><img src="../resources/images/main/Avatar.png" alt="Hallo89 logo"></a>
+        <a href="/" class="name">Hallo89</a>
+        <span class="arrow">></span>
+        <a href="tutorials.html" class="item">Tutorials</a>
+      </div>
+      <aside id="modes">
+        <button type="button" class="mode_gear fa fa-cog" onclick="toggleDropdown()"></button>
         <div class="dropdown_box">
-          <div class="dropdown_header">
-            <span class="dropdown_header_text">modes</span>
-          </div>
+          <div class="dropdown_header">modes</div>
           <div class="dropdown_text">
-            <span class="mode_switch switch_daynight" onclick="toggleMode()"> Light Theme </span>
+            <span class="mode_switch switch_daynight" onclick="toggleMode()">Light Theme</span>
           </div>
         </div>
-      </div>
+      </aside>
     </div>
-    <div id="headline_popout" onclick="toggleHeadline()">
-      <span class="face left front"></span>
-      <span class="face left behind"></span>
-      <span class="face left side_back"></span>
-      <span class="face left side_front"></span>
-      <span class="face left side_end"></span>
-      <span class="face right front"></span>
-      <span class="face right behind"></span>
-      <span class="face right side_back"></span>
-      <span class="face right side_front"></span>
-      <span class="face right side_end"></span>
-    </div>
-
     <header id="tutorial_header">
       <h1 class="header_navigation">
         <span class="header_nav_part root">assets</span><span class="header_nav_part slash">/</span><span class="header_nav_part mod">minecraft</span><span class="header_nav_part slash">/</span><span class="header_nav_part child_1">blockstates</span><span class="header_nav_part slash">/</span><span class="header_nav_part file">dirt.json</span>

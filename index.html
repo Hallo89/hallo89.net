@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="dark-mode">
+<html class="dark-mode" lang="en" dir="ltr">
   <head>
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1">
     <meta charset="utf-8">
@@ -14,36 +14,6 @@
     <link rel="stylesheet" type="text/css" href="mainpage.css">
   </head>
   <body>
-
-    <div id="headline">
-      <a href="https://hallo89.github.io/Some-shitty-website/" class="head_image"></a>
-      <nav class="head_nav">
-        <a href="tools">Tools</a>
-        <a href="https://nesewebel.de">Nesewebel</a>
-      </nav>
-      <aside class="modes">
-        <button type="button" class="mode_gear fa fa-cog"></button>
-        <div class="dropdown_box">
-          <div class="dropdown_header">modes</div>
-          <div class="dropdown_text">
-            <span class="mode_switch switch_daynight" onclick="toggleMode()">Light Theme</span>
-            <span class="mode_switch switch_nesewebel" onclick="toggleModeNesewebel()">Nesewebel Theme</span>
-          </div>
-        </div>
-      </aside>
-    </div>
-    <div id="headline_popout" onclick="toggleHeadline()">
-      <span class="face left front"></span>
-      <span class="face left behind"></span>
-      <span class="face left side_back"></span>
-      <span class="face left side_front"></span>
-      <span class="face left side_end"></span>
-      <span class="face right front"></span>
-      <span class="face right behind"></span>
-      <span class="face right side_back"></span>
-      <span class="face right side_front"></span>
-      <span class="face right side_end"></span>
-    </div>
 
     <header id="head_block">
       <h1 data-heading="Hallo89"><span class="main_text">Hallo89</span></h1>
@@ -62,6 +32,16 @@
         ];
         document.write('<p class="sub_header">' + randomSubheader[Math.floor(randomSubheader.length*Math.random())] + '</p>');
       </script>
+      <aside id="modes">
+        <button type="button" class="mode_gear fa fa-cog" onclick="toggleDropdown()"></button>
+        <div class="dropdown_box">
+          <div class="dropdown_header">modes</div>
+          <div class="dropdown_text">
+            <span class="mode_switch switch_daynight" onclick="toggleMode()">Light Theme</span>
+            <span class="mode_switch switch_nesewebel" onclick="toggleModeNesewebel()">Nesewebel Theme</span>
+          </div>
+        </div>
+      </aside>
     </header>
 
     <nav id="box_nav">
@@ -135,13 +115,6 @@
         window.removeEventListener('mousemove', removeHoverLock);
         if (e.target == h1 || e.target == h1Text) h1HoverIn();
       }
-
-      (function() {
-        //Applying the mode-opening mechanism late due to the headline animation
-        setTimeout(function() {
-          document.querySelector('.mode_gear').addEventListener('click', toggleDropdown);
-        }, 1850);
-      })();
 
       var nodeRanges = [];
       const h1Node2 = document.createElement('span');

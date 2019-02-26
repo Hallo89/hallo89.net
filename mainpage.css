@@ -2,8 +2,13 @@
 Written by Hallo89 using LESS CSS - http://lesscss.org
 No necessity to write this in here but Less is awesome!
 */
+html.nesewebel-mode.dark-mode {
+  scrollbar-color: white black;
+}
+html.nesewebel-mode.light-mode {
+  scrollbar-color: black white;
+}
 body {
-  background-color: #171717;
   font-size: calc(.05vw + .025vh + 17.82px);
 }
 html.nesewebel-mode.dark-mode body {
@@ -12,55 +17,17 @@ html.nesewebel-mode.dark-mode body {
 html.nesewebel-mode.light-mode body {
   background-color: white;
 }
-html.nesewebel-mode.dark-mode #headline .modes .dropdown_box {
-  border-top: 3px solid #242424;
-  border-bottom: 3px solid #060606;
-  box-shadow: 0 3px 1px black, 1px 1px 5px rgba(10, 10, 10, 0.75);
+#modes {
+  position: absolute;
+  top: .4em;
+  right: .4em;
+  font-size: 1.69em;
 }
-html.nesewebel-mode.dark-mode #headline .modes .dropdown_box::before {
-  border: 15px solid #242424;
+#modes.enabled .dropdown_box {
+  clip-path: circle(150% at 6.59em -1.29em);
 }
-html.nesewebel-mode.dark-mode #headline .modes .dropdown_box .dropdown_header {
-  background-color: black;
-  color: white;
-}
-html.nesewebel-mode.dark-mode #headline .modes .dropdown_box .mode_switch {
-  color: white;
-  background-color: black;
-}
-html.nesewebel-mode.dark-mode #headline .modes .dropdown_box .mode_switch:hover {
-  background-color: #0d0d0d;
-}
-html.nesewebel-mode.dark-mode #headline .head_image {
-  background-image: url('images/main/Avatar_black_white.png');
-}
-html.nesewebel-mode.light-mode #headline .modes .dropdown_box {
-  border-top: 3px solid #e6e6e6;
-  border-bottom: 3px solid #f9f9f9;
-  box-shadow: 0 3px 1px white, 1px 1px 5px rgba(245, 245, 245, 0.75);
-}
-html.nesewebel-mode.light-mode #headline .modes .dropdown_box::before {
-  border: 15px solid #e6e6e6;
-}
-html.nesewebel-mode.light-mode #headline .modes .dropdown_box .dropdown_header {
-  background-color: white;
-  color: black;
-}
-html.nesewebel-mode.light-mode #headline .modes .dropdown_box .mode_switch {
-  color: black;
-  background-color: white;
-}
-html.nesewebel-mode.light-mode #headline .modes .dropdown_box .mode_switch:hover {
-  background-color: #fafafa;
-}
-html.nesewebel-mode.light-mode #headline .head_image {
-  background-image: url('images/main/Avatar_white_black.png');
-}
-#headline {
-  animation: 2s headlineclose;
-}
-#headline_popout {
-  animation: 1.96s headline_popout_in1 linear, 1.96s headline_popout_in2, 2s headline_popout_in3;
+#modes .dropdown_box {
+  clip-path: circle(0 at 6.59em -1.29em);
 }
 #head_block {
   position: relative;

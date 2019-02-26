@@ -5,8 +5,8 @@ Written by Hallo89 using LESS CSS - http://lesscss.org
 No necessity to write this in here but Less is awesome!
 */
 
-@import "colors.less";
-@import "mixins.less";
+@import 'colors';
+@import 'mixins';
 
 
 html {
@@ -14,290 +14,171 @@ html {
   &.light-mode {
     scrollbar-color: auto;
   }
-  &.nesewebel-mode.dark-mode {
-    scrollbar-color: @nesewebel-foreground @nesewebel-background;
-  }
-  &.nesewebel-mode.light-mode {
-    scrollbar-color: @nesewebel-foreground--light @nesewebel-background--light;
-  }
 }
 
 body {
   margin: 0 0 15px 0;
   background-color: @background-color;
   font-family: Arial;
-  .mode-switch-transition.background;
+  .mode-transition.background;
   html.light-mode & {
     background-color: @background-color--light;
   }
 }
 
-#headline {
+#navbar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  position: fixed;
+  justify-content: space-between;
   width: 100%;
-  height: 60px;
-  background-color: @headline-background;
-  transform: translateY(-60px) skew(8deg);
-  transition: all .5s ease;
-  z-index: 10;
-  .headline_expanded & {
-    transform: none;
+  padding: .4em;
+  font-size: 2em;
+  background-color: hsl(0, 0%, 5%);
+  color: hsl(0, 0%, 60%);
+  box-sizing: border-box;
+  a {
+    color: inherit;
+    text-decoration: none;
   }
-  .head_image {
-    width: 50px;
-    min-width: 50px;
-    height: 50px;
-    margin-left: 5px;
-    border-radius: 100%;
-    background-image: url('./images/main/Avatar.png');
-    background-size: contain;
-    cursor: pointer;
-    .noselect;
-  }
-  .head_nav {
-    max-width: 700px;
-    width: 100%;
-    font-size: 28px;
-    font-family: 'Calibri', sans-serif;
+  .text {
+    font-family: 'Century Gothic', 'Arial', sans-serif;
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    animation: .4s fadein ease-in-out;
-    transition: transform .15s linear;
-    a {
-      flex: 1;
-      text-align: center;
-      text-decoration: none;
-      color: @nav-foreground;
-      transition:  all .75s;
-      &::before, &::after {
-        content: '';
-        border-bottom: solid 1px;
-        border-top: solid 1px;
-        vertical-align: middle;
-        width: 0;
-        border-radius: 2px;
-        display: inline-block;
-        transition: all .6s;
-      }
-      &:hover {
-        flex: 1.25;
-        transform: scale(1.08);
-      }
-      &:hover::before, &:hover::after {
-        width: 8px;
-      }
+    align-items: center;
+    img {
+      display: block;
+      width: 1.9em;
+      height: 1.9em;
+      border-radius: 100%;
+      margin-right: .3em;
     }
-  }
-  .modes {
-    position: relative;
-    margin: 1px 10px 0 0;
-    &.enabled .dropdown_box {
-      clip: rect(-12px 300px 200px 0px); //this is an amazing fallback for browsers without clip-path (which are a lot)
-      clip-path: circle(150% at 197px -35.5px);
+    .name {
+      font-weight: 600;
     }
-    &.enabled .mode_gear {
-      transform: rotateZ(135deg);
+    .arrow {
+      font-family: 'Source Code Pro', 'Consolas', 'Century Gothic', sans-serif;
+      padding: 0 .3em;
+      font-weight: 500;
+      .noselect;
     }
-    .mode_gear {
-      background-color: transparent;
-      border: none;
-      padding: 0;
-      font-size: 41px;
-      transition: all .45s cubic-bezier(.52,.15,.16,1.2);
-      color: @headline-gear;
-      cursor: pointer;
-    }
-    .dropdown_box {
-      clip: rect(-12px 300px -12px 0px);
-      clip-path: circle(0 at 197px -35.5px);
-      position: absolute;
-      font-size: 30px;
-      right: -4px;
-      margin: 15px 0 0;
-      border-top: 3px solid @mode-dropdown-bordertop;
-      border-bottom: 3px solid @mode-dropdown-borderbottom;
-      box-shadow: 0 3px 1px @mode-dropdown-extreme-shadow, 1px 1px 5px @mode-dropdown-shadow;
-      transition+: all .45s cubic-bezier(.52,.15,.16,1.2);
-      .mode-switch-transition.background;
-      .mode-switch-transition.shadow;
-      .mode-switch-transition.border;
-      z-index: 1;
-      &::before {
-        content: '';
-        position: absolute;
-        right: 9px;
-        top: -8px;
-        border: 15px solid @mode-dropdown-bordertop;
-        transform: rotate(45deg);
-        .mode-switch-transition.border;
-        z-index: -1;
-      }
-      .dropdown_header {
-        background-color: @mode-dropdown-header-background;
-        padding: 9px 18px;
-        font-family: 'Arial', sans-serif;
-        text-transform: uppercase;
-        color: @mode-dropdown-header-foreground;
-        .mode-switch-transition.color;
-        .mode-switch-transition.background;
-      }
-      .mode_switch {
-        font-size: .89em;
-        font-family: 'Calibri', 'Times New Roman', serif;
-        display: block;
-        white-space: nowrap;
-        position: relative;
-        padding: 9px 9px 9px 12px;
-        color: @mode-switch-foreground;
-        background-color: @mode-switch-background;
-        cursor: pointer;
-        transition: all .15s linear;
-        .noselect;
-        &:hover {
-          background-color: @mode-switch-background-hover;
-          transition: all .15s linear;
-        }
-        &::before {
-          position: absolute;
-          left: 6px;
-          top: 7px;
-          border-left: 3px solid;
-          height: 70%;
-          animation: .52s borderglideX;
-        }
-      }
-    }
-    html.light-mode & .switch_daynight,
-    html.nesewebel-mode & .switch_nesewebel {
-      &::before {
-        content: '';
-      }
-    }
-    html.light-mode & .switch_daynight {
-      &::before {
-        color: @theme-color;
-      }
-    }
-  }
-  html.light-mode & {
-    background-color: @headline-background;
-    .head_nav a {
-      color: @nav-foreground--light;
-    }
-    .modes {
-      .dropdown_box {
-        border-top: 3px solid @mode-dropdown-bordertop--light;
-        border-bottom: 3px solid @mode-dropdown-borderbottom--light;
-        box-shadow: 0 3px 1px @mode-dropdown-extreme-shadow--light, 1px 1px 5px @mode-dropdown-shadow--light;
-        &::before {
-          border: 15px solid @mode-dropdown-bordertop--light;
-        }
-        .dropdown_header {
-          background-color: @mode-dropdown-header-background--light;
-          color: @mode-dropdown-header-foreground--light;
-        }
-        .mode_switch {
-          color: @mode-switch-foreground--light;
-          background-color: @mode-switch-background--light;
-          &:hover {
-            background-color: @mode-switch-background-hover--light;
-          }
-        }
-      }
+    .item {
+      font-family: 'San Francisco', 'Arial', sans-serif;
     }
   }
 }
 
-
-#headline_popout {
-  width: 51px;
-  height: 51px;
-  position: fixed;
-  right: 20px;
-  top: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: .6s;
-  transform: rotate3d(5, 1, 2, 45deg);
-  transform-style: preserve-3d;
-  z-index: 9;
-  cursor: pointer;
-  .noselect;
-  .headline_expanded & {
-    transform: rotate3d(5, 1, 2, 540deg);
-    top: 80px;
+#modes {
+  position: relative;
+  &.enabled .dropdown_box {
+    clip: rect(-12px 230px 180px 0px); //this is an amazing fallback for browsers without clip-path (which are a lot)
+    clip-path: circle(150% at 130.5px -40px);
   }
-  .face {
+  &.enabled .mode_gear {
+    transform: rotateZ(135deg);
+  }
+  .mode_gear {
+    display: block;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    font-size: 1.5em;
+    transition: all .45s cubic-bezier(.52,.15,.16,1.2);
+    color: @headline-gear;
+    cursor: pointer;
+    &::before {
+      display: block;
+    }
+  }
+  .dropdown_box {
+    clip: rect(-12px 230px -12px 0px);
+    clip-path: circle(0 at 130.5px -40px);
     position: absolute;
-    height: 8px;
-    width: 33px;
-    background-color: gray;
-    outline: 1px solid transparent;
-  }
-  .left {
-    left: 0;
-  }
-  .right {
+    font-size: .95em;
     right: 0;
+    margin: 15px 0 0;
+    border-top: 3px solid @mode-dropdown-bordertop;
+    border-bottom: 3px solid @mode-dropdown-borderbottom;
+    box-shadow: 0 3px 1px @mode-dropdown-extreme-shadow, 1px 1px 5px @mode-dropdown-shadow;
+    transition+: all .45s cubic-bezier(.52,.15,.16,1.2);
+    .mode-transition.background;
+    .mode-transition.shadow;
+    .mode-transition.border;
+    z-index: 1;
+    &::before {
+      content: '';
+      position: absolute;
+      right: .3em;
+      top: -8px;
+      border: 15px solid @mode-dropdown-bordertop;
+      transform: rotate(45deg);
+      .mode-transition.border;
+      z-index: -1;
+    }
+    .dropdown_header {
+      background-color: @mode-dropdown-header-background;
+      padding: 9px 18px;
+      font-family: 'Arial', sans-serif;
+      text-transform: uppercase;
+      color: @mode-dropdown-header-foreground;
+      .mode-transition.color;
+      .mode-transition.background;
+    }
+    .mode_switch {
+      font-size: .89em;
+      font-family: 'Calibri', 'Times New Roman', serif;
+      display: block;
+      white-space: nowrap;
+      position: relative;
+      padding: 9px 9px 9px 12px;
+      color: @mode-switch-foreground;
+      background-color: @mode-switch-background;
+      cursor: pointer;
+      transition: all .15s linear;
+      .noselect;
+      &:hover {
+        background-color: @mode-switch-background-hover;
+        transition: all .15s linear;
+      }
+      &::before {
+        position: absolute;
+        left: 6px;
+        top: 7px;
+        border-left: 3px solid;
+        height: 70%;
+        animation: .52s borderglideX;
+      }
+    }
   }
-  .front.left {
-    transform: rotateZ(45deg) translateZ(4px);
+  html.light-mode & .switch_daynight,
+  html.nesewebel-mode & .switch_nesewebel {
+    &::before {
+      content: '';
+    }
   }
-  .front.right {
-    transform: rotateZ(-45deg) translateZ(4px);
+  html.light-mode & .switch_daynight {
+    &::before {
+      color: @theme-color;
+    }
   }
-  .behind.left {
-    transform: rotateZ(45deg) rotateY(180deg) translateZ(4px);
-  }
-  .behind.right {
-    transform: rotateZ(-45deg) rotateY(180deg) translateZ(4px);
-  }
-  .side_back.left {
-    transform: rotateZ(45deg) rotateX(90deg) translateZ(4px);
-  }
-  .side_back.right {
-    transform: rotateZ(-45deg) rotateX(90deg) translateZ(4px);
-  }
-  .side_front.left {
-    transform: rotateZ(45deg) rotateX(-90deg) translateZ(4px);
-  }
-  .side_front.right {
-    transform: rotateZ(-45deg) rotateX(-90deg) translateZ(4px);
-  }
-  .side_end.left {
-    transform: rotateZ(45deg) rotateY(90deg) translateZ(-8px) translateY(-9px);
-  }
-  .side_end.right {
-    transform: rotateZ(-45deg) rotateY(-90deg) translateZ(-8px) translateY(-9px);
-  }
-  .side_end {
-    width: 8px;
-  }
-  .front {
-    background-color: hsl(0, 0%, 50%);
-  }
-  .side_front.right {
-    background-color: hsl(0, 0%, 43%);
-  }
-  .side_front.left {
-    background-color: hsl(0, 0%, 41%);
-  }
-  .side_back {
-    background-color: hsl(0, 0%, 38%);
-  }
-  .behind {
-    background-color: hsl(0, 0%, 34%);
-  }
-  .side_end.right {
-    background-color: hsl(0, 0%, 39%);
-  }
-  .side_end.left {
-    background-color: hsl(0, 0%, 36%);
+  html.light-mode & {
+    .dropdown_box {
+      border-top: 3px solid @mode-dropdown-bordertop--light;
+      border-bottom: 3px solid @mode-dropdown-borderbottom--light;
+      box-shadow: 0 3px 1px @mode-dropdown-extreme-shadow--light, 1px 1px 5px @mode-dropdown-shadow--light;
+      &::before {
+        border: 15px solid @mode-dropdown-bordertop--light;
+      }
+      .dropdown_header {
+        background-color: @mode-dropdown-header-background--light;
+        color: @mode-dropdown-header-foreground--light;
+      }
+      .mode_switch {
+        color: @mode-switch-foreground--light;
+        background-color: @mode-switch-background--light;
+        &:hover {
+          background-color: @mode-switch-background-hover--light;
+        }
+      }
+    }
   }
 }
 
@@ -312,9 +193,9 @@ body {
   box-shadow: 0 4px 1px @glb-box-extreme-shadow, 1px 2px 6px @glb-box-shadow;
   box-sizing: border-box;
   position: relative;
-  .mode-switch-transition.background;
-  .mode-switch-transition.shadow;
-  .mode-switch-transition.border;
+  .mode-transition.background;
+  .mode-transition.shadow;
+  .mode-transition.border;
   &.hyperbox {
     cursor: pointer;
     text-decoration: none;
@@ -383,7 +264,7 @@ body {
       transition+: all .4s ease-out;
       z-index: 2;
       opacity: .65;
-      .mode-switch-transition.background;
+      .mode-transition.background;
     }
     &::before {
       height: 40px;
@@ -418,12 +299,12 @@ body {
     text-transform: uppercase;
     color: @glb-box-header-foreground;
     line-height: 28px;
-    .mode-switch-transition.background;
-    .mode-switch-transition.color;
+    .mode-transition.background;
+    .mode-transition.color;
   }
   .box_text {
     color: @glb-box-description-foreground;
-    .mode-switch-transition.color;
+    .mode-transition.color;
   }
   .description {
     font-family: Calibri, 'Times New Roman', serif;
@@ -454,4 +335,4 @@ body {
 }
 
 
-@import "keyframes.less";
+@import 'keyframes';
