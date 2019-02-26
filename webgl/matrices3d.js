@@ -1,3 +1,5 @@
+const inputs = toolbar.querySelector('.inputs');
+
 slider89.defaultValues({
   task: draw,
   classList: ['input_box'],
