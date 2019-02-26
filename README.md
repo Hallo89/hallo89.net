@@ -1,4 +1,4 @@
-# Some-shitty-website
+# hallo89.github.io (formerly Some-shitty-website)
 
 A website having started as a little side-project of mine, without much confidence, as one can see at the name of it.
 Meanwhile it is actually quite feature-rich and a large playground for my projects
