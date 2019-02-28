@@ -1,3 +1,23 @@
+/* Source Code Pro by Adobe @ https://github.com/adobe-fonts/source-code-pro/ */
+@font-face {
+  font-family: 'Source Code Pro';
+  font-weight: normal;
+  src:
+    local('Source Code Pro'),
+    local('SourceCodePro-Regular'),
+    url('../resources/fonts/SourceCodePro/SourceCodePro-Regular.otf.woff2') format('woff2'),
+    url('../resources/fonts/SourceCodePro/SourceCodePro-Regular.otf.woff') format('woff');
+}
+@font-face {
+  font-family: 'Source Code Pro';
+  font-weight: bold;
+  src:
+    local('Source Code Pro Bold'),
+    local('SourceCodePro-Bold'),
+    url('../resources/fonts/SourceCodePro/SourceCodePro-Bold.otf.woff2') format('woff2'),
+    url('../resources/fonts/SourceCodePro/SourceCodePro-Bold.otf.woff') format('woff');
+}
+
 body {
   font-size: calc(.12vw + .06vh + 15.14px);
 }
