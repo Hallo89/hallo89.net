@@ -251,13 +251,13 @@ html.nesewebel-mode.light-mode #head_block h1:hover::before {
   animation: 0.82s shiftinBox ease-out;
 }
 #box_nav .box .dwm::before {
-  background-image: url('resources/images/main/MINECRAFT.png');
+  background-image: url('MINECRAFT.png');
 }
 #box_nav .box .triangles::before {
-  background-image: url('resources/images/main/triangles.png');
+  background-image: url('triangles.png');
 }
 #box_nav .box .matrix_3d::before {
-  background-image: url('resources/images/main/cube.png');
+  background-image: url('cube.png');
 }
 html.nesewebel-mode.dark-mode #box_nav .box {
   background-color: black;

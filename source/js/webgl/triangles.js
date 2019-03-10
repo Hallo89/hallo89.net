@@ -3,7 +3,6 @@ const vertex = `#version 300 es
 
 in vec2 position;
 
-uniform float amountX;
 uniform float lightness;
 uniform float threshold;
 uniform mat3 projection;
@@ -11,6 +10,7 @@ uniform mat3 rotateZ;
 uniform mat3 rotationOffset;
 uniform mat3 rotateZ90;
 uniform mat3 rotation90Offset;
+uniform vec2 amount;
 uniform vec2 rands;
 uniform vec2 rands90;
 uniform vec2 drawDims;
@@ -30,7 +30,7 @@ void main() {
   //The current triangle iteration
   float id = float(gl_InstanceID);
   //On which grid and row the triangle batch is positioned
-  vec2 currentGridPos = vec2(mod(floor(id / 2.0), amountX), floor(floor(id / 2.0) / amountX));
+  vec2 currentGridPos = vec2(mod(floor(id / 2.0), amount.x), floor(floor(id / 2.0) / amount.x));
 
   //Taking two Math.random() from a uniform and doing some pre-compution for absolute randomness
   vec2 randMethod = rands * (sin(id + 1.0) * (id + 1.0));
@@ -60,7 +60,28 @@ void main() {
   }
 
   gl_Position = vec4((positionMatrix * vec3(position, 1)).xy, 0, 1);
-  fragColor = color * value;
+  if (currentGridPos.x / amount.x + currentGridPos.y / amount.y < 1.0) {
+    fragColor = (
+      (
+        ((color * 0.5) * (currentGridPos.x / (amount.x * 0.5))) +
+        ((color * 0.5) * (currentGridPos.y / (amount.y * 0.5)))
+      ) + (
+        ((vec3(192.0/255.0, 57.0/255.0, 43.0/255.0) * 0.5) * (((amount.x * 0.5) - currentGridPos.x) / (amount.x * 0.5))) +
+        ((vec3(192.0/255.0, 57.0/255.0, 43.0/255.0) * 0.5) * (((amount.y * 0.5) - currentGridPos.y) / (amount.y * 0.5)))
+      )
+    );
+  } else {
+    fragColor = (
+      (
+        ((color * 0.5) * (((amount.x * 0.5) - (currentGridPos.x - amount.x * 0.5)) / (amount.x * 0.5))) +
+        ((color * 0.5) * (((amount.y * 0.5) - (currentGridPos.y - amount.y * 0.5)) / (amount.y * 0.5)))
+      ) + (
+        ((vec3(41.0/255.0, 128.0/255.0, 185.0/255.0) * 0.5) * ((currentGridPos.x - amount.x * 0.5) / (amount.x * 0.5))) +
+        ((vec3(41.0/255.0, 128.0/255.0, 185.0/255.0) * 0.5) * ((currentGridPos.y - amount.y * 0.5) / (amount.y * 0.5)))
+      )
+    );
+  }
+  fragColor *= value;
 }
 `;
 
@@ -124,7 +145,7 @@ const aPositionAlt = gl.getAttribLocation(programAlt, 'position');
 const uRand = gl.getUniformLocation(program, 'rands');
 const uRand90 = gl.getUniformLocation(program, 'rands90');
 const uDrawDims = gl.getUniformLocation(program, 'drawDims');
-const uAmountX = gl.getUniformLocation(program, 'amountX');
+const uAmount = gl.getUniformLocation(program, 'amount');
 const uLightness = gl.getUniformLocation(program, 'lightness');
 const uThreshold = gl.getUniformLocation(program, 'threshold');
 const uRotateZ = gl.getUniformLocation(program, 'rotateZ');
@@ -320,7 +341,7 @@ function computeSizes() {
   amountY = Math.round(screenHeight / drawHeight);
   //Set the uniforms needed for the shaders (if the new system is used)
   if (!legacyMode) {
-    gl.uniform1f(uAmountX, amountX);
+    gl.uniform2f(uAmount, amountX, amountY);
     gl.uniform2f(uDrawDims, drawWidth, drawHeight);
     gl.uniformMatrix3fv(uProjection, false, [
       2 / screenWidth, 0, 0,
