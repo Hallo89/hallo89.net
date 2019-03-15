@@ -1,0 +1,17 @@
+<div id="navbar">
+  <nav class="text">
+    <a href="../"><img src="../Avatar.png" alt="Hallo89 logo"></a>
+    <a href="../" class="name">Hallo89</a>
+    <span class="arrow">></span>
+    <a href="<% page %>.html" class="item"><% page[0].toUpperCase() + page.slice(1) %></a>
+  </nav>
+  <aside id="modes">
+    <button type="button" class="mode_gear fa fa-cog" onclick="toggleDropdown()"></button>
+    <div class="dropdown_box">
+      <div class="dropdown_header">modes</div>
+      <div class="dropdown_text">
+        <span class="mode_switch switch_daynight" onclick="toggleMode()">Light Theme</span>
+      </div>
+    </div>
+  </aside>
+</div>

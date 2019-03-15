@@ -5,6 +5,7 @@ app.listen(8000, function() {
   console.log("Listening on port 8000!");
 });
 
+app.set('view engine', 'ejs');
 app.set('views', __dirname + '/pages');
 app.set('strict routing', false);
 
@@ -19,11 +20,16 @@ function get(which, fileName) {
     res.sendFile(__dirname + '/pages/' + (fileName || which) + '.html');
   });
 }
+function getEJS(which, fileName) {
+  app.get('/' + which, function(req, res) {
+    res.render((fileName || which), {page: (fileName || which)});
+  });
+}
 
 get('', 'index');
 get('sponge');
 get('tutorials');
-get('slider89');
+getEJS('slider89');
 get('blog');
 get('tools');
 get('tools/3DMagic');
