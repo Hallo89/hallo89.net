@@ -1,11 +1,16 @@
 const express = require('express');
+const nunjucks = require('nunjucks');
 const app = express();
 
 app.listen(8000, function() {
   console.log("Listening on port 8000!");
 });
 
-app.set('view engine', 'ejs');
+nunjucks.configure('pages', {
+  express: app
+});
+
+app.set('view engine', 'njk');
 app.set('views', __dirname + '/pages');
 app.set('strict routing', false);
 
@@ -20,16 +25,16 @@ function get(which, fileName) {
     res.sendFile(__dirname + '/pages/' + (fileName || which) + '.html');
   });
 }
-function getEJS(which, fileName) {
+function getNJK(which, param, fileName) {
   app.get('/' + which, function(req, res) {
-    res.render((fileName || which), {page: (fileName || which)});
+    param ? res.render(fileName || which) : res.render(fileName || which, param);
   });
 }
 
 get('', 'index');
 get('sponge');
 get('tutorials');
-getEJS('slider89');
+getNJK('slider89');
 get('blog');
 get('tools');
 get('tools/3DMagic');
