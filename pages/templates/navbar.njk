@@ -1,10 +1,19 @@
+{% macro navbar(thisPage, heading = false, modes = false, additional = false) %}
 <div id="navbar">
   <nav class="text">
     <a href="../"><img src="../Avatar.png" alt="Hallo89 logo"></a>
     <a href="../" class="name">Hallo89</a>
     <span class="arrow">></span>
-    <a href="{{ page }}" class="item">{{ page | capitalize }}</a>
+    {% if heading %}
+      <{{ heading }}><a href="{{ thisPage }}" class="item">{{ thisPage | capitalize }}</a></{{ heading }}>
+    {% else %}
+      <a href="{{ thisPage }}" class="item">{{ thisPage | capitalize }}</a>
+    {% endif %}
   </nav>
+  {% if additional %}
+  {{ caller() }}
+  {% endif %}
+  {% if modes %}
   <aside id="modes">
     <button type="button" class="mode_gear fa fa-cog" onclick="toggleDropdown()"></button>
     <div class="dropdown_box">
@@ -14,4 +23,6 @@
       </div>
     </div>
   </aside>
+  {% endif %}
 </div>
+{% endmacro %}
