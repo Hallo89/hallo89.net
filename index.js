@@ -27,14 +27,14 @@ function get(which, fileName) {
 }
 function getNJK(which, param, fileName) {
   app.get('/' + which, function(req, res) {
-    param ? res.render(fileName || which) : res.render(fileName || which, param);
+    param ? res.render(fileName || which, param) : res.render(fileName || which);
   });
 }
 
 get('', 'index');
 get('sponge');
 get('tutorials');
-getNJK('slider89');
+getNJK('slider89', {page: 'slider89'});
 get('blog');
 get('tools');
 get('tools/3DMagic');
