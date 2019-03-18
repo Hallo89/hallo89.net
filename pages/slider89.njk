@@ -7,17 +7,17 @@
     <link rel="stylesheet" href="../slider89.css">
   </head>
   <body>
+    {% import 'templates/navbar.njk' as navbar %}
 
+    {% call navbar.navbar(page, 'h1', false, true) %}
     <nav id="id_nav">
-      <h1>Slider89</h1>
-      <div class="links">
-        <a href="#what">What is this?</a>
-        <a href="#starting">Getting started</a>
-        <a href="#properties">Properties</a>
-        <a href="#functions">Methods</a>
-        <a href="#structure">HTML & CSS structure</a>
-      </div>
+      <a href="#what">What is this?</a>
+      <a href="#starting">Getting started</a>
+      <a href="#properties">Properties</a>
+      <a href="#functions">Methods</a>
+      <a href="#structure">HTML & CSS structure</a>
     </nav>
+    {%- endcall %}
     <main id="main_article">
       <h2 id="intro">
         <a href="#intro" class="icon_anchor">#</a>Introduction

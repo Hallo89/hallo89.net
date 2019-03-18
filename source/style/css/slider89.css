@@ -30,37 +30,30 @@ a {
   text-decoration: none;
 }
 
-#id_nav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  background-color: hsl(0, 0%, 13.5%);
-  color: hsl(0, 0%, 68%);
-  padding: 15px 30px;
-  font-family: 'San Francisco Monospaced', 'Consolas', monospace;
-}
-#id_nav h1 {
-  font-size: 2.37em;
+#navbar h1 {
+  font-size: inherit;
+  font-weight: normal;
   margin: 0;
-  color: hsl(0, 0%, 60%);
 }
-#id_nav .links {
-  flex: 1;
-  padding: 0 10px;
+#navbar .text {
+  margin-right: .6em;
+}
+#navbar #id_nav {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  font-size: 1.3em;
+  flex-grow: 1;
+  font-size: .74em;
+  font-family: 'San Francisco Monospaced', 'Consolas', monospace;
 }
-#id_nav .links a {
+#navbar #id_nav a {
   color: hsl(0, 0%, 65%);
-  margin: 9px 10px;
+  margin: 0 .5em;
   border-bottom: 2px solid hsl(0, 0%, 45%);
   white-space: nowrap;
   transition: all .15s ease-in-out;
 }
-#id_nav .links a:hover {
+#navbar #id_nav a:hover {
   color: hsl(0, 0%, 70%);
   border-color: hsl(0, 0%, 55%);
 }
