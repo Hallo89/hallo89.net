@@ -31,12 +31,12 @@ function getNJK(which, param, fileName) {
   });
 }
 
-get('', 'index');
+getNJK('', false, 'index');
 get('sponge');
 get('tutorials');
 getNJK('slider89', {page: 'slider89'});
 get('blog');
-get('tools');
+getNJK('tools');
 get('tools/3DMagic');
 get('tools/RFG');
 get('tools/mocking');

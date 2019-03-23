@@ -44,49 +44,31 @@
       </aside>
     </header>
 
+    {% import 'templates/glb_box.njk' as box %}
     <nav id="box_nav">
-      <a href="https://minecraft.curseforge.com/projects/dandelion-with-mods" class="box glb_box hyperbox imager">
-        <b class="corneranimation"></b>
-        <h2 class="box_header">Dandelion With Mods</h2>
-        <div class="image_container dwm">
-          <p class="description box_text">
-            A minecraft resource pack, forked from the original resource pack 'Dandelion', featuring mod support, many improved and new vanilla items & models and 1.13. <br>
-            Although not worked on extensively anymore, I consider it one of my main projects
-          </p>
-        </div>
-      </a>
-      <a href="tools" class="box glb_box hyperbox">
-        <b class="corneranimation"></b>
-        <h2 class="box_header">tools</h2>
-        <p class="description box_text">
-          A variety of useful tools, currently featuring a random number generator and an extensive minecraft model creator. <br>
-          Along with Dandelion With Mods and this website in general, it is one of my main projects
-        </p>
-      </a>
-      <a href="slider89" class="box glb_box hyperbox">
-        <b class="corneranimation"></b>
-        <h2 class="box_header">Slider89</h2>
-        <p class="description box_text">
-          Slider89 is a framework for easily creating and manipulating fully customizable CSS sliders for your website, featuring functions and practices for every purpose
-        </p>
-      </a>
-      <div class="box glb_box multiplebox">
-        <b class="corneranimation"></b>
-        <h2 class="box_header">WebGL Experiments</h2>
-        <p class="description box_text">A WebGL 2 learning log</p>
-        <div class="links box_text">
-          <a class="imager triangles" href="webgl/triangles">Triangles</a>
-          <a class="imager matrix_3d" href="webgl/matrices3d">Matrices & 3D</a>
-        </div>
-      </div>
-      <div class="box glb_box multiplebox">
-        <b class="corneranimation"></b>
-        <h2 class="box_header">Other stuff</h2>
-        <div class="links box_text">
-          <a href="sponge">Useful thing</a>
-          <a href="tutorials">Empty thing</a>
-        </div>
-      </div>
+      {% call box.image_box('Dandelion With Mods', 'https://minecraft.curseforge.com/projects/dandelion-with-mods', 'dwm') %}
+        A minecraft resource pack, forked from the original resource pack 'Dandelion', featuring mod support, many improved and new vanilla items & models and 1.13. <br>
+        Although not worked on extensively anymore, I consider it one of my main projects
+      {% endcall %}
+
+      {% call box.box('Tools', sameref = true) %}
+        A variety of useful tools, currently featuring a random number generator and an extensive minecraft model creator. <br>
+        Along with Dandelion With Mods and this website in general, it is one of my main projects
+      {% endcall %}
+
+      {% call box.box('Slider89', sameref = true) %}
+        Slider89 is a framework for easily creating and manipulating fully customizable CSS sliders for your website, featuring functions and practices for every purpose
+      {% endcall %}
+
+      {{ box.links_box('WebGL Experiments', 'A WebGL 2 learning log', images = true, links = [
+        ['Triangles', 'triangles', 'webgl/triangles'],
+        ['Matrices & 3D', 'matrix_3d', 'webgl/matrices3d']
+      ]) }}
+
+      {{ box.links_box('Other stuff', links = [
+        ['Useful thing', 'sponge'],
+        ['Empty thing', 'tutorials']
+      ]) }}
     </nav>
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">

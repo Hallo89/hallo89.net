@@ -1,0 +1,42 @@
+{% macro box(heading, ref, sameref = false) %}
+<a href="{{ ref if not sameref else heading | lower }}" class="box glb_box hyperbox imager">
+  <b class="corneranimation"></b>
+  <h2 class="box_header">{{ heading }}</h2>
+  <p class="description box_text">
+    {{ caller() | trim }}
+  </p>
+</a>
+{% endmacro %}
+
+{% macro image_box(heading, ref, imgClass) %}
+<a href="{{ ref }}" class="box glb_box hyperbox imager">
+  <b class="corneranimation"></b>
+  <h2 class="box_header">{{ heading }}</h2>
+  <div class="image_container {{ imgClass }}">
+    <p class="description box_text">
+      {{ caller() | trim }}
+    </p>
+  </div>
+</a>
+{% endmacro %}
+
+{% macro links_box(heading, description, images = false, links) %}
+<div class="box glb_box multiplebox">
+  <b class="corneranimation"></b>
+  <h2 class="box_header">{{ heading }}</h2>
+  {% if description -%}
+    <p class="description box_text">{{ description }}</p>
+  {%- endif %}
+  <div class="links box_text">
+  {% if images -%}
+    {% for name, class, ref in links -%}
+      <a class="imager {{ class }}" href="{{ ref }}">{{ name | safe }}</a>
+    {%- endfor %}
+  {%- else -%}
+    {% for name, class in links -%}
+      <a href="{{ class }}">{{ name }}</a>
+    {%- endfor %}
+  {%- endif %}
+  </div>
+</div>
+{% endmacro %}
