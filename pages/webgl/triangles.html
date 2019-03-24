@@ -376,6 +376,7 @@
       const expander = document.querySelector('.inputs_expander');
 
       inputColor.addEventListener('input', pickerChange);
+      inputColor.addEventListener('change', pickerSubmit);
       inputHEX.addEventListener('input', hexChange);
       for (let i = 0; i < inputsRGB.length; i++) {
         inputsRGB[i].addEventListener('input', rgbChange);
@@ -423,6 +424,11 @@
         if (value != null) {
           updateColors(value, 'picker');
           draw(true, hexToRgb(value));
+        }
+      }
+      function pickerSubmit() {
+        const value = checkHex(inputColor.value);
+        if (value != null) {
           updateHash({color: value.slice(1)});
         }
       }
