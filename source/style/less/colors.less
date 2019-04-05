@@ -17,8 +17,14 @@
 @header-selection: @theme-color;
 @subheader-selection: #469870;
 
+@cookiebanner-foreground: lighten(@glb-box-description-foreground, 15%);
+@cookiebanner-button: lighten(@glb-box, 7%);
+@cookiebanner-button-foreground: lighten(@glb-box-description-foreground, 20%);
+
+@cookiebanner-foreground--light: darken(@glb-box-description-foreground--light, 15%);
+
 @headline-background: darken(@background-color, 2.5%);
-@headline-gear: mix(darken(@foreground-color, 5%), @theme-color, 30%);
+@mode-gear: mix(darken(@foreground-color, 5%), @theme-color, 30%);
 
 @mode-dropdown-box: lighten(@header-background-color, 2.8%);
 @mode-dropdown-shadow: fadeout(darken(@mode-dropdown-box, 4%), 20%);
@@ -41,16 +47,6 @@
 @mode-switch-foreground--light: @foreground-color--light;
 @mode-switch-background--light: @mode-dropdown-box--light;
 @mode-switch-background-hover--light: lighten(@mode-switch-background--light, 3%);
-
-@nav-foreground: darken(@foreground-color, 10%);
-
-@nav-foreground--light: darken(@heading-foreground-color--light, 10%);
-@nav-background--light: fadeout(lighten(@header-background-color--light, 7%), 35%);
-@nav-shadow--light: darken(@background-color--light, 4%);
-
-@headline-expandingborder: lighten(@headline-background, 28%);
-@headline-expandingborder--light: darken(@heading-foreground-color--light, 22%);
-
 
 @heading-foreground-color: lighten(@foreground-color, 2.5%);
 @heading-shadow: darken(@heading-foreground-color, 14%);
