@@ -26,6 +26,86 @@ body {
   }
 }
 
+#cookiebanner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  display: flex;
+  font-size: 1.13em;
+  border-bottom: 3px solid @glb-box-borderbottom;
+  box-shadow: 1px -2px 6px @glb-box-shadow;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  transition+: clip-path .2s cubic-bezier(.35,.05,.35,.95), opacity .4s ease;
+  .mode-transition.background;
+  .mode-transition.shadow;
+  .mode-transition.border;
+  .description {
+    color: @cookiebanner-foreground;
+    padding: .55em .7em;
+    html.light-mode & {
+      color: @cookiebanner-foreground--light;
+    }
+  }
+  .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 0%;
+    width: 100%;
+    background-color: @glb-box-bordertop;
+    transition: all .08s ease-out;
+    z-index: 1;
+  }
+  button {
+    position: relative;
+    border: none;
+    padding: 0 1em;
+    background-color: @cookiebanner-button;
+    color: @cookiebanner-button-foreground;
+    font-size: inherit;
+    font-family: 'San Francisco Monospace', 'Consolas';
+    letter-spacing: -1px;
+    cursor: pointer;
+    &::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      height: 100%;
+      width: 0;
+      background: @cookiebanner-button;
+      z-index: -1;
+      border-radius: 100px;
+      transition: all .55s cubic-bezier(.45, .12, .22, 1);
+    }
+  }
+  &.removing {
+    button::before {
+      width: ~'calc(200vw - 100%)';
+      border-radius: 0;
+      transform: translateX(-100vw);
+    }
+  }
+  &.removing2 {
+    .background {
+      height: 100%;
+    }
+  }
+  &.removing3 {
+    opacity: 0;
+    clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+  }
+  &.gone {
+    display: none;
+  }
+  &.invisible {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
 #navbar {
   display: flex;
   align-items: center;
@@ -82,7 +162,7 @@ body {
     padding: 0;
     font-size: 1.5em;
     transition: all .45s cubic-bezier(.52,.15,.16,1.2);
-    color: @headline-gear;
+    color: @mode-gear;
     cursor: pointer;
     &::before {
       display: block;
