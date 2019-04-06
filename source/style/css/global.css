@@ -15,7 +15,7 @@ body {
   transition: background .15s linear;
 }
 html.light-mode body {
-  background-color: #ededed;
+  background-color: #ebebeb;
 }
 #cookiebanner {
   position: fixed;
@@ -248,19 +248,19 @@ html.light-mode #modes .switch_daynight::before {
 }
 html.light-mode #modes .dropdown_box {
   border-top: 3px solid #ffffff;
-  border-bottom: 3px solid #fafafa;
-  box-shadow: 0 3px 1px rgba(224, 224, 224, 0.9), 1px 1px 5px rgba(242, 242, 242, 0.8);
+  border-bottom: 3px solid #f7f7f7;
+  box-shadow: 0 3px 1px rgba(222, 222, 222, 0.9), 1px 1px 5px rgba(240, 240, 240, 0.8);
 }
 html.light-mode #modes .dropdown_box::before {
   border: 15px solid #ffffff;
 }
 html.light-mode #modes .dropdown_box .dropdown_header {
-  background-color: #ffffff;
+  background-color: #fcfcfc;
   color: #858585;
 }
 html.light-mode #modes .dropdown_box .mode_switch {
   color: #595959;
-  background-color: #fcfcfc;
+  background-color: #fafafa;
 }
 html.light-mode #modes .dropdown_box .mode_switch:hover {
   background-color: #ffffff;
@@ -389,17 +389,17 @@ html.light-mode #modes .dropdown_box .mode_switch:hover {
   margin: 0;
 }
 html.light-mode .glb_box {
-  background-color: #f5f5f5;
+  background-color: #f4f4f4;
   border-top: 4px solid #ffffff;
-  border-bottom: 4px solid #f1f1f1;
-  box-shadow: 0 4px 1px rgba(214, 214, 214, 0.9), 1px 2px 6px rgba(230, 230, 230, 0.8);
+  border-bottom: 4px solid #efefef;
+  box-shadow: 0 4px 1px rgba(212, 212, 212, 0.9), 1px 2px 6px rgba(228, 228, 228, 0.8);
 }
 html.light-mode .glb_box .corneranimation::before,
 html.light-mode .glb_box .corneranimation::after {
-  background-color: #dedede;
+  background-color: #dddddd;
 }
 html.light-mode .glb_box .box_header {
-  background-color: #f9f9f9;
+  background-color: #f7f7f7;
   color: #9c9c9c;
 }
 html.light-mode .glb_box .box_text {
