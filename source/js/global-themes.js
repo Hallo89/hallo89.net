@@ -16,7 +16,7 @@ window.addEventListener('load', function() {
 function hideBannerThemes() {
   hideBanner();
   if (!getCookie('theme')) {
-    document.cookie = 'theme=dark';
+    document.cookie = html.classList.contains('light-mode') ? 'theme=light' : 'theme=dark';
   } else {
     toggleMode(getCookie('theme'), true);
   }
@@ -25,12 +25,16 @@ function hideBannerThemes() {
 function toggleMode(mode, accepted) {
   if (mode) {
     if (mode == 'dark') html.classList.remove('light-mode');
-    html.classList.add(mode + '-mode');
+    if (mode == 'light') html.classList.add(mode + '-mode');
   } else {
     html.classList.toggle('light-mode');
   }
   if (accepted || getCookie('acceptedCookies') == 'true') {
-    document.cookie = mode || html.classList.contains('light-mode') ? 'theme=light' : 'theme=dark';
+    if (mode) {
+      document.cookie = 'theme=' + mode;
+    } else {
+      document.cookie = html.classList.contains('light-mode') ? 'theme=light' : 'theme=dark';
+    }
   }
 }
 

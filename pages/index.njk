@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="dark-mode" lang="en" dir="ltr">
+<html lang="en" dir="ltr">
   <head>
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1">
     <meta charset="utf-8">
@@ -16,14 +16,9 @@
     <script src="global-themes.js"></script>
   </head>
   <body>
+    {% import 'templates/cookie_banner.njk' as cookie -%}
 
-    <aside id="cookiebanner" class="glb_box invisible">
-      <b class="background"></b>
-      <div class="description box_text">
-        This site uses cookies by Cloudflare, this banner and to save your preferenced theme color. By continuing to use it, you agree to them!
-      </div>
-      <button type="button" onclick="hideBannerThemes()">Alrighty!</button>
-    </aside>
+    {{ cookie.banner(true) }}
 
     <header id="head_block">
       <h1 data-heading="Hallo89"><span class="main_text">Hallo89</span></h1>
