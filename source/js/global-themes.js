@@ -2,6 +2,8 @@ const html = document.documentElement;
 var modes;
 
 window.addEventListener('load', function() {
+  banner.children[1].innerHTML = 'This site uses cookies by Cloudflare, this banner and to save your preferenced theme color. By continuing to use it, you agree to them!';
+  banner.children[2].onclick = hideBannerThemes;
   modes = document.getElementById('modes');
 });
 
