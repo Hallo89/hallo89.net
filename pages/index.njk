@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#17469E">
     <meta property="og:title" content="Hallo89">
     <meta property="og:description" content="Hallo89.">
-    <meta property="og:url" content="https://hallo89.github.io/Some-shitty-website/">
+    <meta property="og:url" content="https://hallo89.net/">
     <meta property="og:image" content="Avatar.png">
     <title>Hallo89</title>
     <link rel="icon" href="favicon.ico">
@@ -14,6 +14,20 @@
     <link rel="stylesheet" href="main.css">
     <script src="global.js"></script>
     <script src="global-themes.js"></script>
+    <script>
+      const randomSubheader = [
+        "An ode to Nesewebel",
+        "A tale of Sparxdev",
+        "Rectangulous precipitation",
+        "Numerical apparatus",
+        "An acceptable website",
+        "Geometrical calculation",
+        "Graphical utilization",
+        "Resourceful bundling",
+        "Component-relative outlaying",
+        "Anumismatic fragment painting"
+      ];
+    </script>
   </head>
   <body>
     {% import 'templates/cookie_banner.njk' as cookie -%}
@@ -22,21 +36,11 @@
 
     <header id="head_block">
       <h1 data-heading="Hallo89"><span class="main_text">Hallo89</span></h1>
-      <script>
-        var randomSubheader = [
-          "An ode to Nesewebel",
-    		  "A tale of Sparxdev",
-    		  "Rectangulous precipitation",
-    		  "Numerical apparatus",
-    		  "An acceptable website",
-    		  "Geometrical calculation",
-    		  "Graphical utilization",
-    		  "Resourceful bundling",
-    		  "Component-relative outlaying",
-    		  "Anumismatic fragment painting"
-        ];
-        document.write('<p class="sub_header">' + randomSubheader[Math.floor(randomSubheader.length*Math.random())] + '</p>');
-      </script>
+      <p class="sub_header">
+        <script>
+          document.write(randomSubheader[Math.floor(randomSubheader.length*Math.random())]);
+        </script>
+      </p>
       <aside id="modes">
         <button type="button" class="mode_gear fa fa-cog" onclick="toggleDropdown()"></button>
         <div class="dropdown_box">
