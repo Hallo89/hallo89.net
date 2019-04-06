@@ -44,9 +44,6 @@ body {
   .description {
     color: @cookiebanner-foreground;
     padding: .55em .7em;
-    html.light-mode & {
-      color: @cookiebanner-foreground--light;
-    }
   }
   .background {
     position: absolute;
@@ -68,6 +65,8 @@ body {
     font-family: 'San Francisco Monospace', 'Consolas';
     letter-spacing: -.5px;
     cursor: pointer;
+    .mode-transition.background;
+    .mode-transition.color;
     &::before {
       content: '';
       position: absolute;
@@ -75,10 +74,11 @@ body {
       top: 0;
       height: 100%;
       width: 0;
-      background: @cookiebanner-button;
+      background-color: @cookiebanner-button;
       z-index: -1;
       border-radius: 100px;
-      transition: all .55s cubic-bezier(.45, .12, .22, 1);
+      transition+: all .55s cubic-bezier(.45, .12, .22, 1);
+      .mode-transition.background;
     }
   }
   &.removing {
@@ -104,6 +104,24 @@ body {
     opacity: 0;
     visibility: hidden;
   }
+
+  html.light-mode & {
+    border-bottom: 3px solid @glb-box-borderbottom--light;
+    box-shadow: 1px -2px 6px @glb-box-shadow--light;
+    .description {
+      color: @cookiebanner-foreground--light;
+    }
+    .background {
+      background-color: @glb-box-bordertop--light;
+    }
+    button {
+      color: @cookiebanner-button-foreground--light;
+      &, &::before {
+        background-color: @cookiebanner-button--light;
+      }
+    }
+  }
+
   @media (max-width: 420px) {
     flex-direction: column;
     button {
