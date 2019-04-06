@@ -22,9 +22,9 @@ html.light-mode body {
   bottom: 0;
   left: 0;
   width: 100%;
-  z-index: 10;
+  z-index: 100;
   display: flex;
-  font-size: 1.13em;
+  font-size: calc(.3vw + .1vh + 14.68px);
   border-bottom: 3px solid #1a1a1a;
   box-shadow: 1px -2px 6px rgba(19, 19, 19, 0.8);
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
@@ -55,7 +55,7 @@ html.light-mode #cookiebanner .description {
   color: #bababa;
   font-size: inherit;
   font-family: 'San Francisco Monospace', 'Consolas';
-  letter-spacing: -1px;
+  letter-spacing: -0.5px;
   cursor: pointer;
 }
 #cookiebanner button::before {
@@ -88,6 +88,32 @@ html.light-mode #cookiebanner .description {
 #cookiebanner.invisible {
   opacity: 0;
   visibility: hidden;
+}
+@media (max-width: 420px) {
+  #cookiebanner {
+    flex-direction: column;
+  }
+  #cookiebanner button {
+    padding: .6em 0;
+    letter-spacing: normal;
+    position: static;
+  }
+  #cookiebanner button::before {
+    left: 0;
+    top: auto;
+    bottom: 2em;
+    height: 0%;
+    width: 100%;
+    border-radius: 10px;
+    transition: none;
+  }
+  #cookiebanner.removing button::before {
+    width: 100%;
+    transform: none;
+    height: calc(100% - 2em);
+    border-radius: 0;
+    transition: all 0.55s cubic-bezier(0.45, 0.12, 0.22, 1);
+  }
 }
 #navbar {
   display: flex;
