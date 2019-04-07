@@ -3,19 +3,19 @@ Written by Hallo89 using LESS CSS - http://lesscss.org
 No necessity to write this in here but Less is awesome!
 */
 html {
-  scrollbar-color: #4d4d4d #2e2e2e;
+  scrollbar-color: hsl(0, 0%, 30%) hsl(0, 0%, 18%);
 }
 html.light-mode {
   scrollbar-color: auto;
 }
 body {
   margin: 0 0 15px 0;
-  background-color: #171717;
+  background-color: hsl(0, 0%, 9%);
   font-family: Arial;
-  transition: background .15s linear;
+  transition: background 0.15s linear;
 }
 html.light-mode body {
-  background-color: #ebebeb;
+  background-color: hsl(0, 0%, 92%);
 }
 #cookiebanner {
   position: fixed;
@@ -24,15 +24,15 @@ html.light-mode body {
   width: 100%;
   z-index: 100;
   display: flex;
-  font-size: calc(.3vw + .1vh + 14.68px);
+  font-size: calc(0.3vw + 0.1vh + 14.68px);
   border-bottom: 3px solid #1a1a1a;
-  box-shadow: 1px -2px 6px rgba(19, 19, 19, 0.8);
+  box-shadow: 1px -2px 6px hsla(0, 0%, 7.5%, 0.8);
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-  transition: clip-path 0.2s cubic-bezier(0.35, 0.05, 0.35, 0.95), opacity 0.4s ease, background .15s linear, box-shadow 0.15s linear, border .15s linear;
+  transition: clip-path 0.2s cubic-bezier(0.35, 0.05, 0.35, 0.95), opacity 0.4s ease, background 0.15s linear, box-shadow 0.15s linear, border 0.15s linear;
 }
 #cookiebanner .description {
-  color: #adadad;
-  padding: .55em .7em;
+  color: hsl(0, 0%, 68%);
+  padding: 0.55em 0.7em;
 }
 #cookiebanner .background {
   position: absolute;
@@ -40,7 +40,7 @@ html.light-mode body {
   left: 0;
   height: 0%;
   width: 100%;
-  background-color: #494949;
+  background-color: hsl(0, 0%, 28.5%);
   transition: all 0.08s ease-out;
   z-index: 1;
 }
@@ -48,13 +48,13 @@ html.light-mode body {
   position: relative;
   border: none;
   padding: 0 1em;
-  background-color: #2f2f2f;
-  color: #bababa;
+  background-color: hsl(0, 0%, 18.5%);
+  color: hsl(0, 0%, 73%);
   font-size: inherit;
   font-family: 'San Francisco Monospace', 'Consolas';
   letter-spacing: -0.5px;
   cursor: pointer;
-  transition: background .15s linear, color .15s linear;
+  transition: background 0.15s linear, color 0.15s linear;
 }
 #cookiebanner button::before {
   content: '';
@@ -63,10 +63,10 @@ html.light-mode body {
   top: 0;
   height: 100%;
   width: 0;
-  background-color: #2f2f2f;
+  background-color: hsl(0, 0%, 18.5%);
   z-index: -1;
   border-radius: 100px;
-  transition: all 0.55s cubic-bezier(0.45, 0.12, 0.22, 1), background .15s linear;
+  transition: all 0.55s cubic-bezier(0.45, 0.12, 0.22, 1), background 0.15s linear;
 }
 #cookiebanner.removing button::before {
   width: calc(200vw - 100%);
@@ -89,27 +89,27 @@ html.light-mode body {
 }
 html.light-mode #cookiebanner {
   border-bottom: 3px solid #efefef;
-  box-shadow: 1px -2px 6px rgba(228, 228, 228, 0.8);
+  box-shadow: 1px -2px 6px hsla(0, 0%, 89.5%, 0.8);
 }
 html.light-mode #cookiebanner .description {
-  color: #333333;
+  color: hsl(0, 0%, 20%);
 }
 html.light-mode #cookiebanner .background {
-  background-color: #ffffff;
+  background-color: hsl(0, 0%, 100%);
 }
 html.light-mode #cookiebanner button {
-  color: #191919;
+  color: hsl(0, 0%, 10%);
 }
 html.light-mode #cookiebanner button,
 html.light-mode #cookiebanner button::before {
-  background-color: #dfdfdf;
+  background-color: hsl(0, 0%, 87.5%);
 }
 @media (max-width: 420px) {
   #cookiebanner {
     flex-direction: column;
   }
   #cookiebanner button {
-    padding: .6em 0;
+    padding: 0.6em 0;
     letter-spacing: normal;
     position: static;
   }
@@ -135,10 +135,10 @@ html.light-mode #cookiebanner button::before {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: .4em;
-  font-size: calc(.2vw + .06vh + 27.6px);
-  background-color: #0d0d0d;
-  color: #999999;
+  padding: 0.4em;
+  font-size: calc(0.2vw + 0.06vh + 27.6px);
+  background-color: hsl(0, 0%, 5%);
+  color: hsl(0, 0%, 60%);
   box-sizing: border-box;
 }
 #navbar a {
@@ -155,14 +155,14 @@ html.light-mode #cookiebanner button::before {
   width: 1.9em;
   height: 1.9em;
   border-radius: 100%;
-  margin-right: .3em;
+  margin-right: 0.3em;
 }
 #navbar .text .name {
   font-weight: 600;
 }
 #navbar .text .arrow {
   font-family: 'Source Code Pro', 'Consolas', 'Century Gothic', sans-serif;
-  padding: 0 .3em;
+  padding: 0 0.3em;
   font-weight: 500;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -199,52 +199,52 @@ html.light-mode #cookiebanner button::before {
   clip: rect(-12px 230px -12px 0px);
   clip-path: circle(0 at 130.5px -40px);
   position: absolute;
-  font-size: .95em;
+  font-size: 0.95em;
   right: 0;
   margin: 15px 0 0;
-  border-top: 3px solid #545454;
+  border-top: 3px solid hsl(0, 0%, 32.8%);
   border-bottom: 3px solid #252525;
-  box-shadow: 0 3px 1px rgba(26, 26, 26, 0.9), 1px 1px 5px rgba(30, 30, 30, 0.8);
-  transition: all 0.45s cubic-bezier(0.52, 0.15, 0.16, 1.2), background .15s linear, box-shadow 0.15s linear, border .15s linear;
+  box-shadow: 0 3px 1px hsla(0, 0%, 10%, 0.9), 1px 1px 5px hsla(0, 0%, 11.8%, 0.8);
+  transition: all 0.45s cubic-bezier(0.52, 0.15, 0.16, 1.2), background 0.15s linear, box-shadow 0.15s linear, border 0.15s linear;
   z-index: 1;
 }
 #modes .dropdown_box::before {
   content: '';
   position: absolute;
-  right: .3em;
+  right: 0.3em;
   top: -8px;
-  border: 15px solid #545454;
+  border: 15px solid hsl(0, 0%, 32.8%);
   transform: rotate(45deg);
-  transition: border .15s linear;
+  transition: border 0.15s linear;
   z-index: -1;
 }
 #modes .dropdown_box .dropdown_header {
-  background-color: #2b2b2b;
+  background-color: hsl(0, 0%, 16.8%);
   padding: 9px 18px;
   font-family: 'Arial', sans-serif;
   text-transform: uppercase;
-  color: #6e6e6e;
-  transition: color .15s linear, background .15s linear;
+  color: hsl(0, 0%, 43%);
+  transition: color 0.15s linear, background 0.15s linear;
 }
 #modes .dropdown_box .mode_switch {
-  font-size: .89em;
+  font-size: 0.89em;
   font-family: 'Calibri', 'Times New Roman', serif;
   display: block;
   white-space: nowrap;
   position: relative;
   padding: 9px 9px 9px 12px;
-  color: #969696;
-  background-color: #282828;
+  color: hsl(0, 0%, 59%);
+  background-color: hsl(0, 0%, 15.8%);
   cursor: pointer;
-  transition: all .15s linear;
+  transition: all 0.15s linear;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
 #modes .dropdown_box .mode_switch:hover {
-  background-color: #303030;
-  transition: all .15s linear;
+  background-color: hsl(0, 0%, 18.8%);
+  transition: all 0.15s linear;
 }
 #modes .dropdown_box .mode_switch::before {
   position: absolute;
@@ -252,7 +252,7 @@ html.light-mode #cookiebanner button::before {
   top: 7px;
   border-left: 3px solid;
   height: 70%;
-  animation: .52s borderglideX;
+  animation: 0.52s borderglideX;
 }
 html.light-mode #modes .switch_daynight::before,
 html.nesewebel-mode #modes .switch_nesewebel::before {
@@ -262,35 +262,35 @@ html.light-mode #modes .switch_daynight::before {
   color: #17469E;
 }
 html.light-mode #modes .dropdown_box {
-  border-top: 3px solid #ffffff;
+  border-top: 3px solid hsl(0, 0%, 100%);
   border-bottom: 3px solid #f7f7f7;
-  box-shadow: 0 3px 1px rgba(222, 222, 222, 0.9), 1px 1px 5px rgba(240, 240, 240, 0.8);
+  box-shadow: 0 3px 1px hsla(0, 0%, 87%, 0.9), 1px 1px 5px hsla(0, 0%, 94%, 0.8);
 }
 html.light-mode #modes .dropdown_box::before {
-  border: 15px solid #ffffff;
+  border: 15px solid hsl(0, 0%, 100%);
 }
 html.light-mode #modes .dropdown_box .dropdown_header {
-  background-color: #fcfcfc;
-  color: #858585;
+  background-color: hsl(0, 0%, 99%);
+  color: hsl(0, 0%, 52%);
 }
 html.light-mode #modes .dropdown_box .mode_switch {
-  color: #595959;
-  background-color: #fafafa;
+  color: hsl(0, 0%, 35%);
+  background-color: hsl(0, 0%, 98%);
 }
 html.light-mode #modes .dropdown_box .mode_switch:hover {
-  background-color: #ffffff;
+  background-color: hsl(0, 0%, 100%);
 }
 .glb_box {
   font-size: 1.45em;
   overflow: hidden;
   border-radius: 2px;
-  background-color: #1d1d1d;
-  border-top: 4px solid #494949;
+  background-color: hsl(0, 0%, 11.5%);
+  border-top: 4px solid hsl(0, 0%, 28.5%);
   border-bottom: 4px solid #1a1a1a;
-  box-shadow: 0 4px 1px rgba(15, 15, 15, 0.9), 1px 2px 6px rgba(19, 19, 19, 0.8);
+  box-shadow: 0 4px 1px hsla(0, 0%, 6%, 0.9), 1px 2px 6px hsla(0, 0%, 7.5%, 0.8);
   box-sizing: border-box;
   position: relative;
-  transition: background .15s linear, box-shadow 0.15s linear, border .15s linear;
+  transition: background 0.15s linear, box-shadow 0.15s linear, border 0.15s linear;
 }
 .glb_box.hyperbox {
   cursor: pointer;
@@ -349,16 +349,16 @@ html.light-mode #modes .dropdown_box .mode_switch:hover {
 .glb_box.imager:hover .image_container::before,
 .glb_box .imager:hover::before {
   filter: none;
-  opacity: .5;
+  opacity: 0.5;
 }
 .glb_box .corneranimation::before,
 .glb_box .corneranimation::after {
   content: '';
   position: absolute;
-  background-color: #0f0f0f;
-  transition: all 0.4s ease-out, background .15s linear;
+  background-color: hsl(0, 0%, 6%);
+  transition: all 0.4s ease-out, background 0.15s linear;
   z-index: 2;
-  opacity: .65;
+  opacity: 0.65;
 }
 .glb_box .corneranimation::before {
   height: 40px;
@@ -381,20 +381,20 @@ html.light-mode #modes .dropdown_box .mode_switch:hover {
   transform: rotateZ(-45deg) translateX(0);
 }
 .glb_box .box_header {
-  background-color: #202020;
+  background-color: hsl(0, 0%, 12.5%);
   padding: 24px 21px;
   margin: 0;
   font-family: Arial, sans-serif;
   font-weight: normal;
   font-size: 1em;
   text-transform: uppercase;
-  color: #575757;
+  color: hsl(0, 0%, 34%);
   line-height: 28px;
-  transition: background .15s linear, color .15s linear;
+  transition: background 0.15s linear, color 0.15s linear;
 }
 .glb_box .box_text {
-  color: #878787;
-  transition: color .15s linear;
+  color: hsl(0, 0%, 53%);
+  transition: color 0.15s linear;
 }
 .glb_box .description {
   font-family: Calibri, 'Times New Roman', serif;
@@ -404,21 +404,21 @@ html.light-mode #modes .dropdown_box .mode_switch:hover {
   margin: 0;
 }
 html.light-mode .glb_box {
-  background-color: #f4f4f4;
-  border-top: 4px solid #ffffff;
+  background-color: hsl(0, 0%, 95.5%);
+  border-top: 4px solid hsl(0, 0%, 100%);
   border-bottom: 4px solid #efefef;
-  box-shadow: 0 4px 1px rgba(212, 212, 212, 0.9), 1px 2px 6px rgba(228, 228, 228, 0.8);
+  box-shadow: 0 4px 1px hsla(0, 0%, 83%, 0.9), 1px 2px 6px hsla(0, 0%, 89.5%, 0.8);
 }
 html.light-mode .glb_box .corneranimation::before,
 html.light-mode .glb_box .corneranimation::after {
-  background-color: #dddddd;
+  background-color: hsl(0, 0%, 86.5%);
 }
 html.light-mode .glb_box .box_header {
-  background-color: #f7f7f7;
-  color: #9c9c9c;
+  background-color: hsl(0, 0%, 97%);
+  color: hsl(0, 0%, 61%);
 }
 html.light-mode .glb_box .box_text {
-  color: #595959;
+  color: hsl(0, 0%, 35%);
 }
 @keyframes shiftin {
   from {
@@ -445,7 +445,7 @@ html.light-mode .glb_box .box_text {
 }
 @keyframes shadowIn {
   from {
-    text-shadow: 1px 1px #7c7c7c, 1.5px 1.5px #7c7c7c, 2px 2px #7c7c7c;
+    text-shadow: 1px 1px hsl(0, 0%, 48.5%), 1.5px 1.5px hsl(0, 0%, 48.5%), 2px 2px hsl(0, 0%, 48.5%);
   }
 }
 @keyframes headlineclose {
@@ -458,13 +458,13 @@ html.light-mode .glb_box .box_text {
 }
 @keyframes headline_popout_in1 {
   0% {
-    opacity: .05;
+    opacity: 0.05;
   }
   70% {
-    opacity: .15;
+    opacity: 0.15;
   }
   100% {
-    opacity: .85;
+    opacity: 0.85;
   }
 }
 @keyframes headline_popout_in2 {

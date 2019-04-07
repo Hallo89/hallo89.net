@@ -19,7 +19,7 @@ html {
 }
 
 body {
-  font-size: ~'calc(.05vw + .025vh + 17.82px)';
+  font-size: calc(.05vw + .025vh + 17.82px);
   html.nesewebel-mode.dark-mode & {
     background-color: @nesewebel-background;
   }
@@ -49,10 +49,10 @@ body {
   box-shadow: 0 2px 13px @header-shadow;
   background-color: @header-background-color;
   @headheight: ~'8vw + 16vh + 103px';
-  height: ~'calc(@{headheight})';
+  height: calc(@headheight);
   color: @heading-foreground-color;
-  .mode-transition.background;
-  .mode-transition.shadow;
+  .mode-transition.background();
+  .mode-transition.shadow();
   h1 {
     font: bold 6.9em 'Century Gothic', 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', sans-serif;
     text-transform: uppercase;
@@ -60,8 +60,8 @@ body {
     .text-shadow.drop(6, @heading-shadow);
     margin: 0;
     transition+: transform .76s;
-    .mode-transition.textshadow;
-    .mode-transition.color;
+    .mode-transition.textshadow();
+    .mode-transition.color();
     animation: .75s fadein linear, .9s shiftin, .4s shadowIn cubic-bezier(.43, .1, .15, 1.1);
     &:not(.nohover):hover {
       transform: scale(0.78) scale(1.294);
@@ -103,7 +103,7 @@ body {
   .sub_header {
     position: absolute;
 	//height of the header divided by 4 minus the header height brought back to the body font size times 2
-    bottom: ~'calc((@{headheight})/4 - 2em)';
+    bottom: calc((@headheight)/4 - 2em);
     font-family: 'Segoe UI', 'Arial', sans-serif;
     font-size: 1em;
     font-style: italic;
@@ -111,8 +111,8 @@ body {
     white-space: nowrap;
     animation: .6s fadein ease-in;
     .selection(@subheader-selection);
-    .mode-transition.background;
-    .mode-transition.color;
+    .mode-transition.background();
+    .mode-transition.color();
   }
 
   html.light-mode & {
@@ -225,17 +225,18 @@ body {
   }
 }
 
+@headheight640: ~'24vw + 12vh + 32.8px';
 @media (max-width: 640px) {
   body {
-    font-size: ~'calc(1.1vw + 11.28px)';
+    font-size: calc(1.1vw + 11.28px);
   }
   #head_block {
-    height: ~'calc(24vw + 12vh + 32.8px)';
+    height: calc(@headheight640);
     h1 {
-      font-size: ~'calc(17.5vw + 2vh + -1.62px)';
+      font-size: calc(17.5vw + 2vh + -1.62px);
     }
     .sub_header {
-      bottom: ~'calc((24vw + 12vh + 32.8px)/4 - ((17.5vw + 2vh + -1.62px) * 0.145) * 2)';
+      bottom: calc((@headheight640)/4 - ((17.5vw + 2vh + -1.62px) * 0.145) * 2);
     }
   }
 }
@@ -266,10 +267,10 @@ body {
 @media (max-width: 330px) {
   #head_block {
     h1 {
-      font-size: ~'calc(10vw + 1vh + 31.13px)';
+      font-size: calc(10vw + 1vh + 31.13px);
     }
     .sub_header {
-      bottom: ~'calc((24vw + 12vh + 32.8px)/4 - ((10vw + 1vh + 31.13px) * 0.145) * 2)';
+      bottom: calc((@headheight640)/4 - ((10vw + 1vh + 31.13px) * 0.145) * 2);
     }
   }
 }

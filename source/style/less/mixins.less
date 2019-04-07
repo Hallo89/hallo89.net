@@ -1,4 +1,4 @@
-// main: mainpage.less
+// main: global.less|main.less
 
 .noselect() {
   -webkit-user-select: none;
@@ -14,32 +14,30 @@
 .text-shadow() {
   .drop(@amount, @color, @trail-comma: false, @it: 0) {
     & when (@it < @amount) {
-      text-shadow+: ~'
-        @{it}px @{it}px @{color},
-        @{it}.5px @{it}.5px @{color}';
+      text-shadow+:
+        unit(@it, px) unit(@it, px) @color,
+        @it + .5px @it + .5px @color;
       .text-shadow.drop(@amount, @color, @trail-comma, @it + 1);
     }
     & when (@it = @amount) {
-      text-shadow+: ~'
-        @{it}px @{it}px @{color}';
+      text-shadow+: unit(@it, px) unit(@it, px) @color;
       & when (@trail-comma = true) {
-        text-shadow+: ~'
-          @{it}.5px @{it}.5px @{color}';
+        text-shadow+: @it + .5px @it + .5px @color;
       }
     }
   }
   .around(@size, @color, @it: 0) when (@it < 4) {
     & when (@it = 0) {
-      text-shadow+: ~"@{size}px @{size}px @{color}";
+      text-shadow+: unit(@size, px) unit(@size, px) @color;
     }
     & when (@it = 1) {
-      text-shadow+: ~"@{size}px -@{size}px @{color}";
+      text-shadow+: unit(@size, px) unit(-@size, px) @color;
     }
     & when (@it = 2) {
-      text-shadow+: ~"-@{size}px @{size}px @{color}";
+      text-shadow+: unit(-@size, px) unit(@size, px) @color;
     }
     & when (@it = 3) {
-      text-shadow+: ~"-@{size}px -@{size}px @{color}";
+      text-shadow+: unit(-@size, px) unit(-@size, px) @color;
     }
     .text-shadow.around(@size, @color, @it + 1);
   }

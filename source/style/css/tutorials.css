@@ -15,7 +15,7 @@ h2 {
   align-items: center;
   height: 110px;
   width: 100%;
-  background-color: #212121;
+  background-color: hsl(0, 0%, 13%);
 }
 #tutorial_header .header_navigation {
   font-size: 50px;
@@ -23,7 +23,7 @@ h2 {
   font-family: "Overpass Mono", sans-serif;
   letter-spacing: -0.006em;
   white-space: nowrap;
-  color: #999999;
+  color: hsl(0, 0%, 60%);
   transform: translateX(calc(-70px + 9.5vw));
 }
 @media (max-width: 834px) {
@@ -43,13 +43,13 @@ h2 {
   height: 2000px;
   padding: 60px 35px 35px;
   font-size: 22px;
-  color: #999999;
+  color: hsl(0, 0%, 60%);
 }
 #main #main_content h2 {
   font-size: 2.5em;
   font-family: 'Raleway', sans-serif;
   writing-mode: sideways-lr;
-  color: #919191;
+  color: hsl(0, 0%, 57%);
   margin-left: -25px;
   margin-top: -1px;
   float: left;
@@ -61,7 +61,7 @@ h2 {
   position: sticky;
   top: 55px;
   font-size: 25px;
-  color: #8f8f8f;
+  color: hsl(0, 0%, 56%);
   margin-right: 30px;
   font-family: 'Raleway', sans-serif;
 }
@@ -75,7 +75,7 @@ h2 {
 }
 .tutorial_nav .aside_container .nested_items {
   margin-left: 15px;
-  font-size: .77em;
+  font-size: 0.77em;
 }
 .tutorial_nav#headline_tutorials {
   top: 0;
@@ -89,10 +89,10 @@ h2 {
   margin: 0;
   padding: 8px;
   cursor: pointer;
-  transition: .22s;
+  transition: 0.22s;
 }
 .tutorial_nav#headline_tutorials .aside_container:hover {
-  background-color: #242424;
+  background-color: hsl(0, 0%, 14%);
 }
 .tutorial_nav#headline_tutorials .aside_container .nested_items {
   display: none;
