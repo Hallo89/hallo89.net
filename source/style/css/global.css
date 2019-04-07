@@ -254,6 +254,12 @@ html.light-mode #cookiebanner button::before {
   height: 70%;
   animation: 0.52s borderglideX;
 }
+@keyframes borderglideX {
+  from {
+    height: 0;
+    top: 50%;
+  }
+}
 html.light-mode #modes .switch_daynight::before,
 html.nesewebel-mode #modes .switch_nesewebel::before {
   content: '';
