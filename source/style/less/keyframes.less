@@ -1,19 +1,12 @@
-// main: global.less
+// main: global.less|main.less
 
+//main.less
 @keyframes shiftin {
   from { transform: translateY(-45px); }
-}
-@keyframes shiftinBox {
-  from { transform: translateY(-17px); }
 }
 @keyframes fadein {
   from { opacity: 0.1; }
 }
-@keyframes nope {
-  from { opacity: 0; }
-  to   { opacity: 0; }
-}
-
 @keyframes shadowIn {
   from {
     text-shadow:
@@ -21,27 +14,6 @@
       1.5px 1.5px @heading-shadow,
       2px 2px @heading-shadow;
   }
-}
-
-@keyframes headlineclose {
-  0%  { transform: none; }
-  67% { transform: none; }
-}
-@keyframes headline_popout_in1 {
-  0%   { opacity: .05; }
-  70%  { opacity: .15; }
-  100% { opacity: .85; }
-}
-@keyframes headline_popout_in2 {
-  0%    { transform: scale(.85) rotate3d(5, 1, 2, 45deg); }
-  81%   { transform: scale(.85) rotate3d(5, 1, 2, 45deg); }
-  90.5% { transform: scale(1.15) rotate3d(5, 1, 2, 45deg); }
-  100%  { transform: rotate3d(5, 1, 2, 45deg); }
-}
-@keyframes headline_popout_in3 {
-  0%   { top: 80px; }
-  67%  { top: 80px; }
-  100% { top: 20px }
 }
 
 @keyframes headingcut {
@@ -53,6 +25,8 @@
   30%  { transform: translate(0); }
   100% { transform: translate(-4px); }
 }
+
+//global.less
 @keyframes borderglideX {
   from { height: 0; top: 50%; }
 }
