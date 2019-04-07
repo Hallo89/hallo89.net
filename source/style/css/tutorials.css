@@ -3,6 +3,7 @@ Written by Hallo89 using LESS CSS - http://lesscss.org
 No necessity to write this in here but Less is awesome!
 */
 body {
+  margin: 0 0 15px;
   font-family: 'Segoe UI', sans-serif;
 }
 h1,

@@ -9,6 +9,7 @@ html.nesewebel-mode.light-mode {
   scrollbar-color: black white;
 }
 body {
+  margin: 0 0 15px;
   font-size: calc(0.05vw + 0.025vh + 17.82px);
 }
 html.nesewebel-mode.dark-mode body {
