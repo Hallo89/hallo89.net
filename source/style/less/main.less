@@ -10,7 +10,7 @@ No necessity to write this in here but Less is awesome!
 
 
 html {
-  &.nesewebel-mode.dark-mode {
+  &.nesewebel-mode {
     scrollbar-color: @nesewebel-foreground @nesewebel-background;
   }
   &.nesewebel-mode.light-mode {
@@ -21,7 +21,7 @@ html {
 body {
   margin: 0 0 15px;
   font-size: calc(.05vw + .025vh + 17.82px);
-  html.nesewebel-mode.dark-mode & {
+  html.nesewebel-mode & {
     background-color: @nesewebel-background;
   }
   html.nesewebel-mode.light-mode & {
@@ -151,7 +151,7 @@ body {
       }
     }
   }
-  html.nesewebel-mode.dark-mode & {
+  html.nesewebel-mode & {
     box-shadow: 0 2px 13px @nesewebel-header-shadow;
     background-color: @nesewebel-background;
     color: @nesewebel-foreground;
@@ -215,7 +215,7 @@ body {
     .matrix_3d::before {
       background-image: url('cube.png');
     }
-    html.nesewebel-mode.dark-mode & {
+    html.nesewebel-mode & {
       background-color: @nesewebel-background;
       border-top: 4px solid @nesewebel-box-bordertop;
       border-bottom: 4px solid @nesewebel-box-borderbottom;
@@ -277,7 +277,7 @@ body {
       html.light-mode & {
         .text-shadow.drop(@it, @heading-shadow--light, @trail);
       }
-      html.nesewebel-mode.dark-mode & {
+      html.nesewebel-mode & {
         .text-shadow.drop(@it, @nesewebel-heading-shadow--light, @trail);
       }
       html.nesewebel-mode.light-mode & {
