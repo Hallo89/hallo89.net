@@ -2,41 +2,39 @@ const html = document.documentElement;
 var modes;
 
 window.addEventListener('load', function() {
-  banner.children[1].innerHTML = 'This site uses cookies by Cloudflare, this banner and to save your preferenced theme color. By continuing to use it, you agree to them!';
-  banner.children[2].onclick = hideBannerThemes;
+  if (hasAccepted != 'true') {
+    banner.children[1].innerHTML = 'This site uses cookies by Cloudflare, this banner and to save your preferenced theme color. By continuing to use it, you agree to them!';
+    banner.children[2].onclick = hideBannerThemes;
+  }
   modes = document.getElementById('modes');
 });
 
 //Set the theme according to the cookie 'theme' on startup (but only if cookies have been accepted)
 (function() {
   const themeCookie = getCookie('theme');
-  if (themeCookie && getCookie('acceptedCookies') == 'true') {
-    toggleMode(themeCookie, true);
+  if (themeCookie && hasAccepted == 'true') {
+    toggleMode(themeCookie);
   }
 })();
 
 function hideBannerThemes() {
   hideBanner();
   if (!getCookie('theme')) {
-    document.cookie = html.classList.contains('light-mode') ? 'theme=light' : 'theme=dark';
+    document.cookie = 'theme=' + (html.classList.contains('light-mode') ? 'light' : 'dark') + '; path=/';
   } else {
-    toggleMode(getCookie('theme'), true);
+    toggleMode(getCookie('theme'));
   }
 }
 
-function toggleMode(mode, accepted) {
+function toggleMode(mode) {
   if (mode) {
     if (mode == 'dark') html.classList.remove('light-mode');
-    if (mode == 'light') html.classList.add(mode + '-mode');
+    if (mode == 'light') html.classList.add('light-mode');
   } else {
     html.classList.toggle('light-mode');
   }
-  if (accepted || getCookie('acceptedCookies') == 'true') {
-    if (mode) {
-      document.cookie = 'theme=' + mode;
-    } else {
-      document.cookie = html.classList.contains('light-mode') ? 'theme=light' : 'theme=dark';
-    }
+  if (!mode && getCookie('acceptedCookies') == 'true') {
+    document.cookie = 'theme=' + (html.classList.contains('light-mode') ? 'light' : 'dark') + '; path=/';
   }
 }
 

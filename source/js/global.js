@@ -3,6 +3,8 @@ function getCookie(name) {
   return list != null ? list[1] : null;
 }
 
+const hasAccepted = getCookie('acceptedCookies');
+
 //Create the banner element
 const banner = (function() {
   const aside = document.createElement('aside');
@@ -25,18 +27,15 @@ const banner = (function() {
   return aside;
 })();
 
-//Check whether cookies have already been accepted
-window.addEventListener('load', function() {
-  document.body.insertBefore(banner, document.body.children[0]);
-  setTimeout(function() {
-    if (getCookie('acceptedCookies') == 'true') {
-      banner.classList.add('gone');
+if (hasAccepted != 'true') {
+  //If no cookie saying that cookies have been accepted is present, append the banner to the body
+  window.addEventListener('load', function() {
+    document.body.insertBefore(banner, document.body.children[0]);
+    setTimeout(function() {
       banner.classList.remove('invisible');
-    } else {
-      banner.classList.remove('invisible');
-    }
-  }, 10);
-});
+    }, 10);
+  });
+}
 
 function hideBanner() {
   banner.classList.add('removing');
@@ -49,5 +48,5 @@ function hideBanner() {
       }, 200);
     }, 80);
   }, 450);
-  document.cookie = 'acceptedCookies=true';
+  document.cookie = 'acceptedCookies=true; path=/';
 }
