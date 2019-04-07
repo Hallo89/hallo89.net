@@ -54,11 +54,6 @@ html.nesewebel-mode.light-mode body {
     transform: translateY(-45px);
   }
 }
-@keyframes fadein {
-  from {
-    opacity: 0.1;
-  }
-}
 @keyframes shadowIn {
   from {
     text-shadow: 1px 1px hsl(0, 0%, 48.5%), 1.5px 1.5px hsl(0, 0%, 48.5%), 2px 2px hsl(0, 0%, 48.5%);
@@ -136,6 +131,11 @@ html.nesewebel-mode.light-mode body {
   background-color: transparent;
   color: #469870;
 }
+@keyframes fadein {
+  from {
+    opacity: 0.1;
+  }
+}
 html.light-mode #head_block {
   box-shadow: 0 2px 13px hsla(0, 0%, 77%, 0.75);
   background-color: hsl(0, 0%, 96%);
@@ -205,6 +205,11 @@ html.nesewebel-mode.light-mode #head_block h1:hover::before {
 }
 #box_nav .box:nth-child(5) {
   animation: 0.82s shiftinBox ease-out;
+}
+@keyframes shiftinBox {
+  from {
+    transform: translateY(-17px);
+  }
 }
 #box_nav .box .dwm::before {
   background-image: url('MINECRAFT.png');

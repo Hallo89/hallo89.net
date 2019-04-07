@@ -66,9 +66,6 @@ body {
     @keyframes shiftin {
       from { transform: translateY(-45px); }
     }
-    @keyframes fadein {
-      from { opacity: 0.1; }
-    }
     @keyframes shadowIn {
       from {
         text-shadow:
@@ -137,6 +134,9 @@ body {
     .mode-transition.background();
     .mode-transition.color();
   }
+  @keyframes fadein {
+    from { opacity: 0.1; }
+  }
 
   html.light-mode & {
     box-shadow: 0 2px 13px @header-shadow--light;
@@ -199,6 +199,11 @@ body {
         .boxanimation(@seconds);
       }
       .box-animation-loop(@amount, @seconds + .08s, @it + 1);
+    }
+    @keyframes shiftinBox {
+      from {
+        transform: translateY(-17px);
+      }
     }
     .dwm::before {
       background-image: url('MINECRAFT.png');
