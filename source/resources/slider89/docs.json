@@ -1,69 +1,67 @@
 {
-  "docs": {
-    "Properties": {
-      "description": "These are the key to reading values from the slider and defining its properties.
+  "Properties": {
+    "description": "These are the key to reading values from the slider and defining its properties.
 Every property's value is accessed using code//<sliderInstance>.<property>",
-      "categories": {
-        "Configuration properties": {
-          "description": "Define the slider's configuration as properties of an object passed as a parameter into a#functions//various functions//.",
-          "list": {
-            "min": {
-              "description": "The minimum value of the slider's range",
-              "attributes": {
-                "type": "number",
-                "influencing": "a#//width at 'auto'",
-                "default": 0
-              }
-            },
-            "max": {
-              "description": "The maximum value of the slider's range",
-              "attributes": {
-                "type": "number",
-                "influencing": "a#//width at 'auto'",
-                "default": 100
-              }
-            },
-            "value": {
-              "description": "Used to specify the value the slider and its knob should start at",
-              "attributes": {
-                "type": "number",
-                "default": "min"
-              }
-            },
-            "comma": {
-              "description": "How many digits the value should have after its decimal place",
-              "attributes": {
-                "type": "int",
-                "default": 0
-              }
-            },
-            "width": {
-              "description": "The final width of the slider.<br>
-              A number represents the width in pixels regardless of the slider's range, whereas the keyword 'auto' computes the width automatically from the slider's range in a 1:1 ratio.<br>
-              If the property code//+a#//absWidth is false, which is default, the width is implicit; it is expanded by a small amount resembling the padding at the sides of the slider (The default padding is half of the slider knob's width either side) in order to get an expected result",
-              "attributes": {
-                "type": "number",
-                "unit": "px",
-                "influences": "a#//absWidth, a#//min, a#//max",
-                "available keywords": "'auto'",
-                "default": "'auto'"
-              }
+    "categories": {
+      "Configuration properties": {
+        "description": "Define the slider's configuration as properties of an object passed as a parameter into a#functions//various functions//.",
+        "list": {
+          "min": {
+            "description": "The minimum value of the slider's range",
+            "attributes": {
+              "type": "number",
+              "influencing": "a#//width at 'auto'",
+              "default": 0
+            }
+          },
+          "max": {
+            "description": "The maximum value of the slider's range",
+            "attributes": {
+              "type": "number",
+              "influencing": "a#//width at 'auto'",
+              "default": 100
+            }
+          },
+          "value": {
+            "description": "Used to specify the value the slider and its knob should start at",
+            "attributes": {
+              "type": "number",
+              "default": "min"
+            }
+          },
+          "comma": {
+            "description": "How many digits the value should have after its decimal place",
+            "attributes": {
+              "type": "int",
+              "default": 0
+            }
+          },
+          "width": {
+            "description": "The final width of the slider.<br>
+            A number represents the width in pixels regardless of the slider's range, whereas the keyword 'auto' computes the width automatically from the slider's range in a 1:1 ratio.<br>
+            If the property code//+a#//absWidth is false, which is default, the width is implicit; it is expanded by a small amount resembling the padding at the sides of the slider (The default padding is half of the slider knob's width either side) in order to get an expected result",
+            "attributes": {
+              "type": "number",
+              "unit": "px",
+              "influences": "a#//absWidth, a#//min, a#//max",
+              "available keywords": "'auto'",
+              "default": "'auto'"
             }
           }
-        },
-        "Read only": {
-
-        },
-        "Internal": {
-
         }
+      },
+      "Read only": {
+
+      },
+      "Internal": {
+
       }
-    },
-    "Methods (Functions)": {
-
-    },
-    "HTML & CSS Structure": {
-
     }
+  },
+  "Methods (Functions)": {
+
+  },
+  "HTML & CSS Structure": {
+
   }
 }
