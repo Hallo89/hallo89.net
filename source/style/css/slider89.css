@@ -19,6 +19,7 @@
 }
 
 body {
+  margin: 0;
   font-size: calc(.12vw + .06vh + 15.14px);
 }
 
