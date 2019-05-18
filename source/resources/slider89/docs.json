@@ -1,11 +1,10 @@
 {
   "Properties": {
-    "description": "These are the key to reading values from the slider and defining its properties.
-Every property's value is accessed using code//<sliderInstance>.<property>",
+    "description": "These are the key to reading values from the slider and defining its properties./br!//Every property's value is accessed using code<//<sliderInstance>.<property>//>",
     "categories": {
       "Configuration properties": {
-        "description": "Define the slider's configuration as properties of an object passed as a parameter into a#functions//various functions//.",
-        "list": {
+        "description": "Define the slider's configuration as properties of an object passed as a parameter into a#functions<//various functions//>.",
+        "values": {
           "min": {
             "description": "The minimum value of the slider's range",
             "attributes": {
@@ -37,9 +36,7 @@ Every property's value is accessed using code//<sliderInstance>.<property>",
             }
           },
           "width": {
-            "description": "The final width of the slider.<br>
-            A number represents the width in pixels regardless of the slider's range, whereas the keyword 'auto' computes the width automatically from the slider's range in a 1:1 ratio.<br>
-            If the property code//+a#//absWidth is false, which is default, the width is implicit; it is expanded by a small amount resembling the padding at the sides of the slider (The default padding is half of the slider knob's width either side) in order to get an expected result",
+            "description": "The final width of the slider./br!//A number represents the width in pixels regardless of the slider's range, whereas the keyword 'auto' computes the width automatically from the slider's range in a 1:1 ratio./br!//If the property code+a#//absWidth is false, which is default, the width is implicit; it is expanded by a small amount resembling the padding at the sides of the slider (The default padding is half of the slider knob's width either side) in order to get an expected result",
             "attributes": {
               "type": "number",
               "unit": "px",
@@ -47,21 +44,428 @@ Every property's value is accessed using code//<sliderInstance>.<property>",
               "available keywords": "'auto'",
               "default": "'auto'"
             }
+          },
+          "caption": {
+            "description": "The caption you see below the slider",
+            "attributes": {
+              "type": "string",
+              "default": "''"
+            }
+          },
+          "classList": {
+            "description": "An array containing CSS classes to be added to the slider's a#structure<//HTML structure//>",
+            "attributes": {
+              "type": "array<string>",
+              "influencing": "a#structure<//HTML structure//>",
+              "default": "[]"
+            }
+          },
+          "task": {
+            "description": "This value takes a function to be executed every time the slider is moved. The function must be declared without parentheses, or be an inline anonymous function",
+            "attributes": {
+              "type": "function",
+              "default": "undefined"
+            }
+          },
+          "taskMouseUp": {
+            "version": "0.1.1",
+            "description": "This is the same as code+a#//task, taking a function, which is, however, executed only every time the mouse button is released after the slider has been interacted with",
+            "attributes": {
+              "type": "function",
+              "default": "undefined"
+            }
+          },
+          "structure": {
+            "version": "0.2.0",
+            "description": "An XML-like layout resulting in the final HTML structure of the slider./br!//(For now) necessary components: code//<wrapper>, code//<knob>, code//<tooltip>, code//<caption>, where every tag except code//wrapper is a non-closing one-line tag./br!//Definition of attributes: code<//[!]attributeName(value1[, value2[, ...]])//>, where an exclamation mark in front of the attribute overwrites potential framework-side pre-defined values./br!//For additional elements, insert a new uniquely-named tag and, if needed, specifiy the HTML tag type after that./br!//Additionally, inner text is created by simply placing it inside the tag in quotation marks./br!//Example: pre:class(codeblock)+code<//<caption !class(input_header)>
+<text span class(char_info, default) \"Text appearing inside the element\">
+<wrapper class(input)>
+<knob style(height: 50px)>
+<tooltip>
+</wrapper>//>",
+            "attributes": {
+              "type": "string",
+              "influencing": "a#structure<//HTML structure//>",
+              "default": "'<wrapper><knob><tooltip></wrapper><caption>'"
+            }
+          },
+          "absWidth": {
+            "description": "'Absolute width'; setting this to true computes the slider's width explicitly without taking the slider's padding into account",
+            "attributes": {
+              "type": "boolean",
+              "influencing": "a#//width",
+              "default": "false"
+            }
+          },
+          "trimComma": {
+            "description": "If true, a value's digits after its decimal place are culled if they are 0. This is an aesthetic config property noticable at the value-displaying tooltip./br!//Example: 6.000 is trimmed to 6",
+            "attributes": {
+              "type": "boolean",
+              "default": "true"
+            }
+          },
+          "tipDuration": [
+            {
+              "version": "0.2.0",
+              "description": "The duration after how long the value tooltip should vanish when the slider hasn't been interacted with./br!//Setting it to code//false disables the timer, making the value never disappear",
+              "attributes": {
+                "type": "number | boolean<false>",
+                "unit": "ms",
+                "default": "250"
+              }
+            },
+            {
+              "version": "0.1.0",
+              "description": "The duration after how long the value tooltip should vanish when the slider hasn't been interacted with",
+              "attributes": {
+                "type": "number",
+                "unit": "ms",
+                "default": "250"
+              }
+            }
+          ],
+          "replaceNode": {
+            "description": "If set to true, the slider instance will replace the code+a#Slider89//targetNode instead of being appended as a child inside it",
+            "attributes": {
+              "state": "WRITE ONLY",
+              "type": "boolean",
+              "influencing": "a#//Slider89",
+              "default": "false"
+            }
           }
         }
       },
       "Read only": {
-
+        "description": "The following properties are read only and may not be used as configuration properties",
+        "presets": {
+          "attributes": {
+            "state": "READ ONLY",
+          }
+        },
+        "values": {
+          "element": [
+            {
+              "version": "0.2.0",
+              "description": "An object containing all nodes of the final a#structure<//HTML structure//> after the slider instance's initialization",
+              "attributes": {
+                "type": "object<HTMLnodes>",
+                "influences": "a#//buildElement",
+                "default": "undefined",
+              }
+            },
+            {
+              "version": "0.1.0",
+              "description": "The HTML element (see a#structure<//HTML structure//> of the final slider instance after initialization",
+              "attributes": {
+                "type": "HTMLnode",
+                "influences": "a#//buildElement",
+                "default": "undefined",
+              }
+            }
+          ]
+        }
       },
       "Internal": {
-
+        "collapsed": true,
+        "description": "Below listed are properties which are internal to the framework and serve no purpose for the user but maybe you want to hack the framework idk but feel free to",
+        "presets": {
+          "attributes": {
+            "state": "INTERNAL",
+          }
+        },
+        "values": {
+          "taskLock": {
+            "description": "While dragging the slider, if the previous and new value are equal to each other, the specified code+a#//task is executed once and code//taskLock is set to true, which prevents further executions of code//task if the value has still not changed. If the value has changed again, code//taskLock is set to false",
+            "attributes": {
+              "type": "boolean",
+              "influences": "a#//executeSlider",
+              "default": "false",
+            }
+          },
+          "tipTimer": {
+            "description": "The current code//timeout instance used for the value-tooltip which is terminated when the slider is dragged anew while a previous timeout instance was still running",
+            "attributes": {
+              "type": "timeout",
+              "influences": "a#//executeSlider",
+              "default": "undefined",
+            }
+          }
+        }
       }
     }
   },
   "Methods (Functions)": {
-
+    "categories": {
+      "Constructor": {
+        "values": {
+          "Slider89(<targetNode>[, <configProperties>])": {
+            "description": "The slider object constructor; initialize a slider instance by using the code//new keyword in front of it and binding it to a variable./br!//Example: div:class(codeblock)+code<//var myInstance = new Slider89(someElement);//> or: pre:class(codeblock)+code<//var myInstance = new Slider89(someElement, {
+  configProperty1: configPropertyValue1,
+  configProperty2: configPropertyValue2
+});//>",
+            "definitions": {
+              "targetNode": "An HTML element the instance will be created in",
+              "configProperties": "a#properties-config<//configuration properties//>"
+            },
+            "attributes": {
+              "influences": "code+a#//replaceNode"
+            }
+          }
+        }
+      },
+      "Instance functions": {
+        "description": "Functions under this category are called on a slider instance",
+        "values": {
+          "<sliderInstance>.newValues(<configProperties>)": {
+            "description": "This function takes configuration properties and restructures the slider based on its new properties./br!//Although properties strong//could be overriden using code<//<sliderInstance>.<configProperty> = <newValue>//>, this function ensures every dependent and dependency is restructured as well./br!//Examples: it writes a new caption into the element; it sets a new width of the element; etc./br!//Additionally, if code//min or code//max is changed, the value recomputes itself based on the previous min-max-ratio",
+            "definitions": {
+              "sliderInstance": "An instance of a slider constructed via the code+a#//Slider89 constructor"
+            }
+          }
+        }
+      },
+      "The code//slider89 object": {
+        "description": "'code//slider89' (take notice that it's a lowercase \"s\"!) is a standalone object used for functions which are called without a reference to a slider instance",
+        "values": {
+          "slider89.defaultValues(<configProperties>)": {
+            "description": "Called before a slider is created, it sets default values for every instance to apply",
+            "definitions": {
+              "slider89": "standalone object storing instance-independent values"
+            }
+          }
+        }
+      },
+      "Internal": {
+        "collapsed": true,
+        "description": "As with the a#properties-internal<//internal properties//>, these values serve no purpose for the user but are listed here to give the user (and hacker) full transparency",
+        "presets": {
+          "attributes": {
+            "state": "INTERNAL"
+          }
+        },
+        "values": {
+          "<sliderInstance>.buildElement(<targetNode>, replaceNode) -> object<HTMLnodes>": [
+            {
+              "version": "0.2.0",
+              "description": "Builds the slider's a#structure<//HTML structure//> into the specified code//targetNode, adding additional classes from the code+a#//classList property, if present. If code+a#//replaceNode is true, it replaces code//targetNode./br!//The object containing all HTML elements of the final HTML, which is beforehand acquired from code+a#//parseHTML, is returned to be written into code+a#//element",
+              "attributes": {
+                "influences": "a#//replaceNode, a#//parseHTML, a#//classList",
+                "influencing": "a#structure<//HTML structure//>, a#//element"
+              }
+            },
+            {
+              "version": "0.1.0",
+              "description": "Builds the slider's a#structure<//HTML structure//> into the specified code//targetNode, adding additional classes from the code+a#//classList property, if present. If code+a#//replaceNode is true, it replaces code//targetNode./br//The function returns the created element to be written into a variable (-> code+a#//element)",
+              "attributes": {
+                "influences": "a#//replaceNode, a#//classList",
+                "influencing": "a#structure<//HTML structure//>, a#//element"
+              }
+            }
+          ],
+          "<sliderInstance>.executeSlider(<clickedCoordinate>)": {
+            "description": "This function is executed every time the code//mousemove event, and more specifically, the code+a#//mouseMove function is fired and handles the value, its tooltip and the specified code+a#//task function",
+            "definitions": {
+              "clickedCoordinate": "an code//int representing a screen-related x-coordinate where the mouse has been clicked"
+            },
+            "attributes": {
+              "influences": "a#//element, a#//task",
+              "influencing": "a#//value, a#//tipTimer, a#//taskLock"
+            }
+          },
+          "<sliderInstance>.checkTask(<task>) -> <task> | false": [
+            {
+              "version": "0.1.1",
+              "description": "A function evaluation whether a handed-over code//task is valid:/br!//If it is, plainly return it without doing anything, if not, for example because it has been declared em//with parenthesis (which javascript cannot explicitly check), throw an error into the console and return code//false",
+              "attributes": {
+                "influencing": "a#//task, a#//taskMouseUp"
+              }
+            },
+            {
+              "version": "0.1.0",
+              "description": "A function evaluation whether an input code+a#//task, which is also handed over into this function, is valid. If it is, write it into the specified code//objectTarget/br!//If the task is no valid function, for example declared em//with parentheses, throw an error into the console",
+              "definitions": {
+                "objectTarget": "The object to write into; either the slider instance (a#//constructor) or the code+a#slider89-object<//slider89 object//>"
+              },
+              "attributes": {
+                "influencing": "a#//task"
+              }
+            }
+          ],
+          "<sliderInstance>.computeWidth(<valueObject>) -> int": {
+            "description": "If the code<//valueObject//>'s code+a#//width is code//'auto', compute the width automatically based on code+a#//min and code+a#//max, if it isn't, set the valueObject's width to its own width but take code+a#//absWidth into account",
+            "definitions": {
+              "valueObject": "an object preferably carrying values for code+a#//width, code+a#//min, code+a#//max and code+a#//absWidth"
+            },
+            "attributes": {
+              "influences": "a#//min, a#//max, a#//absWidth",
+              "influencing": "a#//width"
+            }
+          },
+          "<sliderInstance>.parseHTML(structure) -> object<structureNodes>": {
+            "version": "0.2.0",
+            "description": "This function will parse a given code+a#//structure into valid HTML, taking every attribute, innerHTML, etc. into account./br!//It will return every HTML node created as an object, with the in code//structure specified tag name as object name",
+            "attributes": {
+              "influences": "a#//structure",
+              "influencing": "a#//buildElement, a#structure<//HTML structure//>"
+            }
+          },
+          "<sliderInstance>.mouseMove(event)": {
+            "description": "Is executed by the mousemove event, being its own function for the ability to remove the event listener afterwards, and executing code+a#//executeSlider, passing event.",
+            "definitions": {
+              "event": "The event parameter handed over by the event listener"
+            }
+          }
+        }
+      }
+    }
   },
   "HTML & CSS Structure": {
+    "description": "As of version code<//0.2.0//> (with the introduction of the code+a#structure<//structure system//>), CSS has been split into two sections: crucial and non-crucial. Crucial CSS is declared with a strict code<//.slider89 .slider_{sliderPart}//>, whereas uncrucial styles are matched with the new class code<//.slider89_{sliderPart}//>. This ensures a good stylability of the slider without the user having to nest their selectors to overcome the strict selectors.",
+    "values": {
+      "HTML structure": [
+        {
+          "version": "0.2.0",
+          "description": "pre:class(codeblock)+code<//<div class=\"slider89 [{additional classes}]\">
+  <div class=\"slider slider89_wrapper\" style=\"width: {width}px\">
+    <div class=\"slider_knob slider89_knob\" style=\"transform: translateX({value}px)\"></div>
+    <div class=\"slider_tooltip slider89_tooltip right hidden noselect\">{value}</div>
+  </div>
+  <div class=\"slider_header slider89_header\">{caption}</div>
+</div>//>"
+},
+        {
+          "version": "0.1.0",
+          "description": "pre:class(codeblock)+code<//<div class=\"slider89 [{additional classes}]\">
+  <div class=\"slider\" style=\"width: {width}px\">
+    <span class=\"slider_knob\" style=\"transform: translateX({value}px)\"></span>
+    <span class=\"slider_tooltip right hidden noselect\">{value}</span>
+  </div>
+  <span class=\"slider_header\">{caption}</span>
+</div>//>"
+        }
+      ],
+      "CSS structure": [
+        {
+          "version": "0.2.0",
+          "description": "pre:class(codeblock)+code<//.slider89 {
+display: inline-block;
+}
+.slider89 .slider {
+position: relative;
+font-family: monospace;
+font-size: 18px;
+font-weight: bold;
+padding: 0;
+}
+.slider89_wrapper {
+background-color: hsl(0, 0%, 19%);
+height: 25px;
+}
+.slider89 .slider_knob {
+position: absolute;
+cursor: pointer;
+left: 0;
+z-index: 1;
+}
+.slider89_knob {
+height: 25px;
+width: 14px;
+background-color: hsl(0, 0%, 27%);
+}
+.slider89 .slider_tooltip {
+position: absolute;
+display: flex;
+align-items: center;
+height: 100%;
+cursor: default;
+opacity: 1;
+transition: .2s ease-out;
+}
+.slider89_tooltip {
+color: hsl(0, 0%, 45%);
+padding: 1px 3px 0;
+}
+.slider89 .slider_tooltip.left {
+left: 0;
+}
+.slider89 .slider_tooltip.right {
+right: 0;
+}
+.slider89 .slider_tooltip.hidden {
+opacity: 0;
+}
+.slider89_header {
+color: hsl(0, 0%, 70%);
+font-family: 'Calibri', serif;
+font-size: 20px;
+}
 
+.noselect {
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+}//>"
+        },
+        {
+          "version": "0.1.0",
+          "description": "pre:class(codeblock)+code<//.slider89 {
+display: inline-block;
+}
+.slider89 .slider {
+position: relative;
+padding: 0;
+background-color: hsl(0, 0%, 19%);
+font-family: monospace;
+font-size: 18px;
+font-weight: bold;
+height: 25px;
+}
+.slider89 .slider_knob {
+position: absolute;
+cursor: pointer;
+left: 0;
+height: 25px;
+width: 14px;
+background-color: hsl(0, 0%, 27%);
+z-index: 1;
+}
+.slider89 .slider_tooltip {
+position: absolute;
+display: flex;
+align-items: center;
+padding: 1px 3px 0;
+color: hsl(0, 0%, 45%);
+height: 100%;
+cursor: default;
+opacity: 1;
+transition: .2s ease-out;
+}
+.slider89 .slider_tooltip.left {
+left: 0;
+}
+.slider89 .slider_tooltip.right {
+right: 0;
+}
+.slider89 .slider_tooltip.hidden {
+opacity: 0;
+}
+
+.slider89 .slider_header {
+color: hsl(0, 0%, 70%);
+font-family: 'Calibri', serif;
+font-size: 20px;
+display: block;
+}
+
+.noselect {
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+}//>"
+        }
+      ]
+    }
   }
 }
