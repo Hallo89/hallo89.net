@@ -77,12 +77,7 @@
           },
           "structure": {
             "version": "0.2.0",
-            "description": "An XML-like layout resulting in the final HTML structure of the slider./br!//(For now) necessary components: code//<wrapper>, code//<knob>, code//<tooltip>, code//<caption>, where every tag except code//wrapper is a non-closing one-line tag./br!//Definition of attributes: code<//[!]attributeName(value1[, value2[, ...]])//>, where an exclamation mark in front of the attribute overwrites potential framework-side pre-defined values./br!//For additional elements, insert a new uniquely-named tag and, if needed, specifiy the HTML tag type after that./br!//Additionally, inner text is created by simply placing it inside the tag in quotation marks./br!//Example: pre:class(codeblock)+code<//<caption !class(input_header)>
-<text span class(char_info, default) \"Text appearing inside the element\">
-<wrapper class(input)>
-<knob style(height: 50px)>
-<tooltip>
-</wrapper>//>",
+            "description": "An XML-like layout resulting in the final HTML structure of the slider./br!//(For now) necessary components: code//<wrapper>, code//<knob>, code//<tooltip>, code//<caption>, where every tag except code//wrapper is a non-closing one-line tag./br!//Definition of attributes: code<//[!]attributeName(value1[, value2[, ...]])//>, where an exclamation mark in front of the attribute overwrites potential framework-side pre-defined values./br!//For additional elements, insert a new uniquely-named tag and, if needed, specifiy the HTML tag type after that./br!//Additionally, inner text is created by simply placing it inside the tag in quotation marks./br!//Example: pre:class(codeblock)+code<//<caption !class(input_header)>\n<text span class(char_info, default) \"Text appearing inside the element\">\n<wrapper class(input)>\n  <knob style(height: 50px)>\n  <tooltip>\n</wrapper>//>",
             "attributes": {
               "type": "string",
               "influencing": "a#structure<//HTML structure//>",
@@ -139,7 +134,7 @@
         "description": "The following properties are read only and may not be used as configuration properties",
         "presets": {
           "attributes": {
-            "state": "READ ONLY",
+            "state": "READ ONLY"
           }
         },
         "values": {
@@ -150,7 +145,7 @@
               "attributes": {
                 "type": "object<HTMLnodes>",
                 "influences": "a#//buildElement",
-                "default": "undefined",
+                "default": "undefined"
               }
             },
             {
@@ -159,7 +154,7 @@
               "attributes": {
                 "type": "HTMLnode",
                 "influences": "a#//buildElement",
-                "default": "undefined",
+                "default": "undefined"
               }
             }
           ]
@@ -170,7 +165,7 @@
         "description": "Below listed are properties which are internal to the framework and serve no purpose for the user but maybe you want to hack the framework idk but feel free to",
         "presets": {
           "attributes": {
-            "state": "INTERNAL",
+            "state": "INTERNAL"
           }
         },
         "values": {
@@ -179,7 +174,7 @@
             "attributes": {
               "type": "boolean",
               "influences": "a#//executeSlider",
-              "default": "false",
+              "default": "false"
             }
           },
           "tipTimer": {
@@ -187,7 +182,7 @@
             "attributes": {
               "type": "timeout",
               "influences": "a#//executeSlider",
-              "default": "undefined",
+              "default": "undefined"
             }
           }
         }
@@ -199,10 +194,7 @@
       "Constructor": {
         "values": {
           "Slider89(<targetNode>[, <configProperties>])": {
-            "description": "The slider object constructor; initialize a slider instance by using the code//new keyword in front of it and binding it to a variable./br!//Example: div:class(codeblock)+code<//var myInstance = new Slider89(someElement);//> or: pre:class(codeblock)+code<//var myInstance = new Slider89(someElement, {
-  configProperty1: configPropertyValue1,
-  configProperty2: configPropertyValue2
-});//>",
+            "description": "The slider object constructor; initialize a slider instance by using the code//new keyword in front of it and binding it to a variable./br!//Example: div:class(codeblock)+code<//var myInstance = new Slider89(someElement);//> or: pre:class(codeblock)+code<//var myInstance = new Slider89(someElement, {\n  configProperty1: configPropertyValue1,\n  configProperty2: configPropertyValue2\n});//>",
             "definitions": {
               "targetNode": "An HTML element the instance will be created in",
               "configProperties": "a#properties-config<//configuration properties//>"
@@ -325,145 +317,21 @@
       "HTML structure": [
         {
           "version": "0.2.0",
-          "description": "pre:class(codeblock)+code<//<div class=\"slider89 [{additional classes}]\">
-  <div class=\"slider slider89_wrapper\" style=\"width: {width}px\">
-    <div class=\"slider_knob slider89_knob\" style=\"transform: translateX({value}px)\"></div>
-    <div class=\"slider_tooltip slider89_tooltip right hidden noselect\">{value}</div>
-  </div>
-  <div class=\"slider_header slider89_header\">{caption}</div>
-</div>//>"
+          "description": "pre:class(codeblock)+code<//<div class=\"slider89 [{additional classes}]\">\n  <div class=\"slider slider89_wrapper\" style=\"width: {width}px\">\n    <div class=\"slider_knob slider89_knob\" style=\"transform: translateX({value}px)\"></div>\n    <div class=\"slider_tooltip slider89_tooltip right hidden noselect\">{value}</div>\n  </div>\n  <div class=\"slider_header slider89_header\">{caption}</div>\n</div>//>"
 },
         {
           "version": "0.1.0",
-          "description": "pre:class(codeblock)+code<//<div class=\"slider89 [{additional classes}]\">
-  <div class=\"slider\" style=\"width: {width}px\">
-    <span class=\"slider_knob\" style=\"transform: translateX({value}px)\"></span>
-    <span class=\"slider_tooltip right hidden noselect\">{value}</span>
-  </div>
-  <span class=\"slider_header\">{caption}</span>
-</div>//>"
+          "description": "pre:class(codeblock)+code<//<div class=\"slider89 [{additional classes}]\">\n  <div class=\"slider\" style=\"width: {width}px\">\n    <span class=\"slider_knob\" style=\"transform: translateX({value}px)\"></span>\n    <span class=\"slider_tooltip right hidden noselect\">{value}</span>\n  </div>\n  <span class=\"slider_header\">{caption}</span>\n</div>//>"
         }
       ],
       "CSS structure": [
         {
           "version": "0.2.0",
-          "description": "pre:class(codeblock)+code<//.slider89 {
-display: inline-block;
-}
-.slider89 .slider {
-position: relative;
-font-family: monospace;
-font-size: 18px;
-font-weight: bold;
-padding: 0;
-}
-.slider89_wrapper {
-background-color: hsl(0, 0%, 19%);
-height: 25px;
-}
-.slider89 .slider_knob {
-position: absolute;
-cursor: pointer;
-left: 0;
-z-index: 1;
-}
-.slider89_knob {
-height: 25px;
-width: 14px;
-background-color: hsl(0, 0%, 27%);
-}
-.slider89 .slider_tooltip {
-position: absolute;
-display: flex;
-align-items: center;
-height: 100%;
-cursor: default;
-opacity: 1;
-transition: .2s ease-out;
-}
-.slider89_tooltip {
-color: hsl(0, 0%, 45%);
-padding: 1px 3px 0;
-}
-.slider89 .slider_tooltip.left {
-left: 0;
-}
-.slider89 .slider_tooltip.right {
-right: 0;
-}
-.slider89 .slider_tooltip.hidden {
-opacity: 0;
-}
-.slider89_header {
-color: hsl(0, 0%, 70%);
-font-family: 'Calibri', serif;
-font-size: 20px;
-}
-
-.noselect {
--webkit-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
-user-select: none;
-}//>"
+          "description": "pre:class(codeblock)+code<//.slider89 {\ndisplay: inline-block;\n}\n.slider89 .slider {\nposition: relative;\nfont-family: monospace;\nfont-size: 18px;\nfont-weight: bold;\npadding: 0;\n}\n.slider89_wrapper {\nbackground-color: hsl(0, 0%, 19%);\nheight: 25px;\n}\n.slider89 .slider_knob {\nposition: absolute;\ncursor: pointer;\nleft: 0;\nz-index: 1;\n}\n.slider89_knob {\nheight: 25px;\nwidth: 14px;\nbackground-color: hsl(0, 0%, 27%);\n}\n.slider89 .slider_tooltip {\nposition: absolute;\ndisplay: flex;\nalign-items: center;\nheight: 100%;\ncursor: default;\nopacity: 1;\ntransition: .2s ease-out;\n}\n.slider89_tooltip {\ncolor: hsl(0, 0%, 45%);\npadding: 1px 3px 0;\n}\n.slider89 .slider_tooltip.left {\nleft: 0;\n}\n.slider89 .slider_tooltip.right {\nright: 0;\n}\n.slider89 .slider_tooltip.hidden {\nopacity: 0;\n}\n.slider89_header {\ncolor: hsl(0, 0%, 70%);\nfont-family: 'Calibri', serif;\nfont-size: 20px;\n}\n\n.noselect {\n-webkit-user-select: none;\n-moz-user-select: none;\n-ms-user-select: none;\nuser-select: none;\n}//>"
         },
         {
           "version": "0.1.0",
-          "description": "pre:class(codeblock)+code<//.slider89 {
-display: inline-block;
-}
-.slider89 .slider {
-position: relative;
-padding: 0;
-background-color: hsl(0, 0%, 19%);
-font-family: monospace;
-font-size: 18px;
-font-weight: bold;
-height: 25px;
-}
-.slider89 .slider_knob {
-position: absolute;
-cursor: pointer;
-left: 0;
-height: 25px;
-width: 14px;
-background-color: hsl(0, 0%, 27%);
-z-index: 1;
-}
-.slider89 .slider_tooltip {
-position: absolute;
-display: flex;
-align-items: center;
-padding: 1px 3px 0;
-color: hsl(0, 0%, 45%);
-height: 100%;
-cursor: default;
-opacity: 1;
-transition: .2s ease-out;
-}
-.slider89 .slider_tooltip.left {
-left: 0;
-}
-.slider89 .slider_tooltip.right {
-right: 0;
-}
-.slider89 .slider_tooltip.hidden {
-opacity: 0;
-}
-
-.slider89 .slider_header {
-color: hsl(0, 0%, 70%);
-font-family: 'Calibri', serif;
-font-size: 20px;
-display: block;
-}
-
-.noselect {
--webkit-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
-user-select: none;
-}//>"
+          "description": "pre:class(codeblock)+code<//.slider89 {\ndisplay: inline-block;\n}\n.slider89 .slider {\nposition: relative;\npadding: 0;\nbackground-color: hsl(0, 0%, 19%);\nfont-family: monospace;\nfont-size: 18px;\nfont-weight: bold;\nheight: 25px;\n}\n.slider89 .slider_knob {\nposition: absolute;\ncursor: pointer;\nleft: 0;\nheight: 25px;\nwidth: 14px;\nbackground-color: hsl(0, 0%, 27%);\nz-index: 1;\n}\n.slider89 .slider_tooltip {\nposition: absolute;\ndisplay: flex;\nalign-items: center;\npadding: 1px 3px 0;\ncolor: hsl(0, 0%, 45%);\nheight: 100%;\ncursor: default;\nopacity: 1;\ntransition: .2s ease-out;\n}\n.slider89 .slider_tooltip.left {\nleft: 0;\n}\n.slider89 .slider_tooltip.right {\nright: 0;\n}\n.slider89 .slider_tooltip.hidden {\nopacity: 0;\n}\n\n.slider89 .slider_header {\ncolor: hsl(0, 0%, 70%);\nfont-family: 'Calibri', serif;\nfont-size: 20px;\ndisplay: block;\n}\n\n.noselect {\n-webkit-user-select: none;\n-moz-user-select: none;\n-ms-user-select: none;\nuser-select: none;\n}//>"
         }
       ]
     }
