@@ -1,13 +1,21 @@
 const express = require('express');
 const nunjucks = require('nunjucks');
+const argon = require('argon-parser');
 const app = express();
 
 app.listen(8000, function() {
   console.log("Listening on port 8000!");
 });
 
-nunjucks.configure('pages', {
+const njk = nunjucks.configure('pages', {
   express: app
+});
+
+njk.addFilter('argonize', function(val) {
+  return (val != null ? argon.parse(val.toString()) : '');
+});
+njk.addFilter('isArray', function(val) {
+  return Array.isArray(val);
 });
 
 app.set('view engine', 'njk');
@@ -34,7 +42,6 @@ function getNJK(which, param, fileName) {
 getNJK('', false, 'index');
 get('sponge');
 get('tutorials');
-getNJK('slider89', {page: 'slider89'});
 get('blog');
 getNJK('tools');
 get('tools/3DMagic');
@@ -43,3 +50,7 @@ get('tools/mocking');
 get('tools/spacing');
 get('webgl/triangles');
 get('webgl/matrices3d');
+app.get('/slider89', function(req, res) {
+  const data = require('./source/resources/slider89/docs.json');
+  res.render('slider89', {page: 'slider89', data: data})
+});
