@@ -10,9 +10,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "argon-parser": "^1.1.1",
-    "body-parser": "^1.18.3",
-    "express": "^4.16.4",
+    "argon-parser": "^1.2.3",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.0",
     "nunjucks": "^3.2.0"
   }
 }
