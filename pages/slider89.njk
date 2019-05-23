@@ -5,7 +5,7 @@
     <title>Slider89 | Hallo89</title>
     <link rel="stylesheet" href="../global.css">
     <link rel="stylesheet" href="../slider89.css">
-    <script src="global.js"></script>
+    <script src="../global.js"></script>
   </head>
   <body>
     {% import 'templates/navbar.njk' as navbar %}
@@ -125,63 +125,68 @@
 
         <hr>
 
-        {% for heading, value in data %}
-          <h3><a href="#{{ heading | lower }}" class="icon_anchor">#</a>{{ heading }}</h3>
-          {% if value.description %}
-            <p>{{ value.description | argonize | safe }}</p>
+        {% macro docItem(name, value, presets) %}
+          {% if value.version %}
+          <strong class="indicator noselect">{{ value.version }}</strong>
           {% endif %}
-          {% for category, content in value.categories %}
-            {% set id = category | lower %}
-            <div class="list_container" id="#{{ id }}">
-              <h4>{{ category }}
-                <button class="expand_button">
+          <dt>
+            <a href="#{{ name }}"><code>{{ name }}</code></a>
+          </dt>
+          <dd class="doc_item description">
+            {{ value.description | e | argonize | safe }}
+          </dd>
+          {% set attributes = concatObj([presets.attributes, value.attributes]) %}
+          {% for attr, attrVal in attributes %}
+          <dd class="doc_item info_item {{-' state' if attr == 'state'}}">
+            <span class="nodisplay">{{"└ " if loop.last else "├"}}</span>
+            {% if attr == 'state' %}
+            <strong>{{attrVal | e | argonize | safe}}</strong>
+            {% else %}
+            {{attr}}: {{attrVal | e | separate(['\\s+OR', ','], 'code') | argonize | safe}}
+            {% endif %}
+          </dd>
+          {% endfor %}
+        {% endmacro %}
+
+        {% for section, sectionVal in data %}
+          {# Docs h3 (Properties, etc.), [description, categories] | in the whole json #}
+          <h3><a href="#{{ section | kebab }}" class="icon_anchor">#</a>{{ section }}</h3>
+          {% if sectionVal.description %}
+          <p>{{ sectionVal.description | e | argonize | safe }}</p>
+          {% endif %}
+          {% for category, categoryVal in sectionVal.categories %}
+            {# Category under one section (Read only, etc.), [description, values, ...] #}
+            {% set categoryID = '#' + (section | lower | firstword) + '--' + (category | kebab) %}
+            {% set presets = categoryVal.presets %}
+            <div class="list_container" id="{{ categoryID }}">
+              <h4>
+                <span>{{ category | e | argonize | safe }}</span>
+                <button class="expand_button {{-' active' if categoryVal.collapsed == true}}">
                   <div class="symbols">
                     <span class="symbol plus">+</span>
                     <span class="symbol minus">-</span>
                   </div>
                 </button>
-                <a href="#{{ id }}" class="icon_anchor">#</a>
+                <a href="{{ categoryID }}" class="icon_anchor">#</a>
               </h4>
-              <div class="collapsible">
-                {% if content.description %}
-                  <p>{{ content.description | argonize | safe }}</p>
+              <div class="collapsible {{-' collapsed' if categoryVal.collapsed == true}}">
+                {% if categoryVal.description %}
+                <p>{{ categoryVal.description | e | argonize | safe }}</p>
                 {% endif %}
                 <dl class="doc_list">
-                  {% for prop, val in content.values %}
-                    {% if val | isArray %}
-                      <div id="{{ prop }}" class="list_item version_list">
-                        {% for ver in val %}
-                          <div class="version v{{ ver.version | replace('.', '_') }} {{ "newest active enabled" if loop.first}} versions_{{ val | length }}">
-                            <strong class="indicator noselect">{{ ver.version }}</strong>
-                            <dt>
-                              <a href="#{{ prop }}"><code>{{ prop }}</code></a>
-                            </dt>
-                            <dd class="doc_item description">
-                              {{ ver.description | argonize | safe }}
-                            </dd>
-                            {% for attrName, attrVal in ver.attributes %}
-                            <dd class="doc_item info_item">
-                              <span class="nodisplay">{{"└ " if loop.last else "├"}}</span>
-                              {{attrName}}: <code>{{attrVal | argonize | safe}}</code>
-                            </dd>
-                            {% endfor %}
+                  {% for prop, propVal in categoryVal.values %}
+                    {# Property (min, max, etc.), [description, attributes, definitions] #}
+                    {% if propVal | isArray %} {# If the property has multiple versions #}
+                      <div id="{{ prop }}" class="list_item version_list versions_{{ propVal | length }}">
+                        {% for ver in propVal %}
+                          <div class="version v{{ver.version | replace('.', '_')}} {{'newest active enabled' if loop.first}}">
+                            {{ docItem(prop, ver, categoryVal.presets) }}
                           </div>
                         {% endfor %}
                       </div>
-                    {% else %}
+                    {% else %} {# If the property doesn't have multiple versions #}
                       <div id="{{ prop }}" class="list_item">
-                        <dt>
-                          <a href="#{{ prop }}"><code>{{ prop }}</code></a>
-                        </dt>
-                        <dd class="doc_item description">
-                          {{ val.description | argonize | safe }}
-                        </dd>
-                        {% for attrName, attrVal in val.attributes %}
-                          <dd class="doc_item info_item">
-                            <span class="nodisplay">{{"└ " if loop.last else "├"}}</span>
-                            {{attrName}}: <code>{{attrVal | argonize | safe}}</code>
-                          </dd>
-                        {% endfor %}
+                        {{ docItem(prop, propVal, categoryVal.presets) }}
                       </div>
                     {% endif %}
                   {% endfor %}
