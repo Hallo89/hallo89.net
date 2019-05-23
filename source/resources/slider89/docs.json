@@ -1,9 +1,9 @@
 {
   "Properties": {
-    "description": "These are the key to reading values from the slider and defining its properties./br!//Every property's value is accessed using code<//<sliderInstance>.<property>//>",
+    "description": "These are the key to reading values from the slider and defining its properties./br!//Every property's value is accessed using code{//<sliderInstance>.<property>//}",
     "categories": {
       "Configuration properties": {
-        "description": "Define the slider's configuration as properties of an object passed as a parameter into a#functions<//various functions//>.",
+        "description": "Define the slider's configuration as properties of an object passed as a parameter into a#functions{//various functions//}.",
         "values": {
           "min": {
             "description": "The minimum value of the slider's range",
@@ -25,7 +25,7 @@
             "description": "Used to specify the value the slider and its knob should start at",
             "attributes": {
               "type": "number",
-              "default": "min"
+              "default": "a#//min"
             }
           },
           "comma": {
@@ -53,10 +53,10 @@
             }
           },
           "classList": {
-            "description": "An array containing CSS classes to be added to the slider's a#structure<//HTML structure//>",
+            "description": "An array containing CSS classes to be added to the slider's a#structure{//HTML structure//}",
             "attributes": {
               "type": "array<string>",
-              "influencing": "a#structure<//HTML structure//>",
+              "influencing": "a#structure{//HTML structure//}",
               "default": "[]"
             }
           },
@@ -77,10 +77,10 @@
           },
           "structure": {
             "version": "0.2.0",
-            "description": "An XML-like layout resulting in the final HTML structure of the slider./br!//(For now) necessary components: code//<wrapper>, code//<knob>, code//<tooltip>, code//<caption>, where every tag except code//wrapper is a non-closing one-line tag./br!//Definition of attributes: code<//[!]attributeName(value1[, value2[, ...]])//>, where an exclamation mark in front of the attribute overwrites potential framework-side pre-defined values./br!//For additional elements, insert a new uniquely-named tag and, if needed, specifiy the HTML tag type after that./br!//Additionally, inner text is created by simply placing it inside the tag in quotation marks./br!//Example: pre:class(codeblock)+code<//<caption !class(input_header)>\n<text span class(char_info, default) \"Text appearing inside the element\">\n<wrapper class(input)>\n  <knob style(height: 50px)>\n  <tooltip>\n</wrapper>//>",
+            "description": "An XML-like layout resulting in the final HTML structure of the slider./br!//(For now) necessary components: code//<wrapper>, code//<knob>, code//<tooltip>, code//<caption>, where every tag except code//wrapper is a non-closing one-line tag./br!//Definition of attributes: code{//[!]attributeName(value1[, value2[, ...]])//}, where an exclamation mark in front of the attribute overwrites potential framework-side pre-defined values./br!//For additional elements, insert a new uniquely-named tag and, if needed, specifiy the HTML tag type after that./br!//Additionally, inner text is created by simply placing it inside the tag in quotation marks./br!//Example: pre:class(codeblock)+code{//<caption !class(input_header)>\n<text span class(char_info, default) \"Text appearing inside the element\">\n<wrapper class(input)>\n  <knob style(height: 50px)>\n  <tooltip>\n</wrapper>//}",
             "attributes": {
               "type": "string",
-              "influencing": "a#structure<//HTML structure//>",
+              "influencing": "a#structure{//HTML structure//}",
               "default": "'<wrapper><knob><tooltip></wrapper><caption>'"
             }
           },
@@ -104,7 +104,7 @@
               "version": "0.2.0",
               "description": "The duration after how long the value tooltip should vanish when the slider hasn't been interacted with./br!//Setting it to code//false disables the timer, making the value never disappear",
               "attributes": {
-                "type": "number | boolean<false>",
+                "type": "number OR boolean<false>",
                 "unit": "ms",
                 "default": "250"
               }
@@ -141,7 +141,7 @@
           "element": [
             {
               "version": "0.2.0",
-              "description": "An object containing all nodes of the final a#structure<//HTML structure//> after the slider instance's initialization",
+              "description": "An object containing all nodes of the final a#structure{//HTML structure//} after the slider instance's initialization",
               "attributes": {
                 "type": "object<HTMLnodes>",
                 "influences": "a#//buildElement",
@@ -150,7 +150,7 @@
             },
             {
               "version": "0.1.0",
-              "description": "The HTML element (see a#structure<//HTML structure//> of the final slider instance after initialization",
+              "description": "The HTML element (see a#structure{//HTML structure//} of the final slider instance after initialization",
               "attributes": {
                 "type": "HTMLnode",
                 "influences": "a#//buildElement",
@@ -189,15 +189,15 @@
       }
     }
   },
-  "Methods (Functions)": {
+  "Methods (functions)": {
     "categories": {
       "Constructor": {
         "values": {
           "Slider89(<targetNode>[, <configProperties>])": {
-            "description": "The slider object constructor; initialize a slider instance by using the code//new keyword in front of it and binding it to a variable./br!//Example: div:class(codeblock)+code<//var myInstance = new Slider89(someElement);//> or: pre:class(codeblock)+code<//var myInstance = new Slider89(someElement, {\n  configProperty1: configPropertyValue1,\n  configProperty2: configPropertyValue2\n});//>",
+            "description": "The slider object constructor; initialize a slider instance by using the code//new keyword in front of it and binding it to a variable./br!//Example: div:class(codeblock)+code{//var myInstance = new Slider89(someElement);//} or: pre:class(codeblock)+code{//var myInstance = new Slider89(someElement, {\n  configProperty1: configPropertyValue1,\n  configProperty2: configPropertyValue2\n});//}",
             "definitions": {
               "targetNode": "An HTML element the instance will be created in",
-              "configProperties": "a#properties-config<//configuration properties//>"
+              "configProperties": "a#properties-config{//configuration properties//}"
             },
             "attributes": {
               "influences": "code+a#//replaceNode"
@@ -209,7 +209,7 @@
         "description": "Functions under this category are called on a slider instance",
         "values": {
           "<sliderInstance>.newValues(<configProperties>)": {
-            "description": "This function takes configuration properties and restructures the slider based on its new properties./br!//Although properties strong//could be overriden using code<//<sliderInstance>.<configProperty> = <newValue>//>, this function ensures every dependent and dependency is restructured as well./br!//Examples: it writes a new caption into the element; it sets a new width of the element; etc./br!//Additionally, if code//min or code//max is changed, the value recomputes itself based on the previous min-max-ratio",
+            "description": "This function takes configuration properties and restructures the slider based on its new properties./br!//Although properties strong//could be overriden using code{//<sliderInstance>.<configProperty> = <newValue>//}, this function ensures every dependent and dependency is restructured as well./br!//Examples: it writes a new caption into the element; it sets a new width of the element; etc./br!//Additionally, if code//min or code//max is changed, the value recomputes itself based on the previous min-max-ratio",
             "definitions": {
               "sliderInstance": "An instance of a slider constructed via the code+a#//Slider89 constructor"
             }
@@ -229,7 +229,7 @@
       },
       "Internal": {
         "collapsed": true,
-        "description": "As with the a#properties-internal<//internal properties//>, these values serve no purpose for the user but are listed here to give the user (and hacker) full transparency",
+        "description": "As with the a#properties-internal{//internal properties//}, these values serve no purpose for the user but are listed here to give the user (and hacker) full transparency",
         "presets": {
           "attributes": {
             "state": "INTERNAL"
@@ -239,18 +239,18 @@
           "<sliderInstance>.buildElement(<targetNode>, replaceNode) -> object<HTMLnodes>": [
             {
               "version": "0.2.0",
-              "description": "Builds the slider's a#structure<//HTML structure//> into the specified code//targetNode, adding additional classes from the code+a#//classList property, if present. If code+a#//replaceNode is true, it replaces code//targetNode./br!//The object containing all HTML elements of the final HTML, which is beforehand acquired from code+a#//parseHTML, is returned to be written into code+a#//element",
+              "description": "Builds the slider's a#structure{//HTML structure//} into the specified code//targetNode, adding additional classes from the code+a#//classList property, if present. If code+a#//replaceNode is true, it replaces code//targetNode./br!//The object containing all HTML elements of the final HTML, which is beforehand acquired from code+a#//parseHTML, is returned to be written into code+a#//element",
               "attributes": {
                 "influences": "a#//replaceNode, a#//parseHTML, a#//classList",
-                "influencing": "a#structure<//HTML structure//>, a#//element"
+                "influencing": "a#structure{//HTML structure//}, a#//element"
               }
             },
             {
               "version": "0.1.0",
-              "description": "Builds the slider's a#structure<//HTML structure//> into the specified code//targetNode, adding additional classes from the code+a#//classList property, if present. If code+a#//replaceNode is true, it replaces code//targetNode./br//The function returns the created element to be written into a variable (-> code+a#//element)",
+              "description": "Builds the slider's a#structure{//HTML structure//} into the specified code//targetNode, adding additional classes from the code+a#//classList property, if present. If code+a#//replaceNode is true, it replaces code//targetNode./br//The function returns the created element to be written into a variable (-> code+a#//element)",
               "attributes": {
                 "influences": "a#//replaceNode, a#//classList",
-                "influencing": "a#structure<//HTML structure//>, a#//element"
+                "influencing": "a#structure{//HTML structure//}, a#//element"
               }
             }
           ],
@@ -276,7 +276,7 @@
               "version": "0.1.0",
               "description": "A function evaluation whether an input code+a#//task, which is also handed over into this function, is valid. If it is, write it into the specified code//objectTarget/br!//If the task is no valid function, for example declared em//with parentheses, throw an error into the console",
               "definitions": {
-                "objectTarget": "The object to write into; either the slider instance (a#//constructor) or the code+a#slider89-object<//slider89 object//>"
+                "objectTarget": "The object to write into; either the slider instance (a#//constructor) or the code+a#slider89-object{//slider89 object//}"
               },
               "attributes": {
                 "influencing": "a#//task"
@@ -284,7 +284,7 @@
             }
           ],
           "<sliderInstance>.computeWidth(<valueObject>) -> int": {
-            "description": "If the code<//valueObject//>'s code+a#//width is code//'auto', compute the width automatically based on code+a#//min and code+a#//max, if it isn't, set the valueObject's width to its own width but take code+a#//absWidth into account",
+            "description": "If the code{//valueObject//}'s code+a#//width is code//'auto', compute the width automatically based on code+a#//min and code+a#//max, if it isn't, set the valueObject's width to its own width but take code+a#//absWidth into account",
             "definitions": {
               "valueObject": "an object preferably carrying values for code+a#//width, code+a#//min, code+a#//max and code+a#//absWidth"
             },
@@ -298,7 +298,7 @@
             "description": "This function will parse a given code+a#//structure into valid HTML, taking every attribute, innerHTML, etc. into account./br!//It will return every HTML node created as an object, with the in code//structure specified tag name as object name",
             "attributes": {
               "influences": "a#//structure",
-              "influencing": "a#//buildElement, a#structure<//HTML structure//>"
+              "influencing": "a#//buildElement, a#structure{//HTML structure//}"
             }
           },
           "<sliderInstance>.mouseMove(event)": {
@@ -311,27 +311,27 @@
       }
     }
   },
-  "HTML & CSS Structure": {
-    "description": "As of version code<//0.2.0//> (with the introduction of the code+a#structure<//structure system//>), CSS has been split into two sections: crucial and non-crucial. Crucial CSS is declared with a strict code<//.slider89 .slider_{sliderPart}//>, whereas uncrucial styles are matched with the new class code<//.slider89_{sliderPart}//>. This ensures a good stylability of the slider without the user having to nest their selectors to overcome the strict selectors.",
+  "HTML & CSS structure": {
+    "description": "As of version code{//0.2.0//} (with the introduction of the code+a#structure{//structure system//}), CSS has been split into two sections: crucial and non-crucial. Crucial CSS is declared with a strict code{//.slider89 .slider_{sliderPart}//}, whereas uncrucial styles are matched with the new class code{//.slider89_{sliderPart}//}. This ensures a good stylability of the slider without the user having to nest their selectors to overcome the strict selectors.",
     "values": {
       "HTML structure": [
         {
           "version": "0.2.0",
-          "description": "pre:class(codeblock)+code<//<div class=\"slider89 [{additional classes}]\">\n  <div class=\"slider slider89_wrapper\" style=\"width: {width}px\">\n    <div class=\"slider_knob slider89_knob\" style=\"transform: translateX({value}px)\"></div>\n    <div class=\"slider_tooltip slider89_tooltip right hidden noselect\">{value}</div>\n  </div>\n  <div class=\"slider_header slider89_header\">{caption}</div>\n</div>//>"
-},
+          "description": "pre:class(codeblock)+code{//<div class=\"slider89 [{additional classes}]\">\n  <div class=\"slider slider89_wrapper\" style=\"width: {width}px\">\n    <div class=\"slider_knob slider89_knob\" style=\"transform: translateX({value}px)\"></div>\n    <div class=\"slider_tooltip slider89_tooltip right hidden noselect\">{value}</div>\n  </div>\n  <div class=\"slider_header slider89_header\">{caption}</div>\n</div>//}"
+        },
         {
           "version": "0.1.0",
-          "description": "pre:class(codeblock)+code<//<div class=\"slider89 [{additional classes}]\">\n  <div class=\"slider\" style=\"width: {width}px\">\n    <span class=\"slider_knob\" style=\"transform: translateX({value}px)\"></span>\n    <span class=\"slider_tooltip right hidden noselect\">{value}</span>\n  </div>\n  <span class=\"slider_header\">{caption}</span>\n</div>//>"
+          "description": "pre:class(codeblock)+code{//<div class=\"slider89 [{additional classes}]\">\n  <div class=\"slider\" style=\"width: {width}px\">\n    <span class=\"slider_knob\" style=\"transform: translateX({value}px)\"></span>\n    <span class=\"slider_tooltip right hidden noselect\">{value}</span>\n  </div>\n  <span class=\"slider_header\">{caption}</span>\n</div>//}"
         }
       ],
       "CSS structure": [
         {
           "version": "0.2.0",
-          "description": "pre:class(codeblock)+code<//.slider89 {\ndisplay: inline-block;\n}\n.slider89 .slider {\nposition: relative;\nfont-family: monospace;\nfont-size: 18px;\nfont-weight: bold;\npadding: 0;\n}\n.slider89_wrapper {\nbackground-color: hsl(0, 0%, 19%);\nheight: 25px;\n}\n.slider89 .slider_knob {\nposition: absolute;\ncursor: pointer;\nleft: 0;\nz-index: 1;\n}\n.slider89_knob {\nheight: 25px;\nwidth: 14px;\nbackground-color: hsl(0, 0%, 27%);\n}\n.slider89 .slider_tooltip {\nposition: absolute;\ndisplay: flex;\nalign-items: center;\nheight: 100%;\ncursor: default;\nopacity: 1;\ntransition: .2s ease-out;\n}\n.slider89_tooltip {\ncolor: hsl(0, 0%, 45%);\npadding: 1px 3px 0;\n}\n.slider89 .slider_tooltip.left {\nleft: 0;\n}\n.slider89 .slider_tooltip.right {\nright: 0;\n}\n.slider89 .slider_tooltip.hidden {\nopacity: 0;\n}\n.slider89_header {\ncolor: hsl(0, 0%, 70%);\nfont-family: 'Calibri', serif;\nfont-size: 20px;\n}\n\n.noselect {\n-webkit-user-select: none;\n-moz-user-select: none;\n-ms-user-select: none;\nuser-select: none;\n}//>"
+          "description": "pre:class(codeblock)+code{//.slider89 {\ndisplay: inline-block;\n}\n.slider89 .slider {\nposition: relative;\nfont-family: monospace;\nfont-size: 18px;\nfont-weight: bold;\npadding: 0;\n}\n.slider89_wrapper {\nbackground-color: hsl(0, 0%, 19%);\nheight: 25px;\n}\n.slider89 .slider_knob {\nposition: absolute;\ncursor: pointer;\nleft: 0;\nz-index: 1;\n}\n.slider89_knob {\nheight: 25px;\nwidth: 14px;\nbackground-color: hsl(0, 0%, 27%);\n}\n.slider89 .slider_tooltip {\nposition: absolute;\ndisplay: flex;\nalign-items: center;\nheight: 100%;\ncursor: default;\nopacity: 1;\ntransition: .2s ease-out;\n}\n.slider89_tooltip {\ncolor: hsl(0, 0%, 45%);\npadding: 1px 3px 0;\n}\n.slider89 .slider_tooltip.left {\nleft: 0;\n}\n.slider89 .slider_tooltip.right {\nright: 0;\n}\n.slider89 .slider_tooltip.hidden {\nopacity: 0;\n}\n.slider89_header {\ncolor: hsl(0, 0%, 70%);\nfont-family: 'Calibri', serif;\nfont-size: 20px;\n}\n\n.noselect {\n-webkit-user-select: none;\n-moz-user-select: none;\n-ms-user-select: none;\nuser-select: none;\n}//}"
         },
         {
           "version": "0.1.0",
-          "description": "pre:class(codeblock)+code<//.slider89 {\ndisplay: inline-block;\n}\n.slider89 .slider {\nposition: relative;\npadding: 0;\nbackground-color: hsl(0, 0%, 19%);\nfont-family: monospace;\nfont-size: 18px;\nfont-weight: bold;\nheight: 25px;\n}\n.slider89 .slider_knob {\nposition: absolute;\ncursor: pointer;\nleft: 0;\nheight: 25px;\nwidth: 14px;\nbackground-color: hsl(0, 0%, 27%);\nz-index: 1;\n}\n.slider89 .slider_tooltip {\nposition: absolute;\ndisplay: flex;\nalign-items: center;\npadding: 1px 3px 0;\ncolor: hsl(0, 0%, 45%);\nheight: 100%;\ncursor: default;\nopacity: 1;\ntransition: .2s ease-out;\n}\n.slider89 .slider_tooltip.left {\nleft: 0;\n}\n.slider89 .slider_tooltip.right {\nright: 0;\n}\n.slider89 .slider_tooltip.hidden {\nopacity: 0;\n}\n\n.slider89 .slider_header {\ncolor: hsl(0, 0%, 70%);\nfont-family: 'Calibri', serif;\nfont-size: 20px;\ndisplay: block;\n}\n\n.noselect {\n-webkit-user-select: none;\n-moz-user-select: none;\n-ms-user-select: none;\nuser-select: none;\n}//>"
+          "description": "pre:class(codeblock)+code{//.slider89 {\ndisplay: inline-block;\n}\n.slider89 .slider {\nposition: relative;\npadding: 0;\nbackground-color: hsl(0, 0%, 19%);\nfont-family: monospace;\nfont-size: 18px;\nfont-weight: bold;\nheight: 25px;\n}\n.slider89 .slider_knob {\nposition: absolute;\ncursor: pointer;\nleft: 0;\nheight: 25px;\nwidth: 14px;\nbackground-color: hsl(0, 0%, 27%);\nz-index: 1;\n}\n.slider89 .slider_tooltip {\nposition: absolute;\ndisplay: flex;\nalign-items: center;\npadding: 1px 3px 0;\ncolor: hsl(0, 0%, 45%);\nheight: 100%;\ncursor: default;\nopacity: 1;\ntransition: .2s ease-out;\n}\n.slider89 .slider_tooltip.left {\nleft: 0;\n}\n.slider89 .slider_tooltip.right {\nright: 0;\n}\n.slider89 .slider_tooltip.hidden {\nopacity: 0;\n}\n\n.slider89 .slider_header {\ncolor: hsl(0, 0%, 70%);\nfont-family: 'Calibri', serif;\nfont-size: 20px;\ndisplay: block;\n}\n\n.noselect {\n-webkit-user-select: none;\n-moz-user-select: none;\n-ms-user-select: none;\nuser-select: none;\n}//}"
         }
       ]
     }
