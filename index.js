@@ -12,10 +12,28 @@ const njk = nunjucks.configure('pages', {
 });
 
 njk.addFilter('argonize', function(val) {
-  return (val != null ? argon.parse(val.toString()) : '');
+  return (val != null ? argon.parse(val.toString()) : val);
 });
 njk.addFilter('isArray', function(val) {
   return Array.isArray(val);
+});
+njk.addFilter('firstword', function(val) {
+  return (typeof val == 'string' && val.indexOf(' ') != -1 ? val.slice(0, val.indexOf(' ')) : val);
+});
+njk.addFilter('separate', function(val, exclusion, tag) {
+  const excls = Array.isArray(exclusion) ? exclusion.reduce((prev, current) => prev + '|' + current) : exclusion;
+  return val.replace(new RegExp('([\\d\\D]+?)($|(?:'+excls+')(?:\\s+|$))', 'g'), function(match, value, exclusion) {
+    return '<' + tag + '>' + value + '</' + tag + '>' + exclusion;
+  });
+});
+njk.addFilter('kebab', function(val) {
+  //Shortcut of two filters: | lower | replace(' ', '-')
+  return (typeof val == 'string' ? val.toLowerCase().replace(' ', '-') : val);
+});
+njk.addGlobal('concatObj', function(objects) {
+  return objects.reduce(function(prev, current) {
+    return Object.assign(prev, current);
+  }, {})
 });
 
 app.set('view engine', 'njk');
