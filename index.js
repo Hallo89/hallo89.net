@@ -1,3 +1,4 @@
+const fetch = require('node-fetch');
 const express = require('express');
 const nunjucks = require('nunjucks');
 const argon = require('argon-parser');
@@ -33,7 +34,7 @@ njk.addFilter('kebab', function(val) {
 njk.addGlobal('concatObj', function(objects) {
   return objects.reduce(function(prev, current) {
     return Object.assign(prev, current);
-  }, {})
+  }, {});
 });
 
 app.set('view engine', 'njk');
@@ -70,5 +71,9 @@ get('webgl/triangles');
 get('webgl/matrices3d');
 app.get('/slider89', function(req, res) {
   const data = require('./source/resources/slider89/docs.json');
-  res.render('slider89', {page: 'slider89', data: data})
+  fetch('https://api.github.com/repos/Hallo89/Slider89/releases')
+    .then(res => res.json())
+    .then(gitData => {
+      res.render('slider89', {page: 'slider89', data: data, gitData: gitData})
+    });
 });
