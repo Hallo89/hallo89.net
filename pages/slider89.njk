@@ -119,130 +119,110 @@
         <div class="version_switch">
           <strong>Version-select: </strong>
           <span class="version_buttons">
+            {%- for version in gitData -%}
+              <button class="{{ version.tag_name | replace('.', '_') }} {{- ' active' if loop.first}}" type="button">{{ version.tag_name }}</button>
+            {%- endfor -%}
           </span>
         </div>
         <p>This chapter will introduce all available methods, variables etc. with a thorough explanation</p>
 
         <hr>
 
-        {% macro docItem(name, value, presets) %}
-          {% if value.version %}
-          <strong class="indicator noselect">{{ value.version }}</strong>
-          {% endif %}
+        {% macro propList(values, presets) %}
+          <dl class="doc_list">
+            {%- for value, propVal in values -%}
+              {# Property (min, max, etc.), [description, attributes, definitions] #}
+              {% if propVal | isArray -%} {# If the property has multiple versions #}
+                <div id="{{ value | kebab }}" class="list_item version_list">
+                  <dt><a href="#{{ value | kebab }}"><code>{{ value }}</code></a></dt>
+                  <div class="indicator">
+                    {%- for ver in propVal -%}
+                    <strong>{{ ver.version }}</strong>
+                    {%- endfor -%}
+                  </div>
+                  <div class="versions">
+                    {% for ver in propVal -%}
+                      <div class="v{{ver.version | replace('.', '_')}} {{- ' active' if loop.first}}">
+                        {{ docItem(value, ver, presets) }}
+                      </div>
+                    {% endfor -%}
+                  </div>
+                </div>
+              {% else -%} {# If the property doesn't have multiple versions #}
+                <div id="{{ value | kebab }}" class="list_item">
+                  {{ docItem(value, propVal, presets) }}
+                </div>
+              {% endif -%}
+            {% endfor -%}
+          </dl>
+        {% endmacro -%}
+
+        {%- macro docItem(name, value, presets) %}
+          {% if value.version is undefined-%}
           <dt>
-            <a href="#{{ name }}"><code>{{ name }}</code></a>
+            <a href="#{{ name | kebab }}"><code>{{ name }}</code></a>
           </dt>
+          {% endif -%}
           <dd class="doc_item description">
             {{ value.description | e | argonize | safe }}
           </dd>
-          {% set attributes = concatObj([presets.attributes, value.attributes]) %}
-          {% for attr, attrVal in attributes %}
+          {% set attributes = concatObj([presets.attributes, value.attributes]) -%}
+          {% for attr, attrVal in attributes -%}
           <dd class="doc_item info_item {{-' state' if attr == 'state'}}">
             <span class="nodisplay">{{"└ " if loop.last else "├"}}</span>
-            {% if attr == 'state' %}
+            {% if attr == 'state' -%}
             <strong>{{attrVal | e | argonize | safe}}</strong>
-            {% else %}
+            {% else -%}
             {{attr}}: {{attrVal | e | separate(['\\s+OR', ','], 'code') | argonize | safe}}
-            {% endif %}
+            {% endif -%}
           </dd>
-          {% endfor %}
-        {% endmacro %}
+          {% endfor -%}
+        {% endmacro -%}
 
-        {% for section, sectionVal in data %}
+        {% for section, sectionVal in data -%}
           {# Docs h3 (Properties, etc.), [description, categories] | in the whole json #}
           <h3><a href="#{{ section | kebab }}" class="icon_anchor">#</a>{{ section }}</h3>
-          {% if sectionVal.description %}
+          {% if sectionVal.description -%}
           <p>{{ sectionVal.description | e | argonize | safe }}</p>
-          {% endif %}
-          {% for category, categoryVal in sectionVal.categories %}
-            {# Category under one section (Read only, etc.), [description, values, ...] #}
-            {% set categoryID = '#' + (section | lower | firstword) + '--' + (category | kebab) %}
-            {% set presets = categoryVal.presets %}
-            <div class="list_container" id="{{ categoryID }}">
-              <h4>
-                <span>{{ category | e | argonize | safe }}</span>
-                <button class="expand_button {{-' active' if categoryVal.collapsed == true}}">
-                  <div class="symbols">
-                    <span class="symbol plus">+</span>
-                    <span class="symbol minus">-</span>
-                  </div>
-                </button>
-                <a href="{{ categoryID }}" class="icon_anchor">#</a>
-              </h4>
-              <div class="collapsible {{-' collapsed' if categoryVal.collapsed == true}}">
-                {% if categoryVal.description %}
-                <p>{{ categoryVal.description | e | argonize | safe }}</p>
-                {% endif %}
-                <dl class="doc_list">
-                  {% for prop, propVal in categoryVal.values %}
-                    {# Property (min, max, etc.), [description, attributes, definitions] #}
-                    {% if propVal | isArray %} {# If the property has multiple versions #}
-                      <div id="{{ prop }}" class="list_item version_list versions_{{ propVal | length }}">
-                        {% for ver in propVal %}
-                          <div class="version v{{ver.version | replace('.', '_')}} {{'newest active enabled' if loop.first}}">
-                            {{ docItem(prop, ver, categoryVal.presets) }}
-                          </div>
-                        {% endfor %}
-                      </div>
-                    {% else %} {# If the property doesn't have multiple versions #}
-                      <div id="{{ prop }}" class="list_item">
-                        {{ docItem(prop, propVal, categoryVal.presets) }}
-                      </div>
-                    {% endif %}
-                  {% endfor %}
-                </dl>
+          {% endif -%}
+          {% if sectionVal.categories -%}
+            {% for category, categoryVal in sectionVal.categories -%}
+              {# Category under one section (Read only, etc.), [description, values, ...] #}
+              {% set categoryID = '#' + (section | lower | firstword) + '--' + (category | kebab) -%}
+              {% set presets = categoryVal.presets -%}
+              <div class="list_container" id="{{ categoryID }}">
+                <h4>
+                  <span>{{ category | e | argonize | safe }}</span>
+                  <button class="expand_button {{-' active' if categoryVal.collapsed == true}}">
+                    <div class="symbols">
+                      <span class="symbol plus">+</span>
+                      <span class="symbol minus">-</span>
+                    </div>
+                  </button>
+                  <a href="{{ categoryID }}" class="icon_anchor">#</a>
+                </h4>
+                <div class="collapsible {{-' collapsed' if categoryVal.collapsed == true}}">
+                  {% if categoryVal.description -%}
+                  <p>{{ categoryVal.description | e | argonize | safe }}</p>
+                  {% endif -%}
+                  {{ propList(categoryVal.values, categoryVal.presets) }}
+                </div>
               </div>
-            </div>
-          {% endfor %}
-        {% endfor %}
+            {% endfor -%}
+          {% else -%}
+            {{ propList(sectionVal.values, sectionVal.presets) }}
+          {% endif -%}
+        {% endfor -%}
 
       </section>
     </main>
 
     <script>
-      const versions = [
-        '0.2.0',
-        '0.1.1',
-        '0.1.0',
-      ];
-      const versionsJS = new Array(versions.length);
-      for (var i = 0; i < versions.length; i++) versionsJS[i] = 'v' + versions[i].replace(/\./g, '_');
+      const versionSwitch = document.querySelector('.version_switch');
 
-      const versionSwitch = document.querySelector('.version_switch .version_buttons');
-      const versionLists = document.querySelectorAll('.version_list');
-      const stylesheet = document.createElement('style');
-      document.head.appendChild(stylesheet);
-
+      for (let l of versionSwitch.querySelectorAll('button')) l.addEventListener('click', switchGlobalVersion);
       for (let l of document.querySelectorAll('h4')) l.addEventListener('click', toggleCollapsible);
       for (let l of document.querySelectorAll('.copyable .copy_icon')) l.addEventListener('click', copyCode);
-      for (let l of document.querySelectorAll('.version_list .version')) l.addEventListener('click', swapItem);
-
-      //adding all available versions to the version selector menu
-      for (var i = 0; i < versions.length; i++) {
-        const button = document.createElement('button');
-        button.classList.add(versionsJS[i]);
-        if (i == 0) button.classList.add('active');
-        button.innerHTML = versions[i];
-        versionSwitch.appendChild(button);
-        button.addEventListener('click', versionSelect);
-      }
-
-      //IIFE adding styles to the style sheet corresponding with the version cards
-      (function() {
-        const finishedStyles = [];
-        for (let l of versionLists) {
-          const childLen = l.children.length;
-          l.classList.add('versions_' + childLen);
-          if (childLen > 1 && !finishedStyles.includes(childLen)) {
-            stylesheet.sheet.insertRule('.version_list.versions_' + childLen + ' .version { padding: .25em ' + (40*(childLen - 1) + 10) + 'px .25em 45px }');
-            for (var n = 1; n < childLen; n++) {
-              stylesheet.sheet.insertRule('.version_list.versions_' + childLen + ' .version:nth-child(' + (n+1) + ').enabled { transform: translateX(' + 45*n + 'px) }');
-              stylesheet.sheet.insertRule('.version_list.versions_' + childLen + ' .version:nth-child(' + (n+1) + '):not(.enabled) { transform: translateX(calc(100% - ' + 40*(childLen - n) + 'px)) }');
-            }
-            finishedStyles.push(childLen);
-          }
-        }
-      })();
 
       function copyCode() {
         const codeblock = this.previousElementSibling;
@@ -269,41 +249,10 @@
         }, 900);
       }
 
-      function swapItem() {
-        if (!this.classList.contains('active')) {
-          swapVersion(this.parentNode.children, false, this);
-        }
-      }
-
-      function versionSelect() {
+      function switchGlobalVersion() {
         if (!this.classList.contains('active')) {
           versionSwitch.querySelector('button.active').classList.remove('active');
           this.classList.add('active');
-          const version = this.classList[0];
-          for (let l of versionLists) {
-            const thisChildren = l.children;
-            if (l.children.length > 1) swapVersion(thisChildren, true, version);
-          }
-        }
-      }
-
-      function swapVersion(thisChildren, checkVersion, thisCheck) {
-        for (var i = 0; i < thisChildren.length; i++) {
-          if (thisChildren[i].classList.contains('active')) var activeIndex = i;
-          if (checkVersion ? thisChildren[i].classList.contains(thisCheck) : thisChildren[i] == thisCheck) var thisIndex = i;
-        }
-        if (thisIndex != null) {
-          if (activeIndex < thisIndex) {
-            for (var i = activeIndex + 1; i <= thisIndex; i++) {
-              thisChildren[i].classList.add('enabled');
-            }
-          } else if (activeIndex > thisIndex) {
-            for (var i = activeIndex; i > thisIndex; i--) {
-              thisChildren[i].classList.remove('enabled');
-            }
-          }
-          thisChildren[activeIndex].classList.remove('active');
-          thisChildren[thisIndex].classList.add('active');
         }
       }
 
