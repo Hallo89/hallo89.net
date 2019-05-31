@@ -330,7 +330,7 @@ body {
       .nav-item-in(3);
       .nav-item-in(@amount, @duration: .45s, @it: 1) when (@it < @amount + 1) {
         &:nth-child(@{it}) {
-          animation: @duration navItemIn cubic-bezier(.4,.1,.5,1);
+          animation: @duration navItemIn cubic-bezier(.4, .1, .5, 1);
         }
         .nav-item-in(@amount, @duration + .08s, @it + 1);
       }
@@ -371,7 +371,7 @@ body {
     width: 5.5em;
     margin: .3em 0;
     border: 1px solid @footer-hr;
-    animation: .4s borderIn cubic-bezier(.55,.05,.5,.95);
+    animation: .4s borderIn cubic-bezier(.55, .05, .5, .95);
     @keyframes borderIn {
       from {
         width: 0;
