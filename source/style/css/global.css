@@ -354,7 +354,7 @@ html.light-mode #modes .dropdown_box .mode_switch:hover {
 }
 @keyframes borderIn {
   from {
-    width: 0;
+    width: 3.5em;
     opacity: 0.25;
   }
 }
