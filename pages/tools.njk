@@ -11,21 +11,11 @@
     {% import 'templates/glb_box.njk' as box %}
     <div id="containers">
 
-      {% call box.box('3D Magic', '3DMagic') %}
-        A tool which displays minecraft models from their JSON format in a model viewing environment, featuring an integrated text editor to modify the model
-      {% endcall %}
-
-      {% call box.box('Random figure generator', 'RFG') %}
-        A tool to generate random numbers. Their amount, starting and ending point and the length of one figure after its comma is customizable
-      {% endcall %}
-
-      {% call box.box('Mocking generator', 'mocking') %}
-        A tool to generate text iN ThE MOcKboB sTylE which is no outdated meme at all
-      {% endcall %}
-
-      {% call box.box('Spacing generator', 'spacing') %}
-        A tool converting text to a format alternating between characters and spaces. The amount of spaces in between every character is customizable
-      {% endcall %}
+      {% for child, childVal in links.Tools.children %}
+        {% call box.box(child, '.' + childVal.link) %}
+          {{ childVal.description }}
+        {% endcall %}
+      {% endfor %}
 
     </div>
   </body>

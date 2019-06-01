@@ -40,7 +40,7 @@ get('sponge');
 get('tutorials');
 getNJK('slider89', {page: 'slider89'});
 get('blog');
-getNJK('tools');
+getNJK('tools', {links: getLinks() });
 get('tools/3DMagic');
 get('tools/RFG');
 get('tools/mocking');
