@@ -61,7 +61,7 @@ a {
 
 #main_article {
   max-width: 1000px;
-  margin: calc(2vh + .75vw + 16.29px) auto 200px;
+  margin: calc(2vh + .75vw + 16.29px) auto;
   padding: 0 .63em;
   color: hsl(0, 0%, 68%);
   line-height: 1.56;
