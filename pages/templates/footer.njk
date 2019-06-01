@@ -1,3 +1,4 @@
+{%- set links = getNavLinks() -%}
 <footer id="footer">
   <div class="nav-wrapper">
     <div class="nav-item">
@@ -12,10 +13,12 @@
       <div class="item-wrapper">
         <h3>Quick nav</h3>
         <ul>
-          <li><a href="https://hallo89.net/">Home</a></li>
-          <li><a href="https://hallo89.net/tools/">Tools</a></li>
-          <li><a href="https://hallo89.net/slider89/">Slider89</a></li>
-          <li><a href="https://hallo89.net/webgl/triangles">WebGL Experiments</a></li>
+          <li><a href="/">Home</a></li>
+          {% for nav, navVal in links -%}
+          {%- if navVal.nonrelevant != true -%}
+          <li><a href="{{ '/' + navVal.link }}">{{ nav }}</a></li>
+          {% endif -%}
+          {%- endfor -%}
         </ul>
       </div>
     </div>

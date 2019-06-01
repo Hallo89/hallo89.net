@@ -6,8 +6,11 @@ app.listen(8000, function() {
   console.log("Listening on port 8000!");
 });
 
-nunjucks.configure('pages', {
+const njk = nunjucks.configure('pages', {
   express: app
+});
+njk.addGlobal('getNavLinks', function() {
+  return getLinks();
 });
 
 app.set('view engine', 'njk');
