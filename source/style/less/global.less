@@ -504,8 +504,7 @@ body {
     position: relative;
     flex-grow: 1;
     z-index: 1;
-    &::before {
-      content: '';
+    .image {
       position: absolute;
       left: 0;
       top: 0;
@@ -520,7 +519,7 @@ body {
     }
   }
   &.imager:hover .image_container, .imager:hover {
-    &::before {
+    .image {
       filter: none;
       opacity: .5;
     }

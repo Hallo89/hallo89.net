@@ -212,15 +212,6 @@ html.nesewebel-mode.light-mode #head_block h1:hover::before {
     transform: translateY(-17px);
   }
 }
-#box_nav .box .dwm::before {
-  background-image: url('MINECRAFT.png');
-}
-#box_nav .box .triangles::before {
-  background-image: url('triangles.png');
-}
-#box_nav .box .matrix_3d::before {
-  background-image: url('cube.png');
-}
 html.nesewebel-mode #box_nav .box {
   background-color: black;
   border-top: 4px solid #242424;

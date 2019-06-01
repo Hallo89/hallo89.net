@@ -478,9 +478,8 @@ html.light-mode #footer a::before {
   flex-grow: 1;
   z-index: 1;
 }
-.glb_box.imager .image_container::before,
-.glb_box .imager::before {
-  content: '';
+.glb_box.imager .image_container .image,
+.glb_box .imager .image {
   position: absolute;
   left: 0;
   top: 0;
@@ -493,8 +492,8 @@ html.light-mode #footer a::before {
   opacity: 0.2;
   transition: all 0.25s cubic-bezier(0, 0, 0.75, 1);
 }
-.glb_box.imager:hover .image_container::before,
-.glb_box .imager:hover::before {
+.glb_box.imager:hover .image_container .image,
+.glb_box .imager:hover .image {
   filter: none;
   opacity: 0.5;
 }
