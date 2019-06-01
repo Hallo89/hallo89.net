@@ -25,20 +25,21 @@
 <div class="box glb_box multiplebox">
   <b class="corneranimation"></b>
   <h2 class="box_header">{{ heading | safe }}</h2>
-  {% if description -%}
+  {%- if description %}
     <p class="description box_text">{{ description | safe }}</p>
   {%- endif %}
   <div class="links box_text">
-    {% for comp, compVal in components %}
-      {% set ref = (link + compVal.link) if link else compVal.link %}
-      {% if compVal.image %}
-        <a class="imager" href="{{ ref }}">{{ comp | safe }}
+    {%- for comp, compVal in components -%}
+      {%- set ref = (link + compVal.link) if link else compVal.link -%}
+      {%- if compVal.image %}
+        <a class="imager" href="{{ ref }}">
+          {{ comp | safe }}
           <i class="image" style="background-image: url('{{ compVal.image }}.png')"></i>
         </a>
-      {% else %}
+      {%- else %}
         <a href="{{ ref }}">{{ comp | safe }}</a>
-      {% endif %}
-    {% endfor %}
+      {%- endif -%}
+    {%- endfor %}
   </div>
 </div>
 {% endmacro %}
