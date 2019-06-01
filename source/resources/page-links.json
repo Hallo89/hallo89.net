@@ -2,11 +2,29 @@
   "navigation": {
     "Tools": {
       "link": "/tools",
-      "description": "A variety of useful tools, currently featuring a random number generator and an extensive minecraft model creator.\nAlong with Dandelion With Mods and this website in general, it is one of my main projects"
+      "description": "A variety of useful tools, currently featuring a random number generator, a small minecraft model creator, a text spacer and a very useful mocking text generator",
+      "children": {
+        "3D Magic": {
+          "link": "/3DMagic",
+          "description": "A minimal minecraft model creator which displays minecraft models from their JSON format in a model viewing environment, featuring an integrated text editor to modify the model"
+        },
+        "Random figure generator": {
+          "link": "/RFG",
+          "description": "A tool to generate random numbers. Their amount, starting and ending point and the length of one figure after its comma is customizable"
+        },
+        "Mocking generator": {
+          "link": "/mocking",
+          "description": "A tool to generate text iN ThE MOcKboB sTylE which is no outdated meme at all"
+        },
+        "Spacing generator": {
+          "link": "/spacing",
+          "description": "A tool converting text to a format alternating between characters and spaces. The amount of spaces in between every character is customizable"
+        }
+      }
     },
     "Slider89": {
       "link": "/slider89",
-      "description": "Slider89 is a framework for easily creating and manipulating fully customizable CSS sliders for your website, featuring functions and practices for every purpose"
+      "description": "Slider89 is a library for easily creating and manipulating fully customizable sliders for your website built with modern Javascript, featuring functions and practices for every purpose"
     },
     "WebGL Experiments": {
       "link": "/webgl",
