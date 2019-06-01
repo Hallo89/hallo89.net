@@ -20,6 +20,10 @@ app.use(express.static('source/images'));
 app.use(express.static('source/resources'));
 app.use(express.static('source/icon'));
 
+function getLinks() {
+  return require('./source/resources/page-links.json');
+}
+
 function get(which, fileName) {
   app.get('/' + which, function(req, res) {
     res.sendFile(__dirname + '/pages/' + (fileName || which) + '.html');
@@ -31,7 +35,7 @@ function getNJK(which, param, fileName) {
   });
 }
 
-getNJK('', false, 'index');
+getNJK('', { links: getLinks() }, 'index');
 get('sponge');
 get('tutorials');
 getNJK('slider89', {page: 'slider89'});
