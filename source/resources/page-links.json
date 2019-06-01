@@ -1,0 +1,38 @@
+{
+  "navigation": {
+    "Tools": {
+      "link": "/tools",
+      "description": "A variety of useful tools, currently featuring a random number generator and an extensive minecraft model creator.\nAlong with Dandelion With Mods and this website in general, it is one of my main projects"
+    },
+    "Slider89": {
+      "link": "/slider89",
+      "description": "Slider89 is a framework for easily creating and manipulating fully customizable CSS sliders for your website, featuring functions and practices for every purpose"
+    },
+    "WebGL Experiments": {
+      "link": "/webgl",
+      "description": "A WebGL 2 learning log",
+      "components": {
+        "Triangles": {
+          "link": "/triangles",
+          "image": "triangles"
+        },
+        "Matrices & 3D": {
+          "link": "/matrices3d",
+          "image": "cube"
+        }
+      }
+    },
+    "Other stuff": {
+      "link": false,
+      "nonrelevant": true,
+      "components": {
+        "Useful thing": {
+          "link": "/sponge",
+        },
+        "Empty thing": {
+          "link": "/tutorials",
+        }
+      }
+    }
+  }
+}
