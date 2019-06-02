@@ -3,7 +3,7 @@
   <b class="corneranimation"></b>
   <h2 class="box_header">{{ heading | safe }}</h2>
   <p class="description box_text">
-    {{ caller() | trim | safe }}
+    {{ caller() | trim | nl2br | safe }}
   </p>
 </a>
 {% endmacro %}
@@ -15,7 +15,7 @@
   <div class="image_container">
     <i class="image" style="background-image: url('{{ img }}.png')"></i>
     <p class="description box_text">
-      {{ caller() | trim | safe }}
+      {{ caller() | trim | nl2br | safe }}
     </p>
   </div>
 </a>
@@ -26,7 +26,7 @@
   <b class="corneranimation"></b>
   <h2 class="box_header">{{ heading | safe }}</h2>
   {%- if description %}
-    <p class="description box_text">{{ description | safe }}</p>
+    <p class="description box_text">{{ description | nl2br | safe }}</p>
   {%- endif %}
   <div class="links box_text">
     {%- for comp, compVal in components -%}
