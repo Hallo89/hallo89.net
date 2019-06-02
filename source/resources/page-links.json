@@ -31,11 +31,13 @@
     "components": {
       "Triangles": {
         "link": "/triangles",
-        "image": "triangles"
+        "image": "triangles",
+        "description": "Triangles is the most thorough WebGL Experiment in which I learned about graphics, GPUs, WebGL/OpenGL and everything connected to it.\nAdditionally, it looks dope, try it!"
       },
       "Matrices & 3D": {
         "link": "/matrices3d",
-        "image": "cube"
+        "image": "cube",
+        "description": "A study of 3D perspective and matrices - Translations, transformations, scaling, fov, ..."
       }
     }
   },
