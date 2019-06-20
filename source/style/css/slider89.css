@@ -368,29 +368,81 @@ h4 .icon_anchor {
   height: 100%;
 }
 
+.list_item.version_item .indicator {
+  display: flex;
+  justify-content: space-around;
+  font-size: 1.075em;
+  margin: .45em 0 .45em 25px;
+  box-sizing: border-box;
+}
+.list_item.version_item .indicator .indicator_item {
+  border-bottom: 4px solid hsl(0, 0%, 20%);
+  flex: 1;
+}
+.list_item.version_item .indicator .indicator_item > strong {
+  display: block;
+  padding: .2em 1em;
+}
+/* version_list - multiple versions */
 .list_item.version_list .versions {
   position: relative;
   overflow: hidden;
 }
-.list_item.version_list .versions > div {
+.list_item.version_list .versions .prop_version {
   width: 100%;
+  transition: all .3s cubic-bezier(.65, .1, .1, 1), opacity .25s ease-in-out;
 }
-.list_item.version_list .versions > div:not(.active) {
+.list_item.version_list .versions .prop_version:not(.active) {
   visibility: hidden;
   position: absolute;
   top: 0;
   left: 0;
-  transform: translateX(100%);
+  opacity: 0;
 }
-.list_item.version_list .indicator {
-  display: flex;
-  justify-content: space-around;
-  font-size: 1.075em;
-  border-bottom: 4px solid hsl(0, 0%, 18%);
-  padding: .2em 1em;
-  margin: .25em 25px .5em;
-  border-radius: 2px;
-  box-sizing: border-box;
+.list_item.version_list .versions .prop_version:not(.active).left {
+  transform: translateX(-40%);
+}
+.list_item.version_list .versions .prop_version:not(.active).right {
+  transform: translateX(40%);
+}
+.list_item.version_list .indicator .indicator_item {
+  cursor: pointer;
+}
+.list_item.version_list .indicator .indicator_item > strong {
+  position: relative;
+  transition: all .1s ease;
+}
+.list_item.version_list .indicator .indicator_item > strong::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0;
+  background-color: hsl(0, 0%, 20%);
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  z-index: -1;
+  transform-origin: bottom;
+  transition: all .1s ease, transform .15s ease;
+}
+.list_item.version_list .indicator .indicator_item:hover > strong::before,
+.list_item.version_list .indicator .indicator_item.active > strong::before {
+  height: 100%;
+}
+.list_item.version_list .indicator .indicator_item.active > strong::before {
+  opacity: .3;
+  transform: scale(.96);
+}
+.list_item.version_list .indicator .indicator_item.active:hover > strong::before {
+  opacity: .4;
+}
+.list_item.version_list .indicator .indicator_item > strong::before,
+.list_item.version_list .indicator .indicator_item:hover > strong::before {
+  opacity: .45;
+}
+.list_item.version_list .indicator .indicator_item:active > strong::before {
+  transform: scale(.98);
 }
 
 /* .doc_list .list_item.version_list {

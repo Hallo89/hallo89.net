@@ -132,21 +132,31 @@
           <dl class="doc_list">
             {%- for value, propVal in values -%}
               {# Property (min, max, etc.), [description, attributes, definitions] #}
-              {% if propVal | isArray -%} {# If the property has multiple versions #}
-                <div id="{{ value | kebab }}" class="list_item version_list">
+              {% if (propVal | isArray) or (propVal.version) -%} {# If the property has one or more versions #}
+                <div id="{{ value | kebab }}" class="list_item version_item {{- ' version_list' if not propVal.version}}">
                   <dt><a href="#{{ value | kebab }}"><code>{{ value }}</code></a></dt>
                   <div class="indicator">
-                    {%- for ver in propVal -%}
-                    <strong>{{ ver.version }}</strong>
-                    {%- endfor -%}
+                    {% if propVal | isArray %}
+                      {%- for ver in propVal -%}
+                      <span class="indicator_item v{{ver.version | replace('.', '_')}} {{- ' active' if loop.first}} noselect"><strong>{{ ver.version }}</strong></span>
+                      {%- endfor -%}
+                    {% else %}
+                      <span class="indicator_item v{{propVal.version | replace('.', '_')}} noselect"><strong>{{ propVal.version }}</strong></span>
+                    {% endif %}
                   </div>
-                  <div class="versions">
+                  {% if propVal | isArray %}
+                    <div class="versions">
                     {% for ver in propVal -%}
-                      <div class="v{{ver.version | replace('.', '_')}} {{- ' active' if loop.first}}">
+                      <div class="prop_version v{{ver.version | replace('.', '_')}} {{- ' active' if loop.first}} {{- ' right' if not loop.first}}">
                         {{ docItem(value, ver, presets) }}
                       </div>
                     {% endfor -%}
-                  </div>
+                    </div>
+                  {% else %}
+                    <div class="v{{propVal.version | replace('.', '_')}}">
+                      {{ docItem(value, propVal, presets) }}
+                    </div>
+                  {% endif %}
                 </div>
               {% else -%} {# If the property doesn't have multiple versions #}
                 <div id="{{ value | kebab }}" class="list_item">
@@ -158,7 +168,7 @@
         {% endmacro -%}
 
         {%- macro docItem(name, value, presets) %}
-          {% if value.version is undefined-%}
+          {% if value.version is undefined -%}
           <dt>
             <a href="#{{ name | kebab }}"><code>{{ name }}</code></a>
           </dt>
@@ -219,16 +229,50 @@
 
     <script>
       const versionSwitch = document.querySelector('.version_switch');
+      const vSwitchBtns = versionSwitch.querySelectorAll('button');
+      const copyBtns = document.querySelectorAll('.copyable .copy_icon');
+      const indicatorItems = document.querySelectorAll('.list_item.version_list .indicator .indicator_item');
+      const h4s = document.getElementsByTagName('h4');
 
-      for (let l of versionSwitch.querySelectorAll('button')) l.addEventListener('click', switchGlobalVersion);
-      for (let l of document.querySelectorAll('h4')) l.addEventListener('click', toggleCollapsible);
-      for (let l of document.querySelectorAll('.copyable .copy_icon')) l.addEventListener('click', copyCode);
+      for (let i = 0; i < indicatorItems.length; i++) indicatorItems[i].addEventListener('click', switchCardVersion);
+      for (let i = 0; i < h4s.length; i++) h4s[i].addEventListener('click', toggleCollapsible);
+      for (let i = 0; i < vSwitchBtns.length; i++) vSwitchBtns[i].addEventListener('click', switchGlobalVersion);
+      for (let i = 0; i < copyBtns.length; i++) copyBtns[i].addEventListener('click', copyCode);
+
+      function switchCardVersion() {
+        if (this.classList.contains('active')) return;
+        const version = this.classList[1];
+        const vProps = this.parentNode.parentNode.querySelectorAll('.versions .prop_version');
+        let clickPos;
+        for (let i = 0; i < vProps.length; i++) {
+          if (vProps[i].classList.contains(version)) {
+            clickPos = i;
+            break;
+          }
+        }
+        for (let i = 0; i < vProps.length; i++) {
+          if (clickPos > i) {
+            vProps[i].classList.add('left');
+            vProps[i].classList.remove('right');
+          } else if (clickPos < i) {
+            vProps[i].classList.add('right');
+            vProps[i].classList.remove('left');
+          }
+          if (vProps[i].classList.contains('active')) {
+            vProps[i].classList.remove('active');
+          } else if (i == clickPos) {
+            vProps[i].classList.add('active');
+          }
+        }
+        this.parentNode.querySelector('.indicator_item.active').classList.remove('active');
+        this.classList.add('active');
+      }
 
       function copyCode() {
         const codeblock = this.previousElementSibling;
         const selection = window.getSelection();
         const ranges = new Array(selection.rangeCount);
-        for (var i = 0; i < selection.rangeCount; i++) {
+        for (let i = 0; i < selection.rangeCount; i++) {
           ranges[i] = selection.getRangeAt(i);
         }
         const range = document.createRange();
