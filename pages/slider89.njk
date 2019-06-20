@@ -19,7 +19,7 @@
       <a href="#structure">HTML & CSS structure</a>
     </nav>
     {%- endcall %}
-    <main id="main_article">
+    <main>
       <h2 id="intro">
         <a href="#intro" class="icon_anchor">#</a>Introduction
       </h2>
@@ -58,10 +58,10 @@
           In both cases only two files are needed: <code>slider89.js</code> and <code>slider89.css</code><br>
           You'll then need to link them in your HTML file like so:
         </p>
-        <div class="code_wrapper copyable">
-          <pre class="codeblock copyable"><code>&lt;script src="<em>yourpath</em>/slider89.js"&gt;&lt;/script&gt;
+        <div class="code_copy_wrapper">
+          <pre class="codeblock"><code>&lt;script src="<em>yourpath</em>/slider89.js"&gt;&lt;/script&gt;
 &lt;link rel="stylesheet" href="<em>yourpath</em>/slider89.css"&gt;</code></pre>
-          <button class="copy_icon">
+          <button class="copy_btn">
             <span class="text">Copy</span>
             <div class="checkbox">
               <i class="mark lower"></i>
@@ -72,10 +72,10 @@
         <p>
           or, fetching from the website:
         </p>
-        <div class="code_wrapper copyable">
+        <div class="code_copy_wrapper">
           <pre class="codeblock"><code>&lt;script src="https://hallo89.github.io/Slider89/slider89.js"&gt;&lt;/script&gt;
 &lt;link rel="stylesheet" href="https://hallo89.github.io/Slider89/slider89.css"&gt;</code></pre>
-          <button class="copy_icon">
+          <button class="copy_btn">
             <span class="text">Copy</span>
             <div class="checkbox">
               <i class="mark lower"></i>
@@ -116,7 +116,7 @@
       </h2>
 
       <section id="section_docs">
-        <div class="version_switch">
+        <div class="version_select">
           <strong>Version-select: </strong>
           <span class="version_buttons">
             {%- for version in gitData -%}
@@ -200,7 +200,7 @@
               {# Category under one section (Read only, etc.), [description, values, ...] #}
               {% set categoryID = '#' + (section | lower | firstword) + '--' + (category | kebab) -%}
               {% set presets = categoryVal.presets -%}
-              <div class="list_container" id="{{ categoryID }}">
+              <div class="list_section" id="{{ categoryID }}">
                 <h4>
                   <span>{{ category | e | argonize | safe }}</span>
                   <button class="expand_button {{-' active' if categoryVal.collapsed == true}}">
@@ -228,9 +228,9 @@
     </main>
 
     <script>
-      const versionSwitch = document.querySelector('.version_switch');
+      const versionSwitch = document.querySelector('.version_select');
       const vSwitchBtns = versionSwitch.querySelectorAll('button');
-      const copyBtns = document.querySelectorAll('.copyable .copy_icon');
+      const copyBtns = document.querySelectorAll('.code_copy_wrapper .copy_btn');
       const indicatorItems = document.querySelectorAll('.list_item.version_list .indicator .indicator_item');
       const h4s = document.getElementsByTagName('h4');
 

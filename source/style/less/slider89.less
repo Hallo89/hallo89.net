@@ -1,0 +1,535 @@
+// out: ../css/slider89.css, sourcemap: false, compress: false
+
+/* Source Code Pro by Adobe @ https://github.com/adobe-fonts/source-code-pro/ */
+@font-face {
+  font-family: 'Source Code Pro';
+  font-weight: normal;
+  src:
+    local('Source Code Pro'),
+    local('SourceCodePro-Regular'),
+    url('../resources/fonts/SourceCodePro/SourceCodePro-Regular.otf.woff2') format('woff2'),
+    url('../resources/fonts/SourceCodePro/SourceCodePro-Regular.otf.woff') format('woff');
+}
+@font-face {
+  font-family: 'Source Code Pro';
+  font-weight: bold;
+  src:
+    local('Source Code Pro Bold'),
+    local('SourceCodePro-Bold'),
+    url('../resources/fonts/SourceCodePro/SourceCodePro-Bold.otf.woff2') format('woff2'),
+    url('../resources/fonts/SourceCodePro/SourceCodePro-Bold.otf.woff') format('woff');
+}
+
+body {
+  margin: 0;
+  font-size: calc(.12vw + .06vh + 15.14px);
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#navbar {
+  h1 {
+    font-size: inherit;
+    font-weight: normal;
+    margin: 0;
+  }
+  .text {
+    margin-right: .6em;
+  }
+  #id_nav {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    font-size: .74em;
+    font-family: 'San Francisco Monospaced', 'Consolas', monospace;
+    a {
+      color: hsl(0, 0%, 65%);
+      margin: 0 .5em;
+      border-bottom: 2px solid hsl(0, 0%, 45%);
+      white-space: nowrap;
+      transition: all .15s ease-in-out;
+      &:hover {
+        color: hsl(0, 0%, 70%);
+        border-color: hsl(0, 0%, 55%);
+      }
+    }
+  }
+}
+
+main {
+  max-width: 1000px;
+  margin: calc(2vh + .75vw + 16.29px) auto 200px;
+  padding: 0 .63em;
+  color: hsl(0, 0%, 68%);
+  line-height: 1.56;
+  section {
+    margin: auto;
+    max-width: 900px;
+    /* Ensuring a minimum amount of indent when the viewport width gehts smaller */
+    padding: 0 1.45em;
+  }
+
+  h2 {
+    font-size: 2.11em;
+    font-family: 'San Francisco Monospaced', 'Consolas', monospace;
+    color: hsl(0, 0%, 66%)
+  }
+
+  h3 {
+    color: hsl(0, 0%, 70%);
+    font-family: 'Calibri', sans-serif;
+    margin: .6em 0;
+  }
+  hr {
+    border-bottom: none;
+    border-top: 3px solid hsl(0, 0%, 35%);
+    margin: .8em 0 .7em;
+  }
+  h3, hr {
+    font-size: 1.9em;
+  }
+
+  p, dd, code {
+    a {
+      position: relative;
+      padding: 1px 1px 2px;
+      transition: background-color .08s;
+      &:hover {
+        padding: 1px;
+      }
+    }
+  }
+  p, dd {
+    a {
+      color: #1398A9;
+      border-bottom: 1px solid;
+      &:hover {
+        /* #1398A9 in rgba */
+        background-color: rgba(19, 152, 170, .19);
+        border-bottom: 2px solid;
+      }
+      &:visited {
+        color: #469870;
+      }
+      &:hover:visited {
+        /* #469870 in rgba */
+        background-color: rgba(70, 152, 112, .18);
+      }
+      &:active {
+        color: #A84E4E;
+      }
+      &:hover:active {
+        /* #A84E4E in rgba */
+        background-color: rgba(168, 78, 78, .18);
+      }
+    }
+  }
+  code a {
+    color: hsl(0, 0%, 76%);
+    border-bottom: 1px solid hsl(0, 0%, 50%);
+    &:hover {
+      background-color: hsla(0, 0%, 60%, .1);
+      border-bottom: 2px solid hsl(0, 0%, 50%);
+    }
+    &:visited {
+      color: inherit;
+    }
+    &:hover:visited {
+      background-color: hsla(0, 0%, 60%, .18);
+    }
+    &:active {
+      /* Above color mixed with 180/255 60% lightness */
+      color: #9D8282;
+    }
+    &:hover:active {
+      /* #9D8282 in rgba */
+      background-color: rgba(157, 130, 130, .18);
+    }
+  }
+}
+
+main code {
+  padding: 2px 3px;
+}
+main .codeblock code {
+  padding: 0;
+}
+main code, .codeblock {
+  font-family: 'San Francisco Monospaced', 'Consolas', monospace;
+  color: hsl(0, 0%, 70%);
+  background-color: hsl(0, 0%, 13.5%);
+  border-radius: 1px;
+}
+.codeblock {
+  padding: 3px 8px;
+  margin: .25em 0;
+  overflow: auto;
+}
+
+.code_copy_wrapper {
+  display: flex;
+  .codeblock {
+    width: 100%;
+  }
+  .copy_btn {
+    position: relative;
+    background-color: hsl(0, 0%, 17%);
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    margin: .25em 0;
+    box-shadow: -1px 0 10px hsla(0, 0%, 12%, .2);
+    color: inherit;
+    border: none;
+    overflow: hidden;
+    font-size: 1.15em;
+    font-family: 'San Francisco Monospaced', 'Consolas', monospace;
+    transition: all .3s ease;
+    &:hover, &.active {
+      padding: 0 15px;
+      box-shadow: -1px 0 15px hsla(0, 0%, 10%, .25);
+      background-color: hsl(0, 0%, 18%);
+    }
+    .text {
+      transition: all .18s ease;
+    }
+    &.active .text {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    .checkbox {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      clip-path: polygon(16% 50%, 24% 43%, 24% 43%, 24% 43%, 16% 50%, 16% 50%);
+      transition: all .18s ease;
+      transform: translateX(-100%);
+      opacity: 0;
+      /* PLEASE IMPROVE */
+      .mark {
+        position: absolute;
+        height: 4px;
+        bottom: 32%;
+        left: 45.5%;
+        transform-origin: bottom left;
+        background-color: hsl(0, 0%, 70%);
+        border-radius: 1px;
+        transition: all .3s ease;
+      }
+      .mark.lower {
+        transform: rotate(-135deg);
+        width: 19px;
+      }
+      .mark.upper {
+        transform: rotate(-45deg) translateX(-4px);
+        width: 35px;
+      }
+    }
+    &.active .checkbox {
+      animation: .3s checkmarkIn ease;
+      transform: none;
+      opacity: 1;
+      clip-path: polygon(85% 31%, 77% 23%, 41% 60%, 24% 43%, 16% 50%, 41% 76%);
+      @keyframes checkmarkIn {
+        0%   { clip-path: polygon(16% 50%, 24% 43%, 24% 43%, 24% 43%, 16% 50%, 16% 50%); }
+        30%  { clip-path: polygon(41% 76%, 41% 60%, 41% 60%, 24% 43%, 16% 50%, 41% 76%); }
+        100% { clip-path: polygon(85% 31%, 77% 23%, 41% 60%, 24% 43%, 16% 50%, 41% 76%); }
+      }
+    }
+  }
+}
+
+#section_docs dt code {
+  font-size: 1.1em;
+  color: hsl(0, 0%, 78%);
+  background-color: hsl(0, 0%, 18.5%);
+  padding: 2px 9px;
+  border-radius: 100px;
+}
+#section_docs dt code,
+.doc_list .info_item,
+main code a,
+main h4,
+.list_section .expand_button {
+  font-family: 'Source Code Pro', 'DejaVu Sans Mono', 'Fira Code', 'San Francisco Monospaced', 'Consolas', monospace;
+}
+
+.icon_anchor {
+  margin: 0 14px 0 -39px;
+  padding: 0 2px;
+  color: hsl(0, 0%, 60%);
+  text-decoration: none;
+  font-family: 'Consolas', 'San Francisco Monospaced', sans-serif;
+  opacity: .25;
+  transition: all .1s ease-in-out;
+  h4 & {
+    margin: 0 0 0 10px;
+  }
+}
+main {
+  h2, h3, h4 {
+    &:hover .icon_anchor {
+      opacity: 1;
+    }
+  }
+}
+
+main h4 {
+  font-size: 1.58em;
+  margin: 1.2em 0;
+  color: hsl(0, 0%, 65%);
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.list_section {
+  .collapsible.collapsed {
+    height: 0;
+    display: none;
+  }
+  .expand_button {
+    position: absolute;
+    left: -1.166em;
+    height: .833em;
+    width: .833em;
+    border: none;
+    background-color: hsl(0, 0%, 18%);
+    color: hsl(0, 0%, 55%);
+    font-size: 1em;
+    font-family: 'Source Code Pro', 'Lucida Console', 'DejaVu Sans Mono', 'Century', 'Century Gothic', 'Consolas', 'San Francisco Monospaced', sans-serif;
+    padding: 0;
+    border-radius: 100px;
+    .symbols {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all .55s ease;
+    }
+    .symbol {
+      position: absolute;
+      transition: all .38s cubic-bezier(.35,.1,.35,1);
+      &.plus {
+        visibility: hidden;
+        transform: Scale(0);
+      }
+    }
+    &.active {
+      .symbols {
+        transform: rotateZ(360deg);
+      }
+      .symbol {
+        &.minus {
+          transform: Scale(0);
+          visibility: hidden;
+          animation: preventHidden .8s linear;
+          @keyframes preventHidden {
+            from { visibility: visible; }
+            to   { visibility: visible; }
+          }
+        }
+        &.plus {
+          transform: Scale(1);
+          visibility: visible;
+        }
+      }
+    }
+  }
+}
+
+.version_select {
+  background-color: hsl(0, 0%, 13%);
+  padding: 15px 30px;
+  font-size: 1.3em;
+  display: flex;
+  .version_buttons {
+    display: flex;
+    justify-content: space-evenly;
+    flex: 1;
+  }
+  button {
+    position: relative;
+    background-color: unset;
+    border: none;
+    color: hsl(0, 0%, 65%);
+    font-size: .9em;
+    font-family: 'San Francisco Monospaced', 'Consolas', monospace;
+    z-index: 0;
+    padding: 6px 10px;
+    transition: all .2s ease;
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 0;
+      z-index: -1;
+      background-color: hsl(0, 0%, 80%);
+      transition: all .2s ease;
+    }
+    &:hover, &.active {
+      color: hsl(0, 0%, 16%);
+      &::before {
+        height: 100%;
+      }
+    }
+  }
+}
+
+.list_item {
+  &.version_item .indicator {
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.075em;
+    margin: .45em 0 .45em 25px;
+    box-sizing: border-box;
+    .indicator_item {
+      border-bottom: 4px solid hsl(0, 0%, 20%);
+      flex: 1;
+      &.active > strong::before {
+        height: 100%;
+        opacity: .35;
+        transform: scale(.98);
+      }
+      &:active > strong::before {
+        transform: scale(.99);
+      }
+      > strong {
+        display: block;
+        padding: .2em 1em;
+        position: relative;
+        transition: all .1s ease;
+        &::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          height: 0;
+          background-color: hsl(0, 0%, 20%);
+          border-top-left-radius: 3px;
+          border-top-right-radius: 3px;
+          opacity: .5;
+          z-index: -1;
+          transform-origin: bottom;
+          transition: all .1s ease, transform .15s ease;
+        }
+      }
+    }
+  }
+  &.version_list {
+    .indicator .indicator_item {
+      cursor: pointer;
+      &:hover > strong::before {
+        height: 100%;
+      }
+      &:active > strong::before {
+        transform: scale(.98);
+      }
+      &.active {
+        > strong::before {
+          transform: scale(.955);
+        }
+        &:hover > strong::before {
+          opacity: .45;
+        }
+      }
+    }
+    .versions {
+      position: relative;
+      overflow: hidden;
+      .prop_version {
+        width: 100%;
+        transition: all .3s cubic-bezier(.65, .1, .1, 1), opacity .25s ease-in-out;
+        &:not(.active) {
+          visibility: hidden;
+          position: absolute;
+          top: 0;
+          left: 0;
+          opacity: 0;
+          &.left {
+            transform: translateX(-40%);
+          }
+          &.right {
+            transform: translateX(40%);
+          }
+        }
+      }
+    }
+  }
+}
+
+.doc_list {
+  list-style-type: none;
+  padding-left: 20px;
+  margin: 1.3em 0;
+  .list_item {
+    margin: .75em 0;
+    padding: .75em 0;
+  }
+  dt {
+    margin-bottom: 3px;
+  }
+  .doc_item {
+    margin-left: 25px;
+  }
+  .info_item {
+    position: relative;
+    margin-left: 70px;
+    text-indent: -15px;
+    &.state {
+      color: #904851;
+    }
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      left: -32px;
+    }
+    &::before {
+      border-left: 1.5px solid hsl(0, 0%, 55%);
+      top: 0;
+      bottom: 0;
+    }
+    &::after {
+      border-top: 1.5px solid hsl(0, 0%, 55%);
+      top: 50%;
+      width: 13px;
+    }
+    &:nth-last-of-type(1)::before {
+      top: 0;
+      bottom: 50%;
+    }
+  }
+}
+
+.demo_block {
+  display: flex;
+  justify-content: center;
+  height: 25px;
+}
+.demo_block .slider89 .slider {
+  background-color: hsl(0, 0%, 18%);
+}
+
+.nodisplay {
+  display: none;
+}
+
+.noselect {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
