@@ -141,7 +141,7 @@
                       <span class="indicator_item v{{ver.version | replace('.', '_')}} {{- ' active' if loop.first}} noselect"><strong>{{ ver.version }}</strong></span>
                       {%- endfor -%}
                     {% else %}
-                      <span class="indicator_item v{{propVal.version | replace('.', '_')}} noselect"><strong>{{ propVal.version }}</strong></span>
+                      <span class="indicator_item v{{propVal.version | replace('.', '_')}} active noselect"><strong>{{ propVal.version }}</strong></span>
                     {% endif %}
                   </div>
                   {% if propVal | isArray %}

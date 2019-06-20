@@ -382,8 +382,52 @@ h4 .icon_anchor {
 .list_item.version_item .indicator .indicator_item > strong {
   display: block;
   padding: .2em 1em;
+  position: relative;
+  transition: all .1s ease;
+}
+.list_item.version_item .indicator .indicator_item > strong::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0;
+  background-color: hsl(0, 0%, 20%);
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  z-index: -1;
+  transform-origin: bottom;
+  transition: all .1s ease, transform .15s ease;
+}
+.list_item.version_list .indicator .indicator_item:hover > strong::before,
+.list_item.version_item .indicator .indicator_item.active > strong::before {
+  height: 100%;
+}
+.list_item.version_item .indicator .indicator_item.active > strong::before {
+  opacity: .35;
+  transform: scale(.98);
+}
+.list_item.version_list .indicator .indicator_item.active > strong::before {
+  transform: scale(.955);
+}
+.list_item.version_list .indicator .indicator_item.active:hover > strong::before {
+  opacity: .45;
+}
+.list_item.version_item .indicator .indicator_item > strong::before,
+.list_item.version_list .indicator .indicator_item:hover > strong::before {
+  opacity: .5;
+}
+.list_item.version_item .indicator .indicator_item:active > strong::before {
+  transform: scale(.99);
+}
+.list_item.version_list .indicator .indicator_item:active > strong::before {
+  transform: scale(.98);
 }
 /* version_list - multiple versions */
+.list_item.version_list .indicator .indicator_item {
+  cursor: pointer;
+}
+
 .list_item.version_list .versions {
   position: relative;
   overflow: hidden;
@@ -404,45 +448,6 @@ h4 .icon_anchor {
 }
 .list_item.version_list .versions .prop_version:not(.active).right {
   transform: translateX(40%);
-}
-.list_item.version_list .indicator .indicator_item {
-  cursor: pointer;
-}
-.list_item.version_list .indicator .indicator_item > strong {
-  position: relative;
-  transition: all .1s ease;
-}
-.list_item.version_list .indicator .indicator_item > strong::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 0;
-  background-color: hsl(0, 0%, 20%);
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
-  z-index: -1;
-  transform-origin: bottom;
-  transition: all .1s ease, transform .15s ease;
-}
-.list_item.version_list .indicator .indicator_item:hover > strong::before,
-.list_item.version_list .indicator .indicator_item.active > strong::before {
-  height: 100%;
-}
-.list_item.version_list .indicator .indicator_item.active > strong::before {
-  opacity: .3;
-  transform: scale(.96);
-}
-.list_item.version_list .indicator .indicator_item.active:hover > strong::before {
-  opacity: .4;
-}
-.list_item.version_list .indicator .indicator_item > strong::before,
-.list_item.version_list .indicator .indicator_item:hover > strong::before {
-  opacity: .45;
-}
-.list_item.version_list .indicator .indicator_item:active > strong::before {
-  transform: scale(.98);
 }
 
 /* .doc_list .list_item.version_list {
