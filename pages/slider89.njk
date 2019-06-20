@@ -250,6 +250,7 @@
             break;
           }
         }
+        let clickHeight = vProps[clickPos].clientHeight;
         for (let i = 0; i < vProps.length; i++) {
           if (clickPos > i) {
             vProps[i].classList.add('left');
@@ -259,11 +260,18 @@
             vProps[i].classList.remove('left');
           }
           if (vProps[i].classList.contains('active')) {
+            vProps[clickPos].setAttribute('style', 'height:' + vProps[i].clientHeight + 'px');
             vProps[i].classList.remove('active');
           } else if (i == clickPos) {
             vProps[i].classList.add('active');
           }
         }
+        setTimeout(function() {
+          vProps[clickPos].setAttribute('style', 'height:' + clickHeight + 'px');
+          setTimeout(function() {
+            vProps[clickPos].setAttribute('style', '');
+          }, 125);
+        }, 20);
         this.parentNode.querySelector('.indicator_item.active').classList.remove('active');
         this.classList.add('active');
       }
