@@ -180,14 +180,12 @@
           {# state #}
           {% if val.state %}
             <dd class="doc_item info_item special_item state">
-              <span class="nodisplay">│</span>
               <strong>{{val.state}}</strong>
             </dd>
           {% endif %}
           {# definitions #}
           {% if val.definitions %}
             <dd class="doc_item info_item">
-              <span class="nodisplay">│</span>
               Definitions: <div class="definitions">
                 {% for def, defVal in val.definitions -%}
                   <div class="definition">
@@ -200,7 +198,6 @@
           {# attributes #}
           {% for attr, attrVal in val.attributes %}
             <dd class="doc_item info_item">
-              <span class="nodisplay">{{"└ " if loop.last else "├"}}</span>
               {{attr}}: {{attrVal | e | separate(['\\s+OR', ','], 'code') | argonize | safe}}
             </dd>
           {% endfor %}
