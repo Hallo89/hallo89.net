@@ -296,6 +296,7 @@
             props[i].classList.remove('left');
           }
           if (props[i].classList.contains('active')) {
+            if (i == target) break;
             props[target].setAttribute('style', 'height:' + props[i].clientHeight + 'px');
             props[i].classList.remove('active');
           } else if (i == target) {
