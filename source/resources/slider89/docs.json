@@ -110,7 +110,7 @@
               }
             },
             {
-              "version": "0.1.0",
+              "version": "0.1.3",
               "description": "The duration after how long the value tooltip should vanish when the slider hasn't been interacted with",
               "attributes": {
                 "type": "number",
@@ -247,7 +247,7 @@
             },
             {
               "version": "0.1.0",
-              "description": "Builds the slider's a#structure{//HTML structure//} into the specified code//targetNode, adding additional classes from the code+a#//classList property, if present. If code+a#//replaceNode is true, it replaces code//targetNode./br//The function returns the created element to be written into a variable (-> code+a#//element)",
+              "description": "Builds the slider's a#structure{//HTML structure//} into the specified code//targetNode, adding additional classes from the code+a#//classList property, if present. If code+a#//replaceNode is true, it replaces code//targetNode./br!//The function returns the created element to be written into a variable (-> code+a#//element)",
               "attributes": {
                 "influences": "a#//replaceNode, a#//classList",
                 "influencing": "a#structure{//HTML structure//}, a#//element"
@@ -267,14 +267,14 @@
           "<sliderInstance>.checkTask(<task>) -> <task> | false": [
             {
               "version": "0.1.1",
-              "description": "A function evaluation whether a handed-over code//task is valid:/br!//If it is, plainly return it without doing anything, if not, for example because it has been declared em//with parenthesis (which javascript cannot explicitly check), throw an error into the console and return code//false",
+              "description": "A function evaluation whether a handed-over code//task is valid:/br!//If it is, plainly return it without doing anything, if not, for example because it has been declared em//with parentheses (which javascript cannot explicitly check), throw an error into the console and return code//false",
               "attributes": {
                 "influencing": "a#//task, a#//taskMouseUp"
               }
             },
             {
               "version": "0.1.0",
-              "description": "A function evaluation whether an input code+a#//task, which is also handed over into this function, is valid. If it is, write it into the specified code//objectTarget/br!//If the task is no valid function, for example declared em//with parentheses, throw an error into the console",
+              "description": "A function evaluation whether an input code+a#//task, which is also handed over into this function, is valid. If it is, write it into the specified code{//objectTarget//}/br!//If the task is no valid function, for example declared em//with parentheses, throw an error into the console",
               "definitions": {
                 "objectTarget": "The object to write into; either the slider instance (a#//constructor) or the code+a#slider89-object{//slider89 object//}"
               },
