@@ -33,9 +33,19 @@ njk.addFilter('kebab', function(val) {
 });
 njk.addGlobal('concatObj', function(objects) {
   return objects.reduce(function(prev, current) {
-    return Object.assign(prev, current);
+    return mergeObjects(JSON.parse(JSON.stringify(prev)), current);
   }, {});
 });
+function mergeObjects(target, source) {
+  for (const key in source) {
+    if (key in target && typeof target[key] == 'object') {
+      mergeObjects(target[key], source[key]);
+    } else {
+      target[key] = source[key];
+    }
+  }
+  return target;
+}
 
 app.set('view engine', 'njk');
 app.set('views', __dirname + '/pages');
@@ -69,8 +79,9 @@ get('tools/mocking');
 get('tools/spacing');
 get('webgl/triangles');
 get('webgl/matrices3d');
+
+const data = require('./source/resources/slider89/docs.json');
 app.get('/slider89', function(req, res) {
-  const data = require('./source/resources/slider89/docs.json');
   fetch('https://api.github.com/repos/Hallo89/Slider89/releases')
     .then(res => res.json())
     .then(gitData => {

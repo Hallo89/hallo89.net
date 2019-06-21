@@ -176,17 +176,34 @@
           <dd class="doc_item description">
             {{ value.description | e | argonize | safe }}
           </dd>
-          {% set attributes = concatObj([presets.attributes, value.attributes]) -%}
-          {% for attr, attrVal in attributes -%}
-          <dd class="doc_item info_item {{-' state' if attr == 'state'}}">
-            <span class="nodisplay">{{"└ " if loop.last else "├"}}</span>
-            {% if attr == 'state' -%}
-            <strong>{{attrVal | e | argonize | safe}}</strong>
-            {% else -%}
-            {{attr}}: {{attrVal | e | separate(['\\s+OR', ','], 'code') | argonize | safe}}
-            {% endif -%}
-          </dd>
-          {% endfor -%}
+          {% set val = concatObj([presets, value]) %}
+          {# state #}
+          {% if val.state %}
+            <dd class="doc_item info_item special_item state">
+              <span class="nodisplay">│</span>
+              <strong>{{val.state}}</strong>
+            </dd>
+          {% endif %}
+          {# definitions #}
+          {% if val.definitions %}
+            <dd class="doc_item info_item">
+              <span class="nodisplay">│</span>
+              Definitions: <div class="definitions">
+                {% for def, defVal in val.definitions -%}
+                  <div class="definition">
+                    <code>{{def}}</code> = {{defVal | e | argonize | safe}}
+                  </div>
+                {% endfor -%}
+              </div>
+            </dd>
+          {% endif %}
+          {# attributes #}
+          {% for attr, attrVal in val.attributes %}
+            <dd class="doc_item info_item">
+              <span class="nodisplay">{{"└ " if loop.last else "├"}}</span>
+              {{attr}}: {{attrVal | e | separate(['\\s+OR', ','], 'code') | argonize | safe}}
+            </dd>
+          {% endfor %}
         {% endmacro -%}
 
         {% for section, sectionVal in data -%}

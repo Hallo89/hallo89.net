@@ -121,8 +121,8 @@
           ],
           "replaceNode": {
             "description": "If set to true, the slider instance will replace the code+a#Slider89//targetNode instead of being appended as a child inside it",
+            "state": "WRITE ONLY",
             "attributes": {
-              "state": "WRITE ONLY",
               "type": "boolean",
               "influencing": "a#//Slider89",
               "default": "false"
@@ -133,9 +133,7 @@
       "Read only": {
         "description": "The following properties are read only and may not be used as configuration properties",
         "presets": {
-          "attributes": {
-            "state": "READ ONLY"
-          }
+          "state": "READ ONLY"
         },
         "values": {
           "element": [
@@ -164,9 +162,7 @@
         "collapsed": true,
         "description": "Below listed are properties which are internal to the framework and serve no purpose for the user but maybe you want to hack the framework idk but feel free to",
         "presets": {
-          "attributes": {
-            "state": "INTERNAL"
-          }
+          "state": "INTERNAL"
         },
         "values": {
           "taskLock": {
@@ -231,9 +227,7 @@
         "collapsed": true,
         "description": "As with the a#properties-internal{//internal properties//}, these values serve no purpose for the user but are listed here to give the user (and hacker) full transparency",
         "presets": {
-          "attributes": {
-            "state": "INTERNAL"
-          }
+          "state": "INTERNAL"
         },
         "values": {
           "<sliderInstance>.buildElement(<targetNode>, replaceNode) -> object<HTMLnodes>": [
@@ -295,7 +289,7 @@
           },
           "<sliderInstance>.parseHTML(structure) -> object<structureNodes>": {
             "version": "0.2.0",
-            "description": "This function will parse a given code+a#//structure into valid HTML, taking every attribute, innerHTML, etc. into account./br!//It will return every HTML node created as an object, with the in code//structure specified tag name as object name",
+            "description": "This function will parse a given code+a#//structure into valid HTML, taking every attribute, inner text content etc. into account./br!//It will return every HTML node created as an object, with the in code//structure specified tag name as object name",
             "attributes": {
               "influences": "a#//structure",
               "influencing": "a#//buildElement, a#structure{//HTML structure//}"

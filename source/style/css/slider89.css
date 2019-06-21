@@ -484,31 +484,39 @@ main h4 {
 }
 .doc_list .info_item {
   position: relative;
-  margin-left: 70px;
-  text-indent: -15px;
+  margin-left: 80px;
+  text-indent: -20px;
+  padding: 2px 0;
 }
 .doc_list .info_item.state {
   color: #904851;
 }
+.doc_list .info_item .definitions {
+  margin-left: 15px;
+}
+.doc_list .info_item .definitions .definition {
+  padding: 2px 0;
+}
 .doc_list .info_item::before,
 .doc_list .info_item::after {
-  content: '';
   position: absolute;
-  left: -32px;
+  left: -40px;
 }
 .doc_list .info_item::before {
-  border-left: 1.5px solid hsl(0, 0%, 55%);
+  content: '';
+  border-left: 2px solid hsl(0, 0%, 37%);
   top: 0;
   bottom: 0;
 }
-.doc_list .info_item::after {
-  border-top: 1.5px solid hsl(0, 0%, 55%);
-  top: 50%;
-  width: 13px;
+.doc_list .info_item:not(.special_item)::after {
+  content: '';
+  border-top: 2px solid hsl(0, 0%, 37%);
+  top: 0.78em;
+  width: 14px;
 }
-.doc_list .info_item:nth-last-of-type(1)::before {
+.doc_list .info_item:nth-last-of-type(1):not(.special_item)::before {
   top: 0;
-  bottom: 50%;
+  height: 0.78em;
 }
 .demo_block {
   display: flex;

@@ -497,30 +497,39 @@ main h4 {
     margin-left: 25px;
   }
   .info_item {
+    @text-indent: 20px;
     position: relative;
-    margin-left: 70px;
-    text-indent: -15px;
+    margin-left: 60px + @text-indent;
+    text-indent: -@text-indent;
+    padding: 2px 0;
     &.state {
       color: #904851;
     }
+    .definitions {
+      margin-left: 15px;
+      .definition {
+        padding: 2px 0;
+      }
+    }
     &::before, &::after {
-      content: '';
       position: absolute;
-      left: -32px;
+      left: -20px - @text-indent;
     }
     &::before {
-      border-left: 1.5px solid hsl(0, 0%, 55%);
+      content: '';
+      border-left: 2px solid hsl(0, 0%, 37%);
       top: 0;
       bottom: 0;
     }
-    &::after {
-      border-top: 1.5px solid hsl(0, 0%, 55%);
-      top: 50%;
-      width: 13px;
+    &:not(.special_item)::after {
+      content: '';
+      border-top: 2px solid hsl(0, 0%, 37%);
+      top: .78em;
+      width: 14px;
     }
-    &:nth-last-of-type(1)::before {
+    &:nth-last-of-type(1):not(.special_item)::before {
       top: 0;
-      bottom: 50%;
+      height: .78em;
     }
   }
 }
