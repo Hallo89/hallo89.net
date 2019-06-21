@@ -110,7 +110,7 @@
               }
             },
             {
-              "version": "0.1.3",
+              "version": "0.1.0",
               "description": "The duration after how long the value tooltip should vanish when the slider hasn't been interacted with",
               "attributes": {
                 "type": "number",
