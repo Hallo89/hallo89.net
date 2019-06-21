@@ -384,6 +384,24 @@ main h4 {
   border-bottom: 4px solid hsl(0, 0%, 20%);
   flex: 1;
 }
+.list_item.version_item .indicator .indicator_item.new {
+  border-color: #243F32;
+}
+.list_item.version_item .indicator .indicator_item.new > strong::before {
+  background-color: #243F32;
+}
+.list_item.version_item .indicator .indicator_item.current {
+  border-color: #20404B;
+}
+.list_item.version_item .indicator .indicator_item.current > strong::before {
+  background-color: #20404B;
+}
+.list_item.version_item .indicator .indicator_item.incompatible {
+  border-color: #993D3A;
+}
+.list_item.version_item .indicator .indicator_item.incompatible > strong::before {
+  background-color: #993D3A;
+}
 .list_item.version_item .indicator .indicator_item.active > strong::before {
   height: 100%;
   opacity: 0.35;

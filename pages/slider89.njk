@@ -138,10 +138,10 @@
                   <div class="indicator">
                     {% if propVal | isArray %}
                       {%- for ver in propVal -%}
-                      <span class="indicator_item v{{ver.version | replace('.', '_')}} {{- ' active' if loop.first}} noselect"><strong>{{ ver.version }}</strong></span>
+                      <span class="indicator_item v{{ver.version | replace('.', '_')}} {{- ' active' if loop.first}} {{- ' new' if 'v' + ver.version == gitData[0].tag_name}} noselect"><strong>{{ ver.version }}</strong></span>
                       {%- endfor -%}
                     {% else %}
-                      <span class="indicator_item v{{propVal.version | replace('.', '_')}} active noselect"><strong>{{ propVal.version }}</strong></span>
+                      <span class="indicator_item v{{propVal.version | replace('.', '_')}} active {{- ' new' if 'v' + propVal.version == gitData[0].tag_name}} noselect"><strong>{{ propVal.version }}</strong></span>
                     {% endif %}
                   </div>
                   {% if propVal | isArray %}
@@ -228,52 +228,88 @@
     </main>
 
     <script>
+      const h4s = document.getElementsByTagName('h4');
       const versionSwitch = document.querySelector('.version_select');
       const vSwitchBtns = versionSwitch.querySelectorAll('button');
       const copyBtns = document.querySelectorAll('.code_copy_wrapper .copy_btn');
       const indicatorItems = document.querySelectorAll('.list_item.version_list .indicator .indicator_item');
-      const h4s = document.getElementsByTagName('h4');
+      const versionItems = document.getElementsByClassName('version_item');
+
+      const newestVer = formatVersion(vSwitchBtns[0].textContent);
 
       for (let i = 0; i < indicatorItems.length; i++) indicatorItems[i].addEventListener('click', switchCardVersion);
       for (let i = 0; i < h4s.length; i++) h4s[i].addEventListener('click', toggleCollapsible);
-      for (let i = 0; i < vSwitchBtns.length; i++) vSwitchBtns[i].addEventListener('click', switchGlobalVersion);
+      for (let i = 0; i < vSwitchBtns.length; i++) vSwitchBtns[i].addEventListener('click', switchGlbVersion);
       for (let i = 0; i < copyBtns.length; i++) copyBtns[i].addEventListener('click', copyCode);
 
       function switchCardVersion() {
         if (this.classList.contains('active')) return;
         const version = this.classList[1];
         const vProps = this.parentNode.parentNode.querySelectorAll('.versions .prop_version');
-        let clickPos;
         for (let i = 0; i < vProps.length; i++) {
           if (vProps[i].classList.contains(version)) {
-            clickPos = i;
+            var clickPos = i;
             break;
           }
         }
-        let clickHeight = vProps[clickPos].clientHeight;
-        for (let i = 0; i < vProps.length; i++) {
-          if (clickPos > i) {
-            vProps[i].classList.add('left');
-            vProps[i].classList.remove('right');
-          } else if (clickPos < i) {
-            vProps[i].classList.add('right');
-            vProps[i].classList.remove('left');
+        changePropVersion(vProps, clickPos, this);
+      }
+
+      function switchGlbVersion() {
+        if (this.classList.contains('active')) return;
+        versionSwitch.querySelector('button.active').classList.remove('active');
+        this.classList.add('active');
+        //e.g 0.2.0 becomes 1020
+        const selectVer = formatVersion(this.textContent);
+        for (let i = 0; i < versionItems.length; i++) {
+          const indicChilds = versionItems[i].children[1].children;
+          let propLock = false;
+          for (let n = 0; n < indicChilds.length; n++) {
+            const ver = formatVersion(indicChilds[n].classList[1]);
+            indicChilds[n].classList.remove('current');
+            indicChilds[n].classList.remove('incompatible');
+            if (selectVer < ver) {
+              indicChilds[n].classList.add('incompatible');
+            } else if (selectVer == ver && ver != newestVer) {
+              indicChilds[n].classList.add('current');
+            }
+            if (selectVer >= ver && !propLock) {
+              changePropVersion(versionItems[i].children[2].children, n, indicChilds[n]);
+              propLock = true;
+            }
           }
-          if (vProps[i].classList.contains('active')) {
-            vProps[clickPos].setAttribute('style', 'height:' + vProps[i].clientHeight + 'px');
-            vProps[i].classList.remove('active');
-          } else if (i == clickPos) {
-            vProps[i].classList.add('active');
+        }
+      }
+
+      function formatVersion(ver) {
+        return parseInt('1' + ver.slice(1).replace(/[_\.]/g, ''));
+      }
+
+      function changePropVersion(props, target, indicator) {
+        const clickHeight = props[target].clientHeight;
+        for (let i = 0; i < props.length; i++) {
+          if (target > i) {
+            props[i].classList.add('left');
+            props[i].classList.remove('right');
+          } else if (target < i) {
+            props[i].classList.add('right');
+            props[i].classList.remove('left');
+          }
+          if (props[i].classList.contains('active')) {
+            props[target].setAttribute('style', 'height:' + props[i].clientHeight + 'px');
+            props[i].classList.remove('active');
+          } else if (i == target) {
+            props[i].classList.add('active');
           }
         }
         setTimeout(function() {
-          vProps[clickPos].setAttribute('style', 'height:' + clickHeight + 'px');
+          props[target].setAttribute('style', 'height:' + clickHeight + 'px');
           setTimeout(function() {
-            vProps[clickPos].setAttribute('style', '');
+            props[target].setAttribute('style', '');
           }, 125);
         }, 20);
-        this.parentNode.querySelector('.indicator_item.active').classList.remove('active');
-        this.classList.add('active');
+        indicator.parentNode.querySelector('.indicator_item.active').classList.remove('active');
+        indicator.classList.add('active');
       }
 
       function copyCode() {
@@ -299,13 +335,6 @@
         setTimeout(function() {
           that.classList.remove('active');
         }, 900);
-      }
-
-      function switchGlobalVersion() {
-        if (!this.classList.contains('active')) {
-          versionSwitch.querySelector('button.active').classList.remove('active');
-          this.classList.add('active');
-        }
       }
 
       function toggleCollapsible(e) {
