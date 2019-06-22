@@ -385,22 +385,22 @@ main h4 {
   flex: 1;
 }
 .list_item.version_item .indicator .indicator_item.new {
-  border-color: #243F32;
+  border-color: #214031;
 }
 .list_item.version_item .indicator .indicator_item.new > strong::before {
-  background-color: #243F32;
+  background-color: #214031;
 }
 .list_item.version_item .indicator .indicator_item.current {
-  border-color: #20404B;
+  border-color: #1f4252;
 }
 .list_item.version_item .indicator .indicator_item.current > strong::before {
-  background-color: #20404B;
+  background-color: #1f4252;
 }
 .list_item.version_item .indicator .indicator_item.incompatible {
-  border-color: #993D3A;
+  border-color: #983838;
 }
 .list_item.version_item .indicator .indicator_item.incompatible > strong::before {
-  background-color: #993D3A;
+  background-color: #983838;
 }
 .list_item.version_item .indicator .indicator_item.active > strong::before {
   height: 100%;
