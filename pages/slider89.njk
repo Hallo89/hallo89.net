@@ -216,7 +216,7 @@
               {% set presets = categoryVal.presets -%}
               <div class="list_section" id="{{ categoryID }}">
                 <h4>
-                  <span>{{ category | e | argondry | safe }}</span>
+                  <span>{{ category | e | argonize | safe }}</span>
                   <button class="expand_button {{-' active' if categoryVal.collapsed == true}}">
                     <div class="symbols">
                       <span class="symbol plus">+</span>
