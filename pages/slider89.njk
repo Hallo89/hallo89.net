@@ -14,9 +14,9 @@
     <nav id="id_nav">
       <a href="#what">What is this?</a>
       <a href="#starting">Getting started</a>
-      <a href="#properties">Properties</a>
-      <a href="#functions">Methods</a>
-      <a href="#structure">HTML & CSS structure</a>
+      <a href="#Properties">Properties</a>
+      <a href="#Methods">Methods</a>
+      <a href="#HTML">HTML & CSS structure</a>
     </nav>
     {%- endcall %}
     <main>
@@ -120,7 +120,7 @@
           <strong>Version-select: </strong>
           <span class="version_buttons">
             {%- for version in gitData -%}
-              <button class="{{ version.tag_name | replace('.', '_') }} {{- ' active' if loop.first}}" type="button">{{ version.tag_name }}</button>
+              <button class="{{ version.tag_name | dotSnake }} {{- ' active' if loop.first}}" type="button">{{ version.tag_name }}</button>
             {%- endfor -%}
           </span>
         </div>
@@ -132,34 +132,35 @@
           <dl class="doc_list">
             {%- for value, propVal in values -%}
               {# Property (min, max, etc.), [description, attributes, definitions] #}
+              {% set propID = value | argondry | functName | kebab %}
               {% if (propVal | isArray) or (propVal.version) -%} {# If the property has one or more versions #}
-                <div id="{{ value | kebab }}" class="list_item version_item {{- ' version_list' if not propVal.version}}">
-                  <dt><a href="#{{ value | kebab }}"><code>{{ value | e | argonize | safe }}</code></a></dt>
+                <div id="{{ propID }}" class="list_item version_item {{- ' version_list' if not propVal.version}}">
+                  <dt><a href="#{{ propID }}"><code>{{ value | e | argonize | safe }}</code></a></dt>
                   <div class="indicator">
                     {% if propVal | isArray %}
                       {%- for ver in propVal -%}
-                      <span class="indicator_item v{{ver.version | replace('.', '_')}} {{- ' active' if loop.first}} {{- ' new' if 'v' + ver.version == gitData[0].tag_name}} noselect"><strong>{{ ver.version }}</strong></span>
+                      <span class="indicator_item v{{ver.version | dotSnake}} {{- ' active' if loop.first}} {{- ' new' if 'v' + ver.version == gitData[0].tag_name}} noselect"><strong>{{ ver.version }}</strong></span>
                       {%- endfor -%}
                     {% else %}
-                      <span class="indicator_item v{{propVal.version | replace('.', '_')}} active {{- ' new' if 'v' + propVal.version == gitData[0].tag_name}} noselect"><strong>{{ propVal.version }}</strong></span>
+                      <span class="indicator_item v{{propVal.version | dotSnake}} active {{- ' new' if 'v' + propVal.version == gitData[0].tag_name}} noselect"><strong>{{ propVal.version }}</strong></span>
                     {% endif %}
                   </div>
                   {% if propVal | isArray %}
                     <div class="versions">
                     {% for ver in propVal -%}
-                      <div class="prop_version v{{ver.version | replace('.', '_')}} {{- ' active' if loop.first}} {{- ' right' if not loop.first}}">
+                      <div class="prop_version v{{ver.version | dotSnake}} {{- ' active' if loop.first}} {{- ' right' if not loop.first}}">
                         {{ docItem(value, ver, presets) }}
                       </div>
                     {% endfor -%}
                     </div>
                   {% else %}
-                    <div class="v{{propVal.version | replace('.', '_')}}">
+                    <div class="v{{propVal.version | dotSnake}}">
                       {{ docItem(value, propVal, presets) }}
                     </div>
                   {% endif %}
                 </div>
               {% else -%} {# If the property doesn't have multiple versions #}
-                <div id="{{ value | kebab }}" class="list_item">
+                <div id="{{ propID }}" class="list_item">
                   {{ docItem(value, propVal, presets) }}
                 </div>
               {% endif -%}
@@ -170,7 +171,7 @@
         {%- macro docItem(name, value, presets) %}
           {% if value.version is undefined -%}
           <dt>
-            <a href="#{{ name | kebab }}"><code>{{ name | e | argonize | safe }}</code></a>
+            <a href="#{{ name | argondry | functName | kebab }}"><code>{{ name | e | argonize | safe }}</code></a>
           </dt>
           {% endif -%}
           <dd class="doc_item description">
@@ -198,21 +199,22 @@
           {# attributes #}
           {% for attr, attrVal in val.attributes %}
             <dd class="doc_item info_item">
-              {{attr}}: {{attrVal | e | separate(['\\s+OR', ','], 'code') | argonize | safe}}
+              {{attr}}: {{attrVal | e | argonize | separate(['\\s+OR', ','], 'code') | safe}}
             </dd>
           {% endfor %}
         {% endmacro -%}
 
         {% for section, sectionVal in data -%}
           {# Docs h3 (Properties, etc.), [description, categories] | in the whole json #}
-          <h3><a href="#{{ section | kebab }}" class="icon_anchor">#</a>{{ section }}</h3>
+          {% set sectionID = section | firstword %}
+          <h3 id="{{ sectionID }}"><a href="#{{ sectionID }}" class="icon_anchor">#</a>{{ section }}</h3>
           {% if sectionVal.description -%}
           <p>{{ sectionVal.description | e | argonize | safe }}</p>
           {% endif -%}
           {% if sectionVal.categories -%}
             {% for category, categoryVal in sectionVal.categories -%}
               {# Category under one section (Read only, etc.), [description, values, ...] #}
-              {% set categoryID = '#' + (section | lower | firstword) + '--' + (category | kebab) -%}
+              {% set categoryID = (section | firstword) + '--' + (category | argondry | kebab) -%}
               {% set presets = categoryVal.presets -%}
               <div class="list_section" id="{{ categoryID }}">
                 <h4>
@@ -223,7 +225,7 @@
                       <span class="symbol minus">-</span>
                     </div>
                   </button>
-                  <a href="{{ categoryID }}" class="icon_anchor">#</a>
+                  <a href="#{{ categoryID }}" class="icon_anchor">#</a>
                 </h4>
                 <div class="collapsible {{-' collapsed' if categoryVal.collapsed == true}}">
                   {% if categoryVal.description -%}

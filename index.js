@@ -18,6 +18,10 @@ njk.addFilter('argonize', function(val) {
 njk.addFilter('argondry', function(val) {
   return (val != null ? argon.parse(val.toString(), true) : val);
 });
+njk.addFilter('functName', function (val) {
+  const match = val.match(/(?:.+\s*=\s*)?(\w+)\([\d\D]*\)/);
+  return match ? match[1] : val;
+});
 njk.addFilter('isArray', function(val) {
   return Array.isArray(val);
 });
@@ -31,8 +35,10 @@ njk.addFilter('separate', function(val, exclusion, tag) {
   });
 });
 njk.addFilter('kebab', function(val) {
-  //Shortcut of two filters: | lower | replace(' ', '-')
-  return (typeof val == 'string' ? val.toLowerCase().replace(' ', '-') : val);
+  return (typeof val == 'string' ? val.replace(/\s/g, '-') : val);
+});
+njk.addFilter('dotSnake', function(val) {
+  return (typeof val == 'string' ? val.replace(/\./g, '_') : val);
 });
 njk.addGlobal('concatObj', function(objects) {
   return objects.reduce(function(prev, current) {
