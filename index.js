@@ -15,6 +15,9 @@ const njk = nunjucks.configure('pages', {
 njk.addFilter('argonize', function(val) {
   return (val != null ? argon.parse(val.toString()) : val);
 });
+njk.addFilter('argondry', function(val) {
+  return (val != null ? argon.parse(val.toString(), true) : val);
+});
 njk.addFilter('isArray', function(val) {
   return Array.isArray(val);
 });

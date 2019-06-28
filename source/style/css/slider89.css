@@ -20,6 +20,9 @@ a {
   text-decoration: none;
   color: inherit;
 }
+var {
+  font-style: italic;
+}
 #navbar h1 {
   font-size: inherit;
   font-weight: normal;
@@ -486,7 +489,7 @@ main h4 {
   position: relative;
   margin-left: 80px;
   text-indent: -20px;
-  padding: 2px 0;
+  padding: 3px 0;
 }
 .doc_list .info_item.state {
   color: #904851;

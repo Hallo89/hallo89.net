@@ -134,7 +134,7 @@
               {# Property (min, max, etc.), [description, attributes, definitions] #}
               {% if (propVal | isArray) or (propVal.version) -%} {# If the property has one or more versions #}
                 <div id="{{ value | kebab }}" class="list_item version_item {{- ' version_list' if not propVal.version}}">
-                  <dt><a href="#{{ value | kebab }}"><code>{{ value }}</code></a></dt>
+                  <dt><a href="#{{ value | kebab }}"><code>{{ value | e | argonize | safe }}</code></a></dt>
                   <div class="indicator">
                     {% if propVal | isArray %}
                       {%- for ver in propVal -%}
@@ -170,7 +170,7 @@
         {%- macro docItem(name, value, presets) %}
           {% if value.version is undefined -%}
           <dt>
-            <a href="#{{ name | kebab }}"><code>{{ name }}</code></a>
+            <a href="#{{ name | kebab }}"><code>{{ name | e | argonize | safe }}</code></a>
           </dt>
           {% endif -%}
           <dd class="doc_item description">
@@ -216,7 +216,7 @@
               {% set presets = categoryVal.presets -%}
               <div class="list_section" id="{{ categoryID }}">
                 <h4>
-                  <span>{{ category | e | argonize | safe }}</span>
+                  <span>{{ category | e | argondry | safe }}</span>
                   <button class="expand_button {{-' active' if categoryVal.collapsed == true}}">
                     <div class="symbols">
                       <span class="symbol plus">+</span>
