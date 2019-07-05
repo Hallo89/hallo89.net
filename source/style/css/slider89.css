@@ -444,7 +444,7 @@ main h4 {
   transform: scale(0.98);
 }
 .list_item.version_list .indicator .indicator_item.active > strong::before {
-  transform: scale(0.955);
+  transform: scale(0.96);
 }
 .list_item.version_list .indicator .indicator_item.active:hover > strong::before {
   opacity: 0.45;
