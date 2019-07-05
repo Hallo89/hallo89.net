@@ -89,11 +89,13 @@ get('tools/spacing');
 get('webgl/triangles');
 get('webgl/matrices3d');
 
-const data = require('./source/resources/slider89/docs.json');
+const jsonData = require('./source/resources/slider89/docs.json');
+let gitData = [];
+fetch('https://api.github.com/repos/Hallo89/Slider89/releases')
+  .then(res => res.json())
+  .then(data => {
+    gitData = data;
+  });
 app.get('/slider89', function(req, res) {
-  fetch('https://api.github.com/repos/Hallo89/Slider89/releases')
-    .then(res => res.json())
-    .then(gitData => {
-      res.render('slider89', {page: 'slider89', data: data, gitData: gitData})
-    });
+  res.render('slider89', {page: 'slider89', data: jsonData, gitData: gitData});
 });
