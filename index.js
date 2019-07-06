@@ -8,6 +8,10 @@ app.listen(8000, function() {
   console.log("Listening on port 8000!");
 });
 
+argon.addFlag(['f', 'first'], function(val) {
+  return val.slice(0, val.indexOf(' '));
+}, true);
+
 const njk = nunjucks.configure('pages', {
   express: app
 });

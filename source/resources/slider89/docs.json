@@ -1,6 +1,6 @@
 {
   "Properties": {
-    "description": "These are the key to reading values from the slider and defining its properties./br!//Every property's value is accessed using code{//<sliderInstance>.<property>//}",
+    "description": "These are the key to reading values from the slider and defining its properties./br!//Every property's value is accessed using code//<sliderInstance>.<property>",
     "categories": {
       "Configuration properties": {
         "description": "Define the slider's configuration as properties of an object passed as a parameter into a#Methods{//various functions//}.",
@@ -54,10 +54,10 @@
             }
           },
           "classList": {
-            "description": "An array containing CSS classes to be added to the slider's top-level element in its a#HTML-structure{//HTML structure//}",
+            "description": "An array containing CSS classes to be added to the slider's top-level element in its a#{//HTML structure//}",
             "attributes": {
               "type": "array<string>",
-              "influencing": "a#HTML-structure{//HTML structure//}",
+              "influencing": "a#{//HTML structure//}",
               "default": "[]"
             }
           },
@@ -78,10 +78,10 @@
           },
           "structure": {
             "version": "0.2.0",
-            "description": "An XML-like format resulting in the final a#HTML-structure{//HTML structure//} of the slider./br!//(For now) necessary tags: code//<wrapper>, code//<knob>, code//<tooltip>, code//<caption>, where every tag except code//wrapper is a non-closing one-line tag./br!//Definition of attributes: inside a tag, code{//[!]attributeName(value1[, value2[, ...]])//}, where an exclamation mark in front of the attribute overwrites potential library-side pre-defined values./br!//Custom elements can be inserted anywhere. They need to have a unique name and their tag type (div, etc.) can be declared after their name./br!//Inner text content is created by simply placing it inside the tag at the end in quotation marks./br!//Example: pre:class(codeblock)+code{//<caption !class(input_header)>\n<text span class(char_info, default) \"Text appearing inside the element\">\n<wrapper class(input)>\n  <knob style(height: 50px)>\n  <tooltip>\n</wrapper>//}",
+            "description": "An XML-like format resulting in the final a#{//HTML structure//} of the slider./br!//(For now) necessary tags: code//<wrapper>, code//<knob>, code//<tooltip>, code//<caption>, where every tag except code//wrapper is a non-closing one-line tag./br!//Definition of attributes: inside a tag, code{//[!]attributeName(value1[, value2[, ...]])//}, where an exclamation mark in front of the attribute overwrites potential library-side pre-defined values./br!//Custom elements can be inserted anywhere. They need to have a unique name and their tag type (div, etc.) can be declared after their name./br!//Inner text content is created by simply placing it inside the tag at the end in quotation marks./br!//Example: pre:class(codeblock)+code{//<caption !class(input_header)>\n<text span class(char_info, default) \"Text appearing inside the element\">\n<wrapper class(input)>\n  <knob style(height: 50px)>\n  <tooltip>\n</wrapper>//}",
             "attributes": {
               "type": "string",
-              "influencing": "a#HTML-structure{//HTML structure//}",
+              "influencing": "a#{//HTML structure//}",
               "default": "'<wrapper><knob><tooltip></wrapper><caption>'"
             }
           },
@@ -94,7 +94,7 @@
             }
           },
           "trimComma": {
-            "description": "If true, the a#{//value//}'s decimal places are culled if they are 0. This is an aesthetic property coming handy at the value-displaying tooltip./br!//Example: 6.000 is trimmed to 6",
+            "description": "If true, the a#//value|'s decimal places are culled if they are 0. This is an aesthetic property coming handy at the value-displaying tooltip./br!//Example: 6.000 is trimmed to 6",
             "attributes": {
               "type": "boolean",
               "default": "true"
@@ -140,7 +140,7 @@
           "element": [
             {
               "version": "0.2.0",
-              "description": "An object containing all nodes of the final a#HTML-structure{//HTML structure//} after the slider instance's initialization",
+              "description": "An object containing all nodes of the final a#{//HTML structure//} after the slider instance's initialization",
               "attributes": {
                 "type": "object<HTMLnodes>",
                 "influences": "a#//buildElement",
@@ -149,7 +149,7 @@
             },
             {
               "version": "0.1.0",
-              "description": "The top-level HTML element (see a#HTML-structure{//HTML structure//} of the final slider instance after initialization",
+              "description": "The top-level HTML element (see a#{//HTML structure//}) of the final slider instance after initialization",
               "attributes": {
                 "type": "HTMLnode",
                 "influences": "a#//buildElement",
@@ -175,7 +175,7 @@
             }
           },
           "tipTimer": {
-            "description": "The current code//Timeout instance of the value tooltip timer (see a#{//tipDuration//}) which is terminated when the slider is dragged anew while a previous timeout instance was still running",
+            "description": "The current code//Timeout instance of the value tooltip timer (see a#//tipDuration) which is terminated when the slider is dragged anew while a previous timeout instance was still running",
             "attributes": {
               "type": "Timeout",
               "influences": "a#//executeSlider, a#//tipDuration",
@@ -190,11 +190,11 @@
     "categories": {
       "Constructor": {
         "values": {
-          "var//sliderInstance = Slider89(var{//targetNode//}[, var{//configProperties//}])": {
+          "var//sliderInstance = Slider89(var//targetNode[, var//configProperties])": {
             "description": "The code//Slider89 class and its constructor; initialize a slider instance by using the code//new keyword in front of it and binding it to a variable./br!//Example: div:class(codeblock)+code{//const mySlider = new Slider89(someElement);//} A more advanced example with a configured slider: pre:class(codeblock)+code{//const mySlider = new Slider89(someElement, {\n  max: 400,\n  value: 300,\n  replaceNode: true\n});//}",
             "definitions": {
               "targetNode": "i{//DOM node//}: Creation target of the slider instance",
-              "configProperties": "i{//object//}: a#Properties--Configuration-properties{//Configuration properties//}"
+              "configProperties": "i//object: a#Properties--${//Configuration properties//}"
             },
             "attributes": {
               "influences": "code+a#//replaceNode"
@@ -205,26 +205,26 @@
       "Instance functions": {
         "description": "Functions under this category are called on a slider instance",
         "values": {
-          "var//sliderInstance.newValues(var{//configProperties//})": {
-            "description": "This function restructures the slider it was called on with configuration properties given as a parameter./br!//Although properties strong//could be overriden using code{//i//sliderInstance.i//configProperty = i//newValue//}, this function ensures every dependent and dependency is restructured as well. For example, it writes a new caption into the element, it sets a new width of the element, etc./br!//Additionally, if code//min or code//max is changed, the code+a#//value recomputes itself based on the previous min-max-ratio/br!//In the future, I may find a way to deprecate this function",
+          "var//sliderInstance|.newValues(var//configProperties)": {
+            "description": "This function restructures the slider it was called on with configuration properties given as a parameter./br!//Although properties strong//could be overriden using code{//var//sliderInstance|.var//configProperty = var//newValue//}, this function ensures every dependent and dependency is restructured as well. For example, it writes a new caption into the element, it sets a new width of the element, etc./br!//Additionally, if code//min or code//max is changed, the code+a#//value recomputes itself based on the previous min-max-ratio/br!//In the future, I may find a way to deprecate this function",
             "definitions": {
               "sliderInstance": "A i{//slider instance//} (see the code+a#//Slider89 constructor)",
-              "configProperties": "i{//object//}: a#Properties--Configuration-properties{//Configuration properties//}"
+              "configProperties": "i//object: a#Properties--${//Configuration properties//}"
             },
             "attributes": {
-              "influences": "a#Properties--Configuration-properties{//Configuration properties//}"
+              "influences": "a#Properties--${//Configuration properties//}"
             }
           }
         }
       },
       "The code//slider89 object": {
-        "description": "'code//slider89' (take notice that it's a lowercase \"s\"!) is a standalone object used for functions which are called without a reference to a slider instance",
+        "description": "'code//slider89|' (take notice that it's a lowercase \"s\"!) is a standalone object used for functions which are called without a reference to a slider instance",
         "values": {
           "slider89.defaultValues(var//configProperties)": {
             "description": "Called before a slider is created, it sets default configuration properties implicitly applied to every afterwards created slider instance",
             "definitions": {
               "slider89": "A standalone i//object storing global values",
-              "configProperties": "i{//object//}: a#Properties--Configuration-properties{//Configuration properties//}"
+              "configProperties": "i//object: a#Properties--${//Configuration properties//}"
             }
           }
         }
@@ -236,45 +236,45 @@
           "state": "INTERNAL"
         },
         "values": {
-          "var//element = var//sliderInstance.buildElement(var//targetNode, var{//replaceNode//})": [
+          "var//element = var//sliderInstance|.buildElement(var//targetNode, var//replaceNode)": [
             {
               "version": "0.2.0",
-              "description": "Builds the slider's a#HTML-structure{//HTML structure//} into the specified code//targetNode, adding additional classes from the code+a#//classList property, if present. If code+a#//replaceNode is true, it replaces code//targetNode (acquired from code+a#{//Slider89//})./br!//The object containing all HTML elements of the final a#HTML-structure{//HTML structure//} (acquired from code+a#{//parseHTML//}) is returned to be written into code+a#//element",
+              "description": "Builds the slider's a#{//HTML structure//} into the specified code//targetNode, adding additional classes from the code+a#//classList property, if present. If code+a#//replaceNode is true, it replaces code//targetNode (acquired from code+a#//Slider89)./br!//The object containing all HTML elements of the final a#{//HTML structure//} (acquired from code+a#//parseHTML) is returned to be written into code+a#//element",
               "definitions": {
-                "element": "i{//object//}: The code+a#//element property",
+                "element": "i//object: The code+a#//element property",
                 "targetNode": "The i{//DOM node//} the slider is created in (see a#slider89{//constructor//})",
-                "replaceNode": "i{//boolean//}: The config property code+a#//replaceNode"
+                "replaceNode": "i//boolean: The config property code+a#//replaceNode"
               },
               "attributes": {
                 "influences": "a#//replaceNode, a#//parseHTML, a#//classList",
-                "influencing": "a#HTML-structure{//HTML structure//}, a#//element"
+                "influencing": "a#{//HTML structure//}, a#//element"
               }
             },
             {
               "version": "0.1.0",
-              "description": "Builds the slider's a#HTML-structure{//HTML structure//} into the specified code//targetNode, adding additional classes from the code+a#//classList property, if present. If code+a#//replaceNode is true, it replaces code//targetNode./br!//The function returns the created element to be written into a variable (-> code+a#{//element//})",
+              "description": "Builds the slider's a#{//HTML structure//} into the specified code//targetNode, adding additional classes from the code+a#//classList property, if present. If code+a#//replaceNode is true, it replaces code//targetNode|./br!//The function returns the created element to be written into a variable (-> code+a#{//element//})",
               "definitions": {
-                "element": "i{//object//}: The code+a#//element property",
+                "element": "i//object: The code+a#//element property",
                 "targetNode": "The first parameter of the a#Slider89//constructor, the i{//DOM element//} the slider is created in",
-                "replaceNode": "i{//boolean//}: The config property code+a#//replaceNode"
+                "replaceNode": "i//boolean: The config property code+a#//replaceNode"
               },
               "attributes": {
                 "influences": "a#//replaceNode, a#//classList",
-                "influencing": "a#HTML-structure{//HTML structure//}, a#//element"
+                "influencing": "a#{//HTML structure//}, a#//element"
               }
             }
           ],
-          "var//sliderInstance.executeSlider(var//clickedCoordinate)": {
-            "description": "This function is executed every time the code//mousemove event, and more specifically the code+a#//mouseMove function, is fired and handles the value, tooltip, specified code+a#{//task//}/code+a#//taskMouseUp function, etc.",
+          "var//sliderInstance|.executeSlider(var//clickedCoordinate)": {
+            "description": "This function is executed every time the code//mousemove event, and more specifically the code+a#//mouseMove function, is fired and handles the value, tooltip, specified code+a#//task|/code+a#//taskMouseUp function, etc.",
             "definitions": {
-              "clickedCoordinate": "i{//int//}: A screen-related x-coordinate where the mouse has been clicked"
+              "clickedCoordinate": "i//int: A screen-related x-coordinate where the mouse has been clicked"
             },
             "attributes": {
               "influences": "a#//element, a#//task",
               "influencing": "a#//value, a#//tipTimer, a#//taskLock"
             }
           },
-          "var//result = var//sliderInstance.checkTask(var{//task//})": [
+          "var//result = var//sliderInstance|.checkTask(var//task)": [
             {
               "version": "0.1.1",
               "description": "A function evaluating whether a handed-over code//task is valid:/br!//If it is, plainly return it without doing anything, if not, for example because it has been declared em//with parentheses (which Javascript cannot explicitly check), throw an error into the console and return code//false",
@@ -288,9 +288,9 @@
             },
             {
               "version": "0.1.0",
-              "description": "MODIFIED FUNCTION. A function evaluating whether an input code+a#//task, which is also handed over into this function, is valid. If it is, write it into the specified code{//objectTarget//}/br!//If the task is no valid function, for example declared em//with parentheses, throw an error into the console",
+              "description": "MODIFIED FUNCTION. A function evaluating whether an input code+a#//task, which is also handed over into this function, is valid. If it is, write it into the specified code//objectTarget|/br!//If the task is no valid function, for example declared em//with parentheses, throw an error into the console",
               "definitions": {
-                "objectTarget": "The i//object to write into; either the slider instance (see a#Slider89{//constructor//}) or the code+a#Methods--The-slider89-object{//slider89 object//}",
+                "objectTarget": "The i//object to write into; either the slider instance (see a#Slider89//constructor) or the code+a#Methods--The-${//slider89 object//}",
                 "task": "i{//function reference//}: One of a#//task and a#//taskMouseUp"
               },
               "attributes": {
@@ -298,13 +298,13 @@
               }
             }
           ],
-          "var//finalWidth = var//sliderInstance.computeWidth(var{//width//})": [
+          "var//finalWidth = var//sliderInstance|.computeWidth(var//width)": [
             {
               "version": "0.1.1",
               "description": "If code//width is code//'auto', compute the width automatically based on code+a#//min and code+a#//max, if it isn't, only take code+a#//absWidth into account",
               "definitions": {
-                "finalWidth": "i{//int//}: The final computed width of the passed width",
-                "width": "i{//int//}: The width to be computed"
+                "finalWidth": "i//int: The final computed width of the passed width",
+                "width": "i//int: The width to be computed"
               },
               "attributes": {
                 "influences": "a#//min, a#//max, a#//absWidth",
@@ -313,10 +313,10 @@
             },
             {
               "version": "0.1.0",
-              "description": "MODIFIED FUNCTION - var//width is here a var//valueObject. If the code{//valueObject//}'s code+a#//width is code//'auto', compute the width automatically based on code+a#//min and code+a#//max, if it isn't, only take code+a#//absWidth into account",
+              "description": "MODIFIED FUNCTION - var//width is here a var//valueObject. If the code//valueObject|'s code+a#//width is code//'auto', compute the width automatically based on code+a#//min and code+a#//max, if it isn't, only take code+a#//absWidth into account",
               "definitions": {
                 "finalWidth": "An i//int representing the final computed width of the given width",
-                "valueObject": "i{//object//}: a#Properties--Configuration-properties{//Configuration properties//} carrying a code+a#//width value"
+                "valueObject": "i//object: a#Properties--${//Configuration properties//} carrying a code+a#//width value"
               },
               "attributes": {
                 "influences": "a#//min, a#//max, a#//absWidth",
@@ -324,19 +324,19 @@
               }
             }
           ],
-          "var//htmlNodes = var//sliderInstance.parseHTML(var{//structure//})": {
+          "var//htmlNodes = var//sliderInstance|.parseHTML(var//structure)": {
             "version": "0.2.0",
             "description": "This function will parse a given code+a#//structure into valid HTML, taking every attribute, inner text content etc. into account./br!//It will return every created HTML node in an object, with the in the structure specified tag name as object name",
             "definitions": {
-              "htmlNodes": "i{//object//}: All DOM nodes of the final a#HTML-structure{//HTML structure//} of the slider instance",
-              "structure": "i{//string//}: The final a#HTML-structure{//HTML structure//} of the instance -> code+a#//structure"
+              "htmlNodes": "i//object: All DOM nodes of the final a#{//HTML structure//} of the slider instance",
+              "structure": "i//string: The final a#{//HTML structure//} of the instance -> code+a#//structure"
             },
             "attributes": {
               "influences": "a#//structure",
-              "influencing": "a#//buildElement, a#HTML-structure{//HTML structure//}"
+              "influencing": "a#//buildElement, a#{//HTML structure//}"
             }
           },
-          "var//sliderInstance.mouseMove(var{//event//})": {
+          "var//sliderInstance|.mouseMove(var//event)": {
             "description": "Is executed by the mousemove event, being its own function for the ability to remove the event listener afterwards, and executing code+a#//executeSlider, passing the parameter of the event.",
             "definitions": {
               "event": "The i//event parameter handed over by the event listener"
@@ -347,7 +347,7 @@
     }
   },
   "HTML & CSS structure": {
-    "description": "As of version code{//0.2.0//} (with the introduction of the code+a#structure{//structure system//}), CSS has been split into two sections: crucial and non-crucial. Crucial CSS is declared with a strict code{//.slider89 .slider_{sliderPart}//}, whereas uncrucial styles are matched with the new class code{//.slider89_{sliderPart}//}. This ensures a good ability to style the slider without the user having to nest their selectors to overcome the strict selectors.",
+    "description": "As of version code//0.2.0 (with the introduction of the code+a#${f}{//structure system//}), CSS has been split into two sections: crucial and non-crucial. Crucial CSS is declared with a strict code{//.slider89 .slider_{sliderPart}//}, whereas uncrucial styles are matched with the new class code{//.slider89_{sliderPart}//}. This ensures a good ability to style the slider without the user having to nest their selectors to overcome the strict selectors.",
     "values": {
       "HTML structure": [
         {
