@@ -274,30 +274,31 @@
               "influencing": "a#//value, a#//tipTimer, a#//taskLock"
             }
           },
-          "var//result = var//sliderInstance|.checkTask(var//task)": [
-            {
-              "version": "0.1.1",
-              "description": "A function evaluating whether a handed-over code//task is valid:/br!//If it is, plainly return it without doing anything, if not, for example because it has been declared em//with parentheses (which Javascript cannot explicitly check), throw an error into the console and return code//false",
-              "definitions": {
-                "result": "The passed i//task if the evaluation was successful or i+code//false",
-                "task": "i{//function reference//}: One of a#//task and a#//taskMouseUp"
-              },
-              "attributes": {
-                "influencing": "a#//task, a#//taskMouseUp"
-              }
+          "var//result = var//sliderInstance|.checkTask(var//task)": {
+            "version": "0.1.1",
+            "version_predecessor": "a#//setTask",
+            "description": "A function evaluating whether a handed-over code//task is valid:/br!//If it is, plainly return it without doing anything, if not, for example because it has been declared em//with parentheses (which Javascript cannot explicitly check), throw an error into the console and return code//false",
+            "definitions": {
+              "result": "The passed i//task if the evaluation was successful or i+code//false",
+              "task": "i{//function reference//}: One of code+a#//task and code+a#//taskMouseUp"
             },
-            {
-              "version": "0.1.0",
-              "description": "MODIFIED FUNCTION. A function evaluating whether an input code+a#//task, which is also handed over into this function, is valid. If it is, write it into the specified code//objectTarget|/br!//If the task is no valid function, for example declared em//with parentheses, throw an error into the console",
-              "definitions": {
-                "objectTarget": "The i//object to write into; either the slider instance (see a#Slider89//constructor) or the code+a#Methods--The-${//slider89 object//}",
-                "task": "i{//function reference//}: One of a#//task and a#//taskMouseUp"
-              },
-              "attributes": {
-                "influencing": "a#//task"
-              }
+            "attributes": {
+              "influencing": "a#//task, a#//taskMouseUp"
             }
-          ],
+          },
+          "var//sliderInstance|.setTask(var//target, var//task)": {
+            "version": "0.1.0",
+            "version_modifier": "deprecated",
+            "version_successor": "a#//checkTask",
+            "description": "A function evaluating whether a handed-over code+a#//task is valid. If it is, write it into the specified code//objectTarget (Either code+a#//Slider89 or the code+a#Methods--The-${//slider89 object//})/br!//If the task is no valid function, for example declared em//with parentheses, throw an error into the console",
+            "definitions": {
+              "objectTarget": "The i//object to write into; either the slider instance (see a#Slider89//constructor) or the code+a#Methods--The-${//slider89 object//}",
+              "task": "i{//function reference//}: One of code+a#//task and code+a#//taskMouseUp"
+            },
+            "attributes": {
+              "influencing": "a#//task"
+            }
+          },
           "var//finalWidth = var//sliderInstance|.computeWidth(var//width)": [
             {
               "version": "0.1.1",
@@ -347,7 +348,7 @@
     }
   },
   "HTML & CSS structure": {
-    "description": "As of version code//0.2.0 (with the introduction of the code+a#${f}{//structure system//}), CSS has been split into two sections: crucial and non-crucial. Crucial CSS is declared with a strict code{//.slider89 .slider_{sliderPart}//}, whereas uncrucial styles are matched with the new class code{//.slider89_{sliderPart}//}. This ensures a good ability to style the slider without the user having to nest their selectors to overcome the strict selectors.",
+    "description": "As of version code//0.2.0 (with the introduction of the code+a#(${f}){//structure system//}), CSS has been split into two sections: crucial and non-crucial. Crucial CSS is declared with a strict code{//.slider89 .slider_{sliderPart}//}, whereas uncrucial styles are matched with the new class code{//.slider89_{sliderPart}//}. This ensures a good ability to style the slider without the user having to nest their selectors to overcome the strict selectors.",
     "values": {
       "HTML structure": [
         {
