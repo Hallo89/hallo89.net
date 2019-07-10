@@ -128,20 +128,20 @@
 
         <hr>
 
-        {% macro indicatorVer(verObj, active = true) %}
-          {% set displayVer = ('UNTIL ' if verObj.version_modifier == 'deprecated') + verObj.version %}
+        {%- macro indicatorVer(verObj, active = true) %}
+          {% set displayVer = ('UNTIL ' if verObj.version_modifier == 'deprecated') + verObj.version -%}
           <span class="indicator_item v{{verObj.version | dotSnake}}
             {{- ' active' if active}}
             {{- ' new' if 'v' + verObj.version == gitData[0].tag_name}}
             {{- ' incompatible' if verObj.version_modifier == 'deprecated' and compareVer('v' + verObj.version, gitData[0].tag_name) == 'smaller' }}
             {{- ' deprecate' if verObj.version_modifier == 'deprecated' }} noselect"><strong>{{ displayVer }}</strong></span>
-        {% endmacro %}
+        {% endmacro -%}
 
-        {% macro propList(values, presets) %}
+        {%- macro propList(values, presets) -%}
           <dl class="doc_list">
             {%- for value, propVal in values -%}
               {# Property (min, max, etc.), [description, attributes, definitions] #}
-              {% set propID = value | argondry | functName | kebab %}
+              {% set propID = value | argondry | functName | kebab -%}
               {% if (propVal | isArray) or (propVal.version) -%} {# If the property has one or more versions #}
                 <div id="{{ propID }}" class="list_item version_item {{- ' version_list' if not propVal.version}}">
                   <dt><a href="#{{ propID }}"><code>{{ value | e | argonize | safe }}</code></a></dt>
@@ -150,11 +150,11 @@
                       {%- for ver in propVal -%}
                         {{ indicatorVer(ver, loop.first) }}
                       {%- endfor -%}
-                    {% else %}
+                    {% else -%}
                       {{ indicatorVer(propVal) }}
-                    {% endif %}
+                    {% endif -%}
                   </div>
-                  {% if propVal | isArray %}
+                  {% if propVal | isArray -%}
                     <div class="versions">
                     {% for ver in propVal -%}
                       <div class="prop_version v{{ver.version | dotSnake}} {{- ' active' if loop.first}} {{- ' right' if not loop.first}}">
@@ -162,11 +162,11 @@
                       </div>
                     {% endfor -%}
                     </div>
-                  {% else %}
+                  {% else -%}
                     <div class="v{{propVal.version | dotSnake}}">
                       {{ docItem(value, propVal, presets) }}
                     </div>
-                  {% endif %}
+                  {% endif -%}
                 </div>
               {% else -%} {# If the property doesn't have multiple versions #}
                 <div id="{{ propID }}" class="list_item">
@@ -177,36 +177,36 @@
           </dl>
         {% endmacro -%}
 
-        {%- macro docItem(name, value, presets) %}
+        {%- macro docItem(name, value, presets) -%}
           {% if value.version is undefined -%}
           <dt>
             <a href="#{{ name | argondry | functName | kebab }}"><code>{{ name | e | argonize | safe }}</code></a>
           </dt>
-          {% endif %}
-          {% if value.version_modifier %}
-            {% if value.version_modifier == 'deprecated' %}
+          {% endif -%}
+          {% if value.version_modifier -%}
+            {% if value.version_modifier == 'deprecated' -%}
               <div class="doc_item version_notice {{- ' active' if compareVer('v' + value.version, gitData[0].tag_name) == 'smaller' }}">Deprecated since {{ value.version | incrVer(gitData) }}{{ (' in favor of <code>' + value.version_successor | e | argonize + '</code>') | safe if value.version_successor }}</div>
-            {% endif %}
-          {% endif %}
+            {% endif -%}
+          {% endif -%}
           <dd class="doc_item description">
             {{ value.description | e | argonize | safe }}
           </dd>
-          {% set val = concatObj([presets, value]) %}
+          {%- set val = concatObj([presets, value]) -%}
           {# state #}
-          {% if val.state %}
+          {% if val.state -%}
             <dd class="doc_item info_item special_item state">
               <strong>{{val.state}}</strong>
             </dd>
-          {% endif %}
+          {% endif -%}
           {# history (predecessor, successor, ...) #}
-          {% if value.version_predecessor or value.version_successor %}
-            {% set content = value %}
+          {% if value.version_predecessor or value.version_successor -%}
+            {% set content = value -%}
             <dd class="doc_item info_item">
               {{'Predecessor' if value.version_predecessor else 'Successor'}}: <code>{{ (value.version_successor if value.version_successor else value.version_predecessor) | e | argonize | safe }}</code>
             </dd>
-          {% endif %}
+          {% endif -%}
           {# definitions #}
-          {% if val.definitions %}
+          {% if val.definitions -%}
             <dd class="doc_item info_item">
               Definitions:<div class="definitions">
                 {% for def, defVal in val.definitions -%}
@@ -216,21 +216,21 @@
                 {% endfor -%}
               </div>
             </dd>
-          {% endif %}
+          {% endif -%}
           {# attributes #}
-          {% for attr, attrVal in val.attributes %}
+          {% for attr, attrVal in val.attributes -%}
             <dd class="doc_item info_item">
               {{attr}}: {{attrVal | e | argonize | separate(['\\s+OR', ','], 'code') | safe}}
             </dd>
-          {% endfor %}
+          {% endfor -%}
         {% endmacro -%}
 
-        {% for section, sectionVal in data -%}
+        {%- for section, sectionVal in data -%}
           {# Docs h3 (Properties, etc.), [description, categories] | in the whole json #}
-          {% set sectionID = section | firstword %}
-          <h3 id="{{ sectionID }}"><a href="#{{ sectionID }}" class="icon_anchor">#</a>{{ section }}</h3>
+          {% set sectionID = section | firstword -%}
+            <h3 id="{{ sectionID }}"><a href="#{{ sectionID }}" class="icon_anchor">#</a>{{ section }}</h3>
           {% if sectionVal.description -%}
-          <p>{{ sectionVal.description | e | argonize | safe }}</p>
+            <p>{{ sectionVal.description | e | argonize | safe }}</p>
           {% endif -%}
           {% if sectionVal.categories -%}
             {% for category, categoryVal in sectionVal.categories -%}
