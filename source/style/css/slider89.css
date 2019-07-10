@@ -376,6 +376,29 @@ main h4 {
 .version_select button.active::before {
   height: 100%;
 }
+.list_item.version_item .version_notice {
+  margin: 0 0 0 25px;
+  padding: 0 0.85em;
+  font-size: 0;
+  font-weight: bold;
+  font-family: San Francisco Monospaced, Consolas, monospace;
+  color: hsl(0, 0%, 75%);
+  background-color: rgba(152, 56, 56, 0.35);
+  border-radius: 3px;
+  opacity: 0;
+  clip-path: inset(0 0 100% 0);
+  visibility: hidden;
+  transition: all 0.2s ease, font-size 0.25s ease, clip-path 0.15s ease-out;
+}
+.list_item.version_item .version_notice.active {
+  font-size: 1.05em;
+  margin: 0.45em 0 0.45em 25px;
+  padding: 0.3em 0.85em;
+  opacity: 1;
+  clip-path: inset(0 0 0 0);
+  visibility: visible;
+  transition: all 0.2s ease, clip-path 0.15s ease-in;
+}
 .list_item.version_item .indicator {
   display: flex;
   justify-content: space-around;
