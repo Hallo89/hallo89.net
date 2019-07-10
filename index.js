@@ -32,6 +32,12 @@ njk.addFilter('isArray', function(val) {
 njk.addFilter('firstword', function(val) {
   return (typeof val == 'string' && val.indexOf(' ') != -1 ? val.slice(0, val.indexOf(' ')) : val);
 });
+njk.addFilter('incrVer', function(val, array) {
+  for (const i in array) {
+    if (array[i].tag_name == 'v' + val) return array[i - 1] ? array[i - 1].tag_name.slice(1) : val;
+  }
+  return val;
+});
 njk.addFilter('separate', function(val, exclusion, tag) {
   const excls = Array.isArray(exclusion) ? exclusion.reduce((prev, current) => prev + '|' + current) : exclusion;
   return val.replace(new RegExp('([\\d\\D]+?)($|(?:'+excls+')(?:\\s+|$))', 'g'), function(match, value, exclusion) {
@@ -43,6 +49,15 @@ njk.addFilter('kebab', function(val) {
 });
 njk.addFilter('dotSnake', function(val) {
   return (typeof val == 'string' ? val.replace(/\./g, '_') : val);
+});
+njk.addGlobal('compareVer', function(ver1, ver2) {
+  ver1 = parseInt('1' + ver1.slice(1).replace(/[_\.]/g, ''));
+  ver2 = parseInt('1' + ver2.slice(1).replace(/[_\.]/g, ''));
+  if (ver1 > ver2) {
+    return 'greater';
+  } else if (ver1 < ver2) {
+    return 'smaller';
+  } else return 'equal';
 });
 njk.addGlobal('concatObj', function(objects) {
   return objects.reduce(function(prev, current) {
