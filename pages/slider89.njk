@@ -135,7 +135,7 @@
             {{- ' new' if 'v' + verObj.version == gitData[0].tag_name}}
             {{- ' incompatible' if verObj.version_modifier == 'deprecated' and compareVer('v' + verObj.version, gitData[0].tag_name) == 'smaller' }}
             {{- ' deprecate' if verObj.version_modifier == 'deprecated' }} noselect"><strong>{{ displayVer }}</strong></span>
-        {% endmacro -%}
+        {%- endmacro -%}
 
         {%- macro propList(values, presets) -%}
           <dl class="doc_list">
@@ -155,11 +155,11 @@
                     {% endfor -%}
                   {% endif -%}
                   <dt class="{{ 'version_names' if multiNames }}">
-                    <a href="#{{ propID }}"><code>{{ value | e | argonize | safe }}</code></a>
+                    <a href="#{{ propID }}"><code>{{ value | e | argonize | safe }}</code></a>{{ ', ' if multiNames }}
                     {%- if propVal | isArray -%}
                       {% for ver in propVal -%}
                         {% if ver.name -%}
-                          <a href="#{{ propID }}" class="name_version v{{ ver.version | dotSnake }}"><code>{{ ver.name | e | argonize | safe }}</code></a>
+                          <a href="#{{ propID }}" class="name_version v{{ ver.version | dotSnake }}"><code>{{ ver.name | e | argonize | safe }}</code></a>{{ ', ' if multiNames and not loop.last }}
                         {% endif -%}
                       {% endfor -%}
                     {% endif -%}
@@ -167,10 +167,12 @@
                   {# Indicator -#}
                   <div class="indicator">
                     {% if propVal | isArray %}
+                    <span class="_visuallyhidden">Versions: </span>
                       {%- for ver in propVal -%}
-                        {{ indicatorVer(ver, loop.first) }}
+                        {{ indicatorVer(ver, loop.first) }}{{ '<span class="_visuallyhidden">,</span>' | safe if not loop.last}}
                       {%- endfor -%}
                     {% else -%}
+                      <span class="_visuallyhidden">Version: </span>
                       {{ indicatorVer(propVal) }}
                     {% endif -%}
                   </div>
@@ -178,6 +180,7 @@
                   {% if propVal | isArray -%}
                     <div class="versions">
                     {% for ver in propVal -%}
+                      <span class="_visuallyhidden">Version {{ ver.version }}</span>
                       <div class="prop_version v{{ver.version | dotSnake}} {{- ' active' if loop.first}} {{- ' right' if not loop.first}}">
                         {{ docItem(value, ver, presets) }}
                       </div>
@@ -200,9 +203,9 @@
 
         {%- macro docItem(name, value, presets) -%}
           {% if value.version is undefined -%}
-          <dt>
-            <a href="#{{ name | argondry | functName | kebab }}"><code>{{ name | e | argonize | safe }}</code></a>
-          </dt>
+            <dt>
+              <a href="#{{ name | argondry | functName | kebab }}"><code>{{ name | e | argonize | safe }}</code></a>
+            </dt>
           {% endif -%}
           {% if value.version_modifier -%}
             {% if value.version_modifier == 'deprecated' -%}
@@ -216,22 +219,26 @@
           {# state #}
           {% if val.state -%}
             <dd class="doc_item info_item special_item state">
+              <span class="nodisplay">{{'└ ' if loop.last else '├ '}}</span>
               <strong>{{val.state}}</strong>
             </dd>
           {% endif -%}
           {# history (predecessor, successor, ...) #}
           {% if value.version_predecessor or value.version_successor -%}
-            {% set content = value -%}
+            {%- set content = value -%}
             <dd class="doc_item info_item">
+              <span class="nodisplay">{{'└ ' if loop.last else '├ '}}</span>
               {{'Predecessor' if value.version_predecessor else 'Successor'}}: <code>{{ (value.version_successor if value.version_successor else value.version_predecessor) | e | argonize | safe }}</code>
             </dd>
           {% endif -%}
           {# definitions #}
           {% if val.definitions -%}
             <dd class="doc_item info_item">
+              <span class="nodisplay">{{'└ ' if loop.last else '├ '}}</span>
               Definitions:<div class="definitions">
                 {% for def, defVal in val.definitions -%}
                   <div class="definition">
+                    <span>│ </span>
                     <code>{{def}}</code> = {{defVal | e | argonize | safe}}
                   </div>
                 {% endfor -%}
@@ -241,6 +248,7 @@
           {# attributes #}
           {% for attr, attrVal in val.attributes -%}
             <dd class="doc_item info_item">
+              <span class="nodisplay">{{'└ ' if loop.last else '├' }}</span>
               {{attr}}: {{attrVal | e | argonize | separate(['\\s+OR', ','], 'code') | safe}}
             </dd>
           {% endfor -%}
