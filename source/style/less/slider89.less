@@ -523,6 +523,31 @@ main h4 {
   }
   dt {
     margin-bottom: 3px;
+    a {
+      display: inline-block;
+    }
+    &.version_names {
+      position: relative;
+      a {
+        transition: all .15s ease-in-out;
+        &.name_version {
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          opacity: 0;
+          transition: all .15s .025s ease-in-out;
+          &.active {
+            opacity: 1;
+          }
+        }
+        &.inactive {
+          transition: all .15s .025s ease-in-out;
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+    }
   }
   .doc_item {
     margin-left: 25px;

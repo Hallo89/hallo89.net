@@ -290,9 +290,9 @@
             "version": "0.1.0",
             "version_modifier": "deprecated",
             "version_successor": "a#//checkTask",
-            "description": "A function evaluating whether a handed-over code+a#//task is valid. If it is, write it into the specified code//objectTarget (Either code+a#//Slider89 or the code+a#Methods--The-${//slider89 object//})/br!//If the task is no valid function, for example declared em//with parentheses, throw an error into the console",
+            "description": "A function evaluating whether a handed-over code+a#//task is valid. If it is, write it into the specified code//target which is an object with the Slider89 infrastructure, so either code+a#//Slider89 or the code+a#Methods--The-${//slider89 object//}/br!//If the task is no valid function, for example declared em//with parentheses, throw an error into the console",
             "definitions": {
-              "objectTarget": "The i//object to write into; either the slider instance (see a#Slider89//constructor) or the code+a#Methods--The-${//slider89 object//}",
+              "target": "The i//object to write into; either the slider instance (see a#Slider89//constructor) or the code+a#Methods--The-${//slider89 object//}",
               "task": "i{//function reference//}: One of code+a#//task and code+a#//taskMouseUp"
             },
             "attributes": {
@@ -314,9 +314,10 @@
             },
             {
               "version": "0.1.0",
-              "description": "MODIFIED FUNCTION - var//width is here a var//valueObject. If the code//valueObject|'s code+a#//width is code//'auto', compute the width automatically based on code+a#//min and code+a#//max, if it isn't, only take code+a#//absWidth into account",
+              "name": "var//finalWidth = var//sliderInstance|.computeWidth(var//valueObject)",
+              "description": "If the code//valueObject|'s code+a#//width is code//'auto', compute the width automatically based on code+a#//min and code+a#//max, if it isn't, only take code+a#//absWidth into account",
               "definitions": {
-                "finalWidth": "An i//int representing the final computed width of the given width",
+                "finalWidth": "i//int: The final computed width of the passed width",
                 "valueObject": "i//object: a#Properties--${//Configuration properties//} carrying a code+a#//width value"
               },
               "attributes": {

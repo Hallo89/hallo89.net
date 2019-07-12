@@ -505,6 +505,31 @@ main h4 {
 .doc_list dt {
   margin-bottom: 3px;
 }
+.doc_list dt a {
+  display: inline-block;
+}
+.doc_list dt.version_names {
+  position: relative;
+}
+.doc_list dt.version_names a {
+  transition: all 0.15s ease-in-out;
+}
+.doc_list dt.version_names a.name_version {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  opacity: 0;
+  transition: all 0.15s 0.025s ease-in-out;
+}
+.doc_list dt.version_names a.name_version.active {
+  opacity: 1;
+}
+.doc_list dt.version_names a.inactive {
+  transition: all 0.15s 0.025s ease-in-out;
+  opacity: 0;
+  visibility: hidden;
+}
 .doc_list .doc_item {
   margin-left: 25px;
 }

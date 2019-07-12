@@ -144,7 +144,27 @@
               {% set propID = value | argondry | functName | kebab -%}
               {% if (propVal | isArray) or (propVal.version) -%} {# If the property has one or more versions #}
                 <div id="{{ propID }}" class="list_item version_item {{- ' version_list' if not propVal.version}}">
-                  <dt><a href="#{{ propID }}"><code>{{ value | e | argonize | safe }}</code></a></dt>
+                  {# Name -#}
+                  {# Determining whether a class at <dt> needs to be added -#}
+                  {% set multiNames = false -%}
+                  {% if propVal | isArray -%}
+                    {% for ver in propVal -%}
+                      {% if ver.name -%}
+                        {% set multiNames = true %}
+                      {% endif -%}
+                    {% endfor -%}
+                  {% endif -%}
+                  <dt class="{{ 'version_names' if multiNames }}">
+                    <a href="#{{ propID }}"><code>{{ value | e | argonize | safe }}</code></a>
+                    {%- if propVal | isArray -%}
+                      {% for ver in propVal -%}
+                        {% if ver.name -%}
+                          <a href="#{{ propID }}" class="name_version v{{ ver.version | dotSnake }}"><code>{{ ver.name | e | argonize | safe }}</code></a>
+                        {% endif -%}
+                      {% endfor -%}
+                    {% endif -%}
+                  </dt>
+                  {# Indicator -#}
                   <div class="indicator">
                     {% if propVal | isArray %}
                       {%- for ver in propVal -%}
@@ -154,6 +174,7 @@
                       {{ indicatorVer(propVal) }}
                     {% endif -%}
                   </div>
+                  {# versions -#}
                   {% if propVal | isArray -%}
                     <div class="versions">
                     {% for ver in propVal -%}
@@ -267,7 +288,7 @@
     <script>
       const h4s = document.getElementsByTagName('h4');
       const versionSwitch = document.querySelector('.version_select');
-      const vSwitchBtns = versionSwitch.querySelectorAll('button');
+      const vSwitchBtns = versionSwitch.getElementsByTagName('button');
       const copyBtns = document.querySelectorAll('.code_copy_wrapper .copy_btn');
       const indicatorItems = document.querySelectorAll('.list_item.version_list .indicator .indicator_item');
       const versionItems = document.getElementsByClassName('version_item');
@@ -331,6 +352,17 @@
 
       function changePropVersion(props, target, indicator) {
         const clickHeight = props[target].clientHeight;
+        const vNames = props[0].parentNode.parentNode.querySelector('.version_names');
+        if (vNames) {
+          const activeName = vNames.querySelector('a.active');
+          const vNameMatch = vNames.querySelector('a.' + indicator.classList[1]);
+          if (activeName) activeName.classList.remove('active');
+          if (vNameMatch) {
+            if (vNameMatch.clientWidth < vNames.children[0].clientWidth) vNames.children[0].classList.add('inactive');
+            vNameMatch.classList.add('active');
+          }
+          if (!vNameMatch && activeName && vNames.children[0].classList.contains('inactive')) vNames.children[0].classList.remove('inactive');
+        }
         for (let i = 0; i < props.length; i++) {
           if (target > i) {
             props[i].classList.add('left');
