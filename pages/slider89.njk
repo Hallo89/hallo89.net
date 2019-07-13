@@ -332,23 +332,25 @@
           const notice = versionItems[i].querySelector('.version_notice');
           let propLock = false;
           for (let n = 0; n < indicChilds.length; n++) {
-            const ver = formatVersion(indicChilds[n].classList[1]);
-            indicChilds[n].classList.remove('current');
-            indicChilds[n].classList.remove('incompatible');
-            if (indicChilds[n].classList.contains('deprecate')) {
-              notice.classList.remove('active');
-              if (selectVer > ver) {
+            if (!indicChilds[n].classList.contains('_visuallyhidden')) {
+              const ver = formatVersion(indicChilds[n].classList[1]);
+              indicChilds[n].classList.remove('current');
+              indicChilds[n].classList.remove('incompatible');
+              if (indicChilds[n].classList.contains('deprecate')) {
+                notice.classList.remove('active');
+                if (selectVer > ver) {
+                  indicChilds[n].classList.add('incompatible');
+                  notice.classList.add('active');
+                }
+              } else if (selectVer < ver && !indicChilds[n].classList.contains('deprecate')) {
                 indicChilds[n].classList.add('incompatible');
-                notice.classList.add('active');
+              } else if (selectVer == ver && ver != newestVer) {
+                indicChilds[n].classList.add('current');
               }
-            } else if (selectVer < ver && !indicChilds[n].classList.contains('deprecate')) {
-              indicChilds[n].classList.add('incompatible');
-            } else if (selectVer == ver && ver != newestVer) {
-              indicChilds[n].classList.add('current');
-            }
-            if (selectVer >= ver && !propLock && versionItems[i].classList.contains('versions')) {
-              changePropVersion(versionItems[i].lastElementChild.children, n, indicChilds[n]);
-              propLock = true;
+              if (selectVer >= ver && !propLock && versionItems[i].classList.contains('versions')) {
+                changePropVersion(versionItems[i].lastElementChild.children, n, indicChilds[n]);
+                propLock = true;
+              }
             }
           }
         }
