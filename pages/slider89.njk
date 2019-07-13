@@ -29,7 +29,7 @@
           However, the restriction of not being able to style it very well is a point which isn't easy to ignore. People tell me that there are many ways to style a range input, to which I answer with the question whether approximately 80 lines of css (cross-browser support included) solely for one range input is worth it.
         </p>
         <p>
-          This is why I wrote a framework to solve this very problem: <em>Slider89</em>, which also happened to solve a lot more problems and make life much easier. How convenient!
+          This is why I wrote a library to solve this very problem: <em>Slider89</em>, which also happened to solve a lot more problems and make life much easier. How convenient!
         </p>
 
         <hr>
@@ -38,7 +38,7 @@
           <a href="#what" class="icon_anchor">#</a>What is this?
         </h3>
         <p>
-          Slider89 is a very simple framework for easily creating css sliders (range inputs). Being based on javascript and custom elements with CSS instead of a built-in browser-side &lt;input&gt;-element, it features full styling customizability but allows for rich configuration on the technical side as well. It is very useful for modifying values on the go, as an example.</p>
+          Slider89 is a very simple library for easily creating css sliders (range inputs). Being based on javascript and custom elements with CSS instead of a built-in browser-side &lt;input&gt;-element, it features full styling customizability but allows for rich configuration on the technical side as well. It is very useful for modifying values on the go, as an example.</p>
         <p>
           A basic slider can look like this (Its background-color is a bit darker but otherwise this is an all-default slider):
         </p>
@@ -91,7 +91,7 @@
           To create one instance of a slider, we do the following in our javascript:
         </p>
         <div class="codeblock">
-          <code>var mySlider = new Slider89(targetElement);</code>
+          <code>const mySlider = new Slider89(targetElement);</code>
         </div>
         <p>
           This is pretty straightforward: we create a new instance of the <code>Slider89</code> class with the <code>new</code> operator and pass the HTML-element we want the slider to be created in as paramter into the function.<br>
@@ -100,9 +100,9 @@
         </p>
         <div class="demo_block" id="demo_1_plain"></div>
         <p>
-          However, what would a framework be without means of configuration? To configure it we pass an additional parameter as object into the <a href="#functions-constructor">Slider89 constructor </a> which we fill with <a href="#properties-config">configuration-properties</a>. Here's an example:
+          However, what would a library be without means of configuration? To configure it we pass an additional parameter as object into the <a href="#functions-constructor">Slider89 constructor </a> which we fill with <a href="#properties-config">configuration-properties</a>. Here's an example:
         </p>
-        <pre class="codeblock"><code>var mySlider = new Slider89(targetElement, {
+        <pre class="codeblock"><code>const mySlider = new Slider89(targetElement, {
   min: -50,
   max: 175,
   value: 80
