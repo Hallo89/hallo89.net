@@ -23,6 +23,7 @@
 body {
   margin: 0;
   font-size: calc(0.12vw + 0.06vh + 15.14px);
+  font-family: 'Fira Sans', 'Roboto', 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', Arial, 'San Francisco', sans-serif;
 }
 button {
   cursor: pointer;
@@ -79,7 +80,7 @@ main {
   margin: calc(2vh + 0.75vw + 16.29px) auto 200px;
   padding: 0 0.63em;
   color: hsl(0, 0%, 68%);
-  line-height: 1.56;
+  line-height: 1.58;
 }
 main section {
   margin: auto;
@@ -88,14 +89,17 @@ main section {
   padding: 0 1.45em;
 }
 main h2 {
-  font-size: 2.11em;
-  font-family: 'San Francisco Monospaced', 'Consolas', monospace;
   color: hsl(0, 0%, 66%);
+  font-size: 2.11em;
+  font-family: 'Source Code Pro', 'DejaVu Sans Mono', 'Fira Mono', 'Fira Code', 'San Francisco Monospaced', 'Consolas', monospace;
 }
 main h3 {
   color: hsl(0, 0%, 70%);
-  font-family: 'Calibri', sans-serif;
+  font-family: 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', 'San Francisco', Arial, sans-serif;
   margin: 0.6em 0;
+}
+main h4 {
+  font-family: 'Source Code Pro', 'DejaVu Sans Mono', 'Fira Mono', 'Fira Code', 'San Francisco Monospaced', 'Consolas', monospace;
 }
 main hr {
   border-bottom: none;
@@ -104,7 +108,7 @@ main hr {
 }
 main h3,
 main hr {
-  font-size: 1.9em;
+  font-size: 1.82em;
 }
 main p a,
 main dd a,
@@ -172,9 +176,9 @@ main .codeblock code {
 }
 main code,
 .codeblock {
-  font-family: 'San Francisco Monospaced', 'Consolas', monospace;
   color: hsl(0, 0%, 70%);
   background-color: hsl(0, 0%, 13.5%);
+  font-family: 'Source Code Pro', 'DejaVu Sans Mono', 'Fira Mono', 'Fira Code', 'San Francisco Monospaced', 'Consolas', monospace;
   border-radius: 1px;
 }
 .codeblock {
@@ -267,22 +271,16 @@ main code,
   font-size: 1.1em;
   color: hsl(0, 0%, 78%);
   background-color: hsl(0, 0%, 18.5%);
+  font-family: 'Source Code Pro', 'DejaVu Sans Mono', 'Fira Mono', 'Fira Code', 'San Francisco Monospaced', 'Consolas', monospace;
   padding: 2px 9px;
   border-radius: 100px;
-}
-#section_docs dt code,
-.doc_list .info_item,
-main code a,
-main h4,
-.list_section .expand_button {
-  font-family: 'Source Code Pro', 'DejaVu Sans Mono', 'Fira Code', 'San Francisco Monospaced', 'Consolas', monospace;
 }
 .icon_anchor {
   margin: 0 14px 0 -39px;
   padding: 0 2px;
   color: hsl(0, 0%, 60%);
   text-decoration: none;
-  font-family: 'Consolas', 'San Francisco Monospaced', sans-serif;
+  font-family: 'San Francisco Monospaced', 'Consolas', monospace;
   opacity: 0.25;
   transition: all 0.1s ease-in-out;
 }
@@ -554,6 +552,7 @@ main h4 {
 }
 .doc_list .info_item {
   position: relative;
+  font-family: 'Source Code Pro', 'DejaVu Sans Mono', 'Fira Mono', 'Fira Code', 'San Francisco Monospaced', 'Consolas', monospace;
   margin-left: 80px;
   text-indent: -20px;
   padding: 3px 0;

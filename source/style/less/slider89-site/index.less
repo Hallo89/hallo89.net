@@ -2,49 +2,12 @@
 
 @import (reference) 'colors';
 
-/* Source Code Pro by Adobe @ https://github.com/adobe-fonts/source-code-pro/ */
-@font-face {
-  font-family: 'Source Code Pro';
-  font-weight: normal;
-  src:
-    local('Source Code Pro'),
-    local('SourceCodePro-Regular'),
-    url('../fonts/SourceCodePro/SourceCodePro-Regular.otf.woff2') format('woff2'),
-    url('../fonts/SourceCodePro/SourceCodePro-Regular.otf.woff') format('woff');
-}
-@font-face {
-  font-family: 'Source Code Pro';
-  font-weight: bold;
-  src:
-    local('Source Code Pro Bold'),
-    local('SourceCodePro-Bold'),
-    url('../fonts/SourceCodePro/SourceCodePro-Bold.otf.woff2') format('woff2'),
-    url('../fonts/SourceCodePro/SourceCodePro-Bold.otf.woff') format('woff');
-}
-
-/* Fira Sans by Mozilla @ https://github.com/mozilla/Fira/ */
-@font-face {
-  font-family: 'Fira Sans';
-  font-weight: normal;
-  src:
-    local('Fira Sans'),
-    local('FiraSans-Regular'),
-    url('../fonts/FiraSans/FiraSans-Regular.woff2') format('woff2'),
-    url('../fonts/FiraSans/FiraSans-Regular.woff') format('woff');
-}
-@font-face {
-  font-family: 'Fira Sans';
-  font-weight: bold;
-  src:
-    local('Fira Sans Bold'),
-    local('FiraSans-Bold'),
-    url('../fonts/FiraSans/FiraSans-Bold.woff2') format('woff2'),
-    url('../fonts/FiraSans/FiraSans-Bold.woff') format('woff');
-}
+@import 'fonts';
 
 body {
   margin: 0;
   font-size: calc(.12vw + .06vh + 15.14px);
+  font-family: @Fira-Sans;
 }
 
 button {
@@ -89,7 +52,7 @@ var {
     flex-wrap: wrap;
     flex-grow: 1;
     font-size: .74em;
-    font-family: 'San Francisco Monospaced', 'Consolas', monospace;
+    font-family: @Consolas;
     a {
       color: @nav-item;
       margin: 0 .5em;
@@ -109,7 +72,7 @@ main {
   margin: calc(2vh + .75vw + 16.29px) auto 200px;
   padding: 0 .63em;
   color: @main-color;
-  line-height: 1.56;
+  line-height: 1.58;
   section {
     margin: auto;
     max-width: 900px;
@@ -118,23 +81,28 @@ main {
   }
 
   h2 {
-    font-size: 2.11em;
-    font-family: 'San Francisco Monospaced', 'Consolas', monospace;
     color: @h2;
+    font-size: 2.11em;
+    font-family: @SourceCodePro;
   }
 
   h3 {
     color: @h3;
-    font-family: 'Calibri', sans-serif;
+    font-family: @Segoe;
     margin: .6em 0;
   }
+
+  h4 {
+    font-family: @SourceCodePro;
+  }
+
   hr {
     border-bottom: none;
     border-top: 3px solid @hr;
     margin: .8em 0 .7em;
   }
   h3, hr {
-    font-size: 1.9em;
+    font-size: 1.82em;
   }
 
   p, dd, code {
@@ -198,9 +166,9 @@ main .codeblock code {
   padding: 0;
 }
 main code, .codeblock {
-  font-family: 'San Francisco Monospaced', 'Consolas', monospace;
   color: @code;
   background-color: @code-bg;
+  font-family: @SourceCodePro;
   border-radius: 1px;
 }
 .codeblock {
@@ -226,7 +194,7 @@ main code, .codeblock {
     border: none;
     overflow: hidden;
     font-size: 1.15em;
-    font-family: 'San Francisco Monospaced', 'Consolas', monospace;
+    font-family: @Consolas;
     transition: all .3s ease;
     &:hover, &.active {
       padding: 0 15px;
@@ -288,15 +256,9 @@ main code, .codeblock {
   font-size: 1.1em;
   color: @propname;
   background-color: @propname-bg;
+  font-family: @SourceCodePro;
   padding: 2px 9px;
   border-radius: 100px;
-}
-#section_docs dt code,
-.doc_list .info_item,
-main code a,
-main h4,
-.list_section .expand_button {
-  font-family: 'Source Code Pro', 'DejaVu Sans Mono', 'Fira Code', 'San Francisco Monospaced', 'Consolas', monospace;
 }
 
 .icon_anchor {
@@ -304,7 +266,7 @@ main h4,
   padding: 0 2px;
   color: @heading-anchor;
   text-decoration: none;
-  font-family: 'Consolas', 'San Francisco Monospaced', sans-serif;
+  font-family: @Consolas;
   opacity: .25;
   transition: all .1s ease-in-out;
   h4 & {
@@ -584,6 +546,7 @@ main h4 {
   .info_item {
     @text-indent: 20px;
     position: relative;
+    font-family: @SourceCodePro;
     margin-left: 60px + @text-indent;
     text-indent: -@text-indent;
     padding: 3px 0;
