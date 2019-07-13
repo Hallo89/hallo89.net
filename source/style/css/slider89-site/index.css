@@ -125,8 +125,7 @@ main dd a {
 }
 main p a:hover,
 main dd a:hover {
-  /* #1398A9 in rgba */
-  background-color: rgba(19, 152, 170, 0.19);
+  background-color: rgba(19, 152, 169, 0.18);
   border-bottom: 2px solid;
 }
 main p a:visited,
@@ -135,7 +134,6 @@ main dd a:visited {
 }
 main p a:hover:visited,
 main dd a:hover:visited {
-  /* #469870 in rgba */
   background-color: rgba(70, 152, 112, 0.18);
 }
 main p a:active,
@@ -144,7 +142,6 @@ main dd a:active {
 }
 main p a:hover:active,
 main dd a:hover:active {
-  /* #A84E4E in rgba */
   background-color: rgba(168, 78, 78, 0.18);
 }
 main code a {
@@ -162,12 +159,10 @@ main code a:hover:visited {
   background-color: hsla(0, 0%, 60%, 0.18);
 }
 main code a:active {
-  /* Above color mixed with 180/255 60% lightness */
-  color: #9D8282;
+  color: rgba(153, 153, 153, 0.426);
 }
 main code a:hover:active {
-  /* #9D8282 in rgba */
-  background-color: rgba(157, 130, 130, 0.18);
+  background-color: rgba(153, 153, 153, 0.18);
 }
 main code {
   padding: 2px 3px;
@@ -318,8 +313,8 @@ main h4 {
   height: 0.833em;
   width: 0.833em;
   border: none;
-  background-color: hsl(0, 0%, 18%);
   color: hsl(0, 0%, 55%);
+  background-color: hsl(0, 0%, 18%);
   font-size: 1em;
   font-family: 'Source Code Pro', 'Lucida Console', 'DejaVu Sans Mono', 'Century', 'Century Gothic', 'Consolas', 'San Francisco Monospaced', sans-serif;
   padding: 0;

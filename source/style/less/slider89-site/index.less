@@ -1,5 +1,7 @@
 // out: ../../css/slider89-site/index.css, sourcemap: false, compress: false
 
+@import (reference) 'colors';
+
 /* Source Code Pro by Adobe @ https://github.com/adobe-fonts/source-code-pro/ */
 @font-face {
   font-family: 'Source Code Pro';
@@ -89,14 +91,14 @@ var {
     font-size: .74em;
     font-family: 'San Francisco Monospaced', 'Consolas', monospace;
     a {
-      color: hsl(0, 0%, 65%);
+      color: @nav-item;
       margin: 0 .5em;
-      border-bottom: 2px solid hsl(0, 0%, 45%);
+      border-bottom: 2px solid @nav-item-underline;
       white-space: nowrap;
       transition: all .15s ease-in-out;
       &:hover {
-        color: hsl(0, 0%, 70%);
-        border-color: hsl(0, 0%, 55%);
+        color: @nav-item-hover;
+        border-color: @nav-item-underline-hover;
       }
     }
   }
@@ -106,7 +108,7 @@ main {
   max-width: 1000px;
   margin: calc(2vh + .75vw + 16.29px) auto 200px;
   padding: 0 .63em;
-  color: hsl(0, 0%, 68%);
+  color: @main-color;
   line-height: 1.56;
   section {
     margin: auto;
@@ -118,17 +120,17 @@ main {
   h2 {
     font-size: 2.11em;
     font-family: 'San Francisco Monospaced', 'Consolas', monospace;
-    color: hsl(0, 0%, 66%)
+    color: @h2;
   }
 
   h3 {
-    color: hsl(0, 0%, 70%);
+    color: @h3;
     font-family: 'Calibri', sans-serif;
     margin: .6em 0;
   }
   hr {
     border-bottom: none;
-    border-top: 3px solid hsl(0, 0%, 35%);
+    border-top: 3px solid @hr;
     margin: .8em 0 .7em;
   }
   h3, hr {
@@ -147,49 +149,44 @@ main {
   }
   p, dd {
     a {
-      color: #1398A9;
+      color: @general-link;
       border-bottom: 1px solid;
       &:hover {
-        /* #1398A9 in rgba */
-        background-color: rgba(19, 152, 170, .19);
+        background-color: @general-link-bg-hover;
         border-bottom: 2px solid;
       }
       &:visited {
-        color: #469870;
+        color: @general-link-visited;
       }
       &:hover:visited {
-        /* #469870 in rgba */
-        background-color: rgba(70, 152, 112, .18);
+        background-color: @general-link-bg-visited;
       }
       &:active {
-        color: #A84E4E;
+        color: @general-link-active;
       }
       &:hover:active {
-        /* #A84E4E in rgba */
-        background-color: rgba(168, 78, 78, .18);
+        background-color: @general-link-bg-active;
       }
     }
   }
   code a {
-    color: hsl(0, 0%, 76%);
-    border-bottom: 1px solid hsl(0, 0%, 50%);
+    color: @code-link;
+    border-bottom: 1px solid @code-link-underline;
     &:hover {
-      background-color: hsla(0, 0%, 60%, .1);
-      border-bottom: 2px solid hsl(0, 0%, 50%);
+      background-color: @code-link-bg-hover;
+      border-bottom: 2px solid @code-link-underline-hover;
     }
     &:visited {
       color: inherit;
     }
     &:hover:visited {
-      background-color: hsla(0, 0%, 60%, .18);
+      background-color: @code-link-bg-hover-visited;
     }
     &:active {
-      /* Above color mixed with 180/255 60% lightness */
-      color: #9D8282;
+      color: @code-link-active;
     }
     &:hover:active {
-      /* #9D8282 in rgba */
-      background-color: rgba(157, 130, 130, .18);
+      background-color: @code-link-bg-hover-active;
     }
   }
 }
@@ -202,8 +199,8 @@ main .codeblock code {
 }
 main code, .codeblock {
   font-family: 'San Francisco Monospaced', 'Consolas', monospace;
-  color: hsl(0, 0%, 70%);
-  background-color: hsl(0, 0%, 13.5%);
+  color: @code;
+  background-color: @code-bg;
   border-radius: 1px;
 }
 .codeblock {
@@ -219,12 +216,12 @@ main code, .codeblock {
   }
   .copy_btn {
     position: relative;
-    background-color: hsl(0, 0%, 17%);
+    background-color: @copy-btn-bg;
     display: flex;
     align-items: center;
     padding: 0 12px;
     margin: .25em 0;
-    box-shadow: -1px 0 10px hsla(0, 0%, 12%, .2);
+    box-shadow: -1px 0 10px @copy-btn-shadow;
     color: inherit;
     border: none;
     overflow: hidden;
@@ -233,8 +230,8 @@ main code, .codeblock {
     transition: all .3s ease;
     &:hover, &.active {
       padding: 0 15px;
-      box-shadow: -1px 0 15px hsla(0, 0%, 10%, .25);
-      background-color: hsl(0, 0%, 18%);
+      box-shadow: -1px 0 15px @copy-btn-shadow-active;
+      background-color: @copy-btn-bg-active;
     }
     .text {
       transition: all .18s ease;
@@ -260,7 +257,7 @@ main code, .codeblock {
         bottom: 32%;
         left: 45.5%;
         transform-origin: bottom left;
-        background-color: hsl(0, 0%, 70%);
+        background-color: @copy-checkmark;
         border-radius: 1px;
         transition: all .3s ease;
       }
@@ -289,8 +286,8 @@ main code, .codeblock {
 
 #section_docs dt code {
   font-size: 1.1em;
-  color: hsl(0, 0%, 78%);
-  background-color: hsl(0, 0%, 18.5%);
+  color: @propname;
+  background-color: @propname-bg;
   padding: 2px 9px;
   border-radius: 100px;
 }
@@ -305,7 +302,7 @@ main h4,
 .icon_anchor {
   margin: 0 14px 0 -39px;
   padding: 0 2px;
-  color: hsl(0, 0%, 60%);
+  color: @heading-anchor;
   text-decoration: none;
   font-family: 'Consolas', 'San Francisco Monospaced', sans-serif;
   opacity: .25;
@@ -325,7 +322,7 @@ main {
 main h4 {
   font-size: 1.58em;
   margin: 1.2em 0;
-  color: hsl(0, 0%, 65%);
+  color: @h4;
   cursor: pointer;
   position: relative;
   display: flex;
@@ -343,8 +340,8 @@ main h4 {
     height: .833em;
     width: .833em;
     border: none;
-    background-color: hsl(0, 0%, 18%);
-    color: hsl(0, 0%, 55%);
+    color: @h4-expand-btn;
+    background-color: @h4-expand-btn-bg;
     font-size: 1em;
     font-family: 'Source Code Pro', 'Lucida Console', 'DejaVu Sans Mono', 'Century', 'Century Gothic', 'Consolas', 'San Francisco Monospaced', sans-serif;
     padding: 0;
@@ -387,7 +384,7 @@ main h4 {
 }
 
 .version_select {
-  background-color: hsl(0, 0%, 13%);
+  background-color: @version-select-bg;
   padding: 15px 30px;
   font-size: 1.3em;
   display: flex;
@@ -400,7 +397,7 @@ main h4 {
     position: relative;
     background-color: unset;
     border: none;
-    color: hsl(0, 0%, 65%);
+    color: @version-select-btn;
     font-size: .9em;
     font-family: 'San Francisco Monospaced', 'Consolas', monospace;
     z-index: 0;
@@ -414,19 +411,17 @@ main h4 {
       width: 100%;
       height: 0;
       z-index: -1;
-      background-color: hsl(0, 0%, 80%);
+      background-color: @version-select-btn-bg;
       transition: all .2s ease;
     }
     &:hover, &.active {
-      color: hsl(0, 0%, 16%);
+      color: @version-select-btn-active;
       &::before {
         height: 100%;
       }
     }
   }
 }
-
-@incompat-color: #983838;
 
 .list_item {
   &.version_item {
@@ -436,8 +431,8 @@ main h4 {
       font-size: 0;
       font-weight: bold;
       font-family: San Francisco Monospaced, Consolas, monospace;
-      color: hsl(0, 0%, 75%);
-      background-color: fade(@incompat-color, 35%);
+      color: @version-banner;
+      background-color: @version-banner-bg;
       border-radius: 3px;
       opacity: 0;
       clip-path: inset(0 0 100% 0);
@@ -460,7 +455,7 @@ main h4 {
       margin: .45em 0 .45em 25px;
       box-sizing: border-box;
       .indicator_item {
-        border-bottom: 4px solid hsl(0, 0%, 20%);
+        border-bottom: 4px solid @tab-default;
         flex: 1;
         .tab-variant(@class, @color) {
           &.@{class} {
@@ -470,9 +465,9 @@ main h4 {
             }
           }
         }
-        .tab-variant(new, #214031);
-        .tab-variant(current, #1f4252);
-        .tab-variant(incompatible, @incompat-color);
+        .tab-variant(new, @tab-new);
+        .tab-variant(current, @tab-current);
+        .tab-variant(incompatible, @tab-incompatible);
         &.active > strong::before {
           height: 100%;
           opacity: .35;
@@ -493,7 +488,7 @@ main h4 {
             right: 0;
             bottom: 0;
             height: 0;
-            background-color: hsl(0, 0%, 20%);
+            background-color: @tab-default;
             border-top-left-radius: 3px;
             border-top-right-radius: 3px;
             opacity: .5;
@@ -593,7 +588,7 @@ main h4 {
     text-indent: -@text-indent;
     padding: 3px 0;
     &.state {
-      color: #904851;
+      color: @info-state;
     }
     .definitions {
       margin-left: 15px;
@@ -607,13 +602,13 @@ main h4 {
     }
     &::before {
       content: '';
-      border-left: 2px solid hsl(0, 0%, 37%);
+      border-left: 2px solid @info-item-guide;
       top: 0;
       bottom: 0;
     }
     &:not(.special_item)::after {
       content: '';
-      border-top: 2px solid hsl(0, 0%, 37%);
+      border-top: 2px solid @info-item-guide;
       top: .78em;
       width: 14px;
     }
@@ -628,9 +623,9 @@ main h4 {
   display: flex;
   justify-content: center;
   height: 25px;
-}
-.demo_block .slider89 .slider {
-  background-color: hsl(0, 0%, 18%);
+  .slider89 .slider {
+    background-color: hsl(0, 0%, 18%);
+  }
 }
 
 .nodisplay {
