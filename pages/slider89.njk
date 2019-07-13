@@ -238,7 +238,7 @@
               Definitions:<div class="definitions">
                 {% for def, defVal in val.definitions -%}
                   <div class="definition">
-                    <span>│ </span>
+                    <span class="nodisplay">│ </span>
                     <code>{{def}}</code> = {{defVal | e | argonize | safe}}
                   </div>
                 {% endfor -%}
