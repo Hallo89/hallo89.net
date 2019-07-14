@@ -328,29 +328,27 @@
         //e.g 0.2.0 becomes 1020
         const selectVer = formatVersion(this.textContent);
         for (let i = 0; i < versionItems.length; i++) {
-          const indicChilds = versionItems[i].querySelector('.indicator').children;
+          const indicChilds = versionItems[i].querySelector('.indicator').getElementsByClassName('indicator_item');
           const notice = versionItems[i].querySelector('.version_notice');
           let propLock = false;
           for (let n = 0; n < indicChilds.length; n++) {
-            if (!indicChilds[n].classList.contains('_visuallyhidden')) {
-              const ver = formatVersion(indicChilds[n].classList[1]);
-              indicChilds[n].classList.remove('current');
-              indicChilds[n].classList.remove('incompatible');
-              if (indicChilds[n].classList.contains('deprecate')) {
-                notice.classList.remove('active');
-                if (selectVer > ver) {
-                  indicChilds[n].classList.add('incompatible');
-                  notice.classList.add('active');
-                }
-              } else if (selectVer < ver && !indicChilds[n].classList.contains('deprecate')) {
+            const ver = formatVersion(indicChilds[n].classList[1]);
+            indicChilds[n].classList.remove('current');
+            indicChilds[n].classList.remove('incompatible');
+            if (indicChilds[n].classList.contains('deprecate')) {
+              notice.classList.remove('active');
+              if (selectVer > ver) {
                 indicChilds[n].classList.add('incompatible');
-              } else if (selectVer == ver && ver != newestVer) {
-                indicChilds[n].classList.add('current');
+                notice.classList.add('active');
               }
-              if (selectVer >= ver && !propLock && versionItems[i].classList.contains('versions')) {
-                changePropVersion(versionItems[i].lastElementChild.children, n, indicChilds[n]);
-                propLock = true;
-              }
+            } else if (selectVer < ver && !indicChilds[n].classList.contains('deprecate')) {
+              indicChilds[n].classList.add('incompatible');
+            } else if (selectVer == ver && ver != newestVer) {
+              indicChilds[n].classList.add('current');
+            }
+            if (selectVer >= ver && !propLock && versionItems[i].classList.contains('version_list')) {
+              changePropVersion(versionItems[i].lastElementChild.getElementsByClassName('prop_version'), n, indicChilds[n]);
+              propLock = true;
             }
           }
         }
@@ -360,12 +358,12 @@
         return parseInt('1' + ver.slice(1).replace(/[_\.]/g, ''));
       }
 
-      function changePropVersion(props, target, indicator) {
+      function changePropVersion(props, target, indicChild) {
         const clickHeight = props[target].clientHeight;
         const vNames = props[0].parentNode.parentNode.querySelector('.version_names');
         if (vNames) {
           const activeName = vNames.querySelector('a.active');
-          const vNameMatch = vNames.querySelector('a.' + indicator.classList[1]);
+          const vNameMatch = vNames.querySelector('a.' + indicChild.classList[1]);
           if (activeName) activeName.classList.remove('active');
           if (vNameMatch) {
             if (vNameMatch.clientWidth < vNames.children[0].clientWidth) vNames.children[0].classList.add('inactive');
@@ -395,8 +393,8 @@
             props[target].setAttribute('style', '');
           }, 125);
         }, 20);
-        indicator.parentNode.querySelector('.indicator_item.active').classList.remove('active');
-        indicator.classList.add('active');
+        indicChild.parentNode.querySelector('.indicator_item.active').classList.remove('active');
+        indicChild.classList.add('active');
       }
 
       function copyCode() {
