@@ -155,11 +155,11 @@
                     {% endfor -%}
                   {% endif -%}
                   <dt class="{{ 'version_names' if multiNames }}">
-                    <a href="#{{ propID }}"><code>{{ value | e | argonize | safe }}</code></a>{{ ', ' if multiNames }}
+                    <a href="#{{ propID }}"><code>{{ value | e | argonize | safe }}</code></a>{{ '<span class="_visuallyhidden">, </span>' | safe if multiNames }}
                     {%- if propVal | isArray -%}
                       {% for ver in propVal -%}
                         {% if ver.name -%}
-                          <a href="#{{ propID }}" class="name_version v{{ ver.version | dotSnake }}"><code>{{ ver.name | e | argonize | safe }}</code></a>{{ ', ' if multiNames and not loop.last }}
+                          <a href="#{{ propID }}" class="name_version v{{ ver.version | dotSnake }}"><code>{{ ver.name | e | argonize | safe }}</code></a>{{ '<span class="_visuallyhidden">, </span>' | safe if multiNames and not loop.last }}
                         {% endif -%}
                       {% endfor -%}
                     {% endif -%}
