@@ -7,7 +7,7 @@
 body {
   margin: 0;
   font-size: calc(.12vw + .06vh + 15.14px);
-  font-family: @Fira-Sans;
+  font-family: @FiraSans;
 }
 
 button {
@@ -82,8 +82,8 @@ main {
 
   h2 {
     color: @h2;
-    font-size: 2.11em;
-    font-family: @SourceCodePro;
+    font-size: 2.2em;
+    font-family: @FiraSans;
   }
 
   h3 {
@@ -97,70 +97,84 @@ main {
   }
 
   hr {
-    border-bottom: none;
-    border-top: 3px solid @hr;
-    margin: .8em 0 .7em;
+    border: none;
+    border-top: 2px solid @hr;
+    margin: .65em 0;
   }
   h3, hr {
     font-size: 1.82em;
   }
 
-  p, dd, code {
+  code, p, dd, .version_notice {
     a {
-      position: relative;
-      padding: 1px 1px 2px;
-      transition: background-color .08s;
-      &:hover {
-        padding: 1px;
+      border-bottom: 1px solid;
+      padding: 1px;
+    }
+  }
+  p a {
+    color: @general-link;
+    &:hover {
+      padding: 1px 1px 0;
+      border-bottom: 2px solid;
+    }
+    &:visited {
+      color: @general-link-visited;
+      border-color: @general-link-visited;
+    }
+    &:active {
+      background-color: @general-link-bg;
+      &:visited {
+        background-color: @general-link-bg-visited;
       }
     }
   }
-  p, dd {
-    a {
-      color: @general-link;
-      border-bottom: 1px solid;
-      &:hover {
-        background-color: @general-link-bg-hover;
-        border-bottom: 2px solid;
-      }
-      &:visited {
-        color: @general-link-visited;
-      }
-      &:hover:visited {
-        background-color: @general-link-bg-visited;
-      }
-      &:active {
-        color: @general-link-active;
-      }
-      &:hover:active {
-        background-color: @general-link-bg-active;
-      }
+  dd a, .version_notice a {
+    &:hover {
+      color: @dd-link-hover;
+      border-color: @dd-link-hover;
+    }
+    &:active {
+      color: @dd-link-active;
+      border-color: @dd-link-active;
     }
   }
   code a {
-    color: @code-link;
-    border-bottom: 1px solid @code-link-underline;
+    color: @code;
     &:hover {
-      background-color: @code-link-bg-hover;
-      border-bottom: 2px solid @code-link-underline-hover;
-    }
-    &:visited {
-      color: inherit;
-    }
-    &:hover:visited {
-      background-color: @code-link-bg-hover-visited;
+      color: @code-link-hover;
+      border-color: @code-link-hover;
     }
     &:active {
       color: @code-link-active;
+      border-color: @code-link-active;
     }
-    &:hover:active {
-      background-color: @code-link-bg-hover-active;
+  }
+  //I love CSS
+  p code a {
+    color: @code;
+    &:hover {
+      color: @code-link-hover !important;
+      padding: 1px;
+      border-bottom: 1px solid;
+    }
+    &:visited {
+      border-color: inherit;
+      color: inherit;
+    }
+    &:active {
+      background-color: inherit;
+      color: @code-link-active !important;
+      border-color: @code-link-active !important;
+      &:visited {
+        background-color: inherit;
+      }
     }
   }
 }
 
 main code {
-  padding: 2px 3px;
+  padding: .125em .25em;
+  border-radius: 2px;
 }
 main .codeblock code {
   padding: 0;
@@ -169,10 +183,13 @@ main code, .codeblock {
   color: @code;
   background-color: @code-bg;
   font-family: @SourceCodePro;
-  border-radius: 1px;
+}
+main .version_notice code {
+  background-color: transparent;
+  padding: 0;
 }
 .codeblock {
-  padding: 3px 8px;
+  padding: .25em .5em;
   margin: .25em 0;
   overflow: auto;
 }
@@ -189,7 +206,6 @@ main code, .codeblock {
     align-items: center;
     padding: 0 12px;
     margin: .25em 0;
-    box-shadow: -1px 0 10px @copy-btn-shadow;
     color: inherit;
     border: none;
     overflow: hidden;
@@ -198,7 +214,6 @@ main code, .codeblock {
     transition: all .3s ease;
     &:hover, &.active {
       padding: 0 15px;
-      box-shadow: -1px 0 15px @copy-btn-shadow-active;
       background-color: @copy-btn-bg-active;
     }
     .text {
@@ -252,19 +267,9 @@ main code, .codeblock {
   }
 }
 
-#section_docs dt code {
-  font-size: 1.1em;
-  color: @propname;
-  background-color: @propname-bg;
-  font-family: @SourceCodePro;
-  padding: 2px 9px;
-  border-radius: 100px;
-}
-
 .icon_anchor {
   margin: 0 14px 0 -39px;
   padding: 0 2px;
-  color: @heading-anchor;
   text-decoration: none;
   font-family: @Consolas;
   opacity: .25;
@@ -509,13 +514,21 @@ main h4 {
   padding-left: 20px;
   margin: 1.3em 0;
   .list_item {
-    margin: .75em 0;
-    padding: .75em 0;
+    margin: .8em 0;
+    padding: .8em 0;
   }
   dt {
-    margin-bottom: 3px;
+    margin-bottom: .28em;
     a {
       display: inline-block;
+    }
+    code {
+      font-size: 1.1em;
+      color: @propname;
+      background-color: @propname-bg;
+      font-weight: 600;
+      padding: .125em .525em;
+      border-radius: 100px;
     }
     &.version_names {
       position: relative;
@@ -540,14 +553,15 @@ main h4 {
       }
     }
   }
+  @margin-indent: 1.6em;
   .doc_item {
-    margin-left: 25px;
+    margin-left: @margin-indent;
   }
   .info_item {
     @text-indent: 20px;
     position: relative;
     font-family: @SourceCodePro;
-    margin-left: 60px + @text-indent;
+    margin-left: calc(35px + @text-indent + @margin-indent);
     text-indent: -@text-indent;
     padding: 3px 0;
     &.state {
@@ -569,15 +583,16 @@ main h4 {
       top: 0;
       bottom: 0;
     }
+    @info-guide-height: 1em;
     &:not(.special_item)::after {
       content: '';
       border-top: 2px solid @info-item-guide;
-      top: .78em;
+      top: @info-guide-height;
       width: 14px;
     }
     &:nth-last-of-type(1):not(.special_item)::before {
       top: 0;
-      height: .78em;
+      height: @info-guide-height;
     }
   }
 }

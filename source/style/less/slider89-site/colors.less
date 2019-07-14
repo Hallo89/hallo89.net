@@ -1,62 +1,56 @@
 // main: index.less
 
+@import (reference) '../colors.less';
+
+@main-color: hsl(0, 0%, 78%);
+
 @nav-item: hsl(0, 0%, 65%);
 @nav-item-underline: hsl(0, 0%, 45%);
 @nav-item-hover: hsl(0, 0%, 70%);
 @nav-item-underline-hover: hsl(0, 0%, 55%);
 
-@main-color: hsl(0, 0%, 68%);
-
-@h2: hsl(0, 0%, 66%);
-@h3: hsl(0, 0%, 70%);
-@h4: hsl(0, 0%, 65%);
-@hr: hsl(0, 0%, 35%);
+@h2: lighten(@main-color, 2%);
+@h3: @main-color;
+@h4: darken(@main-color, 2%);
+@hr: lighten(@background-color, 14%);
 
 @general-link: #1398A9;
 @general-link-visited: #469870;
-@general-link-active: #A84E4E;
-@general-link-bg-hover: fade(@general-link, 18%);
+@general-link-bg: fade(@general-link, 18%);
 @general-link-bg-visited: fade(@general-link-visited, 18%);
-@general-link-bg-active: fade(@general-link-active, 18%);
 
-@code-link: hsl(0, 0%, 76%);
-@code-link-active: mix(@code-link-bg-hover-visited, hsl(0, 0%, 60%), 70%);
-@code-link-underline: hsl(0, 0%, 50%);
-@code-link-underline-hover: hsl(0, 0%, 50%);
-@code-link-bg-hover: hsla(0, 0%, 60%, .1);
-@code-link-bg-hover-visited: hsla(0, 0%, 60%, .18);
-@code-link-bg-hover-active: fade(@code-link-active, 18%);
+@code: lighten(@main-color, 4%);
+@code-bg: lighten(@background-color, 5.5%);
 
-@code: hsl(0, 0%, 70%);
-@code-bg: hsl(0, 0%, 13.5%);
+@dd-link-hover: lighten(@main-color, 8%);
+@dd-link-active: lighten(@main-color, 4%);
 
-@copy-btn-bg: hsl(0, 0%, 17%);
-@copy-btn-shadow: hsla(0, 0%, 12%, .2);
-@copy-btn-shadow-active: hsla(0, 0%, 10%, .25);
-@copy-btn-bg-active: hsl(0, 0%, 18%);
-@copy-checkmark: hsl(0, 0%, 70%);
+@code-link-hover: lighten(@code, 8%);
+@code-link-active: lighten(@code, 4%);
 
-@propname: hsl(0, 0%, 78%);
-@propname-bg: hsl(0, 0%, 18.5%);
+@copy-btn-bg: lighten(@code-bg, 4%);
+@copy-btn-bg-active: lighten(@copy-btn-bg, 1%);
+@copy-checkmark: lighten(@main-color, 6%);
 
-@heading-anchor: hsl(0, 0%, 60%);
+@propname: lighten(@main-color, 8%);
+@propname-bg: lighten(@background-color, 10.5%);
 
-@h4-expand-btn: hsl(0, 0%, 55%);
-@h4-expand-btn-bg: hsl(0, 0%, 18%);
+@h4-expand-btn: darken(@main-color, 10%);
+@h4-expand-btn-bg: lighten(@background-color, 10%);
 
-@version-select-bg: hsl(0, 0%, 13%);
-@version-select-btn: hsl(0, 0%, 65%);
-@version-select-btn-bg: hsl(0, 0%, 80%);
-@version-select-btn-active: hsl(0, 0%, 16%);
+@version-select-bg: lighten(@background-color, 5%);
+@version-select-btn: @main-color;
+@version-select-btn-bg: lighten(@main-color, 13%);
+@version-select-btn-active: @background-color;
 
-@tab-default: hsl(0, 0%, 20%);
+@tab-default: lighten(@background-color, 11.5%);
 @tab-new: #214031;
 @tab-current: #1f4252;
 @tab-incompatible: #983838;
 
-@version-banner: hsl(0, 0%, 75%);
+@version-banner: @main-color;
 @version-banner-bg: fade(@tab-incompatible, 35%);
 
 @info-state: #904851;
 
-@info-item-guide: hsl(0, 0%, 37%);
+@info-item-guide: lighten(@background-color, 27%);
