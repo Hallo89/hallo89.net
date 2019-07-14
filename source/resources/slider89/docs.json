@@ -64,7 +64,7 @@
           "task": {
             "description": "This property takes a reference to a function to be executed every time the slider is moved (event: i//mousemove). A em{//function reference//} is either an anonymous function or a declared function without parentheses",
             "attributes": {
-              "type": "function",
+              "type": "function reference",
               "default": "undefined"
             }
           },
@@ -72,7 +72,7 @@
             "version": "0.1.1",
             "description": "This property behaves similarly to code+a#//task but it is only executed every time the mouse button is released after the slider has been interacted with (event: i//mouseup)",
             "attributes": {
-              "type": "function",
+              "type": "function reference",
               "default": "undefined"
             }
           },
@@ -293,7 +293,7 @@
             "description": "A function evaluating whether a handed-over code+a#//task is valid. If it is, write it into the specified code//target which is an object with the Slider89 infrastructure, so either code+a#//Slider89 or the code+a#Methods--The-${//slider89 object//}/br!//If the task is no valid function, for example declared em//with parentheses, throw an error into the console",
             "definitions": {
               "target": "The i//object to write into; either the slider instance (see a#Slider89//constructor) or the code+a#Methods--The-${//slider89 object//}",
-              "task": "i{//function reference//}: One of code+a#//task and code+a#//taskMouseUp"
+              "task": "i{//function reference//}: code+a#//task"
             },
             "attributes": {
               "influencing": "a#//task"
@@ -349,7 +349,7 @@
     }
   },
   "HTML & CSS structure": {
-    "description": "As of version code//0.2.0 (with the introduction of the code+a#(${f}){//structure system//}), CSS has been split into two sections: crucial and non-crucial. Crucial CSS is declared with a strict code{//.slider89 .slider_{sliderPart}//}, whereas uncrucial styles are matched with the new class code{//.slider89_{sliderPart}//}. This ensures a good ability to style the slider without the user having to nest their selectors to overcome the strict selectors.",
+    "description": "As of version code//0.2.0 (with the introduction of the a#(${f}){//structure system//}), CSS has been split into two sections: crucial and non-crucial. Crucial CSS is declared with a strict code{//.slider89 .slider_{sliderPart}//}, whereas uncrucial styles are matched with the new class code{//.slider89_{sliderPart}//}. This ensures a good ability to style the slider without the user having to nest their selectors to overcome the strict selectors.",
     "values": {
       "HTML structure": [
         {
