@@ -4,6 +4,13 @@
 
 @import 'fonts';
 
+.noselect() {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 body {
   margin: 0;
   font-size: calc(.12vw + .06vh + 15.14px);
@@ -93,7 +100,14 @@ main {
   }
 
   h4 {
+    font-size: 1.58em;
     font-family: @SourceCodePro;
+    margin: 1.2em 0;
+    color: @h4;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
   }
 
   hr {
@@ -109,6 +123,9 @@ main {
     a {
       border-bottom: 1px solid;
       padding: 1px;
+      &:active {
+        transition: background-color .05s ease-in-out;
+      }
     }
   }
   p a {
@@ -134,6 +151,7 @@ main {
       border-color: @dd-link-hover;
     }
     &:active {
+      background-color: @dd-link-bg-active;
       color: @dd-link-active;
       border-color: @dd-link-active;
     }
@@ -145,6 +163,7 @@ main {
       border-color: @code-link-hover;
     }
     &:active {
+      background-color: inherit;
       color: @code-link-active;
       border-color: @code-link-active;
     }
@@ -274,6 +293,7 @@ main .version_notice code {
   font-family: @Consolas;
   opacity: .25;
   transition: all .1s ease-in-out;
+  .noselect();
   h4 & {
     margin: 0 0 0 10px;
   }
@@ -284,16 +304,6 @@ main {
       opacity: 1;
     }
   }
-}
-
-main h4 {
-  font-size: 1.58em;
-  margin: 1.2em 0;
-  color: @h4;
-  cursor: pointer;
-  position: relative;
-  display: flex;
-  align-items: center;
 }
 
 .list_section {
@@ -424,6 +434,7 @@ main h4 {
       .indicator_item {
         border-bottom: 4px solid @tab-default;
         flex: 1;
+        .noselect();
         .tab-variant(@class, @color) {
           &.@{class} {
             border-color: @color;
@@ -485,6 +496,28 @@ main h4 {
         }
       }
     }
+    dt.version_names {
+      position: relative;
+      a {
+        transition: all .15s ease-in-out;
+        &.name_version {
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          opacity: 0;
+          transition: all .15s .025s ease-in-out;
+          &.active {
+            opacity: 1;
+          }
+        }
+        &.inactive {
+          transition: all .15s .025s ease-in-out;
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+    }
     .versions {
       position: relative;
       overflow: hidden;
@@ -529,28 +562,6 @@ main h4 {
       font-weight: 600;
       padding: .125em .525em;
       border-radius: 100px;
-    }
-    &.version_names {
-      position: relative;
-      a {
-        transition: all .15s ease-in-out;
-        &.name_version {
-          position: absolute;
-          top: 0;
-          left: 0;
-          bottom: 0;
-          opacity: 0;
-          transition: all .15s .025s ease-in-out;
-          &.active {
-            opacity: 1;
-          }
-        }
-        &.inactive {
-          transition: all .15s .025s ease-in-out;
-          opacity: 0;
-          visibility: hidden;
-        }
-      }
     }
   }
   @margin-indent: 1.6em;
@@ -608,11 +619,4 @@ main h4 {
 
 .nodisplay {
   display: none;
-}
-
-.noselect {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 }

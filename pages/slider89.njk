@@ -134,7 +134,7 @@
             {{- ' active' if active}}
             {{- ' new' if 'v' + verObj.version == gitData[0].tag_name}}
             {{- ' incompatible' if verObj.version_modifier == 'deprecated' and compareVer('v' + verObj.version, gitData[0].tag_name) == 'smaller' }}
-            {{- ' deprecate' if verObj.version_modifier == 'deprecated' }} noselect"><strong>{{ displayVer }}</strong></span>
+            {{- ' deprecate' if verObj.version_modifier == 'deprecated' }}"><strong>{{ displayVer }}</strong></span>
         {%- endmacro -%}
 
         {%- macro propList(values, presets) -%}
