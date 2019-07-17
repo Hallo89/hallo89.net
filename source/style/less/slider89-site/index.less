@@ -1,8 +1,6 @@
 // out: ../../css/slider89-site/index.css, sourcemap: false, compress: false
 
-@import (reference) 'colors';
-
-@import 'fonts';
+@import (reference) 'vars';
 
 .noselect() {
   -webkit-user-select: none;
@@ -562,12 +560,10 @@ main .version_notice code {
       border-radius: 100px;
     }
   }
-  @margin-indent: ~'.5vw + .15vh + .98em';
   .doc_item {
     margin-left: calc(@margin-indent);
   }
   .info_item {
-    @text-indent: 20px;
     position: relative;
     font-family: @SourceCodePro;
     margin-left: calc(35px + @text-indent + @margin-indent);
@@ -592,7 +588,6 @@ main .version_notice code {
       top: 0;
       bottom: 0;
     }
-    @info-guide-height: 1em;
     &:not(.special_item)::after {
       content: '';
       border-top: 2px solid @info-item-guide;
