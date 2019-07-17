@@ -13,7 +13,7 @@
 
 body {
   margin: 0;
-  font-size: calc(.12vw + .06vh + 15.14px);
+  font-size: calc(.05vw + .025vh + 16.82px);
   font-family: @FiraSans;
 }
 
@@ -65,7 +65,7 @@ var {
       margin: 0 .5em;
       border-bottom: 2px solid @nav-item-underline;
       white-space: nowrap;
-      transition: all .15s ease-in-out;
+      transition: color .15s ease-in-out, border-color .15s ease-in-out;
       &:hover {
         color: @nav-item-hover;
         border-color: @nav-item-underline-hover;
@@ -75,22 +75,21 @@ var {
 }
 
 main {
-  max-width: 1000px;
-  margin: calc(2vh + .75vw + 16.29px) auto 200px;
-  padding: 0 .63em;
+  max-width: calc(15vw + 2.5vh + 685px);
+  margin: calc(2vh + .75vw + 14px) auto 200px;
+  padding: 0 .5em;
   color: @main-color;
   line-height: 1.58;
   section {
-    margin: auto;
-    max-width: 900px;
-    /* Ensuring a minimum amount of indent when the viewport width gehts smaller */
-    padding: 0 1.45em;
+    margin: 2em auto;
+    padding: 0 1.8em;
   }
 
   h2 {
     color: @h2;
     font-size: 2.2em;
     font-family: @FiraSans;
+    margin: 0;
   }
 
   h3 {
@@ -110,6 +109,24 @@ main {
     align-items: center;
   }
 
+  h2, h3, h4 {
+    margin-left: -1.12em;
+    display: flex;
+    align-items: center;
+    &:hover .icon_anchor {
+      opacity: 1;
+    }
+  }
+
+  .icon_anchor {
+    margin: 0 .435em 0 0;
+    padding: 0 2px;
+    font-family: 'Consolas', 'San Francisco Monospaced', 'Arial', 'Source Code Pro', monospace;
+    opacity: .25;
+    transition: all .1s ease-in-out;
+    .noselect();
+  }
+
   hr {
     border: none;
     border-top: 2px solid @hr;
@@ -118,7 +135,9 @@ main {
   h3, hr {
     font-size: 1.82em;
   }
+}
 
+main {
   code, p, dd, .version_notice {
     a {
       border-bottom: 1px solid;
@@ -191,6 +210,60 @@ main {
   }
 }
 
+.list_section {
+  .collapsible.collapsed {
+    height: 0;
+    display: none;
+  }
+  .expand_button {
+    flex-shrink: 0;
+    margin-left: .43em;
+    height: .833em;
+    width: .833em;
+    border: none;
+    color: @h4-expand-btn;
+    background-color: @h4-expand-btn-bg;
+    font-size: 1em;
+    font-family: 'Source Code Pro', 'Lucida Console', 'DejaVu Sans Mono', 'Century', 'Century Gothic', 'Consolas', 'San Francisco Monospaced', sans-serif;
+    padding: 0;
+    border-radius: 100px;
+    .symbols {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all .55s ease;
+    }
+    .symbol {
+      position: absolute;
+      transition: all .38s cubic-bezier(.35,.1,.35,1);
+      &.plus {
+        visibility: hidden;
+        transform: Scale(0);
+      }
+    }
+    &.active {
+      .symbols {
+        transform: rotateZ(360deg);
+      }
+      .symbol {
+        &.minus {
+          transform: Scale(0);
+          visibility: hidden;
+          animation: preventHidden .8s linear;
+          @keyframes preventHidden {
+            from { visibility: visible; }
+            to   { visibility: visible; }
+          }
+        }
+        &.plus {
+          transform: Scale(1);
+          visibility: visible;
+        }
+      }
+    }
+  }
+}
+
 main code {
   padding: .125em .25em;
   border-radius: 2px;
@@ -229,7 +302,7 @@ main .version_notice code {
     border: none;
     overflow: hidden;
     font-size: 1.15em;
-    font-family: @Consolas;
+    font-family: @SourceCodePro;
     transition: all .3s ease;
     &:hover, &.active {
       padding: 0 15px;
@@ -286,83 +359,9 @@ main .version_notice code {
   }
 }
 
-.icon_anchor {
-  margin: 0 14px 0 -39px;
-  padding: 0 2px;
-  text-decoration: none;
-  font-family: @Consolas;
-  opacity: .25;
-  transition: all .1s ease-in-out;
-  .noselect();
-  h4 & {
-    margin: 0 0 0 10px;
-  }
-}
-main {
-  h2, h3, h4 {
-    &:hover .icon_anchor {
-      opacity: 1;
-    }
-  }
-}
-
-.list_section {
-  .collapsible.collapsed {
-    height: 0;
-    display: none;
-  }
-  .expand_button {
-    position: absolute;
-    left: -1.166em;
-    height: .833em;
-    width: .833em;
-    border: none;
-    color: @h4-expand-btn;
-    background-color: @h4-expand-btn-bg;
-    font-size: 1em;
-    font-family: 'Source Code Pro', 'Lucida Console', 'DejaVu Sans Mono', 'Century', 'Century Gothic', 'Consolas', 'San Francisco Monospaced', sans-serif;
-    padding: 0;
-    border-radius: 100px;
-    .symbols {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: all .55s ease;
-    }
-    .symbol {
-      position: absolute;
-      transition: all .38s cubic-bezier(.35,.1,.35,1);
-      &.plus {
-        visibility: hidden;
-        transform: Scale(0);
-      }
-    }
-    &.active {
-      .symbols {
-        transform: rotateZ(360deg);
-      }
-      .symbol {
-        &.minus {
-          transform: Scale(0);
-          visibility: hidden;
-          animation: preventHidden .8s linear;
-          @keyframes preventHidden {
-            from { visibility: visible; }
-            to   { visibility: visible; }
-          }
-        }
-        &.plus {
-          transform: Scale(1);
-          visibility: visible;
-        }
-      }
-    }
-  }
-}
-
 .version_select {
   background-color: @version-select-bg;
-  padding: 15px 30px;
+  padding: .55em 1.2em;
   font-size: 1.3em;
   display: flex;
   .version_buttons {
@@ -376,10 +375,10 @@ main {
     border: none;
     color: @version-select-btn;
     font-size: .9em;
-    font-family: 'San Francisco Monospaced', 'Consolas', monospace;
+    font-family: @Consolas;
     z-index: 0;
     padding: 6px 10px;
-    transition: all .2s ease;
+    transition: color .2s ease;
     &::before {
       content: '';
       position: absolute;
@@ -389,7 +388,7 @@ main {
       height: 0;
       z-index: -1;
       background-color: @version-select-btn-bg;
-      transition: all .2s ease;
+      transition: height .2s ease;
     }
     &:hover, &.active {
       color: @version-select-btn-active;
@@ -407,7 +406,7 @@ main {
       padding: 0 .85em;
       font-size: 0;
       font-weight: bold;
-      font-family: San Francisco Monospaced, Consolas, monospace;
+      font-family: @Consolas;
       color: @version-banner;
       background-color: @version-banner-bg;
       border-radius: 3px;
@@ -458,7 +457,6 @@ main {
           display: block;
           padding: .2em 1em;
           position: relative;
-          transition: all .1s ease;
           &::before {
             content: '';
             position: absolute;
@@ -523,7 +521,7 @@ main {
       overflow: hidden;
       .prop_version {
         width: 100%;
-        transition: all .3s cubic-bezier(.65, .1, .1, 1), height .125s cubic-bezier(.45, .05, .3, .9), opacity .25s ease-in-out;
+        transition: transform .3s cubic-bezier(.65, .1, .1, 1), visibility .3s cubic-bezier(.65, .1, .1, 1), height .125s cubic-bezier(.45, .05, .3, .9), opacity .25s ease-in-out;
         &:not(.active) {
           visibility: hidden;
           position: absolute;
@@ -544,7 +542,7 @@ main {
 
 .doc_list {
   list-style-type: none;
-  padding-left: 20px;
+  padding-left: calc(1vw + .15vh - .04em);
   margin: 1.3em 0;
   .list_item {
     margin: .8em 0;
@@ -564,9 +562,9 @@ main {
       border-radius: 100px;
     }
   }
-  @margin-indent: 1.6em;
+  @margin-indent: ~'.5vw + .15vh + .98em';
   .doc_item {
-    margin-left: @margin-indent;
+    margin-left: calc(@margin-indent);
   }
   .info_item {
     @text-indent: 20px;
@@ -620,3 +618,5 @@ main {
 .nodisplay {
   display: none;
 }
+
+@import 'media';

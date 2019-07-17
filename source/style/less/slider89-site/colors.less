@@ -4,10 +4,12 @@
 
 @main-color: hsl(0, 0%, 78%);
 
-@nav-item: hsl(0, 0%, 65%);
-@nav-item-underline: hsl(0, 0%, 45%);
-@nav-item-hover: hsl(0, 0%, 70%);
-@nav-item-underline-hover: hsl(0, 0%, 55%);
+@nav: darken(@main-color, 6%);
+@nav-item: @nav;
+@nav-item-underline: darken(@nav-item, 15%);
+@nav-item-hover: lighten(@nav-item, 5%);
+@nav-item-underline-hover: lighten(@nav-item-underline, 8%);
+@nav-media-bg: lighten(@background-color, 4%);
 
 @h2: lighten(@main-color, 4%);
 @h3: lighten(@main-color, 2%);
@@ -36,8 +38,8 @@
 @propname: lighten(@main-color, 8%);
 @propname-bg: lighten(@background-color, 10.5%);
 
-@h4-expand-btn: darken(@main-color, 10%);
-@h4-expand-btn-bg: lighten(@background-color, 10%);
+@h4-expand-btn: darken(@main-color, 8%);
+@h4-expand-btn-bg: lighten(@background-color, 11%);
 
 @version-select-bg: lighten(@background-color, 5%);
 @version-select-btn: @main-color;

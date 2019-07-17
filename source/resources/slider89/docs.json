@@ -190,7 +190,7 @@
     "categories": {
       "Constructor": {
         "values": {
-          "var//sliderInstance = Slider89(var//targetNode[, var//configProperties])": {
+          "var//sliderInstance = Slider89(/wbr!//var//targetNode[, var//configProperties])": {
             "description": "The code//Slider89 class and its constructor; initialize a slider instance by using the code//new keyword in front of it and binding it to a variable./br!//Example: div:class(codeblock)+code{//const mySlider = new Slider89(someElement);//} A more advanced example with a configured slider: pre:class(codeblock)+code{//const mySlider = new Slider89(someElement, {\n  max: 400,\n  value: 300,\n  replaceNode: true\n});//}",
             "definitions": {
               "targetNode": "i{//DOM node//}: Creation target of the slider instance",
@@ -205,7 +205,7 @@
       "Instance functions": {
         "description": "Functions under this category are called on a slider instance",
         "values": {
-          "var//sliderInstance|.newValues(var//configProperties)": {
+          "var//sliderInstance|.newValues(/wbr!//var//configProperties)": {
             "description": "This function restructures the slider it was called on with configuration properties given as a parameter./br!//Although properties strong//could be overriden using code{//var//sliderInstance|.var//configProperty = var//newValue//}, this function ensures every dependent and dependency is restructured as well. For example, it writes a new caption into the element, it sets a new width of the element, etc./br!//Additionally, if code//min or code//max is changed, the code+a#//value recomputes itself based on the previous min-max-ratio/br!//In the future, I may find a way to deprecate this function",
             "definitions": {
               "sliderInstance": "A i{//slider instance//} (see the code+a#//Slider89 constructor)",
@@ -220,7 +220,7 @@
       "The code//slider89 object": {
         "description": "'code//slider89|' (take notice that it's a lowercase \"s\"!) is a standalone object used for functions which are called without a reference to a slider instance",
         "values": {
-          "slider89.defaultValues(var//configProperties)": {
+          "slider89.defaultValues(/wbr!//var//configProperties)": {
             "description": "Called before a slider is created, it sets default configuration properties implicitly applied to every afterwards created slider instance",
             "definitions": {
               "slider89": "A standalone i//object storing global values",
@@ -236,7 +236,7 @@
           "state": "INTERNAL"
         },
         "values": {
-          "var//element = var//sliderInstance|.buildElement(var//targetNode, var//replaceNode)": [
+          "var//element = var//sliderInstance|.buildElement(/wbr!//var//targetNode, var//replaceNode)": [
             {
               "version": "0.2.0",
               "description": "Builds the slider's a#{//HTML structure//} into the specified code//targetNode, adding additional classes from the code+a#//classList property, if present. If code+a#//replaceNode is true, it replaces code//targetNode (acquired from code+a#//Slider89)./br!//The object containing all HTML elements of the final a#{//HTML structure//} (acquired from code+a#//parseHTML) is returned to be written into code+a#//element",
@@ -264,7 +264,7 @@
               }
             }
           ],
-          "var//sliderInstance|.executeSlider(var//clickedCoordinate)": {
+          "var//sliderInstance|.executeSlider(/wbr!//var//clickedCoordinate)": {
             "description": "This function is executed every time the code//mousemove event, and more specifically the code+a#//mouseMove function, is fired and handles the value, tooltip, specified code+a#//task|/code+a#//taskMouseUp function, etc.",
             "definitions": {
               "clickedCoordinate": "i//int: A screen-related x-coordinate where the mouse has been clicked"
@@ -274,7 +274,7 @@
               "influencing": "a#//value, a#//tipTimer, a#//taskLock"
             }
           },
-          "var//result = var//sliderInstance|.checkTask(var//task)": {
+          "var//result = var//sliderInstance|.checkTask(/wbr!//var//task)": {
             "version": "0.1.1",
             "version_predecessor": "a#//setTask",
             "description": "A function evaluating whether a handed-over code//task is valid:/br!//If it is, plainly return it without doing anything, if not, for example because it has been declared em//with parentheses (which Javascript cannot explicitly check), throw an error into the console and return code//false",
@@ -286,7 +286,7 @@
               "influencing": "a#//task, a#//taskMouseUp"
             }
           },
-          "var//sliderInstance|.setTask(var//target, var//task)": {
+          "var//sliderInstance|.setTask(/wbr!//var//target, var//task)": {
             "version": "0.1.0",
             "version_modifier": "deprecated",
             "version_successor": "a#//checkTask",
@@ -299,7 +299,7 @@
               "influencing": "a#//task"
             }
           },
-          "var//finalWidth = var//sliderInstance|.computeWidth(var//width)": [
+          "var//finalWidth = var//sliderInstance|.computeWidth(/wbr!//var//width)": [
             {
               "version": "0.1.1",
               "description": "If code//width is code//'auto', compute the width automatically based on code+a#//min and code+a#//max, if it isn't, only take code+a#//absWidth into account",
@@ -314,7 +314,7 @@
             },
             {
               "version": "0.1.0",
-              "name": "var//finalWidth = var//sliderInstance|.computeWidth(var//valueObject)",
+              "name": "var//finalWidth = var//sliderInstance|.computeWidth(/wbr!//var//valueObject)",
               "description": "If the code//valueObject|'s code+a#//width is code//'auto', compute the width automatically based on code+a#//min and code+a#//max, if it isn't, only take code+a#//absWidth into account",
               "definitions": {
                 "finalWidth": "i//int: The final computed width of the passed width",
@@ -326,7 +326,7 @@
               }
             }
           ],
-          "var//htmlNodes = var//sliderInstance|.parseHTML(var//structure)": {
+          "var//htmlNodes = var//sliderInstance|.parseHTML(/wbr!//var//structure)": {
             "version": "0.2.0",
             "description": "This function will parse a given code+a#//structure into valid HTML, taking every attribute, inner text content etc. into account./br!//It will return every created HTML node in an object, with the in the structure specified tag name as object name",
             "definitions": {
@@ -338,7 +338,7 @@
               "influencing": "a#//buildElement, a#{//HTML structure//}"
             }
           },
-          "var//sliderInstance|.mouseMove(var//event)": {
+          "var//sliderInstance|.mouseMove(/wbr!//var//event)": {
             "description": "Is executed by the mousemove event, being its own function for the ability to remove the event listener afterwards, and executing code+a#//executeSlider, passing the parameter of the event.",
             "definitions": {
               "event": "The i//event parameter handed over by the event listener"

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1">
     <meta charset="utf-8">
     <title>Slider89 | Hallo89</title>
     <link rel="stylesheet" href="../global.css">
@@ -100,7 +101,7 @@
         </p>
         <div class="demo_block" id="demo_1_plain"></div>
         <p>
-          However, what would a library be without means of configuration? To configure it we pass an additional parameter as object into the <a href="#functions-constructor">Slider89 constructor </a> which we fill with <a href="#properties-config">configuration-properties</a>. Here's an example:
+          However, what would a library be without means of configuration? To configure it we pass an additional parameter as object into the <a href="#functions-constructor">Slider89 constructor </a> which we fill with <a href="#properties-config">configuration properties</a>. Here's an example:
         </p>
         <pre class="codeblock"><code>const mySlider = new Slider89(targetElement, {
   min: -50,
@@ -268,6 +269,7 @@
               {% set presets = categoryVal.presets -%}
               <div class="list_section" id="{{ categoryID }}">
                 <h4>
+                  <a href="#{{ categoryID }}" class="icon_anchor">#</a>
                   <span>{{ category | e | argonize | safe }}</span>
                   <button class="expand_button {{-' active' if categoryVal.collapsed == true}}">
                     <div class="symbols">
@@ -275,7 +277,6 @@
                       <span class="symbol minus">-</span>
                     </div>
                   </button>
-                  <a href="#{{ categoryID }}" class="icon_anchor">#</a>
                 </h4>
                 <div class="collapsible {{-' collapsed' if categoryVal.collapsed == true}}">
                   {% if categoryVal.description -%}
@@ -424,7 +425,7 @@
 
       function toggleCollapsible(e) {
         if (!e.target.classList.contains('icon_anchor')) {
-          this.children[this.children.length - 2].classList.toggle('active');
+          this.lastElementChild.classList.toggle('active');
           this.nextElementSibling.classList.toggle('collapsed');
         }
       }
