@@ -558,8 +558,8 @@ main .version_notice code {
   margin: 1.3em 0;
 }
 .doc_list .list_item {
-  margin: 0.8em 0;
-  padding: 0.8em 0;
+  margin: calc(0.15vw + 0.65vh + 0.252em) 0;
+  padding: calc(0.15vw + 0.65vh + 0.252em) 0;
 }
 .doc_list dt {
   margin-bottom: 0.28em;
