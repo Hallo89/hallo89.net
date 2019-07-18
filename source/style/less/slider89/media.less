@@ -1,5 +1,25 @@
 // main: index.less
 
+@media (max-width: 390px) {
+  #navbar {
+    .text {
+      .name {
+        transform: translateX(-100%);
+        visibility: hidden;
+        clip-path: inset(0 0 0 100%);
+      }
+      .arrow, h1 {
+        transform: translateX(-3.75em);
+      }
+    }
+  }
+}
+@media (max-width: 460px) {
+  #navbar {
+    align-items: stretch;
+  }
+}
+
 @media (max-width: 630px) {
   .version_select {
     flex-direction: column;
@@ -11,7 +31,7 @@
   }
 }
 
-@media (max-width: 940px) {
+@media (max-width: 960px) {
   body {
     font-size: calc(0.3vw + 0.1vh + 13.85px);
   }
@@ -20,6 +40,11 @@
     padding: 0;
     .text {
       margin: .4em;
+    }
+    #modes {
+      position: absolute;
+      top: .6em;
+      right: .4em;
     }
     #id_nav {
       width: 100%;

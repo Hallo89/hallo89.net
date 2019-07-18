@@ -6,18 +6,21 @@
     <title>Slider89 | Hallo89</title>
     <link rel="stylesheet" href="../global.css">
     <link rel="stylesheet" href="index.css">
-    <script src="../global.js"></script>
+    <script src="/global.js"></script>
+    <script src="/global-themes.js"></script>
   </head>
   <body>
     {% import 'templates/navbar.njk' as navbar %}
 
-    {% call navbar.navbar(page, 'h1', false, true) %}
+    {% call navbar.navbar(page, 'h1', true, true) %}
     <nav id="id_nav">
-      <a href="#what">What is this?</a>
-      <a href="#starting">Getting started</a>
-      <a href="#Properties">Properties</a>
-      <a href="#Methods">Methods</a>
-      <a href="#HTML">HTML & CSS structure</a>
+      <ul>
+        <li><a href="#what">What is this?</a></li>
+        <li><a href="#starting">Getting started</a></li>
+        <li><a href="#Properties">Properties</a></li>
+        <li><a href="#Methods">Methods</a></li>
+        <li><a href="#HTML">HTML & CSS structure</a></li>
+      </ul>
     </nav>
     {%- endcall %}
     <main>
@@ -295,6 +298,8 @@
     </main>
 
     <link rel="stylesheet" href="fonts.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css">
     <script>
       const h4s = document.getElementsByTagName('h4');
       const versionSwitch = document.querySelector('.version_select');

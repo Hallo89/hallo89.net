@@ -34,17 +34,35 @@ var {
 #navbar .text {
   margin-right: 0.6em;
 }
+#navbar .text .name {
+  clip-path: inset(0 0 0 0);
+}
+#navbar .text .name,
+#navbar .text .arrow,
+#navbar .text h1 {
+  transition: transform 0.25s cubic-bezier(0.5, 0.1, 0.25, 1.16), clip-path 0.25s cubic-bezier(0.5, 0.1, 0.25, 1.16), visibility 0.25s cubic-bezier(0.5, 0.1, 0.25, 1.16);
+}
+#navbar #modes {
+  margin: 0 0.2em 0 0.6em;
+}
 #navbar #id_nav {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
   flex-grow: 1;
   font-size: 0.74em;
   font-family: 'San Francisco Monospaced', 'Consolas', 'Source Code Pro', monospace;
 }
+#navbar #id_nav ul {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#navbar #id_nav li {
+  margin: 0 0.5em;
+}
 #navbar #id_nav a {
   color: hsl(0, 0%, 72%);
-  margin: 0 0.5em;
   border-bottom: 2px solid hsl(0, 0%, 57%);
   white-space: nowrap;
   transition: color 0.15s ease-in-out, border-color 0.15s ease-in-out;
@@ -599,6 +617,22 @@ main .version_notice code {
 .nodisplay {
   display: none;
 }
+@media (max-width: 390px) {
+  #navbar .text .name {
+    transform: translateX(-100%);
+    visibility: hidden;
+    clip-path: inset(0 0 0 100%);
+  }
+  #navbar .text .arrow,
+  #navbar .text h1 {
+    transform: translateX(-3.75em);
+  }
+}
+@media (max-width: 460px) {
+  #navbar {
+    align-items: stretch;
+  }
+}
 @media (max-width: 630px) {
   .version_select {
     flex-direction: column;
@@ -609,7 +643,7 @@ main .version_notice code {
     justify-content: space-around;
   }
 }
-@media (max-width: 940px) {
+@media (max-width: 960px) {
   body {
     font-size: calc(0.3vw + 0.1vh + 13.85px);
   }
@@ -619,6 +653,11 @@ main .version_notice code {
   }
   #navbar .text {
     margin: 0.4em;
+  }
+  #navbar #modes {
+    position: absolute;
+    top: 0.6em;
+    right: 0.4em;
   }
   #navbar #id_nav {
     width: 100%;
