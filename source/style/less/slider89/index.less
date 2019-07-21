@@ -1,6 +1,7 @@
 // out: ../../css/slider89/index.css, sourcemap: false, compress: false
 
 @import (reference) 'vars';
+@import (reference) '../mixins';
 
 .noselect() {
   -webkit-user-select: none;
@@ -13,6 +14,10 @@ body {
   margin: 0;
   font-size: calc(.05vw + .025vh + 16.82px);
   font-family: @FiraSans;
+
+  html.light-mode & {
+    background-color: @main-bg--lt;
+  }
 }
 
 button {
@@ -148,9 +153,30 @@ main {
     border: none;
     border-top: 2px solid @hr;
     margin: .65em 0;
+    .mode-transition.border();
   }
   h3, hr {
     font-size: 1.82em;
+  }
+
+  &, h2, h3, h4 {
+    .mode-transition.color();
+  }
+
+  html.light-mode & {
+    color: @main-color--lt;
+    h2 {
+      color: @h2--lt;
+    }
+    h3 {
+      color: @h3--lt;
+    }
+    h4 {
+      color: @h4--lt;
+    }
+    hr {
+      border-color: @hr--lt;
+    }
   }
 }
 
@@ -159,6 +185,8 @@ main {
     a {
       border-bottom: 1px solid;
       padding: 1px;
+      .mode-transition.color();
+      transition+: border-color .15s linear;
       &:active {
         transition: background-color .05s ease-in-out;
       }
@@ -204,24 +232,52 @@ main {
       border-color: @code-link-active;
     }
   }
-  //I love CSS
-  p code a {
-    color: @code;
-    &:hover {
-      color: @code-link-hover !important;
-      padding: 1px;
-      border-bottom: 1px solid;
-    }
-    &:visited {
-      border-color: inherit;
-      color: inherit;
-    }
-    &:active {
-      background-color: inherit;
-      color: @code-link-active !important;
-      border-color: @code-link-active !important;
+
+  html.light-mode & {
+    p a {
+      color: @general-link--lt;
       &:visited {
+        color: @general-link-visited--lt;
+        border-color: @general-link-visited--lt;
+      }
+      &:active {
+        background-color: @general-link-bg--lt;
+        &:visited {
+          background-color: @general-link-bg-visited--lt;
+        }
+      }
+    }
+    dd a, .version_notice a {
+      &:hover {
+        color: @dd-link-hover--lt;
+        border-color: @dd-link-hover--lt;
+      }
+      &:active {
+        background-color: @dd-link-bg-active--lt;
+        color: @dd-link-active--lt;
+        border-color: @dd-link-active--lt;
+      }
+    }
+    code a {
+      color: @code--lt;
+      &:hover {
+        color: @code-link-hover--lt;
+        border-color: @code-link-hover--lt;
+      }
+      &:active {
         background-color: inherit;
+        color: @code-link-active--lt;
+        border-color: @code-link-active--lt;
+      }
+    }
+    p code a {
+      color: @code--lt;
+      &:hover {
+        color: @code-link-hover--lt !important;
+      }
+      &:active {
+        color: @code-link-active--lt !important;
+        border-color: @code-link-active--lt !important;
       }
     }
   }
@@ -244,6 +300,8 @@ main {
     font-family: 'Source Code Pro', 'Lucida Console', 'DejaVu Sans Mono', 'Century', 'Century Gothic', 'Consolas', 'San Francisco Monospaced', sans-serif;
     padding: 0;
     border-radius: 100px;
+    .mode-transition.color();
+    .mode-transition.background();
     .symbols {
       display: flex;
       justify-content: center;
@@ -279,6 +337,13 @@ main {
       }
     }
   }
+
+  html.light-mode & {
+    .expand_button {
+      color: @h4-expand-btn--lt;
+      background-color: @h4-expand-btn-bg--lt;
+    }
+  }
 }
 
 main code {
@@ -292,9 +357,16 @@ main code, .codeblock {
   color: @code;
   background-color: @code-bg;
   font-family: @SourceCodePro;
+  .mode-transition.color();
+  .mode-transition.background();
+
+  html.light-mode & {
+    color: @code--lt;
+    background-color: @code-bg--lt;
+  }
 }
 main .version_notice code {
-  background-color: transparent;
+  background-color: transparent !important;
   padding: 0;
 }
 .codeblock {
@@ -320,7 +392,7 @@ main .version_notice code {
     overflow: hidden;
     font-size: 1.15em;
     font-family: @SourceCodePro;
-    transition: all .3s ease;
+    transition: all .25s ease;
     &:hover, &.active {
       padding: 0 15px;
       background-color: @copy-btn-bg-active;
@@ -352,14 +424,14 @@ main .version_notice code {
         background-color: @copy-checkmark;
         border-radius: 1px;
         transition: all .3s ease;
-      }
-      .mark.lower {
-        transform: rotate(-135deg);
-        width: 19px;
-      }
-      .mark.upper {
-        transform: rotate(-45deg) translateX(-4px);
-        width: 35px;
+        &.lower {
+          transform: rotate(-135deg);
+          width: 19px;
+        }
+        &.upper {
+          transform: rotate(-45deg) translateX(-4px);
+          width: 35px;
+        }
       }
     }
     &.active .checkbox {
@@ -374,6 +446,20 @@ main .version_notice code {
       }
     }
   }
+
+  html.light-mode & {
+    .copy_btn {
+      background-color: @copy-btn-bg--lt;
+      &:hover, &.active {
+        background-color: @copy-btn-bg-active--lt;
+      }
+      .checkbox {
+        .mark {
+          background-color: @copy-checkmark--lt;
+        }
+      }
+    }
+  }
 }
 
 .version_select {
@@ -381,6 +467,7 @@ main .version_notice code {
   padding: .55em 1.2em;
   font-size: 1.3em;
   display: flex;
+  .mode-transition.background();
   .version_buttons {
     display: flex;
     justify-content: space-evenly;
@@ -390,7 +477,7 @@ main .version_notice code {
     position: relative;
     background-color: unset;
     border: none;
-    color: @version-select-btn;
+    color: inherit;
     font-size: .9em;
     font-family: @Consolas;
     z-index: 0;
@@ -405,12 +492,25 @@ main .version_notice code {
       height: 0;
       z-index: -1;
       background-color: @version-select-btn-bg;
-      transition: height .2s ease;
+      transition+: height .2s ease;
+      .mode-transition.background();
     }
     &:hover, &.active {
       color: @version-select-btn-active;
       &::before {
         height: 100%;
+      }
+    }
+  }
+
+  html.light-mode & {
+    background-color: @version-select-bg--lt;
+    button {
+      &::before {
+        background-color: @version-select-btn-bg--lt;
+      }
+      &:hover, &.active {
+        color: @version-select-btn-active--lt;
       }
     }
   }
@@ -424,13 +524,14 @@ main .version_notice code {
       font-size: 0;
       font-weight: bold;
       font-family: @Consolas;
-      color: @version-banner;
+      color: @main-color;
       background-color: @version-banner-bg;
       border-radius: 3px;
       opacity: 0;
       clip-path: inset(0 0 100% 0);
       visibility: hidden;
-      transition: all .2s ease, font-size .25s ease, clip-path .15s ease-out;
+      transition+: all .2s ease, font-size .25s ease, clip-path .15s ease-out;
+      .mode-transition.color();
       &.active {
         font-size: 1.05em;
         margin: .45em 0 .45em 25px;
@@ -451,14 +552,6 @@ main .version_notice code {
         border-bottom: 4px solid @tab-default;
         flex: 1;
         .noselect();
-        .tab-variant(@class, @color) {
-          &.@{class} {
-            border-color: @color;
-            > strong::before {
-              background-color: @color;
-            }
-          }
-        }
         .tab-variant(new, @tab-new);
         .tab-variant(current, @tab-current);
         .tab-variant(incompatible, @tab-incompatible);
@@ -555,6 +648,28 @@ main .version_notice code {
       }
     }
   }
+
+  html.light-mode & {
+    &.version_item {
+      .version_notice {
+        color: @main-color--lt;
+        background-color: @version-banner-bg--lt;
+      }
+      .indicator {
+        .indicator_item {
+          border-color: @tab-default--lt;
+          .tab-variant(new, @tab-new--lt);
+          .tab-variant(current, @tab-current--lt);
+          .tab-variant(incompatible, @tab-incompatible--lt);
+          > strong {
+            &::before {
+              background-color: @tab-default--lt;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 .doc_list {
@@ -577,6 +692,8 @@ main .version_notice code {
       font-weight: 600;
       padding: .125em .525em;
       border-radius: 100px;
+      .mode-transition.color();
+      .mode-transition.background();
     }
   }
   .doc_item {
@@ -606,16 +723,38 @@ main .version_notice code {
       border-left: 2px solid @info-item-guide;
       top: 0;
       bottom: 0;
+      .mode-transition.border();
     }
     &:not(.special_item)::after {
       content: '';
       border-top: 2px solid @info-item-guide;
       top: @info-guide-height;
       width: 14px;
+      .mode-transition.border();
     }
     &:nth-last-of-type(1):not(.special_item)::before {
       top: 0;
       height: @info-guide-height;
+    }
+  }
+
+  html.light-mode & {
+    dt {
+      code {
+        color: @propname--lt;
+        background-color: @propname-bg--lt;
+      }
+    }
+    .info_item {
+      &.state {
+        color: @info-state--lt;
+      }
+      &::before {
+        border-color: @info-item-guide--lt;
+      }
+      &:not(.special_item)::after {
+        border-color: @info-item-guide--lt;
+      }
     }
   }
 }

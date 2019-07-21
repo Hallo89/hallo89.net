@@ -3,6 +3,9 @@ body {
   font-size: calc(0.05vw + 0.025vh + 16.82px);
   font-family: 'Fira Sans', 'Roboto', 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', Arial, 'San Francisco', sans-serif;
 }
+html.light-mode body {
+  background-color: hsl(0, 0%, 98%);
+}
 button {
   cursor: pointer;
 }
@@ -130,10 +133,32 @@ main hr {
   border: none;
   border-top: 2px solid hsl(0, 0%, 23%);
   margin: 0.65em 0;
+  transition: border 0.15s linear;
 }
 main h3,
 main hr {
   font-size: 1.82em;
+}
+main,
+main h2,
+main h3,
+main h4 {
+  transition: color 0.15s linear;
+}
+html.light-mode main {
+  color: hsl(0, 0%, 6%);
+}
+html.light-mode main h2 {
+  color: hsl(0, 0%, 4%);
+}
+html.light-mode main h3 {
+  color: hsl(0, 0%, 5%);
+}
+html.light-mode main h4 {
+  color: hsl(0, 0%, 6%);
+}
+html.light-mode main hr {
+  border-color: hsl(0, 0%, 84%);
 }
 main code a,
 main p a,
@@ -141,6 +166,7 @@ main dd a,
 main .version_notice a {
   border-bottom: 1px solid;
   padding: 1px;
+  transition: color 0.15s linear, border-color 0.15s linear;
 }
 main code a:active,
 main p a:active,
@@ -149,21 +175,21 @@ main .version_notice a:active {
   transition: background-color 0.05s ease-in-out;
 }
 main p a {
-  color: #1398A9;
+  color: #289FA3;
 }
 main p a:hover {
   padding: 1px 1px 0;
   border-bottom: 2px solid;
 }
 main p a:visited {
-  color: #469870;
-  border-color: #469870;
+  color: #559E6D;
+  border-color: #559E6D;
 }
 main p a:active {
-  background-color: rgba(19, 152, 169, 0.18);
+  background-color: rgba(40, 159, 163, 0.18);
 }
 main p a:active:visited {
-  background-color: rgba(70, 152, 112, 0.18);
+  background-color: rgba(85, 158, 109, 0.18);
 }
 main dd a:hover,
 main .version_notice a:hover {
@@ -188,25 +214,51 @@ main code a:active {
   color: hsl(0, 0%, 86%);
   border-color: hsl(0, 0%, 86%);
 }
-main p code a {
-  color: hsl(0, 0%, 82%);
+html.light-mode main p a {
+  color: #138296;
 }
-main p code a:hover {
-  color: hsl(0, 0%, 90%) !important;
-  padding: 1px;
-  border-bottom: 1px solid;
+html.light-mode main p a:visited {
+  color: #20806A;
+  border-color: #20806A;
 }
-main p code a:visited {
-  border-color: inherit;
-  color: inherit;
+html.light-mode main p a:active {
+  background-color: rgba(19, 130, 150, 0.18);
 }
-main p code a:active {
+html.light-mode main p a:active:visited {
+  background-color: rgba(32, 128, 106, 0.18);
+}
+html.light-mode main dd a:hover,
+html.light-mode main .version_notice a:hover {
+  color: hsl(0, 0%, 18%);
+  border-color: hsl(0, 0%, 18%);
+}
+html.light-mode main dd a:active,
+html.light-mode main .version_notice a:active {
+  background-color: hsla(0, 0%, 6%, 0.12);
+  color: hsl(0, 0%, 12%);
+  border-color: hsl(0, 0%, 12%);
+}
+html.light-mode main code a {
+  color: hsl(0, 0%, 2%);
+}
+html.light-mode main code a:hover {
+  color: hsl(0, 0%, 14%);
+  border-color: hsl(0, 0%, 14%);
+}
+html.light-mode main code a:active {
   background-color: inherit;
-  color: hsl(0, 0%, 86%) !important;
-  border-color: hsl(0, 0%, 86%) !important;
+  color: hsl(0, 0%, 8%);
+  border-color: hsl(0, 0%, 8%);
 }
-main p code a:active:visited {
-  background-color: inherit;
+html.light-mode main p code a {
+  color: hsl(0, 0%, 2%);
+}
+html.light-mode main p code a:hover {
+  color: hsl(0, 0%, 14%) !important;
+}
+html.light-mode main p code a:active {
+  color: hsl(0, 0%, 8%) !important;
+  border-color: hsl(0, 0%, 8%) !important;
 }
 .list_section .collapsible.collapsed {
   height: 0;
@@ -224,6 +276,7 @@ main p code a:active:visited {
   font-family: 'Source Code Pro', 'Lucida Console', 'DejaVu Sans Mono', 'Century', 'Century Gothic', 'Consolas', 'San Francisco Monospaced', sans-serif;
   padding: 0;
   border-radius: 100px;
+  transition: color 0.15s linear, background 0.15s linear;
 }
 .list_section .expand_button .symbols {
   display: flex;
@@ -259,6 +312,10 @@ main p code a:active:visited {
   transform: Scale(1);
   visibility: visible;
 }
+html.light-mode .list_section .expand_button {
+  color: hsl(0, 0%, 14%);
+  background-color: hsl(0, 0%, 87%);
+}
 main code {
   padding: 0.125em 0.25em;
   border-radius: 2px;
@@ -271,9 +328,15 @@ main code,
   color: hsl(0, 0%, 82%);
   background-color: hsl(0, 0%, 14.5%);
   font-family: 'Source Code Pro', 'DejaVu Sans Mono', 'Fira Mono', 'Fira Code', 'San Francisco Monospaced', 'Consolas', monospace;
+  transition: color 0.15s linear, background 0.15s linear;
+}
+html.light-mode main code,
+html.light-mode .codeblock {
+  color: hsl(0, 0%, 2%);
+  background-color: hsl(0, 0%, 92.5%);
 }
 main .version_notice code {
-  background-color: transparent;
+  background-color: transparent !important;
   padding: 0;
 }
 .codeblock {
@@ -299,7 +362,7 @@ main .version_notice code {
   overflow: hidden;
   font-size: 1.15em;
   font-family: 'Source Code Pro', 'DejaVu Sans Mono', 'Fira Mono', 'Fira Code', 'San Francisco Monospaced', 'Consolas', monospace;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
 }
 .code_copy_wrapper .copy_btn:hover,
 .code_copy_wrapper .copy_btn.active {
@@ -360,11 +423,22 @@ main .version_notice code {
     clip-path: polygon(85% 31%, 77% 23%, 41% 60%, 24% 43%, 16% 50%, 41% 76%);
   }
 }
+html.light-mode .code_copy_wrapper .copy_btn {
+  background-color: hsl(0, 0%, 88.5%);
+}
+html.light-mode .code_copy_wrapper .copy_btn:hover,
+html.light-mode .code_copy_wrapper .copy_btn.active {
+  background-color: hsl(0, 0%, 87.5%);
+}
+html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
+  background-color: hsl(0, 0%, 6%);
+}
 .version_select {
   background-color: hsl(0, 0%, 14%);
   padding: 0.55em 1.2em;
   font-size: 1.3em;
   display: flex;
+  transition: background 0.15s linear;
 }
 .version_select .version_buttons {
   display: flex;
@@ -375,7 +449,7 @@ main .version_notice code {
   position: relative;
   background-color: unset;
   border: none;
-  color: hsl(0, 0%, 78%);
+  color: inherit;
   font-size: 0.9em;
   font-family: 'San Francisco Monospaced', 'Consolas', 'Source Code Pro', monospace;
   z-index: 0;
@@ -391,7 +465,7 @@ main .version_notice code {
   height: 0;
   z-index: -1;
   background-color: hsl(0, 0%, 91%);
-  transition: height 0.2s ease;
+  transition: height 0.2s ease, background 0.15s linear;
 }
 .version_select button:hover,
 .version_select button.active {
@@ -400,6 +474,16 @@ main .version_notice code {
 .version_select button:hover::before,
 .version_select button.active::before {
   height: 100%;
+}
+html.light-mode .version_select {
+  background-color: hsl(0, 0%, 93%);
+}
+html.light-mode .version_select button::before {
+  background-color: hsl(0, 0%, 14%);
+}
+html.light-mode .version_select button:hover,
+html.light-mode .version_select button.active {
+  color: hsl(0, 0%, 98%);
 }
 .list_item.version_item .version_notice {
   margin: 0 0 0 25px;
@@ -413,7 +497,7 @@ main .version_notice code {
   opacity: 0;
   clip-path: inset(0 0 100% 0);
   visibility: hidden;
-  transition: all 0.2s ease, font-size 0.25s ease, clip-path 0.15s ease-out;
+  transition: all 0.2s ease, font-size 0.25s ease, clip-path 0.15s ease-out, color 0.15s linear;
 }
 .list_item.version_item .version_notice.active {
   font-size: 1.05em;
@@ -432,7 +516,7 @@ main .version_notice code {
   box-sizing: border-box;
 }
 .list_item.version_item .indicator .indicator_item {
-  border-bottom: 4px solid hsl(0, 0%, 20.5%);
+  border-bottom: 4px solid hsl(0, 0%, 21%);
   flex: 1;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -477,7 +561,7 @@ main .version_notice code {
   right: 0;
   bottom: 0;
   height: 0;
-  background-color: hsl(0, 0%, 20.5%);
+  background-color: hsl(0, 0%, 21%);
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   opacity: 0.5;
@@ -543,6 +627,34 @@ main .version_notice code {
 .list_item.version_list .versions .prop_version:not(.active).right {
   transform: translateX(40%);
 }
+html.light-mode .list_item.version_item .version_notice {
+  color: hsl(0, 0%, 6%);
+  background-color: rgba(188, 115, 115, 0.35);
+}
+html.light-mode .list_item.version_item .indicator .indicator_item {
+  border-color: hsl(0, 0%, 82.5%);
+}
+html.light-mode .list_item.version_item .indicator .indicator_item.new {
+  border-color: #95B3A5;
+}
+html.light-mode .list_item.version_item .indicator .indicator_item.new > strong::before {
+  background-color: #95B3A5;
+}
+html.light-mode .list_item.version_item .indicator .indicator_item.current {
+  border-color: #B8D6E0;
+}
+html.light-mode .list_item.version_item .indicator .indicator_item.current > strong::before {
+  background-color: #B8D6E0;
+}
+html.light-mode .list_item.version_item .indicator .indicator_item.incompatible {
+  border-color: #BC7373;
+}
+html.light-mode .list_item.version_item .indicator .indicator_item.incompatible > strong::before {
+  background-color: #BC7373;
+}
+html.light-mode .list_item.version_item .indicator .indicator_item > strong::before {
+  background-color: hsl(0, 0%, 82.5%);
+}
 .doc_list {
   list-style-type: none;
   padding-left: calc(1vw + 0.15vh - 0.04em);
@@ -565,6 +677,7 @@ main .version_notice code {
   font-weight: 600;
   padding: 0.125em 0.525em;
   border-radius: 100px;
+  transition: color 0.15s linear, background 0.15s linear;
 }
 .doc_list .doc_item {
   margin-left: calc(.5vw + .15vh + .98em);
@@ -577,7 +690,7 @@ main .version_notice code {
   padding: 3px 0;
 }
 .doc_list .info_item.state {
-  color: #904851;
+  color: #A84E4E;
 }
 .doc_list .info_item .definitions {
   margin-left: 15px;
@@ -595,16 +708,31 @@ main .version_notice code {
   border-left: 2px solid hsl(0, 0%, 36%);
   top: 0;
   bottom: 0;
+  transition: border 0.15s linear;
 }
 .doc_list .info_item:not(.special_item)::after {
   content: '';
   border-top: 2px solid hsl(0, 0%, 36%);
   top: 1em;
   width: 14px;
+  transition: border 0.15s linear;
 }
 .doc_list .info_item:nth-last-of-type(1):not(.special_item)::before {
   top: 0;
   height: 1em;
+}
+html.light-mode .doc_list dt code {
+  color: hsl(0, 0%, 0%);
+  background-color: hsl(0, 0%, 87.5%);
+}
+html.light-mode .doc_list .info_item.state {
+  color: #C1604D;
+}
+html.light-mode .doc_list .info_item::before {
+  border-color: hsl(0, 0%, 71%);
+}
+html.light-mode .doc_list .info_item:not(.special_item)::after {
+  border-color: hsl(0, 0%, 71%);
 }
 .demo_block {
   display: flex;
