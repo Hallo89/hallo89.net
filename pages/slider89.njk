@@ -33,7 +33,7 @@
           However, the restriction of not being able to style it very well is a point which isn't easy to ignore. People tell me that there are many ways to style a range input, to which I answer with the question whether approximately 80 lines of css (cross-browser support included) solely for one range input is worth it.
         </p>
         <p>
-          This is why I wrote a library to solve this very problem: <em>Slider89</em>, which also happened to solve a lot more problems and make life much easier. How convenient!
+          This is why I made a library to solve this very problem: <em>Slider89</em>, which also happened to solve a lot more problems. How convenient!
         </p>
 
         <hr>
@@ -42,13 +42,13 @@
           <a href="#what" class="icon_anchor">#</a>What is this?
         </h3>
         <p>
-          Slider89 is a very simple library for easily creating css sliders (range inputs). Being based on javascript and custom elements with CSS instead of a built-in browser-side &lt;input&gt;-element, it features full styling customizability but allows for rich configuration on the technical side as well. It is very useful for modifying values on the go, as an example.</p>
+          Slider89 is a very simple library for easily creating sliders (range inputs) for a webpage. Being based on custom HTML elements and Javascript instead of a built-in browser side &lt;input&gt;-element, it allows for full styling and behaviour customization. It is, for example, very useful for modifying values on the go.</p>
         <p>
           A basic slider can look like this (Its background-color is a bit darker but otherwise this is an all-default slider):
         </p>
         <div class="demo_block" id="demo_plain"></div>
         <p>
-          The values are automatically computed based on the slider's minimum and maximum values
+          Obviously, the default theme and configuration will not fit into everyone's design and use cases, but Slider89 is strong when it comes to customization. Beware, however, that it is still in an early alpha state and more features are yet to come.
         </p>
 
         <hr>
@@ -57,10 +57,10 @@
           <a href="#starting" class="icon_anchor">#</a>Getting started
         </h3>
         <p>
-          Like usual when needing external resources, you first need to fetch the necessary files and load them up into your HTML document.<br>
-          There are two ways of doing this: you can either download them from the github repository, <a href="https://github.com/Hallo89/Slider89">https://github.com/Hallo89/Slider89</a>, or fetch the files from the repository's website as seen below to <em>always</em> get the latest available version.<br>
-          In both cases only two files are needed: <code>slider89.js</code> and <code>slider89.css</code><br>
-          You'll then need to link them in your HTML file like so:
+          Slider89 is a client-side library (I don't know yet how useful it is to have it on NPM), so you first need to fetch the necessary files and load them up into your HTML document.<br>
+          There are two ways of doing this: you can either download them from its repository on GitHub, <a href="https://github.com/Hallo89/Slider89">https://github.com/Hallo89/Slider89</a>, or fetch the files from the repo's website as seen below to always get the latest available version.<br>
+          In both cases only two files are needed: <code>slider89.js</code> and <code>slider89.css</code>.<br>
+          You'll then need to link them in your HTML file (first the download way):
         </p>
         <div class="code_copy_wrapper">
           <pre class="codeblock"><code>&lt;script src="<em>yourpath</em>/slider89.js"&gt;&lt;/script&gt;
@@ -88,23 +88,23 @@
           </button>
         </div>
         <p>
-          Tip: I prefer to load both the script and style at the end of the document to squeeze an extra bit of speed out of the page because, given that the scripts are also at the end of the document which is usual practice, one will not need them before.
+          Tip: I prefer to load both script and style at the end of the document (before the closing body tag) so that the page will build a tiny bit faster. That's because one will most likely not need the files before as the DOM needs to build up before one can interact with it, which makes sense.
         </p>
         <p>
-          Now that everything is loaded up, we can start to create sliderz. All you have to know is the initialization method; everything else can be taken from the <a href="#doc">documentation</a> section.<br>
-          To create one instance of a slider, we do the following in our javascript:
+          Now that everything is loaded up, we can start to create sliderz. All you have to know is the initialization method; everything else can be taken from the <a href="#docs">documentation section</a>.<br>
+          To create one instance of a slider, we do the following in our Javascript:
         </p>
         <div class="codeblock">
           <code>const mySlider = new Slider89(targetElement);</code>
         </div>
         <p>
-          This is pretty straightforward: we create a new instance of the <code>Slider89</code> class with the <code>new</code> operator and pass the HTML-element we want the slider to be created in as paramter into the function.<br>
-          Lastly, we obviously have to store the slider in a variable to be able to access it in future code (it is also valid not to use a variable, I'm doing this with the demos on this page for example, but this is a very rare case as you cannot do anything with it after initialization).<br>
+          We create a new instance of the <code>Slider89</code> class with the <code>new</code> operator and pass the DOM element we want the slider to be created in as argument into the function.<br>
+          Assigning the instance to a variable is optional, it will be created in the given element one way or another, but without a variable one obviously can't do anything with the slider.<br>
           An all-default slider initialized plainly like this will look like the example you see above:
         </p>
         <div class="demo_block" id="demo_1_plain"></div>
         <p>
-          However, what would a library be without means of configuration? To configure it we pass an additional parameter as object into the <a href="#functions-constructor">Slider89 constructor </a> which we fill with <a href="#properties-config">configuration properties</a>. Here's an example:
+          As stated above, config options are available: to configure the slider, we pass an additional argument into the <a href="#Methods--Constructor">Slider89 constructor</a>, an object which we equip with <a href="#Properties--Configuration-properties">configuration properties</a>. Here's an example:
         </p>
         <pre class="codeblock"><code>const mySlider = new Slider89(targetElement, {
   min: -50,
@@ -115,8 +115,8 @@
         <div class="demo_block" id="demo_2_configged"></div>
       </section>
 
-      <h2 id="doc">
-        <a href="#doc" class="icon_anchor">#</a>Documentation
+      <h2 id="docs">
+        <a href="#docs" class="icon_anchor">#</a>Documentation
       </h2>
 
       <section id="section_docs">
