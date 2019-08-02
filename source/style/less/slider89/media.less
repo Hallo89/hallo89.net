@@ -22,10 +22,7 @@
 
 @media (max-width: 630px) {
   .version_select {
-    flex-direction: column;
-    text-align: center;
     .version_buttons {
-      margin-top: .4em;
       justify-content: space-around;
     }
   }
@@ -54,10 +51,12 @@
   }
   main {
     h3, h4 {
-      margin-left: 0;
-      .icon_anchor {
-        order: 1;
-        margin: 0 0 0 .435em;
+      &:not(.no-anchor) {
+        margin-left: 0;
+        .icon_anchor {
+          order: 1;
+          margin: 0 0 0 .435em;
+        }
       }
     }
     section {
@@ -68,7 +67,7 @@
 }
 
 @media (max-width: 1080px) {
-  main h2 {
+  main h2:not(.no-anchor) {
     margin-left: 0;
     .icon_anchor {
       order: 1;

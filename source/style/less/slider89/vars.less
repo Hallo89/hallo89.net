@@ -1,6 +1,8 @@
 // main: index.less
 
 // -- misc --
+@ver-select-arrow-height: .86em;
+@ver-select-arrow-width: 2.5px;
 @nav-separate-margin: .6em;
 @text-indent: 20px;
 @margin-indent: ~'.5vw + .15vh + .98em';
@@ -97,13 +99,21 @@
 @h4-expand-btn--lt: lighten(@main-color--lt, 8%);
 @h4-expand-btn-bg--lt: darken(@main-bg--lt, 11%);
 
-@version-select-bg: lighten(@background-color, 5%);
-@version-select-btn-bg: lighten(@main-color, 13%);
-@version-select-btn-active: @background-color;
+@ver-select-bg: lighten(@background-color, 6%);
+@ver-select-btn-bg: lighten(@main-color, 13%);
+@ver-select-btn-active: @background-color;
+@ver-select-expand: @main-color;
+@ver-select-expand-bg: lighten(@ver-select-descript-bg, 9.5%);
+@ver-select-descript-header: darken(@main-color, 14%);
+@ver-select-descript-bg: darken(@ver-select-bg, 3.5%);
+@ver-select-show-more: darken(@main-color, 4%);
+@ver-select-show-more-border: lighten(@ver-select-descript-bg, 9%);
+@ver-select-show-more-bg-hover: lighten(@ver-select-descript-bg, 1.5%);
+@ver-select-show-more-border-hover: lighten(@ver-select-show-more-border, 1.5%);
 
-@version-select-bg--lt: darken(@main-bg--lt, 5%);
-@version-select-btn-bg--lt: lighten(@main-color--lt, 8%);
-@version-select-btn-active--lt: @main-bg--lt;
+@ver-select-bg--lt: darken(@main-bg--lt, 6%);
+@ver-select-btn-bg--lt: lighten(@main-color--lt, 8%);
+@ver-select-btn-active--lt: @main-bg--lt;
 
 @tab-default: lighten(@background-color, 12%);
 @tab-new: #214031;

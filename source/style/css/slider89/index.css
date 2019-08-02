@@ -106,16 +106,16 @@ main h4 {
   display: flex;
   align-items: center;
 }
-main h2,
-main h3,
-main h4 {
+main h2:not(.no-anchor),
+main h3:not(.no-anchor),
+main h4:not(.no-anchor) {
   margin-left: -1.12em;
   display: flex;
   align-items: center;
 }
-main h2:hover .icon_anchor,
-main h3:hover .icon_anchor,
-main h4:hover .icon_anchor {
+main h2:not(.no-anchor):hover .icon_anchor,
+main h3:not(.no-anchor):hover .icon_anchor,
+main h4:not(.no-anchor):hover .icon_anchor {
   opacity: 1;
 }
 main .icon_anchor {
@@ -434,18 +434,18 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
   background-color: hsl(0, 0%, 6%);
 }
 .version_select {
-  background-color: hsl(0, 0%, 14%);
-  padding: 0.55em 1.2em;
-  font-size: 1.3em;
-  display: flex;
+  position: relative;
+  border-radius: 1px;
   transition: background 0.15s linear;
 }
 .version_select .version_buttons {
   display: flex;
   justify-content: space-evenly;
-  flex: 1;
+  background-color: hsl(0, 0%, 15%);
+  font-size: 1.3em;
+  padding: 0.7em 1em;
 }
-.version_select button {
+.version_select .version_buttons button {
   position: relative;
   background-color: unset;
   border: none;
@@ -456,7 +456,7 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
   padding: 6px 10px;
   transition: color 0.2s ease;
 }
-.version_select button::before {
+.version_select .version_buttons button::before {
   content: '';
   position: absolute;
   left: 0;
@@ -467,22 +467,118 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
   background-color: hsl(0, 0%, 91%);
   transition: height 0.2s ease, background 0.15s linear;
 }
-.version_select button:hover,
-.version_select button.active {
+.version_select .version_buttons button:hover,
+.version_select .version_buttons button.active {
   color: hsl(0, 0%, 9%);
 }
-.version_select button:hover::before,
-.version_select button.active::before {
+.version_select .version_buttons button:hover::before,
+.version_select .version_buttons button.active::before {
   height: 100%;
 }
-html.light-mode .version_select {
-  background-color: hsl(0, 0%, 93%);
+.version_select .expand_btn {
+  display: block;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0.84em 1.6em;
+  background: hsl(0, 0%, 21%);
+  border: 0;
+  border-radius: 100px;
+  opacity: 0;
+  transition: opacity 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-html.light-mode .version_select button::before {
+.version_select .expand_btn .arrow {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  /* Default: up */
+}
+.version_select .expand_btn .arrow .left,
+.version_select .expand_btn .arrow .right {
+  display: block;
+  position: absolute;
+  border-bottom: 2.5px solid hsl(0, 0%, 78%);
+  width: 0.86em;
+  transform-origin: 100% 0;
+  transition: transform 0.22s cubic-bezier(0.5, 0.13, 0.1, 1);
+}
+.version_select .expand_btn .arrow .left {
+  transform: translate(-0.43em, -0.43em) rotateZ(-45deg);
+}
+.version_select .expand_btn .arrow .right {
+  transform: translate(-0.43em, -0.43em) rotateZ(225deg) translateY(-2.5px);
+}
+.version_select .expand_btn .arrow.down .left {
+  transform: translate(-0.43em, 0.43em) rotateZ(45deg) translateY(-2.5px);
+}
+.version_select .expand_btn .arrow.down .right {
+  transform: translate(-0.43em, 0.43em) rotateZ(135deg);
+}
+.version_select .expand_btn:hover {
+  opacity: 1 !important;
+  box-shadow: 1px 1px 8px hsla(0, 0%, 6%, 0.2);
+}
+.version_select:hover .expand_btn {
+  opacity: 0.45;
+}
+.version_select .description {
+  background-color: hsl(0, 0%, 11.5%);
+}
+.version_select .description .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.95em;
+  padding: 0.5em 1.2em;
+  color: hsl(0, 0%, 64%);
+}
+.version_select .description .header .heading {
+  font-size: 1.15em;
+  font-weight: bold;
+}
+.version_select .description .changelog {
+  padding: 0.5em 1.2em;
+  position: relative;
+  max-height: 8.6em;
+  overflow: hidden;
+}
+.version_select .description .changelog .heading {
+  font-weight: bold;
+}
+.version_select .description .changelog .body {
+  margin-top: 0.3em;
+}
+.version_select .description .changelog .body ul {
+  margin: 0;
+  padding-left: 2em;
+}
+.version_select .description .changelog .read_more {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding: 0.3em;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: hsl(0, 0%, 74%);
+  background-color: hsl(0, 0%, 11.5%);
+  border-top: 3px dashed hsl(0, 0%, 20.5%);
+  transition: background-color 0.15s ease-in-out;
+}
+.version_select .description .changelog .read_more:hover {
+  background-color: hsl(0, 0%, 13%);
+  border-color: hsl(0, 0%, 22%);
+}
+html.light-mode .version_select {
+  background-color: hsl(0, 0%, 92%);
+}
+html.light-mode .version_select .selector button::before {
   background-color: hsl(0, 0%, 14%);
 }
-html.light-mode .version_select button:hover,
-html.light-mode .version_select button.active {
+html.light-mode .version_select .selector button:hover,
+html.light-mode .version_select .selector button.active {
   color: hsl(0, 0%, 98%);
 }
 .list_item.version_item .version_notice {
@@ -762,12 +858,7 @@ html.light-mode .doc_list .info_item:not(.special_item)::after {
   }
 }
 @media (max-width: 630px) {
-  .version_select {
-    flex-direction: column;
-    text-align: center;
-  }
   .version_select .version_buttons {
-    margin-top: 0.4em;
     justify-content: space-around;
   }
 }
@@ -792,12 +883,12 @@ html.light-mode .doc_list .info_item:not(.special_item)::after {
     padding: 0.8em 0;
     background-color: hsl(0, 0%, 13%);
   }
-  main h3,
-  main h4 {
+  main h3:not(.no-anchor),
+  main h4:not(.no-anchor) {
     margin-left: 0;
   }
-  main h3 .icon_anchor,
-  main h4 .icon_anchor {
+  main h3:not(.no-anchor) .icon_anchor,
+  main h4:not(.no-anchor) .icon_anchor {
     order: 1;
     margin: 0 0 0 0.435em;
   }
@@ -807,10 +898,10 @@ html.light-mode .doc_list .info_item:not(.special_item)::after {
   }
 }
 @media (max-width: 1080px) {
-  main h2 {
+  main h2:not(.no-anchor) {
     margin-left: 0;
   }
-  main h2 .icon_anchor {
+  main h2:not(.no-anchor) .icon_anchor {
     order: 1;
     margin: 0 0 0 0.435em;
   }
