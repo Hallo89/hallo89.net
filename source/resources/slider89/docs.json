@@ -1,6 +1,6 @@
 {
   "Properties": {
-    "description": "These are the key to reading values from the slider and defining its properties./br!//Every property's value is accessed using code//<sliderInstance>.<property>",
+    "description": "These are the key to reading values from the slider and defining its properties./br!//Every property's value is read using code//<sliderInstance>.<property>",
     "categories": {
       "Configuration properties": {
         "description": "Define the slider's configuration as properties of an object passed as a parameter into a#Methods{//various functions//}.",
