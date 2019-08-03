@@ -137,22 +137,20 @@
             </span>
           </button>
           <div class="description">
-            <div class="header">
-              <span class="date">Published on 31/12/2018</span>
-              <a href="https://github.com/Hallo89/Slider89/releases/tag/v0.2.0">Go to release</a>
-            </div>
-            <div class="changelog">
-              <span class="heading">What's new</span>
-              <div class="body">
-                <ul>
-                  <li>New property: <code>structure</code>. It takes a string similar to an XML structure to assemble a customized HTML structure (-> <a href="https://hallo89.net/slider89#property-structure">docs</a>)</li>
-                  <li><code>element</code> has been changed in favor of the new structure system: It is now a JavaScript object containing every part of the slider as opposed to only the root element (-> <a href="https://hallo89.net/slider89#property-element">docs</a>)</li>
-                  <li><code>TipDuration</code> can now be set to <code>false</code> to prevent it from disappearing altogether</li>
-                  <li>The HTML classing has been changed to improve stylability: non crucial CSS suited for altering, has been moved into a new, independent class to be spoken to without nesting in the selector, <code>slider89_{slider-part}</code>; crucial CSS is still selected with a (more difficult to override) <code>.slider89 .slider_{slider-part}</code>
-                </ul>
+            {% for version in gitData -%}
+            <div class="version {{version.tag_name | dotSnake }} {{- ' active' if loop.first }}">
+              <div class="header">
+                <span class="date">Published on {{ version.date }}</span>
+                <a href="https://github.com/Hallo89/Slider89/releases/tag/v0.2.0">Go to release</a>
               </div>
-              <div class="read_more">Read more</div>
+              <div class="changelog">
+                <span class="heading">What's new</span>
+                <div class="body">
+                  {{ version.body | safe }}
+                </div>
+              </div>
             </div>
+            {% endfor -%}
           </div>
         </div>
 
@@ -330,6 +328,7 @@
       const h4s = document.getElementsByTagName('h4');
       const versionSwitch = document.querySelector('.version_select .version_buttons');
       const vSwitchBtns = versionSwitch.getElementsByTagName('button');
+      const vSwitchDescript = versionSwitch.parentNode.querySelector('.description');
       const copyBtns = document.querySelectorAll('.code_copy_wrapper .copy_btn');
       const indicatorItems = document.querySelectorAll('.list_item.version_list .indicator .indicator_item');
       const versionItems = document.getElementsByClassName('version_item');
@@ -358,6 +357,21 @@
         if (this.classList.contains('active')) return;
         versionSwitch.querySelector('button.active').classList.remove('active');
         this.classList.add('active');
+        const thisDescript = vSwitchDescript.querySelector('.version.active');
+        const nextDescript = vSwitchDescript.querySelector('.version.' + this.classList[0]);
+        vSwitchDescript.style.height = vSwitchDescript.clientHeight + 'px';
+        setTimeout(function() {
+          vSwitchDescript.style.height = nextDescript.clientHeight + 'px';
+          setTimeout(function() {
+            vSwitchDescript.style.height = '';
+          }, 200);
+        }, 10);
+        thisDescript.classList.remove('active');
+        thisDescript.classList.add('bottom');
+        nextDescript.classList.add('active');
+        setTimeout(function() {
+          thisDescript.classList.remove('bottom');
+        }, 200);
         //e.g 0.2.0 becomes 1020
         const selectVer = formatVersion(this.textContent);
         for (let i = 0; i < versionItems.length; i++) {

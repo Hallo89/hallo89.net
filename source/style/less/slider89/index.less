@@ -514,6 +514,7 @@ main .version_notice code {
     border: 0;
     border-radius: 100px;
     opacity: 0;
+    z-index: 2;
     transition: opacity .15s ease-in-out, box-shadow .15s ease-in-out;
     .arrow {
       position: relative;
@@ -549,16 +550,42 @@ main .version_notice code {
     }
   }
   &:hover .expand_btn {
-    opacity: .45;
+    opacity: .5;
   }
   .description {
+    position: relative;
     background-color: @ver-select-descript-bg;
+    overflow: hidden;
+    transition: height .2s cubic-bezier(.3, .05, .3, .9);
+    .version {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      visibility: hidden;
+      transform: translateY(-20%);
+      opacity: 0;
+      background-color: @ver-select-descript-bg;
+      transition:
+        visibility .2s linear,
+        transform .2s cubic-bezier(.45, .1, .15, .95),
+        opacity .15s ease-in-out;
+      &.bottom {
+        transform: translateY(20%);
+      }
+      &.active {
+        transform: none;
+        position: sticky;
+        visibility: visible;
+        opacity: 1;
+      }
+    }
     .header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-size: .95em;
-      padding: .5em 1.2em;
+      padding: .3em 1.2em;
       color: @ver-select-descript-header;
       .heading {
         font-size: 1.15em;
@@ -566,37 +593,17 @@ main .version_notice code {
       }
     }
     .changelog {
-      padding: .5em 1.2em;
+      padding: .3em 1.2em .75em;
       position: relative;
-      max-height: 8.6em;
       overflow: hidden;
       .heading {
         font-weight: bold;
       }
       .body {
-        margin-top: .3em;
+        margin: .5em .5em 0;
         ul {
           margin: 0;
-          padding-left: 2em;
-        }
-      }
-      .read_more {
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        padding: .3em;
-        cursor: pointer;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: @ver-select-show-more;
-        background-color: @ver-select-descript-bg;
-        border-top: 3px dashed @ver-select-show-more-border;
-        transition: background-color .15s ease-in-out;
-        &:hover {
-          background-color: @ver-select-show-more-bg-hover;
-          border-color: @ver-select-show-more-border-hover;
+          padding-left: 1.5em;
         }
       }
     }

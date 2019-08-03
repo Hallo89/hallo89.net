@@ -485,6 +485,7 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
   border: 0;
   border-radius: 100px;
   opacity: 0;
+  z-index: 2;
   transition: opacity 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 .version_select .expand_btn .arrow {
@@ -519,17 +520,40 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
   box-shadow: 1px 1px 8px hsla(0, 0%, 6%, 0.2);
 }
 .version_select:hover .expand_btn {
-  opacity: 0.45;
+  opacity: 0.5;
 }
 .version_select .description {
+  position: relative;
   background-color: hsl(0, 0%, 11.5%);
+  overflow: hidden;
+  transition: height 0.2s cubic-bezier(0.3, 0.05, 0.3, 0.9);
+}
+.version_select .description .version {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  visibility: hidden;
+  transform: translateY(-20%);
+  opacity: 0;
+  background-color: hsl(0, 0%, 11.5%);
+  transition: visibility 0.2s linear, transform 0.2s cubic-bezier(0.45, 0.1, 0.15, 0.95), opacity 0.15s ease-in-out;
+}
+.version_select .description .version.bottom {
+  transform: translateY(20%);
+}
+.version_select .description .version.active {
+  transform: none;
+  position: sticky;
+  visibility: visible;
+  opacity: 1;
 }
 .version_select .description .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 0.95em;
-  padding: 0.5em 1.2em;
+  padding: 0.3em 1.2em;
   color: hsl(0, 0%, 64%);
 }
 .version_select .description .header .heading {
@@ -537,39 +561,19 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
   font-weight: bold;
 }
 .version_select .description .changelog {
-  padding: 0.5em 1.2em;
+  padding: 0.3em 1.2em 0.75em;
   position: relative;
-  max-height: 8.6em;
   overflow: hidden;
 }
 .version_select .description .changelog .heading {
   font-weight: bold;
 }
 .version_select .description .changelog .body {
-  margin-top: 0.3em;
+  margin: 0.5em 0.5em 0;
 }
 .version_select .description .changelog .body ul {
   margin: 0;
-  padding-left: 2em;
-}
-.version_select .description .changelog .read_more {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  padding: 0.3em;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: hsl(0, 0%, 74%);
-  background-color: hsl(0, 0%, 11.5%);
-  border-top: 3px dashed hsl(0, 0%, 20.5%);
-  transition: background-color 0.15s ease-in-out;
-}
-.version_select .description .changelog .read_more:hover {
-  background-color: hsl(0, 0%, 13%);
-  border-color: hsl(0, 0%, 22%);
+  padding-left: 1.5em;
 }
 html.light-mode .version_select {
   background-color: hsl(0, 0%, 92%);
