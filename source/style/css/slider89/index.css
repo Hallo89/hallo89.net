@@ -475,7 +475,7 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
 .version_select .version_buttons button.active::before {
   height: 100%;
 }
-.version_select .expand_btn {
+.version_select .toggle_btn {
   display: block;
   position: absolute;
   left: 50%;
@@ -488,14 +488,14 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
   z-index: 2;
   transition: opacity 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-.version_select .expand_btn .arrow {
+.version_select .toggle_btn .arrow {
   position: relative;
   display: flex;
   justify-content: center;
   /* Default: up */
 }
-.version_select .expand_btn .arrow .left,
-.version_select .expand_btn .arrow .right {
+.version_select .toggle_btn .arrow .left,
+.version_select .toggle_btn .arrow .right {
   display: block;
   position: absolute;
   border-bottom: 2.5px solid hsl(0, 0%, 78%);
@@ -503,30 +503,34 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
   transform-origin: 100% 0;
   transition: transform 0.22s cubic-bezier(0.5, 0.13, 0.1, 1);
 }
-.version_select .expand_btn .arrow .left {
+.version_select .toggle_btn .arrow .left {
   transform: translate(-0.43em, -0.43em) rotateZ(-45deg);
 }
-.version_select .expand_btn .arrow .right {
+.version_select .toggle_btn .arrow .right {
   transform: translate(-0.43em, -0.43em) rotateZ(225deg) translateY(-2.5px);
 }
-.version_select .expand_btn .arrow.down .left {
+.version_select .toggle_btn.down .arrow .left {
   transform: translate(-0.43em, 0.43em) rotateZ(45deg) translateY(-2.5px);
 }
-.version_select .expand_btn .arrow.down .right {
+.version_select .toggle_btn.down .arrow .right {
   transform: translate(-0.43em, 0.43em) rotateZ(135deg);
 }
-.version_select .expand_btn:hover {
+.version_select .toggle_btn:hover {
   opacity: 1 !important;
   box-shadow: 1px 1px 8px hsla(0, 0%, 6%, 0.2);
 }
-.version_select:hover .expand_btn {
+.version_select:hover .toggle_btn {
   opacity: 0.5;
 }
 .version_select .description {
   position: relative;
   background-color: hsl(0, 0%, 11.5%);
   overflow: hidden;
-  transition: height 0.2s cubic-bezier(0.3, 0.05, 0.3, 0.9);
+  transition: height 0.2s cubic-bezier(0.4, 0.05, 0.25, 0.98), visibility 0.2s linear;
+}
+.version_select .description.collapsed {
+  height: 0;
+  visibility: hidden;
 }
 .version_select .description .version {
   position: absolute;

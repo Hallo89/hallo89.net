@@ -130,7 +130,7 @@
             <button class="{{ version.tag_name | dotSnake }} {{- ' active' if loop.first}}" type="button">{{ version.tag_name }}</button>
             {%- endfor -%}
           </div>
-          <button class="expand_btn" type="button">
+          <button class="toggle_btn" type="button">
             <span class="arrow">
               <span class="left"></span>
               <span class="right"></span>
@@ -329,16 +329,43 @@
       const versionSwitch = document.querySelector('.version_select .version_buttons');
       const vSwitchBtns = versionSwitch.getElementsByTagName('button');
       const vSwitchDescript = versionSwitch.parentNode.querySelector('.description');
+      const vSwitchToggle = versionSwitch.parentNode.querySelector('.toggle_btn');
       const copyBtns = document.querySelectorAll('.code_copy_wrapper .copy_btn');
       const indicatorItems = document.querySelectorAll('.list_item.version_list .indicator .indicator_item');
       const versionItems = document.getElementsByClassName('version_item');
 
       const newestVer = formatVersion(vSwitchBtns[0].textContent);
 
+      vSwitchToggle.addEventListener('click', toggleVersionDescription);
       for (let i = 0; i < indicatorItems.length; i++) indicatorItems[i].addEventListener('click', switchCardVersion);
       for (let i = 0; i < h4s.length; i++) h4s[i].addEventListener('click', toggleCollapsible);
       for (let i = 0; i < vSwitchBtns.length; i++) vSwitchBtns[i].addEventListener('click', switchGlbVersion);
       for (let i = 0; i < copyBtns.length; i++) copyBtns[i].addEventListener('click', copyCode);
+
+      function toggleVersionDescription() {
+        if (vSwitchDescript.classList.contains('collapsed')) {
+          const activeVersion = vSwitchDescript.querySelector('.version.active');
+          vSwitchDescript.style.height = '0';
+          setTimeout(function() {
+            vSwitchDescript.style.height = activeVersion.clientHeight + 'px';
+            setTimeout(function() {
+              vSwitchDescript.style.height = '';
+            }, 200);
+          }, 20);
+          vSwitchDescript.classList.remove('collapsed');
+          this.classList.remove('down');
+        } else {
+          vSwitchDescript.style.height = vSwitchDescript.clientHeight + 'px';
+          setTimeout(function() {
+            vSwitchDescript.style.height = '0';
+            setTimeout(function() {
+              vSwitchDescript.style.height = '';
+            }, 200);
+          }, 20);
+          vSwitchDescript.classList.add('collapsed');
+          this.classList.add('down');
+        }
+      }
 
       function switchCardVersion() {
         if (this.classList.contains('active')) return;
@@ -359,13 +386,15 @@
         this.classList.add('active');
         const thisDescript = vSwitchDescript.querySelector('.version.active');
         const nextDescript = vSwitchDescript.querySelector('.version.' + this.classList[0]);
-        vSwitchDescript.style.height = vSwitchDescript.clientHeight + 'px';
-        setTimeout(function() {
-          vSwitchDescript.style.height = nextDescript.clientHeight + 'px';
+        if (!vSwitchDescript.classList.contains('collapsed')) {
+          vSwitchDescript.style.height = vSwitchDescript.clientHeight + 'px';
           setTimeout(function() {
-            vSwitchDescript.style.height = '';
-          }, 200);
-        }, 10);
+            vSwitchDescript.style.height = nextDescript.clientHeight + 'px';
+            setTimeout(function() {
+              vSwitchDescript.style.height = '';
+            }, 200);
+          }, 10);
+        }
         thisDescript.classList.remove('active');
         thisDescript.classList.add('bottom');
         nextDescript.classList.add('active');
