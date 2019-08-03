@@ -722,10 +722,10 @@ html.light-mode .version_select .selector button.active {
   opacity: 0;
 }
 .list_item.version_list .versions .prop_version:not(.active).left {
-  transform: translateX(-40%);
+  transform: translateX(-35%);
 }
 .list_item.version_list .versions .prop_version:not(.active).right {
-  transform: translateX(40%);
+  transform: translateX(35%);
 }
 html.light-mode .list_item.version_item .version_notice {
   color: hsl(0, 0%, 6%);
