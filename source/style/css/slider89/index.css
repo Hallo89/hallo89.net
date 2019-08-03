@@ -869,6 +869,18 @@ html.light-mode .doc_list .info_item:not(.special_item)::after {
   .version_select .version_buttons {
     justify-content: space-around;
   }
+  .version_select .description .header {
+    padding: 0.3em 3.14vw;
+  }
+  .version_select .description .changelog {
+    padding: 0.3em 3.14vw 0.75em;
+  }
+  .version_select .description .changelog .body {
+    margin: 1.1vh 1.31vw 0;
+  }
+  .version_select .description .changelog .body ul {
+    padding-left: calc(2.98vw + 0.25vh + 0.25em);
+  }
 }
 @media (max-width: 960px) {
   body {
