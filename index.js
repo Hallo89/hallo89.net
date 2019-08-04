@@ -116,11 +116,14 @@ let gitData = [];
 fetch('https://api.github.com/repos/Hallo89/Slider89/releases')
   .then(res => res.json())
   .then(data => {
-    gitData = data;
-    for (version of gitData) {
-      version.body = (function() {
-        return markdown.render(version.body);
-      })();
+    gitData = data;for (version of gitData) {
+      version.body = (function(body) {
+        while(match = /https:\/\/hallo89\.net\/slider89(#[\w-]+)/.exec(body)) {
+          body = body.replace(match[0], match[1]);
+        }
+        body = markdown.render(body);
+        return body;
+      })(version.body);
       version.date = (function() {
         const date = new Date(version.created_at);
         return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();

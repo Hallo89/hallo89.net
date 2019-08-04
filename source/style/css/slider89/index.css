@@ -163,7 +163,8 @@ html.light-mode main hr {
 main code a,
 main p a,
 main dd a,
-main .version_notice a {
+main .version_notice a,
+main .version_select a {
   border-bottom: 1px solid;
   padding: 1px;
   transition: color 0.15s linear, border-color 0.15s linear;
@@ -171,7 +172,8 @@ main .version_notice a {
 main code a:active,
 main p a:active,
 main dd a:active,
-main .version_notice a:active {
+main .version_notice a:active,
+main .version_select a:active {
   transition: background-color 0.05s ease-in-out;
 }
 main p a {
@@ -192,15 +194,29 @@ main p a:active:visited {
   background-color: rgba(85, 158, 109, 0.18);
 }
 main dd a:hover,
-main .version_notice a:hover {
+main .version_notice a:hover,
+main .version_select a:hover {
   color: hsl(0, 0%, 86%);
   border-color: hsl(0, 0%, 86%);
 }
 main dd a:active,
-main .version_notice a:active {
+main .version_notice a:active,
+main .version_select a:active {
   background-color: hsla(0, 0%, 78%, 0.12);
   color: hsl(0, 0%, 82%);
   border-color: hsl(0, 0%, 82%);
+}
+main .version_select .description .header a {
+  padding: 0 1px;
+}
+main .version_select .description .header a:hover {
+  color: hsl(0, 0%, 72%);
+  border-color: hsl(0, 0%, 72%);
+}
+main .version_select .description .header a:active {
+  background-color: hsla(0, 0%, 64%, 0.12);
+  color: hsl(0, 0%, 68%);
+  border-color: hsl(0, 0%, 68%);
 }
 main code a {
   color: hsl(0, 0%, 82%);
@@ -228,12 +244,14 @@ html.light-mode main p a:active:visited {
   background-color: rgba(32, 128, 106, 0.18);
 }
 html.light-mode main dd a:hover,
-html.light-mode main .version_notice a:hover {
+html.light-mode main .version_notice a:hover,
+html.light-mode main .version_select a:hover {
   color: hsl(0, 0%, 18%);
   border-color: hsl(0, 0%, 18%);
 }
 html.light-mode main dd a:active,
-html.light-mode main .version_notice a:active {
+html.light-mode main .version_notice a:active,
+html.light-mode main .version_select a:active {
   background-color: hsla(0, 0%, 6%, 0.12);
   color: hsl(0, 0%, 12%);
   border-color: hsl(0, 0%, 12%);
