@@ -475,6 +475,22 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
 .version_select .version_buttons button.active::before {
   height: 100%;
 }
+.version_select .version_buttons button.new::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 0.55em;
+  width: 0.55em;
+  background-color: #4F8299;
+  transform: translate(40%, -40%);
+  border-radius: 100px;
+  transition: width 0.1s ease, height 0.1s ease;
+}
+.version_select .version_buttons button.new:not(.active)::after {
+  height: 0.45em;
+  width: 0.45em;
+}
 .version_select .toggle_btn {
   display: block;
   position: absolute;

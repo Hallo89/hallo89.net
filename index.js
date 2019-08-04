@@ -122,9 +122,14 @@ fetch('https://api.github.com/repos/Hallo89/Slider89/releases')
         return markdown.render(version.body);
       })();
       version.date = (function() {
-        const match = version.created_at.match(/(\d{4})-(\d{2})-(\d{2})/);
-        return (match != null ? match[3] + '/' + match[2] + '/' + match[1] : val);
+        const date = new Date(version.created_at);
+        return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
       })();
+      if (version == gitData[0]) {
+        const now = new Date(Date.now());
+        now.setMonth(now.getMonth() - 1);
+        version.new = new Date(version.created_at) > now ? true : false;
+      } else version.new = false;
     }
   });
 

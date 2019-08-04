@@ -502,6 +502,24 @@ main .version_notice code {
           height: 100%;
         }
       }
+      &.new::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: .55em;
+        width: .55em;
+        background-color: #4F8299;
+        transform: translate(40%, -40%);
+        border-radius: 100px;
+        transition:
+          width .1s ease,
+          height .1s ease;
+      }
+      &.new:not(.active)::after {
+        height: .45em;
+        width: .45em;
+      }
     }
   }
   .toggle_btn {

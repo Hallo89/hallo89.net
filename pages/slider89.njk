@@ -127,7 +127,7 @@
         <div class="version_select">
           <div class="version_buttons">
             {%- for version in gitData -%}
-            <button class="{{ version.tag_name | dotSnake }} {{- ' active' if loop.first}}" type="button">{{ version.tag_name }}</button>
+            <button class="{{ version.tag_name | dotSnake }} {{- ' new' if version.new }} {{- ' active' if loop.first}}" type="button">{{ version.tag_name }}</button>
             {%- endfor -%}
           </div>
           <button class="toggle_btn" type="button">
