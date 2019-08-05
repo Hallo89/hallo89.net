@@ -256,6 +256,15 @@ html.light-mode main .version_select a:active {
   color: hsl(0, 0%, 12%);
   border-color: hsl(0, 0%, 12%);
 }
+html.light-mode main .version_select .description .header a:hover {
+  color: hsl(0, 0%, 34%);
+  border-color: hsl(0, 0%, 34%);
+}
+html.light-mode main .version_select .description .header a:active {
+  background-color: hsla(0, 0%, 22%, 0.12);
+  color: hsl(0, 0%, 28%);
+  border-color: hsl(0, 0%, 28%);
+}
 html.light-mode main code a {
   color: hsl(0, 0%, 2%);
 }
@@ -551,14 +560,13 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
 }
 .version_select .toggle_btn:hover {
   opacity: 1 !important;
-  box-shadow: 1px 1px 8px hsla(0, 0%, 6%, 0.2);
+  box-shadow: 1px 1px 8px hsla(0, 0%, 5%, 0.02);
 }
 .version_select:hover .toggle_btn {
   opacity: 0.5;
 }
 .version_select .description {
   position: relative;
-  background-color: hsl(0, 0%, 11.5%);
   overflow: hidden;
   transition: height 0.2s cubic-bezier(0.4, 0.05, 0.25, 0.98), visibility 0.2s linear;
 }
@@ -613,15 +621,42 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
   margin: 0;
   padding-left: 1.5em;
 }
-html.light-mode .version_select {
+.version_select .description code,
+.version_select .description .codeblock {
+  background-color: hsl(0, 0%, 15.5%);
+}
+html.light-mode .version_select .version_buttons {
   background-color: hsl(0, 0%, 92%);
 }
-html.light-mode .version_select .selector button::before {
+html.light-mode .version_select .version_buttons button::before {
   background-color: hsl(0, 0%, 14%);
 }
-html.light-mode .version_select .selector button:hover,
-html.light-mode .version_select .selector button.active {
+html.light-mode .version_select .version_buttons button:hover,
+html.light-mode .version_select .version_buttons button.active {
   color: hsl(0, 0%, 98%);
+}
+html.light-mode .version_select .version_buttons button.new::after {
+  background-color: #87BCD3;
+}
+html.light-mode .version_select .toggle_btn {
+  background: hsl(0, 0%, 86%);
+}
+html.light-mode .version_select .toggle_btn .arrow .left,
+html.light-mode .version_select .toggle_btn .arrow .right {
+  border-bottom: 2.5px solid hsl(0, 0%, 6%);
+}
+html.light-mode .version_select .toggle_btn:hover {
+  box-shadow: 1px 1px 8px hsla(0, 0%, 82%, 0.02);
+}
+html.light-mode .version_select .description .version {
+  background-color: hsl(0, 0%, 95.5%);
+}
+html.light-mode .version_select .description .header {
+  color: hsl(0, 0%, 22%);
+}
+html.light-mode .version_select .description code,
+html.light-mode .version_select .description .codeblock {
+  background-color: hsl(0, 0%, 91.5%);
 }
 .list_item.version_item .version_notice {
   margin: 0 0 0 25px;

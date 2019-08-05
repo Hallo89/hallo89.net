@@ -276,6 +276,17 @@ main {
         }
       }
     }
+    .version_select .description .header a {
+      &:hover {
+        color: @vselect-header-link-hover--lt;
+        border-color: @vselect-header-link-hover--lt;
+      }
+      &:active {
+        background-color: @vselect-header-link-bg-active--lt;
+        color: @vselect-header-link-active--lt;
+        border-color: @vselect-header-link-active--lt;
+      }
+    }
     code a {
       color: @code--lt;
       &:hover {
@@ -525,7 +536,7 @@ main .version_notice code {
         right: 0;
         height: .55em;
         width: .55em;
-        background-color: #4F8299;
+        background-color: @vselect-new;
         transform: translate(40%, -40%);
         border-radius: 100px;
         transition:
@@ -557,7 +568,7 @@ main .version_notice code {
       .left, .right {
         display: block;
         position: absolute;
-        border-bottom: @vselect-arrow-width solid @vselect-expand;
+        border-bottom: @vselect-arrow-width solid @main-color;
         width: @vselect-arrow-height;
         transform-origin: 100% 0;
         transition: transform .22s cubic-bezier(.5, .13, .1, 1);
@@ -569,7 +580,7 @@ main .version_notice code {
       .right {
         transform: translate(-@vselect-arrow-height / 2, -@vselect-arrow-height / 2) rotateZ(225deg) translateY(-@vselect-arrow-width);
       }
-      }
+    }
     &.down .arrow {
       .left {
         transform: translate(-@vselect-arrow-height / 2, @vselect-arrow-height / 2) rotateZ(45deg) translateY(-@vselect-arrow-width);
@@ -580,7 +591,7 @@ main .version_notice code {
     }
     &:hover {
       opacity: 1 !important;
-      box-shadow: 1px 1px 8px hsla(0, 0%, 6%, .2);
+      box-shadow: 1px 1px 8px @vselect-expand-shadow;
     }
   }
   &:hover .toggle_btn {
@@ -588,7 +599,6 @@ main .version_notice code {
   }
   .description {
     position: relative;
-    background-color: @vselect-descript-bg;
     overflow: hidden;
     transition: height .2s cubic-bezier(.4, .05, .25, .98), visibility .2s linear;
     &.collapsed {
@@ -645,11 +655,14 @@ main .version_notice code {
         }
       }
     }
+    code, .codeblock {
+      background-color: @vselect-code-bg;
+    }
   }
 
   html.light-mode & {
-    background-color: @vselect-bg--lt;
-    .selector {
+    .version_buttons {
+      background-color: @vselect-bg--lt;
       button {
         &::before {
           background-color: @vselect-btn-bg--lt;
@@ -657,6 +670,31 @@ main .version_notice code {
         &:hover, &.active {
           color: @vselect-btn-active--lt;
         }
+        &.new::after {
+          background-color: @vselect-new--lt;
+        }
+      }
+    }
+    .toggle_btn {
+      background: @vselect-expand-bg--lt;
+      .arrow {
+        .left, .right {
+          border-bottom: @vselect-arrow-width solid @main-color--lt;
+        }
+      }
+      &:hover {
+        box-shadow: 1px 1px 8px @vselect-expand-shadow--lt;
+      }
+    }
+    .description {
+      .version {
+        background-color: @vselect-descript-bg--lt;
+      }
+      .header {
+        color: @vselect-header--lt;
+      }
+      code, .codeblock {
+        background-color: @vselect-code-bg--lt;
       }
     }
   }

@@ -102,9 +102,14 @@
 @vselect-bg: lighten(@background-color, 6%);
 @vselect-btn-bg: lighten(@main-color, 13%);
 @vselect-btn-active: @background-color;
-@vselect-expand: @main-color;
+@vselect-new: #4F8299;
+//
 @vselect-expand-bg: lighten(@vselect-descript-bg, 9.5%);
+@vselect-expand-shadow: fade(darken(@background-color, 4%), 2%);
+//
 @vselect-descript-bg: darken(@vselect-bg, 3.5%);
+@vselect-code-bg: lighten(@vselect-descript-bg, 4%);
+//
 @vselect-header: darken(@main-color, 14%);
 @vselect-header-link-hover: lighten(@vselect-header, 8%);
 @vselect-header-link-active: lighten(@vselect-header, 4%);
@@ -113,6 +118,18 @@
 @vselect-bg--lt: darken(@main-bg--lt, 6%);
 @vselect-btn-bg--lt: lighten(@main-color--lt, 8%);
 @vselect-btn-active--lt: @main-bg--lt;
+@vselect-new--lt: #87BCD3;
+//
+@vselect-expand-bg--lt: darken(@vselect-descript-bg--lt, 9.5%);
+@vselect-expand-shadow--lt: fade(darken(@main-bg--lt, 16%), 2%);
+//
+@vselect-descript-bg--lt: lighten(@vselect-bg--lt, 3.5%);
+@vselect-code-bg--lt: darken(@vselect-descript-bg--lt, 4%);
+//
+@vselect-header--lt: lighten(@main-color--lt, 16%);
+@vselect-header-link-hover--lt: lighten(@vselect-header--lt, 12%);
+@vselect-header-link-active--lt: lighten(@vselect-header--lt, 6%);
+@vselect-header-link-bg-active--lt: fade(@vselect-header--lt, 12%);
 
 @tab-default: lighten(@background-color, 12%);
 @tab-new: #214031;
