@@ -494,13 +494,13 @@ main .version_notice code {
 .version_select {
   position: relative;
   border-radius: 1px;
-  .mode-transition.background();
   .version_buttons {
     display: flex;
     justify-content: space-evenly;
     background-color: @vselect-bg;
     font-size: 1.3em;
     padding: .7em 1em;
+    .mode-transition.background();
     button {
       position: relative;
       background-color: unset;
@@ -539,9 +539,10 @@ main .version_notice code {
         background-color: @vselect-new;
         transform: translate(40%, -40%);
         border-radius: 100px;
-        transition:
+        transition+:
           width .1s ease,
           height .1s ease;
+        .mode-transition.background();
       }
       &.new:not(.active)::after {
         height: .45em;
@@ -560,7 +561,8 @@ main .version_notice code {
     border-radius: 100px;
     opacity: 0;
     z-index: 2;
-    transition: opacity .15s ease-in-out, box-shadow .15s ease-in-out;
+    transition+: opacity .15s ease-in-out, box-shadow .15s ease-in-out;
+    .mode-transition.background();
     .arrow {
       position: relative;
       display: flex;
@@ -571,7 +573,8 @@ main .version_notice code {
         border-bottom: @vselect-arrow-width solid @main-color;
         width: @vselect-arrow-height;
         transform-origin: 100% 0;
-        transition: transform .22s cubic-bezier(.5, .13, .1, 1);
+        transition+: transform .22s cubic-bezier(.5, .13, .1, 1);
+        .mode-transition.border();
       }
       /* Default: up */
       .left {
@@ -614,10 +617,11 @@ main .version_notice code {
       transform: translateY(-20%);
       opacity: 0;
       background-color: @vselect-descript-bg;
-      transition:
+      transition+:
         visibility .2s linear,
         transform .2s cubic-bezier(.45, .1, .15, .95),
         opacity .15s ease-in-out;
+      .mode-transition.background();
       &.bottom {
         transform: translateY(20%);
       }
@@ -635,6 +639,7 @@ main .version_notice code {
       font-size: .95em;
       padding: .3em 1.2em;
       color: @vselect-header;
+      .mode-transition.color();
       .heading {
         font-size: 1.15em;
         font-weight: bold;

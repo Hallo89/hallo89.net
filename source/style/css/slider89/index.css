@@ -463,7 +463,6 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
 .version_select {
   position: relative;
   border-radius: 1px;
-  transition: background 0.15s linear;
 }
 .version_select .version_buttons {
   display: flex;
@@ -471,6 +470,7 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
   background-color: hsl(0, 0%, 15%);
   font-size: 1.3em;
   padding: 0.7em 1em;
+  transition: background 0.15s linear;
 }
 .version_select .version_buttons button {
   position: relative;
@@ -512,7 +512,7 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
   background-color: #4F8299;
   transform: translate(40%, -40%);
   border-radius: 100px;
-  transition: width 0.1s ease, height 0.1s ease;
+  transition: width 0.1s ease, height 0.1s ease, background 0.15s linear;
 }
 .version_select .version_buttons button.new:not(.active)::after {
   height: 0.45em;
@@ -529,7 +529,7 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
   border-radius: 100px;
   opacity: 0;
   z-index: 2;
-  transition: opacity 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: opacity 0.15s ease-in-out, box-shadow 0.15s ease-in-out, background 0.15s linear;
 }
 .version_select .toggle_btn .arrow {
   position: relative;
@@ -544,7 +544,7 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
   border-bottom: 2.5px solid hsl(0, 0%, 78%);
   width: 0.86em;
   transform-origin: 100% 0;
-  transition: transform 0.22s cubic-bezier(0.5, 0.13, 0.1, 1);
+  transition: transform 0.22s cubic-bezier(0.5, 0.13, 0.1, 1), border 0.15s linear;
 }
 .version_select .toggle_btn .arrow .left {
   transform: translate(-0.43em, -0.43em) rotateZ(-45deg);
@@ -583,7 +583,7 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
   transform: translateY(-20%);
   opacity: 0;
   background-color: hsl(0, 0%, 11.5%);
-  transition: visibility 0.2s linear, transform 0.2s cubic-bezier(0.45, 0.1, 0.15, 0.95), opacity 0.15s ease-in-out;
+  transition: visibility 0.2s linear, transform 0.2s cubic-bezier(0.45, 0.1, 0.15, 0.95), opacity 0.15s ease-in-out, background 0.15s linear;
 }
 .version_select .description .version.bottom {
   transform: translateY(20%);
@@ -601,6 +601,7 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
   font-size: 0.95em;
   padding: 0.3em 1.2em;
   color: hsl(0, 0%, 64%);
+  transition: color 0.15s linear;
 }
 .version_select .description .header .heading {
   font-size: 1.15em;
