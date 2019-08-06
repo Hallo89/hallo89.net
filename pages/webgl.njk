@@ -1,22 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Tools | Hallo89</title>
+    <title>WebGL Experiments | Hallo89</title>
     <link rel="stylesheet" href="../global.css">
     <link rel="stylesheet" href="menu.css">
     <script src="../global.js"></script>
   </head>
-  <body class="info_mode">
+  <body>
     {% import 'templates/glb_box.njk' as box %}
-    <div id="containers">
-
-      {% for child, childVal in links.Tools.children %}
+    <div id="menu">
+      {% for child, childVal in links['WebGL Experiments'].components %}
         {% call box.box(child, '.' + childVal.link) %}
           {{ childVal.description }}
         {% endcall %}
       {% endfor %}
-
     </div>
 
     {% include "templates/footer.njk" %}

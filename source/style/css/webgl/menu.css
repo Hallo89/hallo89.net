@@ -1,0 +1,21 @@
+body {
+  margin: 0;
+}
+
+#menu {
+  display: flex;
+  flex-wrap: wrap;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(455px, 1fr));
+  margin: calc(1.4vw + 1vh + 20px) 0;
+  min-height: calc(100vh - 2 * (1.4vw + 1vh + 20px));
+  font-size: 19px;
+}
+
+.box {
+  width: 455px;
+  height: 510px;
+}

@@ -1,42 +1,45 @@
-{% macro box(heading, ref, sameref = false) %}
-<a href="{{ ref if not sameref else heading | lower }}" class="box glb_box hyperbox imager">
+{% macro box(heading, ref) %}
+<a href="{{ ref }}" class="box glb_box hyperbox">
   <b class="corneranimation"></b>
-  <h2 class="box_header">{{ heading }}</h2>
+  <h2 class="box_header">{{ heading | safe }}</h2>
   <p class="description box_text">
-    {{ caller() | trim }}
+    {{ caller() | trim | nl2br | safe }}
   </p>
 </a>
 {% endmacro %}
 
-{% macro image_box(heading, ref, imgClass) %}
+{% macro image_box(heading, ref, img) %}
 <a href="{{ ref }}" class="box glb_box hyperbox imager">
   <b class="corneranimation"></b>
-  <h2 class="box_header">{{ heading }}</h2>
-  <div class="image_container {{ imgClass }}">
+  <h2 class="box_header">{{ heading | safe }}</h2>
+  <div class="image_container">
+    <i class="image" style="background-image: url('{{ img }}.png')"></i>
     <p class="description box_text">
-      {{ caller() | trim }}
+      {{ caller() | trim | nl2br | safe }}
     </p>
   </div>
 </a>
 {% endmacro %}
 
-{% macro links_box(heading, description, images = false, links) %}
+{% macro component_box(heading, description, components, link = false) %}
 <div class="box glb_box multiplebox">
   <b class="corneranimation"></b>
-  <h2 class="box_header">{{ heading }}</h2>
-  {% if description -%}
-    <p class="description box_text">{{ description }}</p>
+  <h2 class="box_header">{{ heading | safe }}</h2>
+  {%- if description %}
+    <p class="description box_text">{{ description | nl2br | safe }}</p>
   {%- endif %}
   <div class="links box_text">
-  {% if images -%}
-    {% for name, class, ref in links -%}
-      <a class="imager {{ class }}" href="{{ ref }}">{{ name | safe }}</a>
+    {%- for comp, compVal in components -%}
+      {%- set ref = (link + compVal.link) if link else compVal.link -%}
+      {%- if compVal.image %}
+        <a class="imager" href="{{ ref }}">
+          {{ comp | safe }}
+          <i class="image" style="background-image: url('{{ compVal.image }}.png')"></i>
+        </a>
+      {%- else %}
+        <a href="{{ ref }}">{{ comp | safe }}</a>
+      {%- endif -%}
     {%- endfor %}
-  {%- else -%}
-    {% for name, class in links -%}
-      <a href="{{ class }}">{{ name }}</a>
-    {%- endfor %}
-  {%- endif %}
   </div>
 </div>
 {% endmacro %}

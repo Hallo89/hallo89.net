@@ -9,7 +9,7 @@ html.nesewebel-mode.light-mode {
   scrollbar-color: black white;
 }
 body {
-  margin: 0 0 15px;
+  margin: 0;
   font-size: calc(0.05vw + 0.025vh + 17.82px);
 }
 html.nesewebel-mode body {
@@ -179,7 +179,7 @@ html.nesewebel-mode.light-mode #head_block h1:hover::before {
   justify-content: space-around;
   display: grid;
   justify-items: center;
-  margin: 1.842em 1.053em 1.053em;
+  margin: 1.842em 1.053em;
   grid-gap: 2.105em;
   grid-template-columns: repeat(auto-fit, minmax(21.579em, 1fr));
   align-items: center;
@@ -211,15 +211,6 @@ html.nesewebel-mode.light-mode #head_block h1:hover::before {
   from {
     transform: translateY(-17px);
   }
-}
-#box_nav .box .dwm::before {
-  background-image: url('MINECRAFT.png');
-}
-#box_nav .box .triangles::before {
-  background-image: url('triangles.png');
-}
-#box_nav .box .matrix_3d::before {
-  background-image: url('cube.png');
 }
 html.nesewebel-mode #box_nav .box {
   background-color: black;

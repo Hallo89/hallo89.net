@@ -52,30 +52,23 @@
 
     {% import 'templates/glb_box.njk' as box %}
     <nav id="box_nav">
-      {% call box.image_box('Dandelion With Mods', 'https://minecraft.curseforge.com/projects/dandelion-with-mods', 'dwm') %}
-        A minecraft resource pack, forked from the original resource pack 'Dandelion', featuring mod support, many improved and new vanilla items & models and 1.13. <br>
+      {% call box.image_box('Dandelion With Mods', 'https://minecraft.curseforge.com/projects/dandelion-with-mods', 'MINECRAFT') %}
+        A minecraft resource pack, forked from the original resource pack 'Dandelion', featuring mod support, many improved and new vanilla items & models and 1.13.
         Although not worked on extensively anymore, I consider it one of my main projects
       {% endcall %}
 
-      {% call box.box('Tools', sameref = true) %}
-        A variety of useful tools, currently featuring a random number generator and an extensive minecraft model creator. <br>
-        Along with Dandelion With Mods and this website in general, it is one of my main projects
-      {% endcall %}
-
-      {% call box.box('Slider89', sameref = true) %}
-        Slider89 is a framework for easily creating and manipulating fully customizable CSS sliders for your website, featuring functions and practices for every purpose
-      {% endcall %}
-
-      {{ box.links_box('WebGL Experiments', 'A WebGL 2 learning log', images = true, links = [
-        ['Triangles', 'triangles', 'webgl/triangles'],
-        ['Matrices & 3D', 'matrix_3d', 'webgl/matrices3d']
-      ]) }}
-
-      {{ box.links_box('Other stuff', links = [
-        ['Useful thing', 'sponge'],
-        ['Empty thing', 'tutorials']
-      ]) }}
+      {% for nav, navVal in links %}
+        {% if navVal.components %}
+          {{ box.component_box(nav, navVal.description, navVal.components, navVal.link) }}
+        {% else %}
+          {% call box.box(nav, navVal.link) %}
+            {{ navVal.description }}
+          {% endcall %}
+        {% endif %}
+      {% endfor %}
     </nav>
+
+    {% include "templates/footer.njk" %}
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css">

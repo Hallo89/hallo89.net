@@ -18,6 +18,9 @@ argon.addFlag(['f', 'first'], function(val) {
 const njk = nunjucks.configure('pages', {
   express: app
 });
+njk.addGlobal('getNavLinks', function() {
+  return getLinks();
+});
 
 njk.addFilter('argonize', function(val) {
   return (val != null ? argon.parse(val.toString()) : val);
@@ -88,6 +91,10 @@ app.use(express.static('source/images'));
 app.use(express.static('source/resources'));
 app.use(express.static('source/icon'));
 
+function getLinks() {
+  return require('./source/resources/page-links.json');
+}
+
 function get(which, fileName) {
   app.get('/' + which, function(req, res) {
     res.sendFile(__dirname + '/pages/' + (fileName || which) + '.html');
@@ -99,15 +106,16 @@ function getNJK(which, param, fileName) {
   });
 }
 
-getNJK('', false, 'index');
+getNJK('', { links: getLinks() }, 'index');
 get('sponge');
 get('tutorials');
 get('blog');
-getNJK('tools');
+getNJK('tools', { links: getLinks() });
 get('tools/3DMagic');
 get('tools/RFG');
 get('tools/mocking');
 get('tools/spacing');
+getNJK('webgl', { links: getLinks() });
 get('webgl/triangles');
 get('webgl/matrices3d');
 
