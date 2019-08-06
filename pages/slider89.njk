@@ -144,7 +144,7 @@
             <div class="version {{version.tag_name | dotSnake }} {{- ' active' if loop.first }}">
               <div class="header">
                 <span class="date">Published on {{ version.date }}</span>
-                <a href="https://github.com/Hallo89/Slider89/releases/tag/v0.2.0">Go to release</a>
+                <a href="{{ version.html_url }}">Go to release</a>
               </div>
               <div class="changelog">
                 <span class="heading">What's new</span>
