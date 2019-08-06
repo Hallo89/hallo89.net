@@ -1,0 +1,158 @@
+// main: index.less
+
+// -- misc --
+@vselect-arrow-height: .86em;
+@vselect-arrow-width: 2.5px;
+@nav-separate-margin: .6em;
+@text-indent: 20px;
+@margin-indent: ~'.5vw + .15vh + .98em';
+@info-guide-height: 1em;
+
+// -- fonts --
+@FiraSans: 'Fira Sans', 'Roboto', 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', Arial, 'San Francisco', sans-serif;
+@Consolas: 'San Francisco Monospaced', 'Consolas', 'Source Code Pro', monospace;
+@Segoe: 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', 'San Francisco', 'Roboto', 'Fira Sans', Arial, sans-serif;
+@SourceCodePro: 'Source Code Pro', 'DejaVu Sans Mono', 'Fira Mono', 'Fira Code', 'San Francisco Monospaced', 'Consolas', monospace;
+
+// -- mixins --
+.tab-variant(@class, @color) {
+  &.@{class} {
+    border-color: @color;
+    > strong::before {
+      background-color: @color;
+    }
+  }
+}
+
+// -- colors --
+@import (reference) '../colors.less';
+
+//Dark mode
+@main-color: hsl(0, 0%, 78%);
+
+@nav: darken(@main-color, 6%);
+@nav-item: @nav;
+@nav-item-underline: darken(@nav-item, 15%);
+@nav-item-hover: lighten(@nav-item, 5%);
+@nav-item-underline-hover: lighten(@nav-item-underline, 8%);
+@nav-media-bg: lighten(@background-color, 4%);
+
+@h2: lighten(@main-color, 4%);
+@h3: lighten(@main-color, 2%);
+@h4: @main-color;
+@hr: lighten(@background-color, 14%);
+
+@general-link: #289FA3;
+@general-link-visited: #559E6D;
+@general-link-bg: fade(@general-link, 18%);
+@general-link-bg-visited: fade(@general-link-visited, 18%);
+
+@code: lighten(@main-color, 4%);
+@code-bg: lighten(@background-color, 5.5%);
+
+@main-link-hover: lighten(@main-color, 8%);
+@main-link-active: lighten(@main-color, 4%);
+@main-link-bg-active: fade(@main-color, 12%);
+
+@code-link-hover: lighten(@code, 8%);
+@code-link-active: lighten(@code, 4%);
+
+@copy-btn-bg: lighten(@code-bg, 4%);
+@copy-btn-bg-active: lighten(@copy-btn-bg, 1%);
+@copy-checkmark: lighten(@main-color, 6%);
+
+@propname: lighten(@main-color, 8%);
+@propname-bg: lighten(@background-color, 10.5%);
+
+@h4-expand-btn: darken(@main-color, 8%);
+@h4-expand-btn-bg: lighten(@background-color, 11%);
+
+@vselect-bg: lighten(@background-color, 6%);
+@vselect-btn-bg: lighten(@main-color, 13%);
+@vselect-btn-active: @background-color;
+@vselect-new: #4F8299;
+//
+@vselect-expand-bg: lighten(@vselect-descript-bg, 9.5%);
+@vselect-expand-shadow: fade(darken(@background-color, 4%), 2%);
+//
+@vselect-descript-bg: darken(@vselect-bg, 3.5%);
+@vselect-code-bg: lighten(@vselect-descript-bg, 4%);
+//
+@vselect-header: darken(@main-color, 14%);
+@vselect-header-link-hover: lighten(@vselect-header, 8%);
+@vselect-header-link-active: lighten(@vselect-header, 4%);
+@vselect-header-link-bg-active: fade(@vselect-header, 12%);
+
+@tab-default: lighten(@background-color, 12%);
+@tab-new: #214031;
+@tab-current: #1f4252;
+@tab-incompatible: #983838;
+
+@version-banner-bg: fade(@tab-incompatible, 35%);
+
+@info-state: #A84E4E;
+
+@info-item-guide: lighten(@background-color, 27%);
+
+
+//Light mode
+@main-color--lt: hsl(0, 0%, 6%);
+
+@main-bg--lt: hsl(0, 0%, 98%);
+
+@h2--lt: darken(@main-color--lt, 2%);
+@h3--lt: darken(@main-color--lt, 1%);
+@h4--lt: @main-color--lt;
+@hr--lt: darken(@main-bg--lt, 14%);
+
+@general-link--lt: #138296;
+@general-link-visited--lt: #20806A;
+@general-link-bg--lt: fade(@general-link--lt, 18%);
+@general-link-bg-visited--lt: fade(@general-link-visited--lt, 18%);
+
+@code--lt: darken(@main-color--lt, 4%);
+@code-bg--lt: darken(@main-bg--lt, 5.5%);
+
+@main-link-hover--lt: lighten(@main-color--lt, 12%);
+@main-link-active--lt: lighten(@main-color--lt, 6%);
+@main-link-bg-active--lt: fade(@main-color--lt, 12%);
+
+@code-link-hover--lt: lighten(@code--lt, 12%);
+@code-link-active--lt: lighten(@code--lt, 6%);
+
+@copy-btn-bg--lt: darken(@code-bg--lt, 4%);
+@copy-btn-bg-active--lt: darken(@copy-btn-bg--lt, 1%);
+@copy-checkmark--lt: @main-color--lt;
+
+@propname--lt: darken(@main-color--lt, 8%);
+@propname-bg--lt: darken(@main-bg--lt, 10.5%);
+
+@h4-expand-btn--lt: lighten(@main-color--lt, 8%);
+@h4-expand-btn-bg--lt: darken(@main-bg--lt, 11%);
+
+@vselect-bg--lt: darken(@main-bg--lt, 6%);
+@vselect-btn-bg--lt: lighten(@main-color--lt, 8%);
+@vselect-btn-active--lt: @main-bg--lt;
+@vselect-new--lt: #87BCD3;
+//
+@vselect-expand-bg--lt: darken(@vselect-descript-bg--lt, 9.5%);
+@vselect-expand-shadow--lt: fade(darken(@main-bg--lt, 16%), 2%);
+//
+@vselect-descript-bg--lt: lighten(@vselect-bg--lt, 3.5%);
+@vselect-code-bg--lt: darken(@vselect-descript-bg--lt, 4%);
+//
+@vselect-header--lt: lighten(@main-color--lt, 16%);
+@vselect-header-link-hover--lt: lighten(@vselect-header--lt, 12%);
+@vselect-header-link-active--lt: lighten(@vselect-header--lt, 6%);
+@vselect-header-link-bg-active--lt: fade(@vselect-header--lt, 12%);
+
+@tab-default--lt: darken(@main-bg--lt, 15.5%);
+@tab-new--lt: #95B3A5;
+@tab-current--lt: #B8D6E0;
+@tab-incompatible--lt: #BC7373;
+
+@version-banner-bg--lt: fade(@tab-incompatible--lt, 35%);
+
+@info-state--lt: #C1604D;
+
+@info-item-guide--lt: darken(@main-bg--lt, 27%);
