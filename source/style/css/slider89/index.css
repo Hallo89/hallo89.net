@@ -618,9 +618,12 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
 .version_select .description .changelog .body {
   margin: 0.5em 0.5em 0;
 }
-.version_select .description .changelog .body ul {
+.version_select .description .changelog ul {
   margin: 0;
   padding-left: 1.5em;
+}
+.version_select .description .changelog a code {
+  padding-bottom: 1px;
 }
 .version_select .description code,
 .version_select .description .codeblock {
