@@ -3,9 +3,12 @@
 */
 const canvas = document.querySelector('canvas');
 
-const gl = canvas.getContext('webgl2', {
-  preserveDrawingBuffer: (typeof preserveBuffer != "undefined" ? preserveBuffer : false)
-});
+const withBuffer = (typeof preserveBuffer != "undefined" ? preserveBuffer : false);
+const gl = (canvas.getContext('webgl2', {
+  preserveDrawingBuffer: withBuffer
+}) || canvas.getContext('experimental-webgl2', {
+  preserveDrawingBuffer: withBuffer
+}));
 if (!gl) {
   console.error('It seems like WebGL2 is not supported');
   const prompt = (function() {
