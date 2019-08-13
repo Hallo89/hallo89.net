@@ -3,10 +3,9 @@
 */
 const canvas = document.querySelector('canvas');
 
-const gl = null;
-// const gl = canvas.getContext('webgl2', {
-//   preserveDrawingBuffer: (typeof preserveBuffer != "undefined" ? preserveBuffer : false)
-// });
+const gl = canvas.getContext('webgl2', {
+  preserveDrawingBuffer: (typeof preserveBuffer != "undefined" ? preserveBuffer : false)
+});
 if (!gl) {
   console.error('It seems like WebGL2 is not supported');
   const prompt = (function() {
@@ -27,7 +26,7 @@ if (!gl) {
     const isIE = navigator.userAgent.indexOf('MSIE') != -1 || navigator.userAgent.indexOf('Trident') != -1;
     alertCaption.textContent = 'No support for WebGL 2';
     alertHeader.textContent = 'This page uses WebGL2 which is not supported by your browser';
-    alertInfo.innerHTML = 'WebGL2 is a modern graphics library for the web not supported by old browsers.<br>      Please choose a modern browser, e.g. the latest Firefox, to be able to see this WebGL2 content.' + (isIE ? '<br>You seem to be using Internet Explorer - This browser is a threat to security and individuality, please upgrade to a modern browser as fast as possible.' : '');
+    alertInfo.innerHTML = 'WebGL2 is a modern graphics library for the web not supported by old browsers.<br>      Please choose a modern desktop browser, e.g. the latest Firefox, or Firefox on mobile to be able to see this WebGL2 content.' + (isIE ? '<br>You seem to be using Internet Explorer - This browser is a threat to security and individuality, please upgrade to a modern browser as fast as possible.' : '');
 
     alertWrapper.appendChild(alert);
     for (let i = 0; i < body.length; i++) alert.appendChild(body[i]);
