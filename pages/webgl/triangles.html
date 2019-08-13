@@ -93,65 +93,14 @@
         z-index: 1;
       }
 
-      .size_alert_wrapper {
-        display: none;
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        top: 0;
-        left: 0;
-        align-items: center;
-        justify-content: center;
-        z-index: 0;
-      }
-      .size_alert {
-        background-color: hsl(0, 0%, 18%);
-        padding: calc(1.5vh + 10px) calc(1.9vw + 5px);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        border-radius: 3px;
-        border: 10px solid hsl(0, 0%, 15%);
-        box-shadow: 1px 1px 18px hsla(0, 0%, 5%, 0.4);
-      }
-      .size_alert .alert_text {
-        text-align: center;
-      }
-      .size_alert .alert_caption {
-        margin: 0 0 calc(.85vh + 7px);
-        padding: 0 0 calc(.85vh + 7px);
-        width: 100%;
-        border-bottom: calc(.25vh + 6px) solid hsl(0, 0%, 23%);
-        color: hsl(0, 0%, 55%);
-        font-size: calc(0.22vw + 20px);
-        font-weight: bold;
-        letter-spacing: 1px;
-      }
-      .size_alert .alert_header {
-        margin: 0;
-        color: hsl(0, 0%, 80%);
-        font-size: calc(0.21vw + 21px);
-        font-weight: bold;
-      }
-      .size_alert .alert_info {
-        color: hsl(0, 0%, 70%);
-        font-size: calc(0.2vw + 13.5px);
-        margin: calc(1.8vh + 6px) 0 calc(2.5vh + 6px);
-      }
-      .size_alert .alert_button {
-        background-color: hsl(0, 0%, 25%);
-        color: hsl(0, 0%, 75%);
-        font-size: 20px;
-        margin: 5px 20px;
-      }
-      .size_alert .alert_button.yes {
+      #size_alert .buttons button.yes {
         font-weight: bold;
         width: calc(3.3vw + 130px);
         height: calc(3.8vh + 15px);
         min-height: 30px;
         min-width: 120px;
       }
-      .size_alert .alert_button.abort {
+      #size_alert .buttons button.abort {
         background-color: hsl(0, 0%, 24%);
         color: hsl(0, 0%, 70%);
         font-size: 18px;
@@ -160,9 +109,6 @@
         min-height: 25px;
         min-width: 100px;
         margin-top: calc(1.7vh + 3px);
-      }
-      body.size_warning .size_alert_wrapper {
-        display: flex;
       }
 
       .tooltips {
@@ -338,13 +284,15 @@
         </div>
       </div>
     </div>
-    <div class="size_alert_wrapper">
-      <div class="size_alert">
-        <p class="alert_text alert_caption">Legacy mode is enabled</p>
-        <p class="alert_text alert_header">A large quantity of triangles is set to generate</p>
-        <p class="alert_text alert_info">While this has no significant negative effects, it can take pretty long</p>
-        <button class="alert_button yes" onclick="hideWarning(); setTimeout(function(){run()}, 20);">Go!</button>
-        <button class="alert_button abort" onclick="hideWarning();">Nevermind</button>
+    <div class="alert_wrapper" id="size_alert">
+      <div class="alert">
+        <p class="text caption">Legacy mode is enabled</p>
+        <p class="text header">A large quantity of triangles is set to generate</p>
+        <p class="text info">While this has no significant negative effects, it can take pretty long</p>
+        <div class="buttons">
+          <button class="yes" onclick="hideWarning(); setTimeout(function(){run()}, 20);">Go!</button>
+          <button class="abort" onclick="hideWarning();">Nevermind</button>
+        </div>
       </div>
     </div>
     <canvas width="800" height="800"></canvas>
@@ -367,6 +315,8 @@
       const inputLines = document.querySelector('.input_box.lines');
 
       const inputDownload = document.querySelector('.input_box.download_canvas .input');
+
+      const sizeAlert = document.getElementById('size_alert');
 
       //for triangles.js
       const inputSize = document.querySelector('.box_wrapper.size .input');
@@ -418,7 +368,7 @@
       }
 
       function hideWarning() {
-        document.body.classList.remove('size_warning');
+        sizeAlert.classList.remove('active');
       }
 
       function pickerChange() {

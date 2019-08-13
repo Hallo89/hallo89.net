@@ -1,48 +1,66 @@
 /*
-  Boilerplate code for WebGL 2. For my purposes, importing a library is not needed
-  Considering the fact that I would not learn about stuff this way, this method is a better one, especially because I add my own spice to it as to comment it in my way so it is best understandable for me (and probably others as well)
-  I'm also adding my own spice to it as to formatting parts of it in a better way
+  Boilerplate code for WebGL 2. For my purposes, importing a library is not needed, considering the fact that I would not learn about stuff this way
 */
+const canvas = document.querySelector('canvas');
 
-const canvas = document.querySelector('canvas'); //The body of this, being the thing I work with
-
-//The absolute legend being the heart of everything (literally everything)
-const gl = canvas.getContext('webgl2', {preserveDrawingBuffer: preserveBuffer});
+const gl = null;
+// const gl = canvas.getContext('webgl2', {
+//   preserveDrawingBuffer: (typeof preserveBuffer != "undefined" ? preserveBuffer : false)
+// });
 if (!gl) {
   console.error('It seems like WebGL2 is not supported');
-  document.body.innerHTML = '<span style="color: hsl(0, 0%, 80%); font-size: 50px;">It seems like WebGL2 is not supported</span>';
+  const prompt = (function() {
+    const alertWrapper = document.createElement('div');
+    const alert = document.createElement('div');
+    const alertCaption = document.createElement('p');
+    const alertHeader = document.createElement('p');
+    const alertInfo = document.createElement('p');
+    alertWrapper.classList.add('alert_wrapper');
+    alertWrapper.classList.add('active');
+    alert.classList.add('alert');
+    alertCaption.classList.add('caption');
+    alertHeader.classList.add('header');
+    alertInfo.classList.add('info');
+    const body = [alertCaption, alertHeader, alertInfo];
+    for (let i = 0; i < body.length; i++) body[i].classList.add('text');
+
+    const isIE = navigator.userAgent.indexOf('MSIE') != -1 || navigator.userAgent.indexOf('Trident') != -1;
+    alertCaption.textContent = 'No support for WebGL 2';
+    alertHeader.textContent = 'This page uses WebGL2 which is not supported by your browser';
+    alertInfo.innerHTML = 'WebGL2 is a modern graphics library for the web not supported by old browsers.<br>      Please choose a modern browser, e.g. the latest Firefox, to be able to see this WebGL2 content.' + (isIE ? '<br>You seem to be using Internet Explorer - This browser is a threat to security and individuality, please upgrade to a modern browser as fast as possible.' : '');
+
+    alertWrapper.appendChild(alert);
+    for (let i = 0; i < body.length; i++) alert.appendChild(body[i]);
+    return alertWrapper;
+  })();
+  document.body.innerHTML = '';
+  document.body.appendChild(prompt);
 }
 
 const webgl = {
-  //The function compiling either one of the shaders, where 'shaderSource' is obvious and shaderType is either FRAGMENT_SHADER or VERTEX_SHADER
+  //Creating a shader program from both needed shaders
+  constructProgram: function(vertex, fragment) {
+    const program = gl.createProgram();
+    //Attaching both shaders to the empty program
+    gl.attachShader(program, this.compileShader(vertex, gl.VERTEX_SHADER));
+    gl.attachShader(program, this.compileShader(fragment, gl.FRAGMENT_SHADER));
+    //Linking the program. I don't know what this does. I think it links, as in merges, both just-attached shaders together into the final thing
+    gl.linkProgram(program);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+      console.error('Error: Program failed to link: ' + gl.getProgramInfoLog(program));
+    }
+    return program;
+  },
+  //Compiling either one of the shaders, where 'shaderType' is either gl.FRAGMENT_SHADER or gl.VERTEX_SHADER
   compileShader: function(source, type) {
-   //creating a new empty 'shader hull'
+    //Creating a new empty 'shader hull'
     let shader = gl.createShader(type);
-   //linking the shader code to the just created empty shader and compiling it
+    //Linking the shader code to the just created empty shader and compiling it
     gl.shaderSource(shader, source);
     gl.compileShader(shader);
-   //get the status. If not correct, throw an error
     if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
       console.error('Error: could not compile shader: ' + gl.getShaderInfoLog(shader));
     }
-   //return the now compiled shader, which is only either one
     return shader;
-  },
-
-  //The function creating a 'program' from both needed shaders
-  constructProgram: function(vertex, fragment) {
-   //creating an empty program to be written
-    let program = gl.createProgram();
-   //attaching both shaders to the empty program
-    gl.attachShader(program, this.compileShader(vertex, gl.VERTEX_SHADER));
-    gl.attachShader(program, this.compileShader(fragment, gl.FRAGMENT_SHADER));
-   //linking the program. I don't know what this does. I think it links, as in merges, both just-attached shaders together into the final thing
-    gl.linkProgram(program);
-   //get the LINK_STATUS which is the status (mind = blown). If not correct, throw an error
-    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-      console.error('Error: program failed to link: ' + gl.getProgramInfoLog(program));
-    }
-   //return the now finished (as in linked) program
-    return program;
   }
 }

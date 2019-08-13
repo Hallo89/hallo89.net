@@ -255,11 +255,11 @@ function generate() {
 
   if (legacyMode) {
     computeSizes();
-    if (!document.body.classList.contains('size_warning') && amountX + amountY >= 1200) {
-      document.body.classList.add('size_warning');
-    } else if (!document.body.classList.contains('size_warning') && amountX + amountY < 1200) {
+    if (!sizeAlert.classList.contains('active') && amountX + amountY >= 1200) {
+      sizeAlert.classList.add('active');
+    } else if (!sizeAlert.classList.contains('active') && amountX + amountY < 1200) {
       run(false);
-    } else if (document.body.classList.contains('size_warning') && amountX + amountY < 1200) {
+    } else if (sizeAlert.classList.contains('active') && amountX + amountY < 1200) {
       hideWarning();
       //The timeout is necessary due to the warning not properly hiding before the generation starts
       setTimeout(function() {
@@ -267,7 +267,7 @@ function generate() {
       }, 20);
     }
   } else {
-    if (document.body.classList.contains('size_warning')) {
+    if (sizeAlert.classList.contains('active')) {
       hideWarning();
     }
     run();
