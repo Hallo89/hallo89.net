@@ -9,6 +9,7 @@ html.light-mode {
   scrollbar-color: auto;
 }
 body {
+  margin: 0;
   background-color: hsl(0, 0%, 9%);
   font-family: Arial, 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', sans-serif;
   transition: background 0.15s linear;
