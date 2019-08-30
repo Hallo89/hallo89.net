@@ -150,6 +150,11 @@ html.light-mode #cookiebanner button::before {
   display: flex;
   align-items: center;
 }
+#navbar .text h1 {
+  font-size: inherit;
+  font-weight: normal;
+  margin: 0;
+}
 #navbar .text img {
   display: block;
   width: 1.9em;
