@@ -1,4 +1,4 @@
-{% macro navbar(thisPage, heading = false, modes = false, additional = false) %}
+{% macro navbar(thisPage, heading = false, modes = false) %}
 <div id="navbar">
   <nav class="text">
     <a href="../"><img src="../Avatar.png" alt="Hallo89 logo"></a>
@@ -10,7 +10,7 @@
       <a href="{{ thisPage }}" class="item">{{ thisPage | capitalize }}</a>
     {% endif %}
   </nav>
-  {% if additional %}
+  {% if caller() %}
   {{ caller() }}
   {% endif %}
   {% if modes %}
