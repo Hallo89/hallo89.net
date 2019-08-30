@@ -18,11 +18,11 @@ html {
 
 body {
   margin: 0;
-  background-color: @background-color;
+  background-color: @main-bg;
   font-family: Arial, 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', sans-serif;
   .mode-transition.background();
   html.light-mode & {
-    background-color: @background-color--light;
+    background-color: @main-bg--lt;
   }
 }
 
@@ -42,7 +42,7 @@ body {
   .mode-transition.shadow();
   .mode-transition.border();
   .description {
-    color: @cookiebanner-foreground;
+    color: @cookiebanner;
     padding: .55em .7em;
   }
   .background {
@@ -59,8 +59,8 @@ body {
     position: relative;
     border: none;
     padding: 0 1em;
-    background-color: @cookiebanner-button;
-    color: @cookiebanner-button-foreground;
+    background-color: @cookiebanner-button-bg;
+    color: @cookiebanner-button;
     font-size: inherit;
     font-family: 'San Francisco Monospace', 'Consolas';
     letter-spacing: -.5px;
@@ -74,7 +74,7 @@ body {
       top: 0;
       height: 100%;
       width: 0;
-      background-color: @cookiebanner-button;
+      background-color: @cookiebanner-button-bg;
       z-index: -1;
       border-radius: 100px;
       transition+: all .55s cubic-bezier(.45, .12, .22, 1);
@@ -106,18 +106,18 @@ body {
   }
 
   html.light-mode & {
-    border-bottom: 3px solid @glb-box-borderbottom--light;
-    box-shadow: 1px -2px 6px @glb-box-shadow--light;
+    border-bottom: 3px solid @glb-box-borderbottom--lt;
+    box-shadow: 1px -2px 6px @glb-box-shadow--lt;
     .description {
-      color: @cookiebanner-foreground--light;
+      color: @cookiebanner--lt;
     }
     .background {
-      background-color: @glb-box-bordertop--light;
+      background-color: @glb-box-bordertop--lt;
     }
     button {
-      color: @cookiebanner-button-foreground--light;
+      color: @cookiebanner-button--lt;
       &, &::before {
-        background-color: @cookiebanner-button--light;
+        background-color: @cookiebanner-button-bg--lt;
       }
     }
   }
@@ -243,11 +243,11 @@ body {
       z-index: -1;
     }
     .dropdown_header {
-      background-color: @mode-dropdown-header-background;
+      background-color: @mode-dropdown-header-bg;
       padding: 9px 18px;
       font-family: 'Arial', sans-serif;
       text-transform: uppercase;
-      color: @mode-dropdown-header-foreground;
+      color: @mode-dropdown-header;
       .mode-transition.color();
       .mode-transition.background();
     }
@@ -258,13 +258,13 @@ body {
       white-space: nowrap;
       position: relative;
       padding: 9px 9px 9px 12px;
-      color: @mode-switch-foreground;
-      background-color: @mode-switch-background;
+      color: @mode-switch;
+      background-color: @mode-switch-bg;
       cursor: pointer;
       transition: all .15s linear;
       .noselect();
       &:hover {
-        background-color: @mode-switch-background-hover;
+        background-color: @mode-switch-bg-hover;
         transition: all .15s linear;
       }
       &::before {
@@ -293,21 +293,21 @@ body {
   }
   html.light-mode & {
     .dropdown_box {
-      border-top: 3px solid @mode-dropdown-bordertop--light;
-      border-bottom: 3px solid @mode-dropdown-borderbottom--light;
-      box-shadow: 0 3px 1px @mode-dropdown-extreme-shadow--light, 1px 1px 5px @mode-dropdown-shadow--light;
+      border-top: 3px solid @mode-dropdown-bordertop--lt;
+      border-bottom: 3px solid @mode-dropdown-borderbottom--lt;
+      box-shadow: 0 3px 1px @mode-dropdown-extreme-shadow--lt, 1px 1px 5px @mode-dropdown-shadow--lt;
       &::before {
-        border: 15px solid @mode-dropdown-bordertop--light;
+        border: 15px solid @mode-dropdown-bordertop--lt;
       }
       .dropdown_header {
-        background-color: @mode-dropdown-header-background--light;
-        color: @mode-dropdown-header-foreground--light;
+        background-color: @mode-dropdown-header-bg--lt;
+        color: @mode-dropdown-header--lt;
       }
       .mode_switch {
-        color: @mode-switch-foreground--light;
-        background-color: @mode-switch-background--light;
+        color: @mode-switch--lt;
+        background-color: @mode-switch-bg--lt;
         &:hover {
-          background-color: @mode-switch-background-hover--light;
+          background-color: @mode-switch-bg-hover--lt;
         }
       }
     }
@@ -321,8 +321,8 @@ body {
   flex-direction: column;
   font-size: calc(.08vw + .04vh + 16.5px);
   padding: 1em 0;
-  background-color: @footer-background;
-  color: @footer-foreground;
+  background-color: @footer-bg;
+  color: @footer;
   .nav-wrapper {
     display: flex;
     justify-content: space-between;
@@ -420,19 +420,19 @@ body {
   }
 
   html.light-mode & {
-    background-color: @footer-background--light;
-    color: @footer-foreground--light;
+    background-color: @footer-bg--lt;
+    color: @footer--lt;
     .nav-wrapper ul li {
-      color: @footer-list-item--light;
+      color: @footer-list-item--lt;
     }
     hr {
-      border: 1px solid @footer-hr--light;
+      border: 1px solid @footer-hr--lt;
     }
     .side-note {
-      color: @footer-sidenote--light;
+      color: @footer-sidenote--lt;
     }
     a::before {
-      border-bottom: 1px solid @footer-list-item--light;
+      border-bottom: 1px solid @footer-list-item--lt;
     }
   }
 
@@ -463,7 +463,7 @@ body {
   font-size: 1.45em;
   overflow: hidden;
   border-radius: 2px;
-  background-color: @glb-box;
+  background-color: @glb-box-bg;
   border-top: 4px solid @glb-box-bordertop;
   border-bottom: 4px solid @glb-box-borderbottom;
   box-shadow: 0 4px 1px @glb-box-extreme-shadow, 1px 2px 6px @glb-box-shadow;
@@ -476,7 +476,7 @@ body {
     cursor: pointer;
     text-decoration: none;
     &:any-link {
-      // Normalizing (-> removing) the dotted outline when going to the last page while having clicked onto an <a> in Firefox
+      // Normalizing the dotted focus/clicked/active/whatever link outline in Firefox
       color: transparent;
     }
   }
@@ -565,20 +565,20 @@ body {
 //end of corneranimations
 //box header
   .box_header {
-    background-color: @glb-box-header-background;
+    background-color: @glb-box-header-bg;
     padding: 24px 21px;
     margin: 0;
     font-family: Arial, sans-serif;
     font-weight: normal;
     font-size: 1em;
     text-transform: uppercase;
-    color: @glb-box-header-foreground;
+    color: @glb-box-header;
     line-height: 28px;
     .mode-transition.background();
     .mode-transition.color();
   }
   .box_text {
-    color: @glb-box-description-foreground;
+    color: @glb-box-description;
     .mode-transition.color();
   }
   .description {
@@ -590,21 +590,21 @@ body {
   }
 
   html.light-mode & {
-    background-color: @glb-box--light;
-    border-top: 4px solid @glb-box-bordertop--light;
-    border-bottom: 4px solid @glb-box-borderbottom--light;
-    box-shadow: 0 4px 1px @glb-box-extreme-shadow--light, 1px 2px 6px @glb-box-shadow--light;
+    background-color: @glb-box-bg--lt;
+    border-top: 4px solid @glb-box-bordertop--lt;
+    border-bottom: 4px solid @glb-box-borderbottom--lt;
+    box-shadow: 0 4px 1px @glb-box-extreme-shadow--lt, 1px 2px 6px @glb-box-shadow--lt;
     .corneranimation {
       &::before, &::after {
-        background-color: @glb-box-corners--light;
+        background-color: @glb-box-corners--lt;
       }
     }
     .box_header {
-      background-color: @glb-box-header-background--light;
-      color: @glb-box-header-foreground--light;
+      background-color: @glb-box-header-bg--lt;
+      color: @glb-box-header--lt;
     }
     .box_text {
-      color: @glb-box-description-foreground--light;
+      color: @glb-box-description--lt;
     }
   }
 }
