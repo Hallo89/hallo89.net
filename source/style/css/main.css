@@ -35,17 +35,17 @@ html.nesewebel-mode.light-mode body {
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 2px 13px hsla(0, 0%, 6%, 0.75);
-  background-color: hsl(0, 0%, 13%);
+  box-shadow: 0 2px 16px hsla(0, 0%, 5%, 0.25);
+  background-color: hsl(0, 0%, 12.5%);
   height: calc(8vw + 16vh + 103px);
-  color: hsl(0, 0%, 62.5%);
+  color: hsl(0, 0%, 66%);
   transition: background 0.15s linear, box-shadow 0.15s linear;
 }
 #head_block h1 {
   font: bold 6.9em 'Century Gothic', 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', sans-serif;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  text-shadow: 0px 0px hsl(0, 0%, 48.5%), 0.5px 0.5px hsl(0, 0%, 48.5%), 1px 1px hsl(0, 0%, 48.5%), 1.5px 1.5px hsl(0, 0%, 48.5%), 2px 2px hsl(0, 0%, 48.5%), 2.5px 2.5px hsl(0, 0%, 48.5%), 3px 3px hsl(0, 0%, 48.5%), 3.5px 3.5px hsl(0, 0%, 48.5%), 4px 4px hsl(0, 0%, 48.5%), 4.5px 4.5px hsl(0, 0%, 48.5%), 5px 5px hsl(0, 0%, 48.5%), 5.5px 5.5px hsl(0, 0%, 48.5%), 6px 6px hsl(0, 0%, 48.5%);
+  text-shadow: 0px 0px hsl(0, 0%, 52%), 0.5px 0.5px hsl(0, 0%, 52%), 1px 1px hsl(0, 0%, 52%), 1.5px 1.5px hsl(0, 0%, 52%), 2px 2px hsl(0, 0%, 52%), 2.5px 2.5px hsl(0, 0%, 52%), 3px 3px hsl(0, 0%, 52%), 3.5px 3.5px hsl(0, 0%, 52%), 4px 4px hsl(0, 0%, 52%), 4.5px 4.5px hsl(0, 0%, 52%), 5px 5px hsl(0, 0%, 52%), 5.5px 5.5px hsl(0, 0%, 52%), 6px 6px hsl(0, 0%, 52%);
   margin: 0;
   transition: transform 0.76s, text-shadow 0.15s linear, color 0.15s linear;
   animation: 0.75s fadein linear, 0.9s shiftin, 0.4s shadowIn cubic-bezier(0.43, 0.1, 0.15, 1.1);
@@ -57,7 +57,7 @@ html.nesewebel-mode.light-mode body {
 }
 @keyframes shadowIn {
   from {
-    text-shadow: 1px 1px hsl(0, 0%, 48.5%), 1.5px 1.5px hsl(0, 0%, 48.5%), 2px 2px hsl(0, 0%, 48.5%);
+    text-shadow: 1px 1px hsl(0, 0%, 52%), 1.5px 1.5px hsl(0, 0%, 52%), 2px 2px hsl(0, 0%, 52%);
   }
 }
 #head_block h1:not(.nohover):hover {
@@ -67,8 +67,8 @@ html.nesewebel-mode.light-mode body {
   display: none;
 }
 #head_block h1::before {
-  color: hsl(0, 0%, 13%);
-  text-shadow: 7px 7px hsl(0, 0%, 13%), 7px -7px hsl(0, 0%, 13%), -7px 7px hsl(0, 0%, 13%), -7px -7px hsl(0, 0%, 13%);
+  color: hsl(0, 0%, 12.5%);
+  text-shadow: 7px 7px hsl(0, 0%, 12.5%), 7px -7px hsl(0, 0%, 12.5%), -7px 7px hsl(0, 0%, 12.5%), -7px -7px hsl(0, 0%, 12.5%);
 }
 #head_block h1::before,
 #head_block h1 .cut_after {
@@ -138,16 +138,16 @@ html.nesewebel-mode.light-mode body {
   }
 }
 html.light-mode #head_block {
-  box-shadow: 0 2px 13px hsla(0, 0%, 77%, 0.75);
-  background-color: hsl(0, 0%, 96%);
-  color: hsl(0, 0%, 44%);
+  box-shadow: 0 2px 16px hsla(0, 0%, 80.5%, 0.25);
+  background-color: hsl(0, 0%, 98%);
+  color: hsl(0, 0%, 36%);
 }
 html.light-mode #head_block h1 {
-  text-shadow: 0px 0px hsl(0, 0%, 58%), 0.5px 0.5px hsl(0, 0%, 58%), 1px 1px hsl(0, 0%, 58%), 1.5px 1.5px hsl(0, 0%, 58%), 2px 2px hsl(0, 0%, 58%), 2.5px 2.5px hsl(0, 0%, 58%), 3px 3px hsl(0, 0%, 58%), 3.5px 3.5px hsl(0, 0%, 58%), 4px 4px hsl(0, 0%, 58%), 4.5px 4.5px hsl(0, 0%, 58%), 5px 5px hsl(0, 0%, 58%), 5.5px 5.5px hsl(0, 0%, 58%), 6px 6px hsl(0, 0%, 58%);
+  text-shadow: 0px 0px hsl(0, 0%, 51%), 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%), 6px 6px hsl(0, 0%, 51%);
 }
 html.light-mode #head_block h1:hover::before {
-  color: hsl(0, 0%, 96%);
-  text-shadow: 7px 7px hsl(0, 0%, 96%), 7px -7px hsl(0, 0%, 96%), -7px 7px hsl(0, 0%, 96%), -7px -7px hsl(0, 0%, 96%);
+  color: hsl(0, 0%, 98%);
+  text-shadow: 7px 7px hsl(0, 0%, 98%), 7px -7px hsl(0, 0%, 98%), -7px 7px hsl(0, 0%, 98%), -7px -7px hsl(0, 0%, 98%);
 }
 html.nesewebel-mode #head_block {
   box-shadow: 0 2px 13px rgba(38, 38, 38, 0.8);
@@ -262,10 +262,10 @@ html.nesewebel-mode.light-mode #box_nav .box .box_text {
 }
 @media (max-width: 550px) {
   #head_block h1 {
-    text-shadow: 0px 0px hsl(0, 0%, 48.5%), 0.5px 0.5px hsl(0, 0%, 48.5%), 1px 1px hsl(0, 0%, 48.5%), 1.5px 1.5px hsl(0, 0%, 48.5%), 2px 2px hsl(0, 0%, 48.5%), 2.5px 2.5px hsl(0, 0%, 48.5%), 3px 3px hsl(0, 0%, 48.5%), 3.5px 3.5px hsl(0, 0%, 48.5%), 4px 4px hsl(0, 0%, 48.5%), 4.5px 4.5px hsl(0, 0%, 48.5%), 5px 5px hsl(0, 0%, 48.5%), 5.5px 5.5px hsl(0, 0%, 48.5%);
+    text-shadow: 0px 0px hsl(0, 0%, 52%), 0.5px 0.5px hsl(0, 0%, 52%), 1px 1px hsl(0, 0%, 52%), 1.5px 1.5px hsl(0, 0%, 52%), 2px 2px hsl(0, 0%, 52%), 2.5px 2.5px hsl(0, 0%, 52%), 3px 3px hsl(0, 0%, 52%), 3.5px 3.5px hsl(0, 0%, 52%), 4px 4px hsl(0, 0%, 52%), 4.5px 4.5px hsl(0, 0%, 52%), 5px 5px hsl(0, 0%, 52%), 5.5px 5.5px hsl(0, 0%, 52%);
   }
   html.light-mode #head_block h1 {
-    text-shadow: 0px 0px hsl(0, 0%, 58%), 0.5px 0.5px hsl(0, 0%, 58%), 1px 1px hsl(0, 0%, 58%), 1.5px 1.5px hsl(0, 0%, 58%), 2px 2px hsl(0, 0%, 58%), 2.5px 2.5px hsl(0, 0%, 58%), 3px 3px hsl(0, 0%, 58%), 3.5px 3.5px hsl(0, 0%, 58%), 4px 4px hsl(0, 0%, 58%), 4.5px 4.5px hsl(0, 0%, 58%), 5px 5px hsl(0, 0%, 58%), 5.5px 5.5px hsl(0, 0%, 58%);
+    text-shadow: 0px 0px hsl(0, 0%, 51%), 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%);
   }
   html.nesewebel-mode #head_block h1 {
     text-shadow: 0px 0px #595959, 0.5px 0.5px #595959, 1px 1px #595959, 1.5px 1.5px #595959, 2px 2px #595959, 2.5px 2.5px #595959, 3px 3px #595959, 3.5px 3.5px #595959, 4px 4px #595959, 4.5px 4.5px #595959, 5px 5px #595959, 5.5px 5.5px #595959;
@@ -276,10 +276,10 @@ html.nesewebel-mode.light-mode #box_nav .box .box_text {
 }
 @media (max-width: 490px) {
   #head_block h1 {
-    text-shadow: 0px 0px hsl(0, 0%, 48.5%), 0.5px 0.5px hsl(0, 0%, 48.5%), 1px 1px hsl(0, 0%, 48.5%), 1.5px 1.5px hsl(0, 0%, 48.5%), 2px 2px hsl(0, 0%, 48.5%), 2.5px 2.5px hsl(0, 0%, 48.5%), 3px 3px hsl(0, 0%, 48.5%), 3.5px 3.5px hsl(0, 0%, 48.5%), 4px 4px hsl(0, 0%, 48.5%), 4.5px 4.5px hsl(0, 0%, 48.5%), 5px 5px hsl(0, 0%, 48.5%);
+    text-shadow: 0px 0px hsl(0, 0%, 52%), 0.5px 0.5px hsl(0, 0%, 52%), 1px 1px hsl(0, 0%, 52%), 1.5px 1.5px hsl(0, 0%, 52%), 2px 2px hsl(0, 0%, 52%), 2.5px 2.5px hsl(0, 0%, 52%), 3px 3px hsl(0, 0%, 52%), 3.5px 3.5px hsl(0, 0%, 52%), 4px 4px hsl(0, 0%, 52%), 4.5px 4.5px hsl(0, 0%, 52%), 5px 5px hsl(0, 0%, 52%);
   }
   html.light-mode #head_block h1 {
-    text-shadow: 0px 0px hsl(0, 0%, 58%), 0.5px 0.5px hsl(0, 0%, 58%), 1px 1px hsl(0, 0%, 58%), 1.5px 1.5px hsl(0, 0%, 58%), 2px 2px hsl(0, 0%, 58%), 2.5px 2.5px hsl(0, 0%, 58%), 3px 3px hsl(0, 0%, 58%), 3.5px 3.5px hsl(0, 0%, 58%), 4px 4px hsl(0, 0%, 58%), 4.5px 4.5px hsl(0, 0%, 58%), 5px 5px hsl(0, 0%, 58%);
+    text-shadow: 0px 0px hsl(0, 0%, 51%), 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%);
   }
   html.nesewebel-mode #head_block h1 {
     text-shadow: 0px 0px #595959, 0.5px 0.5px #595959, 1px 1px #595959, 1.5px 1.5px #595959, 2px 2px #595959, 2.5px 2.5px #595959, 3px 3px #595959, 3.5px 3.5px #595959, 4px 4px #595959, 4.5px 4.5px #595959, 5px 5px #595959;
@@ -290,10 +290,10 @@ html.nesewebel-mode.light-mode #box_nav .box .box_text {
 }
 @media (max-width: 430px) {
   #head_block h1 {
-    text-shadow: 0px 0px hsl(0, 0%, 48.5%), 0.5px 0.5px hsl(0, 0%, 48.5%), 1px 1px hsl(0, 0%, 48.5%), 1.5px 1.5px hsl(0, 0%, 48.5%), 2px 2px hsl(0, 0%, 48.5%), 2.5px 2.5px hsl(0, 0%, 48.5%), 3px 3px hsl(0, 0%, 48.5%), 3.5px 3.5px hsl(0, 0%, 48.5%), 4px 4px hsl(0, 0%, 48.5%), 4.5px 4.5px hsl(0, 0%, 48.5%);
+    text-shadow: 0px 0px hsl(0, 0%, 52%), 0.5px 0.5px hsl(0, 0%, 52%), 1px 1px hsl(0, 0%, 52%), 1.5px 1.5px hsl(0, 0%, 52%), 2px 2px hsl(0, 0%, 52%), 2.5px 2.5px hsl(0, 0%, 52%), 3px 3px hsl(0, 0%, 52%), 3.5px 3.5px hsl(0, 0%, 52%), 4px 4px hsl(0, 0%, 52%), 4.5px 4.5px hsl(0, 0%, 52%);
   }
   html.light-mode #head_block h1 {
-    text-shadow: 0px 0px hsl(0, 0%, 58%), 0.5px 0.5px hsl(0, 0%, 58%), 1px 1px hsl(0, 0%, 58%), 1.5px 1.5px hsl(0, 0%, 58%), 2px 2px hsl(0, 0%, 58%), 2.5px 2.5px hsl(0, 0%, 58%), 3px 3px hsl(0, 0%, 58%), 3.5px 3.5px hsl(0, 0%, 58%), 4px 4px hsl(0, 0%, 58%), 4.5px 4.5px hsl(0, 0%, 58%);
+    text-shadow: 0px 0px hsl(0, 0%, 51%), 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%);
   }
   html.nesewebel-mode #head_block h1 {
     text-shadow: 0px 0px #595959, 0.5px 0.5px #595959, 1px 1px #595959, 1.5px 1.5px #595959, 2px 2px #595959, 2.5px 2.5px #595959, 3px 3px #595959, 3.5px 3.5px #595959, 4px 4px #595959, 4.5px 4.5px #595959;
@@ -304,10 +304,10 @@ html.nesewebel-mode.light-mode #box_nav .box .box_text {
 }
 @media (max-width: 370px) {
   #head_block h1 {
-    text-shadow: 0px 0px hsl(0, 0%, 48.5%), 0.5px 0.5px hsl(0, 0%, 48.5%), 1px 1px hsl(0, 0%, 48.5%), 1.5px 1.5px hsl(0, 0%, 48.5%), 2px 2px hsl(0, 0%, 48.5%), 2.5px 2.5px hsl(0, 0%, 48.5%), 3px 3px hsl(0, 0%, 48.5%), 3.5px 3.5px hsl(0, 0%, 48.5%), 4px 4px hsl(0, 0%, 48.5%);
+    text-shadow: 0px 0px hsl(0, 0%, 52%), 0.5px 0.5px hsl(0, 0%, 52%), 1px 1px hsl(0, 0%, 52%), 1.5px 1.5px hsl(0, 0%, 52%), 2px 2px hsl(0, 0%, 52%), 2.5px 2.5px hsl(0, 0%, 52%), 3px 3px hsl(0, 0%, 52%), 3.5px 3.5px hsl(0, 0%, 52%), 4px 4px hsl(0, 0%, 52%);
   }
   html.light-mode #head_block h1 {
-    text-shadow: 0px 0px hsl(0, 0%, 58%), 0.5px 0.5px hsl(0, 0%, 58%), 1px 1px hsl(0, 0%, 58%), 1.5px 1.5px hsl(0, 0%, 58%), 2px 2px hsl(0, 0%, 58%), 2.5px 2.5px hsl(0, 0%, 58%), 3px 3px hsl(0, 0%, 58%), 3.5px 3.5px hsl(0, 0%, 58%), 4px 4px hsl(0, 0%, 58%);
+    text-shadow: 0px 0px hsl(0, 0%, 51%), 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%);
   }
   html.nesewebel-mode #head_block h1 {
     text-shadow: 0px 0px #595959, 0.5px 0.5px #595959, 1px 1px #595959, 1.5px 1.5px #595959, 2px 2px #595959, 2.5px 2.5px #595959, 3px 3px #595959, 3.5px 3.5px #595959, 4px 4px #595959;
