@@ -4,7 +4,7 @@ body {
   font-family: 'Fira Sans', 'Roboto', 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', Arial, 'San Francisco', sans-serif;
 }
 html.light-mode body {
-  background-color: hsl(0, 0%, 98%);
+  background-color: hsl(0, 0%, 100%);
 }
 button {
   cursor: pointer;
@@ -60,20 +60,26 @@ var {
   margin: 0 0.5em;
 }
 #navbar #id_nav a {
-  color: hsl(0, 0%, 72%);
-  border-bottom: 2px solid hsl(0, 0%, 57%);
+  border-bottom: 2px solid hsl(0, 0%, 58.5%);
   white-space: nowrap;
   transition: color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 }
 #navbar #id_nav a:hover {
-  color: hsl(0, 0%, 77%);
-  border-color: hsl(0, 0%, 65%);
+  color: hsl(0, 0%, 78.5%);
+  border-color: hsl(0, 0%, 66.5%);
+}
+html.light-mode #navbar #id_nav a {
+  border-bottom: 2px solid hsl(0, 0%, 43%);
+}
+html.light-mode #navbar #id_nav a:hover {
+  color: hsl(0, 0%, 23%);
+  border-color: hsl(0, 0%, 35%);
 }
 main {
   max-width: calc(15vw + 2.5vh + 685px);
   margin: calc(2vh + 0.75vw + 14px) auto;
   padding: 0 0.5em;
-  color: hsl(0, 0%, 78%);
+  color: hsl(0, 0%, 76%);
   line-height: 1.58;
 }
 main section {
@@ -81,13 +87,13 @@ main section {
   padding: 0 1.8em;
 }
 main h2 {
-  color: hsl(0, 0%, 82%);
+  color: hsl(0, 0%, 80%);
   font-size: 2.2em;
   font-family: 'Fira Sans', 'Roboto', 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', Arial, 'San Francisco', sans-serif;
   margin: 0;
 }
 main h3 {
-  color: hsl(0, 0%, 80%);
+  color: hsl(0, 0%, 78%);
   font-family: 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', 'San Francisco', 'Roboto', 'Fira Sans', Arial, sans-serif;
   margin: 0.6em 0;
 }
@@ -95,7 +101,7 @@ main h4 {
   font-size: 1.58em;
   font-family: 'Source Code Pro', 'DejaVu Sans Mono', 'Fira Mono', 'Fira Code', 'San Francisco Monospaced', 'Consolas', monospace;
   margin: 1.2em 0;
-  color: hsl(0, 0%, 78%);
+  color: hsl(0, 0%, 76%);
   cursor: pointer;
   position: relative;
   display: flex;
@@ -126,7 +132,7 @@ main .icon_anchor {
 }
 main hr {
   border: none;
-  border-top: 2px solid hsl(0, 0%, 23%);
+  border-top: 2px solid hsl(0, 0%, 22%);
   margin: 0.65em 0;
   transition: border 0.15s linear;
 }
@@ -153,7 +159,7 @@ html.light-mode main h4 {
   color: hsl(0, 0%, 6%);
 }
 html.light-mode main hr {
-  border-color: hsl(0, 0%, 84%);
+  border-color: hsl(0, 0%, 86%);
 }
 main code a,
 main p a,
@@ -191,39 +197,39 @@ main p a:active:visited {
 main dd a:hover,
 main .version_notice a:hover,
 main .version_select a:hover {
-  color: hsl(0, 0%, 86%);
-  border-color: hsl(0, 0%, 86%);
+  color: hsl(0, 0%, 84%);
+  border-color: hsl(0, 0%, 84%);
 }
 main dd a:active,
 main .version_notice a:active,
 main .version_select a:active {
-  background-color: hsla(0, 0%, 78%, 0.12);
-  color: hsl(0, 0%, 82%);
-  border-color: hsl(0, 0%, 82%);
+  background-color: hsla(0, 0%, 76%, 0.12);
+  color: hsl(0, 0%, 80%);
+  border-color: hsl(0, 0%, 80%);
 }
 main .version_select .description .header a {
   padding: 0 1px;
 }
 main .version_select .description .header a:hover {
-  color: hsl(0, 0%, 72%);
-  border-color: hsl(0, 0%, 72%);
+  color: hsl(0, 0%, 70%);
+  border-color: hsl(0, 0%, 70%);
 }
 main .version_select .description .header a:active {
-  background-color: hsla(0, 0%, 64%, 0.12);
-  color: hsl(0, 0%, 68%);
-  border-color: hsl(0, 0%, 68%);
+  background-color: hsla(0, 0%, 62%, 0.12);
+  color: hsl(0, 0%, 66%);
+  border-color: hsl(0, 0%, 66%);
 }
 main code a {
-  color: hsl(0, 0%, 82%);
+  color: hsl(0, 0%, 80%);
 }
 main code a:hover {
-  color: hsl(0, 0%, 90%);
-  border-color: hsl(0, 0%, 90%);
+  color: hsl(0, 0%, 88%);
+  border-color: hsl(0, 0%, 88%);
 }
 main code a:active {
   background-color: inherit;
-  color: hsl(0, 0%, 86%);
-  border-color: hsl(0, 0%, 86%);
+  color: hsl(0, 0%, 84%);
+  border-color: hsl(0, 0%, 84%);
 }
 html.light-mode main p a {
   color: #138296;
@@ -292,8 +298,8 @@ html.light-mode main p code a:active {
   height: 0.833em;
   width: 0.833em;
   border: none;
-  color: hsl(0, 0%, 70%);
-  background-color: hsl(0, 0%, 20%);
+  color: hsl(0, 0%, 68%);
+  background-color: hsl(0, 0%, 19%);
   font-size: 1em;
   font-family: 'Source Code Pro', 'Lucida Console', 'DejaVu Sans Mono', 'Century', 'Century Gothic', 'Consolas', 'San Francisco Monospaced', sans-serif;
   padding: 0;
@@ -336,7 +342,7 @@ html.light-mode main p code a:active {
 }
 html.light-mode .list_section .expand_button {
   color: hsl(0, 0%, 14%);
-  background-color: hsl(0, 0%, 87%);
+  background-color: hsl(0, 0%, 89%);
 }
 main code {
   padding: 0.125em 0.25em;
@@ -347,15 +353,15 @@ main .codeblock code {
 }
 main code,
 .codeblock {
-  color: hsl(0, 0%, 82%);
-  background-color: hsl(0, 0%, 14.5%);
+  color: hsl(0, 0%, 80%);
+  background-color: hsl(0, 0%, 13.5%);
   font-family: 'Source Code Pro', 'DejaVu Sans Mono', 'Fira Mono', 'Fira Code', 'San Francisco Monospaced', 'Consolas', monospace;
   transition: color 0.15s linear, background 0.15s linear;
 }
 html.light-mode main code,
 html.light-mode .codeblock {
   color: hsl(0, 0%, 2%);
-  background-color: hsl(0, 0%, 92.5%);
+  background-color: hsl(0, 0%, 94.5%);
 }
 main .version_notice code {
   background-color: transparent !important;
@@ -374,7 +380,7 @@ main .version_notice code {
 }
 .code_copy_wrapper .copy_btn {
   position: relative;
-  background-color: hsl(0, 0%, 18.5%);
+  background-color: hsl(0, 0%, 17.5%);
   display: flex;
   align-items: center;
   padding: 0 12px;
@@ -389,7 +395,7 @@ main .version_notice code {
 .code_copy_wrapper .copy_btn:hover,
 .code_copy_wrapper .copy_btn.active {
   padding: 0 15px;
-  background-color: hsl(0, 0%, 19.5%);
+  background-color: hsl(0, 0%, 18.5%);
 }
 .code_copy_wrapper .copy_btn .text {
   transition: all 0.18s ease;
@@ -416,7 +422,7 @@ main .version_notice code {
   bottom: 32%;
   left: 45.5%;
   transform-origin: bottom left;
-  background-color: hsl(0, 0%, 84%);
+  background-color: hsl(0, 0%, 82%);
   border-radius: 1px;
   transition: all 0.3s ease;
 }
@@ -446,11 +452,11 @@ main .version_notice code {
   }
 }
 html.light-mode .code_copy_wrapper .copy_btn {
-  background-color: hsl(0, 0%, 88.5%);
+  background-color: hsl(0, 0%, 90.5%);
 }
 html.light-mode .code_copy_wrapper .copy_btn:hover,
 html.light-mode .code_copy_wrapper .copy_btn.active {
-  background-color: hsl(0, 0%, 87.5%);
+  background-color: hsl(0, 0%, 89.5%);
 }
 html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
   background-color: hsl(0, 0%, 6%);
@@ -462,7 +468,7 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
 .version_select .version_buttons {
   display: flex;
   justify-content: space-evenly;
-  background-color: hsl(0, 0%, 15%);
+  background-color: hsl(0, 0%, 14%);
   font-size: 1.3em;
   padding: 0.7em 1em;
   transition: background 0.15s linear;
@@ -486,12 +492,12 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
   width: 100%;
   height: 0;
   z-index: -1;
-  background-color: hsl(0, 0%, 91%);
+  background-color: hsl(0, 0%, 89%);
   transition: height 0.2s ease, background 0.15s linear;
 }
 .version_select .version_buttons button:hover,
 .version_select .version_buttons button.active {
-  color: hsl(0, 0%, 9%);
+  color: hsl(0, 0%, 8%);
 }
 .version_select .version_buttons button:hover::before,
 .version_select .version_buttons button.active::before {
@@ -519,7 +525,7 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 0.84em 1.6em;
-  background: hsl(0, 0%, 21%);
+  background: hsl(0, 0%, 20%);
   border: 0;
   border-radius: 100px;
   opacity: 0;
@@ -536,7 +542,7 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
 .version_select .toggle_btn .arrow .right {
   display: block;
   position: absolute;
-  border-bottom: 2.5px solid hsl(0, 0%, 78%);
+  border-bottom: 2.5px solid hsl(0, 0%, 76%);
   width: 0.86em;
   transform-origin: 100% 0;
   transition: transform 0.22s cubic-bezier(0.5, 0.13, 0.1, 1), border 0.15s linear;
@@ -555,7 +561,7 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
 }
 .version_select .toggle_btn:hover {
   opacity: 1 !important;
-  box-shadow: 1px 1px 8px hsla(0, 0%, 5%, 0.02);
+  box-shadow: 1px 1px 8px hsla(0, 0%, 4%, 0.02);
 }
 .version_select:hover .toggle_btn {
   opacity: 0.5;
@@ -577,7 +583,7 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
   visibility: hidden;
   transform: translateY(-20%);
   opacity: 0;
-  background-color: hsl(0, 0%, 11.5%);
+  background-color: hsl(0, 0%, 10.5%);
   transition: visibility 0.2s linear, transform 0.2s cubic-bezier(0.45, 0.1, 0.15, 0.95), opacity 0.15s ease-in-out, background 0.15s linear;
 }
 .version_select .description .version.bottom {
@@ -595,7 +601,7 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
   align-items: center;
   font-size: 0.95em;
   padding: 0.3em 1.2em;
-  color: hsl(0, 0%, 64%);
+  color: hsl(0, 0%, 62%);
   transition: color 0.15s linear;
 }
 .version_select .description .header .heading {
@@ -622,40 +628,40 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
 }
 .version_select .description code,
 .version_select .description .codeblock {
-  background-color: hsl(0, 0%, 15.5%);
+  background-color: hsl(0, 0%, 14.5%);
 }
 html.light-mode .version_select .version_buttons {
-  background-color: hsl(0, 0%, 92%);
+  background-color: hsl(0, 0%, 94%);
 }
 html.light-mode .version_select .version_buttons button::before {
   background-color: hsl(0, 0%, 14%);
 }
 html.light-mode .version_select .version_buttons button:hover,
 html.light-mode .version_select .version_buttons button.active {
-  color: hsl(0, 0%, 98%);
+  color: hsl(0, 0%, 100%);
 }
 html.light-mode .version_select .version_buttons button.new::after {
   background-color: #87BCD3;
 }
 html.light-mode .version_select .toggle_btn {
-  background: hsl(0, 0%, 86%);
+  background: hsl(0, 0%, 88%);
 }
 html.light-mode .version_select .toggle_btn .arrow .left,
 html.light-mode .version_select .toggle_btn .arrow .right {
   border-bottom: 2.5px solid hsl(0, 0%, 6%);
 }
 html.light-mode .version_select .toggle_btn:hover {
-  box-shadow: 1px 1px 8px hsla(0, 0%, 82%, 0.02);
+  box-shadow: 1px 1px 8px hsla(0, 0%, 84%, 0.02);
 }
 html.light-mode .version_select .description .version {
-  background-color: hsl(0, 0%, 95.5%);
+  background-color: hsl(0, 0%, 97.5%);
 }
 html.light-mode .version_select .description .header {
   color: hsl(0, 0%, 22%);
 }
 html.light-mode .version_select .description code,
 html.light-mode .version_select .description .codeblock {
-  background-color: hsl(0, 0%, 91.5%);
+  background-color: hsl(0, 0%, 93.5%);
 }
 .list_item.version_item .version_notice {
   margin: 0 0 0 25px;
@@ -663,7 +669,7 @@ html.light-mode .version_select .description .codeblock {
   font-size: 0;
   font-weight: bold;
   font-family: 'San Francisco Monospaced', 'Consolas', 'Source Code Pro', monospace;
-  color: hsl(0, 0%, 78%);
+  color: hsl(0, 0%, 76%);
   background-color: rgba(152, 56, 56, 0.35);
   border-radius: 3px;
   opacity: 0;
@@ -688,7 +694,7 @@ html.light-mode .version_select .description .codeblock {
   box-sizing: border-box;
 }
 .list_item.version_item .indicator .indicator_item {
-  border-bottom: 4px solid hsl(0, 0%, 21%);
+  border-bottom: 4px solid hsl(0, 0%, 20%);
   flex: 1;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -733,7 +739,7 @@ html.light-mode .version_select .description .codeblock {
   right: 0;
   bottom: 0;
   height: 0;
-  background-color: hsl(0, 0%, 21%);
+  background-color: hsl(0, 0%, 20%);
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   opacity: 0.5;
@@ -804,7 +810,7 @@ html.light-mode .list_item.version_item .version_notice {
   background-color: rgba(188, 115, 115, 0.35);
 }
 html.light-mode .list_item.version_item .indicator .indicator_item {
-  border-color: hsl(0, 0%, 82.5%);
+  border-color: hsl(0, 0%, 84.5%);
 }
 html.light-mode .list_item.version_item .indicator .indicator_item.new {
   border-color: #95B3A5;
@@ -825,7 +831,7 @@ html.light-mode .list_item.version_item .indicator .indicator_item.incompatible 
   background-color: #BC7373;
 }
 html.light-mode .list_item.version_item .indicator .indicator_item > strong::before {
-  background-color: hsl(0, 0%, 82.5%);
+  background-color: hsl(0, 0%, 84.5%);
 }
 .doc_list {
   list-style-type: none;
@@ -844,8 +850,8 @@ html.light-mode .list_item.version_item .indicator .indicator_item > strong::bef
 }
 .doc_list dt code {
   font-size: 1.1em;
-  color: hsl(0, 0%, 86%);
-  background-color: hsl(0, 0%, 19.5%);
+  color: hsl(0, 0%, 84%);
+  background-color: hsl(0, 0%, 18.5%);
   font-weight: 600;
   padding: 0.125em 0.525em;
   border-radius: 100px;
@@ -877,14 +883,14 @@ html.light-mode .list_item.version_item .indicator .indicator_item > strong::bef
 }
 .doc_list .info_item::before {
   content: '';
-  border-left: 2px solid hsl(0, 0%, 36%);
+  border-left: 2px solid hsl(0, 0%, 35%);
   top: 0;
   bottom: 0;
   transition: border 0.15s linear;
 }
 .doc_list .info_item:not(.special_item)::after {
   content: '';
-  border-top: 2px solid hsl(0, 0%, 36%);
+  border-top: 2px solid hsl(0, 0%, 35%);
   top: 1em;
   width: 14px;
   transition: border 0.15s linear;
@@ -895,16 +901,16 @@ html.light-mode .list_item.version_item .indicator .indicator_item > strong::bef
 }
 html.light-mode .doc_list dt code {
   color: hsl(0, 0%, 0%);
-  background-color: hsl(0, 0%, 87.5%);
+  background-color: hsl(0, 0%, 89.5%);
 }
 html.light-mode .doc_list .info_item.state {
   color: #C1604D;
 }
 html.light-mode .doc_list .info_item::before {
-  border-color: hsl(0, 0%, 71%);
+  border-color: hsl(0, 0%, 73%);
 }
 html.light-mode .doc_list .info_item:not(.special_item)::after {
-  border-color: hsl(0, 0%, 71%);
+  border-color: hsl(0, 0%, 73%);
 }
 .demo_block {
   display: flex;
@@ -969,7 +975,7 @@ html.light-mode .doc_list .info_item:not(.special_item)::after {
   #navbar #id_nav {
     width: 100%;
     padding: 0.8em 0;
-    background-color: hsl(0, 0%, 13%);
+    background-color: hsl(0, 0%, 12%);
   }
   main h3:not(.no-anchor),
   main h4:not(.no-anchor) {

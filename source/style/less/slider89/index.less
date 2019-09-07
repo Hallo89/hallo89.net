@@ -79,13 +79,22 @@ var {
       margin: 0 .5em;
     }
     a {
-      color: @nav-item;
       border-bottom: 2px solid @nav-item-underline;
       white-space: nowrap;
       transition: color .15s ease-in-out, border-color .15s ease-in-out;
       &:hover {
         color: @nav-item-hover;
         border-color: @nav-item-underline-hover;
+      }
+    }
+  }
+
+  html.light-mode & {
+    #id_nav a {
+      border-bottom: 2px solid @nav-item-underline--lt;
+      &:hover {
+        color: @nav-item-hover--lt;
+        border-color: @nav-item-underline-hover--lt;
       }
     }
   }
