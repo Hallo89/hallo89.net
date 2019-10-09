@@ -27,22 +27,22 @@
     url('/fonts/SourceCodePro/SourceCodePro-Semibold.otf.woff') format('woff');
 }
 
-/* Fira Sans by Mozilla @ https://github.com/mozilla/Fira/ */
+/* Open Sans by Steve Matteson for Google @ https://www.opensans.com/ */
 @font-face {
-  font-family: 'Fira Sans';
+  font-family: 'Open Sans';
   font-weight: normal;
   src:
-    local('Fira Sans'),
-    local('FiraSans-Regular'),
-    url('/fonts/FiraSans/FiraSans-Regular.woff2') format('woff2'),
-    url('/fonts/FiraSans/FiraSans-Regular.woff') format('woff');
+    local('Open Sans'),
+    local('OpenSans-Regular'),
+    url('/fonts/OpenSans/OpenSans-Regular.woff2') format('woff2'),
+    url('/fonts/OpenSans/OpenSans-Regular.woff') format('woff');
 }
 @font-face {
-  font-family: 'Fira Sans';
+  font-family: 'Open Sans';
   font-weight: bold;
   src:
-    local('Fira Sans Bold'),
-    local('FiraSans-Bold'),
-    url('/fonts/FiraSans/FiraSans-Bold.woff2') format('woff2'),
-    url('/fonts/FiraSans/FiraSans-Bold.woff') format('woff');
+    local('Open Sans Bold'),
+    local('OpenSans-Bold'),
+    url('/fonts/OpenSans/OpenSans-Bold.woff2') format('woff2'),
+    url('/fonts/OpenSans/OpenSans-Bold.woff') format('woff');
 }

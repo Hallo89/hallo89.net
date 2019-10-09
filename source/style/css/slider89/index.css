@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-size: calc(0.05vw + 0.025vh + 16.82px);
-  font-family: 'Fira Sans', 'Roboto', 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', Arial, 'San Francisco', sans-serif;
+  font-family: 'Open Sans', 'Roboto', 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', Arial, 'San Francisco', sans-serif;
 }
 html.light-mode body {
   background-color: hsl(0, 0%, 100%);
@@ -89,12 +89,12 @@ main section {
 main h2 {
   color: hsl(0, 0%, 80%);
   font-size: 2.2em;
-  font-family: 'Fira Sans', 'Roboto', 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', Arial, 'San Francisco', sans-serif;
+  font-family: 'Open Sans', 'Roboto', 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', Arial, 'San Francisco', sans-serif;
   margin: 0;
 }
 main h3 {
   color: hsl(0, 0%, 78%);
-  font-family: 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', 'San Francisco', 'Roboto', 'Fira Sans', Arial, sans-serif;
+  font-family: 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', 'San Francisco', 'Roboto', 'Open Sans', Arial, sans-serif;
   margin: 0.6em 0;
 }
 main h4 {
