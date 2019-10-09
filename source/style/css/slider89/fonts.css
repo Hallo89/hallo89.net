@@ -2,6 +2,7 @@
 @font-face {
   font-family: 'Source Code Pro';
   font-weight: normal;
+  font-display: swap;
   src:
     local('Source Code Pro'),
     local('SourceCodePro-Regular'),
@@ -11,6 +12,7 @@
 @font-face {
   font-family: 'Source Code Pro';
   font-weight: bold;
+  font-display: swap;
   src:
     local('Source Code Pro Bold'),
     local('SourceCodePro-Bold'),
@@ -20,6 +22,7 @@
 @font-face {
   font-family: 'Source Code Pro';
   font-weight: 600;
+  font-display: swap;
   src:
     local('Source Code Pro Semibold'),
     local('SourceCodePro-Semibold'),
@@ -31,6 +34,7 @@
 @font-face {
   font-family: 'Open Sans';
   font-weight: normal;
+  font-display: swap;
   src:
     local('Open Sans'),
     local('OpenSans-Regular'),
@@ -40,6 +44,7 @@
 @font-face {
   font-family: 'Open Sans';
   font-weight: bold;
+  font-display: swap;
   src:
     local('Open Sans Bold'),
     local('OpenSans-Bold'),
