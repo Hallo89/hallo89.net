@@ -5,7 +5,6 @@ body {
   background: linear-gradient(to bottom right, #1F6C6B, #664D6E); /* #1D5857, #534059 */ /* #1C5150, #4D3C52 */
 }
 
-/* The absolute legend, being the wrapper of everything (literally everything)*/
 #containers {
   /* No-grid fallback */
   display: flex;
@@ -21,9 +20,11 @@ body {
   align-items: center;
 }
 
-/* The tools being repesentated by small clickable boxes. Self-explanatory */
 .box {
   width: 465px;
   height: 520px;
-  box-shadow: 2px 4px 18px hsla(0, 0%, 5%, 0.3);
+  box-shadow: 2px 4px 16px hsla(0, 0%, 6%, 0.25);
+}
+.box:hover {
+  box-shadow: 2px 4px 22px hsla(0, 0%, 5%, 0.31);
 }

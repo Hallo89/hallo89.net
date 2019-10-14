@@ -122,10 +122,15 @@ body.delayfull #wrapper {
 
 .box {
   height: 100%;
-  box-shadow: 4px 8px 45px hsla(0, 0%, 6%, 0.5);
   border-top: 8px solid hsl(0, 0%, 22.5%);
   border-bottom: 6px solid hsl(0, 0%, 10%);
   box-sizing: border-box;
+}
+.box, .box:hover {
+  box-shadow: 4px 8px 45px hsla(0, 0%, 6%, 0.5);
+}
+.box:hover {
+  transform: none;
 }
 
 .box_header {
