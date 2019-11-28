@@ -109,7 +109,7 @@ function getNJK(which, param, fileName) {
 getNJK('', { links: getLinks() }, 'index');
 get('sponge');
 get('tutorials');
-get('blog');
+getNJK('blog', { links: getLinks(), page: 'blog' });
 getNJK('tools', { links: getLinks() });
 get('tools/3DMagic');
 get('tools/RFG');

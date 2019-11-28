@@ -1,0 +1,43 @@
+/* Zilla Slab by Mozilla @ https://github.com/mozilla/zilla-slab */
+@font-face {
+  font-family: 'Zilla Slab';
+  font-weight: bold;
+  src: local('Zilla Slab Bold'), local('ZillaSlab-Bold'), url('../resources/fonts/ZillaSlab/ZillaSlab-bold.woff2') format('woff2'), url('../resources/fonts/ZillaSlab/ZillaSlab-bold.woff') format('woff');
+}
+body {
+  font-size: calc(0.05vw + 0.025vh + 17.12px);
+}
+#main-content {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+#navbar {
+  font-size: 1.749em;
+}
+main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2em;
+}
+.box {
+  width: 17em;
+  height: 14em;
+}
+.box .box_header {
+  text-transform: none;
+}
+header {
+  background-color: hsl(0, 0%, 13%);
+  padding: 1.1em 2.2em;
+  color: hsl(0, 0%, 64%);
+}
+header h1 {
+  margin: 0;
+  font-size: 2.85em;
+  font-family: 'Zilla Slab';
+  word-spacing: 0.5px;
+  letter-spacing: 0.5px;
+}
