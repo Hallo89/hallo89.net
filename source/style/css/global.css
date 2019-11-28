@@ -443,6 +443,7 @@ html.light-mode #footer a::before {
   }
 }
 .glb_box {
+  display: block;
   font-size: 1.45em;
   overflow: hidden;
   border-radius: 2px;
