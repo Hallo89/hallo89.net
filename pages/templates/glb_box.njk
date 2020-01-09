@@ -1,7 +1,13 @@
-{% macro box(heading, ref) %}
+{% macro box(heading, ref, headerSpan) %}
 <a href="{{ ref }}" class="box glb_box hyperbox">
   <span class="corneranimation"></span>
-  <h2 class="box_header">{{ heading | safe }}</h2>
+  <h2 class="box_header">
+    {%- if headerSpan %}
+      <span class="inner">{{ heading | safe }}</span>
+    {%- else %}
+      {{ heading | safe }}
+    {%- endif %}
+  </h2>
   <p class="description box_text">
     {{ caller() | trim | nl2br | safe }}
   </p>
