@@ -24,7 +24,7 @@ main {
 }
 .box {
   width: 19em;
-  border-top-color: hsl(0, 0%, 16%);
+  border-top-color: hsl(0, 0%, 16.5%);
 }
 .box .box_header {
   padding: 0.65em 0.75em;
