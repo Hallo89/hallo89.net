@@ -19,7 +19,7 @@
   <span class="corneranimation"></span>
   <h2 class="box_header">{{ heading | safe }}</h2>
   <div class="image_container">
-    <i class="image" style="background-image: url('{{ img }}.png')"></i>
+    <i class="image" style="background-image: url('/image/{{ img }}.png')"></i>
     <p class="description box_text">
       {{ caller() | trim | nl2br | safe }}
     </p>
@@ -40,7 +40,7 @@
       {%- if compVal.image %}
         <a class="imager" href="{{ ref }}">
           {{ comp | safe }}
-          <i class="image" style="background-image: url('{{ compVal.image }}.png')"></i>
+          <i class="image" style="background-image: url('/image/{{ compVal.image }}.png')"></i>
         </a>
       {%- else %}
         <a href="{{ ref }}">{{ comp | safe }}</a>

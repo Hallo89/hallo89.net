@@ -6,8 +6,8 @@
   src:
     local('Source Code Pro'),
     local('SourceCodePro-Regular'),
-    url('/fonts/SourceCodePro/SourceCodePro-Regular.otf.woff2') format('woff2'),
-    url('/fonts/SourceCodePro/SourceCodePro-Regular.otf.woff') format('woff');
+    url('/font/SourceCodePro/SourceCodePro-Regular.otf.woff2') format('woff2'),
+    url('/font/SourceCodePro/SourceCodePro-Regular.otf.woff') format('woff');
 }
 @font-face {
   font-family: 'Source Code Pro';
@@ -16,8 +16,8 @@
   src:
     local('Source Code Pro Bold'),
     local('SourceCodePro-Bold'),
-    url('/fonts/SourceCodePro/SourceCodePro-Bold.otf.woff2') format('woff2'),
-    url('/fonts/SourceCodePro/SourceCodePro-Bold.otf.woff') format('woff');
+    url('/font/SourceCodePro/SourceCodePro-Bold.otf.woff2') format('woff2'),
+    url('/font/SourceCodePro/SourceCodePro-Bold.otf.woff') format('woff');
 }
 @font-face {
   font-family: 'Source Code Pro';
@@ -26,8 +26,8 @@
   src:
     local('Source Code Pro Semibold'),
     local('SourceCodePro-Semibold'),
-    url('/fonts/SourceCodePro/SourceCodePro-Semibold.otf.woff2') format('woff2'),
-    url('/fonts/SourceCodePro/SourceCodePro-Semibold.otf.woff') format('woff');
+    url('/font/SourceCodePro/SourceCodePro-Semibold.otf.woff2') format('woff2'),
+    url('/font/SourceCodePro/SourceCodePro-Semibold.otf.woff') format('woff');
 }
 
 /* Open Sans by Steve Matteson for Google @ https://www.opensans.com/ */
@@ -38,8 +38,8 @@
   src:
     local('Open Sans'),
     local('OpenSans-Regular'),
-    url('/fonts/OpenSans/OpenSans-Regular.woff2') format('woff2'),
-    url('/fonts/OpenSans/OpenSans-Regular.woff') format('woff');
+    url('/font/OpenSans/OpenSans-Regular.woff2') format('woff2'),
+    url('/font/OpenSans/OpenSans-Regular.woff') format('woff');
 }
 @font-face {
   font-family: 'Open Sans';
@@ -48,6 +48,6 @@
   src:
     local('Open Sans Bold'),
     local('OpenSans-Bold'),
-    url('/fonts/OpenSans/OpenSans-Bold.woff2') format('woff2'),
-    url('/fonts/OpenSans/OpenSans-Bold.woff') format('woff');
+    url('/font/OpenSans/OpenSans-Bold.woff2') format('woff2'),
+    url('/font/OpenSans/OpenSans-Bold.woff') format('woff');
 }

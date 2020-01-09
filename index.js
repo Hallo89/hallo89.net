@@ -14,9 +14,7 @@ const njk = nunjucks.configure('pages', {
 });
 
 (function() {
-  njk.addGlobal('getNavLinks', function() {
-    return pageData;
-  });
+  njk.addGlobal('pageData', pageData);
   njk.addGlobal('compareVer', function(ver1, ver2) {
     ver1 = parseInt('1' + ver1.slice(1).replace(/[_\.]/g, ''));
     ver2 = parseInt('1' + ver2.slice(1).replace(/[_\.]/g, ''));
@@ -91,11 +89,8 @@ app.set('view engine', 'njk');
 app.set('views', __dirname + '/pages');
 app.set('strict routing', false);
 
-app.use(express.static('source/style/css'));
-app.use(express.static('source/js'));
-app.use(express.static('source/images'));
-app.use(express.static('source/resources'));
-app.use(express.static('source/icon'));
+app.use('/style', express.static('source/style/css'));
+app.use(express.static('source'));
 
 function get(which, fileName) {
   app.get('/' + which, function(req, res) {
