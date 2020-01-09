@@ -23,21 +23,21 @@ main {
   padding: 2em;
 }
 .box {
-  width: 17em;
-  height: 14em;
+  width: 19em;
+  border-top-color: hsl(0, 0%, 16%);
 }
 .box .box_header {
+  padding: 0.65em 0.75em;
+  color: hsl(0, 0%, 85%);
+  font-family: 'Zilla Slab';
+  font-size: 1.1em;
+  font-weight: bold;
   text-transform: none;
 }
-header {
-  background-color: hsl(0, 0%, 13%);
-  padding: 1.1em 2.2em;
-  color: hsl(0, 0%, 64%);
+.box .box_header .inner {
+  width: 75%;
+  display: inline-block;
 }
-header h1 {
-  margin: 0;
-  font-size: 2.85em;
-  font-family: 'Zilla Slab';
-  word-spacing: 0.5px;
-  letter-spacing: 0.5px;
+.box .description {
+  padding: 0.5em 0.75em;
 }
