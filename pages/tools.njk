@@ -11,7 +11,7 @@
     {% import 'templates/glb_box.njk' as box %}
     <div id="containers">
 
-      {% for child, childVal in links.Tools.children %}
+      {% for child, childVal in links.children %}
         {% call box.box(child, '.' + childVal.link) %}
           {{ childVal.description }}
         {% endcall %}

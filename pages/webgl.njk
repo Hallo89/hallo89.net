@@ -10,7 +10,7 @@
   <body>
     {% import 'templates/glb_box.njk' as box %}
     <div id="menu">
-      {% for child, childVal in links['WebGL Experiments'].components %}
+      {% for child, childVal in links.components %}
         {% call box.box(child, '.' + childVal.link) %}
           {{ childVal.description }}
         {% endcall %}

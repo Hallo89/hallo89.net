@@ -110,12 +110,12 @@ getNJK('', { links: getLinks() }, 'index');
 get('sponge');
 get('tutorials');
 getNJK('blog', { links: getLinks(), page: 'blog' });
-getNJK('tools', { links: getLinks() });
+getNJK('tools', { links: getLinks()['Tools'] });
 get('tools/3DMagic');
 get('tools/RFG');
 get('tools/mocking');
 get('tools/spacing');
-getNJK('webgl', { links: getLinks() });
+getNJK('webgl', { links: getLinks()['WebGL Experiments'] });
 get('webgl/triangles');
 get('webgl/matrices3d');
 
