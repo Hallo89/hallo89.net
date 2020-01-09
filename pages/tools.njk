@@ -12,7 +12,7 @@
     <div id="containers">
 
       {% for child, childVal in links.children %}
-        {% call box.box(child, '.' + childVal.link) %}
+        {% call box.box(child, '/tools' + childVal.link) %}
           {{ childVal.description }}
         {% endcall %}
       {% endfor %}
