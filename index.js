@@ -6,6 +6,7 @@ const markdown = require('markdown-it')({
   breaks: true
 });
 const sl89Docs = require('./source/resource/slider89/docs.json');
+const pageData = require('./source/resource/page-data.json')
 
 const app = express();
 const njk = nunjucks.configure('pages', {
@@ -14,7 +15,7 @@ const njk = nunjucks.configure('pages', {
 
 (function() {
   njk.addGlobal('getNavLinks', function() {
-    return getLinks();
+    return pageData;
   });
   njk.addGlobal('compareVer', function(ver1, ver2) {
     ver1 = parseInt('1' + ver1.slice(1).replace(/[_\.]/g, ''));
@@ -96,10 +97,6 @@ app.use(express.static('source/images'));
 app.use(express.static('source/resources'));
 app.use(express.static('source/icon'));
 
-function getLinks() {
-  return require('./source/resources/page-links.json');
-}
-
 function get(which, fileName) {
   app.get('/' + which, function(req, res) {
     res.sendFile(__dirname + '/pages/' + (fileName || which) + '.html');
@@ -111,16 +108,16 @@ function getNJK(which, param, fileName) {
   });
 }
 
-getNJK('', { links: getLinks() }, 'index');
+getNJK('', { links: pageData }, 'index');
 get('sponge');
 get('tutorials');
-getNJK('blog', { links: getLinks(), page: 'blog' });
-getNJK('tools', { links: getLinks()['Tools'] });
+getNJK('blog', { links: pageData, page: 'blog' });
+getNJK('tools', { links: pageData['Tools'] });
 get('tools/3DMagic');
 get('tools/RFG');
 get('tools/mocking');
 get('tools/spacing');
-getNJK('webgl', { links: getLinks()['WebGL Experiments'] });
+getNJK('webgl', { links: pageData['WebGL Experiments'] });
 get('webgl/triangles');
 get('webgl/matrices3d');
 app.get('/slider89', function(req, res) {
