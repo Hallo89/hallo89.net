@@ -5,7 +5,7 @@ const argon = require('argon-parser');
 const markdown = require('markdown-it')({
   breaks: true
 });
-const sl89Docs = require('./source/resources/slider89/docs.json');
+const sl89Docs = require('./source/resource/slider89/docs.json');
 
 const app = express();
 const njk = nunjucks.configure('pages', {
