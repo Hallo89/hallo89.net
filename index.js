@@ -14,31 +14,31 @@ const njk = nunjucks.configure('pages', {
   express: app
 });
 
-let sl89GitData = staticSl89GitData;
 fetch('https://api.github.com/repos/Hallo89/Slider89/releases')
   .then(res => res.json())
   .then(data => {
-    if (Array.isArray(data)) {
-      sl89GitData = data;
-      for (version of sl89GitData) {
-        version.body = (function(body) {
-          while(match = /https:\/\/hallo89\.net\/slider89(#[\w-]+)/.exec(body)) {
-            body = body.replace(match[0], match[1]);
-          }
-          body = markdown.render(body);
-          return body;
-        })(version.body);
-        version.date = (function() {
-          const date = new Date(version.created_at);
-          return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
-        })();
-        if (version == sl89GitData[0]) {
-          const now = new Date(Date.now());
-          now.setMonth(now.getMonth() - 1);
-          version.new = new Date(version.created_at) > now ? true : false;
-        } else version.new = false;
-      }
+    if (!Array.isArray(data)) data = staticSl89GitData;
+    for (version of data) {
+      version.body = (function(body) {
+        while(match = /https:\/\/hallo89\.net\/slider89(#[\w-]+)/.exec(body)) {
+          body = body.replace(match[0], match[1]);
+        }
+        body = markdown.render(body);
+        return body;
+      })(version.body);
+      version.date = (function() {
+        const date = new Date(version.created_at);
+        return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+      })();
+      if (version == data[0]) {
+        const now = new Date(Date.now());
+        now.setMonth(now.getMonth() - 1);
+        version.new = new Date(version.created_at) > now ? true : false;
+      } else version.new = false;
     }
+    return data;
+  }).then(sl89GitData => {
+    getNJK('slider89', {data: sl89Docs, gitData: sl89GitData});
   });
 
 (function() {
@@ -149,7 +149,6 @@ function getNJK(which, obj, dataName, fileName) {
 }
 
 getNJK('', false, false, 'index');
-getNJK('slider89', {data: sl89Docs, gitData: sl89GitData});
 getNJK('blog');
 getNJK('tools');
 get('tools/3DMagic');
