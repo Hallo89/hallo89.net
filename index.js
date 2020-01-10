@@ -44,8 +44,7 @@ fetch('https://api.github.com/repos/Hallo89/Slider89/releases')
 (function() {
   njk.addGlobal('staticPageData', pageData);
   njk.addGlobal('compareVer', function(ver1, ver2) {
-    ver1 = parseInt('1' + ver1.slice(1).replace(/[_\.]/g, ''));
-    ver2 = parseInt('1' + ver2.slice(1).replace(/[_\.]/g, ''));
+    [ver1, ver2] = [ver1, ver2].map(ver => parseInt('1' + ver.slice(1).replace(/[_\.]/g, '')));
     if (ver1 > ver2) {
       return 'greater';
     } else if (ver1 < ver2) {
