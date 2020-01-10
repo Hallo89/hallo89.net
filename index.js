@@ -161,4 +161,4 @@ getNJK('webgl', false, 'WebGL Experiments');
 get('webgl/triangles');
 get('webgl/matrices3d');
 get('sponge');
-get('tutorials');
+getNJK('tutorials');

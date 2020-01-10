@@ -10,24 +10,9 @@
     <script src="/js/global-themes.js"></script>
   </head>
   <body>
+    {% import 'templates/navbar.njk' as navbar %}
 
-    <div id="navbar">
-      <nav class="text">
-        <a href="../"><img src="../Avatar.png" alt="Hallo89 logo"></a>
-        <a href="../" class="name">Hallo89</a>
-        <span class="arrow">></span>
-        <a href="tutorials.html" class="item">Tutorials</a>
-      </nav>
-      <aside id="modes">
-        <button type="button" class="mode_gear fa fa-cog" onclick="toggleDropdown()"></button>
-        <div class="dropdown_box">
-          <div class="dropdown_header">modes</div>
-          <div class="dropdown_text">
-            <span class="mode_switch switch_daynight" onclick="toggleMode()">Light Theme</span>
-          </div>
-        </div>
-      </aside>
-    </div>
+    {{ navbar.navbar('Tutorials', true, true, false) }}
 
     <header id="tutorial_header">
       <h1 class="header_navigation">
