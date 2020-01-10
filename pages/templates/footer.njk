@@ -16,7 +16,7 @@
           <li><a href="/">Home</a></li>
           {% for nav, navVal in data -%}
             {%- if navVal.footer != false -%}
-              <li><a href="{{ '/' + navVal.link }}">{{ nav }}</a></li>
+              <li><a href="{{ '/' + (navVal.link if navVal.link else nav | lower) }}">{{ nav }}</a></li>
             {% endif -%}
           {%- endfor -%}
         </ul>
