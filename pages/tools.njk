@@ -8,15 +8,8 @@
     <script src="/js/global.js"></script>
   </head>
   <body class="info_mode">
-    {% import 'templates/glb_box.njk' as box %}
     <div id="containers">
-
-      {% for child, childVal in links.children %}
-        {% call box.box(child, '/tools' + childVal.link) %}
-          {{ childVal.description }}
-        {% endcall %}
-      {% endfor %}
-
+      {% include 'templates/boxList.njk' %}
     </div>
 
     {% include "templates/footer.njk" %}

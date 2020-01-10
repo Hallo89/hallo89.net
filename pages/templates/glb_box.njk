@@ -36,11 +36,13 @@
   {%- endif %}
   <div class="links box_text">
     {%- for comp, compVal in components -%}
-      {%- set ref = (link + compVal.link) if link else compVal.link -%}
+      {%- set refBase = link + '/' if link else '' -%}
+      {%- set ref = refBase + (compVal.link if compVal.link else comp | lower) -%}
       {%- if compVal.image %}
+        {%- set img = comp | lower if compVal.image === true else compVal.image -%}
         <a class="imager" href="{{ ref }}">
           {{ comp | safe }}
-          <i class="image" style="background-image: url('/image/{{ compVal.image }}.png')"></i>
+          <i class="image" style="background-image: url('/image/{{ img }}.png')"></i>
         </a>
       {%- else %}
         <a href="{{ ref }}">{{ comp | safe }}</a>

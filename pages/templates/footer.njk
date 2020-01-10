@@ -1,4 +1,4 @@
-{%- set links = pageData -%}
+{%- set data = pageData -%}
 <footer id="footer">
   <div class="nav-wrapper">
     <div class="nav-item">
@@ -14,10 +14,10 @@
         <h3>Quick nav</h3>
         <ul>
           <li><a href="/">Home</a></li>
-          {% for nav, navVal in links -%}
-          {%- if navVal.nonrelevant != true -%}
-          <li><a href="{{ '/' + navVal.link }}">{{ nav }}</a></li>
-          {% endif -%}
+          {% for nav, navVal in data -%}
+            {%- if navVal.footer != false -%}
+              <li><a href="{{ '/' + navVal.link }}">{{ nav }}</a></li>
+            {% endif -%}
           {%- endfor -%}
         </ul>
       </div>

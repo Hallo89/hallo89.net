@@ -6,12 +6,40 @@ const markdown = require('markdown-it')({
   breaks: true
 });
 const sl89Docs = require('./source/resource/slider89/docs.json');
+const staticSl89GitData = require('./source/resource/slider89/static-git.json')
 const pageData = require('./source/resource/page-data.json')
 
 const app = express();
 const njk = nunjucks.configure('pages', {
   express: app
 });
+
+let sl89GitData = staticSl89GitData;
+fetch('https://api.github.com/repos/Hallo89/Slider89/releases')
+  .then(res => res.json())
+  .then(data => {
+    if (Array.isArray(data)) {
+      sl89GitData = data;
+      for (version of sl89GitData) {
+        version.body = (function(body) {
+          while(match = /https:\/\/hallo89\.net\/slider89(#[\w-]+)/.exec(body)) {
+            body = body.replace(match[0], match[1]);
+          }
+          body = markdown.render(body);
+          return body;
+        })(version.body);
+        version.date = (function() {
+          const date = new Date(version.created_at);
+          return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+        })();
+        if (version == sl89GitData[0]) {
+          const now = new Date(Date.now());
+          now.setMonth(now.getMonth() - 1);
+          version.new = new Date(version.created_at) > now ? true : false;
+        } else version.new = false;
+      }
+    }
+  });
 
 (function() {
   njk.addGlobal('pageData', pageData);
@@ -30,6 +58,14 @@ const njk = nunjucks.configure('pages', {
     }, {});
   });
 
+  njk.addFilter('startsWith', function(val, expr) {
+    if (Array.isArray(expr)) {
+      for (str of expr) {
+        if (new RegExp('^' + str).test(val)) return true;
+      }
+      return false;
+    } else return new RegExp('^' + expr).test(val);
+  });
   njk.addFilter('argonize', function(val) {
     return (val != null ? argon.parse(val.toString()) : val);
   });
@@ -97,49 +133,32 @@ function get(which, fileName) {
     res.sendFile(__dirname + '/pages/' + (fileName || which) + '.html');
   });
 }
-function getNJK(which, param, fileName) {
+function getNJK(which, obj, dataName, fileName) {
+  let params = {};
+  if (which) {
+    let data = dataName ? pageData[dataName] : pageData[which.slice(0, 1).toUpperCase() + which.slice(1)];
+    if (data && data.children) data = data.children;
+    params.pageData = data;
+  } else {
+    params.pageData = pageData;
+  }
+  params.page = which;
+  if (obj) params = Object.assign(params, obj);
   app.get('/' + which, function(req, res) {
-    param ? res.render(fileName || which, param) : res.render(fileName || which);
+    res.render(fileName || which, params);
   });
 }
 
-getNJK('', { links: pageData }, 'index');
-get('sponge');
-get('tutorials');
-getNJK('blog', { links: pageData, page: 'blog' });
-getNJK('tools', { links: pageData['Tools'] });
+getNJK('', false, false, 'index');
+getNJK('slider89', {data: sl89Docs, gitData: sl89GitData});
+getNJK('blog');
+getNJK('tools');
 get('tools/3DMagic');
 get('tools/RFG');
 get('tools/mocking');
 get('tools/spacing');
-getNJK('webgl', { links: pageData['WebGL Experiments'] });
+getNJK('webgl', false, 'WebGL Experiments');
 get('webgl/triangles');
 get('webgl/matrices3d');
-app.get('/slider89', function(req, res) {
-  res.render('slider89', {page: 'slider89', data: sl89Docs, gitData: sl89GitData});
-});
-
-let sl89GitData = new Array();
-fetch('https://api.github.com/repos/Hallo89/Slider89/releases')
-  .then(res => res.json())
-  .then(data => {
-    sl89GitData = data;
-    for (version of sl89GitData) {
-      version.body = (function(body) {
-        while(match = /https:\/\/hallo89\.net\/slider89(#[\w-]+)/.exec(body)) {
-          body = body.replace(match[0], match[1]);
-        }
-        body = markdown.render(body);
-        return body;
-      })(version.body);
-      version.date = (function() {
-        const date = new Date(version.created_at);
-        return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
-      })();
-      if (version == sl89GitData[0]) {
-        const now = new Date(Date.now());
-        now.setMonth(now.getMonth() - 1);
-        version.new = new Date(version.created_at) > now ? true : false;
-      } else version.new = false;
-    }
-  });
+get('sponge');
+get('tutorials');
