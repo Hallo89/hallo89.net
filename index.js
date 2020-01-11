@@ -1,3 +1,4 @@
+const fs = require('fs');
 const fetch = require('node-fetch');
 const express = require('express');
 const nunjucks = require('nunjucks');
@@ -5,9 +6,15 @@ const argon = require('argon-parser');
 const markdown = require('markdown-it')({
   breaks: true
 });
-const sl89Docs = require('./source/resource/slider89/docs.json');
-const staticSl89GitData = require('./source/resource/slider89/static-git.json')
-const pageData = require('./source/resource/page-data.json')
+const sl89Docs = require('./source/data/slider89/docs.json');
+const staticSl89GitData = require('./source/data/slider89/static-git.json');
+const pageData = require('./source/data/page-data.json');
+const staticExclusions = [
+  'data',
+  'style',
+  'favicon.ico',
+  'robots.txt'
+];
 
 const app = express();
 const njk = nunjucks.configure('pages', {
@@ -125,7 +132,17 @@ app.set('views', __dirname + '/pages');
 app.set('strict routing', false);
 
 app.use('/style', express.static('source/style/css'));
-app.use(express.static('source'));
+fs.readdir('./source', (err, files) => {
+  if (err) {
+    console.error("Error scanning directory 'source': " + err);
+    return;
+  }
+  files
+  .filter(val => !staticExclusions.includes(val))
+  .forEach(val => {
+    app.use('/' + val, express.static('source/' + val));
+  });
+});
 
 function get(which, fileName) {
   app.get('/' + which, function(req, res) {
