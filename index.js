@@ -11,9 +11,7 @@ const staticSl89GitData = require('./source/data/slider89/static-git.json');
 const pageData = require('./source/data/page-data.json');
 const staticExclusions = [
   'data',
-  'style',
-  'favicon.ico',
-  'robots.txt'
+  'style'
 ];
 
 const app = express();
@@ -140,7 +138,7 @@ fs.readdir('./source', (err, files) => {
   files
   .filter(val => !staticExclusions.includes(val))
   .forEach(val => {
-    app.use('/' + val, express.static('source/' + val));
+    app.use(val == 'root' ? '' : '/' + val, express.static('source/' + val));
   });
 });
 
