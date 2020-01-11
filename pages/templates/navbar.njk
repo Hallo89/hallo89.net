@@ -11,17 +11,6 @@
     {{ navContent | safe }}
   {%- endif %}
   {%- if pageData.lightMode %}
-  <aside id="modes">
-    <button type="button" class="mode_gear">
-      {# Weirdly enough, Nunjucks can't fetch the svg from /source/ #}
-      {% include './cog-solid.svg' %}
-    </button>
-    <div class="dropdown_box">
-      <div class="dropdown_header">modes</div>
-      <div class="dropdown_text">
-        <span class="mode_switch switch_daynight" onclick="toggleMode()">Light Theme</span>
-      </div>
-    </div>
-  </aside>
+    {% include './mode-switch.njk' %}
   {%- endif %}
 </div>

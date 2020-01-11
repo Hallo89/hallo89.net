@@ -1,6 +1,5 @@
 const html = document.documentElement;
 var modes;
-var modeChildren;
 
 window.addEventListener('load', function() {
   if (hasAccepted != 'true') {
@@ -8,8 +7,7 @@ window.addEventListener('load', function() {
     banner.children[2].addEventListener('click', handleThemes);
   }
   modes = document.getElementById('modes');
-  modes.addEventListener('click', toggleDropdown);
-  modeChildren = enlistChildren(modes);
+  modes.addEventListener('click', toggleMode);
 });
 
 //Set the theme according to the cookie 'theme' on startup (but only if cookies have been accepted)
@@ -21,46 +19,23 @@ window.addEventListener('load', function() {
 })();
 
 function handleThemes() {
-  if (!getCookie('theme')) {
-    document.cookie = 'theme=' + (html.classList.contains('light-mode') ? 'light' : 'dark') + '; path=/';
+  const themeCookie = getCookie('theme');
+  if (!themeCookie) {
+    setThemeCookie();
   } else {
-    toggleMode(getCookie('theme'));
+    toggleMode(themeCookie);
   }
   this.removeEventListener('click', handleThemes);
 }
 
 function toggleMode(mode) {
-  if (mode) {
-    if (mode == 'dark') html.classList.remove('light-mode');
+  if (mode && mode != event) {
     if (mode == 'light') html.classList.add('light-mode');
-  } else {
-    html.classList.toggle('light-mode');
-  }
-  if (!mode && getCookie('acceptedCookies') == 'true') {
-    document.cookie = 'theme=' + (html.classList.contains('light-mode') ? 'light' : 'dark') + '; path=/';
-  }
+    else if (mode == 'dark') html.classList.remove('light-mode');
+  } else html.classList.toggle('light-mode');
+  if (getCookie('acceptedCookies') == 'true') setThemeCookie();
 }
 
-//theme buttons dropdown
-function toggleDropdown() {
-  modes.classList.toggle('enabled');
-  if (!modes.classList.contains('enabled')) window.removeEventListener('click', hideDropdown);
-  else if (modes.classList.contains('enabled')) window.addEventListener('click', hideDropdown);
-}
-
-function hideDropdown(e) {
-  if (modeChildren.indexOf(e.target) == -1) {
-    modes.classList.remove('enabled');
-    window.removeEventListener('click', hideDropdown);
-  }
-}
-
-function enlistChildren(node, arr) {
-  if (arr == null) arr = new Array();
-  for (var i = 0; i < node.children.length; i++) {
-    const child = node.children[i];
-    arr.push(child);
-    if (child.children.length) arr = enlistChildren(child, arr);
-  }
-  return arr;
+function setThemeCookie() {
+  document.cookie = 'theme=' + (html.classList.contains('light-mode') ? 'light' : 'dark') + '; path=/';
 }

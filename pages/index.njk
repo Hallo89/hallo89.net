@@ -42,18 +42,7 @@
           document.write(randomSubheader[Math.floor(randomSubheader.length*Math.random())]);
         </script>
       </p>
-      <aside id="modes">
-        <button type="button" class="mode_gear">
-          {% include 'templates/cog-solid.svg' %}
-        </button>
-        <div class="dropdown_box">
-          <div class="dropdown_header">modes</div>
-          <div class="dropdown_text">
-            <span class="mode_switch switch_daynight" onclick="toggleMode()">Light Theme</span>
-            <span class="mode_switch switch_nesewebel" onclick="toggleModeNesewebel()">Nesewebel Theme</span>
-          </div>
-        </div>
-      </aside>
+      {% include 'templates/mode-switch.njk' %}
     </header>
 
     <nav id="box_nav">

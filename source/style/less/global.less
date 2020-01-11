@@ -203,122 +203,53 @@ body {
 }
 
 #modes {
-  position: relative;
-  &.enabled .dropdown_box {
-    clip: rect(-12px 230px 180px 0px); //this is an amazing fallback for browsers without clip-path (which are a lot)
-    clip-path: circle(150% at 130.5px -40px);
-  }
-  &.enabled .mode_gear {
-    transform: rotateZ(135deg);
-  }
   .mode_gear {
     display: block;
+    position: relative;
     background-color: transparent;
     border: none;
     padding: 0;
     font-size: 1em;
     width: 1.5em;
     height: 1.5em;
-    transition: all .45s cubic-bezier(.52,.15,.16,1.2);
-    color: @mode-gear;
     cursor: pointer;
-    > svg {
-      width: 100%;
-      height: 100%;
-    }
-  }
-  .dropdown_box {
-    clip: rect(-12px 230px -12px 0px);
-    clip-path: circle(0 at 130.5px -40px);
-    position: absolute;
-    font-size: .95em;
-    right: 0;
-    margin: 15px 0 0;
-    border-top: 3px solid @mode-dropdown-bordertop;
-    border-bottom: 3px solid @mode-dropdown-borderbottom;
-    box-shadow: 0 3px 0 @mode-dropdown-extreme-shadow, 0 2px 10px @mode-dropdown-shadow;
-    transition+: all .45s cubic-bezier(.52,.15,.16,1.2);
-    .mode-transition.background();
-    .mode-transition.shadow();
-    .mode-transition.border();
-    z-index: 1;
-    &::before {
-      content: '';
+    .icon {
       position: absolute;
-      right: .3em;
-      top: -8px;
-      border: 15px solid @mode-dropdown-bordertop;
-      transform: rotate(45deg);
-      .mode-transition.border();
-      z-index: -1;
-    }
-    .dropdown_header {
-      background-color: @mode-dropdown-header-bg;
-      padding: 9px 18px;
-      font-family: 'Arial', sans-serif;
-      text-transform: uppercase;
-      color: @mode-dropdown-header;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      transition+: all .275s cubic-bezier(.63,.13,.12,1.15);
       .mode-transition.color();
-      .mode-transition.background();
-    }
-    .mode_switch {
-      font-size: .89em;
-      font-family: 'Calibri', 'Times New Roman', serif;
-      display: block;
-      white-space: nowrap;
-      position: relative;
-      padding: 9px 9px 9px 12px;
-      color: @mode-switch;
-      background-color: @mode-switch-bg;
-      cursor: pointer;
-      transition: all .15s linear;
-      .noselect();
-      &:hover {
-        background-color: @mode-switch-bg-hover;
-      }
-      &::before {
-        position: absolute;
-        left: 6px;
-        top: 7px;
-        border-left: 3px solid;
-        height: 70%;
-        animation: .52s borderglideX;
-        @keyframes borderglideX {
-          from { height: 0; top: 50%; }
+      animation: .55s modeIconIn ease;
+      @keyframes modeIconIn {
+        from {
+          transform: rotate(180deg) scale(.8);
         }
       }
+      > svg {
+        height: 100%;
+        width: 100%;
+      }
+    }
+    .sun {
+      color: hsl(0, 0%, 77.5%);
+    }
+    .moon {
+      color: hsl(0, 0%, 22.5%);
     }
   }
-  html.light-mode & .switch_daynight,
-  html.nesewebel-mode & .switch_nesewebel {
-    &::before {
-      content: '';
-    }
+  .mode_gear .moon,
+  html.light-mode & .mode_gear .sun {
+    transform: rotate(135deg) scale(.8);
+    visibility: hidden;
+    opacity: 0;
   }
-  html.light-mode & .switch_daynight {
-    &::before {
-      color: @theme-color;
-    }
-  }
-  html.light-mode & {
-    .dropdown_box {
-      border-top: 3px solid @mode-dropdown-bordertop--lt;
-      border-bottom: 3px solid @mode-dropdown-borderbottom--lt;
-      box-shadow: 0 3px 0 @mode-dropdown-extreme-shadow--lt, 0 2px 10px @mode-dropdown-shadow--lt;
-      &::before {
-        border: 15px solid @mode-dropdown-bordertop--lt;
-      }
-      .dropdown_header {
-        background-color: @mode-dropdown-header-bg--lt;
-        color: @mode-dropdown-header--lt;
-      }
-      .mode_switch {
-        color: @mode-switch--lt;
-        background-color: @mode-switch-bg--lt;
-        &:hover {
-          background-color: @mode-switch-bg-hover--lt;
-        }
-      }
+  html.light-mode & .mode_gear {
+    .moon {
+      transform: none;
+      visibility: visible;
+      opacity: 1;
     }
   }
 }
