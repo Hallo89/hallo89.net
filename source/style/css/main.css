@@ -12,6 +12,14 @@ body {
   right: 0.4em;
   font-size: 1.69em;
 }
+#modes .mode_gear .icon {
+  animation: 0.55s modeIconIn ease;
+}
+@keyframes modeIconIn {
+  from {
+    transform: rotate(135deg) scale(0.8);
+  }
+}
 #head_block {
   position: relative;
   display: flex;

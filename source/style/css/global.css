@@ -200,12 +200,6 @@ html.light-mode #navbar {
   height: 100%;
   width: 100%;
   transition: all 0.275s cubic-bezier(0.63, 0.13, 0.12, 1.15), color 0.15s linear;
-  animation: 0.55s modeIconIn ease;
-}
-@keyframes modeIconIn {
-  from {
-    transform: rotate(135deg) scale(0.8);
-  }
 }
 #modes .mode_gear .icon > svg {
   height: 100%;
