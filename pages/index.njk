@@ -43,7 +43,9 @@
         </script>
       </p>
       <aside id="modes">
-        <button type="button" class="mode_gear fa fa-cog" onclick="toggleDropdown()"></button>
+        <button type="button" class="mode_gear" onclick="toggleDropdown()">
+          {% include 'templates/cog-solid.svg' %}
+        </button>
         <div class="dropdown_box">
           <div class="dropdown_header">modes</div>
           <div class="dropdown_text">
@@ -61,8 +63,6 @@
 
     {% include "templates/footer.njk" %}
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css">
     <script>
       const isGecko = (/Gecko\/\d+/).test(navigator.userAgent);
       const header = document.getElementById('head_block');

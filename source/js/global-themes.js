@@ -1,5 +1,6 @@
 const html = document.documentElement;
 var modes;
+var modeChildren;
 
 window.addEventListener('load', function() {
   if (hasAccepted != 'true') {
@@ -7,6 +8,7 @@ window.addEventListener('load', function() {
     banner.children[2].onclick = hideBannerThemes;
   }
   modes = document.getElementById('modes');
+  modeChildren = enlistChildren(modes);
 });
 
 //Set the theme according to the cookie 'theme' on startup (but only if cookies have been accepted)
@@ -41,15 +43,23 @@ function toggleMode(mode) {
 //theme buttons dropdown
 function toggleDropdown() {
   modes.classList.toggle('enabled');
+  if (!modes.classList.contains('enabled')) window.removeEventListener('click', hideDropdown);
+  else if (modes.classList.contains('enabled')) window.addEventListener('click', hideDropdown);
 }
 
-window.onclick = function(e) {
-  if (modes.classList.contains('enabled') && !e.target.matches([
-    '.mode_gear',
-    '.dropdown_box',
-    '.dropdown_header',
-    '.mode_switch'
-  ])) {
+function hideDropdown(e) {
+  if (modeChildren.indexOf(e.target) == -1) {
     modes.classList.remove('enabled');
+    window.removeEventListener('click', hideDropdown);
   }
+}
+
+function enlistChildren(node, arr) {
+  if (arr == null) arr = new Array();
+  for (var i = 0; i < node.children.length; i++) {
+    const child = node.children[i];
+    arr.push(child);
+    if (child.children.length) arr = enlistChildren(child, arr);
+  }
+  return arr;
 }
