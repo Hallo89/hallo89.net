@@ -2,21 +2,9 @@
 Written by Hallo89 using LESS CSS - http://lesscss.org
 No necessity to write this in here but Less is awesome!
 */
-html.nesewebel-mode {
-  scrollbar-color: white black;
-}
-html.nesewebel-mode.light-mode {
-  scrollbar-color: black white;
-}
 body {
   margin: 0;
   font-size: calc(0.05vw + 0.025vh + 17.82px);
-}
-html.nesewebel-mode body {
-  background-color: black;
-}
-html.nesewebel-mode.light-mode body {
-  background-color: white;
 }
 #modes {
   position: absolute;
@@ -149,30 +137,6 @@ html.light-mode #head_block h1:hover::before {
   color: hsl(0, 0%, 98%);
   text-shadow: 7px 7px hsl(0, 0%, 98%), 7px -7px hsl(0, 0%, 98%), -7px 7px hsl(0, 0%, 98%), -7px -7px hsl(0, 0%, 98%);
 }
-html.nesewebel-mode #head_block {
-  box-shadow: 0 2px 13px rgba(38, 38, 38, 0.8);
-  background-color: black;
-  color: white;
-}
-html.nesewebel-mode #head_block h1 {
-  text-shadow: 0px 0px #bfbfbf, 0.5px 0.5px #bfbfbf, 1px 1px #bfbfbf, 1.5px 1.5px #bfbfbf, 2px 2px #bfbfbf, 2.5px 2.5px #bfbfbf, 3px 3px #bfbfbf, 3.5px 3.5px #bfbfbf, 4px 4px #bfbfbf, 4.5px 4.5px #bfbfbf, 5px 5px #bfbfbf, 5.5px 5.5px #bfbfbf, 6px 6px #bfbfbf;
-}
-html.nesewebel-mode #head_block h1:hover::before {
-  color: black;
-  text-shadow: 7px 7px black, 7px -7px black, -7px 7px black, -7px -7px black;
-}
-html.nesewebel-mode.light-mode #head_block {
-  box-shadow: 0 2px 13px rgba(224, 224, 224, 0.8);
-  background-color: white;
-  color: black;
-}
-html.nesewebel-mode.light-mode #head_block h1 {
-  text-shadow: 0px 0px #595959, 0.5px 0.5px #595959, 1px 1px #595959, 1.5px 1.5px #595959, 2px 2px #595959, 2.5px 2.5px #595959, 3px 3px #595959, 3.5px 3.5px #595959, 4px 4px #595959, 4.5px 4.5px #595959, 5px 5px #595959, 5.5px 5.5px #595959, 6px 6px #595959;
-}
-html.nesewebel-mode.light-mode #head_block h1:hover::before {
-  color: white;
-  text-shadow: 7px 7px white, 7px -7px white, -7px 7px white, -7px -7px white;
-}
 #box_nav {
   display: flex;
   flex-wrap: wrap;
@@ -212,40 +176,6 @@ html.nesewebel-mode.light-mode #head_block h1:hover::before {
     transform: translateY(-17px);
   }
 }
-html.nesewebel-mode #box_nav .box {
-  background-color: black;
-  border-top: 4px solid #242424;
-  border-bottom: 4px solid #060606;
-  box-shadow: 0 4px 1px black, 1px 2px 6px rgba(10, 10, 10, 0.75);
-}
-html.nesewebel-mode #box_nav .box .corneranimation::before,
-html.nesewebel-mode #box_nav .box .corneranimation::after {
-  background-color: #0f0f0f;
-}
-html.nesewebel-mode #box_nav .box .box_header {
-  background-color: black;
-  color: white;
-}
-html.nesewebel-mode #box_nav .box .box_text {
-  color: white;
-}
-html.nesewebel-mode.light-mode #box_nav .box {
-  background-color: white;
-  border-top: 4px solid #e6e6e6;
-  border-bottom: 4px solid #f9f9f9;
-  box-shadow: 0 4px 1px white, 1px 2px 6px rgba(245, 245, 245, 0.75);
-}
-html.nesewebel-mode.light-mode #box_nav .box .corneranimation::before,
-html.nesewebel-mode.light-mode #box_nav .box .corneranimation::after {
-  background-color: #f0f0f0;
-}
-html.nesewebel-mode.light-mode #box_nav .box .box_header {
-  background-color: white;
-  color: black;
-}
-html.nesewebel-mode.light-mode #box_nav .box .box_text {
-  color: black;
-}
 @media (max-width: 640px) {
   body {
     font-size: calc(1.1vw + 11.28px);
@@ -267,12 +197,6 @@ html.nesewebel-mode.light-mode #box_nav .box .box_text {
   html.light-mode #head_block h1 {
     text-shadow: 0px 0px hsl(0, 0%, 51%), 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%);
   }
-  html.nesewebel-mode #head_block h1 {
-    text-shadow: 0px 0px #595959, 0.5px 0.5px #595959, 1px 1px #595959, 1.5px 1.5px #595959, 2px 2px #595959, 2.5px 2.5px #595959, 3px 3px #595959, 3.5px 3.5px #595959, 4px 4px #595959, 4.5px 4.5px #595959, 5px 5px #595959, 5.5px 5.5px #595959;
-  }
-  html.nesewebel-mode.light-mode #head_block h1 {
-    text-shadow: 0px 0px #595959, 0.5px 0.5px #595959, 1px 1px #595959, 1.5px 1.5px #595959, 2px 2px #595959, 2.5px 2.5px #595959, 3px 3px #595959, 3.5px 3.5px #595959, 4px 4px #595959, 4.5px 4.5px #595959, 5px 5px #595959, 5.5px 5.5px #595959;
-  }
 }
 @media (max-width: 490px) {
   #head_block h1 {
@@ -280,12 +204,6 @@ html.nesewebel-mode.light-mode #box_nav .box .box_text {
   }
   html.light-mode #head_block h1 {
     text-shadow: 0px 0px hsl(0, 0%, 51%), 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%);
-  }
-  html.nesewebel-mode #head_block h1 {
-    text-shadow: 0px 0px #595959, 0.5px 0.5px #595959, 1px 1px #595959, 1.5px 1.5px #595959, 2px 2px #595959, 2.5px 2.5px #595959, 3px 3px #595959, 3.5px 3.5px #595959, 4px 4px #595959, 4.5px 4.5px #595959, 5px 5px #595959;
-  }
-  html.nesewebel-mode.light-mode #head_block h1 {
-    text-shadow: 0px 0px #595959, 0.5px 0.5px #595959, 1px 1px #595959, 1.5px 1.5px #595959, 2px 2px #595959, 2.5px 2.5px #595959, 3px 3px #595959, 3.5px 3.5px #595959, 4px 4px #595959, 4.5px 4.5px #595959, 5px 5px #595959;
   }
 }
 @media (max-width: 430px) {
@@ -295,12 +213,6 @@ html.nesewebel-mode.light-mode #box_nav .box .box_text {
   html.light-mode #head_block h1 {
     text-shadow: 0px 0px hsl(0, 0%, 51%), 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%);
   }
-  html.nesewebel-mode #head_block h1 {
-    text-shadow: 0px 0px #595959, 0.5px 0.5px #595959, 1px 1px #595959, 1.5px 1.5px #595959, 2px 2px #595959, 2.5px 2.5px #595959, 3px 3px #595959, 3.5px 3.5px #595959, 4px 4px #595959, 4.5px 4.5px #595959;
-  }
-  html.nesewebel-mode.light-mode #head_block h1 {
-    text-shadow: 0px 0px #595959, 0.5px 0.5px #595959, 1px 1px #595959, 1.5px 1.5px #595959, 2px 2px #595959, 2.5px 2.5px #595959, 3px 3px #595959, 3.5px 3.5px #595959, 4px 4px #595959, 4.5px 4.5px #595959;
-  }
 }
 @media (max-width: 370px) {
   #head_block h1 {
@@ -308,12 +220,6 @@ html.nesewebel-mode.light-mode #box_nav .box .box_text {
   }
   html.light-mode #head_block h1 {
     text-shadow: 0px 0px hsl(0, 0%, 51%), 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%);
-  }
-  html.nesewebel-mode #head_block h1 {
-    text-shadow: 0px 0px #595959, 0.5px 0.5px #595959, 1px 1px #595959, 1.5px 1.5px #595959, 2px 2px #595959, 2.5px 2.5px #595959, 3px 3px #595959, 3.5px 3.5px #595959, 4px 4px #595959;
-  }
-  html.nesewebel-mode.light-mode #head_block h1 {
-    text-shadow: 0px 0px #595959, 0.5px 0.5px #595959, 1px 1px #595959, 1.5px 1.5px #595959, 2px 2px #595959, 2.5px 2.5px #595959, 3px 3px #595959, 3.5px 3.5px #595959, 4px 4px #595959;
   }
 }
 @media (max-width: 330px) {

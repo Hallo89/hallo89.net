@@ -8,25 +8,9 @@ No necessity to write this in here but Less is awesome!
 @import (reference) 'colors';
 @import (reference) 'mixins';
 
-
-html {
-  &.nesewebel-mode {
-    scrollbar-color: @nese-color @nese-bg;
-  }
-  &.nesewebel-mode.light-mode {
-    scrollbar-color: @nese-color--lt @nese-bg--lt;
-  }
-}
-
 body {
   margin: 0;
   font-size: calc(.05vw + .025vh + 17.82px);
-  html.nesewebel-mode & {
-    background-color: @nese-bg;
-  }
-  html.nesewebel-mode.light-mode & {
-    background-color: @nese-bg--lt;
-  }
 }
 
 #modes {
@@ -151,30 +135,6 @@ body {
       }
     }
   }
-  html.nesewebel-mode & {
-    box-shadow: 0 2px 13px @nese-header-shadow;
-    background-color: @nese-bg;
-    color: @nese-color;
-    h1 {
-      .text-shadow.drop(6, @nese-heading-shadow);
-      &:hover::before {
-        color: @nese-bg;
-        .text-shadow.around(7, @nese-bg);
-      }
-    }
-  }
-  html.nesewebel-mode.light-mode & {
-    box-shadow: 0 2px 13px @nese-header-shadow--lt;
-    background-color: @nese-bg--lt;
-    color: @nese-color--lt;
-    h1 {
-      .text-shadow.drop(6, @nese-heading-shadow--lt);
-      &:hover::before {
-        color: @nese-bg--lt;
-        .text-shadow.around(7, @nese-bg--lt);
-      }
-    }
-  }
 }
 
 #box_nav {
@@ -206,42 +166,6 @@ body {
         transform: translateY(-17px);
       }
     }
-    html.nesewebel-mode & {
-      background-color: @nese-bg;
-      border-top: 4px solid @nese-box-bordertop;
-      border-bottom: 4px solid @nese-box-borderbottom;
-      box-shadow: 0 4px 1px @nese-bg, 1px 2px 6px @nese-box-shadow;
-      .corneranimation {
-        &::before, &::after {
-          background-color: @nese-box-corners;
-        }
-      }
-      .box_header {
-        background-color: @nese-bg;
-        color: @nese-color;
-      }
-      .box_text {
-        color: @nese-color;
-      }
-    }
-    html.nesewebel-mode.light-mode & {
-      background-color: @nese-bg--lt;
-      border-top: 4px solid @nese-box-bordertop--lt;
-      border-bottom: 4px solid @nese-box-borderbottom--lt;
-      box-shadow: 0 4px 1px @nese-bg--lt, 1px 2px 6px @nese-box-shadow--lt;
-      .corneranimation {
-        &::before, &::after {
-          background-color: @nese-box-corners--lt;
-        }
-      }
-      .box_header {
-        background-color: @nese-bg--lt;
-        color: @nese-color--lt;
-      }
-      .box_text {
-        color: @nese-color--lt;
-      }
-    }
   }
 }
 
@@ -267,12 +191,6 @@ body {
       .text-shadow.drop(@it, @heading-shadow, @trail);
       html.light-mode & {
         .text-shadow.drop(@it, @heading-shadow--lt, @trail);
-      }
-      html.nesewebel-mode & {
-        .text-shadow.drop(@it, @nese-heading-shadow--lt, @trail);
-      }
-      html.nesewebel-mode.light-mode & {
-        .text-shadow.drop(@it, @nese-heading-shadow--lt, @trail);
       }
     }
     & when (@trail = true) {
