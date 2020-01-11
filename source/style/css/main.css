@@ -12,12 +12,6 @@ body {
   right: 0.4em;
   font-size: 1.69em;
 }
-#modes.enabled .dropdown_box {
-  clip-path: circle(150% at 6.59em -1.29em);
-}
-#modes .dropdown_box {
-  clip-path: circle(0 at 6.59em -1.29em);
-}
 #head_block {
   position: relative;
   display: flex;
