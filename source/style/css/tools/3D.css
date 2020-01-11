@@ -13,9 +13,9 @@ body {
   position: relative;
 }
 
-/* The glb_box header but just a header isn't worth loading it all */
+/* The glb-box header but just a header isn't worth loading it all */
 
-.box_header .header_text {
+.box-header .header_text {
   padding: 38px 21px;
   font-family: Arial, sans-serif;
   text-transform: uppercase;

@@ -11,11 +11,11 @@ const banner = (function() {
   const bg = document.createElement('b');
   const text = document.createElement('div');
   const btn = document.createElement('button');
-  aside.classList.add('glb_box');
+  aside.classList.add('glb-box');
   aside.classList.add('invisible');
   bg.classList.add('background');
   text.classList.add('description');
-  text.classList.add('box_text');
+  text.classList.add('box-text');
   aside.id = 'cookiebanner';
   btn.type = 'button';
   text.textContent = 'This site uses cookies by Cloudflare and this very banner. By continuing to use it, you agree to them!';

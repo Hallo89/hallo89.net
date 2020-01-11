@@ -203,7 +203,7 @@ body {
 }
 
 #modes {
-  .mode_gear {
+  .mode-gear {
     display: block;
     position: relative;
     background-color: transparent;
@@ -233,13 +233,13 @@ body {
       color: hsl(0, 0%, 22.5%);
     }
   }
-  .mode_gear .moon,
-  html.light-mode & .mode_gear .sun {
+  .mode-gear .moon,
+  html.light-mode & .mode-gear .sun {
     transform: rotate(135deg) scale(.8);
     visibility: hidden;
     opacity: 0;
   }
-  html.light-mode & .mode_gear {
+  html.light-mode & .mode-gear {
     .moon {
       transform: none;
       visibility: visible;
@@ -400,7 +400,7 @@ body {
 }
 
 
-.glb_box {
+.glb-box {
   display: block;
   font-size: 1.45em;
   overflow: hidden;
@@ -523,7 +523,7 @@ body {
   }
 //end of corneranimations
 //box header
-  .box_header {
+  .box-header {
     background-color: @glb-box-header-bg;
     padding: 24px 21px;
     margin: 0;
@@ -536,7 +536,7 @@ body {
     .mode-transition.background();
     .mode-transition.color();
   }
-  .box_text {
+  .box-text {
     color: @glb-box-description;
     .mode-transition.color();
   }
@@ -565,11 +565,11 @@ body {
         background-color: @glb-box-corners--lt;
       }
     }
-    .box_header {
+    .box-header {
       background-color: @glb-box-header-bg--lt;
       color: @glb-box-header--lt;
     }
-    .box_text {
+    .box-text {
       color: @glb-box-description--lt;
     }
   }

@@ -63,7 +63,7 @@ var {
   #modes {
     margin: 0 .2em 0 @nav-separate-margin;
   }
-  #id_nav {
+  #id-nav {
     flex-grow: 1;
     font-size: .74em;
     font-family: @Consolas;
@@ -90,7 +90,7 @@ var {
   }
 
   html.light-mode & {
-    #id_nav a {
+    #id-nav a {
       border-bottom: 2px solid @nav-item-underline--lt;
       &:hover {
         color: @nav-item-hover--lt;
@@ -140,13 +140,13 @@ main {
       margin-left: -1.12em;
       display: flex;
       align-items: center;
-      &:hover .icon_anchor {
+      &:hover .icon-anchor {
         opacity: 1;
       }
     }
   }
 
-  .icon_anchor {
+  .icon-anchor {
     margin: 0 .435em 0 0;
     padding: 0 2px;
     font-family: 'Consolas', 'San Francisco Monospaced', 'Arial', 'Source Code Pro', monospace;
@@ -187,7 +187,7 @@ main {
 }
 
 main {
-  code, p, dd, .version_notice, .version_select {
+  code, p, dd, .version-notice, .version-select {
     a {
       border-bottom: 1px solid;
       padding: 1px;
@@ -215,7 +215,7 @@ main {
       }
     }
   }
-  dd, .version_notice, .version_select {
+  dd, .version-notice, .version-select {
     a {
       &:hover {
         color: @main-link-hover;
@@ -228,7 +228,7 @@ main {
       }
     }
   }
-  .version_select .description .header a {
+  .version-select .description .header a {
     padding: 0 1px;
     &:hover {
       color: @vselect-header-link-hover;
@@ -267,7 +267,7 @@ main {
         }
       }
     }
-    dd, .version_notice, .version_select {
+    dd, .version-notice, .version-select {
       a {
         &:hover {
           color: @main-link-hover--lt;
@@ -280,7 +280,7 @@ main {
         }
       }
     }
-    .version_select .description .header a {
+    .version-select .description .header a {
       &:hover {
         color: @vselect-header-link-hover--lt;
         border-color: @vselect-header-link-hover--lt;
@@ -316,12 +316,12 @@ main {
   }
 }
 
-.list_section {
+.list-section {
   .collapsible.collapsed {
     height: 0;
     display: none;
   }
-  .expand_button {
+  .expand-button {
     flex-shrink: 0;
     margin-left: .43em;
     height: .833em;
@@ -372,7 +372,7 @@ main {
   }
 
   html.light-mode & {
-    .expand_button {
+    .expand-button {
       color: @h4-expand-btn--lt;
       background-color: @h4-expand-btn-bg--lt;
     }
@@ -398,7 +398,7 @@ main code, .codeblock {
     background-color: @code-bg--lt;
   }
 }
-main .version_notice code {
+main .version-notice code {
   background-color: transparent !important;
   padding: 0;
 }
@@ -408,12 +408,12 @@ main .version_notice code {
   overflow: auto;
 }
 
-.code_copy_wrapper {
+.code-copy-wrapper {
   display: flex;
   .codeblock {
     width: 100%;
   }
-  .copy_btn {
+  .copy-btn {
     position: relative;
     background-color: @copy-btn-bg;
     display: flex;
@@ -481,7 +481,7 @@ main .version_notice code {
   }
 
   html.light-mode & {
-    .copy_btn {
+    .copy-btn {
       background-color: @copy-btn-bg--lt;
       &:hover, &.active {
         background-color: @copy-btn-bg-active--lt;
@@ -495,10 +495,10 @@ main .version_notice code {
   }
 }
 
-.version_select {
+.version-select {
   position: relative;
   border-radius: 1px;
-  .version_buttons {
+  .version-buttons {
     display: flex;
     justify-content: space-evenly;
     background-color: @vselect-bg;
@@ -673,7 +673,7 @@ main .version_notice code {
   }
 
   html.light-mode & {
-    .version_buttons {
+    .version-buttons {
       background-color: @vselect-bg--lt;
       button {
         &::before {
@@ -712,9 +712,9 @@ main .version_notice code {
   }
 }
 
-.list_item {
-  &.version_item {
-    .version_notice {
+.list-item {
+  &.version-item {
+    .version-notice {
       margin: 0 0 0 25px;
       padding: 0 .85em;
       font-size: 0;
@@ -744,7 +744,7 @@ main .version_notice code {
       font-size: 1.075em;
       margin: .45em 0 .45em 25px;
       box-sizing: border-box;
-      .indicator_item {
+      .indicator-item {
         border-bottom: 4px solid @tab-default;
         flex: 1;
         .noselect();
@@ -782,8 +782,8 @@ main .version_notice code {
       }
     }
   }
-  &.version_list {
-    .indicator .indicator_item {
+  &.version-list {
+    .indicator .indicator-item {
       cursor: pointer;
       &:hover > strong::before {
         height: 100%;
@@ -800,7 +800,7 @@ main .version_notice code {
         }
       }
     }
-    dt.version_names {
+    dt.version-names {
       position: relative;
       a {
         transition: all .15s ease-in-out;
@@ -825,7 +825,7 @@ main .version_notice code {
     .versions {
       position: relative;
       overflow: hidden;
-      .prop_version {
+      .prop-version {
         width: 100%;
         transition:
           transform .3s cubic-bezier(.65, .1, .1, 1),
@@ -850,13 +850,13 @@ main .version_notice code {
   }
 
   html.light-mode & {
-    &.version_item {
-      .version_notice {
+    &.version-item {
+      .version-notice {
         color: @main-color--lt;
         background-color: @version-banner-bg--lt;
       }
       .indicator {
-        .indicator_item {
+        .indicator-item {
           border-color: @tab-default--lt;
           .tab-variant(new, @tab-new--lt);
           .tab-variant(current, @tab-current--lt);
@@ -872,11 +872,11 @@ main .version_notice code {
   }
 }
 
-.doc_list {
+.doc-list {
   list-style-type: none;
   padding-left: calc(1vw + .15vh - .04em);
   margin: 1.3em 0;
-  .list_item {
+  .list-item {
     margin: calc(.15vw + .65vh + .252em) 0;
     padding: calc(.15vw + .65vh + .252em) 0;
   }
@@ -896,10 +896,10 @@ main .version_notice code {
       .mode-transition.background();
     }
   }
-  .doc_item {
+  .doc-item {
     margin-left: calc(@margin-indent);
   }
-  .info_item {
+  .info-item {
     position: relative;
     font-family: @SourceCodePro;
     margin-left: calc(35px + @text-indent + @margin-indent);
@@ -925,14 +925,14 @@ main .version_notice code {
       bottom: 0;
       .mode-transition.border();
     }
-    &:not(.special_item)::after {
+    &:not(.special-item)::after {
       content: '';
       border-top: 2px solid @info-item-guide;
       top: @info-guide-height;
       width: 14px;
       .mode-transition.border();
     }
-    &:nth-last-of-type(1):not(.special_item)::before {
+    &:nth-last-of-type(1):not(.special-item)::before {
       top: 0;
       height: @info-guide-height;
     }
@@ -945,21 +945,21 @@ main .version_notice code {
         background-color: @propname-bg--lt;
       }
     }
-    .info_item {
+    .info-item {
       &.state {
         color: @info-state--lt;
       }
       &::before {
         border-color: @info-item-guide--lt;
       }
-      &:not(.special_item)::after {
+      &:not(.special-item)::after {
         border-color: @info-item-guide--lt;
       }
     }
   }
 }
 
-.demo_block {
+.demo-block {
   display: flex;
   justify-content: center;
   height: 25px;

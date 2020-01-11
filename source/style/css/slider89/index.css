@@ -43,12 +43,12 @@ var {
 #navbar #modes {
   margin: 0 0.2em 0 0.6em;
 }
-#navbar #id_nav {
+#navbar #id-nav {
   flex-grow: 1;
   font-size: 0.74em;
   font-family: 'San Francisco Monospaced', 'Consolas', 'Source Code Pro', monospace;
 }
-#navbar #id_nav ul {
+#navbar #id-nav ul {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -56,22 +56,22 @@ var {
   padding: 0;
   list-style: none;
 }
-#navbar #id_nav li {
+#navbar #id-nav li {
   margin: 0 0.5em;
 }
-#navbar #id_nav a {
+#navbar #id-nav a {
   border-bottom: 2px solid hsl(0, 0%, 58.5%);
   white-space: nowrap;
   transition: color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 }
-#navbar #id_nav a:hover {
+#navbar #id-nav a:hover {
   color: hsl(0, 0%, 78.5%);
   border-color: hsl(0, 0%, 66.5%);
 }
-html.light-mode #navbar #id_nav a {
+html.light-mode #navbar #id-nav a {
   border-bottom: 2px solid hsl(0, 0%, 43%);
 }
-html.light-mode #navbar #id_nav a:hover {
+html.light-mode #navbar #id-nav a:hover {
   color: hsl(0, 0%, 23%);
   border-color: hsl(0, 0%, 35%);
 }
@@ -114,12 +114,12 @@ main h4:not(.no-anchor) {
   display: flex;
   align-items: center;
 }
-main h2:not(.no-anchor):hover .icon_anchor,
-main h3:not(.no-anchor):hover .icon_anchor,
-main h4:not(.no-anchor):hover .icon_anchor {
+main h2:not(.no-anchor):hover .icon-anchor,
+main h3:not(.no-anchor):hover .icon-anchor,
+main h4:not(.no-anchor):hover .icon-anchor {
   opacity: 1;
 }
-main .icon_anchor {
+main .icon-anchor {
   margin: 0 0.435em 0 0;
   padding: 0 2px;
   font-family: 'Consolas', 'San Francisco Monospaced', 'Arial', 'Source Code Pro', monospace;
@@ -164,8 +164,8 @@ html.light-mode main hr {
 main code a,
 main p a,
 main dd a,
-main .version_notice a,
-main .version_select a {
+main .version-notice a,
+main .version-select a {
   border-bottom: 1px solid;
   padding: 1px;
   transition: color 0.15s linear, border-color 0.15s linear;
@@ -173,8 +173,8 @@ main .version_select a {
 main code a:active,
 main p a:active,
 main dd a:active,
-main .version_notice a:active,
-main .version_select a:active {
+main .version-notice a:active,
+main .version-select a:active {
   transition: background-color 0.05s ease-in-out;
 }
 main p a {
@@ -195,26 +195,26 @@ main p a:active:visited {
   background-color: rgba(85, 158, 109, 0.18);
 }
 main dd a:hover,
-main .version_notice a:hover,
-main .version_select a:hover {
+main .version-notice a:hover,
+main .version-select a:hover {
   color: hsl(0, 0%, 84%);
   border-color: hsl(0, 0%, 84%);
 }
 main dd a:active,
-main .version_notice a:active,
-main .version_select a:active {
+main .version-notice a:active,
+main .version-select a:active {
   background-color: hsla(0, 0%, 76%, 0.12);
   color: hsl(0, 0%, 80%);
   border-color: hsl(0, 0%, 80%);
 }
-main .version_select .description .header a {
+main .version-select .description .header a {
   padding: 0 1px;
 }
-main .version_select .description .header a:hover {
+main .version-select .description .header a:hover {
   color: hsl(0, 0%, 70%);
   border-color: hsl(0, 0%, 70%);
 }
-main .version_select .description .header a:active {
+main .version-select .description .header a:active {
   background-color: hsla(0, 0%, 62%, 0.12);
   color: hsl(0, 0%, 66%);
   border-color: hsl(0, 0%, 66%);
@@ -245,23 +245,23 @@ html.light-mode main p a:active:visited {
   background-color: rgba(32, 128, 106, 0.18);
 }
 html.light-mode main dd a:hover,
-html.light-mode main .version_notice a:hover,
-html.light-mode main .version_select a:hover {
+html.light-mode main .version-notice a:hover,
+html.light-mode main .version-select a:hover {
   color: hsl(0, 0%, 18%);
   border-color: hsl(0, 0%, 18%);
 }
 html.light-mode main dd a:active,
-html.light-mode main .version_notice a:active,
-html.light-mode main .version_select a:active {
+html.light-mode main .version-notice a:active,
+html.light-mode main .version-select a:active {
   background-color: hsla(0, 0%, 6%, 0.12);
   color: hsl(0, 0%, 12%);
   border-color: hsl(0, 0%, 12%);
 }
-html.light-mode main .version_select .description .header a:hover {
+html.light-mode main .version-select .description .header a:hover {
   color: hsl(0, 0%, 34%);
   border-color: hsl(0, 0%, 34%);
 }
-html.light-mode main .version_select .description .header a:active {
+html.light-mode main .version-select .description .header a:active {
   background-color: hsla(0, 0%, 22%, 0.12);
   color: hsl(0, 0%, 28%);
   border-color: hsl(0, 0%, 28%);
@@ -288,11 +288,11 @@ html.light-mode main p code a:active {
   color: hsl(0, 0%, 8%) !important;
   border-color: hsl(0, 0%, 8%) !important;
 }
-.list_section .collapsible.collapsed {
+.list-section .collapsible.collapsed {
   height: 0;
   display: none;
 }
-.list_section .expand_button {
+.list-section .expand-button {
   flex-shrink: 0;
   margin-left: 0.43em;
   height: 0.833em;
@@ -306,24 +306,24 @@ html.light-mode main p code a:active {
   border-radius: 100px;
   transition: color 0.15s linear, background 0.15s linear;
 }
-.list_section .expand_button .symbols {
+.list-section .expand-button .symbols {
   display: flex;
   justify-content: center;
   align-items: center;
   transition: all 0.55s ease;
 }
-.list_section .expand_button .symbol {
+.list-section .expand-button .symbol {
   position: absolute;
   transition: all 0.38s cubic-bezier(0.35, 0.1, 0.35, 1);
 }
-.list_section .expand_button .symbol.plus {
+.list-section .expand-button .symbol.plus {
   visibility: hidden;
   transform: Scale(0);
 }
-.list_section .expand_button.active .symbols {
+.list-section .expand-button.active .symbols {
   transform: rotateZ(360deg);
 }
-.list_section .expand_button.active .symbol.minus {
+.list-section .expand-button.active .symbol.minus {
   transform: Scale(0);
   visibility: hidden;
   animation: preventHidden 0.8s linear;
@@ -336,11 +336,11 @@ html.light-mode main p code a:active {
     visibility: visible;
   }
 }
-.list_section .expand_button.active .symbol.plus {
+.list-section .expand-button.active .symbol.plus {
   transform: Scale(1);
   visibility: visible;
 }
-html.light-mode .list_section .expand_button {
+html.light-mode .list-section .expand-button {
   color: hsl(0, 0%, 14%);
   background-color: hsl(0, 0%, 89%);
 }
@@ -363,7 +363,7 @@ html.light-mode .codeblock {
   color: hsl(0, 0%, 2%);
   background-color: hsl(0, 0%, 94.5%);
 }
-main .version_notice code {
+main .version-notice code {
   background-color: transparent !important;
   padding: 0;
 }
@@ -372,13 +372,13 @@ main .version_notice code {
   margin: 0.25em 0;
   overflow: auto;
 }
-.code_copy_wrapper {
+.code-copy-wrapper {
   display: flex;
 }
-.code_copy_wrapper .codeblock {
+.code-copy-wrapper .codeblock {
   width: 100%;
 }
-.code_copy_wrapper .copy_btn {
+.code-copy-wrapper .copy-btn {
   position: relative;
   background-color: hsl(0, 0%, 17.5%);
   display: flex;
@@ -392,19 +392,19 @@ main .version_notice code {
   font-family: 'Source Code Pro', 'DejaVu Sans Mono', 'Fira Mono', 'Fira Code', 'San Francisco Monospaced', 'Consolas', monospace;
   transition: all 0.25s ease;
 }
-.code_copy_wrapper .copy_btn:hover,
-.code_copy_wrapper .copy_btn.active {
+.code-copy-wrapper .copy-btn:hover,
+.code-copy-wrapper .copy-btn.active {
   padding: 0 15px;
   background-color: hsl(0, 0%, 18.5%);
 }
-.code_copy_wrapper .copy_btn .text {
+.code-copy-wrapper .copy-btn .text {
   transition: all 0.18s ease;
 }
-.code_copy_wrapper .copy_btn.active .text {
+.code-copy-wrapper .copy-btn.active .text {
   transform: translateX(100%);
   opacity: 0;
 }
-.code_copy_wrapper .copy_btn .checkbox {
+.code-copy-wrapper .copy-btn .checkbox {
   position: absolute;
   top: 0;
   left: 0;
@@ -416,7 +416,7 @@ main .version_notice code {
   opacity: 0;
   /* PLEASE IMPROVE */
 }
-.code_copy_wrapper .copy_btn .checkbox .mark {
+.code-copy-wrapper .copy-btn .checkbox .mark {
   position: absolute;
   height: 4px;
   bottom: 32%;
@@ -426,15 +426,15 @@ main .version_notice code {
   border-radius: 1px;
   transition: all 0.3s ease;
 }
-.code_copy_wrapper .copy_btn .checkbox .mark.lower {
+.code-copy-wrapper .copy-btn .checkbox .mark.lower {
   transform: rotate(-135deg);
   width: 19px;
 }
-.code_copy_wrapper .copy_btn .checkbox .mark.upper {
+.code-copy-wrapper .copy-btn .checkbox .mark.upper {
   transform: rotate(-45deg) translateX(-4px);
   width: 35px;
 }
-.code_copy_wrapper .copy_btn.active .checkbox {
+.code-copy-wrapper .copy-btn.active .checkbox {
   animation: 0.3s checkmarkIn ease;
   transform: none;
   opacity: 1;
@@ -451,21 +451,21 @@ main .version_notice code {
     clip-path: polygon(85% 31%, 77% 23%, 41% 60%, 24% 43%, 16% 50%, 41% 76%);
   }
 }
-html.light-mode .code_copy_wrapper .copy_btn {
+html.light-mode .code-copy-wrapper .copy-btn {
   background-color: hsl(0, 0%, 90.5%);
 }
-html.light-mode .code_copy_wrapper .copy_btn:hover,
-html.light-mode .code_copy_wrapper .copy_btn.active {
+html.light-mode .code-copy-wrapper .copy-btn:hover,
+html.light-mode .code-copy-wrapper .copy-btn.active {
   background-color: hsl(0, 0%, 89.5%);
 }
-html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
+html.light-mode .code-copy-wrapper .copy-btn .checkbox .mark {
   background-color: hsl(0, 0%, 6%);
 }
-.version_select {
+.version-select {
   position: relative;
   border-radius: 1px;
 }
-.version_select .version_buttons {
+.version-select .version-buttons {
   display: flex;
   justify-content: space-evenly;
   background-color: hsl(0, 0%, 14%);
@@ -473,7 +473,7 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
   padding: 0.7em 1em;
   transition: background 0.15s linear;
 }
-.version_select .version_buttons button {
+.version-select .version-buttons button {
   position: relative;
   background-color: unset;
   border: none;
@@ -484,7 +484,7 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
   padding: 6px 10px;
   transition: color 0.2s ease;
 }
-.version_select .version_buttons button::before {
+.version-select .version-buttons button::before {
   content: '';
   position: absolute;
   left: 0;
@@ -495,15 +495,15 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
   background-color: hsl(0, 0%, 89%);
   transition: height 0.2s ease, background 0.15s linear;
 }
-.version_select .version_buttons button:hover,
-.version_select .version_buttons button.active {
+.version-select .version-buttons button:hover,
+.version-select .version-buttons button.active {
   color: hsl(0, 0%, 8%);
 }
-.version_select .version_buttons button:hover::before,
-.version_select .version_buttons button.active::before {
+.version-select .version-buttons button:hover::before,
+.version-select .version-buttons button.active::before {
   height: 100%;
 }
-.version_select .version_buttons button.new::after {
+.version-select .version-buttons button.new::after {
   content: '';
   position: absolute;
   top: 0;
@@ -515,11 +515,11 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
   border-radius: 100px;
   transition: width 0.1s ease, height 0.1s ease, background 0.15s linear;
 }
-.version_select .version_buttons button.new:not(.active)::after {
+.version-select .version-buttons button.new:not(.active)::after {
   height: 0.45em;
   width: 0.45em;
 }
-.version_select .toggle_btn {
+.version-select .toggle_btn {
   display: block;
   position: absolute;
   left: 50%;
@@ -532,14 +532,14 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
   z-index: 2;
   transition: opacity 0.15s ease-in-out, box-shadow 0.15s ease-in-out, background 0.15s linear;
 }
-.version_select .toggle_btn .arrow {
+.version-select .toggle_btn .arrow {
   position: relative;
   display: flex;
   justify-content: center;
   /* Default: up */
 }
-.version_select .toggle_btn .arrow .left,
-.version_select .toggle_btn .arrow .right {
+.version-select .toggle_btn .arrow .left,
+.version-select .toggle_btn .arrow .right {
   display: block;
   position: absolute;
   border-bottom: 2.5px solid hsl(0, 0%, 76%);
@@ -547,35 +547,35 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
   transform-origin: 100% 0;
   transition: transform 0.22s cubic-bezier(0.5, 0.13, 0.1, 1), border 0.15s linear;
 }
-.version_select .toggle_btn .arrow .left {
+.version-select .toggle_btn .arrow .left {
   transform: translate(-0.43em, -0.43em) rotateZ(-45deg);
 }
-.version_select .toggle_btn .arrow .right {
+.version-select .toggle_btn .arrow .right {
   transform: translate(-0.43em, -0.43em) rotateZ(225deg) translateY(-2.5px);
 }
-.version_select .toggle_btn.down .arrow .left {
+.version-select .toggle_btn.down .arrow .left {
   transform: translate(-0.43em, 0.43em) rotateZ(45deg) translateY(-2.5px);
 }
-.version_select .toggle_btn.down .arrow .right {
+.version-select .toggle_btn.down .arrow .right {
   transform: translate(-0.43em, 0.43em) rotateZ(135deg);
 }
-.version_select .toggle_btn:hover {
+.version-select .toggle_btn:hover {
   opacity: 1 !important;
   box-shadow: 1px 1px 8px hsla(0, 0%, 4%, 0.02);
 }
-.version_select:hover .toggle_btn {
+.version-select:hover .toggle_btn {
   opacity: 0.5;
 }
-.version_select .description {
+.version-select .description {
   position: relative;
   overflow: hidden;
   transition: height 0.2s cubic-bezier(0.4, 0.05, 0.25, 0.98), visibility 0.2s linear;
 }
-.version_select .description.collapsed {
+.version-select .description.collapsed {
   height: 0;
   visibility: hidden;
 }
-.version_select .description .version {
+.version-select .description .version {
   position: absolute;
   left: 0;
   right: 0;
@@ -586,16 +586,16 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
   background-color: hsl(0, 0%, 10.5%);
   transition: visibility 0.2s linear, transform 0.2s cubic-bezier(0.45, 0.1, 0.15, 0.95), opacity 0.15s ease-in-out, background 0.15s linear;
 }
-.version_select .description .version.bottom {
+.version-select .description .version.bottom {
   transform: translateY(20%);
 }
-.version_select .description .version.active {
+.version-select .description .version.active {
   transform: none;
   position: sticky;
   visibility: visible;
   opacity: 1;
 }
-.version_select .description .header {
+.version-select .description .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -604,66 +604,66 @@ html.light-mode .code_copy_wrapper .copy_btn .checkbox .mark {
   color: hsl(0, 0%, 62%);
   transition: color 0.15s linear;
 }
-.version_select .description .header .heading {
+.version-select .description .header .heading {
   font-size: 1.15em;
   font-weight: bold;
 }
-.version_select .description .changelog {
+.version-select .description .changelog {
   padding: 0.3em 1.2em 0.75em;
   position: relative;
   overflow: hidden;
 }
-.version_select .description .changelog .heading {
+.version-select .description .changelog .heading {
   font-weight: bold;
 }
-.version_select .description .changelog .body {
+.version-select .description .changelog .body {
   margin: 0.5em 0.5em 0;
 }
-.version_select .description .changelog ul {
+.version-select .description .changelog ul {
   margin: 0;
   padding-left: 1.5em;
 }
-.version_select .description .changelog a code {
+.version-select .description .changelog a code {
   padding-bottom: 1px;
 }
-.version_select .description code,
-.version_select .description .codeblock {
+.version-select .description code,
+.version-select .description .codeblock {
   background-color: hsl(0, 0%, 14.5%);
 }
-html.light-mode .version_select .version_buttons {
+html.light-mode .version-select .version-buttons {
   background-color: hsl(0, 0%, 94%);
 }
-html.light-mode .version_select .version_buttons button::before {
+html.light-mode .version-select .version-buttons button::before {
   background-color: hsl(0, 0%, 14%);
 }
-html.light-mode .version_select .version_buttons button:hover,
-html.light-mode .version_select .version_buttons button.active {
+html.light-mode .version-select .version-buttons button:hover,
+html.light-mode .version-select .version-buttons button.active {
   color: hsl(0, 0%, 100%);
 }
-html.light-mode .version_select .version_buttons button.new::after {
+html.light-mode .version-select .version-buttons button.new::after {
   background-color: #87BCD3;
 }
-html.light-mode .version_select .toggle_btn {
+html.light-mode .version-select .toggle_btn {
   background: hsl(0, 0%, 88%);
 }
-html.light-mode .version_select .toggle_btn .arrow .left,
-html.light-mode .version_select .toggle_btn .arrow .right {
+html.light-mode .version-select .toggle_btn .arrow .left,
+html.light-mode .version-select .toggle_btn .arrow .right {
   border-bottom: 2.5px solid hsl(0, 0%, 6%);
 }
-html.light-mode .version_select .toggle_btn:hover {
+html.light-mode .version-select .toggle_btn:hover {
   box-shadow: 1px 1px 8px hsla(0, 0%, 84%, 0.02);
 }
-html.light-mode .version_select .description .version {
+html.light-mode .version-select .description .version {
   background-color: hsl(0, 0%, 97.5%);
 }
-html.light-mode .version_select .description .header {
+html.light-mode .version-select .description .header {
   color: hsl(0, 0%, 22%);
 }
-html.light-mode .version_select .description code,
-html.light-mode .version_select .description .codeblock {
+html.light-mode .version-select .description code,
+html.light-mode .version-select .description .codeblock {
   background-color: hsl(0, 0%, 93.5%);
 }
-.list_item.version_item .version_notice {
+.list-item.version-item .version-notice {
   margin: 0 0 0 25px;
   padding: 0 0.85em;
   font-size: 0;
@@ -677,7 +677,7 @@ html.light-mode .version_select .description .codeblock {
   visibility: hidden;
   transition: all 0.2s ease, font-size 0.25s ease, clip-path 0.15s ease-out, color 0.15s linear;
 }
-.list_item.version_item .version_notice.active {
+.list-item.version-item .version-notice.active {
   font-size: 1.05em;
   margin: 0.45em 0 0.45em 25px;
   padding: 0.3em 0.85em;
@@ -686,14 +686,14 @@ html.light-mode .version_select .description .codeblock {
   visibility: visible;
   transition: all 0.2s ease, clip-path 0.15s ease-in;
 }
-.list_item.version_item .indicator {
+.list-item.version-item .indicator {
   display: flex;
   justify-content: space-around;
   font-size: 1.075em;
   margin: 0.45em 0 0.45em 25px;
   box-sizing: border-box;
 }
-.list_item.version_item .indicator .indicator_item {
+.list-item.version-item .indicator .indicator-item {
   border-bottom: 4px solid hsl(0, 0%, 20%);
   flex: 1;
   -webkit-user-select: none;
@@ -701,38 +701,38 @@ html.light-mode .version_select .description .codeblock {
   -ms-user-select: none;
   user-select: none;
 }
-.list_item.version_item .indicator .indicator_item.new {
+.list-item.version-item .indicator .indicator-item.new {
   border-color: #214031;
 }
-.list_item.version_item .indicator .indicator_item.new > strong::before {
+.list-item.version-item .indicator .indicator-item.new > strong::before {
   background-color: #214031;
 }
-.list_item.version_item .indicator .indicator_item.current {
+.list-item.version-item .indicator .indicator-item.current {
   border-color: #1f4252;
 }
-.list_item.version_item .indicator .indicator_item.current > strong::before {
+.list-item.version-item .indicator .indicator-item.current > strong::before {
   background-color: #1f4252;
 }
-.list_item.version_item .indicator .indicator_item.incompatible {
+.list-item.version-item .indicator .indicator-item.incompatible {
   border-color: #983838;
 }
-.list_item.version_item .indicator .indicator_item.incompatible > strong::before {
+.list-item.version-item .indicator .indicator-item.incompatible > strong::before {
   background-color: #983838;
 }
-.list_item.version_item .indicator .indicator_item.active > strong::before {
+.list-item.version-item .indicator .indicator-item.active > strong::before {
   height: 100%;
   opacity: 0.35;
   transform: scale(0.98);
 }
-.list_item.version_item .indicator .indicator_item:active > strong::before {
+.list-item.version-item .indicator .indicator-item:active > strong::before {
   transform: scale(0.99);
 }
-.list_item.version_item .indicator .indicator_item > strong {
+.list-item.version-item .indicator .indicator-item > strong {
   display: block;
   padding: 0.2em 1em;
   position: relative;
 }
-.list_item.version_item .indicator .indicator_item > strong::before {
+.list-item.version-item .indicator .indicator-item > strong::before {
   content: '';
   position: absolute;
   left: 0;
@@ -747,28 +747,28 @@ html.light-mode .version_select .description .codeblock {
   transform-origin: bottom;
   transition: all 0.1s ease, transform 0.15s ease;
 }
-.list_item.version_list .indicator .indicator_item {
+.list-item.version-list .indicator .indicator-item {
   cursor: pointer;
 }
-.list_item.version_list .indicator .indicator_item:hover > strong::before {
+.list-item.version-list .indicator .indicator-item:hover > strong::before {
   height: 100%;
 }
-.list_item.version_list .indicator .indicator_item:active > strong::before {
+.list-item.version-list .indicator .indicator-item:active > strong::before {
   transform: scale(0.98);
 }
-.list_item.version_list .indicator .indicator_item.active > strong::before {
+.list-item.version-list .indicator .indicator-item.active > strong::before {
   transform: scale(0.96);
 }
-.list_item.version_list .indicator .indicator_item.active:hover > strong::before {
+.list-item.version-list .indicator .indicator-item.active:hover > strong::before {
   opacity: 0.45;
 }
-.list_item.version_list dt.version_names {
+.list-item.version-list dt.version-names {
   position: relative;
 }
-.list_item.version_list dt.version_names a {
+.list-item.version-list dt.version-names a {
   transition: all 0.15s ease-in-out;
 }
-.list_item.version_list dt.version_names a.name_version {
+.list-item.version-list dt.version-names a.name_version {
   position: absolute;
   top: 0;
   left: 0;
@@ -776,79 +776,79 @@ html.light-mode .version_select .description .codeblock {
   opacity: 0;
   transition: all 0.15s 0.025s ease-in-out;
 }
-.list_item.version_list dt.version_names a.name_version.active {
+.list-item.version-list dt.version-names a.name_version.active {
   opacity: 1;
 }
-.list_item.version_list dt.version_names a.inactive {
+.list-item.version-list dt.version-names a.inactive {
   transition: all 0.15s 0.025s ease-in-out;
   opacity: 0;
   visibility: hidden;
 }
-.list_item.version_list .versions {
+.list-item.version-list .versions {
   position: relative;
   overflow: hidden;
 }
-.list_item.version_list .versions .prop_version {
+.list-item.version-list .versions .prop-version {
   width: 100%;
   transition: transform 0.3s cubic-bezier(0.65, 0.1, 0.1, 1), visibility 0.3s cubic-bezier(0.65, 0.1, 0.1, 1), height 0.125s cubic-bezier(0.45, 0.05, 0.3, 0.9), opacity 0.25s ease-in-out;
 }
-.list_item.version_list .versions .prop_version:not(.active) {
+.list-item.version-list .versions .prop-version:not(.active) {
   visibility: hidden;
   position: absolute;
   top: 0;
   left: 0;
   opacity: 0;
 }
-.list_item.version_list .versions .prop_version:not(.active).left {
+.list-item.version-list .versions .prop-version:not(.active).left {
   transform: translateX(-35%);
 }
-.list_item.version_list .versions .prop_version:not(.active).right {
+.list-item.version-list .versions .prop-version:not(.active).right {
   transform: translateX(35%);
 }
-html.light-mode .list_item.version_item .version_notice {
+html.light-mode .list-item.version-item .version-notice {
   color: hsl(0, 0%, 6%);
   background-color: rgba(188, 115, 115, 0.35);
 }
-html.light-mode .list_item.version_item .indicator .indicator_item {
+html.light-mode .list-item.version-item .indicator .indicator-item {
   border-color: hsl(0, 0%, 84.5%);
 }
-html.light-mode .list_item.version_item .indicator .indicator_item.new {
+html.light-mode .list-item.version-item .indicator .indicator-item.new {
   border-color: #95B3A5;
 }
-html.light-mode .list_item.version_item .indicator .indicator_item.new > strong::before {
+html.light-mode .list-item.version-item .indicator .indicator-item.new > strong::before {
   background-color: #95B3A5;
 }
-html.light-mode .list_item.version_item .indicator .indicator_item.current {
+html.light-mode .list-item.version-item .indicator .indicator-item.current {
   border-color: #B8D6E0;
 }
-html.light-mode .list_item.version_item .indicator .indicator_item.current > strong::before {
+html.light-mode .list-item.version-item .indicator .indicator-item.current > strong::before {
   background-color: #B8D6E0;
 }
-html.light-mode .list_item.version_item .indicator .indicator_item.incompatible {
+html.light-mode .list-item.version-item .indicator .indicator-item.incompatible {
   border-color: #BC7373;
 }
-html.light-mode .list_item.version_item .indicator .indicator_item.incompatible > strong::before {
+html.light-mode .list-item.version-item .indicator .indicator-item.incompatible > strong::before {
   background-color: #BC7373;
 }
-html.light-mode .list_item.version_item .indicator .indicator_item > strong::before {
+html.light-mode .list-item.version-item .indicator .indicator-item > strong::before {
   background-color: hsl(0, 0%, 84.5%);
 }
-.doc_list {
+.doc-list {
   list-style-type: none;
   padding-left: calc(1vw + 0.15vh - 0.04em);
   margin: 1.3em 0;
 }
-.doc_list .list_item {
+.doc-list .list-item {
   margin: calc(0.15vw + 0.65vh + 0.252em) 0;
   padding: calc(0.15vw + 0.65vh + 0.252em) 0;
 }
-.doc_list dt {
+.doc-list dt {
   margin-bottom: 0.28em;
 }
-.doc_list dt a {
+.doc-list dt a {
   display: inline-block;
 }
-.doc_list dt code {
+.doc-list dt code {
   font-size: 1.1em;
   color: hsl(0, 0%, 84%);
   background-color: hsl(0, 0%, 18.5%);
@@ -857,67 +857,67 @@ html.light-mode .list_item.version_item .indicator .indicator_item > strong::bef
   border-radius: 100px;
   transition: color 0.15s linear, background 0.15s linear;
 }
-.doc_list .doc_item {
+.doc-list .doc-item {
   margin-left: calc(.5vw + .15vh + .98em);
 }
-.doc_list .info_item {
+.doc-list .info-item {
   position: relative;
   font-family: 'Source Code Pro', 'DejaVu Sans Mono', 'Fira Mono', 'Fira Code', 'San Francisco Monospaced', 'Consolas', monospace;
   margin-left: calc(35px + 20px + .5vw + .15vh + .98em);
   text-indent: -20px;
   padding: 3px 0;
 }
-.doc_list .info_item.state {
+.doc-list .info-item.state {
   color: #A84E4E;
 }
-.doc_list .info_item .definitions {
+.doc-list .info-item .definitions {
   margin-left: 15px;
 }
-.doc_list .info_item .definitions .definition {
+.doc-list .info-item .definitions .definition {
   padding: 2px 0;
 }
-.doc_list .info_item::before,
-.doc_list .info_item::after {
+.doc-list .info-item::before,
+.doc-list .info-item::after {
   position: absolute;
   left: -40px;
 }
-.doc_list .info_item::before {
+.doc-list .info-item::before {
   content: '';
   border-left: 2px solid hsl(0, 0%, 35%);
   top: 0;
   bottom: 0;
   transition: border 0.15s linear;
 }
-.doc_list .info_item:not(.special_item)::after {
+.doc-list .info-item:not(.special-item)::after {
   content: '';
   border-top: 2px solid hsl(0, 0%, 35%);
   top: 1em;
   width: 14px;
   transition: border 0.15s linear;
 }
-.doc_list .info_item:nth-last-of-type(1):not(.special_item)::before {
+.doc-list .info-item:nth-last-of-type(1):not(.special-item)::before {
   top: 0;
   height: 1em;
 }
-html.light-mode .doc_list dt code {
+html.light-mode .doc-list dt code {
   color: hsl(0, 0%, 0%);
   background-color: hsl(0, 0%, 89.5%);
 }
-html.light-mode .doc_list .info_item.state {
+html.light-mode .doc-list .info-item.state {
   color: #C1604D;
 }
-html.light-mode .doc_list .info_item::before {
+html.light-mode .doc-list .info-item::before {
   border-color: hsl(0, 0%, 73%);
 }
-html.light-mode .doc_list .info_item:not(.special_item)::after {
+html.light-mode .doc-list .info-item:not(.special-item)::after {
   border-color: hsl(0, 0%, 73%);
 }
-.demo_block {
+.demo-block {
   display: flex;
   justify-content: center;
   height: 25px;
 }
-.demo_block .slider89 .slider {
+.demo-block .slider89 .slider {
   background-color: hsl(0, 0%, 18%);
 }
 .nodisplay {
@@ -940,19 +940,19 @@ html.light-mode .doc_list .info_item:not(.special_item)::after {
   }
 }
 @media (max-width: 630px) {
-  .version_select .version_buttons {
+  .version-select .version-buttons {
     justify-content: space-around;
   }
-  .version_select .description .header {
+  .version-select .description .header {
     padding: 0.3em 3.14vw;
   }
-  .version_select .description .changelog {
+  .version-select .description .changelog {
     padding: 0.3em 3.14vw 0.75em;
   }
-  .version_select .description .changelog .body {
+  .version-select .description .changelog .body {
     margin: 1.1vh 1.31vw 0;
   }
-  .version_select .description .changelog .body ul {
+  .version-select .description .changelog .body ul {
     padding-left: calc(2.98vw + 0.25vh + 0.25em);
   }
 }
@@ -972,7 +972,7 @@ html.light-mode .doc_list .info_item:not(.special_item)::after {
     top: 0.6em;
     right: 0.4em;
   }
-  #navbar #id_nav {
+  #navbar #id-nav {
     width: 100%;
     padding: 0.8em 0;
     background-color: hsl(0, 0%, 12%);
@@ -981,8 +981,8 @@ html.light-mode .doc_list .info_item:not(.special_item)::after {
   main h4:not(.no-anchor) {
     margin-left: 0;
   }
-  main h3:not(.no-anchor) .icon_anchor,
-  main h4:not(.no-anchor) .icon_anchor {
+  main h3:not(.no-anchor) .icon-anchor,
+  main h4:not(.no-anchor) .icon-anchor {
     order: 1;
     margin: 0 0 0 0.435em;
   }
@@ -995,7 +995,7 @@ html.light-mode .doc_list .info_item:not(.special_item)::after {
   main h2:not(.no-anchor) {
     margin-left: 0;
   }
-  main h2:not(.no-anchor) .icon_anchor {
+  main h2:not(.no-anchor) .icon-anchor {
     order: 1;
     margin: 0 0 0 0.435em;
   }

@@ -26,7 +26,7 @@ main {
   width: 19em;
   border-top-color: hsl(0, 0%, 16.5%);
 }
-.box .box_header {
+.box .box-header {
   padding: 0.65em 0.75em;
   color: hsl(0, 0%, 85%);
   font-family: 'Zilla Slab';
@@ -34,7 +34,7 @@ main {
   font-weight: bold;
   text-transform: none;
 }
-.box .box_header .inner {
+.box .box-header .inner {
   width: 75%;
   display: inline-block;
 }

@@ -11,7 +11,7 @@
   </head>
   <body>
     {% set navContent %}
-      <nav id="id_nav">
+      <nav id="id-nav">
         <ul>
           <li><a href="#what">What is this?</a></li>
           <li><a href="#starting">Getting started</a></li>
@@ -25,7 +25,7 @@
 
     <main>
       <h2 id="intro">
-        <a href="#intro" class="icon_anchor">#</a>Introduction
+        <a href="#intro" class="icon-anchor">#</a>Introduction
       </h2>
       <section>
         <p>
@@ -39,14 +39,14 @@
         <hr>
 
         <h3 id="what">
-          <a href="#what" class="icon_anchor">#</a>What is this?
+          <a href="#what" class="icon-anchor">#</a>What is this?
         </h3>
         <p>
           Slider89 is a very simple library for easily creating sliders (range inputs) for a webpage. Being based on custom HTML elements and Javascript instead of a built-in browser side &lt;input&gt;-element, it allows for full styling and behaviour customization. It is, for example, very useful for modifying values on the go.</p>
         <p>
           A basic slider can look like this (Its background-color is a bit darker but otherwise this is an all-default slider):
         </p>
-        <div class="demo_block" id="demo_plain"></div>
+        <div class="demo-block" id="demo-plain"></div>
         <p>
           Obviously, the default theme and configuration will not fit into everyone's design and use cases, but Slider89 is strong when it comes to customization. Beware, however, that it is still in an early alpha state and more features are yet to come.
         </p>
@@ -57,7 +57,7 @@
         <hr>
 
         <h3 id="starting">
-          <a href="#starting" class="icon_anchor">#</a>Getting started
+          <a href="#starting" class="icon-anchor">#</a>Getting started
         </h3>
         <p>
           Slider89 is a client-side library (I don't know yet how useful it is to have it on NPM), so you first need to fetch the necessary files and load them up into your HTML document.<br>
@@ -65,10 +65,10 @@
           In both cases only two files are needed: <code>slider89.js</code> and <code>slider89.css</code>.<br>
           You'll then need to link them in your HTML file (first the download way):
         </p>
-        <div class="code_copy_wrapper">
+        <div class="code-copy-wrapper">
           <pre class="codeblock"><code>&lt;script src="<em>yourpath</em>/slider89.js"&gt;&lt;/script&gt;
 &lt;link rel="stylesheet" href="<em>yourpath</em>/slider89.css"&gt;</code></pre>
-          <button class="copy_btn">
+          <button class="copy-btn">
             <span class="text">Copy</span>
             <div class="checkbox">
               <i class="mark lower"></i>
@@ -79,10 +79,10 @@
         <p>
           or, fetching from the website:
         </p>
-        <div class="code_copy_wrapper">
+        <div class="code-copy-wrapper">
           <pre class="codeblock"><code>&lt;script src="https://hallo89.github.io/Slider89/slider89.js"&gt;&lt;/script&gt;
 &lt;link rel="stylesheet" href="https://hallo89.github.io/Slider89/slider89.css"&gt;</code></pre>
-          <button class="copy_btn">
+          <button class="copy-btn">
             <span class="text">Copy</span>
             <div class="checkbox">
               <i class="mark lower"></i>
@@ -105,7 +105,7 @@
           Assigning the instance to a variable is optional, it will be created in the given element one way or another, but without a variable one obviously can't do anything with the slider.<br>
           An all-default slider initialized plainly like this will look like the example you see above:
         </p>
-        <div class="demo_block" id="demo_1_plain"></div>
+        <div class="demo-block" id="demo-1-plain"></div>
         <p>
           As stated above, config options are available: to configure the slider, we pass an additional argument into the <a href="#Methods--Constructor">Slider89 constructor</a>, an object which we equip with <a href="#Properties--Configuration-properties">configuration properties</a>. Here's an example:
         </p>
@@ -115,11 +115,11 @@
   value: 80
 });</code></pre>
         <p>Which would turn out into this:</p>
-        <div class="demo_block" id="demo_2_configged"></div>
+        <div class="demo-block" id="demo-2-configged"></div>
       </section>
 
       <h2 id="docs">
-        <a href="#docs" class="icon_anchor">#</a>Documentation
+        <a href="#docs" class="icon-anchor">#</a>Documentation
       </h2>
 
       <section id="section_docs">
@@ -127,10 +127,10 @@
         <hr>
         <h3 class="no-anchor">Version selector</h3>
         <p>If you are restricted to a specific version, choose it here and the docs will adapt.</p>
-        <div class="version_select">
-          <div class="version_buttons">
+        <div class="version-select">
+          <div class="version-buttons">
             {%- for version in gitData -%}
-            <button class="{{ version.tag_name | dotSnake }} {{- ' new' if version.new }} {{- ' active' if loop.first}}" type="button">{{ version.tag_name }}</button>
+            <button class="{{ version.tag-name | dotSnake }} {{- ' new' if version.new }} {{- ' active' if loop.first}}" type="button">{{ version.tag-name }}</button>
             {%- endfor -%}
           </div>
           <button class="toggle_btn" type="button">
@@ -141,10 +141,10 @@
           </button>
           <div class="description">
             {% for version in gitData -%}
-            <div class="version {{version.tag_name | dotSnake }} {{- ' active' if loop.first }}">
+            <div class="version {{version.tag-name | dotSnake }} {{- ' active' if loop.first }}">
               <div class="header">
                 <span class="date">Published on {{ version.date }}</span>
-                <a href="{{ version.html_url }}">Go to release</a>
+                <a href="{{ version.html-url }}">Go to release</a>
               </div>
               <div class="changelog">
                 <span class="heading">What's new</span>
@@ -161,20 +161,20 @@
 
         {%- macro indicatorVer(verObj, active = true) %}
           {% set displayVer = ('UNTIL ' if verObj.version_modifier == 'deprecated') + verObj.version -%}
-          <span class="indicator_item v{{verObj.version | dotSnake}}
+          <span class="indicator-item v{{verObj.version | dotSnake}}
             {{- ' active' if active}}
-            {{- ' new' if 'v' + verObj.version == gitData[0].tag_name}}
-            {{- ' incompatible' if verObj.version_modifier == 'deprecated' and compareVer('v' + verObj.version, gitData[0].tag_name) == 'smaller' }}
+            {{- ' new' if 'v' + verObj.version == gitData[0].tag-name}}
+            {{- ' incompatible' if verObj.version_modifier == 'deprecated' and compareVer('v' + verObj.version, gitData[0].tag-name) == 'smaller' }}
             {{- ' deprecate' if verObj.version_modifier == 'deprecated' }}"><strong>{{ displayVer }}</strong></span>
         {%- endmacro -%}
 
         {%- macro propList(values, presets) -%}
-          <dl class="doc_list">
+          <dl class="doc-list">
             {%- for value, propVal in values -%}
               {# Property (min, max, etc.), [description, attributes, definitions] #}
               {% set propID = value | argondry | functName | kebab -%}
               {% if (propVal | isArray) or (propVal.version) -%} {# If the property has one or more versions #}
-                <div id="{{ propID }}" class="list_item version_item {{- ' version_list' if not propVal.version}}">
+                <div id="{{ propID }}" class="list-item version-item {{- ' version-list' if not propVal.version}}">
                   {# Name -#}
                   {# Determining whether a class at <dt> needs to be added -#}
                   {% set multiNames = false -%}
@@ -185,7 +185,7 @@
                       {% endif -%}
                     {% endfor -%}
                   {% endif -%}
-                  <dt class="{{ 'version_names' if multiNames }}">
+                  <dt class="{{ 'version-names' if multiNames }}">
                     <a href="#{{ propID }}"><code>{{ value | e | argonize | safe }}</code></a>{{ '<span class="_visuallyhidden">, </span>' | safe if multiNames }}
                     {%- if propVal | isArray -%}
                       {% for ver in propVal -%}
@@ -212,7 +212,7 @@
                     <div class="versions">
                     {% for ver in propVal -%}
                       <span class="_visuallyhidden">Version {{ ver.version }}</span>
-                      <div class="prop_version v{{ver.version | dotSnake}} {{- ' active' if loop.first}} {{- ' right' if not loop.first}}">
+                      <div class="prop-version v{{ver.version | dotSnake}} {{- ' active' if loop.first}} {{- ' right' if not loop.first}}">
                         {{ docItem(value, ver, presets) }}
                       </div>
                     {% endfor -%}
@@ -224,7 +224,7 @@
                   {% endif -%}
                 </div>
               {% else -%} {# If the property doesn't have multiple versions #}
-                <div id="{{ propID }}" class="list_item">
+                <div id="{{ propID }}" class="list-item">
                   {{ docItem(value, propVal, presets) }}
                 </div>
               {% endif -%}
@@ -240,16 +240,16 @@
           {% endif -%}
           {% if value.version_modifier -%}
             {% if value.version_modifier == 'deprecated' -%}
-              <div class="doc_item version_notice {{- ' active' if compareVer('v' + value.version, gitData[0].tag_name) == 'smaller' }}">Deprecated since {{ value.version | incrVer(gitData) }}{{ (' in favor of <code>' + value.version_successor | e | argonize + '</code>') | safe if value.version_successor }}</div>
+              <div class="doc-item version-notice {{- ' active' if compareVer('v' + value.version, gitData[0].tag-name) == 'smaller' }}">Deprecated since {{ value.version | incrVer(gitData) }}{{ (' in favor of <code>' + value.version_successor | e | argonize + '</code>') | safe if value.version_successor }}</div>
             {% endif -%}
           {% endif -%}
-          <dd class="doc_item description">
+          <dd class="doc-item description">
             {{ value.description | e | argonize | safe }}
           </dd>
           {%- set val = concatObj([presets, value]) -%}
           {# state #}
           {% if val.state -%}
-            <dd class="doc_item info_item special_item state">
+            <dd class="doc-item info-item special-item state">
               <span class="nodisplay">{{'└ ' if loop.last else '├ '}}</span>
               <strong>{{val.state}}</strong>
             </dd>
@@ -257,14 +257,14 @@
           {# history (predecessor, successor, ...) #}
           {% if value.version_predecessor or value.version_successor -%}
             {%- set content = value -%}
-            <dd class="doc_item info_item">
+            <dd class="doc-item info-item">
               <span class="nodisplay">{{'└ ' if loop.last else '├ '}}</span>
               {{'Predecessor' if value.version_predecessor else 'Successor'}}: <code>{{ (value.version_successor if value.version_successor else value.version_predecessor) | e | argonize | safe }}</code>
             </dd>
           {% endif -%}
           {# definitions #}
           {% if val.definitions -%}
-            <dd class="doc_item info_item">
+            <dd class="doc-item info-item">
               <span class="nodisplay">{{'└ ' if loop.last else '├ '}}</span>
               Definitions:<div class="definitions">
                 {% for def, defVal in val.definitions -%}
@@ -278,7 +278,7 @@
           {% endif -%}
           {# attributes #}
           {% for attr, attrVal in val.attributes -%}
-            <dd class="doc_item info_item">
+            <dd class="doc-item info-item">
               <span class="nodisplay">{{'└ ' if loop.last else '├' }}</span>
               {{attr}}: {{attrVal | e | argonize | separate(['\\s+OR', ','], 'code') | safe}}
             </dd>
@@ -288,7 +288,7 @@
         {%- for section, sectionVal in data -%}
           {# Docs h3 (Properties, etc.), [description, categories] | in the whole json #}
           {% set sectionID = section | firstword -%}
-            <h3 id="{{ sectionID }}"><a href="#{{ sectionID }}" class="icon_anchor">#</a>{{ section }}</h3>
+            <h3 id="{{ sectionID }}"><a href="#{{ sectionID }}" class="icon-anchor">#</a>{{ section }}</h3>
           {% if sectionVal.description -%}
             <p>{{ sectionVal.description | e | argonize | safe }}</p>
           {% endif -%}
@@ -297,11 +297,11 @@
               {# Category under one section (Read only, etc.), [description, values, ...] #}
               {% set categoryID = (section | firstword) + '--' + (category | argondry | kebab) -%}
               {% set presets = categoryVal.presets -%}
-              <div class="list_section" id="{{ categoryID }}">
+              <div class="list-section" id="{{ categoryID }}">
                 <h4>
-                  <a href="#{{ categoryID }}" class="icon_anchor">#</a>
+                  <a href="#{{ categoryID }}" class="icon-anchor">#</a>
                   <span>{{ category | e | argonize | safe }}</span>
-                  <button class="expand_button {{-' active' if categoryVal.collapsed == true}}">
+                  <button class="expand-button {{-' active' if categoryVal.collapsed == true}}">
                     <div class="symbols">
                       <span class="symbol plus">+</span>
                       <span class="symbol minus">-</span>
@@ -329,13 +329,13 @@
     <link rel="stylesheet" href="/style/slider89/fonts.css">
     <script>
       const h4s = document.getElementsByTagName('h4');
-      const versionSwitch = document.querySelector('.version_select .version_buttons');
+      const versionSwitch = document.querySelector('.version-select .version-buttons');
       const vSwitchBtns = versionSwitch.getElementsByTagName('button');
       const vSwitchDescript = versionSwitch.parentNode.querySelector('.description');
       const vSwitchToggle = versionSwitch.parentNode.querySelector('.toggle_btn');
-      const copyBtns = document.querySelectorAll('.code_copy_wrapper .copy_btn');
-      const indicatorItems = document.querySelectorAll('.list_item.version_list .indicator .indicator_item');
-      const versionItems = document.getElementsByClassName('version_item');
+      const copyBtns = document.querySelectorAll('.code-copy-wrapper .copy-btn');
+      const indicatorItems = document.querySelectorAll('.list-item.version-list .indicator .indicator-item');
+      const versionItems = document.getElementsByClassName('version-item');
 
       const newestVer = formatVersion(vSwitchBtns[0].textContent);
 
@@ -373,7 +373,7 @@
       function switchCardVersion() {
         if (this.classList.contains('active')) return;
         const version = this.classList[1];
-        const vProps = this.parentNode.parentNode.querySelectorAll('.versions .prop_version');
+        const vProps = this.parentNode.parentNode.querySelectorAll('.versions .prop-version');
         for (let i = 0; i < vProps.length; i++) {
           if (vProps[i].classList.contains(version)) {
             var clickPos = i;
@@ -407,8 +407,8 @@
         //e.g 0.2.0 becomes 1020
         const selectVer = formatVersion(this.textContent);
         for (let i = 0; i < versionItems.length; i++) {
-          const indicChilds = versionItems[i].querySelector('.indicator').getElementsByClassName('indicator_item');
-          const notice = versionItems[i].querySelector('.version_notice');
+          const indicChilds = versionItems[i].querySelector('.indicator').getElementsByClassName('indicator-item');
+          const notice = versionItems[i].querySelector('.version-notice');
           let propLock = false;
           for (let n = 0; n < indicChilds.length; n++) {
             const ver = formatVersion(indicChilds[n].classList[1]);
@@ -425,8 +425,8 @@
             } else if (selectVer == ver && ver != newestVer) {
               indicChilds[n].classList.add('current');
             }
-            if (selectVer >= ver && !propLock && versionItems[i].classList.contains('version_list')) {
-              changePropVersion(versionItems[i].lastElementChild.getElementsByClassName('prop_version'), n, indicChilds[n]);
+            if (selectVer >= ver && !propLock && versionItems[i].classList.contains('version-list')) {
+              changePropVersion(versionItems[i].lastElementChild.getElementsByClassName('prop-version'), n, indicChilds[n]);
               propLock = true;
             }
           }
@@ -439,7 +439,7 @@
 
       function changePropVersion(props, target, indicChild) {
         const clickHeight = props[target].clientHeight;
-        const vNames = props[0].parentNode.parentNode.querySelector('.version_names');
+        const vNames = props[0].parentNode.parentNode.querySelector('.version-names');
         if (vNames) {
           const activeName = vNames.querySelector('a.active');
           const vNameMatch = vNames.querySelector('a.' + indicChild.classList[1]);
@@ -472,7 +472,7 @@
             props[target].setAttribute('style', '');
           }, 125);
         }, 20);
-        indicChild.parentNode.querySelector('.indicator_item.active').classList.remove('active');
+        indicChild.parentNode.querySelector('.indicator-item.active').classList.remove('active');
         indicChild.classList.add('active');
       }
 
@@ -502,7 +502,7 @@
       }
 
       function toggleCollapsible(e) {
-        if (!e.target.classList.contains('icon_anchor')) {
+        if (!e.target.classList.contains('icon-anchor')) {
           this.lastElementChild.classList.toggle('active');
           this.nextElementSibling.classList.toggle('collapsed');
         }
@@ -511,9 +511,9 @@
     <link rel="stylesheet" href="https://hallo89.github.io/Slider89/slider89.css">
     <script src="https://hallo89.github.io/Slider89/slider89.js"></script>
     <script>
-      new Slider89(document.getElementById('demo_plain'));
-      new Slider89(document.getElementById('demo_1_plain'));
-      new Slider89(document.getElementById('demo_2_configged'), {min: -50, max: 175, value: 80});
+      new Slider89(document.getElementById('demo-plain'));
+      new Slider89(document.getElementById('demo-1-plain'));
+      new Slider89(document.getElementById('demo-2-configged'), {min: -50, max: 175, value: 80});
     </script>
   </body>
 </html>

@@ -88,7 +88,7 @@ fetch('https://api.github.com/repos/Hallo89/Slider89/releases')
   });
   njk.addFilter('incrVer', function(val, array) {
     for (const i in array) {
-      if (array[i].tag_name == 'v' + val) return array[i - 1] ? array[i - 1].tag_name.slice(1) : val;
+      if (array[i].tag-name == 'v' + val) return array[i - 1] ? array[i - 1].tag-name.slice(1) : val;
     }
     return val;
   });

@@ -133,7 +133,7 @@ body.delayfull #wrapper {
   transform: none;
 }
 
-.box_header {
+.box-header {
   display: flex;
   flex-flow: row;
   justify-content: space-between;
@@ -163,7 +163,7 @@ body.delayfull #wrapper {
   margin-right: 7px;
   margin-left: 5px;
 }
-.box_header.compact .header_text {
+.box-header.compact .header_text {
   padding: 33px 15px;
   white-space: nowrap;
 }

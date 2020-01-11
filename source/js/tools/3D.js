@@ -38,7 +38,7 @@ const thisBox = document.querySelector('.box');
 const sectionCode = thisBox.querySelector('.code_container'); //The code container
 const sectionExe = thisBox.querySelector('.execute_container'); //the execute container
 
-const thisHeader = sectionExe.querySelector('.box_header');
+const thisHeader = sectionExe.querySelector('.box-header');
 
 const fileInput = document.getElementById('input_json_model'); //The json file <input> element
 const fileLabel = document.getElementById('json_model_label'); //The label of above, which the user interacts with

@@ -35,9 +35,9 @@
   </head>
   <body>
 
-    <header id="head_block">
-      <h1 data-heading="Hallo89"><span class="main_text">Hallo89</span></h1>
-      <p class="sub_header">
+    <header id="header">
+      <h1 data-heading="Hallo89"><span>Hallo89</span></h1>
+      <p class="subheader">
         <script>
           document.write(randomSubheader[Math.floor(randomSubheader.length*Math.random())]);
         </script>
@@ -45,7 +45,7 @@
       {% include 'templates/mode-switch.njk' %}
     </header>
 
-    <nav id="box_nav">
+    <nav id="box-nav">
       {% include 'templates/box-list.njk' %}
     </nav>
 
@@ -53,7 +53,7 @@
 
     <script>
       const isGecko = (/Gecko\/\d+/).test(navigator.userAgent);
-      const header = document.getElementById('head_block');
+      const header = document.getElementById('header');
       const h1 = header.querySelector('h1');
       const h1Text = h1.querySelector('span');
 
@@ -78,7 +78,7 @@
 
       var nodeRanges = [];
       const h1Node2 = document.createElement('span');
-      h1Node2.classList.add('cut_after');
+      h1Node2.classList.add('cut-after');
       h1Node2.innerHTML = h1Text.innerHTML;
 
       function h1HoverIn() {

@@ -182,7 +182,7 @@ html.light-mode #navbar {
   background-color: hsl(0, 0%, 96%);
   color: hsl(0, 0%, 26%);
 }
-#modes .mode_gear {
+#modes .mode-gear {
   display: block;
   position: relative;
   background-color: transparent;
@@ -193,7 +193,7 @@ html.light-mode #navbar {
   height: 1.5em;
   cursor: pointer;
 }
-#modes .mode_gear .icon {
+#modes .mode-gear .icon {
   position: absolute;
   top: 0;
   left: 0;
@@ -201,23 +201,23 @@ html.light-mode #navbar {
   width: 100%;
   transition: all 0.275s cubic-bezier(0.63, 0.13, 0.12, 1.15), color 0.15s linear;
 }
-#modes .mode_gear .icon > svg {
+#modes .mode-gear .icon > svg {
   height: 100%;
   width: 100%;
 }
-#modes .mode_gear .sun {
+#modes .mode-gear .sun {
   color: hsl(0, 0%, 77.5%);
 }
-#modes .mode_gear .moon {
+#modes .mode-gear .moon {
   color: hsl(0, 0%, 22.5%);
 }
-#modes .mode_gear .moon,
-html.light-mode #modes .mode_gear .sun {
+#modes .mode-gear .moon,
+html.light-mode #modes .mode-gear .sun {
   transform: rotate(135deg) scale(0.8);
   visibility: hidden;
   opacity: 0;
 }
-html.light-mode #modes .mode_gear .moon {
+html.light-mode #modes .mode-gear .moon {
   transform: none;
   visibility: visible;
   opacity: 1;
@@ -369,7 +369,7 @@ html.light-mode #footer a::before {
     width: 4.5em;
   }
 }
-.glb_box {
+.glb-box {
   display: block;
   font-size: 1.45em;
   overflow: hidden;
@@ -382,28 +382,28 @@ html.light-mode #footer a::before {
   position: relative;
   transition: transform 0.25s ease, background 0.15s linear, box-shadow 0.15s linear, border 0.15s linear;
 }
-.glb_box:hover {
+.glb-box:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 0 hsl(0, 0%, 5.5%), 0 3px 24px hsla(0, 0%, 5%, 0.36);
   transition: transform 0.25s ease, box-shadow 0.25s ease-in-out, background 0.15s linear, box-shadow 0.15s linear, border 0.15s linear;
 }
-.glb_box.hyperbox {
+.glb-box.hyperbox {
   cursor: pointer;
   text-decoration: none;
 }
-.glb_box.hyperbox:any-link {
+.glb-box.hyperbox:any-link {
   color: transparent;
 }
-.glb_box.multiplebox {
+.glb-box.multiplebox {
   display: flex;
   flex-direction: column;
 }
-.glb_box.multiplebox .links {
+.glb-box.multiplebox .links {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
 }
-.glb_box.multiplebox .links a {
+.glb-box.multiplebox .links a {
   display: flex;
   align-items: center;
   color: inherit;
@@ -413,21 +413,21 @@ html.light-mode #footer a::before {
   font-style: italic;
   transition: flex 0.2s cubic-bezier(0.2, 0.2, 0.55, 1);
 }
-.glb_box.multiplebox .links a:hover {
+.glb-box.multiplebox .links a:hover {
   flex: 1.3;
 }
-.glb_box.imager {
+.glb-box.imager {
   display: flex;
   flex-direction: column;
 }
-.glb_box.imager .image_container,
-.glb_box .imager {
+.glb-box.imager .image_container,
+.glb-box .imager {
   position: relative;
   flex-grow: 1;
   z-index: 1;
 }
-.glb_box.imager .image_container .image,
-.glb_box .imager .image {
+.glb-box.imager .image_container .image,
+.glb-box .imager .image {
   position: absolute;
   left: 0;
   top: 0;
@@ -440,13 +440,13 @@ html.light-mode #footer a::before {
   opacity: 0.2;
   transition: all 0.25s cubic-bezier(0, 0, 0.75, 1);
 }
-.glb_box.imager:hover .image_container .image,
-.glb_box .imager:hover .image {
+.glb-box.imager:hover .image_container .image,
+.glb-box .imager:hover .image {
   filter: none;
   opacity: 0.5;
 }
-.glb_box .corneranimation::before,
-.glb_box .corneranimation::after {
+.glb-box .corneranimation::before,
+.glb-box .corneranimation::after {
   content: '';
   position: absolute;
   background-color: hsl(0, 0%, 7%);
@@ -454,7 +454,7 @@ html.light-mode #footer a::before {
   z-index: 2;
   opacity: 0.6;
 }
-.glb_box .corneranimation::before {
+.glb-box .corneranimation::before {
   height: 1.4em;
   width: 2.9em;
   left: 0;
@@ -462,7 +462,7 @@ html.light-mode #footer a::before {
   transform-origin: 0 100%;
   transform: rotateZ(45deg) translateY(1.4em) translateX(-50%);
 }
-.glb_box .corneranimation::after {
+.glb-box .corneranimation::after {
   height: 2.9em;
   width: 1.4em;
   right: 0;
@@ -470,13 +470,13 @@ html.light-mode #footer a::before {
   transform-origin: 100% 0;
   transform: rotateZ(-45deg) translateX(1.4em) translateY(-50%);
 }
-.glb_box:hover .corneranimation::before {
+.glb-box:hover .corneranimation::before {
   transform: rotateZ(45deg) translateY(0) translateX(-50%);
 }
-.glb_box:hover .corneranimation::after {
+.glb-box:hover .corneranimation::after {
   transform: rotateZ(-45deg) translateX(0) translateY(-50%);
 }
-.glb_box .box_header {
+.glb-box .box-header {
   background-color: hsl(0, 0%, 11.5%);
   padding: 24px 21px;
   margin: 0;
@@ -488,34 +488,34 @@ html.light-mode #footer a::before {
   line-height: 28px;
   transition: background 0.15s linear, color 0.15s linear;
 }
-.glb_box .box_text {
+.glb-box .box-text {
   color: hsl(0, 0%, 61%);
   transition: color 0.15s linear;
 }
-.glb_box .description {
+.glb-box .description {
   font-family: Calibri, 'Times New Roman', serif;
   font-size: 1.04em;
   line-height: 1.19;
   padding: 0.418em 0.56em;
   margin: 0;
 }
-html.light-mode .glb_box {
+html.light-mode .glb-box {
   background-color: hsl(0, 0%, 95%);
   border-top: 4px solid hsl(0, 0%, 100%);
   border-bottom: 4px solid #efefef;
   box-shadow: 0 4px 0 hsl(0, 0%, 86%), 0 3px 14px hsla(0, 0%, 87%, 0.25);
 }
-html.light-mode .glb_box:hover {
+html.light-mode .glb-box:hover {
   box-shadow: 0 4px 0 hsl(0, 0%, 86%), 0 3px 24px hsla(0, 0%, 85%, 0.36);
 }
-html.light-mode .glb_box .corneranimation::before,
-html.light-mode .glb_box .corneranimation::after {
+html.light-mode .glb-box .corneranimation::before,
+html.light-mode .glb-box .corneranimation::after {
   background-color: hsl(0, 0%, 90.5%);
 }
-html.light-mode .glb_box .box_header {
+html.light-mode .glb-box .box-header {
   background-color: hsl(0, 0%, 96.8%);
   color: hsl(0, 0%, 50%);
 }
-html.light-mode .glb_box .box_text {
+html.light-mode .glb-box .box-text {
   color: hsl(0, 0%, 28%);
 }
