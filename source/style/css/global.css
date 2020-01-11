@@ -204,7 +204,7 @@ html.light-mode #navbar {
 }
 @keyframes modeIconIn {
   from {
-    transform: rotate(180deg) scale(0.8);
+    transform: rotate(135deg) scale(0.8);
   }
 }
 #modes .mode_gear .icon > svg {
