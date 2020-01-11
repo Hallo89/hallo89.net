@@ -152,13 +152,23 @@ function get(which, fileName) {
 function getNJK(which, obj, dataName, fileName) {
   let params = {};
   if (which) {
-    let data = dataName ? pageData[dataName] : pageData[which.slice(0, 1).toUpperCase() + which.slice(1)];
+    let data;
+    if (dataName) {
+      if (Array.isArray(dataName)) {
+        data = pageData;
+        dataName.forEach(val => {
+          data = data[val];
+          if (data && data.children) data = data.children;
+        });
+      } else data = pageData[dataName];
+    } else data = pageData[which.slice(0, 1).toUpperCase() + which.slice(1)];
     if (data && data.children) data = data.children;
     params.pageData = data;
   } else {
     params.pageData = pageData;
   }
   params.page = which;
+  params.name = which.includes('/') ? which.slice(0, which.indexOf('/')) : which;
   if (obj) params = Object.assign(params, obj);
   app.get('/' + which, function(req, res) {
     res.render(fileName || which, params);
@@ -176,4 +186,4 @@ getNJK('webgl', false, 'WebGL Experiments');
 get('webgl/triangles');
 get('webgl/matrices3d');
 get('sponge');
-getNJK('tutorials');
+getNJK('tutorials', false, ['Other stuff', 'Empty thing']);

@@ -27,6 +27,8 @@
     }
   },
   "Slider89": {
+    "lightMode": true,
+    "navBarH1": true,
     "description": "Slider89 is a library for easily creating and manipulating fully customizable sliders for your website, built with modern Javascript and featuring functions and practices for every purpose"
   },
   "WebGL Experiments": {
@@ -54,6 +56,8 @@
         "link": "sponge"
       },
       "Empty thing": {
+        "lightMode": true,
+        "navBarH1": true,
         "link": "tutorials"
       }
     }

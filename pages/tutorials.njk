@@ -10,9 +10,7 @@
     <script src="/js/global-themes.js"></script>
   </head>
   <body>
-    {% import 'templates/navbar.njk' as navbar %}
-
-    {{ navbar.navbar('Tutorials', true, true, false) }}
+    {% include 'templates/navbar.njk' %}
 
     <header id="tutorial_header">
       <h1 class="header_navigation">
