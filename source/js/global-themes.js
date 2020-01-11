@@ -4,8 +4,8 @@ var modeChildren;
 
 window.addEventListener('load', function() {
   if (hasAccepted != 'true') {
-    banner.children[1].innerHTML = 'This site uses cookies by Cloudflare, this banner and to save your preferenced theme color. By continuing to use it, you agree to them!';
-    banner.children[2].onclick = hideBannerThemes;
+    banner.children[1].textContent = 'This site uses cookies by Cloudflare, this banner and to save your preferenced theme color. By continuing to use it, you agree to them!';
+    banner.children[2].addEventListener('click', handleThemes);
   }
   modes = document.getElementById('modes');
   modeChildren = enlistChildren(modes);
@@ -19,13 +19,13 @@ window.addEventListener('load', function() {
   }
 })();
 
-function hideBannerThemes() {
-  hideBanner();
+function handleThemes() {
   if (!getCookie('theme')) {
     document.cookie = 'theme=' + (html.classList.contains('light-mode') ? 'light' : 'dark') + '; path=/';
   } else {
     toggleMode(getCookie('theme'));
   }
+  this.removeEventListener('click', handleThemes);
 }
 
 function toggleMode(mode) {

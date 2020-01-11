@@ -8,19 +8,19 @@ const hasAccepted = getCookie('acceptedCookies');
 //Create the banner element
 const banner = (function() {
   const aside = document.createElement('aside');
+  const bg = document.createElement('b');
+  const text = document.createElement('div');
+  const btn = document.createElement('button');
   aside.classList.add('glb_box');
   aside.classList.add('invisible');
-  aside.id = 'cookiebanner';
-  const bg = document.createElement('b');
   bg.classList.add('background');
-  const text = document.createElement('div');
   text.classList.add('description');
   text.classList.add('box_text');
-  text.innerHTML = 'This site uses cookies by Cloudflare and this very banner. By continuing to use it, you agree to them!';
-  const btn = document.createElement('button');
+  aside.id = 'cookiebanner';
   btn.type = 'button';
-  btn.onclick = hideBanner;
-  btn.innerHTML = 'Alrighty!';
+  text.textContent = 'This site uses cookies by Cloudflare and this very banner. By continuing to use it, you agree to them!';
+  btn.textContent = 'Alrighty!';
+  btn.addEventListener('click', hideBanner);
   aside.appendChild(bg);
   aside.appendChild(text);
   aside.appendChild(btn);
@@ -49,4 +49,5 @@ function hideBanner() {
     }, 80);
   }, 450);
   document.cookie = 'acceptedCookies=true; path=/';
+  this.removeEventListener('click', hideBanner);
 }
