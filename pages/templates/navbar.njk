@@ -12,7 +12,7 @@
   {%- endif %}
   {%- if pageData.lightMode %}
   <aside id="modes">
-    <button type="button" class="mode_gear" onclick="toggleDropdown()">
+    <button type="button" class="mode_gear">
       {# Weirdly enough, Nunjucks can't fetch the svg from /source/ #}
       {% include './cog-solid.svg' %}
     </button>

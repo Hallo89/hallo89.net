@@ -8,6 +8,7 @@ window.addEventListener('load', function() {
     banner.children[2].addEventListener('click', handleThemes);
   }
   modes = document.getElementById('modes');
+  modes.addEventListener('click', toggleDropdown);
   modeChildren = enlistChildren(modes);
 });
 
