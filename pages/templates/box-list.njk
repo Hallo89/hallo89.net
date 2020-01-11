@@ -1,4 +1,4 @@
-{%- import 'templates/glb_box.njk' as box %}
+{%- import 'templates/glb-box.njk' as box %}
 {%- for nav, navVal in pageData %}
   {%- set link = navVal.link if navVal.link else (nav | lower if navVal.link !== false else '') -%}
   {%- if not link | startsWith(['https://', 'http://']) -%}
