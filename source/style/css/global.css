@@ -211,6 +211,9 @@ html.light-mode #navbar {
 #modes .mode-gear .moon {
   color: hsl(0, 0%, 22.5%);
 }
+#modes .mode-gear:focus {
+  outline: none;
+}
 #modes .mode-gear .moon,
 html.light-mode #modes .mode-gear .sun {
   transform: rotate(135deg) scale(0.8);
@@ -390,9 +393,6 @@ html.light-mode #footer a::before {
 .glb-box.hyperbox {
   cursor: pointer;
   text-decoration: none;
-}
-.glb-box.hyperbox:any-link {
-  color: transparent;
 }
 .glb-box.multiplebox {
   display: flex;

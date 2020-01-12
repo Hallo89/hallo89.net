@@ -232,6 +232,12 @@ body {
     .moon {
       color: hsl(0, 0%, 22.5%);
     }
+    &:focus {
+      //Some browsers like Firefox handle tab-focus great by only showing it after a tab has occured
+      //Other browsers like Opera can't get their shit together and always show a blue outline when a button is clicked, thanks
+      //TLDR: The accessibility is not worth the aesthetics, sorry!
+      outline: none;
+    }
   }
   .mode-gear .moon,
   html.light-mode & .mode-gear .sun {
@@ -430,10 +436,6 @@ body {
   &.hyperbox {
     cursor: pointer;
     text-decoration: none;
-    &:any-link {
-      // Normalizing the dotted focus/clicked/active/whatever link outline in Firefox
-      color: transparent;
-    }
   }
   &.multiplebox {
     display: flex;
