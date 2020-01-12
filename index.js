@@ -45,7 +45,6 @@ fetch('https://api.github.com/repos/Hallo89/Slider89/releases')
   }).then(sl89GitData => {
     getNJK('slider89', {data: sl89Docs, gitData: sl89GitData});
   });
-
 (function() {
   njk.addGlobal('staticPageData', pageData);
   njk.addGlobal('compareVer', function(ver1, ver2) {
@@ -88,7 +87,7 @@ fetch('https://api.github.com/repos/Hallo89/Slider89/releases')
   });
   njk.addFilter('incrVer', function(val, array) {
     for (const i in array) {
-      if (array[i].tag-name == 'v' + val) return array[i - 1] ? array[i - 1].tag-name.slice(1) : val;
+      if (array[i].tag_name == 'v' + val) return array[i - 1] ? array[i - 1].tag_name.slice(1) : val;
     }
     return val;
   });

@@ -130,7 +130,7 @@
         <div class="version-select">
           <div class="version-buttons">
             {%- for version in gitData -%}
-            <button class="{{ version.tag-name | dotSnake }} {{- ' new' if version.new }} {{- ' active' if loop.first}}" type="button">{{ version.tag-name }}</button>
+            <button class="{{ version.tag_name | dotSnake }} {{- ' new' if version.new }} {{- ' active' if loop.first}}" type="button">{{ version.tag_name }}</button>
             {%- endfor -%}
           </div>
           <button class="toggle_btn" type="button">
@@ -141,7 +141,7 @@
           </button>
           <div class="description">
             {% for version in gitData -%}
-            <div class="version {{version.tag-name | dotSnake }} {{- ' active' if loop.first }}">
+            <div class="version {{version.tag_name | dotSnake }} {{- ' active' if loop.first }}">
               <div class="header">
                 <span class="date">Published on {{ version.date }}</span>
                 <a href="{{ version.html-url }}">Go to release</a>
@@ -163,8 +163,8 @@
           {% set displayVer = ('UNTIL ' if verObj.version_modifier == 'deprecated') + verObj.version -%}
           <span class="indicator-item v{{verObj.version | dotSnake}}
             {{- ' active' if active}}
-            {{- ' new' if 'v' + verObj.version == gitData[0].tag-name}}
-            {{- ' incompatible' if verObj.version_modifier == 'deprecated' and compareVer('v' + verObj.version, gitData[0].tag-name) == 'smaller' }}
+            {{- ' new' if 'v' + verObj.version == gitData[0].tag_name}}
+            {{- ' incompatible' if verObj.version_modifier == 'deprecated' and compareVer('v' + verObj.version, gitData[0].tag_name) == 'smaller' }}
             {{- ' deprecate' if verObj.version_modifier == 'deprecated' }}"><strong>{{ displayVer }}</strong></span>
         {%- endmacro -%}
 
@@ -240,7 +240,7 @@
           {% endif -%}
           {% if value.version_modifier -%}
             {% if value.version_modifier == 'deprecated' -%}
-              <div class="doc-item version-notice {{- ' active' if compareVer('v' + value.version, gitData[0].tag-name) == 'smaller' }}">Deprecated since {{ value.version | incrVer(gitData) }}{{ (' in favor of <code>' + value.version_successor | e | argonize + '</code>') | safe if value.version_successor }}</div>
+              <div class="doc-item version-notice {{- ' active' if compareVer('v' + value.version, gitData[0].tag_name) == 'smaller' }}">Deprecated since {{ value.version | incrVer(gitData) }}{{ (' in favor of <code>' + value.version_successor | e | argonize + '</code>') | safe if value.version_successor }}</div>
             {% endif -%}
           {% endif -%}
           <dd class="doc-item description">
