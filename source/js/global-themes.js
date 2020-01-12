@@ -5,7 +5,7 @@ window.addEventListener('load', function() {
     banner.children[1].textContent = 'This site uses cookies by Cloudflare, this banner and to save your preferenced theme color. By continuing to use it, you agree to them!';
     banner.children[2].addEventListener('click', handleThemes);
   }
-  modes.querySelector('button.mode-gear').addEventListener('click', toggleMode);
+  document.querySelector('#modes button.mode-gear').addEventListener('click', toggleMode);
 });
 
 //Set the theme according to the cookie 'theme' on startup (but only if cookies have been accepted)
