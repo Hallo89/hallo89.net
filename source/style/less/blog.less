@@ -33,20 +33,26 @@ main {
 
 .box {
   width: 19em;
-  border-top-color: hsl(0, 0%, 16.5%);
+  border-top-color: hsl(0, 0%, 18%);
   .box-header {
+    display: flex;
+    justify-content: space-between;
     padding: .65em .75em;
     color: hsl(0, 0%, 85%);
-    font-family: 'Zilla Slab'; //TODO: improve font suppport
-    font-size: 1.1em;
-    font-weight: bold;
+    font-family: 'Zilla Slab', sans-serif; //TODO: improve font suppport
     text-transform: none;
-    .inner {
-      width: 75%;
-      display: inline-block;
+    .text {
+      font-size: 1.1em;
+      margin: 0;
+      width: 70%;
+    }
+    .date {
+      font-size: .65em;
+      font-family: 'Inter', sans-serif;
     }
   }
   .description {
+    font-size: 1em;
     padding: .5em .75em;
   }
 }

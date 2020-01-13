@@ -14,16 +14,21 @@
       {% include 'templates/navbar.njk' %}
 
       <main>
-        {% call box.box('About my newest project, Argon-parser', '/argon-parser', true) %}
-        Argon-parser makes it easy to write databased HTML snippets by parsing a custom, sophisticated syntax into full HTML with as little repetition as possible.
-        {% endcall %}
+        <a href="/{{ page }}/argon-parser" class="box glb-box hyperbox">
+          <span class="corneranimation"></span>
+          <div class="box-header">
+            <h2 class="text">About my newest project, Argon-parser</h2>
+            <div class="date">2020, Jan 01</div>
+          </div>
+          <p class="description box-text">
+            Argon-parser makes it easy to write databased HTML snippets by parsing a custom, sophisticated syntax into full HTML with as little repetition as possible.
+          </p>
+        </a>
       </main>
     </div>
 
     {% include 'templates/footer.njk' %}
 
     <script src="/js/global.js"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" crossorigin="anonymous">
   </body>
 </html>

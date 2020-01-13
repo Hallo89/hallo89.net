@@ -24,20 +24,26 @@ main {
 }
 .box {
   width: 19em;
-  border-top-color: hsl(0, 0%, 16.5%);
+  border-top-color: hsl(0, 0%, 18%);
 }
 .box .box-header {
+  display: flex;
+  justify-content: space-between;
   padding: 0.65em 0.75em;
   color: hsl(0, 0%, 85%);
-  font-family: 'Zilla Slab';
-  font-size: 1.1em;
-  font-weight: bold;
+  font-family: 'Zilla Slab', sans-serif;
   text-transform: none;
 }
-.box .box-header .inner {
-  width: 75%;
-  display: inline-block;
+.box .box-header .text {
+  font-size: 1.1em;
+  margin: 0;
+  width: 70%;
+}
+.box .box-header .date {
+  font-size: 0.65em;
+  font-family: 'Inter', sans-serif;
 }
 .box .description {
+  font-size: 1em;
   padding: 0.5em 0.75em;
 }
