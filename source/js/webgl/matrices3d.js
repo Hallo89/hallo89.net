@@ -74,8 +74,28 @@ const sldrFov = new Slider89(inputs, {
 });
 
 
-//Computing the color for every vertex processed
-const fragmentSource = `#version 300 es
+const vertexShader = `#version 300 es
+
+in vec4 position;
+in vec3 color;
+
+out vec4 fragColor;
+
+uniform mat4 matPerspective;
+uniform mat4 matOrigin;
+uniform mat4 matTranslate;
+uniform mat4 matRotateX;
+uniform mat4 matRotateY;
+uniform mat4 matRotateZ;
+uniform mat4 matScale;
+
+void main() {
+    fragColor = vec4(color, 1);
+    mat4 finalMatrix = matPerspective * matTranslate * matRotateX * matRotateY * matRotateZ * matScale * matOrigin;
+    gl_Position = finalMatrix * position;
+}
+`;
+const fragmentShader = `#version 300 es
 
 precision mediump float;
 
@@ -84,30 +104,6 @@ out vec4 fragOut;
 
 void main() {
    fragOut = fragColor;
-}
-`;
-
-//Computing the position and stuff for one object
-const vertexSource = `#version 300 es
-
-in vec4 position;
-in vec3 color;
-
-out vec4 fragColor;
-
-uniform mat4 matrixPerspective;
-uniform mat4 matrixOrigin;
-uniform mat4 matrixTranslate;
-uniform mat4 matrixRotateX;
-uniform mat4 matrixRotateY;
-uniform mat4 matrixRotateZ;
-uniform mat4 matrixScale;
-
-void main() {
-    fragColor = vec4(color, 1);
-    mat4 finalMatrix = matrixPerspective * matrixTranslate * matrixRotateX * matrixRotateY * matrixRotateZ * matrixScale * matrixOrigin;
-
-    gl_Position = finalMatrix * position;
 }
 `;
 
@@ -123,18 +119,18 @@ gl.viewport(0, 0, canvas.width, canvas.height);
 //gl.clear(gl.COLOR_BUFFER_BIT);
 
 //creating a shader program from both shaders
-const program = webgl.constructProgram(vertexSource, fragmentSource);
+const program = webgl.constructProgram(vertexShader, fragmentShader);
 //get the position of the "position" and "color" atrribute ("in")
 const locationPosition = gl.getAttribLocation(program, 'position');
 const locationColor = gl.getAttribLocation(program, 'color');
 
-const matrixPerspectivePosition = gl.getUniformLocation(program, 'matrixPerspective');
-const matrixOriginPosition = gl.getUniformLocation(program, 'matrixOrigin');
-const matrixTranslatePosition = gl.getUniformLocation(program, 'matrixTranslate');
-const matrixRotateXPosition = gl.getUniformLocation(program, 'matrixRotateX');
-const matrixRotateYPosition = gl.getUniformLocation(program, 'matrixRotateY');
-const matrixRotateZPosition = gl.getUniformLocation(program, 'matrixRotateZ');
-const matrixScalePosition = gl.getUniformLocation(program, 'matrixScale');
+const matPerspective = gl.getUniformLocation(program, 'matPerspective');
+const matOrigin = gl.getUniformLocation(program, 'matOrigin');
+const matTranslate = gl.getUniformLocation(program, 'matTranslate');
+const matRotateX = gl.getUniformLocation(program, 'matRotateX');
+const matRotateY = gl.getUniformLocation(program, 'matRotateY');
+const matRotateZ = gl.getUniformLocation(program, 'matRotateZ');
+const matScale = gl.getUniformLocation(program, 'matScale');
 
 
 gl.useProgram(program);
@@ -386,7 +382,7 @@ function clearAxes(obj, prop) {
 }
 
 function draw() {
-  gl.uniformMatrix4fv(matrixOriginPosition, false, [
+  gl.uniformMatrix4fv(matOrigin, false, [
     1, 0, 0, 0,
     0, 1, 0, 0,
     0, 0, 1, 0,
@@ -394,37 +390,37 @@ function draw() {
   ]);
 
   const perspective = Math.tan(Math.PI * 0.5 - 0.5 * (sldrFov.value * Math.PI / 180));
-  gl.uniformMatrix4fv(matrixPerspectivePosition, false, [
+  gl.uniformMatrix4fv(matPerspective, false, [
     perspective * canvas.height / canvas.width, 0, 0, 0,
     0, perspective, 0, 0,
     0, 0, (1 + 2000) * (1.0 / (1 - 2000)), -1,
     0, 0, (1 * 2000) * (1.0 / (1 - 2000)) * 2, 0
   ]);
-  gl.uniformMatrix4fv(matrixTranslatePosition, false, [
+  gl.uniformMatrix4fv(matTranslate, false, [
     1, 0, 0, 0,
     0, 1, 0, 0,
     0, 0, 1, 0,
     sldrTranslateX.value, sldrTranslateY.value, sldrTranslateZ.value, 1
   ]);
-  gl.uniformMatrix4fv(matrixRotateXPosition, false, [
+  gl.uniformMatrix4fv(matRotateX, false, [
     1, 0, 0, 0,
     0, Math.cos(sldrRotateX.value * Math.PI / 180), -Math.sin(sldrRotateX.value * Math.PI / 180), 0,
     0, Math.sin(sldrRotateX.value * Math.PI / 180), Math.cos(sldrRotateX.value * Math.PI / 180), 0,
     0, 0, 0, 1
   ]);
-  gl.uniformMatrix4fv(matrixRotateYPosition, false, [
+  gl.uniformMatrix4fv(matRotateY, false, [
     Math.cos(sldrRotateY.value * Math.PI / 180), 0, Math.sin(sldrRotateY.value * Math.PI / 180), 0,
     0, 1, 0, 0,
     -Math.sin(sldrRotateY.value * Math.PI / 180), 0, Math.cos(sldrRotateY.value * Math.PI / 180), 0,
     0, 0, 0, 1
   ]);
-  gl.uniformMatrix4fv(matrixRotateZPosition, false, [
+  gl.uniformMatrix4fv(matRotateZ, false, [
     Math.cos(sldrRotateZ.value * Math.PI / 180), -Math.sin(sldrRotateZ.value * Math.PI / 180), 0, 0,
     Math.sin(sldrRotateZ.value * Math.PI / 180), Math.cos(sldrRotateZ.value * Math.PI / 180), 0, 0,
     0, 0, 1, 0,
     0, 0, 0, 1
   ]);
-  gl.uniformMatrix4fv(matrixScalePosition, false, [
+  gl.uniformMatrix4fv(matScale, false, [
     sldrScaleX.value, 0, 0, 0,
     0, sldrScaleY.value, 0, 0,
     0, 0, sldrScaleZ.value, 0,
