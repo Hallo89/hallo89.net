@@ -1,38 +1,45 @@
 const inputs = toolbar.querySelector('.inputs');
 
+canvas.addEventListener('contextmenu', e => {
+  e.preventDefault();
+});
+
 slider89.defaultValues({
   task: draw,
-  classList: ['input_box'],
+  classList: ['input_box']
 });
 slider89.defaultValues({
+  min: -360,
   max: 360,
-  width: 180,
+  width: 180
 });
-var sliderRotateX = new Slider89(inputs, {
+const sldrRotateX = new Slider89(inputs, {
   caption: 'Rotate: X-axis'
 });
-var sliderRotateY = new Slider89(inputs, {
+const sldrRotateY = new Slider89(inputs, {
   caption: 'Rotate: Y-axis'
 });
-var sliderRotateZ = new Slider89(inputs, {
+const sldrRotateZ = new Slider89(inputs, {
   caption: 'Rotate: Z-axis'
 });
 
 slider89.defaultValues({
-  max: 1000,
-  min: -1000,
   value: 0,
-  width: 120,
+  width: 120
 });
-var sliderTranslateX = new Slider89(inputs, {
-  caption: 'Translate: X-axis'
+const sldrTranslateX = new Slider89(inputs, {
+  caption: 'Translate: X-axis',
+  max: 1500,
+  min: -1500
 });
-var sliderTranslateY = new Slider89(inputs, {
-  caption: 'Translate: Y-axis'
+const sldrTranslateY = new Slider89(inputs, {
+  caption: 'Translate: Y-axis',
+  max: 1000,
+  min: -1000
 });
-var sliderTranslateZ = new Slider89(inputs, {
+const sldrTranslateZ = new Slider89(inputs, {
   min: -2000,
-  max: 0,
+  max: -200,
   value: -1000,
   caption: 'Translate: Z-axis'
 });
@@ -43,20 +50,20 @@ slider89.defaultValues({
   comma: 2,
   value: 1,
   width: 150,
-  trimComma: false,
+  trimComma: false
 });
-var sliderScaleX = new Slider89(inputs, {
+const sldrScaleX = new Slider89(inputs, {
   caption: 'Scale: X-axis'
 });
-var sliderScaleY = new Slider89(inputs, {
+const sldrScaleY = new Slider89(inputs, {
   caption: 'Scale: Y-axis'
 });
-var sliderScaleZ = new Slider89(inputs, {
+const sldrScaleZ = new Slider89(inputs, {
   value: -1,
   caption: 'Scale: Z-axis'
 });
 
-var sliderFov = new Slider89(inputs, {
+const sldrFov = new Slider89(inputs, {
   min: 0,
   value: 90,
   comma: 0,
@@ -67,8 +74,8 @@ var sliderFov = new Slider89(inputs, {
 });
 
 
-//The absolute legend being the code for the fragment shader which is the one computing the color for every vertex processed
-var fragmentSource = `#version 300 es
+//Computing the color for every vertex processed
+const fragmentSource = `#version 300 es
 
 precision mediump float;
 
@@ -80,8 +87,8 @@ void main() {
 }
 `;
 
-//The absolute legend being the code for the vertex shader which is the one computing the position and stuff for one object
-var vertexSource = `#version 300 es
+//Computing the position and stuff for one object
+const vertexSource = `#version 300 es
 
 in vec4 position;
 in vec3 color;
@@ -89,6 +96,7 @@ in vec3 color;
 out vec4 fragColor;
 
 uniform mat4 matrixPerspective;
+uniform mat4 matrixOrigin;
 uniform mat4 matrixTranslate;
 uniform mat4 matrixRotateX;
 uniform mat4 matrixRotateY;
@@ -97,7 +105,7 @@ uniform mat4 matrixScale;
 
 void main() {
     fragColor = vec4(color, 1);
-    mat4 finalMatrix = matrixPerspective * matrixTranslate * matrixRotateX * matrixRotateY * matrixRotateZ * matrixScale;
+    mat4 finalMatrix = matrixPerspective * matrixTranslate * matrixRotateX * matrixRotateY * matrixRotateZ * matrixScale * matrixOrigin;
 
     gl_Position = finalMatrix * position;
 }
@@ -115,31 +123,32 @@ gl.viewport(0, 0, canvas.width, canvas.height);
 //gl.clear(gl.COLOR_BUFFER_BIT);
 
 //creating a shader program from both shaders
-var program = webgl.constructProgram(vertexSource, fragmentSource);
+const program = webgl.constructProgram(vertexSource, fragmentSource);
 //get the position of the "position" and "color" atrribute ("in")
-var locationPosition = gl.getAttribLocation(program, 'position');
-var locationColor = gl.getAttribLocation(program, 'color');
+const locationPosition = gl.getAttribLocation(program, 'position');
+const locationColor = gl.getAttribLocation(program, 'color');
 
-var matrixPerspectivePosition = gl.getUniformLocation(program, 'matrixPerspective');
-var matrixTranslatePosition = gl.getUniformLocation(program, 'matrixTranslate');
-var matrixRotateXPosition = gl.getUniformLocation(program, 'matrixRotateX');
-var matrixRotateYPosition = gl.getUniformLocation(program, 'matrixRotateY');
-var matrixRotateZPosition = gl.getUniformLocation(program, 'matrixRotateZ');
-var matrixScalePosition = gl.getUniformLocation(program, 'matrixScale');
+const matrixPerspectivePosition = gl.getUniformLocation(program, 'matrixPerspective');
+const matrixOriginPosition = gl.getUniformLocation(program, 'matrixOrigin');
+const matrixTranslatePosition = gl.getUniformLocation(program, 'matrixTranslate');
+const matrixRotateXPosition = gl.getUniformLocation(program, 'matrixRotateX');
+const matrixRotateYPosition = gl.getUniformLocation(program, 'matrixRotateY');
+const matrixRotateZPosition = gl.getUniformLocation(program, 'matrixRotateZ');
+const matrixScalePosition = gl.getUniformLocation(program, 'matrixScale');
 
 
 gl.useProgram(program);
 
 
-var vertexArray = gl.createVertexArray();
+const vertexArray = gl.createVertexArray();
 gl.bindVertexArray(vertexArray);
 
 //Creating a new buffer to be used for the position vertices
-var bufferPosition = gl.createBuffer();
+const bufferPosition = gl.createBuffer();
 //Binding the just created buffer as the current ARRAY_BUFFER
 gl.bindBuffer(gl.ARRAY_BUFFER, bufferPosition);
 
-var positions = new Float32Array([
+const positions = new Float32Array([
   //back
   0, 0, -300,
   -300, -300, -300,
@@ -189,10 +198,10 @@ gl.enableVertexAttribArray(locationPosition);
 gl.vertexAttribPointer(locationPosition, 3, gl.FLOAT, false, 0, 0);
 
 
-var bufferColor = gl.createBuffer();
+const bufferColor = gl.createBuffer();
 gl.bindBuffer(gl.ARRAY_BUFFER, bufferColor);
 
-var colors = new Float32Array([
+const colors = new Float32Array([
   20/255, 40/255, 60/255,
   20/255, 40/255, 60/255,
   20/255, 40/255, 60/255,
@@ -242,37 +251,152 @@ gl.vertexAttribPointer(locationColor, 3, gl.FLOAT, false, 0, 0);
 gl.enable(gl.CULL_FACE);
 //gl.enable(gl.DEPTH_TEST);
 
+//Mouse navigation
+const mod = {
+  scale: .275
+};
+var ctrlLock = false;
+var clickedBtn;
+const clickPos = {};
+
+canvas.addEventListener('mousedown', mouseDown);
+canvas.addEventListener('wheel', wheel); //TODO: support for mousewheela
+window.addEventListener('mouseup', removeMouseMove);
+
 draw();
+
+function wheel(e) {
+  if (e.ctrlKey) e.preventDefault();
+  if (e.deltaY) {
+    const direction = -1 * (e.deltaY / Math.abs(e.deltaY)); //either 1 or -1
+    const current = {
+      x: sldrScaleX.value,
+      y: sldrScaleY.value,
+      z: sldrScaleZ.value
+    };
+    let distance = {
+      x: current.x + direction * mod.scale,
+      y: current.y + direction * mod.scale,
+      z: current.z - direction * mod.scale
+    };
+    const step = {};
+    for (const axis in distance) {
+      step[axis] = (Math.abs(current[axis] - distance[axis]) / 3.5) * direction;
+    }
+    const axis = e.ctrlKey && e.shiftKey ? 'z' : (e.ctrlKey ? 'y' : (e.shiftKey ? 'x' : ''));
+    if (axis) distance = clearAxes(distance, axis);
+    animateScale(current, distance, step, direction);
+  }
+}
+function animateScale(distance, target, step, dir) {
+  for (const axis in target) {
+    distance[axis] += (axis == 'z' ? -1 : 1) * step[axis];
+    if (dir > 0) {
+      if (axis == 'z') {
+        if (distance[axis] <= target[axis]) return;
+      } else
+        if (distance[axis] >= target[axis]) return;
+    } else {
+      if (axis == 'z') {
+        if (distance[axis] >= target[axis]) return;
+      } else
+        if (distance[axis] <= target[axis]) return;
+    }
+  }
+  if (distance.x) sldrScaleX.newValues({ value: distance.x });
+  if (distance.y) sldrScaleY.newValues({ value: distance.y });
+  if (distance.z) sldrScaleZ.newValues({ value: distance.z });
+  draw();
+  requestAnimationFrame(() => {
+    animateScale(distance, target, step, dir);
+  });
+}
+
+function mouseMove(e) {
+  if (clickedBtn == 0 || clickedBtn == 2) {
+    if (e.ctrlKey && !ctrlLock) {
+      ctrlLock = true;
+    } else if (!e.ctrlKey && ctrlLock) {
+      mod.tran = 1.7 * (sldrTranslateZ.value / -1000);
+      mod.rot = .44 * (sldrTranslateZ.value / -1000);
+      ctrlLock = false;
+    }
+    if (clickedBtn == 0) {
+      var distance;
+      if (e.ctrlKey) {
+        distance = (e.screenX - e.screenY) * 1.7 - ((clickPos.x - clickPos.y) * 1.7 - clickPos.tran.z);
+      } else {
+        distance = {
+          x: e.screenX * mod.tran - (clickPos.x * mod.tran - clickPos.tran.x),
+          y: e.screenY * mod.tran - (clickPos.y * mod.tran + clickPos.tran.y)
+        };
+      }
+      if (!e.ctrlKey && (distance.x || distance.y) || e.ctrlKey && distance) {
+        if (e.ctrlKey) sldrTranslateZ.newValues({value: distance})
+        else {
+          if (distance.x) sldrTranslateX.newValues({value: distance.x});
+          if (distance.y) sldrTranslateY.newValues({value: -distance.y});
+        }
+        draw();
+      }
+    } else if (clickedBtn == 2) {
+      const distance = {
+        x: e.screenY * mod.rot - (clickPos.y * mod.rot + clickPos.rot.y),
+        y: e.screenX * mod.rot - (clickPos.x * mod.rot + clickPos.rot.x)
+      };
+      if (distance.x || distance.y) {
+        if (distance.x) sldrRotateX.newValues({value: -distance.x});
+        if (distance.y) sldrRotateY.newValues({value: -distance.y});
+        draw();
+      }
+    }
+  }
+}
+
+function mouseDown(e) {
+  if (e.button == 1) e.preventDefault();
+  removeMouseMove();
+  clickedBtn = e.button;
+  // const scaleMod = (sldrScaleX.value + sldrScaleY.value) / 2;
+  mod.tran = 1.7 * (sldrTranslateZ.value / -1000);
+  mod.rot = .44 * (sldrTranslateZ.value / -1000);
+  // mod.rot = .44;
+  clickPos.x = e.screenX;
+  clickPos.y = e.screenY;
+  clickPos.tran = {
+    x: sldrTranslateX.value,
+    y: sldrTranslateY.value,
+    z: sldrTranslateZ.value
+  };
+  clickPos.rot = {
+    x: sldrRotateY.value,
+    y: sldrRotateX.value
+  };
+  window.addEventListener('mousemove', mouseMove);
+}
+
+function removeMouseMove() {
+  window.removeEventListener('mousemove', mouseMove);
+}
+function clearAxes(obj, prop) {
+  for (const axis in obj) {
+    if (prop !== axis) delete obj[axis];
+  }
+  return obj;
+}
+
 function draw() {
-/*
-  2 / (right - left), 0, 0, 0,
-  0, 2 / (top - bottom), 0, 0,
-  0, 0, 2 / (near - far), 0,
-
-  (left + right) / (left - right),
-  (bottom + top) / (bottom - top),
-  (near + far) / (near - far),
-  1,
-*//*
-    gl.uniformMatrix4fv(matrixOrthoPosition, false, [
-    2 / (canvas.width - 0), 0, 0, 0,
-    0, 2 / (0 - canvas.height), 0, 0,
-    0, 0, 2 / (-1000 - 1000), 0,
-    (-canvas.width/2 + canvas.width)/(-canvas.width/2 - canvas.width), (canvas.height + -canvas.height/2)/(canvas.height - -canvas.height/2), (-1000 + 1000)/(-1000 - 1000), 1
+  gl.uniformMatrix4fv(matrixOriginPosition, false, [
+    1, 0, 0, 0,
+    0, 1, 0, 0,
+    0, 0, 1, 0,
+    150, 150, 150, 1
   ]);
-*/
-/*
-  f = Math.tan(Math.PI * 0.5 - 0.5 * fieldOfViewInRadians);
-  rangeInv = 1.0 / (near - far);
 
-  f / aspect, 0, 0, 0,
-  0, f, 0, 0,
-  0, 0, (near + far) * rangeInv, -1,
-  0, 0, near * far * rangeInv * 2, 0
-*/
+  const perspective = Math.tan(Math.PI * 0.5 - 0.5 * (sldrFov.value * Math.PI / 180));
   gl.uniformMatrix4fv(matrixPerspectivePosition, false, [
-    Math.tan(Math.PI * 0.5 - 0.5 * (sliderFov.value * Math.PI / 180)) * canvas.height / canvas.width, 0, 0, 0,
-    0, Math.tan(Math.PI * 0.5 - 0.5 * (sliderFov.value * Math.PI / 180)), 0, 0,
+    perspective * canvas.height / canvas.width, 0, 0, 0,
+    0, perspective, 0, 0,
     0, 0, (1 + 2000) * (1.0 / (1 - 2000)), -1,
     0, 0, (1 * 2000) * (1.0 / (1 - 2000)) * 2, 0
   ]);
@@ -280,30 +404,30 @@ function draw() {
     1, 0, 0, 0,
     0, 1, 0, 0,
     0, 0, 1, 0,
-    sliderTranslateX.value, sliderTranslateY.value, sliderTranslateZ.value, 1
+    sldrTranslateX.value, sldrTranslateY.value, sldrTranslateZ.value, 1
   ]);
   gl.uniformMatrix4fv(matrixRotateXPosition, false, [
     1, 0, 0, 0,
-    0, Math.cos(sliderRotateX.value * Math.PI / 180), -Math.sin(sliderRotateX.value * Math.PI / 180), 0,
-    0, Math.sin(sliderRotateX.value * Math.PI / 180), Math.cos(sliderRotateX.value * Math.PI / 180), 0,
+    0, Math.cos(sldrRotateX.value * Math.PI / 180), -Math.sin(sldrRotateX.value * Math.PI / 180), 0,
+    0, Math.sin(sldrRotateX.value * Math.PI / 180), Math.cos(sldrRotateX.value * Math.PI / 180), 0,
     0, 0, 0, 1
   ]);
   gl.uniformMatrix4fv(matrixRotateYPosition, false, [
-    Math.cos(sliderRotateY.value * Math.PI / 180), 0, Math.sin(sliderRotateY.value * Math.PI / 180), 0,
+    Math.cos(sldrRotateY.value * Math.PI / 180), 0, Math.sin(sldrRotateY.value * Math.PI / 180), 0,
     0, 1, 0, 0,
-    -Math.sin(sliderRotateY.value * Math.PI / 180), 0, Math.cos(sliderRotateY.value * Math.PI / 180), 0,
+    -Math.sin(sldrRotateY.value * Math.PI / 180), 0, Math.cos(sldrRotateY.value * Math.PI / 180), 0,
     0, 0, 0, 1
   ]);
   gl.uniformMatrix4fv(matrixRotateZPosition, false, [
-    Math.cos(sliderRotateZ.value * Math.PI / 180), -Math.sin(sliderRotateZ.value * Math.PI / 180), 0, 0,
-    Math.sin(sliderRotateZ.value * Math.PI / 180), Math.cos(sliderRotateZ.value * Math.PI / 180), 0, 0,
+    Math.cos(sldrRotateZ.value * Math.PI / 180), -Math.sin(sldrRotateZ.value * Math.PI / 180), 0, 0,
+    Math.sin(sldrRotateZ.value * Math.PI / 180), Math.cos(sldrRotateZ.value * Math.PI / 180), 0, 0,
     0, 0, 1, 0,
     0, 0, 0, 1
   ]);
   gl.uniformMatrix4fv(matrixScalePosition, false, [
-    sliderScaleX.value, 0, 0, 0,
-    0, sliderScaleY.value, 0, 0,
-    0, 0, sliderScaleZ.value, 0,
+    sldrScaleX.value, 0, 0, 0,
+    0, sldrScaleY.value, 0, 0,
+    0, 0, sldrScaleZ.value, 0,
     0, 0, 0, 1
   ]);
   //primitiveType, offsetExecute, count
