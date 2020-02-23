@@ -1,22 +1,26 @@
-//The absolute legend being the code for the vertex shader which is the one computing the position and stuff for one object
+//The vertex shader is called once every vertex and computes its properties like position
 const vertex = `#version 300 es
 
 in vec2 position;
+
+const float pi = 3.141592653589793;
+const mat3 rotateZ = mat3(mat2(-1));
+const mat3 rotateZ90 = mat3(
+  0, 1, 0,
+  -1, 0, 0,
+  0, 0, 1
+);
 
 uniform float amountX;
 uniform float lightness;
 uniform float threshold;
 uniform mat3 projection;
-uniform mat3 rotateZ;
-uniform mat3 rotationOffset;
-uniform mat3 rotateZ90;
-uniform mat3 rotation90Offset;
 uniform vec2 rands;
 uniform vec2 rands90;
 uniform vec2 drawDims;
 uniform vec3 color;
-mat3 translation;
-mat3 scale90;
+mat3 rotationOffset;
+mat3 rotation90Offset;
 
 out vec3 fragColor;
 
@@ -26,7 +30,23 @@ float rand(vec2 v) {
   return fract(sin(dot(v.xy, vec2(12.9898, 78.233))) * 43758.5453);
 }
 
+//Statically building some matrices
+void buildMatrices() {
+  rotationOffset = mat3(
+    1, 0, 0,
+    0, 1, 0,
+    -drawDims.x, -drawDims.y, 1
+  );
+  rotation90Offset = mat3(
+    1, 0, 0,
+    0, 1, 0,
+    0, -drawDims.y, 1
+  );
+}
+
 void main() {
+  buildMatrices();
+
   //The current triangle iteration
   float id = float(gl_InstanceID);
   //On which grid and row the triangle batch is positioned
@@ -38,10 +58,11 @@ void main() {
   float value = (0.55 + 2.0 * rand(randMethod)) * (currentGridPos.x + currentGridPos.y + lightness) / (threshold + 0.0001);
 
   //Constructing the translation matrix (which advances with the ID)
-  translation[0] = vec3(1, 0, 0);
-  translation[1] = vec3(0, 1, 0);
-  translation[2] = vec3(drawDims * currentGridPos, 1);
-
+  mat3 translation = mat3(
+    1, 0, 0,
+    0, 1, 0,
+    drawDims * currentGridPos, 1
+  );
   //Defining the matrix, start by adding the projection & translation matrix
   mat3 positionMatrix = projection * translation;
 
@@ -53,9 +74,11 @@ void main() {
   vec2 randMethod90 = rands90 * (sin(ceil((id + 1.0) / 2.0)) * ceil((id + 1.0) / 2.0));
   if (round(rand(randMethod90)) == 1.0) {
     //Constructing the scaling matrix needed for 90° rotated triangles
-    scale90[0] = vec3(drawDims.y / drawDims.x, 0, 0);
-    scale90[1] = vec3(0, drawDims.x / drawDims.y, 0);
-    scale90[2] = vec3(0, 0, 1);
+    mat3 scale90 = mat3(
+      drawDims.y / drawDims.x, 0, 0,
+      0, drawDims.x / drawDims.y, 0,
+      0, 0, 1
+    );
     positionMatrix = positionMatrix * rotateZ90 * scale90 * rotation90Offset;
   }
 
@@ -64,7 +87,7 @@ void main() {
 }
 `;
 
-//The absolute legend being the code for the fragment shader which is the one computing the color for every vertex processed
+//The fragment shader is called once every fragment (pixel) and computes its color
 const fragment = `#version 300 es
 
 precision mediump float;
@@ -91,7 +114,6 @@ void main() {
   gl_Position = vec4(clipSpace * vec2(1, -1), 0, 1);
 }
 `;
-
 const fragmentLegacy = `#version 300 es
 
 precision mediump float;
@@ -127,9 +149,7 @@ const uDrawDims = gl.getUniformLocation(program, 'drawDims');
 const uAmountX = gl.getUniformLocation(program, 'amountX');
 const uLightness = gl.getUniformLocation(program, 'lightness');
 const uThreshold = gl.getUniformLocation(program, 'threshold');
-const uRotateZ = gl.getUniformLocation(program, 'rotateZ');
 const uRotationOffset = gl.getUniformLocation(program, 'rotationOffset');
-const uRotateZ90 = gl.getUniformLocation(program, 'rotateZ90');
 const uRotation90Offset = gl.getUniformLocation(program, 'rotation90Offset');
 const uProjection = gl.getUniformLocation(program, 'projection');
 const uColor = gl.getUniformLocation(program, 'color');
@@ -142,33 +162,16 @@ const vertexArray = gl.createVertexArray();
 gl.bindVertexArray(vertexArray);
 
 //Create a new buffer
-const bufferPosition = gl.createBuffer();
-//we bind the bufferPosition buffer to ARRAY_BUFFER which is a static something which can only hold one buffer at a time
-gl.bindBuffer(gl.ARRAY_BUFFER, bufferPosition);
+const buffer = gl.createBuffer();
+//we bind the `buffer` buffer to ARRAY_BUFFER which is a static something which can only hold one buffer at a time
+gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
 
 //we enable the 'position' attribute -> it would be a constant otherwise
 gl.enableVertexAttribArray(aPosition);
-
 //atrribute, size, type, normalize, stride, offset
 gl.vertexAttribPointer(aPosition, 2, gl.FLOAT, false, 0, 0);
 
-//Tell WebGL which program to use
-if (legacyMode) {
-  gl.useProgram(programAlt);
-} else {
-  gl.useProgram(program);
-}
-
-gl.uniformMatrix3fv(uRotateZ, false, [
-  Math.cos(Math.PI), -Math.sin(Math.PI), 0,
-  Math.sin(Math.PI), Math.cos(Math.PI), 0,
-  0, 0, 1
-]);
-gl.uniformMatrix3fv(uRotateZ90, false, [
-  Math.cos(Math.PI * -0.5), -Math.sin(Math.PI * -0.5), 0,
-  Math.sin(Math.PI * -0.5), Math.cos(Math.PI * -0.5), 0,
-  0, 0, 1
-]);
+gl.useProgram(legacyMode ? programAlt : program);
 
 resizeCanvas();
 computeSizes();
@@ -208,7 +211,7 @@ generate();
 function handleHash() {
   const hash = location.hash;
   //Check for a (valid) presence of each parameter and return the value or false if not valid or present
-  let params = {
+  const params = {
     color: hash.includes('color') ? checkHex(getHashParam('color')) : null,
     size: hash.includes('size') && getHashParam('size') > 0 ? getHashParam('size') : null,
     width: hash.includes('width') && getHashParam('width') > 0 ? getHashParam('width') : null,
@@ -267,14 +270,12 @@ function generate() {
       }, 20);
     }
   } else {
-    if (sizeAlert.classList.contains('active')) {
-      hideWarning();
-    }
+    if (sizeAlert.classList.contains('active')) hideWarning();
     run();
   }
 }
 
-function run(compution = true) {
+function run(compution = true, fixed = false) {
   if (compution) {
     //Compute the final size of the triangles and how many it needs to generate
     computeSizes();
@@ -285,8 +286,7 @@ function run(compution = true) {
   clearCanvas();
   //Build the array needed to draw and write it into the buffer
   createBuffer();
-  //Draw.
-  draw();
+  draw(fixed);
 }
 
 function clearCanvas() {
@@ -305,14 +305,14 @@ function resizeCanvas() {
 }
 
 function computeSizes() {
-  let triangleWidth;
-  let triangleHeight;
   //Define the width of the canvas (as canvas is always the dimensions of the viewport, the code below works)
   screenWidth = canvas.clientWidth;
   screenHeight = canvas.clientHeight;
 
-  triangleWidth = parseInt(document.body.classList.contains('decoupledsize') ? inputWidth.value : inputSize.value);
-  triangleHeight = parseInt(document.body.classList.contains('decoupledsize') ? inputHeight.value : inputSize.value);
+  const isDecoupled = document.body.classList.contains('decoupledsize');
+  const triangleWidth = parseInt(isDecoupled ? inputWidth.value : inputSize.value);
+  const triangleHeight = parseInt(isDecoupled ? inputHeight.value : inputSize.value);
+
   //Compute how big the triangles need to be in order to fill the whole canvas
   drawWidth = triangleWidth + ((screenWidth % triangleWidth) / Math.floor(screenWidth/triangleWidth));
   drawHeight = triangleHeight + ((screenHeight % triangleHeight) / Math.floor(screenHeight/triangleHeight));
@@ -327,16 +327,6 @@ function computeSizes() {
       0, -2 / screenHeight, 0,
       -1, 1, 1
     ]);
-    gl.uniformMatrix3fv(uRotationOffset, false, [
-      1, 0, 0,
-      0, 1, 0,
-      -drawWidth, -drawHeight, 1
-    ]);
-    gl.uniformMatrix3fv(uRotation90Offset, false, [
-      1, 0, 0,
-      0, 1, 0,
-      0, -drawHeight, 1
-    ]);
   }
 }
 
@@ -348,11 +338,10 @@ function createBuffer() {
       0, drawHeight,
       drawWidth, 0
     ]);
-
-    //ARRAY_BUFFER had been bound to bufferPosition, so this is going into bufferPosition
+    //ARRAY_BUFFER had been bound to `buffer`, so this is going into `buffer`
     gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);
   } else {
-    let positions = [];
+    let positions = new Array();
     for (let i = 0; i < amountY; i++) {
       for (let u = 0; u < amountX; u++) {
         const positionMethod = Math.round(Math.random());
@@ -381,7 +370,14 @@ function createBuffer() {
   }
 }
 
-function draw(fixed = false, rgb = {r: document.querySelector('.input.r').value, g: document.querySelector('.input.g').value, b: document.querySelector('.input.b').value}) {
+function draw(
+  fixed = false,
+  rgb = {
+    r: document.querySelector('.input.r').value,
+    g: document.querySelector('.input.g').value,
+    b: document.querySelector('.input.b').value
+  }
+) {
   const drawMethod = lineMode ? gl.LINE_LOOP : gl.TRIANGLES;
 
   clearCanvas();
