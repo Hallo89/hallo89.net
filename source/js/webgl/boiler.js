@@ -3,12 +3,13 @@
 */
 const canvas = document.querySelector('canvas');
 
-const withBuffer = (typeof preserveBuffer != "undefined" ? preserveBuffer : false);
-const gl = (canvas.getContext('webgl2', {
-  preserveDrawingBuffer: withBuffer
-}) || canvas.getContext('experimental-webgl2', {
-  preserveDrawingBuffer: withBuffer
-}));
+const options = {};
+if (typeof preserveBuffer != "undefined") options.preserveDrawingBuffer = preserveBuffer;
+
+const gl =
+  canvas.getContext('webgl2', options) ||
+  canvas.getContext('experimental-webgl2', options);
+
 if (!gl) {
   console.error('It seems like WebGL2 is not supported');
   const prompt = (function() {
@@ -46,7 +47,7 @@ const webgl = {
     //Attaching both shaders to the empty program
     gl.attachShader(program, this.compileShader(vertex, gl.VERTEX_SHADER));
     gl.attachShader(program, this.compileShader(fragment, gl.FRAGMENT_SHADER));
-    //Linking the program. I don't know what this does. I think it links, as in merges, both just-attached shaders together into the final thing
+    //Linking the program. I think it merges both just-attached shaders together into the final thing
     gl.linkProgram(program);
     if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
       console.error('Error: Program failed to link: ' + gl.getProgramInfoLog(program));
