@@ -11,7 +11,10 @@ for (l of crementContainer) l.addEventListener('wheel', crementScroll);
 for (l of crementBtnsUp) l.addEventListener('click', increment);
 for (l of crementBtnsDown) l.addEventListener('click', decrement);
 for (l of inputsChecker) l.addEventListener('click', handleChecker);
-window.addEventListener('mousemove', handleMouseMove);
+
+setTimeout(function() {
+  window.addEventListener('mousemove', handleMouseMove);
+}, 1000);
 
 
 function handleMouseMove(e) {
