@@ -274,6 +274,7 @@
         <a href="../" class="mainref">Hallo89</a>
       </div>
     </div>
+
     <div class="tooltips">
       <div class="tip_wrapper tip_legacy">
         <div class="tip_inner">
@@ -282,6 +283,7 @@
         </div>
       </div>
     </div>
+
     <div class="alert_wrapper" id="size_alert">
       <div class="alert">
         <p class="text caption">Legacy mode is enabled</p>
@@ -293,36 +295,33 @@
         </div>
       </div>
     </div>
+
     <canvas width="800" height="800"></canvas>
 
     <link rel="stylesheet" href="https://hallo89.github.io/Slider89/slider89.css">
+    <script src="https://hallo89.github.io/Slider89/slider89.js"></script>
     <script>
-      var lineMode = false;
-      var legacyMode = false;
-      var tipLock = false;
-      //Clicking the crement buttons, continuously the blur event is fired.
-      //To prevent spamming the history with the hash, only update it after 500ms of no further blur
-      var rgbTimer;
-
       const preserveBuffer = true;
-
+    </script>
+    <script src="/js/webgl/base.js"></script>
+    <script src="/js/webgl/boiler.js"></script>
+    <script src="/js/webgl/triangles/index.js"></script>
+    <script src="/js/webgl/triangles/gl.js"></script>
+    <script src="/js/webgl/triangles/ui.js"></script>
+    <script>
       const inputsRGB = document.querySelectorAll('.input_box.rgb .input');
       const inputColor = document.querySelector('.input_box.colorpicker .input');
       const inputHEX = document.querySelector('.input_box.hex .input');
 
-      const inputLines = document.querySelector('.input_box.lines');
-
-      const inputDownload = document.querySelector('.input_box.download_canvas .input');
-
-      const sizeAlert = document.getElementById('size_alert');
-
-      //for triangles.js
       const inputSize = document.querySelector('.box_wrapper.size .input');
       const inputWidth = document.querySelector('.box_wrapper.width .input');
       const inputHeight = document.querySelector('.box_wrapper.height .input');
 
-      const tipLegacy = document.querySelector('.tooltips .tip_legacy');
+      const inputLines = document.querySelector('.input_box.lines');
+      const inputDownload = document.querySelector('.input_box.download_canvas .input');
 
+      const sizeAlert = document.getElementById('size_alert');
+      const tipLegacy = document.querySelector('.tooltips .tip_legacy');
       const expander = document.querySelector('.inputs_expander');
 
       inputColor.addEventListener('input', pickerChange);
@@ -332,227 +331,41 @@
         inputsRGB[i].addEventListener('input', rgbChange);
         inputsRGB[i].addEventListener('blur', rgbBlur);
       }
-      // window.addEventListener('hashchange', hashChange);
 
-      function enableLines() {
-        lineMode = !lineMode;
-        generate();
-        updateHash({linemode: lineMode});
-      }
+      resizeCanvas();
+      computeSizes();
 
-      function switchScript() {
-        legacyMode = !legacyMode;
-        gl.useProgram(legacyMode ? programAlt : program);
-        if (!tipLock) {
-          tipLegacy.classList.add('active');
-          setTimeout(function() {
-            tipLegacy.classList.remove('active');
-          }, 5500);
-          tipLock = true;
-        }
-        generate();
-      }
+      slider89.defaultValues({
+        trimComma: false,
+        task: function() {
+          draw(true);
+        },
+        classList: ['input_box'],
+        replaceNode: true
+      });
+      const sliderLightness = new Slider89(document.getElementById('slider_lightness'), {
+        value: ((amountX + amountY) * 3.2) / 16,
+        max: (amountX + amountY) * 3.2,
+        comma: 1,
+        width: 120,
+        taskMouseUp: function() {
+          updateHash({lightness: sliderLightness.value});
+        },
+        caption: 'Lightness start'
+      });
+      const sliderThreshold = new Slider89(document.getElementById('slider_threshold'), {
+        value: amountX + amountY,
+        max: amountX + amountY,
+        comma: 3,
+        width: 160,
+        taskMouseUp: function() {
+          updateHash({threshold: sliderThreshold.value});
+        },
+        caption: 'Lightness threshold'
+      });
 
-      function downloadCanvas() {
-        inputDownload.href = canvas.toDataURL();
-      }
-
-      function decoupleSize() {
-        if (!document.body.classList.contains('decoupledsize')) {
-          inputWidth.value = inputSize.value;
-          inputHeight.value = inputSize.value;
-        }
-        document.body.classList.toggle('decoupledsize');
-      }
-
-      function hideWarning() {
-        sizeAlert.classList.remove('active');
-      }
-
-      function pickerChange() {
-        const value = checkHex(inputColor.value);
-        if (value != null) {
-          updateColors(value, 'picker');
-          draw(true, hexToRgb(value));
-        }
-      }
-      function pickerSubmit() {
-        const value = checkHex(inputColor.value);
-        if (value != null) {
-          updateHash({color: value.slice(1)});
-        }
-      }
-      function rgbChange() {
-        const value = checkRgb({
-          r: inputsRGB[0].value,
-          g: inputsRGB[1].value,
-          b: inputsRGB[2].value
-        });
-        if (value != null) {
-          updateColors(rgbToHex(value), 'rgb');
-          draw(true, value);
-        }
-      }
-      function hexChange() {
-        const value = checkHex(inputHEX.value);
-        if (value != null) {
-          updateColors(value, 'hex');
-          draw(true, hexToRgb(value));
-          updateHash({color: value.slice(1)});
-        }
-      }
-      function rgbBlur() {
-        clearTimeout(rgbTimer);
-        rgbTimer = setTimeout(function() {
-          const value = checkRgb({
-            r: inputsRGB[0].value,
-            g: inputsRGB[1].value,
-            b: inputsRGB[2].value
-          });
-          if (value != null) {
-            updateHash({color: rgbToHex(value).slice(1)});
-          }
-        }, 250);
-      }
-
-      function resetHash() {
-        const params = {
-          color: '17469E',
-          width: '50',
-          height: '50',
-          lightness: ((amountX + amountY) * 3.2) / 16,
-          threshold: (amountX + amountY) * 3.2,
-          linemode: false
-        };
-        updateHash(params);
-        updateInputs(params);
-      }
-      function getHashParam(param) {
-        const hash = location.hash;
-        const indexParam = hash.indexOf(param);
-        const suffix = hash.slice(indexParam).indexOf('#');
-        return suffix >= 0 ? hash.slice(indexParam + param.length + 1, suffix + indexParam) : hash.slice(indexParam + param.length + 1);
-      }
-      function updateHash(values = {}) {
-        values = {
-          color: values.color != null ? values.color : getHashParam('color'),
-          size: !document.body.classList.contains('decoupledsize') ? (values.size != null ? values.size : getHashParam('size')) : null,
-          width: document.body.classList.contains('decoupledsize') ? (values.width != null ? values.width : getHashParam('width')) : null,
-          height: document.body.classList.contains('decoupledsize') ? (values.height != null ? values.height : getHashParam('height')) : null,
-          lightness: values.lightness != null ? values.lightness : getHashParam('lightness'),
-          threshold: values.threshold != null ? values.threshold : getHashParam('threshold'),
-          linemode: values.linemode != null ? values.linemode : getHashParam('linemode')
-        }
-        let params = '';
-        const valueNames = Object.keys(values);
-        for (let i = 0; i < valueNames.length; i++) {
-          if (values[valueNames[i]] != null) params += '#' + valueNames[i] + '=' + values[valueNames[i]];
-        }
-        location.replace(location.href.includes('#') ? location.href.slice(0, location.href.indexOf('#')) + params : location.href + params);
-      }
-
-      function updateInputs(values) {
-        //Set the inputs for each parameter to its value
-        if (values.color != null) updateColors(checkHex(values.color));
-        if (values.size) {
-          inputSize.value = values.size;
-        }
-        if (values.width) {
-          inputWidth.value = values.width;
-        }
-        if (values.height) {
-          inputHeight.value = values.height;
-        }
-        if (values.lightness != null) sliderLightness.newValues({value: values.lightness});
-        if (values.threshold != null) sliderThreshold.newValues({value: values.threshold});
-        if (values.linemode != null) {
-          lineMode = values.linemode;
-          if (lineMode == true) {
-            inputLines.classList.add('active');
-          } else {
-            inputLines.classList.remove('active');
-          }
-        }
-      }
-
-      function updateColors(hex, source = '') {
-        if (hex) {
-          if (source != 'rgb') {
-            const rgb = hexToRgb(hex);
-            if (rgb != null) {
-              inputsRGB[0].value = rgb.r;
-              inputsRGB[1].value = rgb.g;
-              inputsRGB[2].value = rgb.b;
-            }
-          }
-          if (source != 'picker') inputColor.value = hex;
-          if (source != 'hex') inputHEX.value = hex;
-        }
-      }
-
-      function checkHex(hex) {
-        const prefixed = hex.includes('#');
-        const prefix = !hex.includes('#') ? '#' : '';
-        if (!/[\dA-Fa-f]{3}|[\dA-Fa-f]{6}/.test(prefix + hex)) {
-          return null;
-        } else if (hex.length + !prefixed == 7) {
-          return prefix + hex;
-        } else if (hex.length + !prefixed == 4) {
-          return prefix + hex;
-        } else {
-          return null;
-        }
-      }
-      function checkRgb(rgb) {
-        rgb = {
-          r: parseInt(rgb.r),
-          g: parseInt(rgb.g),
-          b: parseInt(rgb.b)
-        };
-        //Regex is not made for range validation
-        if (rgb.r >= 0 && rgb.r <= 255 && rgb.r != null && rgb.g >= 0 && rgb.g <= 255 && rgb.g != null && rgb.b >= 0 && rgb.b <= 255 && rgb.b != null) {
-          return rgb;
-        } else {
-          return null;
-        }
-      }
-
-      function hexToRgb(hex) {
-        //Security items theoretically not needed as checkHex exists, but this way it is possible to do hexToRgb without doing checkHex
-        const prefix = !hex.includes('#');
-        if (hex.length + prefix == 7) {
-          return {
-            r: parseInt(hex.slice(1 - prefix, 3 - prefix), 16),
-            g: parseInt(hex.slice(3 - prefix, 5 - prefix), 16),
-            b: parseInt(hex.slice(5 - prefix, 7 - prefix), 16),
-          };
-        } else if (hex.length + prefix == 4) {
-          return {
-            r: parseInt(hex.slice(1 - prefix, 2 - prefix) + hex.slice(1 - prefix, 2 - prefix), 16),
-            g: parseInt(hex.slice(2 - prefix, 3 - prefix) + hex.slice(2 - prefix, 3 - prefix), 16),
-            b: parseInt(hex.slice(3 - prefix, 4 - prefix) + hex.slice(3 - prefix, 4 - prefix), 16),
-          };
-        } else {
-          return null;
-        }
-      }
-      function rgbToHex(rgb) {
-        const hex = {
-          r: parseInt(rgb.r),
-          g: parseInt(rgb.g),
-          b: parseInt(rgb.b)
-        };
-        const fill = {
-          r: hex.r < 16 ? '0' : '',
-          g: hex.g < 16 ? '0' : '',
-          b: hex.b < 16 ? '0' : ''
-        };
-        return '#' + fill.r + (hex.r).toString(16) + fill.g + (hex.g).toString(16) + fill.b + (hex.b).toString(16);
-      }
+      handleHash();
+      generate();
     </script>
-    <script src="https://hallo89.github.io/Slider89/slider89.js"></script>
-    <script src="/js/webgl/base.js"></script>
-    <script src="/js/webgl/boiler.js"></script>
-    <script src="/js/webgl/triangles.js"></script>
   </body>
 </html>
