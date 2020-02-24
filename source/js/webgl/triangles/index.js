@@ -1,7 +1,9 @@
 const defaultProps = {
   size: 50,
   color: '17469E',
-  linemode: 'false'
+  linemode: 'false',
+  lightness: 8,
+  threshold: 100
 };
 var lineMode = false;
 var legacyMode = false;
@@ -90,6 +92,8 @@ function handleSearchParams() {
       const [key, value] = param.split('=');
       values[key] = value;
     }
+    if (values.lightness) values.lightness = (parseInt(values.lightness) / ((amountX + amountY) * 3)) * 100;
+    if (values.threshold) values.threshold = (parseInt(values.threshold) / (amountX + amountY)) * 100;
   }
   if (Object.keys(values).length > 0) {
     updateProperties(values);
@@ -222,11 +226,8 @@ function draw(
 
   clearCanvas();
 
-  if (!fixed) {
-    sliderLightness.newValues({max: (amountX + amountY) * 3.2});
-    sliderThreshold.newValues({max: amountX + amountY});
-  }
-
+  const lightness = (amountX + amountY) * 3 * (sliderLightness.value / 100);
+  const threshold = (amountX + amountY) * (sliderThreshold.value / 100);
   if (!legacyMode) {
     gl.uniform3f(uColor,
       rgb.r/255,
@@ -234,8 +235,8 @@ function draw(
       rgb.b/255
     );
 
-    gl.uniform1f(uLightness, sliderLightness.value);
-    gl.uniform1f(uThreshold, sliderThreshold.value);
+    gl.uniform1f(uLightness, lightness);
+    gl.uniform1f(uThreshold, threshold);
 
     if (!fixed) {
       gl.uniform2f(uRand, Math.random(), Math.random());
@@ -251,11 +252,11 @@ function draw(
         for (let n = 0; n < 2; n++) {
           const randomMethod = fixed ? fixedColors[iteration] : (Math.random() + 0.25) * 2;
           if(!fixed) fixedColors[iteration] = randomMethod;
-          let lightness = randomMethod * (u + i + sliderLightness.value) / (sliderThreshold.value + 0.0001);
+          let lightnessMod = randomMethod * (u + i + lightness) / (threshold + 0.0001);
           gl.uniform4f(uColorFragAlt,
-            (rgb.r/255 * lightness).toFixed(2),
-            (rgb.g/255 * lightness).toFixed(2),
-            (rgb.b/255 * lightness).toFixed(2),
+            (rgb.r/255 * lightnessMod).toFixed(2),
+            (rgb.g/255 * lightnessMod).toFixed(2),
+            (rgb.b/255 * lightnessMod).toFixed(2),
             1
           );
           gl.drawArrays(drawMethod, iteration * 3, 3);

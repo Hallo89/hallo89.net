@@ -51,8 +51,6 @@ function hexChange() {
 
 function resetProperties() {
   const params = Object.assign({}, defaultProps);
-  params.lightness = ((amountX + amountY) * 3.2) / 16;
-  params.threshold = (amountX + amountY) * 3.2;
   switchProgram(false);
   inputLegacy.classList.remove('active');
 
@@ -74,7 +72,8 @@ function getParamLink() {
     const val = props[prop]
     if (defaultProps[prop] != val) params.set(prop, val);
   }
-  const url = location.origin + location.pathname + '?' + params.toString();
+  const paramStr = params.toString();
+  const url = location.origin + location.pathname + (paramStr ? '?' + paramStr : '');
 
   const node = document.createElement('div');
   node.textContent = url;

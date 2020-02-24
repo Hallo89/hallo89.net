@@ -218,7 +218,7 @@
           <button class="input" onclick="resetProperties();">Reset values</button>
         </div>
         <div class="input_box button">
-          <button type="button" class="input" onclick="getParamLink()">Copy link</button>
+          <button type="button" class="input" onclick="getParamLink()">Copy value link</button>
         </div>
         <div class="input_box button ref download_canvas">
           <a class="input" download="triangles.png" onclick="downloadCanvas()">Download image</a>
@@ -289,21 +289,17 @@
         task: function() {
           draw(true);
         },
+        comma: 1,
+        width: 145,
         classList: ['input_box'],
         replaceNode: true
       });
       const sliderLightness = new Slider89(document.getElementById('slider_lightness'), {
-        value: ((amountX + amountY) * 3.2) / 16,
-        max: (amountX + amountY) * 3.2,
-        comma: 1,
-        width: 120,
+        value: defaultProps.lightness,
         caption: 'Lightness start'
       });
       const sliderThreshold = new Slider89(document.getElementById('slider_threshold'), {
-        value: amountX + amountY,
-        max: amountX + amountY,
-        comma: 3,
-        width: 160,
+        value: defaultProps.threshold,
         caption: 'Lightness threshold'
       });
 
