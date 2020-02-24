@@ -1,7 +1,11 @@
+const defaultProps = {
+  size: 50,
+  color: '17469E',
+  linemode: 'false'
+};
 var lineMode = false;
 var legacyMode = false;
 var tipLock = false;
-var rgbTimer;
 
 var screenWidth;
 var screenHeight;
@@ -11,10 +15,10 @@ var amountX;
 var amountY;
 var fixedColors; //The array containing the fixed lightness data for the legacy method
 
-// ------- Conversion functions -------
+// ------- Color functions -------
 function checkHex(hex) {
   const prefixed = hex.includes('#');
-  const prefix = !hex.includes('#') ? '#' : '';
+  const prefix = !prefixed ? '#' : '';
   if (!/[\dA-Fa-f]{3}|[\dA-Fa-f]{6}/.test(prefix + hex)) {
     return null;
   } else if (hex.length + !prefixed == 7) {
@@ -72,81 +76,29 @@ function rgbToHex(rgb) {
   return '#' + fill.r + (hex.r).toString(16) + fill.g + (hex.g).toString(16) + fill.b + (hex.b).toString(16);
 }
 
-// ------- Hash functions -------
-function handleHash() {
-  const hash = location.hash;
-  //Check for a (valid) presence of each parameter and return the value or false if not valid or present
-  const params = {
-    color: hash.includes('color') ? checkHex(getHashParam('color')) : null,
-    size: hash.includes('size') && getHashParam('size') > 0 ? getHashParam('size') : null,
-    width: hash.includes('width') && getHashParam('width') > 0 ? getHashParam('width') : null,
-    height: hash.includes('height') && getHashParam('height') > 0 ? getHashParam('height') : null,
-    lightness: hash.includes('lightness') ? getHashParam('lightness') : null,
-    threshold: hash.includes('threshold') ? getHashParam('threshold') : null,
-    linemode: hash.includes('linemode') && (getHashParam('linemode') == 'true' || getHashParam('linemode') == 'false') ? (getHashParam('linemode') == 'true' ? true : false) : null
-  };
-  if (!params.size && !params.width && !params.height) {
-    params.size = inputSize.value;
-    params.width = null;
-    params.height = null;
-  } else if (params.width || params.height) {
-    document.body.classList.add('decoupledsize');
-    if (params.size) inputSize.value = params.size;
-    if (!params.width) params.width = inputSize.value;
-    if (!params.height) params.height = inputSize.value;
-    params.size = null;
+// ------- URL search parameter functions -------
+function handleSearchParams() {
+  const values = {};
+  if (location.search) {
+    const params = new URL(location).searchParams;
+    for (const [key, value] of params) {
+      values[key] = value;
+    }
+  } else if (location.hash) { //Deprecated, but still valid (for old links)
+    const params = location.hash.slice(1).split('#');
+    for (const param of params) {
+      const [key, value] = param.split('=');
+      values[key] = value;
+    }
   }
-
-  //complete the hash with the missing valid parameters
-  updateHash({
-    color: params.color != null ? params.color.slice(1) : inputHEX.value.slice(1),
-    size: params.size,
-    width: params.width,
-    height: params.height,
-    lightness: params.lightness != null ? params.lightness : sliderLightness.value,
-    threshold: params.threshold != null ? params.threshold : sliderThreshold.value,
-    linemode: params.linemode != null ? params.linemode : lineMode
-  });
-
-  updateInputs(params);
-}
-
-function updateHash(values = {}) {
-  values = {
-    color: values.color != null ? values.color : getHashParam('color'),
-    size: !document.body.classList.contains('decoupledsize') ? (values.size != null ? values.size : getHashParam('size')) : null,
-    width: document.body.classList.contains('decoupledsize') ? (values.width != null ? values.width : getHashParam('width')) : null,
-    height: document.body.classList.contains('decoupledsize') ? (values.height != null ? values.height : getHashParam('height')) : null,
-    lightness: values.lightness != null ? values.lightness : getHashParam('lightness'),
-    threshold: values.threshold != null ? values.threshold : getHashParam('threshold'),
-    linemode: values.linemode != null ? values.linemode : getHashParam('linemode')
+  if (Object.keys(values).length > 0) {
+    updateProperties(values);
+    history.replaceState(null, 'Triangles - WebGL Experiments | Hallo89', 'triangles');
   }
-  let params = '';
-  const valueNames = Object.keys(values);
-  for (let i = 0; i < valueNames.length; i++) {
-    if (values[valueNames[i]] != null) params += '#' + valueNames[i] + '=' + values[valueNames[i]];
-  }
-  location.replace(location.href.includes('#') ? location.href.slice(0, location.href.indexOf('#')) + params : location.href + params);
-}
-
-function getHashParam(param) {
-  const hash = location.hash;
-  const indexParam = hash.indexOf(param);
-  const suffix = hash.slice(indexParam).indexOf('#');
-  return suffix >= 0 ? hash.slice(indexParam + param.length + 1, suffix + indexParam) : hash.slice(indexParam + param.length + 1);
 }
 
 // ------- WebGL functions -------
 function generate() {
-  //Set the hash according to the input values for an instant update
-  updateHash({
-    color: inputHEX.value.slice(1),
-    size: !document.body.classList.contains('decoupledsize') ? inputSize.value : null,
-    width: document.body.classList.contains('decoupledsize') ? inputWidth.value : null,
-    height: document.body.classList.contains('decoupledsize') ? inputHeight.value : null,
-    linemode: lineMode
-  });
-
   if (legacyMode) {
     computeSizes();
     if (!sizeAlert.classList.contains('active') && amountX + amountY >= 1200) {
@@ -200,16 +152,13 @@ function computeSizes() {
   screenWidth = canvas.clientWidth;
   screenHeight = canvas.clientHeight;
 
-  const isDecoupled = document.body.classList.contains('decoupledsize');
-  const triangleWidth = parseInt(isDecoupled ? inputWidth.value : inputSize.value);
-  const triangleHeight = parseInt(isDecoupled ? inputHeight.value : inputSize.value);
-
+  const triangleSize = parseInt(inputSize.value);
   //Compute how big the triangles need to be in order to fill the whole canvas
-  drawWidth = triangleWidth + ((screenWidth % triangleWidth) / Math.floor(screenWidth/triangleWidth));
-  drawHeight = triangleHeight + ((screenHeight % triangleHeight) / Math.floor(screenHeight/triangleHeight));
+  drawWidth = triangleSize + ((screenWidth % triangleSize) / Math.floor(screenWidth/triangleSize));
+  drawHeight = triangleSize + ((screenHeight % triangleSize) / Math.floor(screenHeight/triangleSize));
   amountX = Math.round(screenWidth / drawWidth);
   amountY = Math.round(screenHeight / drawHeight);
-  //Set the uniforms needed for the shaders (if the new system is used)
+
   if (!legacyMode) {
     gl.uniform1f(uAmountX, amountX);
     gl.uniform2f(uDrawDims, drawWidth, drawHeight);
@@ -276,10 +225,6 @@ function draw(
   if (!fixed) {
     sliderLightness.newValues({max: (amountX + amountY) * 3.2});
     sliderThreshold.newValues({max: amountX + amountY});
-    updateHash({
-      lightness: sliderLightness.value,
-      threshold: sliderThreshold.value
-    });
   }
 
   if (!legacyMode) {

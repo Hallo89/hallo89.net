@@ -31,18 +31,6 @@
       .input_box.dimensions .input_header {
         white-space: nowrap;
       }
-      .input_box.dimensions .size_decoupler {
-        border: 0;
-        padding: 0;
-        margin-left: 5px;
-        font-size: 18px;
-        width: 20px;
-        box-sizing: border-box;
-        background-color: hsl(0, 0%, 20%);
-        color: hsl(0, 0%, 73%);
-        transition: all .4s ease;
-        z-index: 1;
-      }
       .input_box.dimensions .box_wrapper {
         overflow: hidden;
         transition: all .4s ease;
@@ -55,34 +43,9 @@
       .input_box.dimensions .crement {
         transition: all .3s ease;
       }
-      body.decoupledsize .input_box.dimensions .size_decoupler {
-        margin: 0;
-      }
 
       .box_wrapper.size {
         width: 100px;
-      }
-      body.decoupledsize .box_wrapper.size, .box_wrapper.decoupled_sizes {
-        visibility: hidden;
-        width: 0;
-        margin: 0;
-        animation: .4s preventHidden linear;
-      }
-      body.decoupledsize .box_wrapper.size .crement, .input_box.dimensions .box_wrapper.decoupled_sizes .crement {
-        font-size: 0;
-        width: 0;
-      }
-
-      body.decoupledsize .box_wrapper.decoupled_sizes {
-        visibility: visible;
-        width: 59px;
-      }
-      body.decoupledsize .box_wrapper.decoupled_sizes.width {
-        margin: 0 5px;
-      }
-      body.decoupledsize .box_wrapper.decoupled_sizes .crement {
-        width: 16px !important;
-        font-size: .6em !important;
       }
 
       .inputs_expander {
@@ -160,6 +123,15 @@
         font-family: 'Consolas', 'San Francisco Monospaced', monospace;
       }
 
+      .visually-hidden {
+        position: absolute;
+        height: 1px;
+        width: 1px;
+        overflow: hidden;
+        clip: rect(1px, 1px, 1px, 1px);
+        white-space: nowrap;
+      }
+
       @keyframes preventHidden {
         from { visibility: visible; }
         to   { visibility: visible; }
@@ -218,27 +190,6 @@
             </div>
             <span class="input_header">Triangle Size</span>
           </div>
-          <button class="size_decoupler" onclick="decoupleSize();">⮂</button>
-          <div class="box_wrapper decoupled_sizes width">
-            <div class="number_wrapper">
-              <input type="number" value="50" class="input number" min="1">
-              <div class="crement_buttons small">
-                <button class="crement plus noselect">▲</button>
-                <button class="crement minus noselect">▼</button>
-              </div>
-            </div>
-            <span class="input_header">Width</span>
-          </div>
-          <div class="box_wrapper decoupled_sizes height">
-            <div class="number_wrapper">
-              <input type="number" value="50" class="input number" min="1">
-              <div class="crement_buttons small">
-                <button class="crement plus noselect">▲</button>
-                <button class="crement minus noselect">▼</button>
-              </div>
-            </div>
-            <span class="input_header">Height</span>
-          </div>
         </div>
         <div class="input_box button">
           <button class="input" onclick="generate();">Regenerate</button>
@@ -246,7 +197,7 @@
         <div id="slider_lightness"></div>
         <div id="slider_threshold"></div>
         <div class="input_box lines checker">
-          <div class="input checker" onclick="enableLines();">
+          <div class="input checker" onclick="toggleLines();">
             <div class="checkmark">
               <span class="mark lower"></span>
               <span class="mark upper"></span>
@@ -254,8 +205,8 @@
           </div>
           <span class="input_header">Line mode</span>
         </div>
-        <div class="input_box lines checker">
-          <div class="input checker" onclick="switchScript();">
+        <div class="input_box legacy checker">
+          <div class="input checker" onclick="toggleLegacy();">
             <div class="checkmark">
               <span class="mark lower"></span>
               <span class="mark upper"></span>
@@ -264,11 +215,14 @@
           <span class="input_header">Legacy system</span>
         </div>
         <div class="input_box button">
-          <button class="input" onclick="resetHash();">Reset values</button>
+          <button class="input" onclick="resetProperties();">Reset values</button>
+        </div>
+        <div class="input_box button">
+          <button type="button" class="input" onclick="getParamLink()">Copy link</button>
         </div>
         <div class="input_box button ref download_canvas">
-        <a class="input" download="triangles.png" onclick="downloadCanvas()">Download image</a>
-      </div>
+          <a class="input" download="triangles.png" onclick="downloadCanvas()">Download image</a>
+        </div>
       </div>
       <div class="info_flag">
         <a href="../" class="mainref">Hallo89</a>
@@ -309,15 +263,12 @@
     <script src="/js/webgl/triangles/gl.js"></script>
     <script src="/js/webgl/triangles/ui.js"></script>
     <script>
-      const inputsRGB = document.querySelectorAll('.input_box.rgb .input');
       const inputColor = document.querySelector('.input_box.colorpicker .input');
+      const inputsRGB = document.querySelectorAll('.input_box.rgb .input');
       const inputHEX = document.querySelector('.input_box.hex .input');
-
       const inputSize = document.querySelector('.box_wrapper.size .input');
-      const inputWidth = document.querySelector('.box_wrapper.width .input');
-      const inputHeight = document.querySelector('.box_wrapper.height .input');
-
       const inputLines = document.querySelector('.input_box.lines');
+      const inputLegacy = document.querySelector('.input_box.legacy');
       const inputDownload = document.querySelector('.input_box.download_canvas .input');
 
       const sizeAlert = document.getElementById('size_alert');
@@ -325,11 +276,9 @@
       const expander = document.querySelector('.inputs_expander');
 
       inputColor.addEventListener('input', pickerChange);
-      inputColor.addEventListener('change', pickerSubmit);
       inputHEX.addEventListener('input', hexChange);
       for (let i = 0; i < inputsRGB.length; i++) {
         inputsRGB[i].addEventListener('input', rgbChange);
-        inputsRGB[i].addEventListener('blur', rgbBlur);
       }
 
       resizeCanvas();
@@ -348,9 +297,6 @@
         max: (amountX + amountY) * 3.2,
         comma: 1,
         width: 120,
-        taskMouseUp: function() {
-          updateHash({lightness: sliderLightness.value});
-        },
         caption: 'Lightness start'
       });
       const sliderThreshold = new Slider89(document.getElementById('slider_threshold'), {
@@ -358,13 +304,10 @@
         max: amountX + amountY,
         comma: 3,
         width: 160,
-        taskMouseUp: function() {
-          updateHash({threshold: sliderThreshold.value});
-        },
         caption: 'Lightness threshold'
       });
 
-      handleHash();
+      handleSearchParams();
       generate();
     </script>
   </body>
