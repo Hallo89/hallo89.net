@@ -175,7 +175,7 @@ function getNJK(which, obj, dataName, fileName) {
 getNJK('', false, false, 'index');
 getNJK('blog');
 getNJK('tools');
-get('tools/3DMagic');
+getNJK('tools/3DMagic');
 get('tools/RFG');
 get('tools/mocking');
 get('tools/spacing');
