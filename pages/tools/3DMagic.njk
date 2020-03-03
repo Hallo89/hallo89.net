@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/style/tools/3D.css">
     <script src="/js/global.js"></script>
   </head>
-  <body class="">
+  <body>
     <div id="wrapper">
 
       <div class="box">
@@ -155,12 +155,9 @@
             <div class="container_3d" id="output" style="transform: rotate3d(1, 0, 0, -20deg) rotate3d(0, 1, 0, 20deg);">
               <div class="boundary_container_2d container_3d">
                 <div class="corners container_3d">
-                  <span class="object_1 var_corner boundary object_2d"></span>
-                  <span class="object_2 var_corner boundary object_2d"></span>
-                  <span class="object_3 var_corner boundary object_2d"></span>
-                  <span class="object_4 var_corner boundary object_2d"></span>
-                  <span class="object_5 var_corner boundary object_2d"></span>
-                  <span class="object_6 var_corner boundary object_2d"></span>
+                  {% for i in range(1, 7) -%}
+                  <span class="object_{{i}} var_corner boundary object_2d"></span>
+                  {% endfor -%}
                 </div>
                 <div class="bottom_grid container_3d">
                   <span class="var_bottom boundary object_2d"></span>
@@ -176,8 +173,10 @@
               </div>
               <div class="boundary_container container_3d nodisplay">
                 <div class="bottom_grid container_3d nodisplay"> <!-- don't turn this on -->
-                  <div class="vertical container_3d">
-                    <div class="stripe_1 container_3d">
+                  {% for orientation in ['vertical', 'horizontal'] %}
+                  <div class="{{orientation}} container_3d">
+                    {% for i in range(1, 18) -%}
+                    <div class="stripe_{{i}} container_3d">
                       <span class="face boundary aid_stripe var_bottom end front"></span>
                       <span class="face boundary aid_stripe var_bottom end behind"></span>
                       <span class="face boundary aid_stripe var_bottom side top"></span>
@@ -185,277 +184,15 @@
                       <span class="face boundary aid_stripe var_bottom side left"></span>
                       <span class="face boundary aid_stripe var_bottom side right"></span>
                     </div>
-                    <div class="stripe_2 container_3d">
-                      <span class="face boundary aid_stripe var_bottom end front"></span>
-                      <span class="face boundary aid_stripe var_bottom end behind"></span>
-                      <span class="face boundary aid_stripe var_bottom side top"></span>
-                      <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                      <span class="face boundary aid_stripe var_bottom side left"></span>
-                      <span class="face boundary aid_stripe var_bottom side right"></span>
-                    </div>
-                    <div class="stripe_3 container_3d">
-                      <span class="face boundary aid_stripe var_bottom end front"></span>
-                      <span class="face boundary aid_stripe var_bottom end behind"></span>
-                      <span class="face boundary aid_stripe var_bottom side top"></span>
-                      <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                      <span class="face boundary aid_stripe var_bottom side left"></span>
-                      <span class="face boundary aid_stripe var_bottom side right"></span>
-                    </div>
-                    <div class="stripe_4 container_3d">
-                      <span class="face boundary aid_stripe var_bottom end front"></span>
-                      <span class="face boundary aid_stripe var_bottom end behind"></span>
-                      <span class="face boundary aid_stripe var_bottom side top"></span>
-                      <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                      <span class="face boundary aid_stripe var_bottom side left"></span>
-                      <span class="face boundary aid_stripe var_bottom side right"></span>
-                    </div>
-                    <div class="stripe_5 container_3d">
-                      <span class="face boundary aid_stripe var_bottom end front"></span>
-                      <span class="face boundary aid_stripe var_bottom end behind"></span>
-                      <span class="face boundary aid_stripe var_bottom side top"></span>
-                      <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                      <span class="face boundary aid_stripe var_bottom side left"></span>
-                      <span class="face boundary aid_stripe var_bottom side right"></span>
-                    </div>
-                    <div class="stripe_6 container_3d">
-                      <span class="face boundary aid_stripe var_bottom end front"></span>
-                      <span class="face boundary aid_stripe var_bottom end behind"></span>
-                      <span class="face boundary aid_stripe var_bottom side top"></span>
-                      <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                      <span class="face boundary aid_stripe var_bottom side left"></span>
-                      <span class="face boundary aid_stripe var_bottom side right"></span>
-                    </div>
-                    <div class="stripe_7 container_3d">
-                      <span class="face boundary aid_stripe var_bottom end front"></span>
-                      <span class="face boundary aid_stripe var_bottom end behind"></span>
-                      <span class="face boundary aid_stripe var_bottom side top"></span>
-                      <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                      <span class="face boundary aid_stripe var_bottom side left"></span>
-                      <span class="face boundary aid_stripe var_bottom side right"></span>
-                    </div>
-                    <div class="stripe_8 container_3d">
-                      <span class="face boundary aid_stripe var_bottom end front"></span>
-                      <span class="face boundary aid_stripe var_bottom end behind"></span>
-                      <span class="face boundary aid_stripe var_bottom side top"></span>
-                      <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                      <span class="face boundary aid_stripe var_bottom side left"></span>
-                      <span class="face boundary aid_stripe var_bottom side right"></span>
-                    </div>
-                    <div class="stripe_9 container_3d">
-                      <span class="face boundary aid_stripe var_bottom end front"></span>
-                      <span class="face boundary aid_stripe var_bottom end behind"></span>
-                      <span class="face boundary aid_stripe var_bottom side top"></span>
-                      <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                      <span class="face boundary aid_stripe var_bottom side left"></span>
-                      <span class="face boundary aid_stripe var_bottom side right"></span>
-                    </div>
-                    <div class="stripe_10 container_3d">
-                      <span class="face boundary aid_stripe var_bottom end front"></span>
-                      <span class="face boundary aid_stripe var_bottom end behind"></span>
-                      <span class="face boundary aid_stripe var_bottom side top"></span>
-                      <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                      <span class="face boundary aid_stripe var_bottom side left"></span>
-                      <span class="face boundary aid_stripe var_bottom side right"></span>
-                    </div>
-                    <div class="stripe_11 container_3d">
-                      <span class="face boundary aid_stripe var_bottom end front"></span>
-                      <span class="face boundary aid_stripe var_bottom end behind"></span>
-                      <span class="face boundary aid_stripe var_bottom side top"></span>
-                      <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                      <span class="face boundary aid_stripe var_bottom side left"></span>
-                      <span class="face boundary aid_stripe var_bottom side right"></span>
-                    </div>
-                    <div class="stripe_12 container_3d">
-                      <span class="face boundary aid_stripe var_bottom end front"></span>
-                      <span class="face boundary aid_stripe var_bottom end behind"></span>
-                      <span class="face boundary aid_stripe var_bottom side top"></span>
-                      <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                      <span class="face boundary aid_stripe var_bottom side left"></span>
-                      <span class="face boundary aid_stripe var_bottom side right"></span>
-                    </div>
-                    <div class="stripe_13 container_3d">
-                      <span class="face boundary aid_stripe var_bottom end front"></span>
-                      <span class="face boundary aid_stripe var_bottom end behind"></span>
-                      <span class="face boundary aid_stripe var_bottom side top"></span>
-                      <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                      <span class="face boundary aid_stripe var_bottom side left"></span>
-                      <span class="face boundary aid_stripe var_bottom side right"></span>
-                    </div>
-                    <div class="stripe_14 container_3d">
-                      <span class="face boundary aid_stripe var_bottom end front"></span>
-                      <span class="face boundary aid_stripe var_bottom end behind"></span>
-                      <span class="face boundary aid_stripe var_bottom side top"></span>
-                      <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                      <span class="face boundary aid_stripe var_bottom side left"></span>
-                      <span class="face boundary aid_stripe var_bottom side right"></span>
-                    </div>
-                    <div class="stripe_15 container_3d">
-                      <span class="face boundary aid_stripe var_bottom end front"></span>
-                      <span class="face boundary aid_stripe var_bottom end behind"></span>
-                      <span class="face boundary aid_stripe var_bottom side top"></span>
-                      <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                      <span class="face boundary aid_stripe var_bottom side left"></span>
-                      <span class="face boundary aid_stripe var_bottom side right"></span>
-                    </div>
-                    <div class="stripe_16 container_3d">
-                      <span class="face boundary aid_stripe var_bottom end front"></span>
-                      <span class="face boundary aid_stripe var_bottom end behind"></span>
-                      <span class="face boundary aid_stripe var_bottom side top"></span>
-                      <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                      <span class="face boundary aid_stripe var_bottom side left"></span>
-                      <span class="face boundary aid_stripe var_bottom side right"></span>
-                    </div>
-                    <div class="stripe_17 container_3d">
-                      <span class="face boundary aid_stripe var_bottom end front"></span>
-                      <span class="face boundary aid_stripe var_bottom end behind"></span>
-                      <span class="face boundary aid_stripe var_bottom side top"></span>
-                      <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                      <span class="face boundary aid_stripe var_bottom side left"></span>
-                      <span class="face boundary aid_stripe var_bottom side right"></span>
-                    </div>
+                    {% endfor -%}
                   </div>
-                  <div class="horizontal container_3d">
-                    <div class="stripe_1 container_3d">
-                      <span class="face boundary aid_stripe var_bottom end front"></span>
-                      <span class="face boundary aid_stripe var_bottom end behind"></span>
-                      <span class="face boundary aid_stripe var_bottom side top"></span>
-                      <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                      <span class="face boundary aid_stripe var_bottom side left"></span>
-                      <span class="face boundary aid_stripe var_bottom side right"></span>
-                    </div>
-                    <div class="stripe_2 container_3d">
-                      <span class="face boundary aid_stripe var_bottom end front"></span>
-                      <span class="face boundary aid_stripe var_bottom end behind"></span>
-                      <span class="face boundary aid_stripe var_bottom side top"></span>
-                      <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                      <span class="face boundary aid_stripe var_bottom side left"></span>
-                      <span class="face boundary aid_stripe var_bottom side right"></span>
-                    </div>
-                    <div class="stripe_3 container_3d">
-                      <span class="face boundary aid_stripe var_bottom end front"></span>
-                      <span class="face boundary aid_stripe var_bottom end behind"></span>
-                      <span class="face boundary aid_stripe var_bottom side top"></span>
-                      <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                      <span class="face boundary aid_stripe var_bottom side left"></span>
-                      <span class="face boundary aid_stripe var_bottom side right"></span>
-                    </div>
-                    <div class="stripe_4 container_3d">
-                      <span class="face boundary aid_stripe var_bottom end front"></span>
-                      <span class="face boundary aid_stripe var_bottom end behind"></span>
-                      <span class="face boundary aid_stripe var_bottom side top"></span>
-                      <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                      <span class="face boundary aid_stripe var_bottom side left"></span>
-                      <span class="face boundary aid_stripe var_bottom side right"></span>
-                    </div>
-                    <div class="stripe_5 container_3d">
-                      <span class="face boundary aid_stripe var_bottom end front"></span>
-                      <span class="face boundary aid_stripe var_bottom end behind"></span>
-                      <span class="face boundary aid_stripe var_bottom side top"></span>
-                      <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                      <span class="face boundary aid_stripe var_bottom side left"></span>
-                      <span class="face boundary aid_stripe var_bottom side right"></span>
-                    </div>
-                    <div class="stripe_6 container_3d">
-                      <span class="face boundary aid_stripe var_bottom end front"></span>
-                      <span class="face boundary aid_stripe var_bottom end behind"></span>
-                      <span class="face boundary aid_stripe var_bottom side top"></span>
-                      <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                      <span class="face boundary aid_stripe var_bottom side left"></span>
-                      <span class="face boundary aid_stripe var_bottom side right"></span>
-                    </div>
-                    <div class="stripe_7 container_3d">
-                      <span class="face boundary aid_stripe var_bottom end front"></span>
-                      <span class="face boundary aid_stripe var_bottom end behind"></span>
-                      <span class="face boundary aid_stripe var_bottom side top"></span>
-                      <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                      <span class="face boundary aid_stripe var_bottom side left"></span>
-                      <span class="face boundary aid_stripe var_bottom side right"></span>
-                    </div>
-                    <div class="stripe_8 container_3d">
-                      <span class="face boundary aid_stripe var_bottom end front"></span>
-                      <span class="face boundary aid_stripe var_bottom end behind"></span>
-                      <span class="face boundary aid_stripe var_bottom side top"></span>
-                      <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                      <span class="face boundary aid_stripe var_bottom side left"></span>
-                      <span class="face boundary aid_stripe var_bottom side right"></span>
-                    </div>
-                    <div class="stripe_9 container_3d">
-                      <span class="face boundary aid_stripe var_bottom end front"></span>
-                      <span class="face boundary aid_stripe var_bottom end behind"></span>
-                      <span class="face boundary aid_stripe var_bottom side top"></span>
-                      <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                      <span class="face boundary aid_stripe var_bottom side left"></span>
-                      <span class="face boundary aid_stripe var_bottom side right"></span>
-                    </div>
-                    <div class="stripe_10 container_3d">
-                      <span class="face boundary aid_stripe var_bottom end front"></span>
-                      <span class="face boundary aid_stripe var_bottom end behind"></span>
-                      <span class="face boundary aid_stripe var_bottom side top"></span>
-                      <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                      <span class="face boundary aid_stripe var_bottom side left"></span>
-                      <span class="face boundary aid_stripe var_bottom side right"></span>
-                    </div>
-                    <div class="stripe_11 container_3d">
-                      <span class="face boundary aid_stripe var_bottom end front"></span>
-                      <span class="face boundary aid_stripe var_bottom end behind"></span>
-                      <span class="face boundary aid_stripe var_bottom side top"></span>
-                      <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                      <span class="face boundary aid_stripe var_bottom side left"></span>
-                      <span class="face boundary aid_stripe var_bottom side right"></span>
-                    </div>
-                    <div class="stripe_12 container_3d">
-                      <span class="face boundary aid_stripe var_bottom end front"></span>
-                      <span class="face boundary aid_stripe var_bottom end behind"></span>
-                      <span class="face boundary aid_stripe var_bottom side top"></span>
-                      <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                      <span class="face boundary aid_stripe var_bottom side left"></span>
-                      <span class="face boundary aid_stripe var_bottom side right"></span>
-                    </div>
-                    <div class="stripe_13 container_3d">
-                      <span class="face boundary aid_stripe var_bottom end front"></span>
-                      <span class="face boundary aid_stripe var_bottom end behind"></span>
-                      <span class="face boundary aid_stripe var_bottom side top"></span>
-                      <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                      <span class="face boundary aid_stripe var_bottom side left"></span>
-                      <span class="face boundary aid_stripe var_bottom side right"></span>
-                    </div>
-                    <div class="stripe_14 container_3d">
-                      <span class="face boundary aid_stripe var_bottom end front"></span>
-                      <span class="face boundary aid_stripe var_bottom end behind"></span>
-                      <span class="face boundary aid_stripe var_bottom side top"></span>
-                      <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                      <span class="face boundary aid_stripe var_bottom side left"></span>
-                      <span class="face boundary aid_stripe var_bottom side right"></span>
-                    </div>
-                    <div class="stripe_15 container_3d">
-                      <span class="face boundary aid_stripe var_bottom end front"></span>
-                      <span class="face boundary aid_stripe var_bottom end behind"></span>
-                      <span class="face boundary aid_stripe var_bottom side top"></span>
-                      <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                      <span class="face boundary aid_stripe var_bottom side left"></span>
-                      <span class="face boundary aid_stripe var_bottom side right"></span>
-                    </div>
-                    <div class="stripe_16 container_3d">
-                      <span class="face boundary aid_stripe var_bottom end front"></span>
-                      <span class="face boundary aid_stripe var_bottom end behind"></span>
-                      <span class="face boundary aid_stripe var_bottom side top"></span>
-                      <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                      <span class="face boundary aid_stripe var_bottom side left"></span>
-                      <span class="face boundary aid_stripe var_bottom side right"></span>
-                    </div>
-                    <div class="stripe_17 container_3d">
-                      <span class="face boundary aid_stripe var_bottom end front"></span>
-                      <span class="face boundary aid_stripe var_bottom end behind"></span>
-                      <span class="face boundary aid_stripe var_bottom side top"></span>
-                      <span class="face boundary aid_stripe var_bottom side bottom"></span>
-                      <span class="face boundary aid_stripe var_bottom side left"></span>
-                      <span class="face boundary aid_stripe var_bottom side right"></span>
-                    </div>
-                  </div>
+                  {% endfor %}
                 </div>
                 <div class="corners container_3d">
-                  <div class="corner_1 container_3d">
-                    <div class="stripe_1 container_3d">
+                  {% for i in range(1, 9) -%}
+                  <div class="corner_{{i}} container_3d">
+                    {% for n in range(1, 4) -%}
+                    <div class="stripe_{{n}} container_3d">
                       <span class="face boundary aid_stripe var_corner end front"></span>
                       <span class="face boundary aid_stripe var_corner end behind"></span>
                       <span class="face boundary aid_stripe var_corner side top"></span>
@@ -463,232 +200,22 @@
                       <span class="face boundary aid_stripe var_corner side left"></span>
                       <span class="face boundary aid_stripe var_corner side right"></span>
                     </div>
-                    <div class="stripe_2 container_3d">
-                      <span class="face boundary aid_stripe var_corner end front"></span>
-                      <span class="face boundary aid_stripe var_corner end behind"></span>
-                      <span class="face boundary aid_stripe var_corner side top"></span>
-                      <span class="face boundary aid_stripe var_corner side bottom"></span>
-                      <span class="face boundary aid_stripe var_corner side left"></span>
-                      <span class="face boundary aid_stripe var_corner side right"></span>
-                    </div>
-                    <div class="stripe_3 container_3d">
-                      <span class="face boundary aid_stripe var_corner end front"></span>
-                      <span class="face boundary aid_stripe var_corner end behind"></span>
-                      <span class="face boundary aid_stripe var_corner side top"></span>
-                      <span class="face boundary aid_stripe var_corner side bottom"></span>
-                      <span class="face boundary aid_stripe var_corner side left"></span>
-                      <span class="face boundary aid_stripe var_corner side right"></span>
-                    </div>
+                    {% endfor -%}
                   </div>
-                  <div class="corner_2 container_3d">
-                    <div class="stripe_1 container_3d">
-                      <span class="face boundary aid_stripe var_corner end front"></span>
-                      <span class="face boundary aid_stripe var_corner end behind"></span>
-                      <span class="face boundary aid_stripe var_corner side top"></span>
-                      <span class="face boundary aid_stripe var_corner side bottom"></span>
-                      <span class="face boundary aid_stripe var_corner side left"></span>
-                      <span class="face boundary aid_stripe var_corner side right"></span>
-                    </div>
-                    <div class="stripe_2 container_3d">
-                      <span class="face boundary aid_stripe var_corner end front"></span>
-                      <span class="face boundary aid_stripe var_corner end behind"></span>
-                      <span class="face boundary aid_stripe var_corner side top"></span>
-                      <span class="face boundary aid_stripe var_corner side bottom"></span>
-                      <span class="face boundary aid_stripe var_corner side left"></span>
-                      <span class="face boundary aid_stripe var_corner side right"></span>
-                    </div>
-                    <div class="stripe_3 container_3d">
-                      <span class="face boundary aid_stripe var_corner end front"></span>
-                      <span class="face boundary aid_stripe var_corner end behind"></span>
-                      <span class="face boundary aid_stripe var_corner side top"></span>
-                      <span class="face boundary aid_stripe var_corner side bottom"></span>
-                      <span class="face boundary aid_stripe var_corner side left"></span>
-                      <span class="face boundary aid_stripe var_corner side right"></span>
-                    </div>
-                  </div>
-                  <div class="corner_3 container_3d">
-                    <div class="stripe_1 container_3d">
-                      <span class="face boundary aid_stripe var_corner end front"></span>
-                      <span class="face boundary aid_stripe var_corner end behind"></span>
-                      <span class="face boundary aid_stripe var_corner side top"></span>
-                      <span class="face boundary aid_stripe var_corner side bottom"></span>
-                      <span class="face boundary aid_stripe var_corner side left"></span>
-                      <span class="face boundary aid_stripe var_corner side right"></span>
-                    </div>
-                    <div class="stripe_2 container_3d">
-                      <span class="face boundary aid_stripe var_corner end front"></span>
-                      <span class="face boundary aid_stripe var_corner end behind"></span>
-                      <span class="face boundary aid_stripe var_corner side top"></span>
-                      <span class="face boundary aid_stripe var_corner side bottom"></span>
-                      <span class="face boundary aid_stripe var_corner side left"></span>
-                      <span class="face boundary aid_stripe var_corner side right"></span>
-                    </div>
-                    <div class="stripe_3 container_3d">
-                      <span class="face boundary aid_stripe var_corner end front"></span>
-                      <span class="face boundary aid_stripe var_corner end behind"></span>
-                      <span class="face boundary aid_stripe var_corner side top"></span>
-                      <span class="face boundary aid_stripe var_corner side bottom"></span>
-                      <span class="face boundary aid_stripe var_corner side left"></span>
-                      <span class="face boundary aid_stripe var_corner side right"></span>
-                    </div>
-                  </div>
-                  <div class="corner_4 container_3d">
-                    <div class="stripe_1 container_3d">
-                      <span class="face boundary aid_stripe var_corner end front"></span>
-                      <span class="face boundary aid_stripe var_corner end behind"></span>
-                      <span class="face boundary aid_stripe var_corner side top"></span>
-                      <span class="face boundary aid_stripe var_corner side bottom"></span>
-                      <span class="face boundary aid_stripe var_corner side left"></span>
-                      <span class="face boundary aid_stripe var_corner side right"></span>
-                    </div>
-                    <div class="stripe_2 container_3d">
-                      <span class="face boundary aid_stripe var_corner end front"></span>
-                      <span class="face boundary aid_stripe var_corner end behind"></span>
-                      <span class="face boundary aid_stripe var_corner side top"></span>
-                      <span class="face boundary aid_stripe var_corner side bottom"></span>
-                      <span class="face boundary aid_stripe var_corner side left"></span>
-                      <span class="face boundary aid_stripe var_corner side right"></span>
-                    </div>
-                    <div class="stripe_3 container_3d">
-                      <span class="face boundary aid_stripe var_corner end front"></span>
-                      <span class="face boundary aid_stripe var_corner end behind"></span>
-                      <span class="face boundary aid_stripe var_corner side top"></span>
-                      <span class="face boundary aid_stripe var_corner side bottom"></span>
-                      <span class="face boundary aid_stripe var_corner side left"></span>
-                      <span class="face boundary aid_stripe var_corner side right"></span>
-                    </div>
-                  </div>
-                  <div class="corner_5 container_3d">
-                    <div class="stripe_1 container_3d">
-                      <span class="face boundary aid_stripe var_corner end front"></span>
-                      <span class="face boundary aid_stripe var_corner end behind"></span>
-                      <span class="face boundary aid_stripe var_corner side top"></span>
-                      <span class="face boundary aid_stripe var_corner side bottom"></span>
-                      <span class="face boundary aid_stripe var_corner side left"></span>
-                      <span class="face boundary aid_stripe var_corner side right"></span>
-                    </div>
-                    <div class="stripe_2 container_3d">
-                      <span class="face boundary aid_stripe var_corner end front"></span>
-                      <span class="face boundary aid_stripe var_corner end behind"></span>
-                      <span class="face boundary aid_stripe var_corner side top"></span>
-                      <span class="face boundary aid_stripe var_corner side bottom"></span>
-                      <span class="face boundary aid_stripe var_corner side left"></span>
-                      <span class="face boundary aid_stripe var_corner side right"></span>
-                    </div>
-                    <div class="stripe_3 container_3d">
-                      <span class="face boundary aid_stripe var_corner end front"></span>
-                      <span class="face boundary aid_stripe var_corner end behind"></span>
-                      <span class="face boundary aid_stripe var_corner side top"></span>
-                      <span class="face boundary aid_stripe var_corner side bottom"></span>
-                      <span class="face boundary aid_stripe var_corner side left"></span>
-                      <span class="face boundary aid_stripe var_corner side right"></span>
-                    </div>
-                  </div>
-                  <div class="corner_6 container_3d">
-                    <div class="stripe_1 container_3d">
-                      <span class="face boundary aid_stripe var_corner end front"></span>
-                      <span class="face boundary aid_stripe var_corner end behind"></span>
-                      <span class="face boundary aid_stripe var_corner side top"></span>
-                      <span class="face boundary aid_stripe var_corner side bottom"></span>
-                      <span class="face boundary aid_stripe var_corner side left"></span>
-                      <span class="face boundary aid_stripe var_corner side right"></span>
-                    </div>
-                    <div class="stripe_2 container_3d">
-                      <span class="face boundary aid_stripe var_corner end front"></span>
-                      <span class="face boundary aid_stripe var_corner end behind"></span>
-                      <span class="face boundary aid_stripe var_corner side top"></span>
-                      <span class="face boundary aid_stripe var_corner side bottom"></span>
-                      <span class="face boundary aid_stripe var_corner side left"></span>
-                      <span class="face boundary aid_stripe var_corner side right"></span>
-                    </div>
-                    <div class="stripe_3 container_3d">
-                      <span class="face boundary aid_stripe var_corner end front"></span>
-                      <span class="face boundary aid_stripe var_corner end behind"></span>
-                      <span class="face boundary aid_stripe var_corner side top"></span>
-                      <span class="face boundary aid_stripe var_corner side bottom"></span>
-                      <span class="face boundary aid_stripe var_corner side left"></span>
-                      <span class="face boundary aid_stripe var_corner side right"></span>
-                    </div>
-                  </div>
-                  <div class="corner_7 container_3d">
-                    <div class="stripe_1 container_3d">
-                      <span class="face boundary aid_stripe var_corner end front"></span>
-                      <span class="face boundary aid_stripe var_corner end behind"></span>
-                      <span class="face boundary aid_stripe var_corner side top"></span>
-                      <span class="face boundary aid_stripe var_corner side bottom"></span>
-                      <span class="face boundary aid_stripe var_corner side left"></span>
-                      <span class="face boundary aid_stripe var_corner side right"></span>
-                    </div>
-                    <div class="stripe_2 container_3d">
-                      <span class="face boundary aid_stripe var_corner end front"></span>
-                      <span class="face boundary aid_stripe var_corner end behind"></span>
-                      <span class="face boundary aid_stripe var_corner side top"></span>
-                      <span class="face boundary aid_stripe var_corner side bottom"></span>
-                      <span class="face boundary aid_stripe var_corner side left"></span>
-                      <span class="face boundary aid_stripe var_corner side right"></span>
-                    </div>
-                    <div class="stripe_3 container_3d">
-                      <span class="face boundary aid_stripe var_corner end front"></span>
-                      <span class="face boundary aid_stripe var_corner end behind"></span>
-                      <span class="face boundary aid_stripe var_corner side top"></span>
-                      <span class="face boundary aid_stripe var_corner side bottom"></span>
-                      <span class="face boundary aid_stripe var_corner side left"></span>
-                      <span class="face boundary aid_stripe var_corner side right"></span>
-                    </div>
-                  </div>
-                  <div class="corner_8 container_3d">
-                    <div class="stripe_1 container_3d">
-                      <span class="face boundary aid_stripe aid_stripe var_corner end front"></span>
-                      <span class="face boundary aid_stripe aid_stripe var_corner end behind"></span>
-                      <span class="face boundary aid_stripe aid_stripe var_corner side top"></span>
-                      <span class="face boundary aid_stripe aid_stripe var_corner side bottom"></span>
-                      <span class="face boundary aid_stripe aid_stripe var_corner side left"></span>
-                      <span class="face boundary aid_stripe aid_stripe var_corner side right"></span>
-                    </div>
-                    <div class="stripe_2 container_3d">
-                      <span class="face boundary aid_stripe aid_stripe var_corner end front"></span>
-                      <span class="face boundary aid_stripe aid_stripe var_corner end behind"></span>
-                      <span class="face boundary aid_stripe aid_stripe var_corner side top"></span>
-                      <span class="face boundary aid_stripe aid_stripe var_corner side bottom"></span>
-                      <span class="face boundary aid_stripe aid_stripe var_corner side left"></span>
-                      <span class="face boundary aid_stripe aid_stripe var_corner side right"></span>
-                    </div>
-                    <div class="stripe_3 container_3d">
-                      <span class="face boundary aid_stripe aid_stripe var_corner end front"></span>
-                      <span class="face boundary aid_stripe aid_stripe var_corner end behind"></span>
-                      <span class="face boundary aid_stripe aid_stripe var_corner side top"></span>
-                      <span class="face boundary aid_stripe aid_stripe var_corner side bottom"></span>
-                      <span class="face boundary aid_stripe aid_stripe var_corner side left"></span>
-                      <span class="face boundary aid_stripe aid_stripe var_corner side right"></span>
-                    </div>
-                  </div>
+                  {% endfor -%}
                 </div>
               </div>
               <div class="container_3d nodisplay" id="axes_container">
-                <div class="axes_x container_3d">
-                  <span class="face axis aid_stripe color_x end front"></span>
-                  <span class="face axis aid_stripe color_x end behind"></span>
-                  <span class="face axis aid_stripe color_x side top"></span>
-                  <span class="face axis aid_stripe color_x side bottom"></span>
-                  <span class="face axis aid_stripe color_x side left"></span>
-                  <span class="face axis aid_stripe color_x side right"></span>
+                {% for axis in ['x', 'y', 'z'] -%}
+                <div class="axes_{{axis}} container_3d">
+                  <span class="face axis aid_stripe color_{{axis}} end front"></span>
+                  <span class="face axis aid_stripe color_{{axis}} end behind"></span>
+                  <span class="face axis aid_stripe color_{{axis}} side top"></span>
+                  <span class="face axis aid_stripe color_{{axis}} side bottom"></span>
+                  <span class="face axis aid_stripe color_{{axis}} side left"></span>
+                  <span class="face axis aid_stripe color_{{axis}} side right"></span>
                 </div>
-                <div class="axes_y container_3d">
-                  <span class="face axis aid_stripe color_y end front"></span>
-                  <span class="face axis aid_stripe color_y end behind"></span>
-                  <span class="face axis aid_stripe color_y side top"></span>
-                  <span class="face axis aid_stripe color_y side bottom"></span>
-                  <span class="face axis aid_stripe color_y side left"></span>
-                  <span class="face axis aid_stripe color_y side right"></span>
-                </div>
-                <div class="axes_z container_3d">
-                  <span class="face axis aid_stripe color_z end front"></span>
-                  <span class="face axis aid_stripe color_z end behind"></span>
-                  <span class="face axis aid_stripe color_z side top"></span>
-                  <span class="face axis aid_stripe color_z side bottom"></span>
-                  <span class="face axis aid_stripe color_z side left"></span>
-                  <span class="face axis aid_stripe color_z side right"></span>
-                </div>
+                {% endfor -%}
               </div>
               <div class="container_3d elements_container">
               </div>
