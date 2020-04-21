@@ -3,7 +3,6 @@ const vertex = `#version 300 es
 
 in vec2 position;
 
-const float pi = 3.141592653589793;
 const mat3 rotateZ = mat3(mat2(-1));
 const mat3 rotateZ90 = mat3(
   0, 1, 0,
@@ -11,7 +10,7 @@ const mat3 rotateZ90 = mat3(
   0, 0, 1
 );
 
-uniform float amountX;
+uniform int amountX;
 uniform float lightness;
 uniform float threshold;
 uniform mat3 projection;
@@ -50,11 +49,11 @@ void main() {
   //The current triangle iteration
   float id = float(gl_InstanceID);
   //On which grid and row the triangle batch is positioned
-  vec2 currentGridPos = vec2(mod(floor(id / 2.0), amountX), floor(floor(id / 2.0) / amountX));
+  vec2 currentGridPos = vec2(ivec2(gl_InstanceID / 2 % amountX, gl_InstanceID / 2 / amountX));
 
   //Taking two Math.random() from a uniform and doing some pre-compution for absolute randomness
   vec2 randMethod = rands * (sin(id + 1.0) * (id + 1.0));
-  //The usual lightness compution
+  //The usual lightness computation
   float value = (0.55 + 2.0 * rand(randMethod)) * (currentGridPos.x + currentGridPos.y + lightness) / (threshold + 0.0001);
 
   //Constructing the translation matrix (which advances with the ID)
@@ -67,7 +66,7 @@ void main() {
   mat3 positionMatrix = projection * translation;
 
   //If the id is uneven, meaning the triangle's counterpart is to be drawn, rotate it
-  if (mod(id, 2.0) == 1.0) {
+  if (gl_InstanceID % 2 == 1) {
     positionMatrix = positionMatrix * rotateZ * rotationOffset;
   }
   //If the rounded modulus of a random number equals 1, rotate the current triangle and its counterpart by 90 degrees

@@ -164,7 +164,7 @@ function computeSizes() {
   amountY = Math.round(screenHeight / drawHeight);
 
   if (!legacyMode) {
-    gl.uniform1f(uAmountX, amountX);
+    gl.uniform1i(uAmountX, amountX);
     gl.uniform2f(uDrawDims, drawWidth, drawHeight);
     gl.uniformMatrix3fv(uProjection, false, [
       2 / screenWidth, 0, 0,
