@@ -3,10 +3,30 @@
     "link": "https://minecraft.curseforge.com/projects/dandelion-with-mods",
     "image": "MINECRAFT",
     "footer": false,
-    "description": "A minecraft resource pack, forked from the original resource pack 'Dandelion', featuring mod support, many improved and new vanilla items & models and 1.13.\nAlthough not worked on extensively anymore, I consider it one of my main projects"
+    "description": "A minecraft resource pack built on top of the original pack 'Dandelion', adding improved blocks & items, custom models and mod support!\nIts development is currently halted."
+  },
+  "WebGL Experiments": {
+    "link": "webgl",
+    "components": true,
+    "description": "A WebGL 2 learning log",
+    "children": {
+      "Triangles": {
+        "image": true,
+        "description": "Triangles is the most thorough WebGL Experiment in which I learned about graphics, GPUs, WebGL/OpenGL and everything connected to it.\nAdditionally it looks dope, try it out!"
+      },
+      "Matrices & 3D": {
+        "link": "matrices3d",
+        "image": "cube",
+        "description": "A study of 3D perspective and matrices - Translations, rotations, scaling, fov, ..."
+      }
+    }
+  },
+  "Win95-web": {
+    "link": "win95",
+    "description": "A Javascript implementation of Microsoft's Windows 95 on the web.\nIt's built without frameworks or libraries, just pure modern Javascript. Thus, it will only work on modern browsers."
   },
   "Tools": {
-    "description": "A variety of useful tools, currently featuring a random number generator, a small minecraft model creator, a text spacer and a very useful mocking text generator",
+    "description": "A variety of small tools, currently featuring a random number generator, a lightweight minecraft model creator, a text spacer and a very useful mocking text generator.",
     "children": {
       "3D Magic": {
         "link": "3DMagic",
@@ -14,7 +34,7 @@
       },
       "Random figure generator": {
         "link": "RFG",
-        "description": "A tool to generate random numbers. Their amount, starting and ending point and the length of one figure after its comma is customizable"
+        "description": "A tool to generate random numbers. Their amount, starting and ending point and the precision is customizable"
       },
       "Mocking generator": {
         "link": "mocking",
@@ -29,23 +49,7 @@
   "Slider89": {
     "lightMode": true,
     "navBarH1": true,
-    "description": "Slider89 is a library for easily creating and manipulating fully customizable sliders for your website, built with modern Javascript and featuring functions and practices for every purpose"
-  },
-  "WebGL Experiments": {
-    "link": "webgl",
-    "components": true,
-    "description": "A WebGL 2 learning log",
-    "children": {
-      "Triangles": {
-        "image": true,
-        "description": "Triangles is the most thorough WebGL Experiment in which I learned about graphics, GPUs, WebGL/OpenGL and everything connected to it.\nAdditionally, it looks dope, try it!"
-      },
-      "Matrices & 3D": {
-        "link": "matrices3d",
-        "image": "cube",
-        "description": "A study of 3D perspective and matrices - Translations, transformations, scaling, fov, ..."
-      }
-    }
+    "description": "Slider89 is a Javascript library for creating customizable sliders.\nBe aware that it's not particularily good which is why it's currently being rewritten!"
   },
   "Other stuff": {
     "link": false,
