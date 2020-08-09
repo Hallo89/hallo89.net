@@ -59,6 +59,17 @@ fetch('https://api.github.com/repos/Hallo89/Slider89/releases')
     return objects.reduce(function(prev, current) {
       return mergeObjects(JSON.parse(JSON.stringify(prev)), current);
     }, {});
+
+    function mergeObjects(target, source) {
+      for (const key in source) {
+        if (key in target && typeof target[key] == 'object') {
+          mergeObjects(target[key], source[key]);
+        } else {
+          target[key] = source[key];
+        }
+      }
+      return target;
+    }
   });
 
   njk.addFilter('startsWith', function(val, expr) {
@@ -103,17 +114,6 @@ fetch('https://api.github.com/repos/Hallo89/Slider89/releases')
   njk.addFilter('dotSnake', function(val) {
     return (typeof val == 'string' ? val.replace(/\./g, '_') : val);
   });
-
-  function mergeObjects(target, source) {
-    for (const key in source) {
-      if (key in target && typeof target[key] == 'object') {
-        mergeObjects(target[key], source[key]);
-      } else {
-        target[key] = source[key];
-      }
-    }
-    return target;
-  }
 })();
 
 argon.addFlag(['f', 'first'], function(val) {
