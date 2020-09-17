@@ -35,5 +35,5 @@ function toggleMode(mode) {
 }
 
 function setThemeCookie() {
-  document.cookie = 'theme=' + (html.classList.contains('light-mode') ? 'light' : 'dark') + '; path=/';
+  document.cookie = 'theme=' + (html.classList.contains('light-mode') ? 'light' : 'dark') + '; path=/; secure; SameSite=strict';
 }

@@ -7,24 +7,9 @@ const hasAccepted = getCookie('acceptedCookies');
 
 //Create the banner element
 const banner = (function() {
-  const aside = document.createElement('aside');
-  const bg = document.createElement('b');
-  const text = document.createElement('div');
-  const btn = document.createElement('button');
-  aside.classList.add('glb-box');
-  aside.classList.add('invisible');
-  bg.classList.add('background');
-  text.classList.add('description');
-  text.classList.add('box-text');
-  aside.id = 'cookiebanner';
-  btn.type = 'button';
-  text.textContent = 'This site uses cookies by Cloudflare and this very banner. By continuing to use it, you agree to them!';
-  btn.textContent = 'Alrighty!';
-  btn.addEventListener('click', hideBanner);
-  aside.appendChild(bg);
-  aside.appendChild(text);
-  aside.appendChild(btn);
-  return aside;
+  const node = document.createElement('div');
+  node.innerHTML = '<aside class="glb-box" id="cookiebanner"><b class="background"></b><div class="description box-text">This site uses cookies by Cloudflare, this banner and to save your preferenced theme color. By continuing to use it, you agree to them!</div><button type="button" onclick="hideBanner()">Alrighty!</button></aside>';
+  return node.firstChild;
 })();
 
 if (hasAccepted != 'true') {
@@ -48,6 +33,6 @@ function hideBanner() {
       }, 200);
     }, 80);
   }, 450);
-  document.cookie = 'acceptedCookies=true; path=/';
+  document.cookie = 'acceptedCookies=true; path=/; secure; SameSite=strict';
   this.removeEventListener('click', hideBanner);
 }
