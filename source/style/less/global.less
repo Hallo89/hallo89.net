@@ -405,6 +405,153 @@ body {
   }
 }
 
+.e-glb-box {
+  display: block;
+  text-decoration: none;
+  position: relative; //only component-box
+  z-index: 0; //only for images
+  overflow: hidden; //only for images
+  width: 17.1em;
+  height: 19em;
+  font-size: 1.25em;
+  font-family: 'Inter', sans-serif;
+  color: hsl(0, 0%, 85%);
+  background-color: @e-glb-box-bg;
+  border-top: 4px solid @glb-box-bordertop;
+  border-bottom: 4px solid @e-glb-box-borderbottom;
+  box-shadow: 0 2px 30px @e-glb-box-shadow;
+  box-sizing: border-box;
+  transition:
+    transform .2s cubic-bezier(.35,.1,.2,.95),
+    box-shadow .2s ease-out;
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 32px @e-glb-box-shadow-hover;
+    .heading {
+      transform: translateY(-.0875em);
+      // padding: 1.75em .5em;
+      .text {
+        background-color: transparent;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+      }
+    }
+    .description {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(-.2em);
+    }
+    .backdrop {
+      -webkit-filter: blur(20px) brightness(65%);
+      filter: blur(20px) brightness(65%);
+    }
+  }
+  .backdrop {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+    background-size: cover;
+    image-rendering: optimizeQuality;
+    image-rendering: -webkit-smooth;
+    image-rendering: smooth;
+    transition:
+      -webkit-filter .225s cubic-bezier(.35,.125,.15,.95),
+      filter .225s cubic-bezier(.35,.125,.15,.95);
+  }
+  .heading {
+    margin: 0;
+    padding: 1.85em .5em;
+    box-sizing: border-box;
+    transition: transform .2s ease;
+    .text {
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+      padding: 0 .25em;
+      background-color: fade(@e-glb-box-bg, 60%);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      transition:
+        //TODO: easing; ease but more fade out? basically this one in reverse
+        -webkit-backdrop-filter .2s cubic-bezier(.35,.125,.15,.95),
+        backdrop-filter .2s cubic-bezier(.35,.125,.15,.95),
+        background-color .2s cubic-bezier(.35,.125,.15,.95);
+    }
+  }
+  .description {
+    line-height: 1.28em;
+    margin: 0;
+    padding: 0 1em;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      transform .175s ease,
+      opacity .1s ease-in-out,
+      visibility .1s linear;
+  }
+  .quick-links {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: .925em;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    background-color: hsla(0, 0%, 11.5%, .75);
+    border-top: @border-width solid hsla(0, 0%, 13%, .75);
+    @border-width: 3px;
+    .link {
+      position: relative;
+      flex: 1;
+      list-style: none;
+      text-align: center;
+      padding: .65em .25em;
+      text-decoration: none;
+      color: inherit;
+      z-index: 1;
+      transition: all .2s ease-in-out; //TODO: ALL
+      // background-color: hsl(0, 0%, 11.5%);
+      // border-top: @border-width solid hsl(0, 0%, 13%);
+      &::before {
+        content: '';
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        left: 25%;
+        top: -@border-width;
+        width: 50%;
+        height: 100%;
+        // box-sizing: border-box;
+        z-index: -1;
+        background-color: hsla(0, 0%, 12%, .3);
+        border-top: @border-width solid hsla(0, 0%, 15%, .25);
+        border-radius: 1px;
+        //TODO: custom easings and times for opacity & width
+        transition:
+          opacity .15s ease-in-out,
+          all .15s ease;
+      }
+      &:hover::before {
+        left: 0;
+        width: 100%;
+        visibility: visible;
+        opacity: 1;
+        // height: 100%;
+      }
+      // &:hover {
+      //   background-color: hsl(0, 0%, 12%);
+      //   // border-top: 3px solid hsl(0, 0%, 15.5%);
+      // }
+    }
+  }
+}
 
 .glb-box {
   display: block;

@@ -372,6 +372,129 @@ html.light-mode #footer a::before {
     width: 4.5em;
   }
 }
+.e-glb-box {
+  display: block;
+  text-decoration: none;
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+  width: 17.1em;
+  height: 19em;
+  font-size: 1.25em;
+  font-family: 'Inter', sans-serif;
+  color: hsl(0, 0%, 85%);
+  background-color: hsl(0, 0%, 10.5%);
+  border-top: 4px solid hsl(0, 0%, 26.5%);
+  border-bottom: 4px solid #0a0a0a;
+  box-shadow: 0 2px 30px hsla(0, 0%, 6%, 0.35);
+  box-sizing: border-box;
+  transition: transform 0.2s cubic-bezier(0.35, 0.1, 0.2, 0.95), box-shadow 0.2s ease-out;
+}
+.e-glb-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 32px hsla(0, 0%, 4%, 0.5);
+}
+.e-glb-box:hover .heading {
+  transform: translateY(-0.0875em);
+}
+.e-glb-box:hover .heading .text {
+  background-color: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+.e-glb-box:hover .description {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-0.2em);
+}
+.e-glb-box:hover .backdrop {
+  -webkit-filter: blur(20px) brightness(65%);
+  filter: blur(20px) brightness(65%);
+}
+.e-glb-box .backdrop {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+  background-size: cover;
+  image-rendering: optimizeQuality;
+  image-rendering: -webkit-smooth;
+  image-rendering: smooth;
+  transition: -webkit-filter 0.225s cubic-bezier(0.35, 0.125, 0.15, 0.95), filter 0.225s cubic-bezier(0.35, 0.125, 0.15, 0.95);
+}
+.e-glb-box .heading {
+  margin: 0;
+  padding: 1.85em 0.5em;
+  box-sizing: border-box;
+  transition: transform 0.2s ease;
+}
+.e-glb-box .heading .text {
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  padding: 0 0.25em;
+  background-color: hsla(0, 0%, 10.5%, 0.6);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transition: -webkit-backdrop-filter 0.2s cubic-bezier(0.35, 0.125, 0.15, 0.95), backdrop-filter 0.2s cubic-bezier(0.35, 0.125, 0.15, 0.95), background-color 0.2s cubic-bezier(0.35, 0.125, 0.15, 0.95);
+}
+.e-glb-box .description {
+  line-height: 1.28em;
+  margin: 0;
+  padding: 0 1em;
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.175s ease, opacity 0.1s ease-in-out, visibility 0.1s linear;
+}
+.e-glb-box .quick-links {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-size: 0.925em;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  background-color: hsla(0, 0%, 11.5%, 0.75);
+  border-top: 3px solid hsla(0, 0%, 13%, 0.75);
+}
+.e-glb-box .quick-links .link {
+  position: relative;
+  flex: 1;
+  list-style: none;
+  text-align: center;
+  padding: 0.65em 0.25em;
+  text-decoration: none;
+  color: inherit;
+  z-index: 1;
+  transition: all 0.2s ease-in-out;
+}
+.e-glb-box .quick-links .link::before {
+  content: '';
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  left: 25%;
+  top: -3px;
+  width: 50%;
+  height: 100%;
+  z-index: -1;
+  background-color: hsla(0, 0%, 12%, 0.3);
+  border-top: 3px solid hsla(0, 0%, 15%, 0.25);
+  border-radius: 1px;
+  transition: opacity 0.15s ease-in-out, all 0.15s ease;
+}
+.e-glb-box .quick-links .link:hover::before {
+  left: 0;
+  width: 100%;
+  visibility: visible;
+  opacity: 1;
+}
 .glb-box {
   display: block;
   font-size: 1.45em;
