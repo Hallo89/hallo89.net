@@ -1,0 +1,32 @@
+{%- for nav, navVal in pageData %}
+
+  {%- set link = navVal.link if navVal.link else (nav | lower if navVal.link !== false else '') -%}
+  {%- if not link | startsWith(['https://', 'http://']) -%}
+    {%- set link = '/' + (page + '/' if page else page) + link -%}
+  {%- endif -%}
+
+  <a href="{{ link }}" class="e-glb-box">
+    <h2 class="heading">
+      <span class="text">{{ nav | safe }}</span>
+    </h2>
+    {%- if navVal.description %}
+      <p class="description">{{ navVal.description | nl2br | safe }}</p>
+    {%- endif %}
+    {%- if navVal.components %}
+      <ul class="quick-links">
+        {%- for comp, compVal in navVal.children -%}
+
+          {%- set refBase = link + '/' if link != '/' else link -%}
+          {%- set ref = refBase + (compVal.link if compVal.link else comp | lower) -%}
+
+          <li class="link" data-href="{{ ref }}">{{ comp | safe }}</li>
+
+        {%- endfor %}
+      </ul>
+    {%- endif %}
+    {%- if navVal.image %}
+      <span class="backdrop" style="background-image: url('/image/nav/{{ navVal.image }}')"></span>
+    {%- endif %}
+  </a>
+
+{% endfor %}
