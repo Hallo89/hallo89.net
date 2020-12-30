@@ -1,21 +1,19 @@
 body {
-  margin: 0;
+  font-size: 19px;
 }
 
 #menu {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
+
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(21.375em, 1fr));
+  grid-gap: 1.75em;
   justify-items: center;
   align-items: center;
-  grid-gap: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(455px, 1fr));
-  margin: calc(1.4vw + 1vh + 20px) 0;
-  min-height: calc(100vh - 2 * (1.4vw + 1vh + 20px));
-  font-size: 19px;
-}
 
-.box {
-  width: 455px;
-  height: 510px;
+  padding: calc(1.4vw + 1vh + 20px) 1.08em;
+  min-height: 100vh;
+  box-sizing: border-box;
 }

@@ -148,7 +148,7 @@ html.light-mode #header h1:hover::before {
   justify-items: center;
   margin: 1.842em 1.053em;
   grid-gap: 2.105em;
-  grid-template-columns: repeat(auto-fit, minmax(21.579em, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(21.375em, 1fr));
   align-items: center;
 }
 #box-nav .box {
