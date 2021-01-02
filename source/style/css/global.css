@@ -438,7 +438,7 @@ html.light-mode #footer a::before {
   background-color: hsla(0, 0%, 10.5%, 0.6);
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
-  transition: -webkit-backdrop-filter 0.2s cubic-bezier(0.35, 0.125, 0.15, 0.95), backdrop-filter 0.2s cubic-bezier(0.35, 0.125, 0.15, 0.95), background-color 0.2s cubic-bezier(0.35, 0.125, 0.15, 0.95);
+  transition: -webkit-backdrop-filter 0.225s cubic-bezier(0.25, 0.15, 0.15, 1), backdrop-filter 0.225s cubic-bezier(0.25, 0.15, 0.15, 1), background-color 0.225s cubic-bezier(0.25, 0.15, 0.15, 1);
 }
 .e-glb-box .description {
   line-height: 1.28em;
@@ -446,7 +446,7 @@ html.light-mode #footer a::before {
   padding: 0 1em;
   opacity: 0;
   visibility: hidden;
-  transition: transform 0.175s ease, opacity 0.1s ease-in-out, visibility 0.1s linear;
+  transition: transform 0.175s cubic-bezier(0.3, 0.15, 0.15, 1), opacity 0.1s ease-in-out, visibility 0.1s linear;
 }
 .e-glb-box .quick-links {
   display: flex;
