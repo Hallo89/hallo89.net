@@ -36,6 +36,8 @@
 @glb-box-description: darken(@main-color, 5%);
 
 @e-glb-box-bg: lighten(@main-bg, 2.5%);
+@e-glb-box-backdrop-opacity: .675;
+@e-glb-box-backdrop-bg: fade(@e-glb-box-bg,  @e-glb-box-backdrop-opacity * 100%);
 @e-glb-box-shadow: fade(darken(@e-glb-box-bg, 6%), 30%);
 @e-glb-box-shadow-hover: fade(darken(@e-glb-box-bg, 6%), 47.5%);
 @e-glb-box-borderbottom: mix(hsl(0, 0%, 0%), @main-bg, 50%);
