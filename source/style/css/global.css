@@ -456,44 +456,57 @@ html.light-mode #footer a::before {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 100%;
+  right: 0;
   padding: 0;
   margin: 0;
-  box-sizing: border-box;
   font-size: 0.925em;
-  border-top: 3px solid hsla(0, 0%, 13%, 0.75);
+  border-top: 3px solid hsla(0, 0%, 13%, 0.675);
 }
 .e-glb-box .quick-links .link {
   position: relative;
   flex: 1;
-  list-style: none;
   text-align: center;
+  list-style: none;
   padding: 0.65em 0.25em;
-  text-decoration: none;
-  color: inherit;
-  z-index: 1;
-  transition: all 0.2s ease-in-out;
 }
 .e-glb-box .quick-links .link::before {
   content: '';
-  visibility: hidden;
-  opacity: 0;
   position: absolute;
-  left: 25%;
   top: -3px;
-  width: 50%;
+  left: 0;
+  width: 0;
   height: 100%;
+  opacity: 0;
   z-index: -1;
-  background-color: hsla(0, 0%, 12%, 0.3);
+  background-color: hsla(0, 0%, 7%, 0.225);
   border-top: 3px solid hsla(0, 0%, 15%, 0.25);
   border-radius: 1px;
-  transition: opacity 0.15s ease-in-out, all 0.15s ease;
+  visibility: hidden;
+  animation: linkShiftOut 0.1s ease;
+  transition: opacity 0.075s ease-in-out;
 }
 .e-glb-box .quick-links .link:hover::before {
-  left: 0;
-  width: 100%;
   visibility: visible;
+  width: 100%;
   opacity: 1;
+  animation: linkShiftIn 0.1s ease;
+}
+@keyframes linkShiftIn {
+  from {
+    width: 0%;
+  }
+}
+@keyframes linkShiftOut {
+  from {
+    left: unset;
+    right: 0;
+    width: 100%;
+  }
+  to {
+    left: unset;
+    right: 0;
+    visibility: visible;
+  }
 }
 .glb-box {
   display: block;
