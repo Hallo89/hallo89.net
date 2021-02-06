@@ -1,6 +1,6 @@
 {%- for name, props in pageData -%}
 
-  {%- set link = props.link if props.link else (name | lower if props.link !== false else '') -%}
+  {%- set link = props.link if props.link else (name | lower) -%}
   {%- if not link | startsWith(['https://', 'http://']) -%}
     {%- set link = '/' + (page + '/' if page else page) + link -%}
   {%- endif %}

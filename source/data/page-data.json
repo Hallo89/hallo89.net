@@ -50,20 +50,5 @@
     "lightMode": true,
     "navBarH1": true,
     "description": "Slider89 is a Javascript library for creating customizable sliders.\nBe aware that it's not particularily good which is why it's currently being rewritten!"
-  },
-  "Other stuff": {
-    "link": false,
-    "components": true,
-    "footer": false,
-    "children": {
-      "Useful thing": {
-        "link": "sponge"
-      },
-      "Empty thing": {
-        "lightMode": true,
-        "navBarH1": true,
-        "link": "tutorials"
-      }
-    }
   }
 }
