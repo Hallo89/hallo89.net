@@ -52,10 +52,14 @@
     {% include "templates/footer.njk" %}
 
     <script>
+      const h1 = document.querySelector('#header h1');
+      const h1Span1 = h1.querySelector('span');
+      const h1Span2 = document.createElement('span');
+      h1Span2.classList.add('cut-after');
+      h1Span2.textContent = h1Span1.textContent;
+
       const isGecko = (/Gecko\/\d+/).test(navigator.userAgent);
-      const header = document.getElementById('header');
-      const h1 = header.querySelector('h1');
-      const h1Text = h1.querySelector('span');
+      let nodeRanges = new Array();
 
       (function() {
         if (isGecko) {
@@ -68,60 +72,53 @@
           h1.addEventListener('mouseleave', h1HoverOut);
         }
       })();
+
       function removeHoverLock(e) {
         h1.classList.remove('nohover');
         h1.addEventListener('mouseenter', h1HoverIn);
         h1.addEventListener('mouseleave', h1HoverOut);
         window.removeEventListener('mousemove', removeHoverLock);
-        if (e.target == h1 || e.target == h1Text) h1HoverIn();
+        if (e.target == h1 || e.target == h1Span1) h1HoverIn();
       }
 
-      var nodeRanges = [];
-      const h1Node2 = document.createElement('span');
-      h1Node2.classList.add('cut-after');
-      h1Node2.innerHTML = h1Text.innerHTML;
-
       function h1HoverIn() {
-        h1.insertBefore(h1Node2, h1Text);
+        h1.insertBefore(h1Span2, h1Span1);
         if (isGecko) dupeHeadingSelection();
       }
       function h1HoverOut() {
-        h1.removeChild(h1Node2);
+        h1.removeChild(h1Span2);
         if (isGecko) normalizeSelection();
       }
 
       function dupeHeadingSelection() {
-        var selection = document.getSelection();
+        const selection = document.getSelection();
         if (selection.anchorNode != null && selection.anchorOffset != selection.focusOffset) {
-          const count = selection.rangeCount;
-          for (var i = 0; i < count; i++) {
-            var thisRange = selection.getRangeAt(i);
-            if (thisRange && thisRange.startContainer.parentNode == h1Text) {
-              var start = thisRange.startOffset;
-              var end = thisRange.endOffset;
-              var range = document.createRange();
-              range.selectNode(h1Node2);
-              range.setStart(h1Node2.firstChild, start <= end ? start : end);
-              range.setEnd(h1Node2.firstChild, start <= end ? end : start);
+
+          for (var i = 0; i < selection.rangeCount; i++) {
+            const thisRange = selection.getRangeAt(i);
+
+            if (thisRange && thisRange.startContainer.parentNode == h1Span1) {
+              const start = thisRange.startOffset;
+              const end = thisRange.endOffset;
+              const range = document.createRange();
+              range.selectNode(h1Span2);
+              range.setStart(h1Span2.firstChild, start <= end ? start : end);
+              range.setEnd(h1Span2.firstChild, start <= end ? end : start);
               nodeRanges.push(range);
+              selection.addRange(range);
             }
           }
-          if (nodeRanges) for (var i = 0; i < nodeRanges.length; i++) selection.addRange(nodeRanges[i]);
         }
       }
       function normalizeSelection() {
-        var selection = document.getSelection();
-        if (nodeRanges) {
-          for (var i = 0; i < nodeRanges.length; i++) {
-            try {
-              selection.removeRange(nodeRanges[i]);
-              nodeRanges[i].detach();
-            } catch (e) {
-              nodeRanges.splice(i, 1);
-            }
-          }
-          nodeRanges = [];
+        const selection = document.getSelection();
+        for (var i = 0; i < nodeRanges.length; i++) {
+          try {
+            selection.removeRange(nodeRanges[i]);
+            nodeRanges[i].detach();
+          } catch (e) {}
         }
+        nodeRanges = new Array();
       }
     </script>
   </body>
