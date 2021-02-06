@@ -1,28 +1,28 @@
 {
   "Dandelion With Mods": {
     "link": "https://minecraft.curseforge.com/projects/dandelion-with-mods",
-    "image": "MINECRAFT",
+    "image": "dandelion-with-mods.jpg",
     "footer": false,
     "description": "A minecraft resource pack built on top of the original pack 'Dandelion', adding improved blocks & items, custom models and mod support!\nIts development is currently halted."
   },
   "WebGL Experiments": {
     "link": "webgl",
+    "image": "webgl-experiments.png",
     "components": true,
     "description": "A WebGL 2 learning log",
     "children": {
       "Triangles": {
-        "image": true,
         "description": "Triangles is the most thorough WebGL Experiment in which I learned about graphics, GPUs, WebGL/OpenGL and everything connected to it.\nAdditionally it looks dope, try it out!"
       },
       "Matrices & 3D": {
         "link": "matrices3d",
-        "image": "cube",
         "description": "A study of 3D perspective and matrices - Translations, rotations, scaling, fov, ..."
       }
     }
   },
   "Win95-web": {
     "link": "win95",
+    "image": "win95-web.png",
     "description": "A Javascript implementation of Microsoft's Windows 95 on the web.\nIt's built without frameworks or libraries, just pure modern Javascript. Thus, it will only work on modern browsers."
   },
   "Tools": {
