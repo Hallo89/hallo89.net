@@ -467,7 +467,6 @@ html.light-mode #footer a::before {
   flex: 1;
   text-align: center;
   list-style: none;
-  padding: 0.65em 0.25em;
 }
 .e-glb-box .quick-links .link::before {
   content: '';
@@ -507,6 +506,18 @@ html.light-mode #footer a::before {
     right: 0;
     visibility: visible;
   }
+}
+.e-glb-box .quick-links button {
+  width: 100%;
+  height: 100%;
+  padding: 0.65em 0.25em;
+  background: transparent;
+  border: none;
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  outline: none;
+  cursor: pointer;
 }
 .glb-box {
   display: block;

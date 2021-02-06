@@ -20,7 +20,9 @@
           {%- set refBase = link + '/' if link != '/' else link -%}
           {%- set ref = refBase + (compVal.link if compVal.link else comp | lower) -%}
 
-          <li class="link" data-href="{{ ref }}">{{ comp | safe }}</li>
+          <li class="link">
+            <button type="button" data-href="{{ ref }}">{{ comp | safe }}</button>
+          </li>
 
         {%- endfor %}
       </ul>
