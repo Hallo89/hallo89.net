@@ -2,6 +2,25 @@
 Written by Hallo89 using LESS CSS - http://lesscss.org
 No necessity to write this in here but Less is awesome!
 */
+/* Inter by Rasmus Andersson @ https://rsms.me/inter/ */
+@font-face {
+  font-family: 'Inter';
+  font-weight: normal;
+  font-display: swap;
+  src: local('Inter'), local('Inter Regular'), local('Inter-Regular'), url('/font/Inter/Inter-Regular.woff2') format('woff2'), url('/font/Inter/Inter-Regular.woff') format('woff');
+}
+@font-face {
+  font-family: 'Inter';
+  font-weight: bold;
+  font-display: swap;
+  src: local('Inter Bold'), local('Inter-Bold'), url('/font/Inter/Inter-Bold.woff2') format('woff2'), url('/font/Inter/Inter-Bold.woff') format('woff');
+}
+@font-face {
+  font-family: 'Inter';
+  font-weight: 300;
+  font-display: swap;
+  src: local('Inter Light'), local('Inter-Light'), url('/font/Inter/Inter-Light.woff2') format('woff2'), url('/font/Inter/Inter-Light.woff') format('woff');
+}
 html {
   scrollbar-color: hsl(0, 0%, 35%) hsl(0, 0%, 17%);
 }
@@ -11,7 +30,7 @@ html.light-mode {
 body {
   margin: 0;
   background-color: hsl(0, 0%, 8%);
-  font-family: Arial, 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', sans-serif;
+  font-family: 'Inter', 'Roboto', 'San Francisco', 'Segoe UI', 'Arial', sans-serif;
   transition: background 0.15s linear;
 }
 html.light-mode body {
@@ -381,7 +400,6 @@ html.light-mode #footer a::before {
   width: 17.1em;
   height: 19em;
   font-size: 1.25em;
-  font-family: 'Inter', sans-serif;
   color: hsl(0, 0%, 85%);
   background-color: hsl(0, 0%, 10.5%);
   border-top: 4px solid hsl(0, 0%, 26.5%);

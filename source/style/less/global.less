@@ -8,6 +8,39 @@ No necessity to write this in here but Less is awesome!
 @import (reference) 'colors';
 @import (reference) 'mixins';
 
+/* Inter by Rasmus Andersson @ https://rsms.me/inter/ */
+@font-face {
+  font-family: 'Inter';
+  font-weight: normal;
+  font-display: swap;
+  src:
+    local('Inter'),
+    local('Inter Regular'),
+    local('Inter-Regular'),
+    url('/font/Inter/Inter-Regular.woff2') format('woff2'),
+    url('/font/Inter/Inter-Regular.woff') format('woff');
+}
+@font-face {
+  font-family: 'Inter';
+  font-weight: bold;
+  font-display: swap;
+  src:
+    local('Inter Bold'),
+    local('Inter-Bold'),
+    url('/font/Inter/Inter-Bold.woff2') format('woff2'),
+    url('/font/Inter/Inter-Bold.woff') format('woff');
+}
+@font-face {
+  font-family: 'Inter';
+  font-weight: 300;
+  font-display: swap;
+  src:
+    local('Inter Light'),
+    local('Inter-Light'),
+    url('/font/Inter/Inter-Light.woff2') format('woff2'),
+    url('/font/Inter/Inter-Light.woff') format('woff');
+}
+
 
 html {
   scrollbar-color: @scrollbar-thumb @scrollbar-track;
@@ -19,7 +52,7 @@ html {
 body {
   margin: 0;
   background-color: @main-bg;
-  font-family: Arial, 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', sans-serif;
+  font-family: 'Inter', 'Roboto', 'San Francisco', 'Segoe UI', 'Arial', sans-serif;
   .mode-transition.background();
   html.light-mode & {
     background-color: @index-bg--lt;
@@ -414,7 +447,6 @@ body {
   width: 17.1em;
   height: 19em;
   font-size: 1.25em;
-  font-family: 'Inter', sans-serif;
   color: hsl(0, 0%, 85%);
   background-color: @e-glb-box-bg;
   border-top: 4px solid @glb-box-bordertop;
