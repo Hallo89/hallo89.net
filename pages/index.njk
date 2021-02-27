@@ -37,11 +37,11 @@
 
     <header id="header">
       <h1 data-heading="Hallo89"><span>Hallo89</span></h1>
-      <p class="subheader">
+      <em class="subheader">
         <script>
           document.write(randomSubheader[Math.floor(randomSubheader.length*Math.random())]);
         </script>
-      </p>
+      </em>
       {% include 'templates/mode-switch.njk' %}
     </header>
 
@@ -50,76 +50,5 @@
     </nav>
 
     {% include "templates/footer.njk" %}
-
-    <script>
-      const h1 = document.querySelector('#header h1');
-      const h1Span1 = h1.querySelector('span');
-      const h1Span2 = document.createElement('span');
-      h1Span2.classList.add('cut-after');
-      h1Span2.textContent = h1Span1.textContent;
-
-      const isGecko = (/Gecko\/\d+/).test(navigator.userAgent);
-      let nodeRanges = new Array();
-
-      (function() {
-        if (isGecko) {
-          h1.classList.add('nohover');
-          setTimeout(function() {
-            window.addEventListener('mousemove', removeHoverLock);
-          }, 900);
-        } else {
-          h1.addEventListener('mouseenter', h1HoverIn);
-          h1.addEventListener('mouseleave', h1HoverOut);
-        }
-      })();
-
-      function removeHoverLock(e) {
-        h1.classList.remove('nohover');
-        h1.addEventListener('mouseenter', h1HoverIn);
-        h1.addEventListener('mouseleave', h1HoverOut);
-        window.removeEventListener('mousemove', removeHoverLock);
-        if (e.target == h1 || e.target == h1Span1) h1HoverIn();
-      }
-
-      function h1HoverIn() {
-        h1.insertBefore(h1Span2, h1Span1);
-        if (isGecko) dupeHeadingSelection();
-      }
-      function h1HoverOut() {
-        h1.removeChild(h1Span2);
-        if (isGecko) normalizeSelection();
-      }
-
-      function dupeHeadingSelection() {
-        const selection = document.getSelection();
-        if (selection.anchorNode != null && selection.anchorOffset != selection.focusOffset) {
-
-          for (var i = 0; i < selection.rangeCount; i++) {
-            const thisRange = selection.getRangeAt(i);
-
-            if (thisRange && thisRange.startContainer.parentNode == h1Span1) {
-              const start = thisRange.startOffset;
-              const end = thisRange.endOffset;
-              const range = document.createRange();
-              range.selectNode(h1Span2);
-              range.setStart(h1Span2.firstChild, start <= end ? start : end);
-              range.setEnd(h1Span2.firstChild, start <= end ? end : start);
-              nodeRanges.push(range);
-              selection.addRange(range);
-            }
-          }
-        }
-      }
-      function normalizeSelection() {
-        const selection = document.getSelection();
-        for (var i = 0; i < nodeRanges.length; i++) {
-          try {
-            selection.removeRange(nodeRanges[i]);
-            nodeRanges[i].detach();
-          } catch (e) {}
-        }
-        nodeRanges = new Array();
-      }
-    </script>
   </body>
 </html>

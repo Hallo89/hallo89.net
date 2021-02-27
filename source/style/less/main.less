@@ -28,15 +28,13 @@ body {
   }
 }
 
+@header-height: ~'8vw + 16vh + 103px';
 #header {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 2px 16px @header-shadow;
-  background-color: @header-bg;
-  @headheight: ~'8vw + 16vh + 103px';
-  height: calc(@headheight);
+  height: calc(@header-height);
   color: @heading;
   .mode-transition.background();
   .mode-transition.shadow();
@@ -44,97 +42,24 @@ body {
     font: bold 6.9em 'Century Gothic', 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', sans-serif;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    .text-shadow.drop(6, @heading-shadow);
     margin: 0;
     transition+: transform .76s;
+    .text-shadow.drop(6, @heading-shadow);
     .mode-transition.textshadow();
     .mode-transition.color();
-    animation: .75s fadein linear, .9s shiftin, .4s shadowIn cubic-bezier(.43, .1, .15, 1.1);
-    @keyframes shiftin {
-      from { transform: translateY(-45px); }
-    }
-    @keyframes shadowIn {
-      from {
-        text-shadow:
-          1px 1px @heading-shadow,
-          1.5px 1.5px @heading-shadow,
-          2px 2px @heading-shadow;
-      }
-    }
-    &:not(.nohover):hover {
-      transform: scale(0.78) scale(1.294);
-    }
-    .cut-after {
-      display: none;
-    }
-    &::before {
-      color: @header-bg;
-      .text-shadow.around(7, @header-bg);
-    }
-    &::before, .cut-after {
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-    &:not(.nohover):hover::before {
-      content: attr(data-heading);
-      clip-path: polygon(0 58%, 0 0, 100% 0, 100% 37%);
-      animation: .3s headingcut ease-in;
-      @keyframes headingcut {
-        from { clip-path: polygon(100% 37%, 100% 0, 100% 0, 100% 37%); }
-        to   { clip-path: polygon(0 58%, 0 0, 100% 0, 100% 37%); }
-      }
-    }
-    &:not(.nohover):hover .cut-after {
-      display: block;
-      clip-path: polygon(0 57.5%, 0 0, 100% 0, 100% 36.5%);
-      transform: translate(-4px);
-      animation: .68s headingshift cubic-bezier(.85,0,1,1);
-      @keyframes headingshift {
-        0%   { transform: translate(0); }
-        30%  { transform: translate(0); }
-        100% { transform: translate(-4px); }
-      }
-    }
-    span::selection {
-      background-color: transparent;
-      color: @header-selection;
-      .text-shadow.drop(6, #518AD6);
-    }
-    span::-moz-selection {
-      background-color: transparent;
-      color: @header-selection;
-      .text-shadow.drop(6, #518AD6);
-    }
   }
   .subheader {
     position: absolute;
-	//height of the header divided by 4 minus the header height brought back to the body font size times 2
-    bottom: calc((@headheight)/4 - 2em);
-    font-family: 'Segoe UI', 'Arial', sans-serif;
-    font-size: 1em;
-    font-style: italic;
-    margin: 0;
+    bottom: calc((@header-height) / 4 - 2em);
     white-space: nowrap;
-    animation: .6s fadein ease-in;
-    .selection(@subheader-selection);
     .mode-transition.background();
     .mode-transition.color();
   }
-  @keyframes fadein {
-    from { opacity: 0.1; }
-  }
 
   html.light-mode & {
-    box-shadow: 0 2px 16px @header-shadow--lt;
-    background-color: @header-bg--lt;
     color: @heading--lt;
     h1 {
       .text-shadow.drop(6, @heading-shadow--lt);
-      &:hover::before {
-        color: @header-bg--lt;
-        .text-shadow.around(7, @header-bg--lt);
-      }
     }
   }
 }
@@ -167,44 +92,6 @@ body {
       from {
         transform: translateY(-17px);
       }
-    }
-  }
-}
-
-@headheight640: ~'24vw + 12vh + 32.8px';
-@media (max-width: 640px) {
-  #header {
-    height: calc(@headheight640);
-    .subheader {
-      bottom: calc((@headheight640)/4 - ((17.5vw + 2vh + -1.62px) * 0.145) * 2);
-    }
-  }
-}
-#header h1 {
-  .media-loop();
-  .media-loop(@start: 550px, @it: 5, @trail: true) when (@it > 3) {
-    @media (max-width: @start) {
-      .text-shadow.drop(@it, @heading-shadow, @trail);
-      html.light-mode & {
-        .text-shadow.drop(@it, @heading-shadow--lt, @trail);
-      }
-    }
-    & when (@trail = true) {
-      .media-loop(@start - 60px, @it, false);
-    }
-    & when (@trail = false) {
-      .media-loop(@start - 60px, @it - 1, true);
-    }
-  }
-}
-
-@media (max-width: 330px) {
-  #header {
-    h1 {
-      font-size: calc(10vw + 1vh + 31.13px);
-    }
-    .subheader {
-      bottom: calc((@headheight640)/4 - ((10vw + 1vh + 31.13px) * 0.145) * 2);
     }
   }
 }

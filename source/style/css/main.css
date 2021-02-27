@@ -25,8 +25,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 2px 16px hsla(0, 0%, 5%, 0.25);
-  background-color: hsl(0, 0%, 12.5%);
   height: calc(8vw + 16vh + 103px);
   color: hsl(0, 0%, 66%);
   transition: background 0.15s linear, box-shadow 0.15s linear;
@@ -35,109 +33,21 @@ body {
   font: bold 6.9em 'Century Gothic', 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', sans-serif;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  text-shadow: 0px 0px hsl(0, 0%, 52%), 0.5px 0.5px hsl(0, 0%, 52%), 1px 1px hsl(0, 0%, 52%), 1.5px 1.5px hsl(0, 0%, 52%), 2px 2px hsl(0, 0%, 52%), 2.5px 2.5px hsl(0, 0%, 52%), 3px 3px hsl(0, 0%, 52%), 3.5px 3.5px hsl(0, 0%, 52%), 4px 4px hsl(0, 0%, 52%), 4.5px 4.5px hsl(0, 0%, 52%), 5px 5px hsl(0, 0%, 52%), 5.5px 5.5px hsl(0, 0%, 52%), 6px 6px hsl(0, 0%, 52%);
   margin: 0;
   transition: transform 0.76s, text-shadow 0.15s linear, color 0.15s linear;
-  animation: 0.75s fadein linear, 0.9s shiftin, 0.4s shadowIn cubic-bezier(0.43, 0.1, 0.15, 1.1);
-}
-@keyframes shiftin {
-  from {
-    transform: translateY(-45px);
-  }
-}
-@keyframes shadowIn {
-  from {
-    text-shadow: 1px 1px hsl(0, 0%, 52%), 1.5px 1.5px hsl(0, 0%, 52%), 2px 2px hsl(0, 0%, 52%);
-  }
-}
-#header h1:not(.nohover):hover {
-  transform: scale(0.78) scale(1.294);
-}
-#header h1 .cut-after {
-  display: none;
-}
-#header h1::before {
-  color: hsl(0, 0%, 12.5%);
-  text-shadow: 7px 7px hsl(0, 0%, 12.5%), 7px -7px hsl(0, 0%, 12.5%), -7px 7px hsl(0, 0%, 12.5%), -7px -7px hsl(0, 0%, 12.5%);
-}
-#header h1::before,
-#header h1 .cut-after {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-#header h1:not(.nohover):hover::before {
-  content: attr(data-heading);
-  clip-path: polygon(0 58%, 0 0, 100% 0, 100% 37%);
-  animation: 0.3s headingcut ease-in;
-}
-@keyframes headingcut {
-  from {
-    clip-path: polygon(100% 37%, 100% 0, 100% 0, 100% 37%);
-  }
-  to {
-    clip-path: polygon(0 58%, 0 0, 100% 0, 100% 37%);
-  }
-}
-#header h1:not(.nohover):hover .cut-after {
-  display: block;
-  clip-path: polygon(0 57.5%, 0 0, 100% 0, 100% 36.5%);
-  transform: translate(-4px);
-  animation: 0.68s headingshift cubic-bezier(0.85, 0, 1, 1);
-}
-@keyframes headingshift {
-  0% {
-    transform: translate(0);
-  }
-  30% {
-    transform: translate(0);
-  }
-  100% {
-    transform: translate(-4px);
-  }
-}
-#header h1 span::selection {
-  background-color: transparent;
-  color: #17469E;
-  text-shadow: 0px 0px #518AD6, 0.5px 0.5px #518AD6, 1px 1px #518AD6, 1.5px 1.5px #518AD6, 2px 2px #518AD6, 2.5px 2.5px #518AD6, 3px 3px #518AD6, 3.5px 3.5px #518AD6, 4px 4px #518AD6, 4.5px 4.5px #518AD6, 5px 5px #518AD6, 5.5px 5.5px #518AD6, 6px 6px #518AD6;
-}
-#header h1 span::-moz-selection {
-  background-color: transparent;
-  color: #17469E;
-  text-shadow: 0px 0px #518AD6, 0.5px 0.5px #518AD6, 1px 1px #518AD6, 1.5px 1.5px #518AD6, 2px 2px #518AD6, 2.5px 2.5px #518AD6, 3px 3px #518AD6, 3.5px 3.5px #518AD6, 4px 4px #518AD6, 4.5px 4.5px #518AD6, 5px 5px #518AD6, 5.5px 5.5px #518AD6, 6px 6px #518AD6;
+  text-shadow: 0px 0px hsl(0, 0%, 52%), 0.5px 0.5px hsl(0, 0%, 52%), 1px 1px hsl(0, 0%, 52%), 1.5px 1.5px hsl(0, 0%, 52%), 2px 2px hsl(0, 0%, 52%), 2.5px 2.5px hsl(0, 0%, 52%), 3px 3px hsl(0, 0%, 52%), 3.5px 3.5px hsl(0, 0%, 52%), 4px 4px hsl(0, 0%, 52%), 4.5px 4.5px hsl(0, 0%, 52%), 5px 5px hsl(0, 0%, 52%), 5.5px 5.5px hsl(0, 0%, 52%), 6px 6px hsl(0, 0%, 52%);
 }
 #header .subheader {
   position: absolute;
-  bottom: calc((8vw + 16vh + 103px)/4 - 2em);
-  font-family: 'Segoe UI', 'Arial', sans-serif;
-  font-size: 1em;
-  font-style: italic;
-  margin: 0;
+  bottom: calc((8vw + 16vh + 103px) / 4 - 2em);
   white-space: nowrap;
-  animation: 0.6s fadein ease-in;
   transition: background 0.15s linear, color 0.15s linear;
 }
-#header .subheader::selection,
-#header .subheader::-moz-selection {
-  background-color: transparent;
-  color: #469870;
-}
-@keyframes fadein {
-  from {
-    opacity: 0.1;
-  }
-}
 html.light-mode #header {
-  box-shadow: 0 2px 16px hsla(0, 0%, 80.5%, 0.25);
-  background-color: hsl(0, 0%, 98%);
   color: hsl(0, 0%, 36%);
 }
 html.light-mode #header h1 {
   text-shadow: 0px 0px hsl(0, 0%, 51%), 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%), 6px 6px hsl(0, 0%, 51%);
-}
-html.light-mode #header h1:hover::before {
-  color: hsl(0, 0%, 98%);
-  text-shadow: 7px 7px hsl(0, 0%, 98%), 7px -7px hsl(0, 0%, 98%), -7px 7px hsl(0, 0%, 98%), -7px -7px hsl(0, 0%, 98%);
 }
 #box-nav {
   display: flex;
@@ -176,53 +86,5 @@ html.light-mode #header h1:hover::before {
 @keyframes shiftinBox {
   from {
     transform: translateY(-17px);
-  }
-}
-@media (max-width: 640px) {
-  #header {
-    height: calc(24vw + 12vh + 32.8px);
-  }
-  #header .subheader {
-    bottom: calc((24vw + 12vh + 32.8px)/4 - ((17.5vw + 2vh + -1.62px) * 0.145) * 2);
-  }
-}
-@media (max-width: 550px) {
-  #header h1 {
-    text-shadow: 0px 0px hsl(0, 0%, 52%), 0.5px 0.5px hsl(0, 0%, 52%), 1px 1px hsl(0, 0%, 52%), 1.5px 1.5px hsl(0, 0%, 52%), 2px 2px hsl(0, 0%, 52%), 2.5px 2.5px hsl(0, 0%, 52%), 3px 3px hsl(0, 0%, 52%), 3.5px 3.5px hsl(0, 0%, 52%), 4px 4px hsl(0, 0%, 52%), 4.5px 4.5px hsl(0, 0%, 52%), 5px 5px hsl(0, 0%, 52%), 5.5px 5.5px hsl(0, 0%, 52%);
-  }
-  html.light-mode #header h1 {
-    text-shadow: 0px 0px hsl(0, 0%, 51%), 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%);
-  }
-}
-@media (max-width: 490px) {
-  #header h1 {
-    text-shadow: 0px 0px hsl(0, 0%, 52%), 0.5px 0.5px hsl(0, 0%, 52%), 1px 1px hsl(0, 0%, 52%), 1.5px 1.5px hsl(0, 0%, 52%), 2px 2px hsl(0, 0%, 52%), 2.5px 2.5px hsl(0, 0%, 52%), 3px 3px hsl(0, 0%, 52%), 3.5px 3.5px hsl(0, 0%, 52%), 4px 4px hsl(0, 0%, 52%), 4.5px 4.5px hsl(0, 0%, 52%), 5px 5px hsl(0, 0%, 52%);
-  }
-  html.light-mode #header h1 {
-    text-shadow: 0px 0px hsl(0, 0%, 51%), 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%);
-  }
-}
-@media (max-width: 430px) {
-  #header h1 {
-    text-shadow: 0px 0px hsl(0, 0%, 52%), 0.5px 0.5px hsl(0, 0%, 52%), 1px 1px hsl(0, 0%, 52%), 1.5px 1.5px hsl(0, 0%, 52%), 2px 2px hsl(0, 0%, 52%), 2.5px 2.5px hsl(0, 0%, 52%), 3px 3px hsl(0, 0%, 52%), 3.5px 3.5px hsl(0, 0%, 52%), 4px 4px hsl(0, 0%, 52%), 4.5px 4.5px hsl(0, 0%, 52%);
-  }
-  html.light-mode #header h1 {
-    text-shadow: 0px 0px hsl(0, 0%, 51%), 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%);
-  }
-}
-@media (max-width: 370px) {
-  #header h1 {
-    text-shadow: 0px 0px hsl(0, 0%, 52%), 0.5px 0.5px hsl(0, 0%, 52%), 1px 1px hsl(0, 0%, 52%), 1.5px 1.5px hsl(0, 0%, 52%), 2px 2px hsl(0, 0%, 52%), 2.5px 2.5px hsl(0, 0%, 52%), 3px 3px hsl(0, 0%, 52%), 3.5px 3.5px hsl(0, 0%, 52%), 4px 4px hsl(0, 0%, 52%);
-  }
-  html.light-mode #header h1 {
-    text-shadow: 0px 0px hsl(0, 0%, 51%), 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%);
-  }
-}
-@media (max-width: 330px) {
-  #header h1 {
-    font-size: calc(10vw + 1vh + 31.13px);
-  }
-  #header .subheader {
-    bottom: calc((24vw + 12vh + 32.8px)/4 - ((10vw + 1vh + 31.13px) * 0.145) * 2);
   }
 }
