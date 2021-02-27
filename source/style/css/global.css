@@ -23,9 +23,15 @@ No necessity to write this in here but Less is awesome!
 }
 html {
   scrollbar-color: hsl(0, 0%, 35%) hsl(0, 0%, 17%);
+  font-size: calc(0.08vw + 0.04vh + 16.05px);
 }
 html.light-mode {
   scrollbar-color: auto;
+}
+@media (max-width: 960px) {
+  html {
+    font-size: calc(0.4vw + 0.1vh + 12.55px);
+  }
 }
 body {
   margin: 0;
@@ -248,7 +254,7 @@ html.light-mode #modes .mode-gear .moon {
   display: flex;
   align-items: center;
   flex-direction: column;
-  font-size: calc(0.08vw + 0.04vh + 16.5px);
+  font-size: 1rem;
   padding: 1em 0;
   background-color: hsl(0, 0%, 4.5%);
   color: hsl(0, 0%, 84%);
@@ -402,7 +408,7 @@ html.light-mode #footer a::before {
   overflow: hidden;
   width: 17.1em;
   height: 19em;
-  font-size: 1.25em;
+  font-size: 1.32rem;
   color: hsl(0, 0%, 85%);
   background-color: hsl(0, 0%, 10.5%);
   border-top: 4px solid hsl(0, 0%, 26.5%);

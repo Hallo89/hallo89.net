@@ -10,7 +10,6 @@ No necessity to write this in here but Less is awesome!
 
 body {
   margin: 0;
-  font-size: calc(.05vw + .025vh + 17.82px);
 }
 
 #modes {
@@ -174,14 +173,8 @@ body {
 
 @headheight640: ~'24vw + 12vh + 32.8px';
 @media (max-width: 640px) {
-  body {
-    font-size: calc(1.1vw + 11.28px);
-  }
   #header {
     height: calc(@headheight640);
-    h1 {
-      font-size: calc(17.5vw + 2vh + -1.62px);
-    }
     .subheader {
       bottom: calc((@headheight640)/4 - ((17.5vw + 2vh + -1.62px) * 0.145) * 2);
     }
