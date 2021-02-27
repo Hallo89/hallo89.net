@@ -367,6 +367,9 @@ html.light-mode #footer a::before {
   border-bottom: 1px solid hsl(0, 0%, 88%);
 }
 @media (max-width: 700px) {
+  #footer {
+    padding: 1em 0.5em;
+  }
   #footer .nav-wrapper {
     flex-flow: column;
   }
