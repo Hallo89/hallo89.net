@@ -7,6 +7,10 @@
   user-select: none;
 }
 
+#for(@end-inclusive, @rule) {
+  each(range(@end-inclusive), @rule);
+}
+
 .selection(@color; @background: transparent;) {
   &::selection, &::-moz-selection {
     background-color: @background;
