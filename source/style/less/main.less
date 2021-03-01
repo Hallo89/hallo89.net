@@ -39,7 +39,9 @@ body {
   .mode-transition.background();
   .mode-transition.shadow();
   h1 {
-    font: bold @h1-font-size 'Century Gothic', 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', sans-serif;
+    font-family: 'Century Gothic', 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', sans-serif;
+    font-weight: bold;
+    font-size: @h1-font-size;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     white-space: nowrap;
@@ -80,6 +82,10 @@ body {
         transform: scale(1.045) translateY(.0125em);
         .drop-shadow(9, hsl(0, 0%, 62%));
       }
+    }
+
+    @media (max-width: 880px) {
+      font-size: calc(10vw + .5vh + 35.9px);
     }
   }
   .subheader {

@@ -30,14 +30,16 @@ body {
   transition: background 0.15s linear, box-shadow 0.15s linear;
 }
 #header h1 {
-  font: bold 7.6em 'Century Gothic', 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', sans-serif;
+  font-family: 'Century Gothic', 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', sans-serif;
+  font-weight: bold;
+  font-size: 7.6em;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   white-space: nowrap;
   margin: 0;
   transition: transform 0.76s, text-shadow 0.15s linear, color 0.15s linear;
   cursor: default;
-  text-shadow: 0px 0px hsl(0, 0%, 62%), 0.5px 0.5px hsl(0, 0%, 62%), 1px 1px hsl(0, 0%, 62%), 1.5px 1.5px hsl(0, 0%, 62%), 2px 2px hsl(0, 0%, 62%), 2.5px 2.5px hsl(0, 0%, 62%), 3px 3px hsl(0, 0%, 62%), 3.5px 3.5px hsl(0, 0%, 62%), 4px 4px hsl(0, 0%, 62%), 4.5px 4.5px hsl(0, 0%, 62%), 5px 5px hsl(0, 0%, 62%), 5.5px 5.5px hsl(0, 0%, 62%), 6px 6px hsl(0, 0%, 62%), 6.5px 6.5px hsl(0, 0%, 62%), 7px 7px hsl(0, 0%, 62%), 7.5px 7.5px hsl(0, 0%, 62%), 8px 8px hsl(0, 0%, 62%);
+  text-shadow: 0.5px 0.5px hsl(0, 0%, 62%), 1px 1px hsl(0, 0%, 62%), 1.5px 1.5px hsl(0, 0%, 62%), 2px 2px hsl(0, 0%, 62%), 2.5px 2.5px hsl(0, 0%, 62%), 3px 3px hsl(0, 0%, 62%), 3.5px 3.5px hsl(0, 0%, 62%), 4px 4px hsl(0, 0%, 62%), 4.5px 4.5px hsl(0, 0%, 62%), 5px 5px hsl(0, 0%, 62%), 5.5px 5.5px hsl(0, 0%, 62%), 6px 6px hsl(0, 0%, 62%), 6.5px 6.5px hsl(0, 0%, 62%), 7px 7px hsl(0, 0%, 62%), 7.5px 7.5px hsl(0, 0%, 62%), 8px 8px hsl(0, 0%, 62%);
 }
 #header h1 span {
   display: inline-block;
@@ -192,7 +194,12 @@ body {
   }
   60% {
     transform: scale(1.045) translateY(0.0125em);
-    text-shadow: 0px 0px hsl(0, 0%, 62%), 0.5px 0.5px hsl(0, 0%, 62%), 1px 1px hsl(0, 0%, 62%), 1.5px 1.5px hsl(0, 0%, 62%), 2px 2px hsl(0, 0%, 62%), 2.5px 2.5px hsl(0, 0%, 62%), 3px 3px hsl(0, 0%, 62%), 3.5px 3.5px hsl(0, 0%, 62%), 4px 4px hsl(0, 0%, 62%), 4.5px 4.5px hsl(0, 0%, 62%), 5px 5px hsl(0, 0%, 62%), 5.5px 5.5px hsl(0, 0%, 62%), 6px 6px hsl(0, 0%, 62%), 6.5px 6.5px hsl(0, 0%, 62%), 7px 7px hsl(0, 0%, 62%), 7.5px 7.5px hsl(0, 0%, 62%), 8px 8px hsl(0, 0%, 62%), 8.5px 8.5px hsl(0, 0%, 62%), 9px 9px hsl(0, 0%, 62%);
+    text-shadow: 0.5px 0.5px hsl(0, 0%, 62%), 1px 1px hsl(0, 0%, 62%), 1.5px 1.5px hsl(0, 0%, 62%), 2px 2px hsl(0, 0%, 62%), 2.5px 2.5px hsl(0, 0%, 62%), 3px 3px hsl(0, 0%, 62%), 3.5px 3.5px hsl(0, 0%, 62%), 4px 4px hsl(0, 0%, 62%), 4.5px 4.5px hsl(0, 0%, 62%), 5px 5px hsl(0, 0%, 62%), 5.5px 5.5px hsl(0, 0%, 62%), 6px 6px hsl(0, 0%, 62%), 6.5px 6.5px hsl(0, 0%, 62%), 7px 7px hsl(0, 0%, 62%), 7.5px 7.5px hsl(0, 0%, 62%), 8px 8px hsl(0, 0%, 62%), 8.5px 8.5px hsl(0, 0%, 62%), 9px 9px hsl(0, 0%, 62%);
+  }
+}
+@media (max-width: 880px) {
+  #header h1 {
+    font-size: calc(10vw + 0.5vh + 35.9px);
   }
 }
 #header .subheader {
@@ -205,7 +212,7 @@ html.light-mode #header {
   color: hsl(0, 0%, 36%);
 }
 html.light-mode #header h1 {
-  text-shadow: 0px 0px hsl(0, 0%, 51%), 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%), 6px 6px hsl(0, 0%, 51%), 6.5px 6.5px hsl(0, 0%, 51%), 7px 7px hsl(0, 0%, 51%), 7.5px 7.5px hsl(0, 0%, 51%), 8px 8px hsl(0, 0%, 51%);
+  text-shadow: 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%), 6px 6px hsl(0, 0%, 51%), 6.5px 6.5px hsl(0, 0%, 51%), 7px 7px hsl(0, 0%, 51%), 7.5px 7.5px hsl(0, 0%, 51%), 8px 8px hsl(0, 0%, 51%);
 }
 #box-nav {
   display: flex;
