@@ -36,7 +36,15 @@
   <body>
 
     <header id="header">
-      <h1 data-heading="Hallo89"><span>Hallo89</span></h1>
+      <h1>
+        <span data-count="1">H</span
+        ><span data-count="2">a</span
+        ><span data-count="3">l</span
+        ><span data-count="4">l</span
+        ><span data-count="5">o</span
+        ><span data-count="6">8</span
+        ><span data-count="7">9</span>
+      </h1>
       <em class="subheader">
         <script>
           document.write(randomSubheader[Math.floor(randomSubheader.length*Math.random())]);
@@ -50,5 +58,64 @@
     </nav>
 
     {% include "templates/footer.njk" %}
+
+    <script>
+      const h1 = document.querySelector('#header h1');
+      let timeoutID;
+      let currentSpan;
+
+      const TEXTLEN = h1.textContent.trim().length;
+      const Animation = {
+        ROOT: 1.375,
+        DURATION: .37,
+        DELAY: .13
+      };
+
+      h1.addEventListener('click', h1Click);
+      h1.addEventListener('mousemove', h1Move);
+      h1.addEventListener('mouseleave', h1Leave);
+
+      function h1Click(e) {
+        const target = e.target;
+        if (target.tagName != 'H1') {
+          for (var i = 1; i <= TEXTLEN; i++) {
+            h1.classList.remove('wave' + i);
+          }
+          if (timeoutID != null) clearTimeout(timeoutID);
+          void h1.offsetHeight; // Trigger a document reflow
+
+          const count = target.dataset.count;
+          // These calculations mirror the used CSS animation's timings
+          const iterations = Math.abs(Number(count) - Math.ceil(TEXTLEN / 2)) + Math.ceil(TEXTLEN / 2);
+          const runTime = Animation.DURATION + Animation.DELAY * Math.pow(iterations - 1, 1 / Animation.ROOT);
+
+          h1.classList.add('wave' + count);
+          timeoutID = setTimeout(function() {
+            h1.classList.remove('wave' + count);
+          }, runTime * 1000);
+        }
+      }
+      function h1Move(e) {
+        const target = e.target;
+        if (target.tagName != 'H1' && target != currentSpan) {
+          if (currentSpan) toggleAdjacentNodes(currentSpan, 2, 'remove');
+
+          toggleAdjacentNodes(target, 2, 'add');
+
+          currentSpan = e.target;
+        }
+      }
+      function h1Leave() {
+        toggleAdjacentNodes(currentSpan, 2, 'remove');
+        currentSpan = null;
+      }
+
+      function toggleAdjacentNodes(node, depth, operation, dir, i = 0) {
+        if (!node || i > depth) return;
+        node.classList[operation]('scale' + (i + 1));
+        if (!dir || dir == 'prev') toggleAdjacentNodes(node.previousElementSibling, depth, operation, 'prev', i + 1);
+        if (!dir || dir == 'next') toggleAdjacentNodes(node.nextElementSibling, depth, operation, 'next', i + 1);
+      }
+    </script>
   </body>
 </html>

@@ -7,39 +7,10 @@
   user-select: none;
 }
 
-.boxanimation(@seconds) {
-  animation: @seconds shiftinBox ease-out;
-}
-
-.text-shadow() {
-  .drop(@amount, @color, @trail-comma: false, @it: 0) {
-    & when (@it < @amount) {
-      text-shadow+:
-        unit(@it, px) unit(@it, px) @color,
-        @it + .5px @it + .5px @color;
-      .text-shadow.drop(@amount, @color, @trail-comma, @it + 1);
-    }
-    & when (@it = @amount) {
-      text-shadow+: unit(@it, px) unit(@it, px) @color;
-      & when (@trail-comma = true) {
-        text-shadow+: @it + .5px @it + .5px @color;
-      }
-    }
-  }
-  .around(@size, @color, @it: 0) when (@it < 4) {
-    & when (@it = 0) {
-      text-shadow+: unit(@size, px) unit(@size, px) @color;
-    }
-    & when (@it = 1) {
-      text-shadow+: unit(@size, px) unit(-@size, px) @color;
-    }
-    & when (@it = 2) {
-      text-shadow+: unit(-@size, px) unit(@size, px) @color;
-    }
-    & when (@it = 3) {
-      text-shadow+: unit(-@size, px) unit(-@size, px) @color;
-    }
-    .text-shadow.around(@size, @color, @it + 1);
+.selection(@color; @background: transparent;) {
+  &::selection, &::-moz-selection {
+    background-color: @background;
+    color: @color;
   }
 }
 
@@ -61,10 +32,62 @@
   }
 }
 
+.boxanimation(@seconds) {
+  animation: @seconds shiftinBox ease-out;
+}
 
-.selection(@color; @background: transparent;) {
-  &::selection, &::-moz-selection {
-    background-color: @background;
-    color: @color;
+.text-shadow() {
+  .drop(@amount, @color, @trail-comma: false, @it: 0) {
+    & when (@it < @amount) {
+      text-shadow+:
+        unit(@it, px) unit(@it, px) @color,
+        @it + .5px @it + .5px @color;
+      .text-shadow.drop(@amount, @color, @trail-comma, @it + 1);
+    }
+    & when (@it = @amount) {
+      text-shadow+: unit(@it, px) unit(@it, px) @color;
+      & when (@trail-comma = true) {
+        text-shadow+: @it + .5px @it + .5px @color;
+      }
+    }
+  }
+}
+
+.wave() {
+  #animation(@it) {
+    // this is a root function to approximate an ease-in
+    animation: .37s .13s * pow(@it, 1 / 1.375) textWave ease;
+  }
+
+  .generate-targets(@textlen, @class) {
+    each(range(@textlen), {
+      &.@{class}@{index} span {
+        .wave.target(@textlen, @index);
+      }
+    });
+  }
+  .target(@textlen, @target, @it: 0) {
+    @half: ceil(@textlen / 2);
+    & when (@it < abs(@target - @half) + @half) {
+      @next: @target + @it;
+      @prev: @target - @it;
+      & when (@prev > 0) and (@next <= @textlen) and not (@next = @prev) {
+        &:nth-child(@{next}),
+        &:nth-child(@{prev}) {
+          .wave#animation(@it);
+        }
+      }
+      & when not (@prev > 0) or (@next = @prev) {
+        &:nth-child(@{next}) {
+          .wave#animation(@it);
+        }
+      }
+      & when not (@next <= @textlen) {
+        &:nth-child(@{prev}) {
+          .wave#animation(@it);
+        }
+      }
+      .wave.target(@textlen, @target, @it + 1);
+    }
   }
 }

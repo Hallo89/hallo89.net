@@ -28,29 +28,63 @@ body {
   }
 }
 
-@header-height: ~'8vw + 16vh + 103px';
+@h1-font-size: 7.6em;
 #header {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(@header-height);
-  color: @heading;
+  height: calc(8vw + 16vh + 103px);
+  color: hsl(0, 0%, 86%);
   .mode-transition.background();
   .mode-transition.shadow();
   h1 {
-    font: bold 6.9em 'Century Gothic', 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', sans-serif;
+    font: bold @h1-font-size 'Century Gothic', 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', sans-serif;
     text-transform: uppercase;
     letter-spacing: 1.5px;
+    white-space: nowrap;
     margin: 0;
     transition+: transform .76s;
-    .text-shadow.drop(6, @heading-shadow);
+    cursor: default;
+    .text-shadow.drop(8, hsl(0, 0%, 62%));
     .mode-transition.textshadow();
     .mode-transition.color();
+
+    // hover & wave animation
+    span {
+      display: inline-block;
+      transition: transform .125s ease;
+      // don't use the hover effect on touch-based devices because it interferes with the wave
+      @media (hover: hover) {
+        &.scale1 {
+          transform: scale(.91);
+        }
+        &.scale2 {
+          transform: scale(.94);
+        }
+        &.scale3 {
+          transform: scale(.9825);
+        }
+      }
+      &:active {
+        transform: scale(.875);
+      }
+    }
+    .wave.generate-targets(7, wave);
+
+    @keyframes textWave {
+      25% {
+        transform: scale(.9375);
+      }
+      60% {
+        transform: scale(1.045) translateY(.0125em);
+        .text-shadow.drop(9, hsl(0, 0%, 62%));
+      }
+    }
   }
   .subheader {
     position: absolute;
-    bottom: calc((@header-height) / 4 - 2em);
+    bottom: calc((100% - @h1-font-size * 1.23) / 4);
     white-space: nowrap;
     .mode-transition.background();
     .mode-transition.color();
@@ -59,7 +93,7 @@ body {
   html.light-mode & {
     color: @heading--lt;
     h1 {
-      .text-shadow.drop(6, @heading-shadow--lt);
+      .text-shadow.drop(8, @heading-shadow--lt);
     }
   }
 }
@@ -72,15 +106,8 @@ body {
   justify-items: center;
   margin: 1.842em 1.053em;
   grid-gap: 2.105em;
-  grid-template-columns: repeat(auto-fit, minmax(21.375em, 1fr));
-  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(22.57em, 1fr));
   .box {
-    width: 14.9em;
-    height: 16.34em;
-    .box-header .header-text {
-      padding: 0.871em 0.762em;
-      line-height: 1.016em;
-    }
     .box-animation-loop();
     .box-animation-loop(@amount: 5, @seconds: .5s, @it: 1) when (@it < @amount + 1) {
       &:nth-child(@{it}) {
