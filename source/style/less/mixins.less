@@ -36,19 +36,17 @@
   animation: @seconds shiftinBox ease-out;
 }
 
-.text-shadow() {
-  .drop(@amount, @color, @trail-comma: false, @it: 0) {
-    & when (@it < @amount) {
-      text-shadow+:
-        unit(@it, px) unit(@it, px) @color,
-        @it + .5px @it + .5px @color;
-      .text-shadow.drop(@amount, @color, @trail-comma, @it + 1);
-    }
-    & when (@it = @amount) {
-      text-shadow+: unit(@it, px) unit(@it, px) @color;
-      & when (@trail-comma = true) {
-        text-shadow+: @it + .5px @it + .5px @color;
-      }
+.drop-shadow(@amount, @color, @trail-comma: false, @it: 0) {
+  & when (@it < @amount) {
+    text-shadow+:
+      unit(@it, px) unit(@it, px) @color,
+      @it + .5px @it + .5px @color;
+    .drop-shadow(@amount, @color, @trail-comma, @it + 1);
+  }
+  & when (@it = @amount) {
+    text-shadow+: unit(@it, px) unit(@it, px) @color;
+    & when (@trail-comma = true) {
+      text-shadow+: @it + .5px @it + .5px @color;
     }
   }
 }

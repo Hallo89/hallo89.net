@@ -46,7 +46,7 @@ body {
     margin: 0;
     transition+: transform .76s;
     cursor: default;
-    .text-shadow.drop(8, hsl(0, 0%, 62%));
+    .drop-shadow(8, hsl(0, 0%, 62%));
     .mode-transition.textshadow();
     .mode-transition.color();
 
@@ -78,7 +78,7 @@ body {
       }
       60% {
         transform: scale(1.045) translateY(.0125em);
-        .text-shadow.drop(9, hsl(0, 0%, 62%));
+        .drop-shadow(9, hsl(0, 0%, 62%));
       }
     }
   }
@@ -93,7 +93,7 @@ body {
   html.light-mode & {
     color: @heading--lt;
     h1 {
-      .text-shadow.drop(8, @heading-shadow--lt);
+      .drop-shadow(8, @heading-shadow--lt);
     }
   }
 }
