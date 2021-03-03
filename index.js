@@ -1,13 +1,15 @@
 const fs = require('fs');
-const fetch = require('node-fetch');
 const express = require('express');
 const nunjucks = require('nunjucks');
 const argon = require('argon-parser');
 const markdown = require('markdown-it')({
   breaks: true
 });
-const sl89Docs = require('./source/data/slider89/docs.json');
-const staticSl89GitData = require('./source/data/slider89/static-git.json');
+const slider89Data = {
+  docs: require('./source/data/slider89/docs.json'),
+  // This is completely static
+  versions: require('./source/data/slider89/static-git.json')
+};
 const pageData = require('./source/data/page-data.json');
 const staticExclusions = [
   'data',
@@ -19,32 +21,6 @@ const njk = nunjucks.configure('pages', {
   express: app
 });
 
-fetch('https://api.github.com/repos/Hallo89/Slider89/releases')
-  .then(res => res.json())
-  .then(data => {
-    if (!Array.isArray(data)) data = staticSl89GitData;
-    for (version of data) {
-      version.body = (function(body) {
-        while(match = /https:\/\/hallo89\.net\/slider89(#[\w-]+)/.exec(body)) {
-          body = body.replace(match[0], match[1]);
-        }
-        body = markdown.render(body);
-        return body;
-      })(version.body);
-      version.date = (function() {
-        const date = new Date(version.created_at);
-        return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
-      })();
-      if (version == data[0]) {
-        const now = new Date(Date.now());
-        now.setMonth(now.getMonth() - 1);
-        version.new = new Date(version.created_at) > now ? true : false;
-      } else version.new = false;
-    }
-    return data;
-  }).then(sl89GitData => {
-    getNJK('slider89', {data: sl89Docs, gitData: sl89GitData});
-  });
 (function() {
   njk.addGlobal('staticPageData', pageData);
   njk.addGlobal('compareVer', function(ver1, ver2) {
@@ -182,4 +158,8 @@ get('tools/spacing');
 getNJK('webgl', false, 'WebGL Experiments');
 get('webgl/triangles');
 get('webgl/matrices3d');
+getNJK('slider89', {
+  data: slider89Data.docs,
+  gitData: slider89Data.versions
+});
 get('sponge');
