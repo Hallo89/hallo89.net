@@ -432,16 +432,17 @@ html.light-mode #footer a::before {
 .e-glb-box:hover .description {
   opacity: 1;
   visibility: visible;
-  transform: translateY(-0.2em);
+  transform: translateY(-0.185em);
 }
 .e-glb-box:hover .backdrop {
   -webkit-filter: blur(20px) brightness(65%);
   filter: blur(20px) brightness(65%);
 }
 .e-glb-box .description {
-  line-height: 1.28em;
+  font-size: 0.96em;
+  line-height: 1.25em;
   margin: 0;
-  padding: 0 1em;
+  padding: 0 1.172em;
   opacity: 0;
   visibility: hidden;
   transition: transform 0.175s cubic-bezier(0.3, 0.15, 0.15, 1), opacity 0.1s ease-in-out, visibility 0.1s linear;

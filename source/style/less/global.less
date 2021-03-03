@@ -476,7 +476,7 @@ body {
     .description {
       opacity: 1;
       visibility: visible;
-      transform: translateY(-.2em);
+      transform: translateY(-.185em);
     }
     .backdrop {
       -webkit-filter: blur(20px) brightness(65%);
@@ -484,9 +484,11 @@ body {
     }
   }
   .description {
-    line-height: 1.28em;
+    font-size: .96em;
+    line-height: 1.25em;
     margin: 0;
-    padding: 0 1em;
+    // NOTE: padding must match the combined h2 + span's padding
+    padding: 0 1.172em;
     opacity: 0;
     visibility: hidden;
     transition:
