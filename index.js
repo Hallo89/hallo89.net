@@ -123,29 +123,30 @@ function get(which, fileName) {
     res.sendFile(__dirname + '/pages/' + (fileName || which) + '.html');
   });
 }
-function getNJK(which, obj, dataName, fileName) {
-  let params = {};
-  if (which) {
-    let data;
-    if (dataName) {
-      if (Array.isArray(dataName)) {
-        data = pageData;
-        dataName.forEach(val => {
-          data = data[val];
-          if (data && data.children) data = data.children;
-        });
-      } else data = pageData[dataName];
-    } else data = pageData[which.slice(0, 1).toUpperCase() + which.slice(1)];
-    if (data && data.children) data = data.children;
-    params.pageData = data;
-  } else {
-    params.pageData = pageData;
+function getNJK(viewPath, customParams, dataName, fileName = viewPath) {
+  let renderParams = {
+    page: viewPath,
+    name: viewPath.includes('/') ? viewPath.slice(0, viewPath.indexOf('/')) : viewPath
+  };
+  renderParams.pageData = (function() {
+    if (viewPath) {
+      let data;
+      if (dataName) {
+        data = pageData[dataName]
+      } else {
+        data = pageData[viewPath.slice(0, 1).toUpperCase() + viewPath.slice(1)];
+      }
+      return data?.children || data;
+    } else {
+      return pageData;
+    }
+  }());
+  if (customParams) {
+    renderParams = Object.assign(renderParams, customParams);
   }
-  params.page = which;
-  params.name = which.includes('/') ? which.slice(0, which.indexOf('/')) : which;
-  if (obj) params = Object.assign(params, obj);
-  app.get('/' + which, function(req, res) {
-    res.render(fileName || which, params);
+
+  app.get('/' + viewPath, function(req, res) {
+    res.render(fileName, renderParams);
   });
 }
 
