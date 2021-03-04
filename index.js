@@ -1,5 +1,6 @@
 const fs = require('fs');
 const express = require('express');
+const yaml = require('js-yaml');
 const nunjucks = require('nunjucks');
 const argon = require('argon-parser');
 const markdown = require('markdown-it')({
@@ -10,7 +11,7 @@ const slider89Data = {
   // This is completely static
   versions: require('./source/data/slider89/static-git.json')
 };
-const pageData = require('./source/data/page-data.json');
+const pageData = yaml.load(fs.readFileSync('./source/data/page-data.yml', 'utf8'));
 const staticExclusions = [
   'data',
   'style'
