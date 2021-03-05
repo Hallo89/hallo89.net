@@ -1,7 +1,14 @@
 const hasAccepted = getCookie('acceptedCookies');
 const banner = (function() {
   const node = document.createElement('div');
-  node.innerHTML = '<aside class="glb-box" id="cookiebanner"><b class="background"></b><div class="description box-text">This site uses cookies by Cloudflare, this banner and to save your preferenced theme color. By continuing to use it, you agree to them!</div><button type="button" onclick="hideBanner()">Alrighty!</button></aside>';
+  node.innerHTML =
+    '<aside id="cookiebanner">' +
+      '<b class="background"></b>' +
+      '<div class="description box-text">' +
+        'This site uses cookies by Cloudflare and this very banner. By continuing to use it, you agree to them!' +
+      '</div>' +
+      '<button type="button" onclick="hideBanner()">Alrighty!</button>' +
+    '</aside>';
   return node.firstChild;
 })();
 
