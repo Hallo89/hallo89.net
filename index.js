@@ -118,9 +118,9 @@ fs.readdir('./source', (err, files) => {
   });
 });
 
-function get(which, fileName) {
-  app.get('/' + which, function(req, res) {
-    res.sendFile(__dirname + '/pages/' + (fileName || which) + '.html');
+function get(viewPath, fileName = viewPath) {
+  app.get('/' + viewPath, function(req, res) {
+    res.sendFile(__dirname + '/pages/' + fileName + '.html');
   });
 }
 function getNJK(viewPath, customParams, dataName, fileName = viewPath) {
