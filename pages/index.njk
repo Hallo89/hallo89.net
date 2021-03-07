@@ -110,7 +110,8 @@
         currentSpan = null;
       }
 
-      function toggleAdjacentNodes(node, depth, operation, dir, i = 0) {
+      function toggleAdjacentNodes(node, depth, operation, dir, i) {
+        if (i == null) i = 0;
         if (!node || i > depth) return;
         node.classList[operation]('scale' + (i + 1));
         if (!dir || dir == 'prev') toggleAdjacentNodes(node.previousElementSibling, depth, operation, 'prev', i + 1);
