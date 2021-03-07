@@ -46,18 +46,20 @@ html.light-mode body {
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 100%;
+  right: 0;
   z-index: 100;
   display: flex;
-  font-size: calc(0.3vw + 0.1vh + 14.68px);
-  border-bottom: 3px solid #171717;
-  box-shadow: 1px -2px 6px hsla(0, 0%, 6%, 0.25);
+  font-size: 1.03rem;
+  border-top: 3px solid hsl(0, 0%, 26.5%);
+  border-bottom: 3px solid #0a0a0a;
+  background-color: hsl(0, 0%, 10.5%);
+  color: hsl(0, 0%, 76%);
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-  transition: clip-path 0.2s cubic-bezier(0.35, 0.05, 0.35, 0.95), opacity 0.4s ease, background 0.15s linear, box-shadow 0.15s linear, border 0.15s linear;
+  transition: clip-path 0.2s cubic-bezier(0.3, 0.1, 0.225, 0.95), opacity 0.375s cubic-bezier(0.6, 0.2, 0.15, 1), background 0.15s linear, border 0.15s linear;
 }
 #cookiebanner .description {
-  color: hsl(0, 0%, 76%);
-  padding: 0.55em 0.7em;
+  z-index: -1;
+  padding: 0.5em 0.7em;
 }
 #cookiebanner .background {
   position: absolute;
@@ -66,20 +68,21 @@ html.light-mode body {
   height: 0%;
   width: 100%;
   background-color: hsl(0, 0%, 26.5%);
-  transition: all 0.08s ease-out;
+  transition: height 0.1s ease;
   z-index: 1;
 }
 #cookiebanner button {
   position: relative;
-  border: none;
-  padding: 0 1em;
-  background-color: hsl(0, 0%, 17%);
-  color: hsl(0, 0%, 81%);
+  padding: 0.5em 0.75em;
+  background-color: hsl(0, 0%, 16.5%);
+  font-family: 'San Francisco Monospace', 'Consolas', 'Inter', sans-serif;
   font-size: inherit;
-  font-family: 'San Francisco Monospace', 'Consolas';
-  letter-spacing: -0.5px;
+  border: none;
+  border-left: 2px solid hsl(0, 0%, 26.5%);
+  border-right: 2px solid #0a0a0a;
+  color: inherit;
   cursor: pointer;
-  transition: background 0.15s linear, color 0.15s linear;
+  transition: all 0.1s ease, background-color 0.1s ease-in-out;
 }
 #cookiebanner button::before {
   content: '';
@@ -88,10 +91,24 @@ html.light-mode body {
   top: 0;
   height: 100%;
   width: 0;
-  background-color: hsl(0, 0%, 17%);
+  background-color: hsl(0, 0%, 15%);
   z-index: -1;
   border-radius: 100px;
-  transition: all 0.55s cubic-bezier(0.45, 0.12, 0.22, 1), background 0.15s linear;
+  transition: all 0.45s cubic-bezier(0.45, 0.1, 0.2, 1), background 0.15s linear;
+}
+#cookiebanner button:active {
+  border-left: 2px solid hsl(0, 0%, 25%);
+  border-right: 2px solid #060606;
+}
+#cookiebanner.removing button,
+#cookiebanner button:active {
+  background-color: hsl(0, 0%, 15%);
+}
+#cookiebanner.removing button {
+  color: transparent;
+  border-left: 2px solid transparent;
+  border-right: 2px solid transparent;
+  outline: none;
 }
 #cookiebanner.removing button::before {
   width: calc(200vw - 100%);
@@ -102,21 +119,15 @@ html.light-mode body {
   height: 100%;
 }
 #cookiebanner.removing3 {
-  opacity: 0;
+  opacity: 0.25;
   clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
 }
 #cookiebanner.gone {
   display: none;
 }
-#cookiebanner.invisible {
-  opacity: 0;
-  visibility: hidden;
-}
 html.light-mode #cookiebanner {
   border-bottom: 3px solid #efefef;
   box-shadow: 1px -2px 6px hsla(0, 0%, 87%, 0.25);
-}
-html.light-mode #cookiebanner .description {
   color: hsl(0, 0%, 13%);
 }
 html.light-mode #cookiebanner .background {
@@ -129,30 +140,36 @@ html.light-mode #cookiebanner button,
 html.light-mode #cookiebanner button::before {
   background-color: hsl(0, 0%, 87%);
 }
-@media (max-width: 420px) {
+@media (max-width: 490px) {
   #cookiebanner {
     flex-direction: column;
   }
+  #cookiebanner .description {
+    padding: 0.45em 0.35em;
+  }
   #cookiebanner button {
-    padding: 0.6em 0;
-    letter-spacing: normal;
     position: static;
+    border: none;
+    border-top: 2px solid hsl(0, 0%, 26.5%);
+  }
+  #cookiebanner button:active {
+    border-top: 2px solid hsl(0, 0%, 25%);
   }
   #cookiebanner button::before {
     left: 0;
     top: auto;
-    bottom: 2em;
+    bottom: 2.25em;
     height: 0%;
-    width: 100%;
-    border-radius: 10px;
-    transition: none;
+    width: 100% !important;
+    border-radius: 0;
+    transition: height 0.375s cubic-bezier(0.55, 0.125, 0.05, 1), background 0.15s linear;
+  }
+  #cookiebanner.removing button {
+    border-top: 2px solid transparent;
   }
   #cookiebanner.removing button::before {
-    width: 100%;
     transform: none;
-    height: calc(100% - 2em);
-    border-radius: 0;
-    transition: all 0.55s cubic-bezier(0.45, 0.12, 0.22, 1);
+    height: calc(100% - 2.25em);
   }
 }
 #navbar {

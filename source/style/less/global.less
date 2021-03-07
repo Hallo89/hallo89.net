@@ -68,20 +68,23 @@ body {
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 100%;
+  right: 0;
   z-index: 100;
   display: flex;
-  font-size: calc(.3vw + .1vh + 14.68px);
-  border-bottom: 3px solid @glb-box-borderbottom;
-  box-shadow: 1px -2px 6px @glb-box-shadow;
+  font-size: 1.03rem;
+  border-top: 3px solid @e-glb-box-border-top;
+  border-bottom: 3px solid @e-glb-box-border-bottom;
+  background-color: @e-glb-box-bg;
+  color: @cookiebanner;
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-  transition+: clip-path .2s cubic-bezier(.35,.05,.35,.95), opacity .4s ease;
+  transition+:
+    clip-path .2s cubic-bezier(.3,.1,.225,.95),
+    opacity .375s cubic-bezier(.6,.2,.15,1);
   .mode-transition.background();
-  .mode-transition.shadow();
   .mode-transition.border();
   .description {
-    color: @cookiebanner;
-    padding: .55em .7em;
+    z-index: -1;
+    padding: .5em .7em;
   }
   .background {
     position: absolute;
@@ -89,22 +92,24 @@ body {
     left: 0;
     height: 0%;
     width: 100%;
-    background-color: @glb-box-bordertop;
-    transition: all .08s ease-out;
+    background-color: @e-glb-box-border-top;
+    transition: height .1s ease;
     z-index: 1;
   }
   button {
     position: relative;
-    border: none;
-    padding: 0 1em;
+    padding: .5em .75em;
     background-color: @cookiebanner-button-bg;
-    color: @cookiebanner-button;
+    font-family: 'San Francisco Monospace', 'Consolas', 'Inter', sans-serif;
     font-size: inherit;
-    font-family: 'San Francisco Monospace', 'Consolas';
-    letter-spacing: -.5px;
+    border: none;
+    border-left: 2px solid @e-glb-box-border-top;
+    border-right: 2px solid @e-glb-box-border-bottom;
+    color: inherit;
     cursor: pointer;
-    .mode-transition.background();
-    .mode-transition.color();
+    transition+:
+      all .1s ease,
+      background-color .1s ease-in-out;
     &::before {
       content: '';
       position: absolute;
@@ -112,18 +117,33 @@ body {
       top: 0;
       height: 100%;
       width: 0;
-      background-color: @cookiebanner-button-bg;
+      background-color: @cookiebanner-button-bg-active;
       z-index: -1;
       border-radius: 100px;
-      transition+: all .55s cubic-bezier(.45, .12, .22, 1);
+      transition+: all .45s cubic-bezier(.45,.1,.2,1);
       .mode-transition.background();
     }
+    &:active {
+      border-left: 2px solid darken(@e-glb-box-border-top, @cookiebanner-active-modifier);
+      border-right: 2px solid darken(@e-glb-box-border-bottom, @cookiebanner-active-modifier);
+    }
+  }
+  &.removing button, button:active {
+    background-color: @cookiebanner-button-bg-active;
   }
   &.removing {
-    button::before {
-      width: calc(200vw - 100%);
-      border-radius: 0;
-      transform: translateX(-100vw);
+    button {
+      // NOTE: I'm manually fading out the button instead of expanding ::after ontop of everything
+      // Because that creates a better transition effect
+      color: transparent;
+      border-left: 2px solid transparent;
+      border-right: 2px solid transparent;
+      outline: none;
+      &::before {
+        width: calc(200vw - 100%);
+        border-radius: 0;
+        transform: translateX(-100vw);
+      }
     }
   }
   &.removing2 {
@@ -132,23 +152,17 @@ body {
     }
   }
   &.removing3 {
-    opacity: 0;
+    opacity: .25;
     clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
   }
   &.gone {
     display: none;
   }
-  &.invisible {
-    opacity: 0;
-    visibility: hidden;
-  }
 
   html.light-mode & {
     border-bottom: 3px solid @glb-box-borderbottom--lt;
     box-shadow: 1px -2px 6px @glb-box-shadow--lt;
-    .description {
-      color: @cookiebanner--lt;
-    }
+    color: @cookiebanner--lt;
     .background {
       background-color: @glb-box-bordertop--lt;
     }
@@ -160,29 +174,37 @@ body {
     }
   }
 
-  @media (max-width: 420px) {
+  @before-bottom: 2.25em;
+  @media (max-width: 490px) {
     flex-direction: column;
+    .description {
+      padding: 0.45em 0.35em;
+    }
     button {
-      padding: .6em 0;
-      letter-spacing: normal;
       position: static;
+      border: none;
+      border-top: 2px solid @e-glb-box-border-top;
+      &:active {
+        border-top: 2px solid darken(@e-glb-box-border-top, @cookiebanner-active-modifier);
+      }
       &::before {
         left: 0;
         top: auto;
-        bottom: 2em;
+        bottom: @before-bottom;
         height: 0%;
-        width: 100%;
-        border-radius: 10px;
-        transition: none;
+        width: 100% !important;
+        border-radius: 0;
+        transition+: height .375s cubic-bezier(.55,.125,.05,1);
+        .mode-transition.background();
       }
     }
     &.removing {
-      button::before {
-        width: 100%;
-        transform: none;
-        height: calc(100% - 2em);
-        border-radius: 0;
-        transition: all .55s cubic-bezier(.45, .12, .22, 1);
+      button {
+        border-top: 2px solid transparent;
+        &::before {
+          transform: none;
+          height: calc(100% - @before-bottom);
+        }
       }
     }
   }

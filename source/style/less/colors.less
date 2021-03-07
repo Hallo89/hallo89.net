@@ -14,10 +14,6 @@
 @navbar: lighten(@navbar-bg, 70%);
 @navbar-bg: darken(@main-bg, 4.5%);
 
-@cookiebanner: lighten(@glb-box-description, 15%);
-@cookiebanner-button: lighten(@glb-box-description, 20%);
-@cookiebanner-button-bg: lighten(@glb-box-bg, 7%);
-
 @heading: @main-color;
 @heading-shadow: darken(@heading, 14%);
 
@@ -40,7 +36,13 @@
 @e-glb-box-backdrop-bg: fade(@e-glb-box-bg,  @e-glb-box-backdrop-opacity * 100%);
 @e-glb-box-shadow: fade(darken(@e-glb-box-bg, 6%), 30%);
 @e-glb-box-shadow-hover: fade(darken(@e-glb-box-bg, 6%), 47.5%);
-@e-glb-box-borderbottom: mix(hsl(0, 0%, 0%), @main-bg, 50%);
+@e-glb-box-border-top: lighten(@e-glb-box-bg, 16%);
+@e-glb-box-border-bottom: mix(hsl(0, 0%, 0%), @main-bg, 50%);
+
+@cookiebanner: lighten(@glb-box-description, 15%);
+@cookiebanner-button-bg: lighten(@e-glb-box-bg, 6%);
+@cookiebanner-active-modifier: 1.5%;
+@cookiebanner-button-bg-active: darken(@cookiebanner-button-bg, @cookiebanner-active-modifier);
 
 @footer: lighten(@footer-bg, 79.5%);
 @footer-bg: darken(@main-bg, 3.5%);

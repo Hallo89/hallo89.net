@@ -3,9 +3,9 @@ const banner = (function() {
   const node = document.createElement('div');
   node.innerHTML =
     '<aside id="cookiebanner">' +
-      '<b class="background"></b>' +
-      '<div class="description box-text">' +
-        'This site uses cookies by Cloudflare and this very banner. By continuing to use it, you agree to them!' +
+      '<span class="background"></span>' +
+      '<div class="description">' +
+        'This site uses cookies by Cloudflare and this very banner. By continuing to use it, you agree to them.' +
       '</div>' +
       '<button type="button" onclick="hideBanner()">Alrighty!</button>' +
     '</aside>';
@@ -31,9 +31,6 @@ window.addEventListener('load', function() {
   //add the cookie banner if cookies haven't been accepted
   if (hasAccepted != 'true') {
     document.body.insertBefore(banner, document.body.children[0]);
-    setTimeout(function() {
-      banner.classList.remove('invisible');
-    }, 10);
   }
 });
 
@@ -51,8 +48,8 @@ function hideBanner() {
       setTimeout(function() {
         banner.classList.add('gone');
       }, 200);
-    }, 80);
-  }, 450);
+    }, 100);
+  }, 340);
   document.cookie = 'acceptedCookies=true; path=/; secure; SameSite=strict';
   this.removeEventListener('click', hideBanner);
 }

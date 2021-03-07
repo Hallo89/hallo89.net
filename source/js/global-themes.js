@@ -2,7 +2,7 @@ const html = document.documentElement;
 
 window.addEventListener('load', function() {
   if (hasAccepted != 'true') {
-    banner.children[1].textContent = 'This site uses cookies by Cloudflare, this banner and to save your preferenced theme color. By continuing to use it, you agree to them!';
+    banner.children[1].textContent = 'This site uses cookies by Cloudflare, this banner and to save your preferenced theme color. By continuing to use it, you agree to them.';
     banner.children[2].addEventListener('click', handleThemes);
   }
   document.querySelector('#modes button.mode-gear').addEventListener('click', toggleMode);
