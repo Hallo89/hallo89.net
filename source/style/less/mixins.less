@@ -11,6 +11,24 @@
   each(range(@end-inclusive), @rule);
 }
 
+.focus(@active-ruleset, @disabled-ruleset) {
+  &:focus {
+    @active-ruleset();
+  }
+  @supports selector(:focus-visible) {
+    &:focus {
+      @disabled-ruleset();
+    }
+  }
+  // NOTE: If one of multiple comma-separated pseudo-classes is unknown to the browser, the whole selector fails
+  &:-moz-focusring {
+    @active-ruleset();
+  }
+  &:focus-visible {
+    @active-ruleset();
+  }
+}
+
 .selection(@color; @background: transparent;) {
   &::selection, &::-moz-selection {
     background-color: @background;

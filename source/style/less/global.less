@@ -64,6 +64,12 @@ body {
   }
 }
 
+.focus({
+  outline: @focus-width solid @focus-color;
+}, {
+  outline: none;
+});
+
 #cookiebanner {
   position: fixed;
   bottom: 0;
@@ -291,12 +297,6 @@ body {
     }
     .moon {
       color: hsl(0, 0%, 22.5%);
-    }
-    &:focus {
-      //Some browsers like Firefox handle tab-focus great by only showing it after a tab has occured
-      //Other browsers like Opera can't get their shit together and always show a blue outline when a button is clicked, thanks
-      //TLDR: The accessibility is not worth the aesthetics, sorry!
-      outline: none;
     }
   }
   .mode-gear .moon,
@@ -621,8 +621,13 @@ body {
       margin: 0;
       color: inherit;
       font: inherit;
-      outline: none;
       cursor: pointer;
+      .focus({
+        outline: none;
+        box-shadow: inset 0 0 0 @focus-width @focus-color;
+      }, {
+        box-shadow: none;
+      });
     }
   }
 }

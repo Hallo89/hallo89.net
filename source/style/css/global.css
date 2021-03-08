@@ -42,6 +42,20 @@ body {
 html.light-mode body {
   background-color: hsl(0, 0%, 92.5%);
 }
+:focus {
+  outline: 3px solid #1960C9;
+}
+@supports selector(:focus-visible) {
+  :focus {
+    outline: none;
+  }
+}
+:-moz-focusring {
+  outline: 3px solid #1960C9;
+}
+:focus-visible {
+  outline: 3px solid #1960C9;
+}
 #cookiebanner {
   position: fixed;
   bottom: 0;
@@ -252,9 +266,6 @@ html.light-mode #navbar {
 }
 #modes .mode-gear .moon {
   color: hsl(0, 0%, 22.5%);
-}
-#modes .mode-gear:focus {
-  outline: none;
 }
 #modes .mode-gear .moon,
 html.light-mode #modes .mode-gear .sun {
@@ -561,8 +572,24 @@ html.light-mode #footer a::before {
   margin: 0;
   color: inherit;
   font: inherit;
-  outline: none;
   cursor: pointer;
+}
+.e-glb-box .quick-links button:focus {
+  outline: none;
+  box-shadow: inset 0 0 0 3px #1960C9;
+}
+@supports selector(:focus-visible) {
+  .e-glb-box .quick-links button:focus {
+    box-shadow: none;
+  }
+}
+.e-glb-box .quick-links button:-moz-focusring {
+  outline: none;
+  box-shadow: inset 0 0 0 3px #1960C9;
+}
+.e-glb-box .quick-links button:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 3px #1960C9;
 }
 .glb-box {
   display: block;
