@@ -166,11 +166,10 @@ body {
   }
 
   html.light-mode & {
-    border-bottom: 3px solid @glb-box-borderbottom--lt;
-    box-shadow: 1px -2px 6px @glb-box-shadow--lt;
+    border-bottom: 3px solid @e-glb-box-border-bottom;
     color: @cookiebanner--lt;
     .background {
-      background-color: @glb-box-bordertop--lt;
+      background-color: @e-glb-box-border-top;
     }
     button {
       color: @cookiebanner-button--lt;
@@ -477,8 +476,8 @@ body {
   font-size: 1.32rem;
   color: hsl(0, 0%, 85%);
   background-color: @e-glb-box-bg;
-  border-top: 4px solid @glb-box-bordertop;
-  border-bottom: 4px solid @e-glb-box-borderbottom;
+  border-top: 4px solid @e-glb-box-border-top;
+  border-bottom: 4px solid @e-glb-box-border-bottom;
   box-shadow: 0 2px 18px @e-glb-box-shadow;
   box-sizing: border-box;
   transition:
