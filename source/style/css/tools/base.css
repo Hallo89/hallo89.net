@@ -1,7 +1,5 @@
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  font-size: 19px;
+  overflow: hidden;
   animation: clipin .4s cubic-bezier(.4, .15, .7, 1);
 }
 @keyframes clipin {
@@ -68,7 +66,6 @@ body.delayfull #wrapper {
   height: 100%;
   display: flex;
   align-items: center;
-  margin-right: 12px;
   opacity: .8;
 }
 .utility_buttons .util_button {
@@ -124,6 +121,7 @@ body.delayfull #wrapper {
   height: 100%;
   border-top: 8px solid hsl(0, 0%, 22.5%);
   border-bottom: 6px solid hsl(0, 0%, 10%);
+  background-color: hsl(0, 0%, 10%);
   box-sizing: border-box;
 }
 .box, .box:hover {
@@ -138,6 +136,11 @@ body.delayfull #wrapper {
   flex-flow: row;
   justify-content: space-between;
   align-items: center;
+  font-family: 'Arial', 'San Francisco', 'Inter', sans-serif;
+  text-transform: uppercase;
+  color: hsl(0, 0%, 50%);
+  background-color: hsl(0, 0%, 11.5%);
+  padding: 1em 1.25em;
 }
 
 .box .header_text {
