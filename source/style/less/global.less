@@ -233,7 +233,6 @@ body {
     text-decoration: none;
   }
   .text {
-    font-family: 'Century Gothic', 'Arial', sans-serif;
     display: flex;
     align-items: center;
     h1 {
@@ -241,24 +240,25 @@ body {
       font-weight: normal;
       margin: 0;
     }
+    .root-link {
+      display: flex;
+      align-items: center;
+    }
     img {
-      display: block;
       width: 1.9em;
       height: 1.9em;
       border-radius: 100%;
       margin-right: .3em;
     }
     .name {
-      font-weight: 600;
+      font-family: 'Century Gothic', 'Inter', sans-serif;
+      font-weight: bold;
     }
     .arrow {
-      font-family: 'Source Code Pro', 'Consolas', 'Century Gothic', sans-serif;
+      font-family: 'Source Code Pro', 'Consolas', monospace;
       padding: 0 .3em;
       font-weight: 500;
       .noselect();
-    }
-    .item {
-      font-family: 'San Francisco', 'Arial', sans-serif;
     }
   }
 

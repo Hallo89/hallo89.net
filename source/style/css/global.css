@@ -203,7 +203,6 @@ html.light-mode #cookiebanner button::before {
   text-decoration: none;
 }
 #navbar .text {
-  font-family: 'Century Gothic', 'Arial', sans-serif;
   display: flex;
   align-items: center;
 }
@@ -212,27 +211,28 @@ html.light-mode #cookiebanner button::before {
   font-weight: normal;
   margin: 0;
 }
+#navbar .text .root-link {
+  display: flex;
+  align-items: center;
+}
 #navbar .text img {
-  display: block;
   width: 1.9em;
   height: 1.9em;
   border-radius: 100%;
   margin-right: 0.3em;
 }
 #navbar .text .name {
-  font-weight: 600;
+  font-family: 'Century Gothic', 'Inter', sans-serif;
+  font-weight: bold;
 }
 #navbar .text .arrow {
-  font-family: 'Source Code Pro', 'Consolas', 'Century Gothic', sans-serif;
+  font-family: 'Source Code Pro', 'Consolas', monospace;
   padding: 0 0.3em;
   font-weight: 500;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
-#navbar .text .item {
-  font-family: 'San Francisco', 'Arial', sans-serif;
 }
 html.light-mode #navbar {
   background-color: hsl(0, 0%, 96%);
