@@ -23,17 +23,6 @@
 @header-bg: lighten(@main-bg, 4.5%);
 @header-shadow: fade(darken(@main-bg, 3%), 25%);
 
-@glb-box-bg: lighten(@main-bg, 2%);
-@glb-box-corners: darken(@glb-box-bg, 3%);
-@glb-box-shadow: fade(darken(@glb-box-bg, 4%), 25%);
-@glb-box-shadow-hover: fade(darken(@glb-box-bg, 5%), 36%);
-@glb-box-extreme-shadow: darken(@main-bg, 2.5%);
-@glb-box-bordertop: lighten(@glb-box-bg, 16.5%);
-@glb-box-borderbottom: mix(@glb-box-bg, @main-bg, 50%);
-@glb-box-header: darken(@main-color, 22%);
-@glb-box-header-bg: lighten(@glb-box-bg, 1.5%);
-@glb-box-description: darken(@main-color, 5%);
-
 @e-glb-box-bg: lighten(@main-bg, 2.5%);
 @e-glb-box-backdrop-opacity: .675;
 @e-glb-box-backdrop-bg: fade(@e-glb-box-bg,  @e-glb-box-backdrop-opacity * 100%);
@@ -42,7 +31,6 @@
 @e-glb-box-border-top: lighten(@e-glb-box-bg, 16%);
 @e-glb-box-border-bottom: mix(hsl(0, 0%, 0%), @main-bg, 50%);
 
-@cookiebanner: lighten(@glb-box-description, 15%);
 @cookiebanner-button-bg: lighten(@e-glb-box-bg, 6%);
 @cookiebanner-active-modifier: 1.5%;
 @cookiebanner-button-bg-active: darken(@cookiebanner-button-bg, @cookiebanner-active-modifier);
@@ -63,26 +51,11 @@
 @navbar--lt: darken(@navbar-bg--lt, 70%);
 @navbar-bg--lt: darken(@main-bg--lt, 2%);
 
-@cookiebanner--lt: darken(@glb-box-description--lt, 15%);
-@cookiebanner-button--lt: darken(@glb-box-description--lt, 25%);
-@cookiebanner-button-bg--lt: darken(@glb-box-bg--lt, 8%);
-
 @heading--lt: lighten(@main-color--lt, 8%);
 @heading-shadow--lt: lighten(@heading--lt, 15%);
 
 @header-bg--lt: @main-bg--lt;
 @header-shadow--lt: fade(darken(@index-bg--lt, 12%), 25%);
-
-@glb-box-bg--lt: lighten(@index-bg--lt, 2.5%);
-@glb-box-corners--lt: darken(@glb-box-bg--lt, 4.5%);
-@glb-box-shadow--lt: fade(darken(@glb-box-bg--lt, 8%), 25%);
-@glb-box-shadow-hover--lt: fade(darken(@glb-box-bg--lt, 10%), 36%);
-@glb-box-extreme-shadow--lt: darken(@index-bg--lt, 6.5%);
-@glb-box-bordertop--lt: lighten(@glb-box-bg--lt, 16.5%);
-@glb-box-borderbottom--lt: mix(@glb-box-bg--lt, @index-bg--lt, 50%);
-@glb-box-header--lt: lighten(@main-color--lt, 22%);
-@glb-box-header-bg--lt: lighten(@glb-box-bg--lt, 1.8%);
-@glb-box-description--lt: @main-color--lt;
 
 @footer--lt: lighten(@footer-bg--lt, 78.5%);
 @footer-bg--lt: darken(@main-bg--lt, 78.5%);
