@@ -15,7 +15,7 @@
   &:focus {
     @active-ruleset();
   }
-  @supports selector(:focus-visible) {
+  @supports selector(:focus-visible) or selector(:-moz-focusring) {
     &:focus {
       @disabled-ruleset();
     }

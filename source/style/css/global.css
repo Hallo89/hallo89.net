@@ -46,7 +46,7 @@ html.light-mode body {
 :focus {
   outline: 3px solid #1960C9;
 }
-@supports selector(:focus-visible) {
+@supports selector(:focus-visible) or selector(:-moz-focusring) {
   :focus {
     outline: none;
   }
@@ -578,7 +578,7 @@ html.light-mode #footer a::before {
   outline: none;
   box-shadow: inset 0 0 0 3px #1960C9;
 }
-@supports selector(:focus-visible) {
+@supports selector(:focus-visible) or selector(:-moz-focusring) {
   .e-glb-box .quick-links button:focus {
     box-shadow: none;
   }
