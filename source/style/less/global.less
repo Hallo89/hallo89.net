@@ -57,6 +57,7 @@ html {
 body {
   margin: 0;
   background-color: @main-bg;
+  color: @main-color;
   font-family: 'Inter', 'Roboto', 'San Francisco', 'Segoe UI', 'Arial', sans-serif;
   .mode-transition.background();
   html.light-mode & {
@@ -81,7 +82,7 @@ body {
   border-top: 3px solid @e-glb-box-border-top;
   border-bottom: 3px solid @e-glb-box-border-bottom;
   background-color: @e-glb-box-bg;
-  color: @cookiebanner;
+  color: @main-color;
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
   transition+:
     clip-path .2s cubic-bezier(.3,.1,.225,.95),
@@ -321,7 +322,7 @@ body {
   font-size: 1rem;
   padding: 1em 0;
   background-color: @footer-bg;
-  color: @footer;
+  color: @main-color;
   .nav-wrapper {
     display: flex;
     justify-content: space-between;
@@ -474,7 +475,7 @@ body {
   width: 17.1em;
   height: 19em;
   font-size: 1.32rem;
-  color: hsl(0, 0%, 85%);
+  color: @main-color;
   background-color: @e-glb-box-bg;
   border-top: 4px solid @e-glb-box-border-top;
   border-bottom: 4px solid @e-glb-box-border-bottom;

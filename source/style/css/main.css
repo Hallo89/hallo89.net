@@ -26,7 +26,6 @@ body {
   justify-content: center;
   align-items: center;
   height: calc(12.5vw + 22vh + 3px);
-  color: hsl(0, 0%, 86%);
   transition: background 0.15s linear, box-shadow 0.15s linear;
 }
 #header h1 {
