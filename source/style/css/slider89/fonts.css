@@ -29,25 +29,3 @@
     url('/font/SourceCodePro/SourceCodePro-Semibold.otf.woff2') format('woff2'),
     url('/font/SourceCodePro/SourceCodePro-Semibold.otf.woff') format('woff');
 }
-
-/* Open Sans by Steve Matteson for Google @ https://www.opensans.com/ */
-@font-face {
-  font-family: 'Open Sans';
-  font-weight: normal;
-  font-display: swap;
-  src:
-    local('Open Sans'),
-    local('OpenSans-Regular'),
-    url('/font/OpenSans/OpenSans-Regular.woff2') format('woff2'),
-    url('/font/OpenSans/OpenSans-Regular.woff') format('woff');
-}
-@font-face {
-  font-family: 'Open Sans';
-  font-weight: bold;
-  font-display: swap;
-  src:
-    local('Open Sans Bold'),
-    local('OpenSans-Bold'),
-    url('/font/OpenSans/OpenSans-Bold.woff2') format('woff2'),
-    url('/font/OpenSans/OpenSans-Bold.woff') format('woff');
-}
