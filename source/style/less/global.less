@@ -79,9 +79,9 @@ body {
   z-index: 100;
   display: flex;
   font-size: 1.03rem;
-  border-top: 3px solid @e-glb-box-border-top;
-  border-bottom: 3px solid @e-glb-box-border-bottom;
-  background-color: @e-glb-box-bg;
+  border-top: 3px solid @gbl-box-border-top;
+  border-bottom: 3px solid @gbl-box-border-bottom;
+  background-color: @gbl-box-bg;
   color: @main-color;
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
   transition+:
@@ -99,7 +99,7 @@ body {
     left: 0;
     height: 0%;
     width: 100%;
-    background-color: @e-glb-box-border-top;
+    background-color: @gbl-box-border-top;
     transition: height .1s ease;
     z-index: 1;
   }
@@ -110,8 +110,8 @@ body {
     font-family: 'San Francisco Monospace', 'Consolas', 'Inter', sans-serif;
     font-size: inherit;
     border: none;
-    border-left: 2px solid @e-glb-box-border-top;
-    border-right: 2px solid @e-glb-box-border-bottom;
+    border-left: 2px solid @gbl-box-border-top;
+    border-right: 2px solid @gbl-box-border-bottom;
     color: inherit;
     cursor: pointer;
     transition+:
@@ -131,8 +131,8 @@ body {
       .mode-transition.background();
     }
     &:active {
-      border-left: 2px solid darken(@e-glb-box-border-top, @cookiebanner-active-modifier);
-      border-right: 2px solid darken(@e-glb-box-border-bottom, @cookiebanner-active-modifier);
+      border-left: 2px solid darken(@gbl-box-border-top, @cookiebanner-active-modifier);
+      border-right: 2px solid darken(@gbl-box-border-bottom, @cookiebanner-active-modifier);
     }
   }
   &.removing button, button:active {
@@ -167,10 +167,10 @@ body {
   }
 
   html.light-mode & {
-    border-bottom: 3px solid @e-glb-box-border-bottom;
+    border-bottom: 3px solid @gbl-box-border-bottom;
     color: @main-color--lt;
     .background {
-      background-color: @e-glb-box-border-top;
+      background-color: @gbl-box-border-top;
     }
   }
 
@@ -183,9 +183,9 @@ body {
     button {
       position: static;
       border: none;
-      border-top: 2px solid @e-glb-box-border-top;
+      border-top: 2px solid @gbl-box-border-top;
       &:active {
-        border-top: 2px solid darken(@e-glb-box-border-top, @cookiebanner-active-modifier);
+        border-top: 2px solid darken(@gbl-box-border-top, @cookiebanner-active-modifier);
       }
       &::before {
         left: 0;
@@ -460,7 +460,7 @@ body {
   }
 }
 
-.e-glb-box {
+.gbl-box {
   display: block;
   text-decoration: none;
   position: relative; //only component-box
@@ -470,17 +470,17 @@ body {
   height: 19em;
   font-size: 1.32rem;
   color: @main-color;
-  background-color: @e-glb-box-bg;
-  border-top: 4px solid @e-glb-box-border-top;
-  border-bottom: 4px solid @e-glb-box-border-bottom;
-  box-shadow: 0 2px 18px @e-glb-box-shadow;
+  background-color: @gbl-box-bg;
+  border-top: 4px solid @gbl-box-border-top;
+  border-bottom: 4px solid @gbl-box-border-bottom;
+  box-shadow: 0 2px 18px @gbl-box-shadow;
   box-sizing: border-box;
   transition:
     transform .2s cubic-bezier(.35,.1,.2,.95),
     box-shadow .2s ease-out;
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 22px @e-glb-box-shadow-hover;
+    box-shadow: 0 4px 22px @gbl-box-shadow-hover;
     .heading {
       transform: translateY(-.0875em);
       .text {
@@ -530,7 +530,7 @@ body {
   }
   .heading .text,
   .quick-links {
-    background-color: @e-glb-box-backdrop-bg;
+    background-color: @gbl-box-backdrop-bg;
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
   }
@@ -558,7 +558,7 @@ body {
     padding: 0;
     margin: 0;
     font-size: .925em;
-    border-top: @border-width solid hsla(0, 0%, 13%, @e-glb-box-backdrop-opacity);
+    border-top: @border-width solid hsla(0, 0%, 13%, @gbl-box-backdrop-opacity);
     @border-width: 3px;
     .link {
       position: relative;
@@ -574,7 +574,7 @@ body {
         height: 100%;
         opacity: 0;
         z-index: -1;
-        background-color: fade(darken(@e-glb-box-backdrop-bg, 3.5%), 22.5%);
+        background-color: fade(darken(@gbl-box-backdrop-bg, 3.5%), 22.5%);
         border-top: @border-width solid hsla(0, 0%, 15%, .25);
         border-radius: 1px;
         visibility: hidden;

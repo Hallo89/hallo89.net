@@ -14,7 +14,7 @@ const banner = (function() {
 
 window.addEventListener('load', function() {
   //add a custom href to the buttons in component boxes (since anchors can't be nested)
-  const componentBoxes = document.querySelectorAll('.e-glb-box.glb-components');
+  const componentBoxes = document.querySelectorAll('.gbl-box.gbl-components');
   for (var i = 0; i < componentBoxes.length; i++) {
     const box = componentBoxes[i];
     const quickLinkBtns = box.querySelectorAll('.quick-links button');

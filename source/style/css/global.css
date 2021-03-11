@@ -421,7 +421,7 @@ html.light-mode #footer a::before {
     width: 4.5em;
   }
 }
-.e-glb-box {
+.gbl-box {
   display: block;
   text-decoration: none;
   position: relative;
@@ -438,28 +438,28 @@ html.light-mode #footer a::before {
   box-sizing: border-box;
   transition: transform 0.2s cubic-bezier(0.35, 0.1, 0.2, 0.95), box-shadow 0.2s ease-out;
 }
-.e-glb-box:hover {
+.gbl-box:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 22px hsla(0, 0%, 4.5%, 0.475);
 }
-.e-glb-box:hover .heading {
+.gbl-box:hover .heading {
   transform: translateY(-0.0875em);
 }
-.e-glb-box:hover .heading .text {
+.gbl-box:hover .heading .text {
   background-color: transparent;
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
 }
-.e-glb-box:hover .description {
+.gbl-box:hover .description {
   opacity: 1;
   visibility: visible;
   transform: translateY(-0.185em);
 }
-.e-glb-box:hover .backdrop {
+.gbl-box:hover .backdrop {
   -webkit-filter: blur(20px) brightness(65%);
   filter: blur(20px) brightness(65%);
 }
-.e-glb-box .description {
+.gbl-box .description {
   font-size: 0.96em;
   line-height: 1.25em;
   margin: 0;
@@ -468,7 +468,7 @@ html.light-mode #footer a::before {
   visibility: hidden;
   transition: transform 0.175s cubic-bezier(0.3, 0.15, 0.15, 1), opacity 0.1s ease-in-out, visibility 0.1s linear;
 }
-.e-glb-box .backdrop {
+.gbl-box .backdrop {
   content: '';
   position: absolute;
   top: 0;
@@ -482,25 +482,25 @@ html.light-mode #footer a::before {
   image-rendering: smooth;
   transition: -webkit-filter 0.225s cubic-bezier(0.35, 0.125, 0.15, 0.95), filter 0.225s cubic-bezier(0.35, 0.125, 0.15, 0.95);
 }
-.e-glb-box .heading .text,
-.e-glb-box .quick-links {
+.gbl-box .heading .text,
+.gbl-box .quick-links {
   background-color: hsla(0, 0%, 10.5%, 0.675);
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
 }
-.e-glb-box .heading {
+.gbl-box .heading {
   margin: 0;
   padding: 1.85em 0.5em;
   box-sizing: border-box;
   transition: transform 0.2s ease;
 }
-.e-glb-box .heading .text {
+.gbl-box .heading .text {
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
   padding: 0 0.25em;
   transition: -webkit-backdrop-filter 0.225s cubic-bezier(0.25, 0.15, 0.15, 1), backdrop-filter 0.225s cubic-bezier(0.25, 0.15, 0.15, 1), background-color 0.225s cubic-bezier(0.25, 0.15, 0.15, 1);
 }
-.e-glb-box .quick-links {
+.gbl-box .quick-links {
   display: flex;
   position: absolute;
   bottom: 0;
@@ -511,13 +511,13 @@ html.light-mode #footer a::before {
   font-size: 0.925em;
   border-top: 3px solid hsla(0, 0%, 13%, 0.675);
 }
-.e-glb-box .quick-links .link {
+.gbl-box .quick-links .link {
   position: relative;
   flex: 1;
   text-align: center;
   list-style: none;
 }
-.e-glb-box .quick-links .link::before {
+.gbl-box .quick-links .link::before {
   content: '';
   position: absolute;
   top: -3px;
@@ -533,7 +533,7 @@ html.light-mode #footer a::before {
   animation: linkShiftOut 0.1s ease;
   transition: opacity 0.075s ease-in-out;
 }
-.e-glb-box .quick-links .link:hover::before {
+.gbl-box .quick-links .link:hover::before {
   visibility: visible;
   width: 100%;
   opacity: 1;
@@ -556,7 +556,7 @@ html.light-mode #footer a::before {
     visibility: visible;
   }
 }
-.e-glb-box .quick-links button {
+.gbl-box .quick-links button {
   width: 100%;
   height: 100%;
   padding: 0.65em 0.25em;
@@ -567,20 +567,20 @@ html.light-mode #footer a::before {
   font: inherit;
   cursor: pointer;
 }
-.e-glb-box .quick-links button:focus {
+.gbl-box .quick-links button:focus {
   outline: none;
   box-shadow: inset 0 0 0 3px #1960C9;
 }
 @supports selector(:focus-visible) or selector(:-moz-focusring) {
-  .e-glb-box .quick-links button:focus {
+  .gbl-box .quick-links button:focus {
     box-shadow: none;
   }
 }
-.e-glb-box .quick-links button:-moz-focusring {
+.gbl-box .quick-links button:-moz-focusring {
   outline: none;
   box-shadow: inset 0 0 0 3px #1960C9;
 }
-.e-glb-box .quick-links button:focus-visible {
+.gbl-box .quick-links button:focus-visible {
   outline: none;
   box-shadow: inset 0 0 0 3px #1960C9;
 }
