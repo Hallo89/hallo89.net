@@ -19,7 +19,7 @@ WebGL Experiments:
     Matrices & 3D:
       link: matrices3d
       description: A study of 3D perspective and matrices - Translations, rotations, scaling, fov, ...
-Win95-web:
+Win95-Web:
   link: win95
   image: win95-web.png
   description: |-
