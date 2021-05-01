@@ -58,6 +58,39 @@ body {
 #header h1 span:active {
   transform: scale(0.875);
 }
+#header h1.landing-animation span:nth-child(1) {
+  animation: 0.305s 0.126s textWaveLanding ease backwards;
+}
+#header h1.landing-animation span:nth-child(2) {
+  animation: 0.305s 0.20859383s textWaveLanding ease backwards;
+}
+#header h1.landing-animation span:nth-child(3) {
+  animation: 0.305s 0.28013529s textWaveLanding ease backwards;
+}
+#header h1.landing-animation span:nth-child(4) {
+  animation: 0.305s 0.34532845s textWaveLanding ease backwards;
+}
+#header h1.landing-animation span:nth-child(5) {
+  animation: 0.305s 0.40617423s textWaveLanding ease backwards;
+}
+#header h1.landing-animation span:nth-child(6) {
+  animation: 0.305s 0.46376581s textWaveLanding ease backwards;
+}
+#header h1.landing-animation span:nth-child(7) {
+  animation: 0.305s 0.51878487s textWaveLanding ease backwards;
+}
+@keyframes textWaveLanding {
+  0% {
+    transform: scale(0.775);
+    color: transparent;
+    text-shadow: none;
+  }
+  60% {
+    color: inherit;
+    transform: scale(1.0675) translateY(0.012em);
+    text-shadow: 0.5px 0.5px hsl(0, 0%, 62%), 1px 1px hsl(0, 0%, 62%), 1.5px 1.5px hsl(0, 0%, 62%), 2px 2px hsl(0, 0%, 62%), 2.5px 2.5px hsl(0, 0%, 62%), 3px 3px hsl(0, 0%, 62%), 3.5px 3.5px hsl(0, 0%, 62%), 4px 4px hsl(0, 0%, 62%), 4.5px 4.5px hsl(0, 0%, 62%), 5px 5px hsl(0, 0%, 62%), 5.5px 5.5px hsl(0, 0%, 62%), 6px 6px hsl(0, 0%, 62%), 6.5px 6.5px hsl(0, 0%, 62%), 7px 7px hsl(0, 0%, 62%), 7.5px 7.5px hsl(0, 0%, 62%), 8px 8px hsl(0, 0%, 62%), 8.5px 8.5px hsl(0, 0%, 62%);
+  }
+}
 #header h1.wave1 span:nth-child(1) {
   animation: 0.37s 0s textWave ease;
 }

@@ -36,7 +36,7 @@
   <body>
 
     <header id="header">
-      <h1>
+      <h1 class="landing-animation">
         <span data-count="1">H</span
         ><span data-count="2">a</span
         ><span data-count="3">l</span
@@ -65,6 +65,7 @@
       let currentSpan;
 
       const TEXTLEN = h1.textContent.trim().length;
+      const LANDING_ANIMATION_DURATION = .82378487;
       const Animation = {
         ROOT: 1.375,
         DURATION: .37,
@@ -74,6 +75,10 @@
       h1.addEventListener('click', h1Click);
       h1.addEventListener('mousemove', h1Move);
       h1.addEventListener('mouseleave', h1Leave);
+
+      setTimeout(function() {
+        h1.classList.remove('landing-animation');
+      }, LANDING_ANIMATION_DURATION * 1000);
 
       function h1Click(e) {
         const target = e.target;
