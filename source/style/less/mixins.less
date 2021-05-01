@@ -69,19 +69,14 @@
 }
 
 .wave() {
-  #animation(@it) {
-    // this is a root function to approximate an ease-in
-    animation: .37s .13s * pow(@it, 1 / 1.375) textWave ease;
-  }
-
-  .generate-targets(@textlen, @class) {
+  .generate-targets(@textlen, @class, @animation) {
     each(range(@textlen), {
       &.@{class}@{index} span {
-        .wave.target(@textlen, @index);
+        .wave.target(@textlen, @index, @animation);
       }
     });
   }
-  .target(@textlen, @target, @it: 0) {
+  .target(@textlen, @target, @animation, @it: 0) {
     @half: ceil(@textlen / 2);
     & when (@it < abs(@target - @half) + @half) {
       @next: @target + @it;
@@ -89,20 +84,20 @@
       & when (@prev > 0) and (@next <= @textlen) and not (@next = @prev) {
         &:nth-child(@{next}),
         &:nth-child(@{prev}) {
-          .wave#animation(@it);
+          @animation();
         }
       }
       & when not (@prev > 0) or (@next = @prev) {
         &:nth-child(@{next}) {
-          .wave#animation(@it);
+          @animation();
         }
       }
       & when not (@next <= @textlen) {
         &:nth-child(@{prev}) {
-          .wave#animation(@it);
+          @animation();
         }
       }
-      .wave.target(@textlen, @target, @it + 1);
+      .wave.target(@textlen, @target, @animation, @it + 1);
     }
   }
 }
