@@ -500,6 +500,14 @@ html.light-mode #footer a::before {
   padding: 0 0.25em;
   transition: -webkit-backdrop-filter 0.225s cubic-bezier(0.25, 0.15, 0.15, 1), backdrop-filter 0.225s cubic-bezier(0.25, 0.15, 0.15, 1), background-color 0.225s cubic-bezier(0.25, 0.15, 0.15, 1);
 }
+.gbl-box .heading .text .icon-external-link {
+  vertical-align: middle;
+  width: 1.6rem;
+  height: 1.6rem;
+  position: relative;
+  bottom: 0.18rem;
+  margin-left: 0.389rem;
+}
 .gbl-box .quick-links {
   display: flex;
   position: absolute;

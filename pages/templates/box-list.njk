@@ -1,13 +1,19 @@
 {%- for name, props in pageData -%}
 
   {%- set link = props.link if props.link else (name | lower) -%}
-  {%- if not link | startsWith(['https://', 'http://']) -%}
+  {%- set isExternal = link | startsWith(['https://', 'http://']) -%}
+  {%- if not isExternal -%}
     {%- set link = '/' + (page + '/' if page else page) + link -%}
   {%- endif %}
 
   <a href="{{ link }}" class="gbl-box {{- ' gbl-components' if props.components }}">
     <h2 class="heading">
-      <span class="text">{{ name | safe }}</span>
+      <span class="text">
+        {{- name | safe -}}
+        {%- if isExternal -%}
+          {%- include './svg/external-link.svg' -%}
+        {%- endif -%}
+      </span>
     </h2>
     {%- if props.description %}
       <p class="description">{{ props.description | nl2br | safe }}</p>
