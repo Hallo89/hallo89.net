@@ -502,11 +502,11 @@ html.light-mode #footer a::before {
 }
 .gbl-box .heading .text .icon-external-link {
   vertical-align: middle;
-  width: 1.6rem;
-  height: 1.6rem;
+  width: 0.813em;
+  height: 0.813em;
   position: relative;
-  bottom: 0.18rem;
-  margin-left: 0.389rem;
+  bottom: 0.091em;
+  margin-left: 0.196em;
 }
 .gbl-box .quick-links {
   display: flex;
