@@ -137,15 +137,10 @@ body {
   }
 }
 
-#box-nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  display: grid;
-  justify-items: center;
-  margin: 1.842em 1.053em;
-  grid-gap: 2.105em;
-  grid-template-columns: repeat(auto-fit, minmax(22.57em, 1fr));
+#gbl-box-menu {
+  padding-top: 1.75em;
+  padding-bottom: 1.75em;
+  height: auto;
   .box {
     .box-animation-loop();
     .box-animation-loop(@amount: 5, @seconds: .5s, @it: 1) when (@it < @amount + 1) {

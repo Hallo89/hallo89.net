@@ -270,29 +270,24 @@ html.light-mode #header {
 html.light-mode #header h1 {
   text-shadow: 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%), 6px 6px hsl(0, 0%, 51%), 6.5px 6.5px hsl(0, 0%, 51%), 7px 7px hsl(0, 0%, 51%), 7.5px 7.5px hsl(0, 0%, 51%), 8px 8px hsl(0, 0%, 51%);
 }
-#box-nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  display: grid;
-  justify-items: center;
-  margin: 1.842em 1.053em;
-  grid-gap: 2.105em;
-  grid-template-columns: repeat(auto-fit, minmax(22.57em, 1fr));
+#gbl-box-menu {
+  padding-top: 1.75em;
+  padding-bottom: 1.75em;
+  height: auto;
 }
-#box-nav .box:nth-child(1) {
+#gbl-box-menu .box:nth-child(1) {
   animation: 0.5s shiftinBox ease-out;
 }
-#box-nav .box:nth-child(2) {
+#gbl-box-menu .box:nth-child(2) {
   animation: 0.58s shiftinBox ease-out;
 }
-#box-nav .box:nth-child(3) {
+#gbl-box-menu .box:nth-child(3) {
   animation: 0.66s shiftinBox ease-out;
 }
-#box-nav .box:nth-child(4) {
+#gbl-box-menu .box:nth-child(4) {
   animation: 0.74s shiftinBox ease-out;
 }
-#box-nav .box:nth-child(5) {
+#gbl-box-menu .box:nth-child(5) {
   animation: 0.82s shiftinBox ease-out;
 }
 @keyframes shiftinBox {

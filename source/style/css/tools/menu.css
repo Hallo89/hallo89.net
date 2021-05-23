@@ -2,19 +2,3 @@ body {
   font-size: 19px;
   background: linear-gradient(to bottom right, #1F6C6B, #664D6E); /* #1D5857, #534059 */ /* #1C5150, #4D3C52 */
 }
-
-#containers {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(21.375em, 1fr));
-  grid-gap: 1.75em;
-  justify-items: center;
-  align-items: center;
-
-  padding: calc(1.8vh + .7vw + 20px) 1.08em;
-  min-height: 100vh;
-  box-sizing: border-box;
-}

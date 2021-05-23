@@ -421,6 +421,20 @@ html.light-mode #footer a::before {
     width: 4.5em;
   }
 }
+#gbl-box-menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(22.57em, 1fr));
+  grid-gap: 1.942em;
+  justify-items: center;
+  align-items: center;
+  font-size: 1rem;
+  padding: 2.64em 1.2em;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
 .gbl-box {
   display: block;
   text-decoration: none;
