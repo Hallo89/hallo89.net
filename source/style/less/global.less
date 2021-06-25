@@ -263,7 +263,9 @@ body {
 }
 
 #modes {
-  .mode-gear {
+  @baseTransition: .325s;
+  @rotateAmount: 33.75deg;
+  .mode-switch {
     display: block;
     position: relative;
     background-color: transparent;
@@ -273,37 +275,85 @@ body {
     width: 1.5em;
     height: 1.5em;
     cursor: pointer;
-    .icon {
+    > svg {
       position: absolute;
       top: 0;
       left: 0;
       height: 100%;
       width: 100%;
-      transition+: all .275s cubic-bezier(.63,.13,.12,1.15);
-      .mode-transition.color();
-      > svg {
-        height: 100%;
-        width: 100%;
+      transition: all @baseTransition ease;
+      > * {
+        transition: all .15s ease;
       }
     }
-    .sun {
-      color: hsl(0, 0%, 77.5%);
+    .icon-sun {
+      color: @main-color;
+      circle {
+        transform-origin: 12px 12px;
+      }
+      rect {
+        transition-delay: .033s;
+      }
     }
-    .moon {
-      color: hsl(0, 0%, 22.5%);
+    .icon-moon {
+      color: hsl(0, 0%, 4%);
+      .base {
+        transform-origin: 6.8px 12px;
+      }
+      .star-1 {
+        transform-origin: 15px 11px;
+        transition-delay: .06s;
+      }
+      .star-2 {
+        transform-origin: 22px 11px;
+        transition-delay: .0665s;
+      }
+      .star-3 {
+        transform-origin: 19px 5px;
+        transition-delay: .073s;
+      }
     }
   }
-  .mode-gear .moon,
-  html.light-mode & .mode-gear .sun {
-    transform: rotate(135deg) scale(.8);
+  // Inverse mode
+  html.light-mode & .mode-switch .icon-sun,
+  html:not(.light-mode) & .mode-switch .icon-moon {
+    transform: rotate(-@rotateAmount);
     visibility: hidden;
-    opacity: 0;
+    z-index: -1;
   }
-  html.light-mode & .mode-gear {
-    .moon {
-      transform: none;
-      visibility: visible;
-      opacity: 1;
+  // Corresponding mode
+  html.light-mode & .mode-switch .icon-moon,
+  html:not(.light-mode) & .mode-switch .icon-sun {
+    animation: @baseTransition iconPositiveRotate ease;
+  }
+  // Only dark mode
+  html:not(.light-mode) & .mode-switch {
+    .icon-moon {
+      .base, .star {
+        transform: scale(0);
+      }
+      .star {
+        transition-delay: 0s;
+      }
+    }
+  }
+  // Only light mode
+  html.light-mode & .mode-switch {
+    .icon-sun {
+      circle {
+        transform: scale(0);
+        transition-delay: .0325s;
+      }
+      rect {
+        height: 0;
+        transition-delay: 0s;
+      }
+    }
+  }
+
+  @keyframes iconPositiveRotate {
+    from {
+      transform: rotate(@rotateAmount);
     }
   }
 }

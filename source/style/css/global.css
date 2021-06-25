@@ -231,7 +231,7 @@ html.light-mode #navbar {
   background-color: hsl(0, 0%, 96%);
   color: hsl(0, 0%, 26%);
 }
-#modes .mode-gear {
+#modes .mode-switch {
   display: block;
   position: relative;
   background-color: transparent;
@@ -242,34 +242,73 @@ html.light-mode #navbar {
   height: 1.5em;
   cursor: pointer;
 }
-#modes .mode-gear .icon {
+#modes .mode-switch > svg {
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
-  transition: all 0.275s cubic-bezier(0.63, 0.13, 0.12, 1.15), color 0.15s linear;
+  transition: all 0.325s ease;
 }
-#modes .mode-gear .icon > svg {
-  height: 100%;
-  width: 100%;
+#modes .mode-switch > svg > * {
+  transition: all 0.15s ease;
 }
-#modes .mode-gear .sun {
-  color: hsl(0, 0%, 77.5%);
+#modes .mode-switch .icon-sun {
+  color: hsl(0, 0%, 86%);
 }
-#modes .mode-gear .moon {
-  color: hsl(0, 0%, 22.5%);
+#modes .mode-switch .icon-sun circle {
+  transform-origin: 12px 12px;
 }
-#modes .mode-gear .moon,
-html.light-mode #modes .mode-gear .sun {
-  transform: rotate(135deg) scale(0.8);
+#modes .mode-switch .icon-sun rect {
+  transition-delay: 0.033s;
+}
+#modes .mode-switch .icon-moon {
+  color: hsl(0, 0%, 4%);
+}
+#modes .mode-switch .icon-moon .base {
+  transform-origin: 6.8px 12px;
+}
+#modes .mode-switch .icon-moon .star-1 {
+  transform-origin: 15px 11px;
+  transition-delay: 0.06s;
+}
+#modes .mode-switch .icon-moon .star-2 {
+  transform-origin: 22px 11px;
+  transition-delay: 0.0665s;
+}
+#modes .mode-switch .icon-moon .star-3 {
+  transform-origin: 19px 5px;
+  transition-delay: 0.073s;
+}
+html.light-mode #modes .mode-switch .icon-sun,
+html:not(.light-mode) #modes .mode-switch .icon-moon {
+  transform: rotate(-33.75deg);
   visibility: hidden;
-  opacity: 0;
+  z-index: -1;
 }
-html.light-mode #modes .mode-gear .moon {
-  transform: none;
-  visibility: visible;
-  opacity: 1;
+html.light-mode #modes .mode-switch .icon-moon,
+html:not(.light-mode) #modes .mode-switch .icon-sun {
+  animation: 0.325s iconPositiveRotate ease;
+}
+html:not(.light-mode) #modes .mode-switch .icon-moon .base,
+html:not(.light-mode) #modes .mode-switch .icon-moon .star {
+  transform: scale(0);
+}
+html:not(.light-mode) #modes .mode-switch .icon-moon .star {
+  transition-delay: 0s;
+}
+html.light-mode #modes .mode-switch .icon-sun circle {
+  transform: scale(0);
+  transition-delay: 0.0325s;
+}
+html.light-mode #modes .mode-switch .icon-sun rect {
+  height: 0;
+  transition-delay: 0s;
+}
+@keyframes iconPositiveRotate {
+  from {
+    transform: rotate(33.75deg);
+  }
 }
 #footer {
   display: flex;
