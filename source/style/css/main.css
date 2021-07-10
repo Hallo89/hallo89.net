@@ -2,6 +2,13 @@
 Written by Hallo89 using LESS CSS - http://lesscss.org
 No necessity to write this in here but Less is awesome!
 */
+/* R-Flex by Vikers converted to WOFF & WOFF2 */
+@font-face {
+  font-family: 'R-Flex';
+  font-weight: bold;
+  font-display: swap;
+  src: local('RFlex'), local('RFlexBold'), local('RFlex-Bold'), url('/font/RFlex/RFlex-Bold.woff2') format('woff2'), url('/font/RFlex/RFlex-Bold.woff') format('woff');
+}
 body {
   margin: 0;
 }
@@ -29,9 +36,9 @@ body {
   transition: background 0.15s linear, box-shadow 0.15s linear;
 }
 #header h1 {
-  font-family: 'Century Gothic', 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', sans-serif;
+  font-family: 'R-Flex', 'Futura PT', 'Century Gothic', 'Segoe UI', 'San Francisco', sans-serif;
   font-weight: bold;
-  font-size: 7.6em;
+  font-size: 8em;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   white-space: nowrap;
@@ -260,7 +267,7 @@ body {
 }
 #header .subheader {
   position: absolute;
-  bottom: calc((100% - 7.6em * 1.3) / 4);
+  bottom: calc((100% - 8em * 1.2) / 4);
   white-space: nowrap;
   transition: background 0.15s linear, color 0.15s linear;
 }
