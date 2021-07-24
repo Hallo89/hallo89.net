@@ -575,18 +575,18 @@ main .version-notice code {
       }
       /* Default: up */
       .left {
-        transform: translate(-@vselect-arrow-height / 2, -@vselect-arrow-height / 2) rotateZ(-45deg);
+        transform: translate((-@vselect-arrow-height / 2), (-@vselect-arrow-height / 2)) rotateZ(-45deg);
       }
       .right {
-        transform: translate(-@vselect-arrow-height / 2, -@vselect-arrow-height / 2) rotateZ(225deg) translateY(-@vselect-arrow-width);
+        transform: translate((-@vselect-arrow-height / 2), (-@vselect-arrow-height / 2)) rotateZ(225deg) translateY(-@vselect-arrow-width);
       }
     }
     &.down .arrow {
       .left {
-        transform: translate(-@vselect-arrow-height / 2, @vselect-arrow-height / 2) rotateZ(45deg) translateY(-@vselect-arrow-width);
+        transform: translate((-@vselect-arrow-height / 2), (@vselect-arrow-height / 2)) rotateZ(45deg) translateY(-@vselect-arrow-width);
       }
       .right {
-        transform: translate(-@vselect-arrow-height / 2, @vselect-arrow-height / 2) rotateZ(135deg);
+        transform: translate((-@vselect-arrow-height / 2), (@vselect-arrow-height / 2)) rotateZ(135deg);
       }
     }
     &:hover {

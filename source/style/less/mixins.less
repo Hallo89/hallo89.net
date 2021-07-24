@@ -77,7 +77,7 @@
     });
   }
   .target(@textlen, @target, @animation, @it: 0) {
-    @half: ceil(@textlen / 2);
+    @half: ceil((@textlen / 2));
     & when (@it < abs(@target - @half) + @half) {
       @next: @target + @it;
       @prev: @target - @it;
