@@ -100,4 +100,32 @@
       .wave.target(@textlen, @target, @animation, @it + 1);
     }
   }
+  .keyframe() {
+    .textWaveLanding(@shadow-length: 8) {
+      @keyframes textWaveLanding {
+        0% {
+          transform: scale(.775);
+          color: transparent;
+          text-shadow: none;
+        }
+        60% {
+          color: inherit;
+          transform: scale(1.0675) translateY(.012em);
+          .drop-shadow(@shadow-length, hsl(0, 0%, 62%));
+          text-shadow+: @shadow-length + .5px @shadow-length + .5px hsl(0, 0%, 62%);
+        }
+      }
+    }
+    .textWave(@shadow-length: 9) {
+      @keyframes textWave {
+        25% {
+          transform: scale(.9375);
+        }
+        60% {
+          transform: scale(1.0475) translateY(.0115em);
+          .drop-shadow(@shadow-length, hsl(0, 0%, 62%));
+        }
+      }
+    }
+  }
 }
