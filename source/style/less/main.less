@@ -87,7 +87,7 @@ body {
 
     &.landing-animation span {
       .wave.target(7, 1, {
-        // NOTE: when chaning these timings, LANDING_ANIMATION_DURATION in index.njk must be adjusted too!
+        // NOTE: when changing these timings, LANDING_ANIMATION_DURATION in index.njk must be adjusted too!
         animation: .305s .126s * pow(@it + 1, (1 / 1.375)) textWaveLanding ease backwards;
       });
       .wave.keyframe.textWaveLanding();
