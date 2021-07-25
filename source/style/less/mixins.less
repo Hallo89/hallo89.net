@@ -8,7 +8,12 @@
 }
 
 #for(@end-inclusive, @rule) {
-  each(range(@end-inclusive), @rule);
+  each(range(@end-inclusive), {
+    // @index: 1 based
+    // @idx: 0 based
+    @idx: @index - 1;
+    @rule();
+  });
 }
 
 .focus(@active-ruleset, @disabled-ruleset) {

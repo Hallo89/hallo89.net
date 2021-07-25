@@ -104,16 +104,15 @@ body {
       font-size: calc(10vw + .5vh + 35.9px);
     }
     #for(3, {
-      // @index is 1-based
-      @max-width: 680px - 80px * @index;
-      @length: 8 - @index;
+      @max-width: 600px - 80px * @idx;
+      @length: 7 - @idx;
       @media (max-width: @max-width) {
         .drop-shadow(@length, hsl(0, 0%, 62%));
         html.light-mode & {
           .drop-shadow(@length, @heading-shadow--lt);
         }
-        .wave.keyframe.textWaveLanding(8 - @index);
-        .wave.keyframe.textWave(9 - @index);
+        .wave.keyframe.textWaveLanding(7 - @idx);
+        .wave.keyframe.textWave(8 - @idx);
       }
     });
   }
