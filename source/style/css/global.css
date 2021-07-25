@@ -65,9 +65,9 @@ html.light-mode body {
   z-index: 100;
   display: flex;
   font-size: 1.03rem;
-  border-top: 3px solid hsl(0, 0%, 26.5%);
+  border-top: 3px solid hsl(0, 0%, 27%);
   border-bottom: 3px solid #0a0a0a;
-  background-color: hsl(0, 0%, 10.5%);
+  background-color: hsl(0, 0%, 11%);
   color: hsl(0, 0%, 86%);
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
   transition: clip-path 0.2s cubic-bezier(0.3, 0.1, 0.225, 0.95), opacity 0.375s cubic-bezier(0.6, 0.2, 0.15, 1), background 0.15s linear, border 0.15s linear;
@@ -82,18 +82,18 @@ html.light-mode body {
   left: 0;
   height: 0%;
   width: 100%;
-  background-color: hsl(0, 0%, 26.5%);
+  background-color: hsl(0, 0%, 27%);
   transition: height 0.1s ease;
   z-index: 1;
 }
 #cookiebanner button {
   position: relative;
   padding: 0.5em 0.75em;
-  background-color: hsl(0, 0%, 16.5%);
+  background-color: hsl(0, 0%, 17%);
   font-family: 'San Francisco Monospace', 'Consolas', 'Inter', sans-serif;
   font-size: inherit;
   border: none;
-  border-left: 2px solid hsl(0, 0%, 26.5%);
+  border-left: 2px solid hsl(0, 0%, 27%);
   border-right: 2px solid #0a0a0a;
   color: inherit;
   cursor: pointer;
@@ -106,18 +106,18 @@ html.light-mode body {
   top: 0;
   height: 100%;
   width: 0;
-  background-color: hsl(0, 0%, 15%);
+  background-color: hsl(0, 0%, 15.5%);
   z-index: -1;
   border-radius: 100px;
   transition: all 0.45s cubic-bezier(0.45, 0.1, 0.2, 1), background 0.15s linear;
 }
 #cookiebanner button:active {
-  border-left: 2px solid hsl(0, 0%, 25%);
+  border-left: 2px solid hsl(0, 0%, 25.5%);
   border-right: 2px solid #060606;
 }
 #cookiebanner.removing button,
 #cookiebanner button:active {
-  background-color: hsl(0, 0%, 15%);
+  background-color: hsl(0, 0%, 15.5%);
 }
 #cookiebanner.removing button {
   color: transparent;
@@ -145,7 +145,7 @@ html.light-mode #cookiebanner {
   color: hsl(0, 0%, 28%);
 }
 html.light-mode #cookiebanner .background {
-  background-color: hsl(0, 0%, 26.5%);
+  background-color: hsl(0, 0%, 27%);
 }
 @media (max-width: 490px) {
   #cookiebanner {
@@ -157,10 +157,10 @@ html.light-mode #cookiebanner .background {
   #cookiebanner button {
     position: static;
     border: none;
-    border-top: 2px solid hsl(0, 0%, 26.5%);
+    border-top: 2px solid hsl(0, 0%, 27%);
   }
   #cookiebanner button:active {
-    border-top: 2px solid hsl(0, 0%, 25%);
+    border-top: 2px solid hsl(0, 0%, 25.5%);
   }
   #cookiebanner button::before {
     left: 0;
@@ -484,16 +484,16 @@ html.light-mode #footer a::before {
   height: 19em;
   font-size: 1.32rem;
   color: hsl(0, 0%, 86%);
-  background-color: hsl(0, 0%, 10.5%);
-  border-top: 4px solid hsl(0, 0%, 26.5%);
+  background-color: hsl(0, 0%, 11%);
+  border-top: 4px solid hsl(0, 0%, 27%);
   border-bottom: 4px solid #0a0a0a;
-  box-shadow: 0 2px 18px hsla(0, 0%, 4.5%, 0.3);
+  box-shadow: 0 2px 18px hsla(0, 0%, 5%, 0.3);
   box-sizing: border-box;
   transition: transform 0.2s cubic-bezier(0.35, 0.1, 0.2, 0.95), box-shadow 0.2s ease-out;
 }
 .gbl-box:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 22px hsla(0, 0%, 4.5%, 0.475);
+  box-shadow: 0 4px 22px hsla(0, 0%, 5%, 0.475);
 }
 .gbl-box:hover .heading {
   transform: translateY(-0.0875em);
@@ -537,7 +537,7 @@ html.light-mode #footer a::before {
 }
 .gbl-box .heading .text,
 .gbl-box .quick-links {
-  background-color: hsla(0, 0%, 10.5%, 0.675);
+  background-color: hsla(0, 0%, 11%, 0.675);
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
 }
@@ -587,7 +587,7 @@ html.light-mode #footer a::before {
   height: 100%;
   opacity: 0;
   z-index: -1;
-  background-color: hsla(0, 0%, 7%, 0.225);
+  background-color: hsla(0, 0%, 7.5%, 0.225);
   border-top: 3px solid hsla(0, 0%, 15%, 0.25);
   border-radius: 1px;
   visibility: hidden;
