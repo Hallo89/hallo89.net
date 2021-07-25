@@ -43,7 +43,6 @@ var {
 
 #navbar {
   .text {
-    margin-right: @nav-separate-margin;
     .name {
       clip-path: inset(0 0 0 0);
     }
@@ -54,13 +53,11 @@ var {
         visibility .25s cubic-bezier(.5, .1, .25, 1.16);
     }
   }
-  #modes {
-    margin: 0 .2em 0 @nav-separate-margin;
-  }
   #id-nav {
     flex-grow: 1;
     font-size: .74em;
     font-family: @Consolas;
+    margin: 0 .8em;
     ul {
       display: flex;
       justify-content: space-around;

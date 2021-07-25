@@ -231,6 +231,9 @@ html.light-mode #navbar {
   background-color: hsl(0, 0%, 96%);
   color: hsl(0, 0%, 26%);
 }
+#navbar #modes {
+  margin-right: 0.2em;
+}
 #modes .mode-switch {
   display: block;
   position: relative;

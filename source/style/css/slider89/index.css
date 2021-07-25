@@ -24,9 +24,6 @@ var {
   white-space: nowrap;
   clip: rect(0 0 0 0);
 }
-#navbar .text {
-  margin-right: 0.6em;
-}
 #navbar .text .name {
   clip-path: inset(0 0 0 0);
 }
@@ -35,13 +32,11 @@ var {
 #navbar .text h1 {
   transition: transform 0.25s cubic-bezier(0.5, 0.1, 0.25, 1.16), clip-path 0.25s cubic-bezier(0.5, 0.1, 0.25, 1.16), visibility 0.25s cubic-bezier(0.5, 0.1, 0.25, 1.16);
 }
-#navbar #modes {
-  margin: 0 0.2em 0 0.6em;
-}
 #navbar #id-nav {
   flex-grow: 1;
   font-size: 0.74em;
   font-family: 'San Francisco Monospaced', 'Consolas', 'Source Code Pro', monospace;
+  margin: 0 0.8em;
 }
 #navbar #id-nav ul {
   display: flex;
