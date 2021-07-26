@@ -959,6 +959,7 @@ html.light-mode .doc-list .info-item:not(.special-item)::after {
     right: 0.4em;
   }
   #navbar #id-nav {
+    margin: 0;
     width: 100%;
     padding: 0.8em 0;
     background-color: hsl(0, 0%, 12%);
