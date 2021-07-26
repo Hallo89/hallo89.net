@@ -185,7 +185,7 @@ html.light-mode #cookiebanner .background {
   justify-content: space-between;
   width: 100%;
   padding: 0.4em;
-  font-size: calc(0.2vw + 0.06vh + 27.6px);
+  font-size: 1.7rem;
   background-color: hsl(0, 0%, 3.5%);
   color: hsl(0, 0%, 73.5%);
   box-sizing: border-box;

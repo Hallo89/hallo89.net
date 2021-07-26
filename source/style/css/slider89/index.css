@@ -912,7 +912,7 @@ html.light-mode .doc-list .info-item:not(.special-item)::after {
 .nodisplay {
   display: none;
 }
-@media (max-width: 390px) {
+@media (max-width: 370px) {
   #navbar .text .name {
     transform: translateX(-100%);
     visibility: hidden;
@@ -920,7 +920,7 @@ html.light-mode .doc-list .info-item:not(.special-item)::after {
   }
   #navbar .text .arrow,
   #navbar .text h1 {
-    transform: translateX(-3.75em);
+    transform: translateX(-3.95em);
   }
 }
 @media (max-width: 460px) {
