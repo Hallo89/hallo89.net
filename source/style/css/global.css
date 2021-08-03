@@ -365,7 +365,7 @@ html.light-mode #modes .mode-switch .icon-sun rect {
 #footer .nav-wrapper ul li {
   list-style: none;
   margin: 0.52em 0;
-  color: hsl(0, 0%, 74%);
+  color: hsl(0, 0%, 75.5%);
 }
 #footer .nav-wrapper ul li:nth-last-of-type(1) {
   margin-bottom: 0;
@@ -376,7 +376,7 @@ html.light-mode #modes .mode-switch .icon-sun rect {
 #footer hr {
   width: 5.5em;
   margin: 0.3em 0;
-  border: 1px solid hsl(0, 0%, 31%);
+  border: 1px solid hsl(0, 0%, 33%);
   animation: 0.4s borderIn cubic-bezier(0.55, 0.05, 0.5, 0.95);
 }
 @keyframes borderIn {
@@ -388,7 +388,7 @@ html.light-mode #modes .mode-switch .icon-sun rect {
 #footer .side-note {
   font-size: 0.9em;
   font-weight: 300;
-  color: hsl(0, 0%, 69%);
+  color: hsl(0, 0%, 71%);
   animation: 0.4s sideNoteIn ease-in;
 }
 @keyframes sideNoteIn {
@@ -411,7 +411,7 @@ html.light-mode #modes .mode-switch .icon-sun rect {
   left: 50%;
   bottom: 0;
   width: 0;
-  border-bottom: 1px solid hsl(0, 0%, 74%);
+  border-bottom: 1px solid hsl(0, 0%, 75.5%);
   transition: all 0.225s ease;
 }
 #footer a:hover::before {
