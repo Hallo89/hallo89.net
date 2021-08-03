@@ -34,13 +34,6 @@
   }
 }
 
-.selection(@color; @background: transparent;) {
-  &::selection, &::-moz-selection {
-    background-color: @background;
-    color: @color;
-  }
-}
-
 .mode-transition() {
   .background() {
     transition+: background .15s linear;
