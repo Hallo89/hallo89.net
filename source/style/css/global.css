@@ -156,7 +156,9 @@ html.light-mode #cookiebanner .background {
   }
   #cookiebanner button {
     position: static;
-    border: none;
+    border-bottom: none;
+    border-left: none !important;
+    border-right: none !important;
     border-top: 2px solid hsl(0, 0%, 27%);
   }
   #cookiebanner button:active {
