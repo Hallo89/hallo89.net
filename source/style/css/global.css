@@ -552,6 +552,7 @@ html.light-mode #footer a::before {
   right: 0;
   padding: 0;
   margin: 0;
+  z-index: 0;
   font-size: 0.925em;
   border-top: 3px solid hsla(0, 0%, 13%, 0.675);
 }
