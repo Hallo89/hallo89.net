@@ -1,12 +1,5 @@
 // main: global.less|main.less|slider89/index.less
 
-.noselect() {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
 #for(@end-inclusive, @rule) {
   each(range(@end-inclusive), {
     // @index: 1 based
@@ -14,6 +7,13 @@
     @idx: @index - 1;
     @rule();
   });
+}
+
+.noselect() {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .focus(@active-ruleset, @disabled-ruleset) {
