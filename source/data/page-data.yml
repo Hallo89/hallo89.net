@@ -3,21 +3,21 @@ Win95-Web:
   link: win95
   image: win95-web.png
   description: |-
-    A Javascript implementation of Microsoft's Windows 95 on the web.
+    A Javascript implementation of Microsoft's Windows 95 – on the web.
     It's built without frameworks or libraries, just pure modern Javascript. Thus, it will only work on modern browsers.
 WebGL Experiments:
   link: webgl
   image: webgl-experiments.png
   components: true
-  description: A WebGL 2 learning log
+  description: A WebGL 2 learning log.
   children:
     Triangles:
       description: |-
-        Triangles is the most thorough WebGL Experiment in which I learned about graphics, GPUs, WebGL/OpenGL and everything connected to it.
+        In Triangles, I learned about graphics, WebGL/OpenGL, shaders, GPUs and more.
         Additionally it looks dope, try it out!
     Matrices & 3D:
       link: matrices3d
-      description: A study of 3D perspective and matrices - Translations, rotations, scaling, fov, ...
+      description: A study of 3D perspective and matrices – Translations, rotations, scaling, fov, ...
 Dandelion With Mods:
   link: https://minecraft.curseforge.com/projects/dandelion-with-mods
   image: dandelion-with-mods.jpg
@@ -26,23 +26,23 @@ Dandelion With Mods:
     A minecraft resource pack built on top of the original pack 'Dandelion', adding improved blocks & items, custom models and mod support!
     Its development is currently halted.
 Tools:
-  description: A variety of small tools, currently featuring a random number generator, a lightweight minecraft model creator, a text spacer and a very useful mocking text generator.
+  description: A variety of small, more or less useful tools.
   children:
     3D Magic:
       link: 3DMagic
-      description: A minimal minecraft model creator which displays minecraft models from their JSON format in a model viewing environment, featuring an integrated text editor to modify the model
+      description: A basic minecraft model creator which renders minecraft models from their JSON format, featuring an integrated text editor.
     Random figure generator:
       link: RFG
-      description: A tool to generate random numbers. Their amount, starting and ending point and the precision is customizable
+      description: A tool to generate pseudo-random numbers with some customizability.
     Mocking generator:
       link: mocking
-      description: A tool to generate text iN ThE MOcKboB sTylE which is no outdated meme at all
+      description: A tool to generate text iN ThE MOcKboB sTylE which is no outdated meme at all.
     Spacing generator:
       link: spacing
-      description: A tool converting text to a format alternating between characters and spaces. The amount of spaces in between every character is customizable
+      description: A tool to insert a custom character in between every letter of an input text.
 Slider89:
   lightMode: true
   navBarH1: true
   description: |-
     Slider89 is a Javascript library for creating customizable sliders.
-    Be aware that it's not particularily good which is why it's currently being rewritten!
+    Be aware that it's not particularily good and I'm currently rewriting it!
