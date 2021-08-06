@@ -1,11 +1,10 @@
 ---
-Dandelion With Mods:
-  link: https://minecraft.curseforge.com/projects/dandelion-with-mods
-  image: dandelion-with-mods.jpg
-  footer: false
+Win95-Web:
+  link: win95
+  image: win95-web.png
   description: |-
-    A minecraft resource pack built on top of the original pack 'Dandelion', adding improved blocks & items, custom models and mod support!
-    Its development is currently halted.
+    A Javascript implementation of Microsoft's Windows 95 on the web.
+    It's built without frameworks or libraries, just pure modern Javascript. Thus, it will only work on modern browsers.
 WebGL Experiments:
   link: webgl
   image: webgl-experiments.png
@@ -19,12 +18,13 @@ WebGL Experiments:
     Matrices & 3D:
       link: matrices3d
       description: A study of 3D perspective and matrices - Translations, rotations, scaling, fov, ...
-Win95-Web:
-  link: win95
-  image: win95-web.png
+Dandelion With Mods:
+  link: https://minecraft.curseforge.com/projects/dandelion-with-mods
+  image: dandelion-with-mods.jpg
+  footer: false
   description: |-
-    A Javascript implementation of Microsoft's Windows 95 on the web.
-    It's built without frameworks or libraries, just pure modern Javascript. Thus, it will only work on modern browsers.
+    A minecraft resource pack built on top of the original pack 'Dandelion', adding improved blocks & items, custom models and mod support!
+    Its development is currently halted.
 Tools:
   description: A variety of small tools, currently featuring a random number generator, a lightweight minecraft model creator, a text spacer and a very useful mocking text generator.
   children:
