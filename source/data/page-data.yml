@@ -17,6 +17,7 @@ WebGL Experiments:
         Additionally it looks dope, try it out!
     Matrices & 3D:
       link: matrices3d
+      image: matrices3D.png
       description: A study of 3D perspective and matrices – Translations, rotations, scaling, fov, ...
 Dandelion With Mods:
   link: https://minecraft.curseforge.com/projects/dandelion-with-mods
