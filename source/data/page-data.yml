@@ -7,11 +7,12 @@ Win95-Web:
     It's built without frameworks or libraries, just pure modern Javascript. Thus, it will only work on modern browsers.
 WebGL Experiments:
   link: webgl
-  image: webgl-experiments.png
+  image: triangles.png
   components: true
   description: A WebGL 2 learning log.
   children:
     Triangles:
+      image: triangles.png
       description: |-
         In Triangles, I learned about graphics, WebGL/OpenGL, shaders, GPUs and more.
         Additionally it looks dope, try it out!
