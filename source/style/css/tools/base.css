@@ -122,6 +122,7 @@ body.delayfull #wrapper {
   border-top: 8px solid hsl(0, 0%, 22.5%);
   border-bottom: 6px solid hsl(0, 0%, 10%);
   background-color: hsl(0, 0%, 10%);
+  overflow: hidden;
   box-sizing: border-box;
 }
 .box, .box:hover {
@@ -140,11 +141,11 @@ body.delayfull #wrapper {
   text-transform: uppercase;
   color: hsl(0, 0%, 50%);
   background-color: hsl(0, 0%, 11.5%);
-  padding: 1em 1.25em;
+  padding: 1.25em;
 }
 
 .box .header_text {
-  font-size: 28px;
+  font-size: 1.55em;
 }
 
 /* Compact input_container mode: header, utility buttons and inputs in one line */
@@ -174,24 +175,19 @@ body.delayfull #wrapper {
 
 /* various styles for various text formatting methods */
 /* General wrapper of a text output */
-.text_function {
-  font-size: .6em;
-  color: hsl(0, 0%, 75%);
-  display: flex;
-}
 .text_box {
-  padding: 5px 10px;
-  overflow: auto;
   display: flex;
   align-items: flex-start;
   align-content: flex-start;
   justify-content: center;
+  color: hsl(0, 0%, 75%);
+  padding: 5px 10px;
+  overflow: auto;
   flex-wrap: wrap;
   word-wrap: break-word;
 }
 .text_content {
   display: block;
-  font-size: .65em;
   line-height: 1.4;
   white-space: pre-wrap;
   -webkit-user-select: all;
