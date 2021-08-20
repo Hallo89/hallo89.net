@@ -28,18 +28,23 @@ Dandelion With Mods:
     A minecraft resource pack built on top of the original pack 'Dandelion', adding improved blocks & items, custom models and mod support!
     Its development is currently halted.
 Tools:
+  image: "linear-gradient(to bottom right, #1F6C6B, #664D6E)"
   description: A variety of small, more or less useful tools.
   children:
     3D Magic:
       link: 3DMagic
+      image: "linear-gradient(to bottom right, #504358, #6A412F)"
       description: A basic minecraft model creator which renders minecraft models from their JSON format, featuring an integrated text editor.
     Random figure generator:
       link: RFG
+      image: "linear-gradient(to bottom right, #7A5B34, #65373D)"
       description: A tool to generate pseudo-random numbers with some customizability.
     Mocking generator:
       link: mocking
+      image: "linear-gradient(to bottom right, #626B20, #03779E)"
       description: A tool to generate text iN ThE MOcKboB sTylE which is no outdated meme at all.
     Spacing generator:
+      image: "linear-gradient(to bottom right, #1B6E87, #614B69)"
       link: spacing
       description: A tool to insert a custom character in between every letter of an input text.
 Slider89:
