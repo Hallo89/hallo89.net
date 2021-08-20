@@ -491,7 +491,7 @@ html.light-mode #footer a::before {
   background-color: hsl(0, 0%, 11%);
   border-top: 4px solid hsl(0, 0%, 27%);
   border-bottom: 4px solid #0a0a0a;
-  box-shadow: 0 2px 18px hsla(0, 0%, 5%, 0.3);
+  box-shadow: 0 2px 18px hsla(0, 0%, 6%, 0.285);
   box-sizing: border-box;
   transition: transform 0.2s cubic-bezier(0.35, 0.1, 0.2, 0.95), box-shadow 0.2s ease-out;
 }
@@ -631,7 +631,7 @@ html.light-mode #footer a::before {
 }
 @media (hover: none) {
   .gbl-box {
-    box-shadow: 0 4px 22px hsla(0, 0%, 5%, 0.475);
+    box-shadow: 0 4px 22px hsla(0, 0%, 6%, 0.475);
   }
   .gbl-box .heading {
     transform: translateY(-0.0875em);
@@ -653,7 +653,7 @@ html.light-mode #footer a::before {
 }
 @media (hover: hover) {
   .gbl-box:hover {
-    box-shadow: 0 4px 22px hsla(0, 0%, 5%, 0.475);
+    box-shadow: 0 4px 22px hsla(0, 0%, 6%, 0.475);
   }
   .gbl-box:hover .heading {
     transform: translateY(-0.0875em);
