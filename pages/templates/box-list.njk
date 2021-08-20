@@ -35,7 +35,7 @@
     {%- endif %}
 
     {%- if props.image %}
-      <span class="backdrop" style="background-image: url('/image/nav/{{ props.image }}')"></span>
+      <span class="backdrop" style="background-image: {{ props.image | expandBackgroundImage }}"></span>
     {%- endif %}
   </a>
 

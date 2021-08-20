@@ -91,6 +91,14 @@ const njk = nunjucks.configure('pages', {
   njk.addFilter('dotSnake', function(val) {
     return (typeof val == 'string' ? val.replace(/\./g, '_') : val);
   });
+
+  njk.addFilter('expandBackgroundImage', function(val) {
+    if (/^[\w-]+\.\w+$/.test(val)) {
+      return `url("/image/nav/${val}")`;
+    } else {
+      return val;
+    }
+  });
 })();
 
 argon.addFlag(['f', 'first'], function(val) {
