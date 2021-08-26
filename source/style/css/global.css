@@ -629,6 +629,27 @@ html.light-mode #footer a::before {
   outline: none;
   box-shadow: inset 0 0 0 3px #1960C9;
 }
+.gbl-box:hover {
+  box-shadow: 0 4px 22px hsla(0, 0%, 6%, 0.475);
+  transform: translateY(-2px);
+}
+.gbl-box:hover .heading {
+  transform: translateY(-0.0875em);
+}
+.gbl-box:hover .heading .text {
+  background-color: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+.gbl-box:hover .description {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-0.185em);
+}
+.gbl-box:hover .backdrop {
+  -webkit-filter: blur(20px) brightness(65%);
+  filter: blur(20px) brightness(65%);
+}
 @media (hover: none) {
   .gbl-box {
     box-shadow: 0 4px 22px hsla(0, 0%, 6%, 0.475);
@@ -647,32 +668,7 @@ html.light-mode #footer a::before {
     transform: translateY(-0.185em);
   }
   .gbl-box .backdrop {
-    -webkit-filter: brightness(45%);
-    filter: brightness(45%);
+    -webkit-filter: brightness(45%) !important;
+    filter: brightness(45%) !important;
   }
-}
-@media (hover: hover) {
-  .gbl-box:hover {
-    box-shadow: 0 4px 22px hsla(0, 0%, 6%, 0.475);
-  }
-  .gbl-box:hover .heading {
-    transform: translateY(-0.0875em);
-  }
-  .gbl-box:hover .heading .text {
-    background-color: transparent;
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-  }
-  .gbl-box:hover .description {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(-0.185em);
-  }
-  .gbl-box:hover .backdrop {
-    -webkit-filter: blur(20px) brightness(65%);
-    filter: blur(20px) brightness(65%);
-  }
-}
-.gbl-box:hover {
-  transform: translateY(-2px);
 }

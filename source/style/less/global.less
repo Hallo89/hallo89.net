@@ -703,24 +703,21 @@ body {
     }
   }
 
+  &:hover {
+    @base-style-active-box();
+    transform: translateY(-2px);
+    .backdrop {
+      -webkit-filter: blur(20px) brightness(65%);
+      filter: blur(20px) brightness(65%);
+    }
+  }
+
   // Special style for touch-based devices
   @media (hover: none) {
     @base-style-active-box();
     .backdrop {
-      -webkit-filter: brightness(45%);
-      filter: brightness(45%);
+      -webkit-filter: brightness(45%) !important;
+      filter: brightness(45%) !important;
     }
-  }
-  @media (hover: hover) {
-    &:hover {
-      @base-style-active-box();
-      .backdrop {
-        -webkit-filter: blur(20px) brightness(65%);
-        filter: blur(20px) brightness(65%);
-      }
-    }
-  }
-  &:hover {
-    transform: translateY(-2px);
   }
 }
