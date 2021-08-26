@@ -27,7 +27,7 @@ function handleThemes() {
 }
 
 function toggleMode(mode) {
-  if (mode && mode != event) {
+  if (mode && !(mode instanceof Event)) {
     if (mode == 'light') html.classList.add('light-mode');
     else if (mode == 'dark') html.classList.remove('light-mode');
   } else html.classList.toggle('light-mode');
