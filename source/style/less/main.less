@@ -85,9 +85,10 @@ body {
       }
     }
 
-    &.landing-animation span {
+    &.landing-animation-h1 span {
       .wave.target(7, 1, {
-        // NOTE: when changing these timings, LANDING_ANIMATION_DURATION in index.njk must be adjusted too!
+        // NOTE: when changing these timings,
+        // H1_LANDING_ANIMATION_DURATION in index.njk must be adjusted too
         animation: .305s .126s * pow(@it + 1, (1 / 1.375)) textWaveLanding ease backwards;
       });
       .wave.keyframe.textWaveLanding();
@@ -136,17 +137,27 @@ body {
   padding-top: 1.75em;
   padding-bottom: 1.75em;
   height: auto;
-  .box {
-    .box-animation-loop();
-    .box-animation-loop(@amount: 5, @seconds: .5s, @it: 1) when (@it < @amount + 1) {
-      &:nth-child(@{it}) {
-        .boxanimation(@seconds);
-      }
-      .box-animation-loop(@amount, @seconds + .08s, @it + 1);
+  // This fixes the animation lagging because it clashes with transition in Firefox
+  &.landing-animation-box .gbl-box {
+    transition: none;
+    &:hover {
+      transform: none;
     }
+  }
+  .gbl-box {
+    .box-animation-loop();
+    // NOTE: when changing these animation timings,
+    // BOX_LANDING_ANIMATION_DURATION in index.njk must be adjusted too
+    .box-animation-loop(@amount: 5, @duration: .42s, @it: 1) when (@it <= @amount) {
+      &:nth-child(@{it}) {
+        animation: @duration shiftinBox cubic-bezier(.285, .05, .5, 1);
+      }
+      .box-animation-loop(@amount, @duration + .0625s, @it + 1);
+    }
+
     @keyframes shiftinBox {
       from {
-        transform: translateY(-17px);
+        transform: translateY(-.7em);
       }
     }
   }

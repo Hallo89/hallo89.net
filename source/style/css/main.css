@@ -65,25 +65,25 @@ body {
 #header h1 span:active {
   transform: scale(0.875);
 }
-#header h1.landing-animation span:nth-child(1) {
+#header h1.landing-animation-h1 span:nth-child(1) {
   animation: 0.305s 0.126s textWaveLanding ease backwards;
 }
-#header h1.landing-animation span:nth-child(2) {
+#header h1.landing-animation-h1 span:nth-child(2) {
   animation: 0.305s 0.20859383s textWaveLanding ease backwards;
 }
-#header h1.landing-animation span:nth-child(3) {
+#header h1.landing-animation-h1 span:nth-child(3) {
   animation: 0.305s 0.28013529s textWaveLanding ease backwards;
 }
-#header h1.landing-animation span:nth-child(4) {
+#header h1.landing-animation-h1 span:nth-child(4) {
   animation: 0.305s 0.34532845s textWaveLanding ease backwards;
 }
-#header h1.landing-animation span:nth-child(5) {
+#header h1.landing-animation-h1 span:nth-child(5) {
   animation: 0.305s 0.40617423s textWaveLanding ease backwards;
 }
-#header h1.landing-animation span:nth-child(6) {
+#header h1.landing-animation-h1 span:nth-child(6) {
   animation: 0.305s 0.46376581s textWaveLanding ease backwards;
 }
-#header h1.landing-animation span:nth-child(7) {
+#header h1.landing-animation-h1 span:nth-child(7) {
   animation: 0.305s 0.51878487s textWaveLanding ease backwards;
 }
 @keyframes textWaveLanding {
@@ -345,23 +345,29 @@ html.light-mode #header h1 {
   padding-bottom: 1.75em;
   height: auto;
 }
-#gbl-box-menu .box:nth-child(1) {
-  animation: 0.5s shiftinBox ease-out;
+#gbl-box-menu.landing-animation-box .gbl-box {
+  transition: none;
 }
-#gbl-box-menu .box:nth-child(2) {
-  animation: 0.58s shiftinBox ease-out;
+#gbl-box-menu.landing-animation-box .gbl-box:hover {
+  transform: none;
 }
-#gbl-box-menu .box:nth-child(3) {
-  animation: 0.66s shiftinBox ease-out;
+#gbl-box-menu .gbl-box:nth-child(1) {
+  animation: 0.42s shiftinBox cubic-bezier(0.285, 0.05, 0.5, 1);
 }
-#gbl-box-menu .box:nth-child(4) {
-  animation: 0.74s shiftinBox ease-out;
+#gbl-box-menu .gbl-box:nth-child(2) {
+  animation: 0.4825s shiftinBox cubic-bezier(0.285, 0.05, 0.5, 1);
 }
-#gbl-box-menu .box:nth-child(5) {
-  animation: 0.82s shiftinBox ease-out;
+#gbl-box-menu .gbl-box:nth-child(3) {
+  animation: 0.545s shiftinBox cubic-bezier(0.285, 0.05, 0.5, 1);
+}
+#gbl-box-menu .gbl-box:nth-child(4) {
+  animation: 0.6075s shiftinBox cubic-bezier(0.285, 0.05, 0.5, 1);
+}
+#gbl-box-menu .gbl-box:nth-child(5) {
+  animation: 0.67s shiftinBox cubic-bezier(0.285, 0.05, 0.5, 1);
 }
 @keyframes shiftinBox {
   from {
-    transform: translateY(-17px);
+    transform: translateY(-0.7em);
   }
 }

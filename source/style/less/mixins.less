@@ -52,10 +52,6 @@
   }
 }
 
-.boxanimation(@seconds) {
-  animation: @seconds shiftinBox ease-out;
-}
-
 .drop-shadow(@amount, @color, @it: 0) {
   & when not (@it = 0) {
     text-shadow+: unit(@it, px) unit(@it, px) @color;

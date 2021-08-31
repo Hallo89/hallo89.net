@@ -1,4 +1,5 @@
 ---
+# NOTE: Update box-count in the main.css starting animation when adding a box!
 Win95-Web:
   link: win95
   image: win95-web.png

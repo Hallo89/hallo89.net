@@ -36,7 +36,7 @@
   <body>
 
     <header id="header">
-      <h1 class="landing-animation">
+      <h1 class="landing-animation-h1">
         <span data-count="1">H</span
         ><span data-count="2">a</span
         ><span data-count="3">l</span
@@ -53,19 +53,22 @@
       {% include 'templates/mode-switch.njk' %}
     </header>
 
-    <nav id="gbl-box-menu">
+    <nav id="gbl-box-menu" class="landing-animation-box">
       {% include 'templates/box-list.njk' %}
     </nav>
 
     {% include "templates/footer.njk" %}
 
     <script>
+      const boxMenu = document.getElementById('gbl-box-menu');
+      const BOX_LANDING_ANIMATION_DURATION = .67;
+
       const h1 = document.querySelector('#header h1');
       let timeoutID;
       let currentSpan;
 
       const TEXTLEN = h1.textContent.trim().length;
-      const LANDING_ANIMATION_DURATION = .82378487;
+      const H1_LANDING_ANIMATION_DURATION = .82378487;
       const Animation = {
         ROOT: 1.375,
         DURATION: .37,
@@ -77,8 +80,12 @@
       h1.addEventListener('mouseleave', h1Leave);
 
       setTimeout(function() {
-        h1.classList.remove('landing-animation');
-      }, LANDING_ANIMATION_DURATION * 1000);
+        boxMenu.classList.remove('landing-animation-box');
+      }, BOX_LANDING_ANIMATION_DURATION * 1000);
+
+      setTimeout(function() {
+        h1.classList.remove('landing-animation-h1');
+      }, H1_LANDING_ANIMATION_DURATION * 1000);
 
       function h1Click(e) {
         const target = e.target;
