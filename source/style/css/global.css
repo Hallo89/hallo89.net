@@ -22,7 +22,7 @@ No necessity to write this in here but Less is awesome!
   src: local('Inter Light'), local('Inter-Light'), url('/font/Inter/Inter-Light.woff2') format('woff2'), url('/font/Inter/Inter-Light.woff') format('woff');
 }
 html {
-  scrollbar-color: hsl(0, 0%, 35%) hsl(0, 0%, 17%);
+  scrollbar-color: hsl(0, 0%, 43%) hsl(0, 0%, 14%);
   font-size: calc(0.08vw + 0.04vh + 16.05px);
 }
 html.light-mode {
