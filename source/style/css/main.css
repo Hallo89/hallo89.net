@@ -9,9 +9,6 @@ No necessity to write this in here but Less is awesome!
   font-display: swap;
   src: local('RFlex'), local('RFlexBold'), local('RFlex-Bold'), url('/font/RFlex/RFlex-Bold.woff2') format('woff2'), url('/font/RFlex/RFlex-Bold.woff') format('woff');
 }
-body {
-  margin: 0;
-}
 #modes {
   position: absolute;
   top: 0.4em;
