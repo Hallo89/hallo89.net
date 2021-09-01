@@ -105,8 +105,8 @@
         60% {
           color: inherit;
           transform: scale(1.0675) translateY(.012em);
-          .drop-shadow(@shadow-length, hsl(0, 0%, 62%));
-          text-shadow+: @shadow-length + .5px @shadow-length + .5px hsl(0, 0%, 62%);
+          .drop-shadow(@shadow-length, @heading-shadow);
+          text-shadow+: @shadow-length + .5px @shadow-length + .5px @heading-shadow;
         }
       }
     }
@@ -117,7 +117,7 @@
         }
         60% {
           transform: scale(1.0475) translateY(.0115em);
-          .drop-shadow(@shadow-length, hsl(0, 0%, 62%));
+          .drop-shadow(@shadow-length, @heading-shadow);
         }
       }
     }
