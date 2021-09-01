@@ -619,7 +619,7 @@ body {
     margin: 0;
     z-index: 0;
     font-size: .925em;
-    border-top: @border-width solid hsla(0, 0%, 13%, @gbl-box-backdrop-opacity);
+    border-top: @border-width solid @gbl-box-quicklinks-border-top;
     @border-width: 3px;
     .link {
       position: relative;
@@ -635,8 +635,8 @@ body {
         height: 100%;
         opacity: 0;
         z-index: -1;
-        background-color: fade(darken(@gbl-box-backdrop-bg, 3.5%), 22.5%);
-        border-top: @border-width solid hsla(0, 0%, 15%, .25);
+        background-color: @gbl-box-quicklinks-hover-background;
+        border-top: @border-width solid @gbl-box-quicklinks-hover-border-top;
         border-radius: 1px;
         visibility: hidden;
         // animations are more robust than transitions, but for most rules it is fine (here: opacity)

@@ -60,7 +60,7 @@ body {
     margin: 0;
     transition+: transform .76s;
     cursor: default;
-    .drop-shadow(8, hsl(0, 0%, 62%));
+    .drop-shadow(8, @heading-shadow);
     .mode-transition.textshadow();
     .mode-transition.color();
 
@@ -108,7 +108,7 @@ body {
       @max-width: 600px - 80px * @idx;
       @length: 7 - @idx;
       @media (max-width: @max-width) {
-        .drop-shadow(@length, hsl(0, 0%, 62%));
+        .drop-shadow(@length, @heading-shadow);
         html.light-mode & {
           .drop-shadow(@length, @heading-shadow--lt);
         }
