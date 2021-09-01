@@ -647,8 +647,8 @@ html.light-mode #footer a::before {
   transform: translateY(-0.185em);
 }
 .gbl-box:hover .backdrop {
-  -webkit-filter: blur(20px) brightness(65%);
-  filter: blur(20px) brightness(65%);
+  -webkit-filter: blur(20px) brightness(60%);
+  filter: blur(20px) brightness(60%);
 }
 @media (hover: none) {
   .gbl-box {
