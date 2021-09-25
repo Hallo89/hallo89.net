@@ -95,7 +95,6 @@ main {
   max-width: calc(15vw + 2.5vh + 685px);
   margin: calc(2vh + .75vw + 14px) auto;
   padding: 0 .5em;
-  color: @main-color;
   line-height: 1.58;
   section {
     margin: 2em auto;
@@ -160,7 +159,6 @@ main {
   }
 
   html.light-mode & {
-    color: @main-color--lt;
     h2 {
       color: @h2--lt;
     }
@@ -710,7 +708,6 @@ main .version-notice code {
       font-size: 0;
       font-weight: bold;
       font-family: @Consolas;
-      color: @main-color;
       background-color: @version-banner-bg;
       border-radius: 3px;
       opacity: 0;
@@ -842,7 +839,6 @@ main .version-notice code {
   html.light-mode & {
     &.version-item {
       .version-notice {
-        color: @main-color--lt;
         background-color: @version-banner-bg--lt;
       }
       .indicator {

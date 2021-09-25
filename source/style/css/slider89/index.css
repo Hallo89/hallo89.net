@@ -69,7 +69,6 @@ main {
   max-width: calc(15vw + 2.5vh + 685px);
   margin: calc(2vh + 0.75vw + 14px) auto;
   padding: 0 0.5em;
-  color: hsl(0, 0%, 86%);
   line-height: 1.58;
 }
 main section {
@@ -134,9 +133,6 @@ main h2,
 main h3,
 main h4 {
   transition: color 0.15s linear;
-}
-html.light-mode main {
-  color: hsl(0, 0%, 6%);
 }
 html.light-mode main h2 {
   color: hsl(0, 0%, 4%);
@@ -658,7 +654,6 @@ html.light-mode .version-select .description .codeblock {
   font-size: 0;
   font-weight: bold;
   font-family: 'San Francisco Monospaced', 'Consolas', 'Source Code Pro', monospace;
-  color: hsl(0, 0%, 86%);
   background-color: rgba(152, 56, 56, 0.35);
   border-radius: 3px;
   opacity: 0;
@@ -795,7 +790,6 @@ html.light-mode .version-select .description .codeblock {
   transform: translateX(35%);
 }
 html.light-mode .list-item.version-item .version-notice {
-  color: hsl(0, 0%, 6%);
   background-color: rgba(188, 115, 115, 0.35);
 }
 html.light-mode .list-item.version-item .indicator .indicator-item {
