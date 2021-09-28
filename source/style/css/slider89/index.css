@@ -50,13 +50,13 @@ var {
   margin: 0 0.5em;
 }
 #navbar #id-nav a {
-  border-bottom: 2px solid hsl(0, 0%, 58.5%);
+  border-bottom: 2px solid hsl(0, 0%, 63.5%);
   white-space: nowrap;
   transition: color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 }
 #navbar #id-nav a:hover {
-  color: hsl(0, 0%, 78.5%);
-  border-color: hsl(0, 0%, 66.5%);
+  color: hsl(0, 0%, 83.5%);
+  border-color: hsl(0, 0%, 71.5%);
 }
 html.light-mode #navbar #id-nav a {
   border-bottom: 2px solid hsl(0, 0%, 37%);
@@ -76,12 +76,12 @@ main section {
   padding: 0 1.8em;
 }
 main h2 {
-  color: hsl(0, 0%, 90%);
+  color: hsl(0, 0%, 92%);
   font-size: 2.2em;
   margin: 0;
 }
 main h3 {
-  color: hsl(0, 0%, 88%);
+  color: hsl(0, 0%, 90%);
   font-family: 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', 'San Francisco', 'Roboto', 'Open Sans', Arial, sans-serif;
   margin: 0.6em 0;
 }
@@ -89,7 +89,7 @@ main h4 {
   font-size: 1.58em;
   font-family: 'Source Code Pro', 'DejaVu Sans Mono', 'Fira Mono', 'Fira Code', 'San Francisco Monospaced', 'Consolas', monospace;
   margin: 1.2em 0;
-  color: hsl(0, 0%, 86%);
+  color: hsl(0, 0%, 88%);
   cursor: pointer;
   position: relative;
   display: flex;
@@ -182,39 +182,39 @@ main p a:active:visited {
 main dd a:hover,
 main .version-notice a:hover,
 main .version-select a:hover {
-  color: hsl(0, 0%, 94%);
-  border-color: hsl(0, 0%, 94%);
+  color: hsl(0, 0%, 96%);
+  border-color: hsl(0, 0%, 96%);
 }
 main dd a:active,
 main .version-notice a:active,
 main .version-select a:active {
-  background-color: hsla(0, 0%, 86%, 0.12);
-  color: hsl(0, 0%, 90%);
-  border-color: hsl(0, 0%, 90%);
+  background-color: hsla(0, 0%, 88%, 0.12);
+  color: hsl(0, 0%, 92%);
+  border-color: hsl(0, 0%, 92%);
 }
 main .version-select .description .header a {
   padding: 0 1px;
 }
 main .version-select .description .header a:hover {
-  color: hsl(0, 0%, 80%);
-  border-color: hsl(0, 0%, 80%);
+  color: hsl(0, 0%, 82%);
+  border-color: hsl(0, 0%, 82%);
 }
 main .version-select .description .header a:active {
-  background-color: hsla(0, 0%, 72%, 0.12);
-  color: hsl(0, 0%, 76%);
-  border-color: hsl(0, 0%, 76%);
+  background-color: hsla(0, 0%, 74%, 0.12);
+  color: hsl(0, 0%, 78%);
+  border-color: hsl(0, 0%, 78%);
 }
 main code a {
-  color: hsl(0, 0%, 90%);
+  color: hsl(0, 0%, 92%);
 }
 main code a:hover {
-  color: hsl(0, 0%, 98%);
-  border-color: hsl(0, 0%, 98%);
+  color: hsl(0, 0%, 100%);
+  border-color: hsl(0, 0%, 100%);
 }
 main code a:active {
   background-color: inherit;
-  color: hsl(0, 0%, 94%);
-  border-color: hsl(0, 0%, 94%);
+  color: hsl(0, 0%, 96%);
+  border-color: hsl(0, 0%, 96%);
 }
 html.light-mode main p a {
   color: #138296;
@@ -283,7 +283,7 @@ html.light-mode main p code a:active {
   height: 0.833em;
   width: 0.833em;
   border: none;
-  color: hsl(0, 0%, 78%);
+  color: hsl(0, 0%, 80%);
   background-color: hsl(0, 0%, 19%);
   font-size: 1em;
   font-family: 'Source Code Pro', 'Lucida Console', 'DejaVu Sans Mono', 'Century', 'Century Gothic', 'Consolas', 'San Francisco Monospaced', sans-serif;
@@ -338,7 +338,7 @@ main .codeblock code {
 }
 main code,
 .codeblock {
-  color: hsl(0, 0%, 90%);
+  color: hsl(0, 0%, 92%);
   background-color: hsl(0, 0%, 13.5%);
   font-family: 'Source Code Pro', 'DejaVu Sans Mono', 'Fira Mono', 'Fira Code', 'San Francisco Monospaced', 'Consolas', monospace;
   transition: color 0.15s linear, background 0.15s linear;
@@ -407,7 +407,7 @@ main .version-notice code {
   bottom: 32%;
   left: 45.5%;
   transform-origin: bottom left;
-  background-color: hsl(0, 0%, 92%);
+  background-color: hsl(0, 0%, 94%);
   border-radius: 1px;
   transition: all 0.3s ease;
 }
@@ -477,7 +477,7 @@ html.light-mode .code-copy-wrapper .copy-btn .checkbox .mark {
   width: 100%;
   height: 0;
   z-index: -1;
-  background-color: hsl(0, 0%, 99%);
+  background-color: hsl(0, 0%, 100%);
   transition: height 0.2s ease, background 0.15s linear;
 }
 .version-select .version-buttons button:hover,
@@ -527,7 +527,7 @@ html.light-mode .code-copy-wrapper .copy-btn .checkbox .mark {
 .version-select .toggle_btn .arrow .right {
   display: block;
   position: absolute;
-  border-bottom: 2.5px solid hsl(0, 0%, 86%);
+  border-bottom: 2.5px solid hsl(0, 0%, 88%);
   width: 0.86em;
   transform-origin: 100% 0;
   transition: transform 0.22s cubic-bezier(0.5, 0.13, 0.1, 1), border 0.15s linear;
@@ -586,7 +586,7 @@ html.light-mode .code-copy-wrapper .copy-btn .checkbox .mark {
   align-items: center;
   font-size: 0.95em;
   padding: 0.3em 1.2em;
-  color: hsl(0, 0%, 72%);
+  color: hsl(0, 0%, 74%);
   transition: color 0.15s linear;
 }
 .version-select .description .header .heading {
@@ -833,7 +833,7 @@ html.light-mode .list-item.version-item .indicator .indicator-item > strong::bef
 }
 .doc-list dt code {
   font-size: 1.1em;
-  color: hsl(0, 0%, 94%);
+  color: hsl(0, 0%, 96%);
   background-color: hsl(0, 0%, 18.5%);
   font-weight: 600;
   padding: 0.125em 0.525em;

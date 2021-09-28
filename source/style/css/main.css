@@ -42,7 +42,7 @@ No necessity to write this in here but Less is awesome!
   margin: 0;
   transition: transform 0.76s, text-shadow 0.15s linear, color 0.15s linear;
   cursor: default;
-  text-shadow: 0.5px 0.5px hsl(0, 0%, 62%), 1px 1px hsl(0, 0%, 62%), 1.5px 1.5px hsl(0, 0%, 62%), 2px 2px hsl(0, 0%, 62%), 2.5px 2.5px hsl(0, 0%, 62%), 3px 3px hsl(0, 0%, 62%), 3.5px 3.5px hsl(0, 0%, 62%), 4px 4px hsl(0, 0%, 62%), 4.5px 4.5px hsl(0, 0%, 62%), 5px 5px hsl(0, 0%, 62%), 5.5px 5.5px hsl(0, 0%, 62%), 6px 6px hsl(0, 0%, 62%), 6.5px 6.5px hsl(0, 0%, 62%), 7px 7px hsl(0, 0%, 62%), 7.5px 7.5px hsl(0, 0%, 62%), 8px 8px hsl(0, 0%, 62%);
+  text-shadow: 0.5px 0.5px hsl(0, 0%, 63%), 1px 1px hsl(0, 0%, 63%), 1.5px 1.5px hsl(0, 0%, 63%), 2px 2px hsl(0, 0%, 63%), 2.5px 2.5px hsl(0, 0%, 63%), 3px 3px hsl(0, 0%, 63%), 3.5px 3.5px hsl(0, 0%, 63%), 4px 4px hsl(0, 0%, 63%), 4.5px 4.5px hsl(0, 0%, 63%), 5px 5px hsl(0, 0%, 63%), 5.5px 5.5px hsl(0, 0%, 63%), 6px 6px hsl(0, 0%, 63%), 6.5px 6.5px hsl(0, 0%, 63%), 7px 7px hsl(0, 0%, 63%), 7.5px 7.5px hsl(0, 0%, 63%), 8px 8px hsl(0, 0%, 63%);
 }
 #header h1 span {
   display: inline-block;
@@ -92,7 +92,7 @@ No necessity to write this in here but Less is awesome!
   60% {
     color: inherit;
     transform: scale(1.0675) translateY(0.012em);
-    text-shadow: 0.5px 0.5px hsl(0, 0%, 62%), 1px 1px hsl(0, 0%, 62%), 1.5px 1.5px hsl(0, 0%, 62%), 2px 2px hsl(0, 0%, 62%), 2.5px 2.5px hsl(0, 0%, 62%), 3px 3px hsl(0, 0%, 62%), 3.5px 3.5px hsl(0, 0%, 62%), 4px 4px hsl(0, 0%, 62%), 4.5px 4.5px hsl(0, 0%, 62%), 5px 5px hsl(0, 0%, 62%), 5.5px 5.5px hsl(0, 0%, 62%), 6px 6px hsl(0, 0%, 62%), 6.5px 6.5px hsl(0, 0%, 62%), 7px 7px hsl(0, 0%, 62%), 7.5px 7.5px hsl(0, 0%, 62%), 8px 8px hsl(0, 0%, 62%), 8.5px 8.5px hsl(0, 0%, 62%);
+    text-shadow: 0.5px 0.5px hsl(0, 0%, 63%), 1px 1px hsl(0, 0%, 63%), 1.5px 1.5px hsl(0, 0%, 63%), 2px 2px hsl(0, 0%, 63%), 2.5px 2.5px hsl(0, 0%, 63%), 3px 3px hsl(0, 0%, 63%), 3.5px 3.5px hsl(0, 0%, 63%), 4px 4px hsl(0, 0%, 63%), 4.5px 4.5px hsl(0, 0%, 63%), 5px 5px hsl(0, 0%, 63%), 5.5px 5.5px hsl(0, 0%, 63%), 6px 6px hsl(0, 0%, 63%), 6.5px 6.5px hsl(0, 0%, 63%), 7px 7px hsl(0, 0%, 63%), 7.5px 7.5px hsl(0, 0%, 63%), 8px 8px hsl(0, 0%, 63%), 8.5px 8.5px hsl(0, 0%, 63%);
   }
 }
 #header h1.wave1 span:nth-child(1) {
@@ -230,12 +230,12 @@ No necessity to write this in here but Less is awesome!
   }
   60% {
     transform: scale(1.0475) translateY(0.0115em);
-    text-shadow: 0.5px 0.5px hsl(0, 0%, 62%), 1px 1px hsl(0, 0%, 62%), 1.5px 1.5px hsl(0, 0%, 62%), 2px 2px hsl(0, 0%, 62%), 2.5px 2.5px hsl(0, 0%, 62%), 3px 3px hsl(0, 0%, 62%), 3.5px 3.5px hsl(0, 0%, 62%), 4px 4px hsl(0, 0%, 62%), 4.5px 4.5px hsl(0, 0%, 62%), 5px 5px hsl(0, 0%, 62%), 5.5px 5.5px hsl(0, 0%, 62%), 6px 6px hsl(0, 0%, 62%), 6.5px 6.5px hsl(0, 0%, 62%), 7px 7px hsl(0, 0%, 62%), 7.5px 7.5px hsl(0, 0%, 62%), 8px 8px hsl(0, 0%, 62%), 8.5px 8.5px hsl(0, 0%, 62%), 9px 9px hsl(0, 0%, 62%);
+    text-shadow: 0.5px 0.5px hsl(0, 0%, 63%), 1px 1px hsl(0, 0%, 63%), 1.5px 1.5px hsl(0, 0%, 63%), 2px 2px hsl(0, 0%, 63%), 2.5px 2.5px hsl(0, 0%, 63%), 3px 3px hsl(0, 0%, 63%), 3.5px 3.5px hsl(0, 0%, 63%), 4px 4px hsl(0, 0%, 63%), 4.5px 4.5px hsl(0, 0%, 63%), 5px 5px hsl(0, 0%, 63%), 5.5px 5.5px hsl(0, 0%, 63%), 6px 6px hsl(0, 0%, 63%), 6.5px 6.5px hsl(0, 0%, 63%), 7px 7px hsl(0, 0%, 63%), 7.5px 7.5px hsl(0, 0%, 63%), 8px 8px hsl(0, 0%, 63%), 8.5px 8.5px hsl(0, 0%, 63%), 9px 9px hsl(0, 0%, 63%);
   }
 }
 @media (max-width: 600px) {
   #header h1 {
-    text-shadow: 0.5px 0.5px hsl(0, 0%, 62%), 1px 1px hsl(0, 0%, 62%), 1.5px 1.5px hsl(0, 0%, 62%), 2px 2px hsl(0, 0%, 62%), 2.5px 2.5px hsl(0, 0%, 62%), 3px 3px hsl(0, 0%, 62%), 3.5px 3.5px hsl(0, 0%, 62%), 4px 4px hsl(0, 0%, 62%), 4.5px 4.5px hsl(0, 0%, 62%), 5px 5px hsl(0, 0%, 62%), 5.5px 5.5px hsl(0, 0%, 62%), 6px 6px hsl(0, 0%, 62%), 6.5px 6.5px hsl(0, 0%, 62%), 7px 7px hsl(0, 0%, 62%);
+    text-shadow: 0.5px 0.5px hsl(0, 0%, 63%), 1px 1px hsl(0, 0%, 63%), 1.5px 1.5px hsl(0, 0%, 63%), 2px 2px hsl(0, 0%, 63%), 2.5px 2.5px hsl(0, 0%, 63%), 3px 3px hsl(0, 0%, 63%), 3.5px 3.5px hsl(0, 0%, 63%), 4px 4px hsl(0, 0%, 63%), 4.5px 4.5px hsl(0, 0%, 63%), 5px 5px hsl(0, 0%, 63%), 5.5px 5.5px hsl(0, 0%, 63%), 6px 6px hsl(0, 0%, 63%), 6.5px 6.5px hsl(0, 0%, 63%), 7px 7px hsl(0, 0%, 63%);
   }
   @keyframes textWavelanding {
     0% {
@@ -246,7 +246,7 @@ No necessity to write this in here but Less is awesome!
     60% {
       color: inherit;
       transform: scale(1.0675) translateY(0.012em);
-      text-shadow: 0.5px 0.5px hsl(0, 0%, 62%), 1px 1px hsl(0, 0%, 62%), 1.5px 1.5px hsl(0, 0%, 62%), 2px 2px hsl(0, 0%, 62%), 2.5px 2.5px hsl(0, 0%, 62%), 3px 3px hsl(0, 0%, 62%), 3.5px 3.5px hsl(0, 0%, 62%), 4px 4px hsl(0, 0%, 62%), 4.5px 4.5px hsl(0, 0%, 62%), 5px 5px hsl(0, 0%, 62%), 5.5px 5.5px hsl(0, 0%, 62%), 6px 6px hsl(0, 0%, 62%), 6.5px 6.5px hsl(0, 0%, 62%), 7px 7px hsl(0, 0%, 62%), 7.5px 7.5px hsl(0, 0%, 62%);
+      text-shadow: 0.5px 0.5px hsl(0, 0%, 63%), 1px 1px hsl(0, 0%, 63%), 1.5px 1.5px hsl(0, 0%, 63%), 2px 2px hsl(0, 0%, 63%), 2.5px 2.5px hsl(0, 0%, 63%), 3px 3px hsl(0, 0%, 63%), 3.5px 3.5px hsl(0, 0%, 63%), 4px 4px hsl(0, 0%, 63%), 4.5px 4.5px hsl(0, 0%, 63%), 5px 5px hsl(0, 0%, 63%), 5.5px 5.5px hsl(0, 0%, 63%), 6px 6px hsl(0, 0%, 63%), 6.5px 6.5px hsl(0, 0%, 63%), 7px 7px hsl(0, 0%, 63%), 7.5px 7.5px hsl(0, 0%, 63%);
     }
   }
   @keyframes textWave {
@@ -255,13 +255,13 @@ No necessity to write this in here but Less is awesome!
     }
     60% {
       transform: scale(1.0475) translateY(0.0115em);
-      text-shadow: 0.5px 0.5px hsl(0, 0%, 62%), 1px 1px hsl(0, 0%, 62%), 1.5px 1.5px hsl(0, 0%, 62%), 2px 2px hsl(0, 0%, 62%), 2.5px 2.5px hsl(0, 0%, 62%), 3px 3px hsl(0, 0%, 62%), 3.5px 3.5px hsl(0, 0%, 62%), 4px 4px hsl(0, 0%, 62%), 4.5px 4.5px hsl(0, 0%, 62%), 5px 5px hsl(0, 0%, 62%), 5.5px 5.5px hsl(0, 0%, 62%), 6px 6px hsl(0, 0%, 62%), 6.5px 6.5px hsl(0, 0%, 62%), 7px 7px hsl(0, 0%, 62%), 7.5px 7.5px hsl(0, 0%, 62%), 8px 8px hsl(0, 0%, 62%);
+      text-shadow: 0.5px 0.5px hsl(0, 0%, 63%), 1px 1px hsl(0, 0%, 63%), 1.5px 1.5px hsl(0, 0%, 63%), 2px 2px hsl(0, 0%, 63%), 2.5px 2.5px hsl(0, 0%, 63%), 3px 3px hsl(0, 0%, 63%), 3.5px 3.5px hsl(0, 0%, 63%), 4px 4px hsl(0, 0%, 63%), 4.5px 4.5px hsl(0, 0%, 63%), 5px 5px hsl(0, 0%, 63%), 5.5px 5.5px hsl(0, 0%, 63%), 6px 6px hsl(0, 0%, 63%), 6.5px 6.5px hsl(0, 0%, 63%), 7px 7px hsl(0, 0%, 63%), 7.5px 7.5px hsl(0, 0%, 63%), 8px 8px hsl(0, 0%, 63%);
     }
   }
 }
 @media (max-width: 520px) {
   #header h1 {
-    text-shadow: 0.5px 0.5px hsl(0, 0%, 62%), 1px 1px hsl(0, 0%, 62%), 1.5px 1.5px hsl(0, 0%, 62%), 2px 2px hsl(0, 0%, 62%), 2.5px 2.5px hsl(0, 0%, 62%), 3px 3px hsl(0, 0%, 62%), 3.5px 3.5px hsl(0, 0%, 62%), 4px 4px hsl(0, 0%, 62%), 4.5px 4.5px hsl(0, 0%, 62%), 5px 5px hsl(0, 0%, 62%), 5.5px 5.5px hsl(0, 0%, 62%), 6px 6px hsl(0, 0%, 62%);
+    text-shadow: 0.5px 0.5px hsl(0, 0%, 63%), 1px 1px hsl(0, 0%, 63%), 1.5px 1.5px hsl(0, 0%, 63%), 2px 2px hsl(0, 0%, 63%), 2.5px 2.5px hsl(0, 0%, 63%), 3px 3px hsl(0, 0%, 63%), 3.5px 3.5px hsl(0, 0%, 63%), 4px 4px hsl(0, 0%, 63%), 4.5px 4.5px hsl(0, 0%, 63%), 5px 5px hsl(0, 0%, 63%), 5.5px 5.5px hsl(0, 0%, 63%), 6px 6px hsl(0, 0%, 63%);
   }
   @keyframes textWavelanding {
     0% {
@@ -272,7 +272,7 @@ No necessity to write this in here but Less is awesome!
     60% {
       color: inherit;
       transform: scale(1.0675) translateY(0.012em);
-      text-shadow: 0.5px 0.5px hsl(0, 0%, 62%), 1px 1px hsl(0, 0%, 62%), 1.5px 1.5px hsl(0, 0%, 62%), 2px 2px hsl(0, 0%, 62%), 2.5px 2.5px hsl(0, 0%, 62%), 3px 3px hsl(0, 0%, 62%), 3.5px 3.5px hsl(0, 0%, 62%), 4px 4px hsl(0, 0%, 62%), 4.5px 4.5px hsl(0, 0%, 62%), 5px 5px hsl(0, 0%, 62%), 5.5px 5.5px hsl(0, 0%, 62%), 6px 6px hsl(0, 0%, 62%), 6.5px 6.5px hsl(0, 0%, 62%);
+      text-shadow: 0.5px 0.5px hsl(0, 0%, 63%), 1px 1px hsl(0, 0%, 63%), 1.5px 1.5px hsl(0, 0%, 63%), 2px 2px hsl(0, 0%, 63%), 2.5px 2.5px hsl(0, 0%, 63%), 3px 3px hsl(0, 0%, 63%), 3.5px 3.5px hsl(0, 0%, 63%), 4px 4px hsl(0, 0%, 63%), 4.5px 4.5px hsl(0, 0%, 63%), 5px 5px hsl(0, 0%, 63%), 5.5px 5.5px hsl(0, 0%, 63%), 6px 6px hsl(0, 0%, 63%), 6.5px 6.5px hsl(0, 0%, 63%);
     }
   }
   @keyframes textWave {
@@ -281,13 +281,13 @@ No necessity to write this in here but Less is awesome!
     }
     60% {
       transform: scale(1.0475) translateY(0.0115em);
-      text-shadow: 0.5px 0.5px hsl(0, 0%, 62%), 1px 1px hsl(0, 0%, 62%), 1.5px 1.5px hsl(0, 0%, 62%), 2px 2px hsl(0, 0%, 62%), 2.5px 2.5px hsl(0, 0%, 62%), 3px 3px hsl(0, 0%, 62%), 3.5px 3.5px hsl(0, 0%, 62%), 4px 4px hsl(0, 0%, 62%), 4.5px 4.5px hsl(0, 0%, 62%), 5px 5px hsl(0, 0%, 62%), 5.5px 5.5px hsl(0, 0%, 62%), 6px 6px hsl(0, 0%, 62%), 6.5px 6.5px hsl(0, 0%, 62%), 7px 7px hsl(0, 0%, 62%);
+      text-shadow: 0.5px 0.5px hsl(0, 0%, 63%), 1px 1px hsl(0, 0%, 63%), 1.5px 1.5px hsl(0, 0%, 63%), 2px 2px hsl(0, 0%, 63%), 2.5px 2.5px hsl(0, 0%, 63%), 3px 3px hsl(0, 0%, 63%), 3.5px 3.5px hsl(0, 0%, 63%), 4px 4px hsl(0, 0%, 63%), 4.5px 4.5px hsl(0, 0%, 63%), 5px 5px hsl(0, 0%, 63%), 5.5px 5.5px hsl(0, 0%, 63%), 6px 6px hsl(0, 0%, 63%), 6.5px 6.5px hsl(0, 0%, 63%), 7px 7px hsl(0, 0%, 63%);
     }
   }
 }
 @media (max-width: 440px) {
   #header h1 {
-    text-shadow: 0.5px 0.5px hsl(0, 0%, 62%), 1px 1px hsl(0, 0%, 62%), 1.5px 1.5px hsl(0, 0%, 62%), 2px 2px hsl(0, 0%, 62%), 2.5px 2.5px hsl(0, 0%, 62%), 3px 3px hsl(0, 0%, 62%), 3.5px 3.5px hsl(0, 0%, 62%), 4px 4px hsl(0, 0%, 62%), 4.5px 4.5px hsl(0, 0%, 62%), 5px 5px hsl(0, 0%, 62%);
+    text-shadow: 0.5px 0.5px hsl(0, 0%, 63%), 1px 1px hsl(0, 0%, 63%), 1.5px 1.5px hsl(0, 0%, 63%), 2px 2px hsl(0, 0%, 63%), 2.5px 2.5px hsl(0, 0%, 63%), 3px 3px hsl(0, 0%, 63%), 3.5px 3.5px hsl(0, 0%, 63%), 4px 4px hsl(0, 0%, 63%), 4.5px 4.5px hsl(0, 0%, 63%), 5px 5px hsl(0, 0%, 63%);
   }
   @keyframes textWavelanding {
     0% {
@@ -298,7 +298,7 @@ No necessity to write this in here but Less is awesome!
     60% {
       color: inherit;
       transform: scale(1.0675) translateY(0.012em);
-      text-shadow: 0.5px 0.5px hsl(0, 0%, 62%), 1px 1px hsl(0, 0%, 62%), 1.5px 1.5px hsl(0, 0%, 62%), 2px 2px hsl(0, 0%, 62%), 2.5px 2.5px hsl(0, 0%, 62%), 3px 3px hsl(0, 0%, 62%), 3.5px 3.5px hsl(0, 0%, 62%), 4px 4px hsl(0, 0%, 62%), 4.5px 4.5px hsl(0, 0%, 62%), 5px 5px hsl(0, 0%, 62%), 5.5px 5.5px hsl(0, 0%, 62%);
+      text-shadow: 0.5px 0.5px hsl(0, 0%, 63%), 1px 1px hsl(0, 0%, 63%), 1.5px 1.5px hsl(0, 0%, 63%), 2px 2px hsl(0, 0%, 63%), 2.5px 2.5px hsl(0, 0%, 63%), 3px 3px hsl(0, 0%, 63%), 3.5px 3.5px hsl(0, 0%, 63%), 4px 4px hsl(0, 0%, 63%), 4.5px 4.5px hsl(0, 0%, 63%), 5px 5px hsl(0, 0%, 63%), 5.5px 5.5px hsl(0, 0%, 63%);
     }
   }
   @keyframes textWave {
@@ -307,7 +307,7 @@ No necessity to write this in here but Less is awesome!
     }
     60% {
       transform: scale(1.0475) translateY(0.0115em);
-      text-shadow: 0.5px 0.5px hsl(0, 0%, 62%), 1px 1px hsl(0, 0%, 62%), 1.5px 1.5px hsl(0, 0%, 62%), 2px 2px hsl(0, 0%, 62%), 2.5px 2.5px hsl(0, 0%, 62%), 3px 3px hsl(0, 0%, 62%), 3.5px 3.5px hsl(0, 0%, 62%), 4px 4px hsl(0, 0%, 62%), 4.5px 4.5px hsl(0, 0%, 62%), 5px 5px hsl(0, 0%, 62%), 5.5px 5.5px hsl(0, 0%, 62%), 6px 6px hsl(0, 0%, 62%);
+      text-shadow: 0.5px 0.5px hsl(0, 0%, 63%), 1px 1px hsl(0, 0%, 63%), 1.5px 1.5px hsl(0, 0%, 63%), 2px 2px hsl(0, 0%, 63%), 2.5px 2.5px hsl(0, 0%, 63%), 3px 3px hsl(0, 0%, 63%), 3.5px 3.5px hsl(0, 0%, 63%), 4px 4px hsl(0, 0%, 63%), 4.5px 4.5px hsl(0, 0%, 63%), 5px 5px hsl(0, 0%, 63%), 5.5px 5.5px hsl(0, 0%, 63%), 6px 6px hsl(0, 0%, 63%);
     }
   }
 }
