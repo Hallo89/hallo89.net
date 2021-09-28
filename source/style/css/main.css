@@ -63,27 +63,27 @@ No necessity to write this in here but Less is awesome!
   transform: scale(0.875);
 }
 #header h1.landing-animation-h1 span:nth-child(1) {
-  animation: 0.305s 0.126s textWaveLanding ease backwards;
+  animation: 0.305s 0.126s textWavelanding ease backwards;
 }
 #header h1.landing-animation-h1 span:nth-child(2) {
-  animation: 0.305s 0.20859383s textWaveLanding ease backwards;
+  animation: 0.305s 0.20859383s textWavelanding ease backwards;
 }
 #header h1.landing-animation-h1 span:nth-child(3) {
-  animation: 0.305s 0.28013529s textWaveLanding ease backwards;
+  animation: 0.305s 0.28013529s textWavelanding ease backwards;
 }
 #header h1.landing-animation-h1 span:nth-child(4) {
-  animation: 0.305s 0.34532845s textWaveLanding ease backwards;
+  animation: 0.305s 0.34532845s textWavelanding ease backwards;
 }
 #header h1.landing-animation-h1 span:nth-child(5) {
-  animation: 0.305s 0.40617423s textWaveLanding ease backwards;
+  animation: 0.305s 0.40617423s textWavelanding ease backwards;
 }
 #header h1.landing-animation-h1 span:nth-child(6) {
-  animation: 0.305s 0.46376581s textWaveLanding ease backwards;
+  animation: 0.305s 0.46376581s textWavelanding ease backwards;
 }
 #header h1.landing-animation-h1 span:nth-child(7) {
-  animation: 0.305s 0.51878487s textWaveLanding ease backwards;
+  animation: 0.305s 0.51878487s textWavelanding ease backwards;
 }
-@keyframes textWaveLanding {
+@keyframes textWavelanding {
   0% {
     transform: scale(0.775);
     color: transparent;
@@ -233,19 +233,11 @@ No necessity to write this in here but Less is awesome!
     text-shadow: 0.5px 0.5px hsl(0, 0%, 62%), 1px 1px hsl(0, 0%, 62%), 1.5px 1.5px hsl(0, 0%, 62%), 2px 2px hsl(0, 0%, 62%), 2.5px 2.5px hsl(0, 0%, 62%), 3px 3px hsl(0, 0%, 62%), 3.5px 3.5px hsl(0, 0%, 62%), 4px 4px hsl(0, 0%, 62%), 4.5px 4.5px hsl(0, 0%, 62%), 5px 5px hsl(0, 0%, 62%), 5.5px 5.5px hsl(0, 0%, 62%), 6px 6px hsl(0, 0%, 62%), 6.5px 6.5px hsl(0, 0%, 62%), 7px 7px hsl(0, 0%, 62%), 7.5px 7.5px hsl(0, 0%, 62%), 8px 8px hsl(0, 0%, 62%), 8.5px 8.5px hsl(0, 0%, 62%), 9px 9px hsl(0, 0%, 62%);
   }
 }
-@media (max-width: 880px) {
-  #header h1 {
-    font-size: calc(10vw + 0.5vh + 35.9px);
-  }
-}
 @media (max-width: 600px) {
   #header h1 {
     text-shadow: 0.5px 0.5px hsl(0, 0%, 62%), 1px 1px hsl(0, 0%, 62%), 1.5px 1.5px hsl(0, 0%, 62%), 2px 2px hsl(0, 0%, 62%), 2.5px 2.5px hsl(0, 0%, 62%), 3px 3px hsl(0, 0%, 62%), 3.5px 3.5px hsl(0, 0%, 62%), 4px 4px hsl(0, 0%, 62%), 4.5px 4.5px hsl(0, 0%, 62%), 5px 5px hsl(0, 0%, 62%), 5.5px 5.5px hsl(0, 0%, 62%), 6px 6px hsl(0, 0%, 62%), 6.5px 6.5px hsl(0, 0%, 62%), 7px 7px hsl(0, 0%, 62%);
   }
-  html.light-mode #header h1 {
-    text-shadow: 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%), 6px 6px hsl(0, 0%, 51%), 6.5px 6.5px hsl(0, 0%, 51%), 7px 7px hsl(0, 0%, 51%);
-  }
-  @keyframes textWaveLanding {
+  @keyframes textWavelanding {
     0% {
       transform: scale(0.775);
       color: transparent;
@@ -271,10 +263,7 @@ No necessity to write this in here but Less is awesome!
   #header h1 {
     text-shadow: 0.5px 0.5px hsl(0, 0%, 62%), 1px 1px hsl(0, 0%, 62%), 1.5px 1.5px hsl(0, 0%, 62%), 2px 2px hsl(0, 0%, 62%), 2.5px 2.5px hsl(0, 0%, 62%), 3px 3px hsl(0, 0%, 62%), 3.5px 3.5px hsl(0, 0%, 62%), 4px 4px hsl(0, 0%, 62%), 4.5px 4.5px hsl(0, 0%, 62%), 5px 5px hsl(0, 0%, 62%), 5.5px 5.5px hsl(0, 0%, 62%), 6px 6px hsl(0, 0%, 62%);
   }
-  html.light-mode #header h1 {
-    text-shadow: 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%), 6px 6px hsl(0, 0%, 51%);
-  }
-  @keyframes textWaveLanding {
+  @keyframes textWavelanding {
     0% {
       transform: scale(0.775);
       color: transparent;
@@ -300,10 +289,7 @@ No necessity to write this in here but Less is awesome!
   #header h1 {
     text-shadow: 0.5px 0.5px hsl(0, 0%, 62%), 1px 1px hsl(0, 0%, 62%), 1.5px 1.5px hsl(0, 0%, 62%), 2px 2px hsl(0, 0%, 62%), 2.5px 2.5px hsl(0, 0%, 62%), 3px 3px hsl(0, 0%, 62%), 3.5px 3.5px hsl(0, 0%, 62%), 4px 4px hsl(0, 0%, 62%), 4.5px 4.5px hsl(0, 0%, 62%), 5px 5px hsl(0, 0%, 62%);
   }
-  html.light-mode #header h1 {
-    text-shadow: 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%);
-  }
-  @keyframes textWaveLanding {
+  @keyframes textWavelanding {
     0% {
       transform: scale(0.775);
       color: transparent;
@@ -325,6 +311,11 @@ No necessity to write this in here but Less is awesome!
     }
   }
 }
+@media (max-width: 880px) {
+  #header h1 {
+    font-size: calc(10vw + 0.5vh + 35.9px);
+  }
+}
 #header .subheader {
   position: absolute;
   bottom: calc((100% - 8em * 1.2) / 4);
@@ -336,6 +327,255 @@ html.light-mode #header {
 }
 html.light-mode #header h1 {
   text-shadow: 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%), 6px 6px hsl(0, 0%, 51%), 6.5px 6.5px hsl(0, 0%, 51%), 7px 7px hsl(0, 0%, 51%), 7.5px 7.5px hsl(0, 0%, 51%), 8px 8px hsl(0, 0%, 51%);
+}
+html.light-mode #header h1.landing-animation-h1 span:nth-child(1) {
+  animation: 0.305s 0.126s textWavelanding-LT ease backwards;
+}
+html.light-mode #header h1.landing-animation-h1 span:nth-child(2) {
+  animation: 0.305s 0.20859383s textWavelanding-LT ease backwards;
+}
+html.light-mode #header h1.landing-animation-h1 span:nth-child(3) {
+  animation: 0.305s 0.28013529s textWavelanding-LT ease backwards;
+}
+html.light-mode #header h1.landing-animation-h1 span:nth-child(4) {
+  animation: 0.305s 0.34532845s textWavelanding-LT ease backwards;
+}
+html.light-mode #header h1.landing-animation-h1 span:nth-child(5) {
+  animation: 0.305s 0.40617423s textWavelanding-LT ease backwards;
+}
+html.light-mode #header h1.landing-animation-h1 span:nth-child(6) {
+  animation: 0.305s 0.46376581s textWavelanding-LT ease backwards;
+}
+html.light-mode #header h1.landing-animation-h1 span:nth-child(7) {
+  animation: 0.305s 0.51878487s textWavelanding-LT ease backwards;
+}
+@keyframes textWavelanding-LT {
+  0% {
+    transform: scale(0.775);
+    color: transparent;
+    text-shadow: none;
+  }
+  60% {
+    color: inherit;
+    transform: scale(1.0675) translateY(0.012em);
+    text-shadow: 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%), 6px 6px hsl(0, 0%, 51%), 6.5px 6.5px hsl(0, 0%, 51%), 7px 7px hsl(0, 0%, 51%), 7.5px 7.5px hsl(0, 0%, 51%), 8px 8px hsl(0, 0%, 51%), 8.5px 8.5px hsl(0, 0%, 51%);
+  }
+}
+html.light-mode #header h1.wave1 span:nth-child(1) {
+  animation: 0.37s 0s textWave-LT ease;
+}
+html.light-mode #header h1.wave1 span:nth-child(2) {
+  animation: 0.37s 0.13s textWave-LT ease;
+}
+html.light-mode #header h1.wave1 span:nth-child(3) {
+  animation: 0.37s 0.21521585s textWave-LT ease;
+}
+html.light-mode #header h1.wave1 span:nth-child(4) {
+  animation: 0.37s 0.28902847s textWave-LT ease;
+}
+html.light-mode #header h1.wave1 span:nth-child(5) {
+  animation: 0.37s 0.35629126s textWave-LT ease;
+}
+html.light-mode #header h1.wave1 span:nth-child(6) {
+  animation: 0.37s 0.41906865s textWave-LT ease;
+}
+html.light-mode #header h1.wave1 span:nth-child(7) {
+  animation: 0.37s 0.47848853s textWave-LT ease;
+}
+html.light-mode #header h1.wave2 span:nth-child(2) {
+  animation: 0.37s 0s textWave-LT ease;
+}
+html.light-mode #header h1.wave2 span:nth-child(3),
+html.light-mode #header h1.wave2 span:nth-child(1) {
+  animation: 0.37s 0.13s textWave-LT ease;
+}
+html.light-mode #header h1.wave2 span:nth-child(4) {
+  animation: 0.37s 0.21521585s textWave-LT ease;
+}
+html.light-mode #header h1.wave2 span:nth-child(5) {
+  animation: 0.37s 0.28902847s textWave-LT ease;
+}
+html.light-mode #header h1.wave2 span:nth-child(6) {
+  animation: 0.37s 0.35629126s textWave-LT ease;
+}
+html.light-mode #header h1.wave2 span:nth-child(7) {
+  animation: 0.37s 0.41906865s textWave-LT ease;
+}
+html.light-mode #header h1.wave3 span:nth-child(3) {
+  animation: 0.37s 0s textWave-LT ease;
+}
+html.light-mode #header h1.wave3 span:nth-child(4),
+html.light-mode #header h1.wave3 span:nth-child(2) {
+  animation: 0.37s 0.13s textWave-LT ease;
+}
+html.light-mode #header h1.wave3 span:nth-child(5),
+html.light-mode #header h1.wave3 span:nth-child(1) {
+  animation: 0.37s 0.21521585s textWave-LT ease;
+}
+html.light-mode #header h1.wave3 span:nth-child(6) {
+  animation: 0.37s 0.28902847s textWave-LT ease;
+}
+html.light-mode #header h1.wave3 span:nth-child(7) {
+  animation: 0.37s 0.35629126s textWave-LT ease;
+}
+html.light-mode #header h1.wave4 span:nth-child(4) {
+  animation: 0.37s 0s textWave-LT ease;
+}
+html.light-mode #header h1.wave4 span:nth-child(5),
+html.light-mode #header h1.wave4 span:nth-child(3) {
+  animation: 0.37s 0.13s textWave-LT ease;
+}
+html.light-mode #header h1.wave4 span:nth-child(6),
+html.light-mode #header h1.wave4 span:nth-child(2) {
+  animation: 0.37s 0.21521585s textWave-LT ease;
+}
+html.light-mode #header h1.wave4 span:nth-child(7),
+html.light-mode #header h1.wave4 span:nth-child(1) {
+  animation: 0.37s 0.28902847s textWave-LT ease;
+}
+html.light-mode #header h1.wave5 span:nth-child(5) {
+  animation: 0.37s 0s textWave-LT ease;
+}
+html.light-mode #header h1.wave5 span:nth-child(6),
+html.light-mode #header h1.wave5 span:nth-child(4) {
+  animation: 0.37s 0.13s textWave-LT ease;
+}
+html.light-mode #header h1.wave5 span:nth-child(7),
+html.light-mode #header h1.wave5 span:nth-child(3) {
+  animation: 0.37s 0.21521585s textWave-LT ease;
+}
+html.light-mode #header h1.wave5 span:nth-child(2) {
+  animation: 0.37s 0.28902847s textWave-LT ease;
+}
+html.light-mode #header h1.wave5 span:nth-child(1) {
+  animation: 0.37s 0.35629126s textWave-LT ease;
+}
+html.light-mode #header h1.wave6 span:nth-child(6) {
+  animation: 0.37s 0s textWave-LT ease;
+}
+html.light-mode #header h1.wave6 span:nth-child(7),
+html.light-mode #header h1.wave6 span:nth-child(5) {
+  animation: 0.37s 0.13s textWave-LT ease;
+}
+html.light-mode #header h1.wave6 span:nth-child(4) {
+  animation: 0.37s 0.21521585s textWave-LT ease;
+}
+html.light-mode #header h1.wave6 span:nth-child(3) {
+  animation: 0.37s 0.28902847s textWave-LT ease;
+}
+html.light-mode #header h1.wave6 span:nth-child(2) {
+  animation: 0.37s 0.35629126s textWave-LT ease;
+}
+html.light-mode #header h1.wave6 span:nth-child(1) {
+  animation: 0.37s 0.41906865s textWave-LT ease;
+}
+html.light-mode #header h1.wave7 span:nth-child(7) {
+  animation: 0.37s 0s textWave-LT ease;
+}
+html.light-mode #header h1.wave7 span:nth-child(6) {
+  animation: 0.37s 0.13s textWave-LT ease;
+}
+html.light-mode #header h1.wave7 span:nth-child(5) {
+  animation: 0.37s 0.21521585s textWave-LT ease;
+}
+html.light-mode #header h1.wave7 span:nth-child(4) {
+  animation: 0.37s 0.28902847s textWave-LT ease;
+}
+html.light-mode #header h1.wave7 span:nth-child(3) {
+  animation: 0.37s 0.35629126s textWave-LT ease;
+}
+html.light-mode #header h1.wave7 span:nth-child(2) {
+  animation: 0.37s 0.41906865s textWave-LT ease;
+}
+html.light-mode #header h1.wave7 span:nth-child(1) {
+  animation: 0.37s 0.47848853s textWave-LT ease;
+}
+@keyframes textWave-LT {
+  25% {
+    transform: scale(0.9375);
+  }
+  60% {
+    transform: scale(1.0475) translateY(0.0115em);
+    text-shadow: 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%), 6px 6px hsl(0, 0%, 51%), 6.5px 6.5px hsl(0, 0%, 51%), 7px 7px hsl(0, 0%, 51%), 7.5px 7.5px hsl(0, 0%, 51%), 8px 8px hsl(0, 0%, 51%), 8.5px 8.5px hsl(0, 0%, 51%), 9px 9px hsl(0, 0%, 51%);
+  }
+}
+@media (max-width: 600px) {
+  html.light-mode #header h1 {
+    text-shadow: 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%), 6px 6px hsl(0, 0%, 51%), 6.5px 6.5px hsl(0, 0%, 51%), 7px 7px hsl(0, 0%, 51%);
+  }
+  @keyframes textWavelanding-LT {
+    0% {
+      transform: scale(0.775);
+      color: transparent;
+      text-shadow: none;
+    }
+    60% {
+      color: inherit;
+      transform: scale(1.0675) translateY(0.012em);
+      text-shadow: 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%), 6px 6px hsl(0, 0%, 51%), 6.5px 6.5px hsl(0, 0%, 51%), 7px 7px hsl(0, 0%, 51%), 7.5px 7.5px hsl(0, 0%, 51%);
+    }
+  }
+  @keyframes textWave-LT {
+    25% {
+      transform: scale(0.9375);
+    }
+    60% {
+      transform: scale(1.0475) translateY(0.0115em);
+      text-shadow: 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%), 6px 6px hsl(0, 0%, 51%), 6.5px 6.5px hsl(0, 0%, 51%), 7px 7px hsl(0, 0%, 51%), 7.5px 7.5px hsl(0, 0%, 51%), 8px 8px hsl(0, 0%, 51%);
+    }
+  }
+}
+@media (max-width: 520px) {
+  html.light-mode #header h1 {
+    text-shadow: 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%), 6px 6px hsl(0, 0%, 51%);
+  }
+  @keyframes textWavelanding-LT {
+    0% {
+      transform: scale(0.775);
+      color: transparent;
+      text-shadow: none;
+    }
+    60% {
+      color: inherit;
+      transform: scale(1.0675) translateY(0.012em);
+      text-shadow: 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%), 6px 6px hsl(0, 0%, 51%), 6.5px 6.5px hsl(0, 0%, 51%);
+    }
+  }
+  @keyframes textWave-LT {
+    25% {
+      transform: scale(0.9375);
+    }
+    60% {
+      transform: scale(1.0475) translateY(0.0115em);
+      text-shadow: 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%), 6px 6px hsl(0, 0%, 51%), 6.5px 6.5px hsl(0, 0%, 51%), 7px 7px hsl(0, 0%, 51%);
+    }
+  }
+}
+@media (max-width: 440px) {
+  html.light-mode #header h1 {
+    text-shadow: 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%);
+  }
+  @keyframes textWavelanding-LT {
+    0% {
+      transform: scale(0.775);
+      color: transparent;
+      text-shadow: none;
+    }
+    60% {
+      color: inherit;
+      transform: scale(1.0675) translateY(0.012em);
+      text-shadow: 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%);
+    }
+  }
+  @keyframes textWave-LT {
+    25% {
+      transform: scale(0.9375);
+    }
+    60% {
+      transform: scale(1.0475) translateY(0.0115em);
+      text-shadow: 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%), 6px 6px hsl(0, 0%, 51%);
+    }
+  }
 }
 #gbl-box-menu {
   padding-top: 1.75em;

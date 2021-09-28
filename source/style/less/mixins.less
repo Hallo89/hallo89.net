@@ -94,9 +94,10 @@
       .wave.target(@textlen, @target, @animation, @it + 1);
     }
   }
+
   .keyframe() {
-    .textWaveLanding(@shadow-length: 8) {
-      @keyframes textWaveLanding {
+    .textWaveLanding(@keyframe-name, @shadow-color, @shadow-length: 8) {
+      @keyframes @keyframe-name {
         0% {
           transform: scale(.775);
           color: transparent;
@@ -105,21 +106,52 @@
         60% {
           color: inherit;
           transform: scale(1.0675) translateY(.012em);
-          .drop-shadow(@shadow-length, @heading-shadow);
-          text-shadow+: @shadow-length + .5px @shadow-length + .5px @heading-shadow;
+          .drop-shadow(@shadow-length, @shadow-color);
+          text-shadow+: @shadow-length + .5px @shadow-length + .5px @shadow-color;
         }
       }
     }
-    .textWave(@shadow-length: 9) {
-      @keyframes textWave {
+    .textWave(@keyframe-name, @shadow-color, @shadow-length: 9) {
+      @keyframes @keyframe-name {
         25% {
           transform: scale(.9375);
         }
         60% {
           transform: scale(1.0475) translateY(.0115em);
-          .drop-shadow(@shadow-length, @heading-shadow);
+          .drop-shadow(@shadow-length, @shadow-color);
         }
       }
     }
+  }
+
+  .buildAnimations(@light-mode: false) {
+    @keyframe-name-landing: if(@light-mode, textWavelanding-LT, textWavelanding);
+    @keyframe-name-wave: if(@light-mode, textWave-LT, textWave);
+    @shadow-color: if(@light-mode, @heading-shadow--lt, @heading-shadow);
+
+    &.landing-animation-h1 span {
+      .wave.target(7, 1, {
+        // NOTE: when changing these timings,
+        // H1_LANDING_ANIMATION_DURATION in index.njk must be adjusted too
+        animation: .305s .126s * pow(@it + 1, (1 / 1.375)) @keyframe-name-landing ease backwards;
+      });
+      .wave.keyframe.textWaveLanding(@keyframe-name-landing, @shadow-color);
+    }
+
+    .wave.generate-targets(7, wave, {
+      // this is a root function to approximate an ease-in
+      animation: .37s .13s * pow(@it, (1 / 1.375)) @keyframe-name-wave ease;
+    });
+    .wave.keyframe.textWave(@keyframe-name-wave, @shadow-color);
+
+    #for(3, {
+      @max-width: 600px - 80px * @idx;
+      @length: 7 - @idx;
+      @media (max-width: @max-width) {
+        .drop-shadow(@length, @shadow-color);
+        .wave.keyframe.textWaveLanding(@keyframe-name-landing, @shadow-color, 7 - @idx);
+        .wave.keyframe.textWave(@keyframe-name-wave, @shadow-color, 8 - @idx);
+      }
+    });
   }
 }
