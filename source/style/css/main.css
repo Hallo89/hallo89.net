@@ -323,10 +323,10 @@ No necessity to write this in here but Less is awesome!
   transition: background 0.15s linear, color 0.15s linear;
 }
 html.light-mode #header {
-  color: hsl(0, 0%, 36%);
+  color: hsl(0, 0%, 13%);
 }
 html.light-mode #header h1 {
-  text-shadow: 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%), 6px 6px hsl(0, 0%, 51%), 6.5px 6.5px hsl(0, 0%, 51%), 7px 7px hsl(0, 0%, 51%), 7.5px 7.5px hsl(0, 0%, 51%), 8px 8px hsl(0, 0%, 51%);
+  text-shadow: 0.5px 0.5px hsl(0, 0%, 38%), 1px 1px hsl(0, 0%, 38%), 1.5px 1.5px hsl(0, 0%, 38%), 2px 2px hsl(0, 0%, 38%), 2.5px 2.5px hsl(0, 0%, 38%), 3px 3px hsl(0, 0%, 38%), 3.5px 3.5px hsl(0, 0%, 38%), 4px 4px hsl(0, 0%, 38%), 4.5px 4.5px hsl(0, 0%, 38%), 5px 5px hsl(0, 0%, 38%), 5.5px 5.5px hsl(0, 0%, 38%), 6px 6px hsl(0, 0%, 38%), 6.5px 6.5px hsl(0, 0%, 38%), 7px 7px hsl(0, 0%, 38%), 7.5px 7.5px hsl(0, 0%, 38%), 8px 8px hsl(0, 0%, 38%);
 }
 html.light-mode #header h1.landing-animation-h1 span:nth-child(1) {
   animation: 0.305s 0.126s textWavelanding-LT ease backwards;
@@ -358,7 +358,7 @@ html.light-mode #header h1.landing-animation-h1 span:nth-child(7) {
   60% {
     color: inherit;
     transform: scale(1.0675) translateY(0.012em);
-    text-shadow: 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%), 6px 6px hsl(0, 0%, 51%), 6.5px 6.5px hsl(0, 0%, 51%), 7px 7px hsl(0, 0%, 51%), 7.5px 7.5px hsl(0, 0%, 51%), 8px 8px hsl(0, 0%, 51%), 8.5px 8.5px hsl(0, 0%, 51%);
+    text-shadow: 0.5px 0.5px hsl(0, 0%, 38%), 1px 1px hsl(0, 0%, 38%), 1.5px 1.5px hsl(0, 0%, 38%), 2px 2px hsl(0, 0%, 38%), 2.5px 2.5px hsl(0, 0%, 38%), 3px 3px hsl(0, 0%, 38%), 3.5px 3.5px hsl(0, 0%, 38%), 4px 4px hsl(0, 0%, 38%), 4.5px 4.5px hsl(0, 0%, 38%), 5px 5px hsl(0, 0%, 38%), 5.5px 5.5px hsl(0, 0%, 38%), 6px 6px hsl(0, 0%, 38%), 6.5px 6.5px hsl(0, 0%, 38%), 7px 7px hsl(0, 0%, 38%), 7.5px 7.5px hsl(0, 0%, 38%), 8px 8px hsl(0, 0%, 38%), 8.5px 8.5px hsl(0, 0%, 38%);
   }
 }
 html.light-mode #header h1.wave1 span:nth-child(1) {
@@ -496,12 +496,12 @@ html.light-mode #header h1.wave7 span:nth-child(1) {
   }
   60% {
     transform: scale(1.0475) translateY(0.0115em);
-    text-shadow: 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%), 6px 6px hsl(0, 0%, 51%), 6.5px 6.5px hsl(0, 0%, 51%), 7px 7px hsl(0, 0%, 51%), 7.5px 7.5px hsl(0, 0%, 51%), 8px 8px hsl(0, 0%, 51%), 8.5px 8.5px hsl(0, 0%, 51%), 9px 9px hsl(0, 0%, 51%);
+    text-shadow: 0.5px 0.5px hsl(0, 0%, 38%), 1px 1px hsl(0, 0%, 38%), 1.5px 1.5px hsl(0, 0%, 38%), 2px 2px hsl(0, 0%, 38%), 2.5px 2.5px hsl(0, 0%, 38%), 3px 3px hsl(0, 0%, 38%), 3.5px 3.5px hsl(0, 0%, 38%), 4px 4px hsl(0, 0%, 38%), 4.5px 4.5px hsl(0, 0%, 38%), 5px 5px hsl(0, 0%, 38%), 5.5px 5.5px hsl(0, 0%, 38%), 6px 6px hsl(0, 0%, 38%), 6.5px 6.5px hsl(0, 0%, 38%), 7px 7px hsl(0, 0%, 38%), 7.5px 7.5px hsl(0, 0%, 38%), 8px 8px hsl(0, 0%, 38%), 8.5px 8.5px hsl(0, 0%, 38%), 9px 9px hsl(0, 0%, 38%);
   }
 }
 @media (max-width: 600px) {
   html.light-mode #header h1 {
-    text-shadow: 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%), 6px 6px hsl(0, 0%, 51%), 6.5px 6.5px hsl(0, 0%, 51%), 7px 7px hsl(0, 0%, 51%);
+    text-shadow: 0.5px 0.5px hsl(0, 0%, 38%), 1px 1px hsl(0, 0%, 38%), 1.5px 1.5px hsl(0, 0%, 38%), 2px 2px hsl(0, 0%, 38%), 2.5px 2.5px hsl(0, 0%, 38%), 3px 3px hsl(0, 0%, 38%), 3.5px 3.5px hsl(0, 0%, 38%), 4px 4px hsl(0, 0%, 38%), 4.5px 4.5px hsl(0, 0%, 38%), 5px 5px hsl(0, 0%, 38%), 5.5px 5.5px hsl(0, 0%, 38%), 6px 6px hsl(0, 0%, 38%), 6.5px 6.5px hsl(0, 0%, 38%), 7px 7px hsl(0, 0%, 38%);
   }
   @keyframes textWavelanding-LT {
     0% {
@@ -512,7 +512,7 @@ html.light-mode #header h1.wave7 span:nth-child(1) {
     60% {
       color: inherit;
       transform: scale(1.0675) translateY(0.012em);
-      text-shadow: 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%), 6px 6px hsl(0, 0%, 51%), 6.5px 6.5px hsl(0, 0%, 51%), 7px 7px hsl(0, 0%, 51%), 7.5px 7.5px hsl(0, 0%, 51%);
+      text-shadow: 0.5px 0.5px hsl(0, 0%, 38%), 1px 1px hsl(0, 0%, 38%), 1.5px 1.5px hsl(0, 0%, 38%), 2px 2px hsl(0, 0%, 38%), 2.5px 2.5px hsl(0, 0%, 38%), 3px 3px hsl(0, 0%, 38%), 3.5px 3.5px hsl(0, 0%, 38%), 4px 4px hsl(0, 0%, 38%), 4.5px 4.5px hsl(0, 0%, 38%), 5px 5px hsl(0, 0%, 38%), 5.5px 5.5px hsl(0, 0%, 38%), 6px 6px hsl(0, 0%, 38%), 6.5px 6.5px hsl(0, 0%, 38%), 7px 7px hsl(0, 0%, 38%), 7.5px 7.5px hsl(0, 0%, 38%);
     }
   }
   @keyframes textWave-LT {
@@ -521,13 +521,13 @@ html.light-mode #header h1.wave7 span:nth-child(1) {
     }
     60% {
       transform: scale(1.0475) translateY(0.0115em);
-      text-shadow: 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%), 6px 6px hsl(0, 0%, 51%), 6.5px 6.5px hsl(0, 0%, 51%), 7px 7px hsl(0, 0%, 51%), 7.5px 7.5px hsl(0, 0%, 51%), 8px 8px hsl(0, 0%, 51%);
+      text-shadow: 0.5px 0.5px hsl(0, 0%, 38%), 1px 1px hsl(0, 0%, 38%), 1.5px 1.5px hsl(0, 0%, 38%), 2px 2px hsl(0, 0%, 38%), 2.5px 2.5px hsl(0, 0%, 38%), 3px 3px hsl(0, 0%, 38%), 3.5px 3.5px hsl(0, 0%, 38%), 4px 4px hsl(0, 0%, 38%), 4.5px 4.5px hsl(0, 0%, 38%), 5px 5px hsl(0, 0%, 38%), 5.5px 5.5px hsl(0, 0%, 38%), 6px 6px hsl(0, 0%, 38%), 6.5px 6.5px hsl(0, 0%, 38%), 7px 7px hsl(0, 0%, 38%), 7.5px 7.5px hsl(0, 0%, 38%), 8px 8px hsl(0, 0%, 38%);
     }
   }
 }
 @media (max-width: 520px) {
   html.light-mode #header h1 {
-    text-shadow: 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%), 6px 6px hsl(0, 0%, 51%);
+    text-shadow: 0.5px 0.5px hsl(0, 0%, 38%), 1px 1px hsl(0, 0%, 38%), 1.5px 1.5px hsl(0, 0%, 38%), 2px 2px hsl(0, 0%, 38%), 2.5px 2.5px hsl(0, 0%, 38%), 3px 3px hsl(0, 0%, 38%), 3.5px 3.5px hsl(0, 0%, 38%), 4px 4px hsl(0, 0%, 38%), 4.5px 4.5px hsl(0, 0%, 38%), 5px 5px hsl(0, 0%, 38%), 5.5px 5.5px hsl(0, 0%, 38%), 6px 6px hsl(0, 0%, 38%);
   }
   @keyframes textWavelanding-LT {
     0% {
@@ -538,7 +538,7 @@ html.light-mode #header h1.wave7 span:nth-child(1) {
     60% {
       color: inherit;
       transform: scale(1.0675) translateY(0.012em);
-      text-shadow: 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%), 6px 6px hsl(0, 0%, 51%), 6.5px 6.5px hsl(0, 0%, 51%);
+      text-shadow: 0.5px 0.5px hsl(0, 0%, 38%), 1px 1px hsl(0, 0%, 38%), 1.5px 1.5px hsl(0, 0%, 38%), 2px 2px hsl(0, 0%, 38%), 2.5px 2.5px hsl(0, 0%, 38%), 3px 3px hsl(0, 0%, 38%), 3.5px 3.5px hsl(0, 0%, 38%), 4px 4px hsl(0, 0%, 38%), 4.5px 4.5px hsl(0, 0%, 38%), 5px 5px hsl(0, 0%, 38%), 5.5px 5.5px hsl(0, 0%, 38%), 6px 6px hsl(0, 0%, 38%), 6.5px 6.5px hsl(0, 0%, 38%);
     }
   }
   @keyframes textWave-LT {
@@ -547,13 +547,13 @@ html.light-mode #header h1.wave7 span:nth-child(1) {
     }
     60% {
       transform: scale(1.0475) translateY(0.0115em);
-      text-shadow: 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%), 6px 6px hsl(0, 0%, 51%), 6.5px 6.5px hsl(0, 0%, 51%), 7px 7px hsl(0, 0%, 51%);
+      text-shadow: 0.5px 0.5px hsl(0, 0%, 38%), 1px 1px hsl(0, 0%, 38%), 1.5px 1.5px hsl(0, 0%, 38%), 2px 2px hsl(0, 0%, 38%), 2.5px 2.5px hsl(0, 0%, 38%), 3px 3px hsl(0, 0%, 38%), 3.5px 3.5px hsl(0, 0%, 38%), 4px 4px hsl(0, 0%, 38%), 4.5px 4.5px hsl(0, 0%, 38%), 5px 5px hsl(0, 0%, 38%), 5.5px 5.5px hsl(0, 0%, 38%), 6px 6px hsl(0, 0%, 38%), 6.5px 6.5px hsl(0, 0%, 38%), 7px 7px hsl(0, 0%, 38%);
     }
   }
 }
 @media (max-width: 440px) {
   html.light-mode #header h1 {
-    text-shadow: 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%);
+    text-shadow: 0.5px 0.5px hsl(0, 0%, 38%), 1px 1px hsl(0, 0%, 38%), 1.5px 1.5px hsl(0, 0%, 38%), 2px 2px hsl(0, 0%, 38%), 2.5px 2.5px hsl(0, 0%, 38%), 3px 3px hsl(0, 0%, 38%), 3.5px 3.5px hsl(0, 0%, 38%), 4px 4px hsl(0, 0%, 38%), 4.5px 4.5px hsl(0, 0%, 38%), 5px 5px hsl(0, 0%, 38%);
   }
   @keyframes textWavelanding-LT {
     0% {
@@ -564,7 +564,7 @@ html.light-mode #header h1.wave7 span:nth-child(1) {
     60% {
       color: inherit;
       transform: scale(1.0675) translateY(0.012em);
-      text-shadow: 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%);
+      text-shadow: 0.5px 0.5px hsl(0, 0%, 38%), 1px 1px hsl(0, 0%, 38%), 1.5px 1.5px hsl(0, 0%, 38%), 2px 2px hsl(0, 0%, 38%), 2.5px 2.5px hsl(0, 0%, 38%), 3px 3px hsl(0, 0%, 38%), 3.5px 3.5px hsl(0, 0%, 38%), 4px 4px hsl(0, 0%, 38%), 4.5px 4.5px hsl(0, 0%, 38%), 5px 5px hsl(0, 0%, 38%), 5.5px 5.5px hsl(0, 0%, 38%);
     }
   }
   @keyframes textWave-LT {
@@ -573,7 +573,7 @@ html.light-mode #header h1.wave7 span:nth-child(1) {
     }
     60% {
       transform: scale(1.0475) translateY(0.0115em);
-      text-shadow: 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%), 6px 6px hsl(0, 0%, 51%);
+      text-shadow: 0.5px 0.5px hsl(0, 0%, 38%), 1px 1px hsl(0, 0%, 38%), 1.5px 1.5px hsl(0, 0%, 38%), 2px 2px hsl(0, 0%, 38%), 2.5px 2.5px hsl(0, 0%, 38%), 3px 3px hsl(0, 0%, 38%), 3.5px 3.5px hsl(0, 0%, 38%), 4px 4px hsl(0, 0%, 38%), 4.5px 4.5px hsl(0, 0%, 38%), 5px 5px hsl(0, 0%, 38%), 5.5px 5.5px hsl(0, 0%, 38%), 6px 6px hsl(0, 0%, 38%);
     }
   }
 }

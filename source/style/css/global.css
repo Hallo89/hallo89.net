@@ -41,7 +41,8 @@ body {
   transition: background 0.15s linear;
 }
 html.light-mode body {
-  background-color: hsl(0, 0%, 92.5%);
+  color: hsl(0, 0%, 4%);
+  background-color: transparent;
 }
 :focus {
   outline: 3px solid #1960C9;
@@ -142,7 +143,7 @@ html.light-mode body {
 }
 html.light-mode #cookiebanner {
   border-bottom: 3px solid #0a0a0a;
-  color: hsl(0, 0%, 28%);
+  color: hsl(0, 0%, 4%);
 }
 html.light-mode #cookiebanner .background {
   background-color: hsl(0, 0%, 27%);
@@ -229,8 +230,8 @@ html.light-mode #cookiebanner .background {
   user-select: none;
 }
 html.light-mode #navbar {
-  background-color: hsl(0, 0%, 96%);
-  color: hsl(0, 0%, 26%);
+  background-color: hsl(0, 0%, 97%);
+  color: hsl(0, 0%, 22%);
 }
 #navbar #modes {
   margin-right: 0.2em;
@@ -421,20 +422,20 @@ html.light-mode #modes .mode-switch .icon-sun rect {
   width: 100%;
 }
 html.light-mode #footer {
-  background-color: hsl(0, 0%, 19.5%);
-  color: hsl(0, 0%, 98%);
+  background-color: hsl(0, 0%, 19%);
+  color: white;
 }
 html.light-mode #footer .nav-wrapper ul li {
-  color: hsl(0, 0%, 88%);
+  color: #e6e6e6;
 }
 html.light-mode #footer hr {
-  border: 1px solid hsl(0, 0%, 45%);
+  border: 1px solid #787878;
 }
 html.light-mode #footer .side-note {
-  color: hsl(0, 0%, 88%);
+  color: #d9d9d9;
 }
 html.light-mode #footer a::before {
-  border-bottom: 1px solid hsl(0, 0%, 88%);
+  border-bottom: 1px solid #e6e6e6;
 }
 @media (max-width: 700px) {
   #footer {

@@ -59,11 +59,11 @@ var {
   border-color: hsl(0, 0%, 66.5%);
 }
 html.light-mode #navbar #id-nav a {
-  border-bottom: 2px solid hsl(0, 0%, 43%);
+  border-bottom: 2px solid hsl(0, 0%, 37%);
 }
 html.light-mode #navbar #id-nav a:hover {
-  color: hsl(0, 0%, 23%);
-  border-color: hsl(0, 0%, 35%);
+  color: hsl(0, 0%, 17%);
+  border-color: hsl(0, 0%, 29%);
 }
 main {
   max-width: calc(15vw + 2.5vh + 685px);

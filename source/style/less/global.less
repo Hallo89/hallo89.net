@@ -61,7 +61,8 @@ body {
   font-family: 'Inter', 'Roboto', 'San Francisco', 'Segoe UI', 'Arial', sans-serif;
   .mode-transition.background();
   html.light-mode & {
-    background-color: @index-bg--lt;
+    color: @main-color--lt;
+    background-color: transparent;
   }
 }
 
@@ -470,7 +471,7 @@ body {
 
   html.light-mode & {
     background-color: @footer-bg--lt;
-    color: @footer--lt;
+    color: @footer-color--lt;
     .nav-wrapper ul li {
       color: @footer-list-item--lt;
     }

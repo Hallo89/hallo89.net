@@ -38,22 +38,16 @@
 
 
 //Light mode
-@main-bg--lt: hsl(0, 0%, 98%);
-@main-color--lt: hsl(0, 0%, 28%);
+@main-color--lt: hsl(0, 0%, 4%);
 
-@index-bg--lt: darken(@main-bg--lt, 5.5%);
+@navbar--lt: darken(@navbar-bg--lt, 75%);
+@navbar-bg--lt: hsl(0, 0%, 97%);
 
-@navbar--lt: darken(@navbar-bg--lt, 70%);
-@navbar-bg--lt: darken(@main-bg--lt, 2%);
+@heading-color--lt: lighten(@main-color--lt, 9%);
+@heading-shadow--lt: lighten(@heading-color--lt, 25%);
 
-@heading--lt: lighten(@main-color--lt, 8%);
-@heading-shadow--lt: lighten(@heading--lt, 15%);
-
-@header-bg--lt: @main-bg--lt;
-@header-shadow--lt: fade(darken(@index-bg--lt, 12%), 25%);
-
-@footer--lt: lighten(@footer-bg--lt, 78.5%);
-@footer-bg--lt: darken(@main-bg--lt, 78.5%);
-@footer-list-item--lt: darken(@footer--lt, 10%);
-@footer-sidenote--lt: darken(@footer--lt, 10%);
-@footer-hr--lt: darken(@footer--lt, 53%);
+@footer-color--lt: white;
+@footer-bg--lt: hsl(0, 0%, 19%);
+@footer-list-item--lt: darken(@footer-color--lt, 10%);
+@footer-sidenote--lt: darken(@footer-color--lt, 15%);
+@footer-hr--lt: darken(@footer-color--lt, 53%);
