@@ -293,6 +293,7 @@ body {
       }
     }
     .icon-sun {
+      // Color must be specified explicitly for the animation to work properly
       color: @main-color;
       circle {
         transform-origin: 12px 12px;
@@ -302,7 +303,7 @@ body {
       }
     }
     .icon-moon {
-      color: hsl(0, 0%, 4%);
+      color: @main-color--lt;
       .base {
         transform-origin: 6.8px 12px;
       }
