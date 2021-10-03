@@ -608,3 +608,43 @@ html.light-mode #header h1.wave7 span:nth-child(1) {
     transform: translateY(-0.7em);
   }
 }
+html.light-mode .gbl-box {
+  color: hsl(0, 0%, 4%);
+  background-color: hsl(0, 0%, 99%);
+  border-top-color: hsl(0, 0%, 100%);
+  border-bottom-color: hsl(0, 0%, 73.5%);
+  box-shadow: 0 2px 18px hsla(0, 0%, 50%, 0.285);
+}
+html.light-mode .gbl-box.gbl-backdrop {
+  background-color: hsl(0, 0%, 77.5%);
+}
+html.light-mode .gbl-box.gbl-backdrop .description {
+  color: hsl(0, 0%, 88%);
+}
+html.light-mode .gbl-box .heading .text,
+html.light-mode .gbl-box .quick-links {
+  background-color: hsla(0, 0%, 99%, 0.7);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+html.light-mode .gbl-box .quick-links {
+  border-top-color: hsla(0, 0%, 97%, 0.7);
+}
+html.light-mode .gbl-box .quick-links .link::before {
+  background-color: hsla(0, 0%, 100%, 0.225);
+  border-top-color: hsla(0, 0%, 95%, 0.25);
+}
+html.light-mode .gbl-box:hover {
+  box-shadow: 0 4px 22px hsla(0, 0%, 50%, 0.475);
+}
+html.light-mode .gbl-box:hover .heading .text {
+  background-color: hsl(0, 0%, 99%);
+}
+@media (hover: none) {
+  html.light-mode .gbl-box {
+    box-shadow: 0 4px 22px hsla(0, 0%, 50%, 0.475);
+  }
+  html.light-mode .gbl-box .heading .text {
+    background-color: hsl(0, 0%, 99%);
+  }
+}

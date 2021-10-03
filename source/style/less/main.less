@@ -136,3 +136,48 @@ No necessity to write this in here but Less is awesome!
     }
   }
 }
+
+// NOTE: These styles also override the normal active styles (:hover etc.)
+html.light-mode .gbl-box {
+  color: @main-color--lt;
+  background-color: @gbl-box-bg--lt;
+  border-top-color: @gbl-box-border-top--lt;
+  border-bottom-color: @gbl-box-border-bottom--lt;
+  box-shadow: @GBL-BOX-NORMAL-SHADOW-BASE @gbl-box-shadow--lt;
+  &.gbl-backdrop {
+    background-color: @gbl-box-backdrop-image-bg--lt;
+    .description {
+      color: @main-color;
+    }
+  }
+
+  .heading .text,
+  .quick-links {
+    background-color: @gbl-box-backdrop-bg--lt;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+  .quick-links {
+    border-top-color: @gbl-box-quicklinks-border-top--lt;
+    .link {
+      &::before {
+        background-color: @gbl-box-quicklinks-hover-background--lt;
+        border-top-color: @gbl-box-quicklinks-hover-border-top--lt;
+      }
+    }
+  }
+
+  @base-style-active-box--lt: {
+    box-shadow: @GBL-BOX-ACTIVE-SHADOW-BASE @gbl-box-shadow-hover--lt;
+    .heading .text {
+      background-color: @gbl-box-heading-hover-bg--lt;
+    }
+  }
+
+  &:hover {
+    @base-style-active-box--lt();
+  }
+  @media (hover: none) {
+    @base-style-active-box--lt();
+  }
+}

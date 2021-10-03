@@ -16,10 +16,13 @@
 
 @heading-shadow: darken(@main-color, 25%);
 
+@GBL-BOX-BACKDROP-OPACITY: 67.5%;
+@GBL-BOX-NORMAL-SHADOW-BASE: 0 2px 18px;
+@GBL-BOX-ACTIVE-SHADOW-BASE: 0 4px 22px;
+
 @gbl-box-bg: lighten(@main-bg, 3%);
-@gbl-box-backdrop-opacity: .675;
-@gbl-box-backdrop-bg: fade(@gbl-box-bg, @gbl-box-backdrop-opacity * 100%);
-@gbl-box-quicklinks-border-top: fade(lighten(@gbl-box-bg, 2%), @gbl-box-backdrop-opacity * 100%);
+@gbl-box-backdrop-bg: fade(@gbl-box-bg, @GBL-BOX-BACKDROP-OPACITY);
+@gbl-box-quicklinks-border-top: fade(lighten(@gbl-box-bg, 2%), @GBL-BOX-BACKDROP-OPACITY);
 @gbl-box-quicklinks-hover-background: fade(darken(@gbl-box-backdrop-bg, 3.5%), 22.5%);
 @gbl-box-quicklinks-hover-border-top: fade(lighten(@gbl-box-quicklinks-border-top, 2%), 25%);
 @gbl-box-shadow: fade(darken(@gbl-box-bg, 5%), 28.5%);
@@ -39,12 +42,27 @@
 
 //Light mode
 @main-color--lt: hsl(0, 0%, 4%);
+@main-bg--lt: hsl(0, 0%, 100%);
 
 @navbar--lt: darken(@navbar-bg--lt, 75%);
-@navbar-bg--lt: hsl(0, 0%, 97%);
+@navbar-bg--lt: darken(@main-bg--lt, 3%);
 
 @heading-color--lt: lighten(@main-color--lt, 9%);
 @heading-shadow--lt: lighten(@heading-color--lt, 25%);
+
+@GBL-BOX-BACKDROP-OPACITY--lt: 70%;
+
+@gbl-box-bg--lt: darken(@main-bg--lt, 1%);
+@gbl-box-backdrop-image-bg--lt: darken(@gbl-box-bg--lt, 21.5%);
+@gbl-box-backdrop-bg--lt: fade(@gbl-box-bg--lt, @GBL-BOX-BACKDROP-OPACITY--lt);
+@gbl-box-heading-hover-bg--lt: fade(@gbl-box-backdrop-bg--lt, 100%);
+@gbl-box-quicklinks-border-top--lt: fade(darken(@gbl-box-bg--lt, 2%), @GBL-BOX-BACKDROP-OPACITY--lt);
+@gbl-box-quicklinks-hover-background--lt: fade(lighten(@gbl-box-backdrop-bg--lt, 3.5%), 22.5%);
+@gbl-box-quicklinks-hover-border-top--lt: fade(darken(@gbl-box-quicklinks-border-top--lt, 2%), 25%);
+@gbl-box-shadow--lt: lighten(@gbl-box-shadow, 44%);
+@gbl-box-shadow-hover--lt: lighten(@gbl-box-shadow-hover, 44%);
+@gbl-box-border-top--lt: @main-bg--lt;
+@gbl-box-border-bottom--lt: darken(@gbl-box-bg--lt, 25.5%);
 
 @footer-color--lt: white;
 @footer-bg--lt: hsl(0, 0%, 19%);

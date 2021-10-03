@@ -547,7 +547,7 @@ body {
   background-color: @gbl-box-bg;
   border-top: 4px solid @gbl-box-border-top;
   border-bottom: 4px solid @gbl-box-border-bottom;
-  box-shadow: 0 2px 18px @gbl-box-shadow;
+  box-shadow: @GBL-BOX-NORMAL-SHADOW-BASE @gbl-box-shadow;
   box-sizing: border-box;
   transition+:
     transform .2s cubic-bezier(.35,.1,.2,.95),
@@ -698,7 +698,7 @@ body {
   }
 
   @base-style-active-box: {
-    box-shadow: 0 4px 22px @gbl-box-shadow-hover;
+    box-shadow: @GBL-BOX-ACTIVE-SHADOW-BASE @gbl-box-shadow-hover;
     .heading {
       transform: translateY(-.0875em);
       .text {

@@ -6,7 +6,7 @@
     {%- set link = '/' + (page + '/' if page else page) + link -%}
   {%- endif %}
 
-  <a href="{{ link }}" class="gbl-box {{- ' gbl-components' if props.components }}">
+  <a href="{{ link }}" class="gbl-box {{- ' gbl-components' if props.components }}{{- ' gbl-backdrop' if props.image }}">
     <h2 class="heading">
       <span class="text">
         {{- name | safe -}}
