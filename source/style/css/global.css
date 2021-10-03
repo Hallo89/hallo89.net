@@ -494,7 +494,7 @@ html.light-mode #footer a::before {
   border-bottom: 4px solid #0a0a0a;
   box-shadow: 0 2px 18px hsla(0, 0%, 6%, 0.285);
   box-sizing: border-box;
-  transition: transform 0.2s cubic-bezier(0.35, 0.1, 0.2, 0.95), box-shadow 0.2s ease-out;
+  transition: transform 0.2s cubic-bezier(0.35, 0.1, 0.2, 0.95), box-shadow 0.2s ease-out, color 0.15s linear, background 0.15s linear, border 0.15s linear, box-shadow 0.15s linear;
 }
 .gbl-box .description {
   font-size: 0.96em;
@@ -556,6 +556,7 @@ html.light-mode #footer a::before {
   z-index: 0;
   font-size: 0.925em;
   border-top: 3px solid hsla(0, 0%, 13%, 0.675);
+  transition: background 0.15s linear, border 0.15s linear;
 }
 .gbl-box .quick-links .link {
   position: relative;
@@ -577,7 +578,7 @@ html.light-mode #footer a::before {
   border-radius: 1px;
   visibility: hidden;
   animation: linkShiftOut 0.1s ease;
-  transition: opacity 0.075s ease-in-out;
+  transition: opacity 0.075s ease-in-out, background 0.15s linear, border 0.15s linear;
 }
 .gbl-box .quick-links .link:hover::before {
   visibility: visible;

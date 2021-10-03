@@ -549,9 +549,13 @@ body {
   border-bottom: 4px solid @gbl-box-border-bottom;
   box-shadow: 0 2px 18px @gbl-box-shadow;
   box-sizing: border-box;
-  transition:
+  transition+:
     transform .2s cubic-bezier(.35,.1,.2,.95),
     box-shadow .2s ease-out;
+  .mode-transition.color();
+  .mode-transition.background();
+  .mode-transition.border();
+  .mode-transition.shadow();
   .description {
     font-size: .96em;
     line-height: 1.25em;
@@ -622,6 +626,8 @@ body {
     z-index: 0;
     font-size: .925em;
     border-top: @border-width solid @gbl-box-quicklinks-border-top;
+    .mode-transition.background();
+    .mode-transition.border();
     @border-width: 3px;
     .link {
       position: relative;
@@ -643,7 +649,9 @@ body {
         visibility: hidden;
         // animations are more robust than transitions, but for most rules it is fine (here: opacity)
         animation: linkShiftOut .1s ease;
-        transition: opacity .075s ease-in-out;
+        transition+: opacity .075s ease-in-out;
+        .mode-transition.background();
+        .mode-transition.border();
       }
       &:hover::before {
         visibility: visible;
