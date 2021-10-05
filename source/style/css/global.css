@@ -451,13 +451,13 @@ html.light-mode #footer .nav-wrapper ul li {
   color: #e6e6e6;
 }
 html.light-mode #footer hr {
-  border: 1px solid #787878;
+  border-color: #787878;
 }
 html.light-mode #footer .side-note {
   color: #d9d9d9;
 }
 html.light-mode #footer a::before {
-  border-bottom: 1px solid #e6e6e6;
+  border-bottom-color: #e6e6e6;
 }
 @media (max-width: 700px) {
   #footer {
@@ -596,7 +596,7 @@ html.light-mode #footer a::before {
   opacity: 0;
   z-index: -1;
   background-color: hsla(0, 0%, 7.5%, 0.225);
-  border-top: 3px solid hsla(0, 0%, 15%, 0.25);
+  border-top-color: hsla(0, 0%, 15%, 0.25);
   border-radius: 1px;
   visibility: hidden;
   animation: linkShiftOut 0.1s ease;

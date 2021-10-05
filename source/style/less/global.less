@@ -503,13 +503,13 @@ body {
       color: @footer-list-item--lt;
     }
     hr {
-      border: 1px solid @footer-hr--lt;
+      border-color: @footer-hr--lt;
     }
     .side-note {
       color: @footer-sidenote--lt;
     }
     a::before {
-      border-bottom: 1px solid @footer-list-item--lt;
+      border-bottom-color: @footer-list-item--lt;
     }
   }
 
@@ -670,7 +670,7 @@ body {
         opacity: 0;
         z-index: -1;
         background-color: @gbl-box-quicklinks-hover-background;
-        border-top: @border-width solid @gbl-box-quicklinks-hover-border-top;
+        border-top-color: @gbl-box-quicklinks-hover-border-top;
         border-radius: 1px;
         visibility: hidden;
         // animations are more robust than transitions, but for most rules it is fine (here: opacity)
