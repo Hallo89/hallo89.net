@@ -88,6 +88,7 @@ body {
   transition+:
     clip-path .2s cubic-bezier(.3,.1,.225,.95),
     opacity .375s cubic-bezier(.6,.2,.15,1);
+  .mode-transition.color();
   .mode-transition.background();
   .mode-transition.border();
   .description {
@@ -101,8 +102,9 @@ body {
     height: 0%;
     width: 100%;
     background-color: @gbl-box-border-top;
-    transition: height .1s ease;
     z-index: 1;
+    transition+: height .1s ease;
+    .mode-transition.background();
   }
   button {
     position: relative;
@@ -118,6 +120,8 @@ body {
     transition+:
       all .1s ease,
       background-color .1s ease-in-out;
+    .mode-transition.background();
+    .mode-transition.border();
     &::before {
       content: '';
       position: absolute;
@@ -125,18 +129,17 @@ body {
       top: 0;
       height: 100%;
       width: 0;
-      background-color: @cookiebanner-button-bg-active;
       z-index: -1;
       border-radius: 100px;
       transition+: all .45s cubic-bezier(.45,.1,.2,1);
       .mode-transition.background();
     }
     &:active {
-      border-left: 2px solid darken(@gbl-box-border-top, @cookiebanner-active-modifier);
-      border-right: 2px solid darken(@gbl-box-border-bottom, @cookiebanner-active-modifier);
+      border-left-color: @cookiebanner-border-top-active;
+      border-right-color: @cookiebanner-border-bottom-active;
     }
   }
-  &.removing button, button:active {
+  &.removing button, button:active, button::before {
     background-color: @cookiebanner-button-bg-active;
   }
   &.removing {
@@ -144,8 +147,8 @@ body {
       // NOTE: I'm manually fading out the button instead of expanding ::after ontop of everything
       // Because that creates a better transition effect
       color: transparent;
-      border-left: 2px solid transparent;
-      border-right: 2px solid transparent;
+      border-left-color: transparent !important;
+      border-right-color: transparent !important;
       outline: none;
       &::before {
         width: calc(200vw - 100%);
@@ -168,10 +171,24 @@ body {
   }
 
   html.light-mode & {
-    border-bottom: 3px solid @gbl-box-border-bottom;
+    border-top-color: @cookiebanner-border-top--lt;
+    border-bottom-color: @cookiebanner-border-bottom--lt;
+    background-color: @cookiebanner-bg--lt;
     color: @main-color--lt;
     .background {
-      background-color: @gbl-box-border-top;
+      background-color: @cookiebanner-border-top--lt;
+    }
+    button {
+      background-color: @cookiebanner-button-bg--lt;
+      border-left-color: @gbl-box-border-top--lt;
+      border-right-color: @cookiebanner-border-bottom--lt;
+      &:active {
+        border-left-color: @cookiebanner-border-top-active--lt;
+        border-right-color: @cookiebanner-border-bottom-active--lt;
+      }
+    }
+    &.removing button, button:active, button::before {
+      background-color: @cookiebanner-button-bg-active--lt;
     }
   }
 
@@ -188,7 +205,7 @@ body {
       border-right: none !important;
       border-top: 2px solid @gbl-box-border-top;
       &:active {
-        border-top: 2px solid darken(@gbl-box-border-top, @cookiebanner-active-modifier);
+        border-top-color: @cookiebanner-border-top-active;
       }
       &::before {
         left: 0;
@@ -203,10 +220,19 @@ body {
     }
     &.removing {
       button {
-        border-top: 2px solid transparent;
+        border-top-color: transparent !important;
         &::before {
           transform: none;
           height: calc(100% - @before-bottom);
+        }
+      }
+    }
+
+    html.light-mode & {
+      button {
+        border-top-color: @gbl-box-border-top--lt;
+        &:active {
+          border-top-color: @cookiebanner-border-top-active--lt;
         }
       }
     }

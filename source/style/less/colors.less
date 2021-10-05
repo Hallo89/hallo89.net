@@ -30,9 +30,11 @@
 @gbl-box-border-top: lighten(@gbl-box-bg, 16%);
 @gbl-box-border-bottom: mix(hsl(0, 0%, 0%), @main-bg, 50%);
 
+@COOKIEBANNER-ACTIVE-MODIFIER: 1.5%;
 @cookiebanner-button-bg: lighten(@gbl-box-bg, 6%);
-@cookiebanner-active-modifier: 1.5%;
-@cookiebanner-button-bg-active: darken(@cookiebanner-button-bg, @cookiebanner-active-modifier);
+@cookiebanner-button-bg-active: darken(@cookiebanner-button-bg, @COOKIEBANNER-ACTIVE-MODIFIER);
+@cookiebanner-border-top-active: darken(@gbl-box-border-top, @COOKIEBANNER-ACTIVE-MODIFIER);
+@cookiebanner-border-bottom-active: darken(@gbl-box-border-bottom, @COOKIEBANNER-ACTIVE-MODIFIER);
 
 @footer-bg: darken(@main-bg, 3.5%);
 @footer-list-item: darken(@main-color, 10%);
@@ -63,6 +65,14 @@
 @gbl-box-shadow-hover--lt: lighten(@gbl-box-shadow-hover, 44%);
 @gbl-box-border-top--lt: @main-bg--lt;
 @gbl-box-border-bottom--lt: darken(@gbl-box-bg--lt, 25.5%);
+
+@cookiebanner-bg--lt: darken(@gbl-box-bg--lt, 5%);
+@cookiebanner-border-top--lt: darken(@gbl-box-border-top--lt, 2.5%);
+@cookiebanner-border-bottom--lt: darken(@gbl-box-border-bottom--lt, 5%);
+@cookiebanner-button-bg--lt: darken(@gbl-box-bg--lt, 11%);
+@cookiebanner-button-bg-active--lt: darken(@cookiebanner-button-bg--lt, @COOKIEBANNER-ACTIVE-MODIFIER);
+@cookiebanner-border-top-active--lt: darken(@gbl-box-border-top--lt, @COOKIEBANNER-ACTIVE-MODIFIER);
+@cookiebanner-border-bottom-active--lt: darken(@gbl-box-border-bottom--lt, @COOKIEBANNER-ACTIVE-MODIFIER);
 
 @footer-color--lt: white;
 @footer-bg--lt: hsl(0, 0%, 19%);
