@@ -1,4 +1,3 @@
-{%- set data = staticPageData -%}
 <footer id="footer">
   <div class="nav-wrapper">
     <div class="nav-item">
@@ -14,10 +13,10 @@
         <h3>Quick nav</h3>
         <ul>
           <li><a href="/">Home</a></li>
-          {% for nav, navVal in data -%}
-            {%- if navVal.footer != false -%}
-              <li><a href="{{ '/' + (navVal.link if navVal.link else nav | lower) }}">{{ nav }}</a></li>
-            {% endif -%}
+          {%- for childLink, childProps in staticPageData.children -%}
+            {%- if childProps.footer != false %}
+              <li><a href="{{ '/' + childLink }}">{{ getPageName(childProps.name, childLink) }}</a></li>
+            {%- endif -%}
           {%- endfor -%}
         </ul>
       </div>

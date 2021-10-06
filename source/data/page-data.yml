@@ -1,56 +1,59 @@
 ---
-# NOTE: Update box-count in the main.css starting animation when adding a box!
-Win95-Web:
-  link: win95
-  image: win95-web.png
-  description: |-
-    A Javascript implementation of Microsoft's Windows 95 – on the web.
-    It's built without frameworks or libraries, just pure modern Javascript. Thus, it will only work on modern browsers.
-WebGL Experiments:
-  link: webgl
-  image: triangles.png
-  components: true
-  description: A WebGL 2 learning log.
-  children:
-    Triangles:
-      image: triangles.png
-      description: |-
-        In Triangles, I learned about graphics, WebGL/OpenGL, shaders, GPUs and more.
-        Additionally it looks dope, try it out!
-    Matrices & 3D:
-      link: matrices3d
-      image: matrices3D.png
-      description: A study of 3D perspective and matrices – Translations, rotations, scaling, fov, ...
-Dandelion With Mods:
-  link: https://minecraft.curseforge.com/projects/dandelion-with-mods
-  image: dandelion-with-mods.jpg
-  footer: false
-  description: |-
-    A minecraft resource pack built on top of the original pack 'Dandelion', adding improved blocks & items, custom models and mod support!
-    Its development is currently halted.
-Tools:
-  image: "linear-gradient(to bottom right, #1F6C6B, #664D6E)"
-  description: A variety of small, more or less useful tools.
-  children:
-    3D Magic:
-      link: 3DMagic
-      image: "linear-gradient(to bottom right, #504358, #6A412F)"
-      description: A basic minecraft model creator which renders minecraft models from their JSON format, featuring an integrated text editor.
-    Random figure generator:
-      link: RFG
-      image: "linear-gradient(to bottom right, #7A5B34, #65373D)"
-      description: A tool to generate pseudo-random numbers with some customizability.
-    Mocking generator:
-      link: mocking
-      image: "linear-gradient(to bottom right, #626B20, #03779E)"
-      description: A tool to generate text iN ThE MOcKboB sTylE which is no outdated meme at all.
-    Spacing generator:
-      image: "linear-gradient(to bottom right, #1B6E87, #614B69)"
-      link: spacing
-      description: A tool to insert a custom character in between every letter of an input text.
-Slider89:
-  lightMode: true
-  navBarH1: true
-  description: |-
-    Slider89 is a Javascript library for creating customizable sliders.
-    Be aware that it's not particularily good and I'm currently rewriting it!
+lightMode: true
+description: Hallo89.net is the website for all of my projects and web development experiments.
+# NOTE: Update box-count in the main.less starting animation when adding a box!
+children:
+  win95:
+    name: Win95-Web
+    image: win95-web.png
+    description: |-
+      A Javascript implementation of Microsoft's Windows 95 – on the web.
+      It's built without frameworks or libraries, just pure modern Javascript. Thus, it will only work on modern browsers.
+  webgl:
+    name: WebGL Experiments
+    image: triangles.png
+    components: true
+    description: A WebGL 2 learning log.
+    children:
+      triangles:
+        image: triangles.png
+        description: |-
+          In Triangles, I learned about graphics, WebGL/OpenGL, shaders, GPUs and more.
+          Additionally it looks dope, try it out!
+      matrices3d:
+        name: Matrices & 3D
+        image: matrices3D.png
+        description: A study of 3D perspective and matrices – Translations, rotations, scaling, fov, ...
+  https://minecraft.curseforge.com/projects/dandelion-with-mods:
+    name: Dandelion With Mods
+    image: dandelion-with-mods.jpg
+    footer: false
+    description: |-
+      A minecraft resource pack built on top of the original pack 'Dandelion', adding improved blocks & items, custom models and mod support!
+      Its development is currently halted.
+  tools:
+    image: "linear-gradient(to bottom right, #1F6C6B, #664D6E)"
+    description: A variety of small, more or less useful tools.
+    children:
+      3DMagic:
+        name: 3D Magic
+        image: "linear-gradient(to bottom right, #504358, #6A412F)"
+        description: A basic minecraft model creator which renders minecraft models from their JSON format, featuring an integrated text editor.
+      RFG:
+        name: Random figure generator
+        image: "linear-gradient(to bottom right, #7A5B34, #65373D)"
+        description: A tool to generate pseudo-random numbers with some customizability.
+      mocking:
+        name: Mocking generator
+        image: "linear-gradient(to bottom right, #626B20, #03779E)"
+        description: A tool to generate text iN ThE MOcKboB sTylE which is no outdated meme at all.
+      spacing:
+        image: "linear-gradient(to bottom right, #1B6E87, #614B69)"
+        name: Spacing generator
+        description: A tool to insert a custom character in between every letter of an input text.
+  slider89:
+    lightMode: true
+    navBarH1: true
+    description: |-
+      Slider89 is a Javascript library for creating customizable sliders.
+      Be aware that it's not particularily good and I'm currently rewriting it!

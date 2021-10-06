@@ -6,7 +6,7 @@
     </a>
     <span class="arrow">></span>
     {{ '<h1>' | safe if pageData.navBarH1 }}
-      <a href="{{ '/' + page }}" class="item">{{ name | capitalize }}</a>
+      <a href="{{ '/' + page }}" class="item">{{ getPageName(pageData.name, name) }}</a>
     {{ '</h1>' | safe if pageData.navBarH1 }}
   </nav>
   {%- if navContent %}

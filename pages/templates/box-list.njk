@@ -1,15 +1,15 @@
-{%- for name, props in pageData -%}
+{%- for link, props in pageData.children -%}
 
-  {%- set link = props.link if props.link else (name | lower) -%}
+  {%- set name = getPageName(props.name, link) -%}
   {%- set isExternal = link | startsWith(['https://', 'http://']) -%}
   {%- if not isExternal -%}
-    {%- set link = '/' + (page + '/' if page else page) + link -%}
+    {%- set link = '/' + (page + '/' if page else '') + link -%}
   {%- endif %}
 
   <a href="{{ link }}" class="gbl-box {{- ' gbl-components' if props.components }}{{- ' gbl-backdrop' if props.image }}">
     <h2 class="heading">
       <span class="text">
-        {{- name | safe -}}
+        {{- name -}}
         {%- if isExternal -%}
           {%- include './svg/external-link.svg' -%}
         {%- endif -%}
@@ -21,13 +21,13 @@
 
     {%- if props.components %}
       <ul class="quick-links">
-        {%- for comp, compVal in props.children -%}
+        {%- for childLink, childProps in props.children -%}
 
-          {%- set refBase = link + '/' if link != '/' else link -%}
-          {%- set ref = refBase + (compVal.link if compVal.link else comp | lower) -%}
+          {%- set childName = getPageName(childProps.name, childLink) -%}
+          {%- set childLinkAbsolute = link + '/' + childLink -%}
 
           <li class="link">
-            <button type="button" data-href="{{ ref }}">{{ comp | safe }}</button>
+            <button type="button" data-href="{{ childLinkAbsolute }}">{{ childName }}</button>
           </li>
 
         {%- endfor %}

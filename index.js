@@ -24,6 +24,10 @@ const njk = nunjucks.configure('pages', {
 
 (function() {
   njk.addGlobal('staticPageData', pageData);
+  njk.addGlobal('getPageName', function(name, link) {
+    return name != null ? name : (link.slice(0, 1).toUpperCase() + link.slice(1));
+  });
+
   njk.addGlobal('compareVer', function(ver1, ver2) {
     [ver1, ver2] = [ver1, ver2].map(ver => parseInt('1' + ver.slice(1).replace(/[_\.]/g, '')));
     if (ver1 > ver2) {
@@ -131,24 +135,23 @@ function get(viewPath, fileName = viewPath) {
     res.sendFile(__dirname + '/pages/' + fileName + '.html');
   });
 }
-function getNJK(viewPath, customParams, dataName, fileName = viewPath) {
+function getNJK(viewPath, customParams, fileName = viewPath) {
   let renderParams = {
     page: viewPath,
-    name: viewPath.includes('/') ? viewPath.slice(0, viewPath.indexOf('/')) : viewPath
-  };
-  renderParams.pageData = (function() {
-    if (viewPath) {
-      let data;
-      if (dataName) {
-        data = pageData[dataName]
-      } else {
-        data = pageData[viewPath.slice(0, 1).toUpperCase() + viewPath.slice(1)];
+    name: viewPath.includes('/') ? viewPath.slice(0, viewPath.indexOf('/')) : viewPath,
+    pageData: (function() {
+      let data = pageData;
+      // Special check for index
+      if (viewPath !== '') {
+        for (const view of viewPath.split('/')) {
+          if (data.children) data = data.children;
+          data = data[view];
+          if (!data) return;
+        }
       }
-      return data?.children || data;
-    } else {
-      return pageData;
-    }
-  }());
+      return data;
+    }())
+  };
   if (customParams) {
     renderParams = Object.assign(renderParams, customParams);
   }
@@ -158,14 +161,14 @@ function getNJK(viewPath, customParams, dataName, fileName = viewPath) {
   });
 }
 
-getNJK('', false, false, 'index');
+getNJK('', false, 'index');
 getNJK('blog');
 getNJK('tools');
 getNJK('tools/3DMagic');
 get('tools/RFG');
 get('tools/mocking');
 get('tools/spacing');
-getNJK('webgl', false, 'WebGL Experiments');
+getNJK('webgl');
 get('webgl/triangles');
 get('webgl/matrices3d');
 getNJK('slider89', {
