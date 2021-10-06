@@ -137,8 +137,8 @@ function get(viewPath, fileName = viewPath) {
 }
 function getNJK(viewPath, customParams, fileName = viewPath) {
   let renderParams = {
-    page: viewPath,
-    name: viewPath.includes('/') ? viewPath.slice(0, viewPath.indexOf('/')) : viewPath,
+    pagePath: viewPath,
+    pageTopLink: viewPath.includes('/') ? viewPath.slice(0, viewPath.indexOf('/')) : viewPath,
     pageData: (function() {
       let data = pageData;
       // Special check for index

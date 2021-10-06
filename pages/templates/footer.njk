@@ -14,7 +14,7 @@
         <ul>
           <li><a href="/">Home</a></li>
           {%- for childLink, childProps in staticPageData.children -%}
-            {%- if childProps.footer != false %}
+            {%- if not childProps.footerHidden -%}
               <li><a href="{{ '/' + childLink }}">{{ getPageName(childProps.name, childLink) }}</a></li>
             {%- endif -%}
           {%- endfor -%}
