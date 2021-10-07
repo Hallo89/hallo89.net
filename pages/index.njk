@@ -1,22 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
-    <meta charset="utf-8">
-    <meta name="theme-color" content="#17469E">
-    <meta name="author" content="Hallo89">
-    <meta name="description" content="I'm a hobby web developer and this is the website for all my projects and web development experiments!">
-    <meta property="og:title" content="Hallo89">
-    <meta property="og:type" content="website">
-    <meta property="og:description" content="Hallo89.net is the website for all of my projects and web development experiments.">
-    <meta property="og:url" content="https://hallo89.net/">
-    <meta property="og:image" content="/image/Avatar.png">
-    <title>Hallo89</title>
-    <link rel="icon" href="favicon.ico">
+    {% include 'templates/common-head.njk' %}
     <link rel="stylesheet" href="/style/global.css">
     <link rel="stylesheet" href="/style/main.css">
-    <script src="/js/global.js"></script>
-    <script src="/js/global-themes.js"></script>
     <script>
       const randomSubheader = [
         "An ode to Nesewebel",
