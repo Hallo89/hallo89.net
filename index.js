@@ -133,11 +133,6 @@ fs.readdir('./source', (err, files) => {
   });
 });
 
-function get(viewPath, fileName = viewPath) {
-  app.get('/' + viewPath, function(req, res) {
-    res.sendFile(__dirname + '/pages/' + fileName + '.html');
-  });
-}
 function getNJK(viewPath, customParams, fileName = viewPath) {
   let renderParams = {
     pagePath: viewPath,
@@ -168,12 +163,12 @@ getNJK('', false, 'index');
 getNJK('blog');
 getNJK('tools');
 getNJK('tools/3DMagic');
-get('tools/RFG');
-get('tools/mocking');
-get('tools/spacing');
+getNJK('tools/RFG');
+getNJK('tools/mocking');
+getNJK('tools/spacing');
 getNJK('webgl');
-get('webgl/triangles');
-get('webgl/matrices3d');
+getNJK('webgl/triangles');
+getNJK('webgl/matrices3d');
 getNJK('slider89', {
   data: slider89Data.docs,
   gitData: slider89Data.versions
