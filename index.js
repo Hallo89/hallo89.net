@@ -96,6 +96,9 @@ const njk = nunjucks.configure('pages', {
     return (typeof val == 'string' ? val.replace(/\./g, '_') : val);
   });
 
+  njk.addFilter('removeNewLines', function(val) {
+    return val?.trim().replace(/\n/g, ' ');
+  });
   njk.addFilter('expandBackgroundImage', function(val) {
     if (/^[\w-]+\.\w+$/.test(val)) {
       return `url("/image/nav/${val}")`;
