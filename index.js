@@ -175,4 +175,3 @@ getNJK('slider89', {
   data: slider89Data.docs,
   gitData: slider89Data.versions
 });
-get('sponge');
