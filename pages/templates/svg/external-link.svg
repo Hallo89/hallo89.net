@@ -1,0 +1,21 @@
+<svg
+  class="icon-external-link"
+  aria-hidden="true"
+  focusable="false"
+  role="img"
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 20 20"
+  width="29"
+  height="29"
+  fill="transparent"
+  stroke="currentColor"
+  stroke-width="2"
+>
+  <path
+    stroke-linejoin="round"
+    d="M8,5 H3 V17 H15 v-5"
+  />
+  <path
+    d="M11,3 H17 v6  M8.5,11.5 L17,3"
+  />
+</svg>

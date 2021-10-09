@@ -13,13 +13,12 @@ body {
   position: relative;
 }
 
-/* The glb-box header but just a header isn't worth loading it all */
-
+.box-header {
+  background: transparent;
+  padding: 0;
+}
 .box-header .header_text {
   padding: 38px 21px;
-  font-family: Arial, sans-serif;
-  text-transform: uppercase;
-  display: inherit;
   line-height: 0;
   color: #575757;
 }
@@ -29,9 +28,9 @@ body {
 #output_container {
   position: relative;
   z-index: 5;
-  overflow: hidden; /*woooaaah*/
+  overflow: hidden;
   grid-row: -3 / -2;
-  perspective: 2500px /*wooooooaaaaahh*/
+  perspective: 2500px;
 }
 #output_container.nogrid {
   position: absolute;
@@ -265,7 +264,7 @@ body {
   left: 40px;
   top: 25px;
   color: hsl(0, 0%, 58%);
-  font-size: .88em;
+  font-size: .925em;
   font-family: Calibri, Arial, sans-serif;
   opacity: .85;
 }

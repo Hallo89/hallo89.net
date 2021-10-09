@@ -10,14 +10,8 @@
   user-select: none;
 }
 
-body {
-  margin: 0;
-  font-size: calc(.05vw + .025vh + 16.82px);
-  font-family: @OpenSans;
-
-  html.light-mode & {
-    background-color: @main-bg--lt;
-  }
+html.light-mode body {
+  background-color: @main-bg--lt;
 }
 
 button {
@@ -49,7 +43,6 @@ var {
 
 #navbar {
   .text {
-    margin-right: @nav-separate-margin;
     .name {
       clip-path: inset(0 0 0 0);
     }
@@ -60,13 +53,11 @@ var {
         visibility .25s cubic-bezier(.5, .1, .25, 1.16);
     }
   }
-  #modes {
-    margin: 0 .2em 0 @nav-separate-margin;
-  }
   #id-nav {
     flex-grow: 1;
     font-size: .74em;
     font-family: @Consolas;
+    margin: 0 .8em;
     ul {
       display: flex;
       justify-content: space-around;
@@ -104,7 +95,6 @@ main {
   max-width: calc(15vw + 2.5vh + 685px);
   margin: calc(2vh + .75vw + 14px) auto;
   padding: 0 .5em;
-  color: @main-color;
   line-height: 1.58;
   section {
     margin: 2em auto;
@@ -114,7 +104,6 @@ main {
   h2 {
     color: @h2;
     font-size: 2.2em;
-    font-family: @OpenSans;
     margin: 0;
   }
 
@@ -170,7 +159,6 @@ main {
   }
 
   html.light-mode & {
-    color: @main-color--lt;
     h2 {
       color: @h2--lt;
     }
@@ -582,18 +570,18 @@ main .version-notice code {
       }
       /* Default: up */
       .left {
-        transform: translate(-@vselect-arrow-height / 2, -@vselect-arrow-height / 2) rotateZ(-45deg);
+        transform: translate((-@vselect-arrow-height / 2), (-@vselect-arrow-height / 2)) rotateZ(-45deg);
       }
       .right {
-        transform: translate(-@vselect-arrow-height / 2, -@vselect-arrow-height / 2) rotateZ(225deg) translateY(-@vselect-arrow-width);
+        transform: translate((-@vselect-arrow-height / 2), (-@vselect-arrow-height / 2)) rotateZ(225deg) translateY(-@vselect-arrow-width);
       }
     }
     &.down .arrow {
       .left {
-        transform: translate(-@vselect-arrow-height / 2, @vselect-arrow-height / 2) rotateZ(45deg) translateY(-@vselect-arrow-width);
+        transform: translate((-@vselect-arrow-height / 2), (@vselect-arrow-height / 2)) rotateZ(45deg) translateY(-@vselect-arrow-width);
       }
       .right {
-        transform: translate(-@vselect-arrow-height / 2, @vselect-arrow-height / 2) rotateZ(135deg);
+        transform: translate((-@vselect-arrow-height / 2), (@vselect-arrow-height / 2)) rotateZ(135deg);
       }
     }
     &:hover {
@@ -720,7 +708,6 @@ main .version-notice code {
       font-size: 0;
       font-weight: bold;
       font-family: @Consolas;
-      color: @main-color;
       background-color: @version-banner-bg;
       border-radius: 3px;
       opacity: 0;
@@ -852,7 +839,6 @@ main .version-notice code {
   html.light-mode & {
     &.version-item {
       .version-notice {
-        color: @main-color--lt;
         background-color: @version-banner-bg--lt;
       }
       .indicator {

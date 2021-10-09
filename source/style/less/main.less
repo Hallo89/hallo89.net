@@ -8,9 +8,17 @@ No necessity to write this in here but Less is awesome!
 @import (reference) 'colors';
 @import (reference) 'mixins';
 
-body {
-  margin: 0;
-  font-size: calc(.05vw + .025vh + 17.82px);
+/* R-Flex by Vikers converted to WOFF & WOFF2 */
+@font-face {
+  font-family: 'R-Flex';
+  font-weight: bold;
+  font-display: swap;
+  src:
+    local('RFlex'),
+    local('RFlexBold'),
+    local('RFlex-Bold'),
+    url('/font/RFlex/RFlex-Bold.woff2') format('woff2'),
+    url('/font/RFlex/RFlex-Bold.woff') format('woff');
 }
 
 #modes {
@@ -29,189 +37,147 @@ body {
   }
 }
 
+@h1-font-size: 8em;
 #header {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 2px 16px @header-shadow;
-  background-color: @header-bg;
-  @headheight: ~'8vw + 16vh + 103px';
-  height: calc(@headheight);
-  color: @heading;
+  height: calc(12.5vw + 22vh + 3px);
   .mode-transition.background();
   .mode-transition.shadow();
   h1 {
-    font: bold 6.9em 'Century Gothic', 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', sans-serif;
+    font-family: 'R-Flex', 'Futura PT', 'Century Gothic', 'Segoe UI', 'San Francisco', sans-serif;
+    font-weight: bold;
+    font-size: @h1-font-size;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    .text-shadow.drop(6, @heading-shadow);
+    white-space: nowrap;
     margin: 0;
     transition+: transform .76s;
+    cursor: default;
+    .drop-shadow(8, @heading-shadow);
     .mode-transition.textshadow();
     .mode-transition.color();
-    animation: .75s fadein linear, .9s shiftin, .4s shadowIn cubic-bezier(.43, .1, .15, 1.1);
-    @keyframes shiftin {
-      from { transform: translateY(-45px); }
-    }
-    @keyframes shadowIn {
-      from {
-        text-shadow:
-          1px 1px @heading-shadow,
-          1.5px 1.5px @heading-shadow,
-          2px 2px @heading-shadow;
+
+    // --- hover & wave animations ---
+    span {
+      display: inline-block;
+      transition: transform .125s ease;
+      // don't use the hover effect on touch-based devices because it interferes with the wave
+      @media (hover: hover) {
+        &.scale1 {
+          transform: scale(.9075);
+        }
+        &.scale2 {
+          transform: scale(.94);
+        }
+        &.scale3 {
+          transform: scale(.9825);
+        }
+      }
+      &:active {
+        transform: scale(.875);
       }
     }
-    &:not(.nohover):hover {
-      transform: scale(0.78) scale(1.294);
-    }
-    .cut-after {
-      display: none;
-    }
-    &::before {
-      color: @header-bg;
-      .text-shadow.around(7, @header-bg);
-    }
-    &::before, .cut-after {
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-    &:not(.nohover):hover::before {
-      content: attr(data-heading);
-      clip-path: polygon(0 58%, 0 0, 100% 0, 100% 37%);
-      animation: .3s headingcut ease-in;
-      @keyframes headingcut {
-        from { clip-path: polygon(100% 37%, 100% 0, 100% 0, 100% 37%); }
-        to   { clip-path: polygon(0 58%, 0 0, 100% 0, 100% 37%); }
-      }
-    }
-    &:not(.nohover):hover .cut-after {
-      display: block;
-      clip-path: polygon(0 57.5%, 0 0, 100% 0, 100% 36.5%);
-      transform: translate(-4px);
-      animation: .68s headingshift cubic-bezier(.85,0,1,1);
-      @keyframes headingshift {
-        0%   { transform: translate(0); }
-        30%  { transform: translate(0); }
-        100% { transform: translate(-4px); }
-      }
-    }
-    span::selection {
-      background-color: transparent;
-      color: @header-selection;
-      .text-shadow.drop(6, #518AD6);
-    }
-    span::-moz-selection {
-      background-color: transparent;
-      color: @header-selection;
-      .text-shadow.drop(6, #518AD6);
+
+    .wave.buildAnimations();
+
+    // --- media queries ---
+    @media (max-width: 880px) {
+      font-size: calc(10vw + .5vh + 35.9px);
     }
   }
+
   .subheader {
     position: absolute;
-	//height of the header divided by 4 minus the header height brought back to the body font size times 2
-    bottom: calc((@headheight)/4 - 2em);
-    font-family: 'Segoe UI', 'Arial', sans-serif;
-    font-size: 1em;
-    font-style: italic;
-    margin: 0;
+    bottom: calc((100% - @h1-font-size * 1.2) / 4);
     white-space: nowrap;
-    animation: .6s fadein ease-in;
-    .selection(@subheader-selection);
     .mode-transition.background();
     .mode-transition.color();
   }
-  @keyframes fadein {
-    from { opacity: 0.1; }
-  }
 
   html.light-mode & {
-    box-shadow: 0 2px 16px @header-shadow--lt;
-    background-color: @header-bg--lt;
-    color: @heading--lt;
+    color: @heading-color--lt;
     h1 {
-      .text-shadow.drop(6, @heading-shadow--lt);
-      &:hover::before {
-        color: @header-bg--lt;
-        .text-shadow.around(7, @header-bg--lt);
-      }
+      .drop-shadow(8, @heading-shadow--lt);
+
+      .wave.buildAnimations(true);
     }
   }
 }
 
-#box-nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  display: grid;
-  justify-items: center;
-  margin: 1.842em 1.053em;
-  grid-gap: 2.105em;
-  grid-template-columns: repeat(auto-fit, minmax(21.579em, 1fr));
-  align-items: center;
-  .box {
-    width: 14.9em;
-    height: 16.34em;
-    .box-header .header-text {
-      padding: 0.871em 0.762em;
-      line-height: 1.016em;
+#gbl-box-menu {
+  padding-top: 1.75em;
+  padding-bottom: 1.75em;
+  height: auto;
+  // This fixes the animation lagging because it clashes with transition in Firefox
+  &.landing-animation-box .gbl-box {
+    transition: none;
+    &:hover {
+      transform: none;
     }
+  }
+  .gbl-box {
     .box-animation-loop();
-    .box-animation-loop(@amount: 5, @seconds: .5s, @it: 1) when (@it < @amount + 1) {
+    // NOTE: when changing these animation timings,
+    // BOX_LANDING_ANIMATION_DURATION in index.njk must be adjusted too
+    .box-animation-loop(@amount: 5, @duration: .42s, @it: 1) when (@it <= @amount) {
       &:nth-child(@{it}) {
-        .boxanimation(@seconds);
+        animation: @duration shiftinBox cubic-bezier(.285, .05, .5, 1);
       }
-      .box-animation-loop(@amount, @seconds + .08s, @it + 1);
+      .box-animation-loop(@amount, @duration + .0625s, @it + 1);
     }
+
     @keyframes shiftinBox {
       from {
-        transform: translateY(-17px);
+        transform: translateY(-.7em);
       }
     }
   }
 }
 
-@headheight640: ~'24vw + 12vh + 32.8px';
-@media (max-width: 640px) {
-  body {
-    font-size: calc(1.1vw + 11.28px);
-  }
-  #header {
-    height: calc(@headheight640);
-    h1 {
-      font-size: calc(17.5vw + 2vh + -1.62px);
+// NOTE: These styles also override the normal active styles (:hover etc.)
+html.light-mode .gbl-box {
+  color: @main-color--lt;
+  background-color: @gbl-box-bg--lt;
+  border-top-color: @gbl-box-border-top--lt;
+  border-bottom-color: @gbl-box-border-bottom--lt;
+  box-shadow: @GBL-BOX-NORMAL-SHADOW-BASE @gbl-box-shadow--lt;
+  &.gbl-backdrop {
+    background-color: @gbl-box-backdrop-image-bg--lt;
+    .description {
+      color: @main-color;
     }
-    .subheader {
-      bottom: calc((@headheight640)/4 - ((17.5vw + 2vh + -1.62px) * 0.145) * 2);
-    }
   }
-}
-#header h1 {
-  .media-loop();
-  .media-loop(@start: 550px, @it: 5, @trail: true) when (@it > 3) {
-    @media (max-width: @start) {
-      .text-shadow.drop(@it, @heading-shadow, @trail);
-      html.light-mode & {
-        .text-shadow.drop(@it, @heading-shadow--lt, @trail);
+
+  .heading .text,
+  .quick-links {
+    background-color: @gbl-box-backdrop-bg--lt;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+  .quick-links {
+    border-top-color: @gbl-box-quicklinks-border-top--lt;
+    .link {
+      &::before {
+        background-color: @gbl-box-quicklinks-hover-background--lt;
+        border-top-color: @gbl-box-quicklinks-hover-border-top--lt;
       }
     }
-    & when (@trail = true) {
-      .media-loop(@start - 60px, @it, false);
-    }
-    & when (@trail = false) {
-      .media-loop(@start - 60px, @it - 1, true);
+  }
+
+  @base-style-active-box--lt: {
+    box-shadow: @GBL-BOX-ACTIVE-SHADOW-BASE @gbl-box-shadow-hover--lt;
+    .heading .text {
+      background-color: @gbl-box-heading-hover-bg--lt;
     }
   }
-}
 
-@media (max-width: 330px) {
-  #header {
-    h1 {
-      font-size: calc(10vw + 1vh + 31.13px);
-    }
-    .subheader {
-      bottom: calc((@headheight640)/4 - ((10vw + 1vh + 31.13px) * 0.145) * 2);
-    }
+  &:hover {
+    @base-style-active-box--lt();
+  }
+  @media (hover: none) {
+    @base-style-active-box--lt();
   }
 }

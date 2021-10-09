@@ -8,13 +8,12 @@
     <link rel="stylesheet" href="/style/blog.css">
   </head>
   <body>
-    {% import 'templates/glb-box.njk' as box %}
 
     <div id="main-content">
       {% include 'templates/navbar.njk' %}
 
       <main>
-        <a href="/{{ page }}/argon-parser" class="box glb-box hyperbox">
+        <a href="/{{ pagePath }}/argon-parser" class="box glb-box hyperbox">
           <span class="corneranimation"></span>
           <div class="box-header">
             <h2 class="text">About my newest project, Argon-parser</h2>

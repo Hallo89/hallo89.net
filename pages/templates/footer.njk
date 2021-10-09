@@ -1,11 +1,10 @@
-{%- set data = staticPageData -%}
 <footer id="footer">
   <div class="nav-wrapper">
     <div class="nav-item">
       <div class="item-wrapper">
         <h3>Source</h3>
         <ul>
-          <li><a href="https://github.com/hallo89/hallo89.net">Hallo89.net on Github</a></li>
+          <li><a href="https://github.com/hallo89/hallo89.net">Hallo89.net on GitHub</a></li>
         </ul>
       </div>
     </div>
@@ -14,10 +13,10 @@
         <h3>Quick nav</h3>
         <ul>
           <li><a href="/">Home</a></li>
-          {% for nav, navVal in data -%}
-            {%- if navVal.footer != false -%}
-              <li><a href="{{ '/' + (navVal.link if navVal.link else nav | lower) }}">{{ nav }}</a></li>
-            {% endif -%}
+          {%- for childLink, childProps in staticPageData.children -%}
+            {%- if not childProps.footerHidden -%}
+              <li><a href="{{ '/' + childLink }}">{{ getPageName(childProps.name, childLink) }}</a></li>
+            {%- endif -%}
           {%- endfor -%}
         </ul>
       </div>
@@ -27,7 +26,7 @@
         <h3>Contact</h3>
         <ul>
           <li><a href="https://twitter.com/Hallo89o">Twitter</a></li>
-          <li><a href="https://github.com/Hallo89">Github</a></li>
+          <li><a href="https://github.com/Hallo89">GitHub</a></li>
           <li><a href="mailto:hallo89@protonmail.com">Mail</a></li>
         </ul>
       </div>

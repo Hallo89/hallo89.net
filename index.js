@@ -1,14 +1,17 @@
 const fs = require('fs');
-const fetch = require('node-fetch');
 const express = require('express');
+const yaml = require('js-yaml');
 const nunjucks = require('nunjucks');
 const argon = require('argon-parser');
 const markdown = require('markdown-it')({
   breaks: true
 });
-const sl89Docs = require('./source/data/slider89/docs.json');
-const staticSl89GitData = require('./source/data/slider89/static-git.json');
-const pageData = require('./source/data/page-data.json');
+const slider89Data = {
+  docs: require('./source/data/slider89/docs.json'),
+  // This is completely static
+  versions: require('./source/data/slider89/static-git.json')
+};
+const pageData = yaml.load(fs.readFileSync('./source/data/page-data.yml', 'utf8'));
 const staticExclusions = [
   'data',
   'style'
@@ -19,34 +22,12 @@ const njk = nunjucks.configure('pages', {
   express: app
 });
 
-fetch('https://api.github.com/repos/Hallo89/Slider89/releases')
-  .then(res => res.json())
-  .then(data => {
-    if (!Array.isArray(data)) data = staticSl89GitData;
-    for (version of data) {
-      version.body = (function(body) {
-        while(match = /https:\/\/hallo89\.net\/slider89(#[\w-]+)/.exec(body)) {
-          body = body.replace(match[0], match[1]);
-        }
-        body = markdown.render(body);
-        return body;
-      })(version.body);
-      version.date = (function() {
-        const date = new Date(version.created_at);
-        return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
-      })();
-      if (version == data[0]) {
-        const now = new Date(Date.now());
-        now.setMonth(now.getMonth() - 1);
-        version.new = new Date(version.created_at) > now ? true : false;
-      } else version.new = false;
-    }
-    return data;
-  }).then(sl89GitData => {
-    getNJK('slider89', {data: sl89Docs, gitData: sl89GitData});
-  });
 (function() {
   njk.addGlobal('staticPageData', pageData);
+  njk.addGlobal('getPageName', function(name, link) {
+    return name != null ? name : (link.slice(0, 1).toUpperCase() + link.slice(1));
+  });
+
   njk.addGlobal('compareVer', function(ver1, ver2) {
     [ver1, ver2] = [ver1, ver2].map(ver => parseInt('1' + ver.slice(1).replace(/[_\.]/g, '')));
     if (ver1 > ver2) {
@@ -114,6 +95,17 @@ fetch('https://api.github.com/repos/Hallo89/Slider89/releases')
   njk.addFilter('dotSnake', function(val) {
     return (typeof val == 'string' ? val.replace(/\./g, '_') : val);
   });
+
+  njk.addFilter('removeNewLines', function(val) {
+    return val?.trim().replace(/\n/g, ' ');
+  });
+  njk.addFilter('expandBackgroundImage', function(val) {
+    if (/^[\w-]+\.\w+$/.test(val)) {
+      return `url("/image/nav/${val}")`;
+    } else {
+      return val;
+    }
+  });
 })();
 
 argon.addFlag(['f', 'first'], function(val) {
@@ -141,46 +133,43 @@ fs.readdir('./source', (err, files) => {
   });
 });
 
-function get(which, fileName) {
-  app.get('/' + which, function(req, res) {
-    res.sendFile(__dirname + '/pages/' + (fileName || which) + '.html');
-  });
-}
-function getNJK(which, obj, dataName, fileName) {
-  let params = {};
-  if (which) {
-    let data;
-    if (dataName) {
-      if (Array.isArray(dataName)) {
-        data = pageData;
-        dataName.forEach(val => {
-          data = data[val];
-          if (data && data.children) data = data.children;
-        });
-      } else data = pageData[dataName];
-    } else data = pageData[which.slice(0, 1).toUpperCase() + which.slice(1)];
-    if (data && data.children) data = data.children;
-    params.pageData = data;
-  } else {
-    params.pageData = pageData;
+function getNJK(viewPath, customParams, fileName = viewPath) {
+  let renderParams = {
+    pagePath: viewPath,
+    pageTopLink: viewPath.includes('/') ? viewPath.slice(0, viewPath.indexOf('/')) : viewPath,
+    pageData: (function() {
+      let data = pageData;
+      // Special check for index
+      if (viewPath !== '') {
+        for (const view of viewPath.split('/')) {
+          if (data.children) data = data.children;
+          data = data[view];
+          if (!data) return;
+        }
+      }
+      return data;
+    }())
+  };
+  if (customParams) {
+    renderParams = Object.assign(renderParams, customParams);
   }
-  params.page = which;
-  params.name = which.includes('/') ? which.slice(0, which.indexOf('/')) : which;
-  if (obj) params = Object.assign(params, obj);
-  app.get('/' + which, function(req, res) {
-    res.render(fileName || which, params);
+
+  app.get('/' + viewPath, function(req, res) {
+    res.render(fileName, renderParams);
   });
 }
 
-getNJK('', false, false, 'index');
+getNJK('', false, 'index');
 getNJK('blog');
 getNJK('tools');
 getNJK('tools/3DMagic');
-get('tools/RFG');
-get('tools/mocking');
-get('tools/spacing');
-getNJK('webgl', false, 'WebGL Experiments');
-get('webgl/triangles');
-get('webgl/matrices3d');
-get('sponge');
-getNJK('tutorials', false, ['Other stuff', 'Empty thing']);
+getNJK('tools/RFG');
+getNJK('tools/mocking');
+getNJK('tools/spacing');
+getNJK('webgl');
+getNJK('webgl/triangles');
+getNJK('webgl/matrices3d');
+getNJK('slider89', {
+  data: slider89Data.docs,
+  gitData: slider89Data.versions
+});

@@ -1,18 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
-    <title>Mocking text generator - Tools | Hallo89</title>
+    {% include 'templates/common-head.njk' %}
     <link rel="stylesheet" href="/style/global.css">
     <link rel="stylesheet" href="/style/tools/base.css">
     <link rel="stylesheet" href="/style/tools/textio.css">
     <link rel="stylesheet" href="/style/tools/mocking.css">
-    <script src="/js/global.js"></script>
   </head>
   <body>
     <div id="wrapper">
 
-      <div class="box info_box glb-box">
+      <div class="box">
         <div class="box-header">
           <span class="header_text">Mocking generator</span>
           <div class="utility_buttons">
@@ -32,7 +30,7 @@
             <span class="input_header">Go!</span>
           </div>
         </div>
-        <div class="text_function text_box text_content" id="output"></div>
+        <div class="text_box text_content" id="output"></div>
       </div>
 
     </div>

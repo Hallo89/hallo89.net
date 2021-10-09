@@ -1,0 +1,36 @@
+{%- set websiteLink = 'https://hallo89.net/' + pagePath -%}
+{%- set description = pageData.description | removeNewLines -%}
+{%- if pageData.title -%}
+  {%- set rawTitle = pageData.title -%}
+{%- elif pageTopLink -%}
+  {%- set rawTitle = getPageName(pageData.name, pageTopLink) -%}
+{%- else -%}
+  {%- set rawTitle = 'Hallo89' -%}
+{%- endif -%}
+{%- set completeTitle = rawTitle + ' | Hallo89' if rawTitle !== 'Hallo89' else rawTitle -%}
+
+<meta charset="utf-8">
+{%- if pageData.isResponsive %}
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+{%- endif %}
+<meta name="theme-color" content="#17469E">
+<meta name="author" content="Hallo89">
+{%- if description %}
+<meta name="description" content="{{ description }}">
+<meta property="og:description" content="{{ description }}">
+{%- endif %}
+{%- if rawTitle !== 'Hallo89' %}
+<meta property="og:site_name" content="Hallo89">
+{%- endif %}
+<meta property="og:title" content="{{ rawTitle }}">
+<meta property="og:url" content="{{ websiteLink }}">
+<meta property="og:type" content="website">
+<meta property="og:image" content="/image/Avatar.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<title>{{ completeTitle }}</title>
+<script src="/js/global.js"></script>
+{%- if pageData.hasLightMode %}
+<script src="/js/global-themes.js"></script>
+{%- endif -%}

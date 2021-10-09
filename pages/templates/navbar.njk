@@ -1,16 +1,18 @@
 <div id="navbar">
   <nav class="text">
-    <a href="/"><img src="/image/Avatar.png" alt="Hallo89 logo"></a>
-    <a href="/" class="name">Hallo89</a>
+    <a href="/" class="root-link">
+      <img src="/image/Avatar.png" alt="Hallo89 logo">
+      <span class="name">Hallo89</span>
+    </a>
     <span class="arrow">></span>
-    {{ '<h1>' | safe if pageData.navBarH1 }}
-      <a href="{{ '/' + page }}" class="item">{{ name | capitalize }}</a>
-    {{ '</h1>' | safe if pageData.navBarH1 }}
+    {{ '<h1>' | safe if pageData.useNavBarH1 }}
+      <a href="{{ '/' + pagePath }}" class="item">{{ getPageName(pageData.name, pageTopLink) }}</a>
+    {{ '</h1>' | safe if pageData.useNavBarH1 }}
   </nav>
   {%- if navContent %}
     {{ navContent | safe }}
   {%- endif %}
-  {%- if pageData.lightMode %}
+  {%- if pageData.hasLightMode %}
     {% include './mode-switch.njk' %}
   {%- endif %}
 </div>

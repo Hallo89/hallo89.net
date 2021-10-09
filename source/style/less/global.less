@@ -8,42 +8,92 @@ No necessity to write this in here but Less is awesome!
 @import (reference) 'colors';
 @import (reference) 'mixins';
 
+/* Inter by Rasmus Andersson @ https://rsms.me/inter/ */
+@font-face {
+  font-family: 'Inter';
+  font-weight: normal;
+  font-display: swap;
+  src:
+    local('Inter'),
+    local('Inter Regular'),
+    local('Inter-Regular'),
+    url('/font/Inter/Inter-Regular.woff2') format('woff2'),
+    url('/font/Inter/Inter-Regular.woff') format('woff');
+}
+@font-face {
+  font-family: 'Inter';
+  font-weight: bold;
+  font-display: swap;
+  src:
+    local('Inter Bold'),
+    local('Inter-Bold'),
+    url('/font/Inter/Inter-Bold.woff2') format('woff2'),
+    url('/font/Inter/Inter-Bold.woff') format('woff');
+}
+@font-face {
+  font-family: 'Inter';
+  font-weight: 300;
+  font-display: swap;
+  src:
+    local('Inter Light'),
+    local('Inter-Light'),
+    url('/font/Inter/Inter-Light.woff2') format('woff2'),
+    url('/font/Inter/Inter-Light.woff') format('woff');
+}
+
 
 html {
   scrollbar-color: @scrollbar-thumb @scrollbar-track;
   &.light-mode {
     scrollbar-color: auto;
   }
+
+  font-size: calc(0.08vw + 0.04vh + 16.05px);
+  @media (max-width: 960px) {
+    font-size: calc(0.4vw + 0.1vh + 12.55px);
+  }
 }
 
 body {
   margin: 0;
   background-color: @main-bg;
-  font-family: Arial, 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', sans-serif;
+  color: @main-color;
+  font-family: 'Inter', 'Roboto', 'San Francisco', 'Segoe UI', 'Arial', sans-serif;
   .mode-transition.background();
   html.light-mode & {
-    background-color: @index-bg--lt;
+    color: @main-color--lt;
+    background-color: transparent;
   }
 }
+
+.focus({
+  outline: @focus-width solid @focus-color;
+}, {
+  outline: none;
+});
 
 #cookiebanner {
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 100%;
+  right: 0;
   z-index: 100;
   display: flex;
-  font-size: calc(.3vw + .1vh + 14.68px);
-  border-bottom: 3px solid @glb-box-borderbottom;
-  box-shadow: 1px -2px 6px @glb-box-shadow;
+  font-size: 1.03rem;
+  border-top: 3px solid @gbl-box-border-top;
+  border-bottom: 3px solid @gbl-box-border-bottom;
+  background-color: @gbl-box-bg;
+  color: @main-color;
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-  transition+: clip-path .2s cubic-bezier(.35,.05,.35,.95), opacity .4s ease;
+  transition+:
+    clip-path .2s cubic-bezier(.3,.1,.225,.95),
+    opacity .375s cubic-bezier(.6,.2,.15,1);
+  .mode-transition.color();
   .mode-transition.background();
-  .mode-transition.shadow();
   .mode-transition.border();
   .description {
-    color: @cookiebanner;
-    padding: .55em .7em;
+    z-index: -1;
+    padding: .5em .7em;
   }
   .background {
     position: absolute;
@@ -51,22 +101,27 @@ body {
     left: 0;
     height: 0%;
     width: 100%;
-    background-color: @glb-box-bordertop;
-    transition: all .08s ease-out;
+    background-color: @gbl-box-border-top;
     z-index: 1;
+    transition+: height .1s ease;
+    .mode-transition.background();
   }
   button {
     position: relative;
-    border: none;
-    padding: 0 1em;
+    padding: .5em .75em;
     background-color: @cookiebanner-button-bg;
-    color: @cookiebanner-button;
+    font-family: 'San Francisco Monospace', 'Consolas', 'Inter', sans-serif;
     font-size: inherit;
-    font-family: 'San Francisco Monospace', 'Consolas';
-    letter-spacing: -.5px;
+    border: none;
+    border-left: 2px solid @gbl-box-border-top;
+    border-right: 2px solid @gbl-box-border-bottom;
+    color: inherit;
     cursor: pointer;
+    transition+:
+      all .1s ease,
+      background-color .1s ease-in-out;
     .mode-transition.background();
-    .mode-transition.color();
+    .mode-transition.border();
     &::before {
       content: '';
       position: absolute;
@@ -74,18 +129,32 @@ body {
       top: 0;
       height: 100%;
       width: 0;
-      background-color: @cookiebanner-button-bg;
       z-index: -1;
       border-radius: 100px;
-      transition+: all .55s cubic-bezier(.45, .12, .22, 1);
+      transition+: all .45s cubic-bezier(.45,.1,.2,1);
       .mode-transition.background();
     }
+    &:active {
+      border-left-color: @cookiebanner-border-top-active;
+      border-right-color: @cookiebanner-border-bottom-active;
+    }
+  }
+  &.removing button, button:active, button::before {
+    background-color: @cookiebanner-button-bg-active;
   }
   &.removing {
-    button::before {
-      width: calc(200vw - 100%);
-      border-radius: 0;
-      transform: translateX(-100vw);
+    button {
+      // NOTE: I'm manually fading out the button instead of expanding ::after ontop of everything
+      // Because that creates a better transition effect
+      color: transparent;
+      border-left-color: transparent !important;
+      border-right-color: transparent !important;
+      outline: none;
+      &::before {
+        width: calc(200vw - 100%);
+        border-radius: 0;
+        transform: translateX(-100vw);
+      }
     }
   }
   &.removing2 {
@@ -94,57 +163,77 @@ body {
     }
   }
   &.removing3 {
-    opacity: 0;
+    opacity: .25;
     clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
   }
   &.gone {
     display: none;
   }
-  &.invisible {
-    opacity: 0;
-    visibility: hidden;
-  }
 
   html.light-mode & {
-    border-bottom: 3px solid @glb-box-borderbottom--lt;
-    box-shadow: 1px -2px 6px @glb-box-shadow--lt;
-    .description {
-      color: @cookiebanner--lt;
-    }
+    border-top-color: @cookiebanner-border-top--lt;
+    border-bottom-color: @cookiebanner-border-bottom--lt;
+    background-color: @cookiebanner-bg--lt;
+    color: @main-color--lt;
     .background {
-      background-color: @glb-box-bordertop--lt;
+      background-color: @cookiebanner-border-top--lt;
     }
     button {
-      color: @cookiebanner-button--lt;
-      &, &::before {
-        background-color: @cookiebanner-button-bg--lt;
+      background-color: @cookiebanner-button-bg--lt;
+      border-left-color: @gbl-box-border-top--lt;
+      border-right-color: @cookiebanner-border-bottom--lt;
+      &:active {
+        border-left-color: @cookiebanner-border-top-active--lt;
+        border-right-color: @cookiebanner-border-bottom-active--lt;
       }
+    }
+    &.removing button, button:active, button::before {
+      background-color: @cookiebanner-button-bg-active--lt;
     }
   }
 
-  @media (max-width: 420px) {
+  @before-bottom: 2.25em;
+  @media (max-width: 490px) {
     flex-direction: column;
+    .description {
+      padding: 0.45em 0.35em;
+    }
     button {
-      padding: .6em 0;
-      letter-spacing: normal;
       position: static;
+      border-bottom: none;
+      border-left: none !important;
+      border-right: none !important;
+      border-top: 2px solid @gbl-box-border-top;
+      &:active {
+        border-top-color: @cookiebanner-border-top-active;
+      }
       &::before {
         left: 0;
         top: auto;
-        bottom: 2em;
+        bottom: @before-bottom;
         height: 0%;
-        width: 100%;
-        border-radius: 10px;
-        transition: none;
+        width: 100% !important;
+        border-radius: 0;
+        transition+: height .375s cubic-bezier(.55,.125,.05,1);
+        .mode-transition.background();
       }
     }
     &.removing {
-      button::before {
-        width: 100%;
-        transform: none;
-        height: calc(100% - 2em);
-        border-radius: 0;
-        transition: all .55s cubic-bezier(.45, .12, .22, 1);
+      button {
+        border-top-color: transparent !important;
+        &::before {
+          transform: none;
+          height: calc(100% - @before-bottom);
+        }
+      }
+    }
+
+    html.light-mode & {
+      button {
+        border-top-color: @gbl-box-border-top--lt;
+        &:active {
+          border-top-color: @cookiebanner-border-top-active--lt;
+        }
       }
     }
   }
@@ -156,7 +245,7 @@ body {
   justify-content: space-between;
   width: 100%;
   padding: .4em;
-  font-size: calc(.2vw + .06vh + 27.6px);
+  font-size: 1.7rem;
   background-color: @navbar-bg;
   color: @navbar;
   box-sizing: border-box;
@@ -167,7 +256,6 @@ body {
     text-decoration: none;
   }
   .text {
-    font-family: 'Century Gothic', 'Arial', sans-serif;
     display: flex;
     align-items: center;
     h1 {
@@ -175,24 +263,24 @@ body {
       font-weight: normal;
       margin: 0;
     }
+    .root-link {
+      display: flex;
+      align-items: center;
+    }
     img {
-      display: block;
       width: 1.9em;
       height: 1.9em;
       border-radius: 100%;
       margin-right: .3em;
     }
     .name {
-      font-weight: 600;
+      font-weight: bold;
     }
     .arrow {
-      font-family: 'Source Code Pro', 'Consolas', 'Century Gothic', sans-serif;
+      font-family: 'Source Code Pro', 'Consolas', monospace;
       padding: 0 .3em;
       font-weight: 500;
       .noselect();
-    }
-    .item {
-      font-family: 'San Francisco', 'Arial', sans-serif;
     }
   }
 
@@ -203,7 +291,13 @@ body {
 }
 
 #modes {
-  .mode-gear {
+  #navbar & {
+    margin-right: .2em;
+  }
+
+  @baseTransition: .325s;
+  @rotateAmount: 33.75deg;
+  .mode-switch {
     display: block;
     position: relative;
     background-color: transparent;
@@ -213,43 +307,86 @@ body {
     width: 1.5em;
     height: 1.5em;
     cursor: pointer;
-    .icon {
+    > svg {
       position: absolute;
       top: 0;
       left: 0;
       height: 100%;
       width: 100%;
-      transition+: all .275s cubic-bezier(.63,.13,.12,1.15);
-      .mode-transition.color();
-      > svg {
-        height: 100%;
-        width: 100%;
+      transition: all @baseTransition ease;
+      > * {
+        transition: all .15s ease;
       }
     }
-    .sun {
-      color: hsl(0, 0%, 77.5%);
+    .icon-sun {
+      // Color must be specified explicitly for the animation to work properly
+      color: @main-color;
+      circle {
+        transform-origin: 12px 12px;
+      }
+      rect {
+        transition-delay: .033s;
+      }
     }
-    .moon {
-      color: hsl(0, 0%, 22.5%);
-    }
-    &:focus {
-      //Some browsers like Firefox handle tab-focus great by only showing it after a tab has occured
-      //Other browsers like Opera can't get their shit together and always show a blue outline when a button is clicked, thanks
-      //TLDR: The accessibility is not worth the aesthetics, sorry!
-      outline: none;
+    .icon-moon {
+      color: @main-color--lt;
+      .base {
+        transform-origin: 6.8px 12px;
+      }
+      .star-1 {
+        transform-origin: 15px 11px;
+        transition-delay: .06s;
+      }
+      .star-2 {
+        transform-origin: 22px 11px;
+        transition-delay: .0665s;
+      }
+      .star-3 {
+        transform-origin: 19px 5px;
+        transition-delay: .073s;
+      }
     }
   }
-  .mode-gear .moon,
-  html.light-mode & .mode-gear .sun {
-    transform: rotate(135deg) scale(.8);
+  // Inverse mode
+  html.light-mode & .mode-switch .icon-sun,
+  html:not(.light-mode) & .mode-switch .icon-moon {
+    transform: rotate(-@rotateAmount);
     visibility: hidden;
-    opacity: 0;
+    z-index: -1;
   }
-  html.light-mode & .mode-gear {
-    .moon {
-      transform: none;
-      visibility: visible;
-      opacity: 1;
+  // Corresponding mode
+  html.light-mode & .mode-switch .icon-moon,
+  html:not(.light-mode) & .mode-switch .icon-sun {
+    animation: @baseTransition iconPositiveRotate ease;
+  }
+  // Only dark mode
+  html:not(.light-mode) & .mode-switch {
+    .icon-moon {
+      .base, .star {
+        transform: scale(0);
+      }
+      .star {
+        transition-delay: 0s;
+      }
+    }
+  }
+  // Only light mode
+  html.light-mode & .mode-switch {
+    .icon-sun {
+      circle {
+        transform: scale(0);
+        transition-delay: .0325s;
+      }
+      rect {
+        height: 0;
+        transition-delay: 0s;
+      }
+    }
+  }
+
+  @keyframes iconPositiveRotate {
+    from {
+      transform: rotate(@rotateAmount);
     }
   }
 }
@@ -259,10 +396,10 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
-  font-size: calc(.08vw + .04vh + 16.5px);
+  font-size: 1rem;
   padding: 1em 0;
   background-color: @footer-bg;
-  color: @footer;
+  color: @main-color;
   .nav-wrapper {
     display: flex;
     justify-content: space-between;
@@ -361,22 +498,23 @@ body {
 
   html.light-mode & {
     background-color: @footer-bg--lt;
-    color: @footer--lt;
+    color: @footer-color--lt;
     .nav-wrapper ul li {
       color: @footer-list-item--lt;
     }
     hr {
-      border: 1px solid @footer-hr--lt;
+      border-color: @footer-hr--lt;
     }
     .side-note {
       color: @footer-sidenote--lt;
     }
     a::before {
-      border-bottom: 1px solid @footer-list-item--lt;
+      border-bottom-color: @footer-list-item--lt;
     }
   }
 
   @media (max-width: 700px) {
+    padding: 1em .5em;
     .nav-wrapper {
       flex-flow: column;
       .nav-item:not(:nth-last-of-type(1)) {
@@ -405,174 +543,218 @@ body {
   }
 }
 
+#gbl-box-menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 
-.glb-box {
-  display: block;
-  font-size: 1.45em;
-  overflow: hidden;
-  border-radius: 2px;
-  background-color: @glb-box-bg;
-  border-top: 4px solid @glb-box-bordertop;
-  border-bottom: 4px solid @glb-box-borderbottom;
-  box-shadow:
-    0 4px 0 @glb-box-extreme-shadow,
-    0 3px 14px @glb-box-shadow;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(22.57em, 1fr));
+  grid-gap: 1.942em;
+  justify-items: center;
+  align-items: center;
+
+  font-size: 1rem;
+  padding: 2.64em 1.2em;
+  min-height: 100vh;
   box-sizing: border-box;
-  position: relative;
-  transition+: transform .25s ease;
+}
+
+.gbl-box {
+  display: block;
+  text-decoration: none;
+  position: relative; //only component-box
+  z-index: 0; //only for images
+  overflow: hidden; //only for images
+  width: 17.1em;
+  height: 19em;
+  font-size: 1.32rem;
+  color: @main-color;
+  background-color: @gbl-box-bg;
+  border-top: 4px solid @gbl-box-border-top;
+  border-bottom: 4px solid @gbl-box-border-bottom;
+  box-shadow: @GBL-BOX-NORMAL-SHADOW-BASE @gbl-box-shadow;
+  box-sizing: border-box;
+  transition+:
+    transform .2s cubic-bezier(.35,.1,.2,.95),
+    box-shadow .2s ease-out;
+  .mode-transition.color();
   .mode-transition.background();
-  .mode-transition.shadow();
   .mode-transition.border();
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow:
-      0 4px 0 @glb-box-extreme-shadow,
-      0 3px 24px @glb-box-shadow-hover;
-    transition+: transform .25s ease, box-shadow .25s ease-in-out;
-    .mode-transition.background();
-    .mode-transition.shadow();
-    .mode-transition.border();
+  .mode-transition.shadow();
+  .description {
+    font-size: .96em;
+    line-height: 1.25em;
+    margin: 0;
+    // NOTE: padding must match the combined h2 + span's padding
+    padding: 0 1.172em;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      transform .175s cubic-bezier(.3,.15,.15,1),
+      opacity .1s ease-in-out,
+      visibility .1s linear;
   }
-  &.hyperbox {
-    cursor: pointer;
-    text-decoration: none;
+  .backdrop {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+    background-size: cover;
+    image-rendering: optimizeQuality;
+    image-rendering: -webkit-smooth;
+    image-rendering: smooth;
+    transition:
+      -webkit-filter .225s cubic-bezier(.35,.125,.15,.95),
+      filter .225s cubic-bezier(.35,.125,.15,.95);
   }
-  &.multiplebox {
+  .heading .text,
+  .quick-links {
+    background-color: @gbl-box-backdrop-bg;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+  .heading {
+    margin: 0;
+    padding: 1.85em .5em;
+    box-sizing: border-box;
+    transition: transform .2s ease;
+    .text {
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+      padding: 0 .25em;
+      transition:
+        -webkit-backdrop-filter .225s cubic-bezier(.25,.15,.15,1),
+        backdrop-filter .225s cubic-bezier(.25,.15,.15,1),
+        background-color .225s cubic-bezier(.25,.15,.15,1);
+      .icon-external-link {
+        vertical-align: middle;
+        // 0.813em = ~ 29px @ 1080p
+        width: .813em;
+        height: .813em;
+        position: relative;
+        bottom: .091em;
+        margin-left: .196em;
+      }
+    }
+  }
+  .quick-links {
     display: flex;
-    flex-direction: column;
-    .links {
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      a {
-        display: flex;
-        align-items: center;
-        color: inherit;
-        flex: 1;
-        padding: 15px;
-        text-decoration: none;
-        font-style: italic;
-        transition: flex .2s cubic-bezier(.2, .2, .55, 1);
-        &:hover {
-          flex: 1.3;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0;
+    margin: 0;
+    z-index: 0;
+    font-size: .925em;
+    border-top: @border-width solid @gbl-box-quicklinks-border-top;
+    .mode-transition.background();
+    .mode-transition.border();
+    @border-width: 3px;
+    .link {
+      position: relative;
+      flex: 1;
+      text-align: center;
+      list-style: none;
+      &::before {
+        content: '';
+        position: absolute;
+        top: -@border-width;
+        left: 0;
+        width: 0;
+        height: 100%;
+        opacity: 0;
+        z-index: -1;
+        background-color: @gbl-box-quicklinks-hover-background;
+        border-top-color: @gbl-box-quicklinks-hover-border-top;
+        border-radius: 1px;
+        visibility: hidden;
+        // animations are more robust than transitions, but for most rules it is fine (here: opacity)
+        animation: linkShiftOut .1s ease;
+        transition+: opacity .075s ease-in-out;
+        .mode-transition.background();
+        .mode-transition.border();
+      }
+      &:hover::before {
+        visibility: visible;
+        width: 100%;
+        opacity: 1;
+        animation: linkShiftIn .1s ease;
+      }
+      @keyframes linkShiftIn {
+        from {
+          width: 0%;
+        }
+      }
+      @keyframes linkShiftOut {
+        from {
+          left: unset;
+          right: 0;
+          width: 100%;
+          visibility: visible;
+        }
+        to {
+          left: unset;
+          right: 0;
+          visibility: visible;
         }
       }
     }
-  }
-  &.imager {
-    display: flex;
-    flex-direction: column;
-  }
-  &.imager .image_container, .imager {
-    position: relative;
-    flex-grow: 1;
-    z-index: 1;
-    .image {
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      right: 0;
-      z-index: -1;
-      background-size: cover;
-      background-position: 0 50%;
-      filter: blur(5px);
-      opacity: 0.2;
-      transition: all 0.25s cubic-bezier(0, 0, .75, 1);
+    button {
+      width: 100%;
+      height: 100%;
+      padding: .65em .25em;
+      background: transparent;
+      border: none;
+      margin: 0;
+      color: inherit;
+      font: inherit;
+      cursor: pointer;
+      .focus({
+        outline: none;
+        box-shadow: inset 0 0 0 @focus-width @focus-color;
+      }, {
+        box-shadow: none;
+      });
     }
-  }
-  &.imager:hover .image_container, .imager:hover {
-    .image {
-      filter: none;
-      opacity: .5;
-    }
-  }
-//corners shifting in when hovering
-  .corneranimation {
-    &::before, &::after {
-      content: '';
-      position: absolute;
-      background-color: @glb-box-corners;
-      transition+: transform .325s cubic-bezier(.35,.05,.15,1);
-      z-index: 2;
-      opacity: .6;
-      .mode-transition.background();
-    }
-    &::before {
-      height: 1.4em;
-      width: 2.9em;
-      left: 0;
-      bottom: 0;
-      transform-origin: 0 100%;
-      transform: rotateZ(45deg) translateY(1.4em) translateX(-50%);
-    }
-    &::after {
-      height: 2.9em;
-      width: 1.4em;
-      right: 0;
-      top: 0;
-      transform-origin: 100% 0;
-      transform: rotateZ(-45deg) translateX(1.4em) translateY(-50%);
-    }
-  }
-  &:hover .corneranimation {
-    &::before {
-      transform: rotateZ(45deg) translateY(0) translateX(-50%);
-    }
-    &::after {
-      transform: rotateZ(-45deg) translateX(0) translateY(-50%);
-    }
-  }
-//end of corneranimations
-//box header
-  .box-header {
-    background-color: @glb-box-header-bg;
-    padding: 24px 21px;
-    margin: 0;
-    font-family: Arial, sans-serif;
-    font-weight: normal;
-    font-size: 1em;
-    text-transform: uppercase;
-    color: @glb-box-header;
-    line-height: 28px;
-    .mode-transition.background();
-    .mode-transition.color();
-  }
-  .box-text {
-    color: @glb-box-description;
-    .mode-transition.color();
-  }
-  .description {
-    font-family: Calibri, 'Times New Roman', serif;
-    font-size: 1.04em;
-    line-height: 1.19;
-    padding: 0.418em .56em;
-    margin: 0;
   }
 
-  html.light-mode & {
-    background-color: @glb-box-bg--lt;
-    border-top: 4px solid @glb-box-bordertop--lt;
-    border-bottom: 4px solid @glb-box-borderbottom--lt;
-    box-shadow:
-      0 4px 0 @glb-box-extreme-shadow--lt,
-      0 3px 14px @glb-box-shadow--lt;
-    &:hover {
-      box-shadow:
-        0 4px 0 @glb-box-extreme-shadow--lt,
-        0 3px 24px @glb-box-shadow-hover--lt;
-    }
-    .corneranimation {
-      &::before, &::after {
-        background-color: @glb-box-corners--lt;
+  @base-style-active-box: {
+    box-shadow: @GBL-BOX-ACTIVE-SHADOW-BASE @gbl-box-shadow-hover;
+    .heading {
+      transform: translateY(-.0875em);
+      .text {
+        background-color: transparent;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
       }
     }
-    .box-header {
-      background-color: @glb-box-header-bg--lt;
-      color: @glb-box-header--lt;
+    .description {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(-.185em);
     }
-    .box-text {
-      color: @glb-box-description--lt;
+  }
+
+  &:hover {
+    @base-style-active-box();
+    transform: translateY(-2px);
+    .backdrop {
+      -webkit-filter: blur(20px) brightness(60%);
+      filter: blur(20px) brightness(60%);
+    }
+  }
+
+  // Special style for touch-based devices
+  @media (hover: none) {
+    @base-style-active-box();
+    .backdrop {
+      -webkit-filter: brightness(45%) !important;
+      filter: brightness(45%) !important;
     }
   }
 }

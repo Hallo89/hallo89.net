@@ -2,9 +2,12 @@
 Written by Hallo89 using LESS CSS - http://lesscss.org
 No necessity to write this in here but Less is awesome!
 */
-body {
-  margin: 0;
-  font-size: calc(0.05vw + 0.025vh + 17.82px);
+/* R-Flex by Vikers converted to WOFF & WOFF2 */
+@font-face {
+  font-family: 'R-Flex';
+  font-weight: bold;
+  font-display: swap;
+  src: local('RFlex'), local('RFlexBold'), local('RFlex-Bold'), url('/font/RFlex/RFlex-Bold.woff2') format('woff2'), url('/font/RFlex/RFlex-Bold.woff') format('woff');
 }
 #modes {
   position: absolute;
@@ -26,210 +29,622 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 2px 16px hsla(0, 0%, 5%, 0.25);
-  background-color: hsl(0, 0%, 12.5%);
-  height: calc(8vw + 16vh + 103px);
-  color: hsl(0, 0%, 66%);
+  height: calc(12.5vw + 22vh + 3px);
   transition: background 0.15s linear, box-shadow 0.15s linear;
 }
 #header h1 {
-  font: bold 6.9em 'Century Gothic', 'Segoe UI', 'Nirmala UI', 'Gadugi', 'Leelawadee UI', sans-serif;
+  font-family: 'R-Flex', 'Futura PT', 'Century Gothic', 'Segoe UI', 'San Francisco', sans-serif;
+  font-weight: bold;
+  font-size: 8em;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  text-shadow: 0px 0px hsl(0, 0%, 52%), 0.5px 0.5px hsl(0, 0%, 52%), 1px 1px hsl(0, 0%, 52%), 1.5px 1.5px hsl(0, 0%, 52%), 2px 2px hsl(0, 0%, 52%), 2.5px 2.5px hsl(0, 0%, 52%), 3px 3px hsl(0, 0%, 52%), 3.5px 3.5px hsl(0, 0%, 52%), 4px 4px hsl(0, 0%, 52%), 4.5px 4.5px hsl(0, 0%, 52%), 5px 5px hsl(0, 0%, 52%), 5.5px 5.5px hsl(0, 0%, 52%), 6px 6px hsl(0, 0%, 52%);
+  white-space: nowrap;
   margin: 0;
   transition: transform 0.76s, text-shadow 0.15s linear, color 0.15s linear;
-  animation: 0.75s fadein linear, 0.9s shiftin, 0.4s shadowIn cubic-bezier(0.43, 0.1, 0.15, 1.1);
+  cursor: default;
+  text-shadow: 0.5px 0.5px hsl(0, 0%, 63%), 1px 1px hsl(0, 0%, 63%), 1.5px 1.5px hsl(0, 0%, 63%), 2px 2px hsl(0, 0%, 63%), 2.5px 2.5px hsl(0, 0%, 63%), 3px 3px hsl(0, 0%, 63%), 3.5px 3.5px hsl(0, 0%, 63%), 4px 4px hsl(0, 0%, 63%), 4.5px 4.5px hsl(0, 0%, 63%), 5px 5px hsl(0, 0%, 63%), 5.5px 5.5px hsl(0, 0%, 63%), 6px 6px hsl(0, 0%, 63%), 6.5px 6.5px hsl(0, 0%, 63%), 7px 7px hsl(0, 0%, 63%), 7.5px 7.5px hsl(0, 0%, 63%), 8px 8px hsl(0, 0%, 63%);
 }
-@keyframes shiftin {
-  from {
-    transform: translateY(-45px);
+#header h1 span {
+  display: inline-block;
+  transition: transform 0.125s ease;
+}
+@media (hover: hover) {
+  #header h1 span.scale1 {
+    transform: scale(0.9075);
+  }
+  #header h1 span.scale2 {
+    transform: scale(0.94);
+  }
+  #header h1 span.scale3 {
+    transform: scale(0.9825);
   }
 }
-@keyframes shadowIn {
-  from {
-    text-shadow: 1px 1px hsl(0, 0%, 52%), 1.5px 1.5px hsl(0, 0%, 52%), 2px 2px hsl(0, 0%, 52%);
-  }
+#header h1 span:active {
+  transform: scale(0.875);
 }
-#header h1:not(.nohover):hover {
-  transform: scale(0.78) scale(1.294);
+#header h1.landing-animation-h1 span:nth-child(1) {
+  animation: 0.305s 0.126s textWavelanding ease backwards;
 }
-#header h1 .cut-after {
-  display: none;
+#header h1.landing-animation-h1 span:nth-child(2) {
+  animation: 0.305s 0.20859383s textWavelanding ease backwards;
 }
-#header h1::before {
-  color: hsl(0, 0%, 12.5%);
-  text-shadow: 7px 7px hsl(0, 0%, 12.5%), 7px -7px hsl(0, 0%, 12.5%), -7px 7px hsl(0, 0%, 12.5%), -7px -7px hsl(0, 0%, 12.5%);
+#header h1.landing-animation-h1 span:nth-child(3) {
+  animation: 0.305s 0.28013529s textWavelanding ease backwards;
 }
-#header h1::before,
-#header h1 .cut-after {
-  position: absolute;
-  top: 0;
-  left: 0;
+#header h1.landing-animation-h1 span:nth-child(4) {
+  animation: 0.305s 0.34532845s textWavelanding ease backwards;
 }
-#header h1:not(.nohover):hover::before {
-  content: attr(data-heading);
-  clip-path: polygon(0 58%, 0 0, 100% 0, 100% 37%);
-  animation: 0.3s headingcut ease-in;
+#header h1.landing-animation-h1 span:nth-child(5) {
+  animation: 0.305s 0.40617423s textWavelanding ease backwards;
 }
-@keyframes headingcut {
-  from {
-    clip-path: polygon(100% 37%, 100% 0, 100% 0, 100% 37%);
-  }
-  to {
-    clip-path: polygon(0 58%, 0 0, 100% 0, 100% 37%);
-  }
+#header h1.landing-animation-h1 span:nth-child(6) {
+  animation: 0.305s 0.46376581s textWavelanding ease backwards;
 }
-#header h1:not(.nohover):hover .cut-after {
-  display: block;
-  clip-path: polygon(0 57.5%, 0 0, 100% 0, 100% 36.5%);
-  transform: translate(-4px);
-  animation: 0.68s headingshift cubic-bezier(0.85, 0, 1, 1);
+#header h1.landing-animation-h1 span:nth-child(7) {
+  animation: 0.305s 0.51878487s textWavelanding ease backwards;
 }
-@keyframes headingshift {
+@keyframes textWavelanding {
   0% {
-    transform: translate(0);
+    transform: scale(0.775);
+    color: transparent;
+    text-shadow: none;
   }
-  30% {
-    transform: translate(0);
-  }
-  100% {
-    transform: translate(-4px);
+  60% {
+    color: inherit;
+    transform: scale(1.0675) translateY(0.012em);
+    text-shadow: 0.5px 0.5px hsl(0, 0%, 63%), 1px 1px hsl(0, 0%, 63%), 1.5px 1.5px hsl(0, 0%, 63%), 2px 2px hsl(0, 0%, 63%), 2.5px 2.5px hsl(0, 0%, 63%), 3px 3px hsl(0, 0%, 63%), 3.5px 3.5px hsl(0, 0%, 63%), 4px 4px hsl(0, 0%, 63%), 4.5px 4.5px hsl(0, 0%, 63%), 5px 5px hsl(0, 0%, 63%), 5.5px 5.5px hsl(0, 0%, 63%), 6px 6px hsl(0, 0%, 63%), 6.5px 6.5px hsl(0, 0%, 63%), 7px 7px hsl(0, 0%, 63%), 7.5px 7.5px hsl(0, 0%, 63%), 8px 8px hsl(0, 0%, 63%), 8.5px 8.5px hsl(0, 0%, 63%);
   }
 }
-#header h1 span::selection {
-  background-color: transparent;
-  color: #17469E;
-  text-shadow: 0px 0px #518AD6, 0.5px 0.5px #518AD6, 1px 1px #518AD6, 1.5px 1.5px #518AD6, 2px 2px #518AD6, 2.5px 2.5px #518AD6, 3px 3px #518AD6, 3.5px 3.5px #518AD6, 4px 4px #518AD6, 4.5px 4.5px #518AD6, 5px 5px #518AD6, 5.5px 5.5px #518AD6, 6px 6px #518AD6;
+#header h1.wave1 span:nth-child(1) {
+  animation: 0.37s 0s textWave ease;
 }
-#header h1 span::-moz-selection {
-  background-color: transparent;
-  color: #17469E;
-  text-shadow: 0px 0px #518AD6, 0.5px 0.5px #518AD6, 1px 1px #518AD6, 1.5px 1.5px #518AD6, 2px 2px #518AD6, 2.5px 2.5px #518AD6, 3px 3px #518AD6, 3.5px 3.5px #518AD6, 4px 4px #518AD6, 4.5px 4.5px #518AD6, 5px 5px #518AD6, 5.5px 5.5px #518AD6, 6px 6px #518AD6;
+#header h1.wave1 span:nth-child(2) {
+  animation: 0.37s 0.13s textWave ease;
+}
+#header h1.wave1 span:nth-child(3) {
+  animation: 0.37s 0.21521585s textWave ease;
+}
+#header h1.wave1 span:nth-child(4) {
+  animation: 0.37s 0.28902847s textWave ease;
+}
+#header h1.wave1 span:nth-child(5) {
+  animation: 0.37s 0.35629126s textWave ease;
+}
+#header h1.wave1 span:nth-child(6) {
+  animation: 0.37s 0.41906865s textWave ease;
+}
+#header h1.wave1 span:nth-child(7) {
+  animation: 0.37s 0.47848853s textWave ease;
+}
+#header h1.wave2 span:nth-child(2) {
+  animation: 0.37s 0s textWave ease;
+}
+#header h1.wave2 span:nth-child(3),
+#header h1.wave2 span:nth-child(1) {
+  animation: 0.37s 0.13s textWave ease;
+}
+#header h1.wave2 span:nth-child(4) {
+  animation: 0.37s 0.21521585s textWave ease;
+}
+#header h1.wave2 span:nth-child(5) {
+  animation: 0.37s 0.28902847s textWave ease;
+}
+#header h1.wave2 span:nth-child(6) {
+  animation: 0.37s 0.35629126s textWave ease;
+}
+#header h1.wave2 span:nth-child(7) {
+  animation: 0.37s 0.41906865s textWave ease;
+}
+#header h1.wave3 span:nth-child(3) {
+  animation: 0.37s 0s textWave ease;
+}
+#header h1.wave3 span:nth-child(4),
+#header h1.wave3 span:nth-child(2) {
+  animation: 0.37s 0.13s textWave ease;
+}
+#header h1.wave3 span:nth-child(5),
+#header h1.wave3 span:nth-child(1) {
+  animation: 0.37s 0.21521585s textWave ease;
+}
+#header h1.wave3 span:nth-child(6) {
+  animation: 0.37s 0.28902847s textWave ease;
+}
+#header h1.wave3 span:nth-child(7) {
+  animation: 0.37s 0.35629126s textWave ease;
+}
+#header h1.wave4 span:nth-child(4) {
+  animation: 0.37s 0s textWave ease;
+}
+#header h1.wave4 span:nth-child(5),
+#header h1.wave4 span:nth-child(3) {
+  animation: 0.37s 0.13s textWave ease;
+}
+#header h1.wave4 span:nth-child(6),
+#header h1.wave4 span:nth-child(2) {
+  animation: 0.37s 0.21521585s textWave ease;
+}
+#header h1.wave4 span:nth-child(7),
+#header h1.wave4 span:nth-child(1) {
+  animation: 0.37s 0.28902847s textWave ease;
+}
+#header h1.wave5 span:nth-child(5) {
+  animation: 0.37s 0s textWave ease;
+}
+#header h1.wave5 span:nth-child(6),
+#header h1.wave5 span:nth-child(4) {
+  animation: 0.37s 0.13s textWave ease;
+}
+#header h1.wave5 span:nth-child(7),
+#header h1.wave5 span:nth-child(3) {
+  animation: 0.37s 0.21521585s textWave ease;
+}
+#header h1.wave5 span:nth-child(2) {
+  animation: 0.37s 0.28902847s textWave ease;
+}
+#header h1.wave5 span:nth-child(1) {
+  animation: 0.37s 0.35629126s textWave ease;
+}
+#header h1.wave6 span:nth-child(6) {
+  animation: 0.37s 0s textWave ease;
+}
+#header h1.wave6 span:nth-child(7),
+#header h1.wave6 span:nth-child(5) {
+  animation: 0.37s 0.13s textWave ease;
+}
+#header h1.wave6 span:nth-child(4) {
+  animation: 0.37s 0.21521585s textWave ease;
+}
+#header h1.wave6 span:nth-child(3) {
+  animation: 0.37s 0.28902847s textWave ease;
+}
+#header h1.wave6 span:nth-child(2) {
+  animation: 0.37s 0.35629126s textWave ease;
+}
+#header h1.wave6 span:nth-child(1) {
+  animation: 0.37s 0.41906865s textWave ease;
+}
+#header h1.wave7 span:nth-child(7) {
+  animation: 0.37s 0s textWave ease;
+}
+#header h1.wave7 span:nth-child(6) {
+  animation: 0.37s 0.13s textWave ease;
+}
+#header h1.wave7 span:nth-child(5) {
+  animation: 0.37s 0.21521585s textWave ease;
+}
+#header h1.wave7 span:nth-child(4) {
+  animation: 0.37s 0.28902847s textWave ease;
+}
+#header h1.wave7 span:nth-child(3) {
+  animation: 0.37s 0.35629126s textWave ease;
+}
+#header h1.wave7 span:nth-child(2) {
+  animation: 0.37s 0.41906865s textWave ease;
+}
+#header h1.wave7 span:nth-child(1) {
+  animation: 0.37s 0.47848853s textWave ease;
+}
+@keyframes textWave {
+  25% {
+    transform: scale(0.9375);
+  }
+  60% {
+    transform: scale(1.0475) translateY(0.0115em);
+    text-shadow: 0.5px 0.5px hsl(0, 0%, 63%), 1px 1px hsl(0, 0%, 63%), 1.5px 1.5px hsl(0, 0%, 63%), 2px 2px hsl(0, 0%, 63%), 2.5px 2.5px hsl(0, 0%, 63%), 3px 3px hsl(0, 0%, 63%), 3.5px 3.5px hsl(0, 0%, 63%), 4px 4px hsl(0, 0%, 63%), 4.5px 4.5px hsl(0, 0%, 63%), 5px 5px hsl(0, 0%, 63%), 5.5px 5.5px hsl(0, 0%, 63%), 6px 6px hsl(0, 0%, 63%), 6.5px 6.5px hsl(0, 0%, 63%), 7px 7px hsl(0, 0%, 63%), 7.5px 7.5px hsl(0, 0%, 63%), 8px 8px hsl(0, 0%, 63%), 8.5px 8.5px hsl(0, 0%, 63%), 9px 9px hsl(0, 0%, 63%);
+  }
+}
+@media (max-width: 600px) {
+  #header h1 {
+    text-shadow: 0.5px 0.5px hsl(0, 0%, 63%), 1px 1px hsl(0, 0%, 63%), 1.5px 1.5px hsl(0, 0%, 63%), 2px 2px hsl(0, 0%, 63%), 2.5px 2.5px hsl(0, 0%, 63%), 3px 3px hsl(0, 0%, 63%), 3.5px 3.5px hsl(0, 0%, 63%), 4px 4px hsl(0, 0%, 63%), 4.5px 4.5px hsl(0, 0%, 63%), 5px 5px hsl(0, 0%, 63%), 5.5px 5.5px hsl(0, 0%, 63%), 6px 6px hsl(0, 0%, 63%), 6.5px 6.5px hsl(0, 0%, 63%), 7px 7px hsl(0, 0%, 63%);
+  }
+  @keyframes textWavelanding {
+    0% {
+      transform: scale(0.775);
+      color: transparent;
+      text-shadow: none;
+    }
+    60% {
+      color: inherit;
+      transform: scale(1.0675) translateY(0.012em);
+      text-shadow: 0.5px 0.5px hsl(0, 0%, 63%), 1px 1px hsl(0, 0%, 63%), 1.5px 1.5px hsl(0, 0%, 63%), 2px 2px hsl(0, 0%, 63%), 2.5px 2.5px hsl(0, 0%, 63%), 3px 3px hsl(0, 0%, 63%), 3.5px 3.5px hsl(0, 0%, 63%), 4px 4px hsl(0, 0%, 63%), 4.5px 4.5px hsl(0, 0%, 63%), 5px 5px hsl(0, 0%, 63%), 5.5px 5.5px hsl(0, 0%, 63%), 6px 6px hsl(0, 0%, 63%), 6.5px 6.5px hsl(0, 0%, 63%), 7px 7px hsl(0, 0%, 63%), 7.5px 7.5px hsl(0, 0%, 63%);
+    }
+  }
+  @keyframes textWave {
+    25% {
+      transform: scale(0.9375);
+    }
+    60% {
+      transform: scale(1.0475) translateY(0.0115em);
+      text-shadow: 0.5px 0.5px hsl(0, 0%, 63%), 1px 1px hsl(0, 0%, 63%), 1.5px 1.5px hsl(0, 0%, 63%), 2px 2px hsl(0, 0%, 63%), 2.5px 2.5px hsl(0, 0%, 63%), 3px 3px hsl(0, 0%, 63%), 3.5px 3.5px hsl(0, 0%, 63%), 4px 4px hsl(0, 0%, 63%), 4.5px 4.5px hsl(0, 0%, 63%), 5px 5px hsl(0, 0%, 63%), 5.5px 5.5px hsl(0, 0%, 63%), 6px 6px hsl(0, 0%, 63%), 6.5px 6.5px hsl(0, 0%, 63%), 7px 7px hsl(0, 0%, 63%), 7.5px 7.5px hsl(0, 0%, 63%), 8px 8px hsl(0, 0%, 63%);
+    }
+  }
+}
+@media (max-width: 520px) {
+  #header h1 {
+    text-shadow: 0.5px 0.5px hsl(0, 0%, 63%), 1px 1px hsl(0, 0%, 63%), 1.5px 1.5px hsl(0, 0%, 63%), 2px 2px hsl(0, 0%, 63%), 2.5px 2.5px hsl(0, 0%, 63%), 3px 3px hsl(0, 0%, 63%), 3.5px 3.5px hsl(0, 0%, 63%), 4px 4px hsl(0, 0%, 63%), 4.5px 4.5px hsl(0, 0%, 63%), 5px 5px hsl(0, 0%, 63%), 5.5px 5.5px hsl(0, 0%, 63%), 6px 6px hsl(0, 0%, 63%);
+  }
+  @keyframes textWavelanding {
+    0% {
+      transform: scale(0.775);
+      color: transparent;
+      text-shadow: none;
+    }
+    60% {
+      color: inherit;
+      transform: scale(1.0675) translateY(0.012em);
+      text-shadow: 0.5px 0.5px hsl(0, 0%, 63%), 1px 1px hsl(0, 0%, 63%), 1.5px 1.5px hsl(0, 0%, 63%), 2px 2px hsl(0, 0%, 63%), 2.5px 2.5px hsl(0, 0%, 63%), 3px 3px hsl(0, 0%, 63%), 3.5px 3.5px hsl(0, 0%, 63%), 4px 4px hsl(0, 0%, 63%), 4.5px 4.5px hsl(0, 0%, 63%), 5px 5px hsl(0, 0%, 63%), 5.5px 5.5px hsl(0, 0%, 63%), 6px 6px hsl(0, 0%, 63%), 6.5px 6.5px hsl(0, 0%, 63%);
+    }
+  }
+  @keyframes textWave {
+    25% {
+      transform: scale(0.9375);
+    }
+    60% {
+      transform: scale(1.0475) translateY(0.0115em);
+      text-shadow: 0.5px 0.5px hsl(0, 0%, 63%), 1px 1px hsl(0, 0%, 63%), 1.5px 1.5px hsl(0, 0%, 63%), 2px 2px hsl(0, 0%, 63%), 2.5px 2.5px hsl(0, 0%, 63%), 3px 3px hsl(0, 0%, 63%), 3.5px 3.5px hsl(0, 0%, 63%), 4px 4px hsl(0, 0%, 63%), 4.5px 4.5px hsl(0, 0%, 63%), 5px 5px hsl(0, 0%, 63%), 5.5px 5.5px hsl(0, 0%, 63%), 6px 6px hsl(0, 0%, 63%), 6.5px 6.5px hsl(0, 0%, 63%), 7px 7px hsl(0, 0%, 63%);
+    }
+  }
+}
+@media (max-width: 440px) {
+  #header h1 {
+    text-shadow: 0.5px 0.5px hsl(0, 0%, 63%), 1px 1px hsl(0, 0%, 63%), 1.5px 1.5px hsl(0, 0%, 63%), 2px 2px hsl(0, 0%, 63%), 2.5px 2.5px hsl(0, 0%, 63%), 3px 3px hsl(0, 0%, 63%), 3.5px 3.5px hsl(0, 0%, 63%), 4px 4px hsl(0, 0%, 63%), 4.5px 4.5px hsl(0, 0%, 63%), 5px 5px hsl(0, 0%, 63%);
+  }
+  @keyframes textWavelanding {
+    0% {
+      transform: scale(0.775);
+      color: transparent;
+      text-shadow: none;
+    }
+    60% {
+      color: inherit;
+      transform: scale(1.0675) translateY(0.012em);
+      text-shadow: 0.5px 0.5px hsl(0, 0%, 63%), 1px 1px hsl(0, 0%, 63%), 1.5px 1.5px hsl(0, 0%, 63%), 2px 2px hsl(0, 0%, 63%), 2.5px 2.5px hsl(0, 0%, 63%), 3px 3px hsl(0, 0%, 63%), 3.5px 3.5px hsl(0, 0%, 63%), 4px 4px hsl(0, 0%, 63%), 4.5px 4.5px hsl(0, 0%, 63%), 5px 5px hsl(0, 0%, 63%), 5.5px 5.5px hsl(0, 0%, 63%);
+    }
+  }
+  @keyframes textWave {
+    25% {
+      transform: scale(0.9375);
+    }
+    60% {
+      transform: scale(1.0475) translateY(0.0115em);
+      text-shadow: 0.5px 0.5px hsl(0, 0%, 63%), 1px 1px hsl(0, 0%, 63%), 1.5px 1.5px hsl(0, 0%, 63%), 2px 2px hsl(0, 0%, 63%), 2.5px 2.5px hsl(0, 0%, 63%), 3px 3px hsl(0, 0%, 63%), 3.5px 3.5px hsl(0, 0%, 63%), 4px 4px hsl(0, 0%, 63%), 4.5px 4.5px hsl(0, 0%, 63%), 5px 5px hsl(0, 0%, 63%), 5.5px 5.5px hsl(0, 0%, 63%), 6px 6px hsl(0, 0%, 63%);
+    }
+  }
+}
+@media (max-width: 880px) {
+  #header h1 {
+    font-size: calc(10vw + 0.5vh + 35.9px);
+  }
 }
 #header .subheader {
   position: absolute;
-  bottom: calc((8vw + 16vh + 103px)/4 - 2em);
-  font-family: 'Segoe UI', 'Arial', sans-serif;
-  font-size: 1em;
-  font-style: italic;
-  margin: 0;
+  bottom: calc((100% - 8em * 1.2) / 4);
   white-space: nowrap;
-  animation: 0.6s fadein ease-in;
   transition: background 0.15s linear, color 0.15s linear;
 }
-#header .subheader::selection,
-#header .subheader::-moz-selection {
-  background-color: transparent;
-  color: #469870;
-}
-@keyframes fadein {
-  from {
-    opacity: 0.1;
-  }
-}
 html.light-mode #header {
-  box-shadow: 0 2px 16px hsla(0, 0%, 80.5%, 0.25);
-  background-color: hsl(0, 0%, 98%);
-  color: hsl(0, 0%, 36%);
+  color: hsl(0, 0%, 13%);
 }
 html.light-mode #header h1 {
-  text-shadow: 0px 0px hsl(0, 0%, 51%), 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%), 6px 6px hsl(0, 0%, 51%);
+  text-shadow: 0.5px 0.5px hsl(0, 0%, 38%), 1px 1px hsl(0, 0%, 38%), 1.5px 1.5px hsl(0, 0%, 38%), 2px 2px hsl(0, 0%, 38%), 2.5px 2.5px hsl(0, 0%, 38%), 3px 3px hsl(0, 0%, 38%), 3.5px 3.5px hsl(0, 0%, 38%), 4px 4px hsl(0, 0%, 38%), 4.5px 4.5px hsl(0, 0%, 38%), 5px 5px hsl(0, 0%, 38%), 5.5px 5.5px hsl(0, 0%, 38%), 6px 6px hsl(0, 0%, 38%), 6.5px 6.5px hsl(0, 0%, 38%), 7px 7px hsl(0, 0%, 38%), 7.5px 7.5px hsl(0, 0%, 38%), 8px 8px hsl(0, 0%, 38%);
 }
-html.light-mode #header h1:hover::before {
-  color: hsl(0, 0%, 98%);
-  text-shadow: 7px 7px hsl(0, 0%, 98%), 7px -7px hsl(0, 0%, 98%), -7px 7px hsl(0, 0%, 98%), -7px -7px hsl(0, 0%, 98%);
+html.light-mode #header h1.landing-animation-h1 span:nth-child(1) {
+  animation: 0.305s 0.126s textWavelanding-LT ease backwards;
 }
-#box-nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  display: grid;
-  justify-items: center;
-  margin: 1.842em 1.053em;
-  grid-gap: 2.105em;
-  grid-template-columns: repeat(auto-fit, minmax(21.579em, 1fr));
-  align-items: center;
+html.light-mode #header h1.landing-animation-h1 span:nth-child(2) {
+  animation: 0.305s 0.20859383s textWavelanding-LT ease backwards;
 }
-#box-nav .box {
-  width: 14.9em;
-  height: 16.34em;
+html.light-mode #header h1.landing-animation-h1 span:nth-child(3) {
+  animation: 0.305s 0.28013529s textWavelanding-LT ease backwards;
 }
-#box-nav .box .box-header .header-text {
-  padding: 0.871em 0.762em;
-  line-height: 1.016em;
+html.light-mode #header h1.landing-animation-h1 span:nth-child(4) {
+  animation: 0.305s 0.34532845s textWavelanding-LT ease backwards;
 }
-#box-nav .box:nth-child(1) {
-  animation: 0.5s shiftinBox ease-out;
+html.light-mode #header h1.landing-animation-h1 span:nth-child(5) {
+  animation: 0.305s 0.40617423s textWavelanding-LT ease backwards;
 }
-#box-nav .box:nth-child(2) {
-  animation: 0.58s shiftinBox ease-out;
+html.light-mode #header h1.landing-animation-h1 span:nth-child(6) {
+  animation: 0.305s 0.46376581s textWavelanding-LT ease backwards;
 }
-#box-nav .box:nth-child(3) {
-  animation: 0.66s shiftinBox ease-out;
+html.light-mode #header h1.landing-animation-h1 span:nth-child(7) {
+  animation: 0.305s 0.51878487s textWavelanding-LT ease backwards;
 }
-#box-nav .box:nth-child(4) {
-  animation: 0.74s shiftinBox ease-out;
+@keyframes textWavelanding-LT {
+  0% {
+    transform: scale(0.775);
+    color: transparent;
+    text-shadow: none;
+  }
+  60% {
+    color: inherit;
+    transform: scale(1.0675) translateY(0.012em);
+    text-shadow: 0.5px 0.5px hsl(0, 0%, 38%), 1px 1px hsl(0, 0%, 38%), 1.5px 1.5px hsl(0, 0%, 38%), 2px 2px hsl(0, 0%, 38%), 2.5px 2.5px hsl(0, 0%, 38%), 3px 3px hsl(0, 0%, 38%), 3.5px 3.5px hsl(0, 0%, 38%), 4px 4px hsl(0, 0%, 38%), 4.5px 4.5px hsl(0, 0%, 38%), 5px 5px hsl(0, 0%, 38%), 5.5px 5.5px hsl(0, 0%, 38%), 6px 6px hsl(0, 0%, 38%), 6.5px 6.5px hsl(0, 0%, 38%), 7px 7px hsl(0, 0%, 38%), 7.5px 7.5px hsl(0, 0%, 38%), 8px 8px hsl(0, 0%, 38%), 8.5px 8.5px hsl(0, 0%, 38%);
+  }
 }
-#box-nav .box:nth-child(5) {
-  animation: 0.82s shiftinBox ease-out;
+html.light-mode #header h1.wave1 span:nth-child(1) {
+  animation: 0.37s 0s textWave-LT ease;
+}
+html.light-mode #header h1.wave1 span:nth-child(2) {
+  animation: 0.37s 0.13s textWave-LT ease;
+}
+html.light-mode #header h1.wave1 span:nth-child(3) {
+  animation: 0.37s 0.21521585s textWave-LT ease;
+}
+html.light-mode #header h1.wave1 span:nth-child(4) {
+  animation: 0.37s 0.28902847s textWave-LT ease;
+}
+html.light-mode #header h1.wave1 span:nth-child(5) {
+  animation: 0.37s 0.35629126s textWave-LT ease;
+}
+html.light-mode #header h1.wave1 span:nth-child(6) {
+  animation: 0.37s 0.41906865s textWave-LT ease;
+}
+html.light-mode #header h1.wave1 span:nth-child(7) {
+  animation: 0.37s 0.47848853s textWave-LT ease;
+}
+html.light-mode #header h1.wave2 span:nth-child(2) {
+  animation: 0.37s 0s textWave-LT ease;
+}
+html.light-mode #header h1.wave2 span:nth-child(3),
+html.light-mode #header h1.wave2 span:nth-child(1) {
+  animation: 0.37s 0.13s textWave-LT ease;
+}
+html.light-mode #header h1.wave2 span:nth-child(4) {
+  animation: 0.37s 0.21521585s textWave-LT ease;
+}
+html.light-mode #header h1.wave2 span:nth-child(5) {
+  animation: 0.37s 0.28902847s textWave-LT ease;
+}
+html.light-mode #header h1.wave2 span:nth-child(6) {
+  animation: 0.37s 0.35629126s textWave-LT ease;
+}
+html.light-mode #header h1.wave2 span:nth-child(7) {
+  animation: 0.37s 0.41906865s textWave-LT ease;
+}
+html.light-mode #header h1.wave3 span:nth-child(3) {
+  animation: 0.37s 0s textWave-LT ease;
+}
+html.light-mode #header h1.wave3 span:nth-child(4),
+html.light-mode #header h1.wave3 span:nth-child(2) {
+  animation: 0.37s 0.13s textWave-LT ease;
+}
+html.light-mode #header h1.wave3 span:nth-child(5),
+html.light-mode #header h1.wave3 span:nth-child(1) {
+  animation: 0.37s 0.21521585s textWave-LT ease;
+}
+html.light-mode #header h1.wave3 span:nth-child(6) {
+  animation: 0.37s 0.28902847s textWave-LT ease;
+}
+html.light-mode #header h1.wave3 span:nth-child(7) {
+  animation: 0.37s 0.35629126s textWave-LT ease;
+}
+html.light-mode #header h1.wave4 span:nth-child(4) {
+  animation: 0.37s 0s textWave-LT ease;
+}
+html.light-mode #header h1.wave4 span:nth-child(5),
+html.light-mode #header h1.wave4 span:nth-child(3) {
+  animation: 0.37s 0.13s textWave-LT ease;
+}
+html.light-mode #header h1.wave4 span:nth-child(6),
+html.light-mode #header h1.wave4 span:nth-child(2) {
+  animation: 0.37s 0.21521585s textWave-LT ease;
+}
+html.light-mode #header h1.wave4 span:nth-child(7),
+html.light-mode #header h1.wave4 span:nth-child(1) {
+  animation: 0.37s 0.28902847s textWave-LT ease;
+}
+html.light-mode #header h1.wave5 span:nth-child(5) {
+  animation: 0.37s 0s textWave-LT ease;
+}
+html.light-mode #header h1.wave5 span:nth-child(6),
+html.light-mode #header h1.wave5 span:nth-child(4) {
+  animation: 0.37s 0.13s textWave-LT ease;
+}
+html.light-mode #header h1.wave5 span:nth-child(7),
+html.light-mode #header h1.wave5 span:nth-child(3) {
+  animation: 0.37s 0.21521585s textWave-LT ease;
+}
+html.light-mode #header h1.wave5 span:nth-child(2) {
+  animation: 0.37s 0.28902847s textWave-LT ease;
+}
+html.light-mode #header h1.wave5 span:nth-child(1) {
+  animation: 0.37s 0.35629126s textWave-LT ease;
+}
+html.light-mode #header h1.wave6 span:nth-child(6) {
+  animation: 0.37s 0s textWave-LT ease;
+}
+html.light-mode #header h1.wave6 span:nth-child(7),
+html.light-mode #header h1.wave6 span:nth-child(5) {
+  animation: 0.37s 0.13s textWave-LT ease;
+}
+html.light-mode #header h1.wave6 span:nth-child(4) {
+  animation: 0.37s 0.21521585s textWave-LT ease;
+}
+html.light-mode #header h1.wave6 span:nth-child(3) {
+  animation: 0.37s 0.28902847s textWave-LT ease;
+}
+html.light-mode #header h1.wave6 span:nth-child(2) {
+  animation: 0.37s 0.35629126s textWave-LT ease;
+}
+html.light-mode #header h1.wave6 span:nth-child(1) {
+  animation: 0.37s 0.41906865s textWave-LT ease;
+}
+html.light-mode #header h1.wave7 span:nth-child(7) {
+  animation: 0.37s 0s textWave-LT ease;
+}
+html.light-mode #header h1.wave7 span:nth-child(6) {
+  animation: 0.37s 0.13s textWave-LT ease;
+}
+html.light-mode #header h1.wave7 span:nth-child(5) {
+  animation: 0.37s 0.21521585s textWave-LT ease;
+}
+html.light-mode #header h1.wave7 span:nth-child(4) {
+  animation: 0.37s 0.28902847s textWave-LT ease;
+}
+html.light-mode #header h1.wave7 span:nth-child(3) {
+  animation: 0.37s 0.35629126s textWave-LT ease;
+}
+html.light-mode #header h1.wave7 span:nth-child(2) {
+  animation: 0.37s 0.41906865s textWave-LT ease;
+}
+html.light-mode #header h1.wave7 span:nth-child(1) {
+  animation: 0.37s 0.47848853s textWave-LT ease;
+}
+@keyframes textWave-LT {
+  25% {
+    transform: scale(0.9375);
+  }
+  60% {
+    transform: scale(1.0475) translateY(0.0115em);
+    text-shadow: 0.5px 0.5px hsl(0, 0%, 38%), 1px 1px hsl(0, 0%, 38%), 1.5px 1.5px hsl(0, 0%, 38%), 2px 2px hsl(0, 0%, 38%), 2.5px 2.5px hsl(0, 0%, 38%), 3px 3px hsl(0, 0%, 38%), 3.5px 3.5px hsl(0, 0%, 38%), 4px 4px hsl(0, 0%, 38%), 4.5px 4.5px hsl(0, 0%, 38%), 5px 5px hsl(0, 0%, 38%), 5.5px 5.5px hsl(0, 0%, 38%), 6px 6px hsl(0, 0%, 38%), 6.5px 6.5px hsl(0, 0%, 38%), 7px 7px hsl(0, 0%, 38%), 7.5px 7.5px hsl(0, 0%, 38%), 8px 8px hsl(0, 0%, 38%), 8.5px 8.5px hsl(0, 0%, 38%), 9px 9px hsl(0, 0%, 38%);
+  }
+}
+@media (max-width: 600px) {
+  html.light-mode #header h1 {
+    text-shadow: 0.5px 0.5px hsl(0, 0%, 38%), 1px 1px hsl(0, 0%, 38%), 1.5px 1.5px hsl(0, 0%, 38%), 2px 2px hsl(0, 0%, 38%), 2.5px 2.5px hsl(0, 0%, 38%), 3px 3px hsl(0, 0%, 38%), 3.5px 3.5px hsl(0, 0%, 38%), 4px 4px hsl(0, 0%, 38%), 4.5px 4.5px hsl(0, 0%, 38%), 5px 5px hsl(0, 0%, 38%), 5.5px 5.5px hsl(0, 0%, 38%), 6px 6px hsl(0, 0%, 38%), 6.5px 6.5px hsl(0, 0%, 38%), 7px 7px hsl(0, 0%, 38%);
+  }
+  @keyframes textWavelanding-LT {
+    0% {
+      transform: scale(0.775);
+      color: transparent;
+      text-shadow: none;
+    }
+    60% {
+      color: inherit;
+      transform: scale(1.0675) translateY(0.012em);
+      text-shadow: 0.5px 0.5px hsl(0, 0%, 38%), 1px 1px hsl(0, 0%, 38%), 1.5px 1.5px hsl(0, 0%, 38%), 2px 2px hsl(0, 0%, 38%), 2.5px 2.5px hsl(0, 0%, 38%), 3px 3px hsl(0, 0%, 38%), 3.5px 3.5px hsl(0, 0%, 38%), 4px 4px hsl(0, 0%, 38%), 4.5px 4.5px hsl(0, 0%, 38%), 5px 5px hsl(0, 0%, 38%), 5.5px 5.5px hsl(0, 0%, 38%), 6px 6px hsl(0, 0%, 38%), 6.5px 6.5px hsl(0, 0%, 38%), 7px 7px hsl(0, 0%, 38%), 7.5px 7.5px hsl(0, 0%, 38%);
+    }
+  }
+  @keyframes textWave-LT {
+    25% {
+      transform: scale(0.9375);
+    }
+    60% {
+      transform: scale(1.0475) translateY(0.0115em);
+      text-shadow: 0.5px 0.5px hsl(0, 0%, 38%), 1px 1px hsl(0, 0%, 38%), 1.5px 1.5px hsl(0, 0%, 38%), 2px 2px hsl(0, 0%, 38%), 2.5px 2.5px hsl(0, 0%, 38%), 3px 3px hsl(0, 0%, 38%), 3.5px 3.5px hsl(0, 0%, 38%), 4px 4px hsl(0, 0%, 38%), 4.5px 4.5px hsl(0, 0%, 38%), 5px 5px hsl(0, 0%, 38%), 5.5px 5.5px hsl(0, 0%, 38%), 6px 6px hsl(0, 0%, 38%), 6.5px 6.5px hsl(0, 0%, 38%), 7px 7px hsl(0, 0%, 38%), 7.5px 7.5px hsl(0, 0%, 38%), 8px 8px hsl(0, 0%, 38%);
+    }
+  }
+}
+@media (max-width: 520px) {
+  html.light-mode #header h1 {
+    text-shadow: 0.5px 0.5px hsl(0, 0%, 38%), 1px 1px hsl(0, 0%, 38%), 1.5px 1.5px hsl(0, 0%, 38%), 2px 2px hsl(0, 0%, 38%), 2.5px 2.5px hsl(0, 0%, 38%), 3px 3px hsl(0, 0%, 38%), 3.5px 3.5px hsl(0, 0%, 38%), 4px 4px hsl(0, 0%, 38%), 4.5px 4.5px hsl(0, 0%, 38%), 5px 5px hsl(0, 0%, 38%), 5.5px 5.5px hsl(0, 0%, 38%), 6px 6px hsl(0, 0%, 38%);
+  }
+  @keyframes textWavelanding-LT {
+    0% {
+      transform: scale(0.775);
+      color: transparent;
+      text-shadow: none;
+    }
+    60% {
+      color: inherit;
+      transform: scale(1.0675) translateY(0.012em);
+      text-shadow: 0.5px 0.5px hsl(0, 0%, 38%), 1px 1px hsl(0, 0%, 38%), 1.5px 1.5px hsl(0, 0%, 38%), 2px 2px hsl(0, 0%, 38%), 2.5px 2.5px hsl(0, 0%, 38%), 3px 3px hsl(0, 0%, 38%), 3.5px 3.5px hsl(0, 0%, 38%), 4px 4px hsl(0, 0%, 38%), 4.5px 4.5px hsl(0, 0%, 38%), 5px 5px hsl(0, 0%, 38%), 5.5px 5.5px hsl(0, 0%, 38%), 6px 6px hsl(0, 0%, 38%), 6.5px 6.5px hsl(0, 0%, 38%);
+    }
+  }
+  @keyframes textWave-LT {
+    25% {
+      transform: scale(0.9375);
+    }
+    60% {
+      transform: scale(1.0475) translateY(0.0115em);
+      text-shadow: 0.5px 0.5px hsl(0, 0%, 38%), 1px 1px hsl(0, 0%, 38%), 1.5px 1.5px hsl(0, 0%, 38%), 2px 2px hsl(0, 0%, 38%), 2.5px 2.5px hsl(0, 0%, 38%), 3px 3px hsl(0, 0%, 38%), 3.5px 3.5px hsl(0, 0%, 38%), 4px 4px hsl(0, 0%, 38%), 4.5px 4.5px hsl(0, 0%, 38%), 5px 5px hsl(0, 0%, 38%), 5.5px 5.5px hsl(0, 0%, 38%), 6px 6px hsl(0, 0%, 38%), 6.5px 6.5px hsl(0, 0%, 38%), 7px 7px hsl(0, 0%, 38%);
+    }
+  }
+}
+@media (max-width: 440px) {
+  html.light-mode #header h1 {
+    text-shadow: 0.5px 0.5px hsl(0, 0%, 38%), 1px 1px hsl(0, 0%, 38%), 1.5px 1.5px hsl(0, 0%, 38%), 2px 2px hsl(0, 0%, 38%), 2.5px 2.5px hsl(0, 0%, 38%), 3px 3px hsl(0, 0%, 38%), 3.5px 3.5px hsl(0, 0%, 38%), 4px 4px hsl(0, 0%, 38%), 4.5px 4.5px hsl(0, 0%, 38%), 5px 5px hsl(0, 0%, 38%);
+  }
+  @keyframes textWavelanding-LT {
+    0% {
+      transform: scale(0.775);
+      color: transparent;
+      text-shadow: none;
+    }
+    60% {
+      color: inherit;
+      transform: scale(1.0675) translateY(0.012em);
+      text-shadow: 0.5px 0.5px hsl(0, 0%, 38%), 1px 1px hsl(0, 0%, 38%), 1.5px 1.5px hsl(0, 0%, 38%), 2px 2px hsl(0, 0%, 38%), 2.5px 2.5px hsl(0, 0%, 38%), 3px 3px hsl(0, 0%, 38%), 3.5px 3.5px hsl(0, 0%, 38%), 4px 4px hsl(0, 0%, 38%), 4.5px 4.5px hsl(0, 0%, 38%), 5px 5px hsl(0, 0%, 38%), 5.5px 5.5px hsl(0, 0%, 38%);
+    }
+  }
+  @keyframes textWave-LT {
+    25% {
+      transform: scale(0.9375);
+    }
+    60% {
+      transform: scale(1.0475) translateY(0.0115em);
+      text-shadow: 0.5px 0.5px hsl(0, 0%, 38%), 1px 1px hsl(0, 0%, 38%), 1.5px 1.5px hsl(0, 0%, 38%), 2px 2px hsl(0, 0%, 38%), 2.5px 2.5px hsl(0, 0%, 38%), 3px 3px hsl(0, 0%, 38%), 3.5px 3.5px hsl(0, 0%, 38%), 4px 4px hsl(0, 0%, 38%), 4.5px 4.5px hsl(0, 0%, 38%), 5px 5px hsl(0, 0%, 38%), 5.5px 5.5px hsl(0, 0%, 38%), 6px 6px hsl(0, 0%, 38%);
+    }
+  }
+}
+#gbl-box-menu {
+  padding-top: 1.75em;
+  padding-bottom: 1.75em;
+  height: auto;
+}
+#gbl-box-menu.landing-animation-box .gbl-box {
+  transition: none;
+}
+#gbl-box-menu.landing-animation-box .gbl-box:hover {
+  transform: none;
+}
+#gbl-box-menu .gbl-box:nth-child(1) {
+  animation: 0.42s shiftinBox cubic-bezier(0.285, 0.05, 0.5, 1);
+}
+#gbl-box-menu .gbl-box:nth-child(2) {
+  animation: 0.4825s shiftinBox cubic-bezier(0.285, 0.05, 0.5, 1);
+}
+#gbl-box-menu .gbl-box:nth-child(3) {
+  animation: 0.545s shiftinBox cubic-bezier(0.285, 0.05, 0.5, 1);
+}
+#gbl-box-menu .gbl-box:nth-child(4) {
+  animation: 0.6075s shiftinBox cubic-bezier(0.285, 0.05, 0.5, 1);
+}
+#gbl-box-menu .gbl-box:nth-child(5) {
+  animation: 0.67s shiftinBox cubic-bezier(0.285, 0.05, 0.5, 1);
 }
 @keyframes shiftinBox {
   from {
-    transform: translateY(-17px);
+    transform: translateY(-0.7em);
   }
 }
-@media (max-width: 640px) {
-  body {
-    font-size: calc(1.1vw + 11.28px);
-  }
-  #header {
-    height: calc(24vw + 12vh + 32.8px);
-  }
-  #header h1 {
-    font-size: calc(17.5vw + 2vh + -1.62px);
-  }
-  #header .subheader {
-    bottom: calc((24vw + 12vh + 32.8px)/4 - ((17.5vw + 2vh + -1.62px) * 0.145) * 2);
-  }
+html.light-mode .gbl-box {
+  color: hsl(0, 0%, 4%);
+  background-color: hsl(0, 0%, 99%);
+  border-top-color: hsl(0, 0%, 100%);
+  border-bottom-color: hsl(0, 0%, 73.5%);
+  box-shadow: 0 2px 18px hsla(0, 0%, 50%, 0.285);
 }
-@media (max-width: 550px) {
-  #header h1 {
-    text-shadow: 0px 0px hsl(0, 0%, 52%), 0.5px 0.5px hsl(0, 0%, 52%), 1px 1px hsl(0, 0%, 52%), 1.5px 1.5px hsl(0, 0%, 52%), 2px 2px hsl(0, 0%, 52%), 2.5px 2.5px hsl(0, 0%, 52%), 3px 3px hsl(0, 0%, 52%), 3.5px 3.5px hsl(0, 0%, 52%), 4px 4px hsl(0, 0%, 52%), 4.5px 4.5px hsl(0, 0%, 52%), 5px 5px hsl(0, 0%, 52%), 5.5px 5.5px hsl(0, 0%, 52%);
-  }
-  html.light-mode #header h1 {
-    text-shadow: 0px 0px hsl(0, 0%, 51%), 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%), 5.5px 5.5px hsl(0, 0%, 51%);
-  }
+html.light-mode .gbl-box.gbl-backdrop {
+  background-color: hsl(0, 0%, 77.5%);
 }
-@media (max-width: 490px) {
-  #header h1 {
-    text-shadow: 0px 0px hsl(0, 0%, 52%), 0.5px 0.5px hsl(0, 0%, 52%), 1px 1px hsl(0, 0%, 52%), 1.5px 1.5px hsl(0, 0%, 52%), 2px 2px hsl(0, 0%, 52%), 2.5px 2.5px hsl(0, 0%, 52%), 3px 3px hsl(0, 0%, 52%), 3.5px 3.5px hsl(0, 0%, 52%), 4px 4px hsl(0, 0%, 52%), 4.5px 4.5px hsl(0, 0%, 52%), 5px 5px hsl(0, 0%, 52%);
-  }
-  html.light-mode #header h1 {
-    text-shadow: 0px 0px hsl(0, 0%, 51%), 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%), 5px 5px hsl(0, 0%, 51%);
-  }
+html.light-mode .gbl-box.gbl-backdrop .description {
+  color: hsl(0, 0%, 88%);
 }
-@media (max-width: 430px) {
-  #header h1 {
-    text-shadow: 0px 0px hsl(0, 0%, 52%), 0.5px 0.5px hsl(0, 0%, 52%), 1px 1px hsl(0, 0%, 52%), 1.5px 1.5px hsl(0, 0%, 52%), 2px 2px hsl(0, 0%, 52%), 2.5px 2.5px hsl(0, 0%, 52%), 3px 3px hsl(0, 0%, 52%), 3.5px 3.5px hsl(0, 0%, 52%), 4px 4px hsl(0, 0%, 52%), 4.5px 4.5px hsl(0, 0%, 52%);
-  }
-  html.light-mode #header h1 {
-    text-shadow: 0px 0px hsl(0, 0%, 51%), 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%), 4.5px 4.5px hsl(0, 0%, 51%);
-  }
+html.light-mode .gbl-box .heading .text,
+html.light-mode .gbl-box .quick-links {
+  background-color: hsla(0, 0%, 99%, 0.7);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
 }
-@media (max-width: 370px) {
-  #header h1 {
-    text-shadow: 0px 0px hsl(0, 0%, 52%), 0.5px 0.5px hsl(0, 0%, 52%), 1px 1px hsl(0, 0%, 52%), 1.5px 1.5px hsl(0, 0%, 52%), 2px 2px hsl(0, 0%, 52%), 2.5px 2.5px hsl(0, 0%, 52%), 3px 3px hsl(0, 0%, 52%), 3.5px 3.5px hsl(0, 0%, 52%), 4px 4px hsl(0, 0%, 52%);
-  }
-  html.light-mode #header h1 {
-    text-shadow: 0px 0px hsl(0, 0%, 51%), 0.5px 0.5px hsl(0, 0%, 51%), 1px 1px hsl(0, 0%, 51%), 1.5px 1.5px hsl(0, 0%, 51%), 2px 2px hsl(0, 0%, 51%), 2.5px 2.5px hsl(0, 0%, 51%), 3px 3px hsl(0, 0%, 51%), 3.5px 3.5px hsl(0, 0%, 51%), 4px 4px hsl(0, 0%, 51%);
-  }
+html.light-mode .gbl-box .quick-links {
+  border-top-color: hsla(0, 0%, 97%, 0.7);
 }
-@media (max-width: 330px) {
-  #header h1 {
-    font-size: calc(10vw + 1vh + 31.13px);
+html.light-mode .gbl-box .quick-links .link::before {
+  background-color: hsla(0, 0%, 100%, 0.225);
+  border-top-color: hsla(0, 0%, 95%, 0.25);
+}
+html.light-mode .gbl-box:hover {
+  box-shadow: 0 4px 22px hsla(0, 0%, 50%, 0.475);
+}
+html.light-mode .gbl-box:hover .heading .text {
+  background-color: hsl(0, 0%, 99%);
+}
+@media (hover: none) {
+  html.light-mode .gbl-box {
+    box-shadow: 0 4px 22px hsla(0, 0%, 50%, 0.475);
   }
-  #header .subheader {
-    bottom: calc((24vw + 12vh + 32.8px)/4 - ((10vw + 1vh + 31.13px) * 0.145) * 2);
+  html.light-mode .gbl-box .heading .text {
+    background-color: hsl(0, 0%, 99%);
   }
 }

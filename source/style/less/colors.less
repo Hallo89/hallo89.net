@@ -1,103 +1,81 @@
-// main: global.less, main.less, slider89/index.less
+// main: global.less|main.less|slider89/index.less
 
 @theme-color: #17469E;
 
+@focus-width: 3px;
+@focus-color: #1960C9;
+
 @main-bg: hsl(0, 0%, 8%);
-@main-color: hsl(0, 0%, 66%);
+@main-color: hsl(0, 0%, 88%);
 
-@scrollbar-thumb: lighten(@main-bg, 27%);
-@scrollbar-track: lighten(@main-bg, 9%);
+@scrollbar-thumb: lighten(@main-bg, 35%);
+@scrollbar-track: lighten(@main-bg, 6%);
 
-@header-selection: @theme-color;
-@subheader-selection: #469870;
-
-@navbar: lighten(@navbar-bg, 70%);
+@navbar: lighten(@navbar-bg, 75%);
 @navbar-bg: darken(@main-bg, 4.5%);
 
-@cookiebanner: lighten(@glb-box-description, 15%);
-@cookiebanner-button: lighten(@glb-box-description, 20%);
-@cookiebanner-button-bg: lighten(@glb-box-bg, 7%);
+@heading-shadow: darken(@main-color, 25%);
 
-@headline-bg: darken(@main-bg, 2.5%);
+@GBL-BOX-BACKDROP-OPACITY: 67.5%;
+@GBL-BOX-NORMAL-SHADOW-BASE: 0 2px 18px;
+@GBL-BOX-ACTIVE-SHADOW-BASE: 0 4px 22px;
 
-@mode-dropdown-box-bg: lighten(@header-bg, 2.5%);
-@mode-dropdown-shadow: fade(darken(@mode-dropdown-box-bg, 4%), 25%);
-@mode-dropdown-extreme-shadow: darken(@header-bg, 2.5%);
-@mode-dropdown-bordertop: lighten(@mode-dropdown-box-bg, 16.5%);
-@mode-dropdown-borderbottom: mix(@header-bg, @mode-dropdown-box-bg, 50%);
-@mode-dropdown-header: darken(@main-color, 20%);
-@mode-dropdown-header-bg: lighten(@mode-dropdown-box-bg, 1%);
-@mode-switch: @main-color;
-@mode-switch-bg: @mode-dropdown-box-bg;
-@mode-switch-bg-hover: lighten(@mode-switch-bg, 2.5%);
+@gbl-box-bg: lighten(@main-bg, 3%);
+@gbl-box-backdrop-bg: fade(@gbl-box-bg, @GBL-BOX-BACKDROP-OPACITY);
+@gbl-box-quicklinks-border-top: fade(lighten(@gbl-box-bg, 2%), @GBL-BOX-BACKDROP-OPACITY);
+@gbl-box-quicklinks-hover-background: fade(darken(@gbl-box-backdrop-bg, 3.5%), 22.5%);
+@gbl-box-quicklinks-hover-border-top: fade(lighten(@gbl-box-quicklinks-border-top, 2%), 25%);
+@gbl-box-shadow: fade(darken(@gbl-box-bg, 5%), 28.5%);
+@gbl-box-shadow-hover: fade(darken(@gbl-box-bg, 5%), 47.5%);
+@gbl-box-border-top: lighten(@gbl-box-bg, 16%);
+@gbl-box-border-bottom: mix(hsl(0, 0%, 0%), @main-bg, 50%);
 
-@heading: @main-color;
-@heading-shadow: darken(@heading, 14%);
+@COOKIEBANNER-ACTIVE-MODIFIER: 1.5%;
+@cookiebanner-button-bg: lighten(@gbl-box-bg, 6%);
+@cookiebanner-button-bg-active: darken(@cookiebanner-button-bg, @COOKIEBANNER-ACTIVE-MODIFIER);
+@cookiebanner-border-top-active: darken(@gbl-box-border-top, @COOKIEBANNER-ACTIVE-MODIFIER);
+@cookiebanner-border-bottom-active: darken(@gbl-box-border-bottom, @COOKIEBANNER-ACTIVE-MODIFIER);
 
-@header-bg: lighten(@main-bg, 4.5%);
-@header-shadow: fade(darken(@main-bg, 3%), 25%);
-
-@glb-box-bg: lighten(@main-bg, 2%);
-@glb-box-corners: darken(@glb-box-bg, 3%);
-@glb-box-shadow: fade(darken(@glb-box-bg, 4%), 25%);
-@glb-box-shadow-hover: fade(darken(@glb-box-bg, 5%), 36%);
-@glb-box-extreme-shadow: darken(@main-bg, 2.5%);
-@glb-box-bordertop: lighten(@glb-box-bg, 16.5%);
-@glb-box-borderbottom: mix(@glb-box-bg, @main-bg, 50%);
-@glb-box-header: darken(@main-color, 22%);
-@glb-box-header-bg: lighten(@glb-box-bg, 1.5%);
-@glb-box-description: darken(@main-color, 5%);
-
-@footer: lighten(@footer-bg, 79.5%);
 @footer-bg: darken(@main-bg, 3.5%);
-@footer-list-item: darken(@footer, 10%);
-@footer-sidenote: darken(@footer, 15%);
-@footer-hr: darken(@footer, 53%);
+@footer-list-item: darken(@main-color, 10%);
+@footer-sidenote: darken(@main-color, 15%);
+@footer-hr: darken(@main-color, 53%);
 
 
 //Light mode
-@main-bg--lt: hsl(0, 0%, 98%);
-@main-color--lt: hsl(0, 0%, 28%);
+@main-color--lt: hsl(0, 0%, 4%);
+@main-bg--lt: hsl(0, 0%, 100%);
 
-@index-bg--lt: darken(@main-bg--lt, 5.5%);
+@navbar--lt: darken(@navbar-bg--lt, 75%);
+@navbar-bg--lt: darken(@main-bg--lt, 3%);
 
-@navbar--lt: darken(@navbar-bg--lt, 70%);
-@navbar-bg--lt: darken(@main-bg--lt, 2%);
+@heading-color--lt: lighten(@main-color--lt, 9%);
+@heading-shadow--lt: lighten(@heading-color--lt, 25%);
 
-@cookiebanner--lt: darken(@glb-box-description--lt, 15%);
-@cookiebanner-button--lt: darken(@glb-box-description--lt, 25%);
-@cookiebanner-button-bg--lt: darken(@glb-box-bg--lt, 8%);
+@GBL-BOX-BACKDROP-OPACITY--lt: 70%;
 
-@mode-dropdown-box-bg--lt: lighten(@header-bg--lt, 2%);
-@mode-dropdown-shadow--lt: fade(darken(@mode-dropdown-box-bg--lt, 4%), 25%);
-@mode-dropdown-extreme-shadow--lt: darken(@header-bg--lt, 5.5%);
-@mode-dropdown-bordertop--lt: lighten(@mode-dropdown-box-bg--lt, 16.5%);
-@mode-dropdown-borderbottom--lt: mix(@header-bg--lt, @mode-dropdown-box-bg--lt, 50%);
-@mode-dropdown-header--lt: lighten(@main-color--lt, 20%);
-@mode-dropdown-header-bg--lt: lighten(@mode-dropdown-box-bg--lt, 1%);
-@mode-switch--lt: @main-color--lt;
-@mode-switch-bg--lt: @mode-dropdown-box-bg--lt;
-@mode-switch-bg-hover--lt: darken(@mode-switch-bg--lt, 2.5%);
+@gbl-box-bg--lt: darken(@main-bg--lt, 1%);
+@gbl-box-backdrop-image-bg--lt: darken(@gbl-box-bg--lt, 21.5%);
+@gbl-box-backdrop-bg--lt: fade(@gbl-box-bg--lt, @GBL-BOX-BACKDROP-OPACITY--lt);
+@gbl-box-heading-hover-bg--lt: fade(@gbl-box-backdrop-bg--lt, 100%);
+@gbl-box-quicklinks-border-top--lt: fade(darken(@gbl-box-bg--lt, 2%), @GBL-BOX-BACKDROP-OPACITY--lt);
+@gbl-box-quicklinks-hover-background--lt: fade(lighten(@gbl-box-backdrop-bg--lt, 3.5%), 22.5%);
+@gbl-box-quicklinks-hover-border-top--lt: fade(darken(@gbl-box-quicklinks-border-top--lt, 2%), 25%);
+@gbl-box-shadow--lt: lighten(@gbl-box-shadow, 44%);
+@gbl-box-shadow-hover--lt: lighten(@gbl-box-shadow-hover, 44%);
+@gbl-box-border-top--lt: @main-bg--lt;
+@gbl-box-border-bottom--lt: darken(@gbl-box-bg--lt, 25.5%);
 
-@heading--lt: lighten(@main-color--lt, 8%);
-@heading-shadow--lt: lighten(@heading--lt, 15%);
+@cookiebanner-bg--lt: darken(@gbl-box-bg--lt, 5%);
+@cookiebanner-border-top--lt: darken(@gbl-box-border-top--lt, 2.5%);
+@cookiebanner-border-bottom--lt: darken(@gbl-box-border-bottom--lt, 5%);
+@cookiebanner-button-bg--lt: darken(@gbl-box-bg--lt, 11%);
+@cookiebanner-button-bg-active--lt: darken(@cookiebanner-button-bg--lt, @COOKIEBANNER-ACTIVE-MODIFIER);
+@cookiebanner-border-top-active--lt: darken(@gbl-box-border-top--lt, @COOKIEBANNER-ACTIVE-MODIFIER);
+@cookiebanner-border-bottom-active--lt: darken(@gbl-box-border-bottom--lt, @COOKIEBANNER-ACTIVE-MODIFIER);
 
-@header-bg--lt: @main-bg--lt;
-@header-shadow--lt: fade(darken(@index-bg--lt, 12%), 25%);
-
-@glb-box-bg--lt: lighten(@index-bg--lt, 2.5%);
-@glb-box-corners--lt: darken(@glb-box-bg--lt, 4.5%);
-@glb-box-shadow--lt: fade(darken(@glb-box-bg--lt, 8%), 25%);
-@glb-box-shadow-hover--lt: fade(darken(@glb-box-bg--lt, 10%), 36%);
-@glb-box-extreme-shadow--lt: darken(@index-bg--lt, 6.5%);
-@glb-box-bordertop--lt: lighten(@glb-box-bg--lt, 16.5%);
-@glb-box-borderbottom--lt: mix(@glb-box-bg--lt, @index-bg--lt, 50%);
-@glb-box-header--lt: lighten(@main-color--lt, 22%);
-@glb-box-header-bg--lt: lighten(@glb-box-bg--lt, 1.8%);
-@glb-box-description--lt: @main-color--lt;
-
-@footer--lt: lighten(@footer-bg--lt, 78.5%);
-@footer-bg--lt: darken(@main-bg--lt, 78.5%);
-@footer-list-item--lt: darken(@footer--lt, 10%);
-@footer-sidenote--lt: darken(@footer--lt, 10%);
-@footer-hr--lt: darken(@footer--lt, 53%);
+@footer-color--lt: white;
+@footer-bg--lt: hsl(0, 0%, 19%);
+@footer-list-item--lt: darken(@footer-color--lt, 10%);
+@footer-sidenote--lt: darken(@footer-color--lt, 15%);
+@footer-hr--lt: darken(@footer-color--lt, 53%);

@@ -1,5 +1,14 @@
 // main: global.less|main.less|slider89/index.less
 
+#for(@end-inclusive, @rule) {
+  each(range(@end-inclusive), {
+    // @index: 1 based
+    // @idx: 0 based
+    @idx: @index - 1;
+    @rule();
+  });
+}
+
 .noselect() {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -7,39 +16,21 @@
   user-select: none;
 }
 
-.boxanimation(@seconds) {
-  animation: @seconds shiftinBox ease-out;
-}
-
-.text-shadow() {
-  .drop(@amount, @color, @trail-comma: false, @it: 0) {
-    & when (@it < @amount) {
-      text-shadow+:
-        unit(@it, px) unit(@it, px) @color,
-        @it + .5px @it + .5px @color;
-      .text-shadow.drop(@amount, @color, @trail-comma, @it + 1);
-    }
-    & when (@it = @amount) {
-      text-shadow+: unit(@it, px) unit(@it, px) @color;
-      & when (@trail-comma = true) {
-        text-shadow+: @it + .5px @it + .5px @color;
-      }
+.focus(@active-ruleset, @disabled-ruleset) {
+  &:focus {
+    @active-ruleset();
+  }
+  @supports selector(:focus-visible) or selector(:-moz-focusring) {
+    &:focus {
+      @disabled-ruleset();
     }
   }
-  .around(@size, @color, @it: 0) when (@it < 4) {
-    & when (@it = 0) {
-      text-shadow+: unit(@size, px) unit(@size, px) @color;
-    }
-    & when (@it = 1) {
-      text-shadow+: unit(@size, px) unit(-@size, px) @color;
-    }
-    & when (@it = 2) {
-      text-shadow+: unit(-@size, px) unit(@size, px) @color;
-    }
-    & when (@it = 3) {
-      text-shadow+: unit(-@size, px) unit(-@size, px) @color;
-    }
-    .text-shadow.around(@size, @color, @it + 1);
+  // NOTE: If one of multiple comma-separated pseudo-classes is unknown to the browser, the whole selector fails
+  &:-moz-focusring {
+    @active-ruleset();
+  }
+  &:focus-visible {
+    @active-ruleset();
   }
 }
 
@@ -61,10 +52,106 @@
   }
 }
 
+.drop-shadow(@amount, @color, @it: 0) {
+  & when not (@it = 0) {
+    text-shadow+: unit(@it, px) unit(@it, px) @color;
+  }
+  & when (@it < @amount) {
+    text-shadow+: @it + .5px @it + .5px @color;
+    .drop-shadow(@amount, @color, @it + 1);
+  }
+}
 
-.selection(@color; @background: transparent;) {
-  &::selection, &::-moz-selection {
-    background-color: @background;
-    color: @color;
+.wave() {
+  .generate-targets(@textlen, @class, @animation) {
+    each(range(@textlen), {
+      &.@{class}@{index} span {
+        .wave.target(@textlen, @index, @animation);
+      }
+    });
+  }
+  .target(@textlen, @target, @animation, @it: 0) {
+    @half: ceil((@textlen / 2));
+    & when (@it < abs(@target - @half) + @half) {
+      @next: @target + @it;
+      @prev: @target - @it;
+      & when (@prev > 0) and (@next <= @textlen) and not (@next = @prev) {
+        &:nth-child(@{next}),
+        &:nth-child(@{prev}) {
+          @animation();
+        }
+      }
+      & when not (@prev > 0) or (@next = @prev) {
+        &:nth-child(@{next}) {
+          @animation();
+        }
+      }
+      & when not (@next <= @textlen) {
+        &:nth-child(@{prev}) {
+          @animation();
+        }
+      }
+      .wave.target(@textlen, @target, @animation, @it + 1);
+    }
+  }
+
+  .keyframe() {
+    .textWaveLanding(@keyframe-name, @shadow-color, @shadow-length: 8) {
+      @keyframes @keyframe-name {
+        0% {
+          transform: scale(.775);
+          color: transparent;
+          text-shadow: none;
+        }
+        60% {
+          color: inherit;
+          transform: scale(1.0675) translateY(.012em);
+          .drop-shadow(@shadow-length, @shadow-color);
+          text-shadow+: @shadow-length + .5px @shadow-length + .5px @shadow-color;
+        }
+      }
+    }
+    .textWave(@keyframe-name, @shadow-color, @shadow-length: 9) {
+      @keyframes @keyframe-name {
+        25% {
+          transform: scale(.9375);
+        }
+        60% {
+          transform: scale(1.0475) translateY(.0115em);
+          .drop-shadow(@shadow-length, @shadow-color);
+        }
+      }
+    }
+  }
+
+  .buildAnimations(@light-mode: false) {
+    @keyframe-name-landing: if(@light-mode, textWavelanding-LT, textWavelanding);
+    @keyframe-name-wave: if(@light-mode, textWave-LT, textWave);
+    @shadow-color: if(@light-mode, @heading-shadow--lt, @heading-shadow);
+
+    &.landing-animation-h1 span {
+      .wave.target(7, 1, {
+        // NOTE: when changing these timings,
+        // H1_LANDING_ANIMATION_DURATION in index.njk must be adjusted too
+        animation: .305s .126s * pow(@it + 1, (1 / 1.375)) @keyframe-name-landing ease backwards;
+      });
+      .wave.keyframe.textWaveLanding(@keyframe-name-landing, @shadow-color);
+    }
+
+    .wave.generate-targets(7, wave, {
+      // this is a root function to approximate an ease-in
+      animation: .37s .13s * pow(@it, (1 / 1.375)) @keyframe-name-wave ease;
+    });
+    .wave.keyframe.textWave(@keyframe-name-wave, @shadow-color);
+
+    #for(3, {
+      @max-width: 600px - 80px * @idx;
+      @length: 7 - @idx;
+      @media (max-width: @max-width) {
+        .drop-shadow(@length, @shadow-color);
+        .wave.keyframe.textWaveLanding(@keyframe-name-landing, @shadow-color, 7 - @idx);
+        .wave.keyframe.textWave(@keyframe-name-wave, @shadow-color, 8 - @idx);
+      }
+    });
   }
 }
