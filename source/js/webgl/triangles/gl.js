@@ -125,12 +125,18 @@ void main() {
 }
 `;
 
+const canvas = GLBoiler.getCanvasByTag();
+
 screenWidth = canvas.clientWidth;
 screenHeight = canvas.clientHeight;
 
+const gl = GLBoiler.getContext(canvas, {
+  preserveDrawingBuffer: true
+});
+
 //creating two shader programs (2.0 and legacy) from both shaders
-const program = webgl.constructProgram(vertex, fragment);
-const programAlt = webgl.constructProgram(vertexLegacy, fragmentLegacy);
+const program = GLBoiler.createProgram(gl, vertex, fragment);
+const programAlt = GLBoiler.createProgram(gl, vertexLegacy, fragmentLegacy);
 
 //get the position of the attributes ("in") in the programs
 const aPosition = gl.getAttribLocation(program, 'position');

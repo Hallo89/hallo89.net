@@ -130,15 +130,10 @@ function run(compution = true, fixed = false) {
   //Resize the canvas to the dimensions of the screen and pass it to WebGL
   resizeCanvas();
   //Wipe the canvas with a wet rag and paint it newly afterwards
-  clearCanvas();
+  GLBoiler.clearAll(gl);
   //Build the array needed to draw and write it into the buffer
   createBuffer();
   draw(fixed);
-}
-
-function clearCanvas() {
-  //As the previous buffer does not get preserved, meaning overriden by a fresh one, we need to clear the buffer manually
-  gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 }
 
 function resizeCanvas() {
@@ -224,7 +219,7 @@ function draw(
 ) {
   const drawMethod = lineMode ? gl.LINE_LOOP : gl.TRIANGLES;
 
-  clearCanvas();
+  GLBoiler.clearAll(gl);
 
   const lightness = (amountX + amountY) * 3 * (sliderLightness.value / 100);
   const threshold = (amountX + amountY) * (sliderThreshold.value / 100);

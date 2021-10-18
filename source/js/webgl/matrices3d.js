@@ -1,3 +1,4 @@
+const canvas = GLBoiler.getCanvasByTag();
 const inputs = toolbar.querySelector('.inputs');
 
 canvas.addEventListener('contextmenu', e => {
@@ -108,18 +109,12 @@ void main() {
 `;
 
 
-//making the inner webgl pixel canvas size the size it is displayed as
-canvas.width = canvas.clientWidth;
-canvas.height = canvas.clientHeight;
-//resize the actual inner webgl clipspace dimensions
-gl.viewport(0, 0, canvas.width, canvas.height);
+const gl = GLBoiler.getContext(canvas);
 
-//setting the canvas background color
-//gl.clearColor(0.2, 0.54, 0.3, 1);
-//gl.clear(gl.COLOR_BUFFER_BIT);
+GLBoiler.setDimensions(gl, canvas);
 
 //creating a shader program from both shaders
-const program = webgl.constructProgram(vertexShader, fragmentShader);
+const program = GLBoiler.createProgram(gl, vertexShader, fragmentShader);
 //get the position of the "position" and "color" atrribute ("in")
 const locationPosition = gl.getAttribLocation(program, 'position');
 const locationColor = gl.getAttribLocation(program, 'color');
