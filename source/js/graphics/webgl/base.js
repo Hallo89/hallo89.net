@@ -12,9 +12,12 @@ for (l of crementBtnsUp) l.addEventListener('click', increment);
 for (l of crementBtnsDown) l.addEventListener('click', decrement);
 for (l of inputsChecker) l.addEventListener('click', handleChecker);
 
-setTimeout(function() {
-  window.addEventListener('mousemove', handleMouseMove);
-}, 1000);
+// If page has the "unsupported" alert
+if (toolbar) {
+  setTimeout(function() {
+    window.addEventListener('mousemove', handleMouseMove);
+  }, 1000);
+}
 
 
 function handleMouseMove(e) {
