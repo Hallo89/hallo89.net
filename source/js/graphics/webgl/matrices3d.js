@@ -3,6 +3,11 @@ const inputs = toolbar.querySelector('.inputs');
 
 const controls = new Controls3D(canvas, draw);
 controls.mod.tran = 1.75;
+controls.gamepadMod = {
+  scale: .04,
+  tran: 8,
+  rot: 1.15
+};
 controls.assignNewState({
   tran: {
     z: -1000
