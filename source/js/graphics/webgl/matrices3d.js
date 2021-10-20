@@ -1,12 +1,21 @@
 const canvas = GLBoiler.getCanvasByTag();
 const inputs = toolbar.querySelector('.inputs');
 
-canvas.addEventListener('contextmenu', e => {
-  e.preventDefault();
+const controls = new Controls3D(canvas, draw);
+controls.mod.tran = 1.75;
+controls.assignNewState({
+  tran: {
+    z: -1000
+  },
+  rot: {
+    x: 45,
+    y: 45
+  }
 });
 
+
 slider89.defaultValues({
-  task: draw,
+  task: sliderMove,
   classList: ['input_box']
 });
 slider89.defaultValues({
@@ -25,7 +34,6 @@ const sldrRotateZ = new Slider89(inputs, {
 });
 
 slider89.defaultValues({
-  value: 0,
   width: 120
 });
 const sldrTranslateX = new Slider89(inputs, {
@@ -41,7 +49,6 @@ const sldrTranslateY = new Slider89(inputs, {
 const sldrTranslateZ = new Slider89(inputs, {
   min: -2000,
   max: -200,
-  value: -1000,
   caption: 'Translate: Z-axis'
 });
 
@@ -49,7 +56,6 @@ slider89.defaultValues({
   max: 5,
   min: -5,
   comma: 2,
-  value: 1,
   width: 150,
   trimComma: false
 });
@@ -241,178 +247,61 @@ gl.vertexAttribPointer(locationColor, 3, gl.FLOAT, false, 0, 0);
 gl.enable(gl.CULL_FACE);
 //gl.enable(gl.DEPTH_TEST);
 
-//Mouse navigation
-const mod = {
-  scale: .275
-};
-var ctrlLock = false;
-var clickedBtn;
-const clickPos = {};
-
-canvas.addEventListener('mousedown', mouseDown);
-canvas.addEventListener('wheel', wheel); //TODO: support for mousewheela
-window.addEventListener('mouseup', removeMouseMove);
-
 draw();
 
-function wheel(e) {
-  if (e.ctrlKey) e.preventDefault();
-  if (e.deltaY) {
-    const direction = -1 * (e.deltaY / Math.abs(e.deltaY)); //either 1 or -1
-    const current = {
-      x: sldrScaleX.value,
-      y: sldrScaleY.value,
-      z: sldrScaleZ.value
-    };
-    let distance = {
-      x: current.x + direction * mod.scale,
-      y: current.y + direction * mod.scale,
-      z: current.z + direction * mod.scale
-    };
-    const step = {};
-    for (const axis in distance) {
-      step[axis] = (Math.abs(current[axis] - distance[axis]) / 3.5) * direction;
-    }
-    const axis = e.ctrlKey && e.shiftKey ? 'z' : (e.ctrlKey ? 'y' : (e.shiftKey ? 'x' : ''));
-    if (axis) distance = clearAxes(distance, axis);
-    animateScale(current, distance, step, direction);
-  }
-}
-function animateScale(distance, target, step, dir) {
-  for (const axis in target) {
-    distance[axis] += step[axis];
-    if (
-      dir > 0 && distance[axis] >= target[axis] ||
-      dir <= 0 && distance[axis] <= target[axis]
-    ) return;
-  }
-  if (distance.x) sldrScaleX.newValues({ value: distance.x });
-  if (distance.y) sldrScaleY.newValues({ value: distance.y });
-  if (distance.z) sldrScaleZ.newValues({ value: distance.z });
-  draw();
-  requestAnimationFrame(() => {
-    animateScale(distance, target, step, dir);
-  });
+
+function setSlidersFromControlsState() {
+  sldrTranslateX.newValues({ value: controls.state.tran.x });
+  sldrTranslateY.newValues({ value: controls.state.tran.y });
+  sldrTranslateZ.newValues({ value: controls.state.tran.z });
+
+  sldrRotateX.newValues({ value: controls.state.rot.x });
+  sldrRotateY.newValues({ value: controls.state.rot.y });
+  sldrRotateZ.newValues({ value: controls.state.rot.z });
+
+  sldrScaleX.newValues({ value: controls.state.scale.x });
+  sldrScaleY.newValues({ value: controls.state.scale.y });
+  sldrScaleZ.newValues({ value: controls.state.scale.z });
 }
 
-function mouseMove(e) {
-  if (clickedBtn == 0 || clickedBtn == 2) {
-    if (e.ctrlKey && !ctrlLock) {
-      ctrlLock = true;
-    } else if (!e.ctrlKey && ctrlLock) {
-      mod.tran = 1.7 * (sldrTranslateZ.value / -1000);
-      mod.rot = .44 * (sldrTranslateZ.value / -1000);
-      ctrlLock = false;
-    }
-    if (clickedBtn == 0) {
-      var distance;
-      if (e.ctrlKey) {
-        distance = (e.screenX - e.screenY) * 1.7 - ((clickPos.x - clickPos.y) * 1.7 - clickPos.tran.z);
-      } else {
-        distance = {
-          x: e.screenX * mod.tran - (clickPos.x * mod.tran - clickPos.tran.x),
-          y: e.screenY * mod.tran - (clickPos.y * mod.tran + clickPos.tran.y)
-        };
-      }
-      if (!e.ctrlKey && (distance.x || distance.y) || e.ctrlKey && distance) {
-        if (e.ctrlKey) sldrTranslateZ.newValues({value: distance})
-        else {
-          if (distance.x) sldrTranslateX.newValues({value: distance.x});
-          if (distance.y) sldrTranslateY.newValues({value: -distance.y});
-        }
-        draw();
-      }
-    } else if (clickedBtn == 2) {
-      const distance = {
-        x: e.screenY * mod.rot - (clickPos.y * mod.rot + clickPos.rot.y),
-        y: e.screenX * mod.rot - (clickPos.x * mod.rot + clickPos.rot.x)
-      };
-      if (distance.x || distance.y) {
-        if (distance.x) sldrRotateX.newValues({value: -distance.x});
-        if (distance.y) sldrRotateY.newValues({value: -distance.y});
-        draw();
-      }
-    }
+function setControlsStateFromSliders() {
+  // Slider89 is dumb and I have no way of knowing which slider invoked the event
+  controls.state.tran.x = sldrTranslateX.value;
+  controls.state.tran.y = sldrTranslateY.value;
+  controls.state.tran.z = sldrTranslateZ.value;
+
+  controls.state.rot.x = sldrRotateX.value;
+  controls.state.rot.y = sldrRotateY.value;
+  controls.state.rot.z = sldrRotateZ.value;
+
+  controls.state.scale.x = sldrScaleX.value;
+  controls.state.scale.y = sldrScaleY.value;
+  controls.state.scale.z = sldrScaleZ.value;
+}
+
+function sliderMove() {
+  setControlsStateFromSliders();
+  draw(true);
+}
+
+function draw(skipSliderUpdate) {
+  if (!skipSliderUpdate) {
+    setSlidersFromControlsState();
   }
-}
 
-function mouseDown(e) {
-  if (e.button == 1) e.preventDefault();
-  removeMouseMove();
-  clickedBtn = e.button;
-  // const scaleMod = (sldrScaleX.value + sldrScaleY.value) / 2;
-  mod.tran = 1.7 * (sldrTranslateZ.value / -1000);
-  mod.rot = .44 * (sldrTranslateZ.value / -1000);
-  // mod.rot = .44;
-  clickPos.x = e.screenX;
-  clickPos.y = e.screenY;
-  clickPos.tran = {
-    x: sldrTranslateX.value,
-    y: sldrTranslateY.value,
-    z: sldrTranslateZ.value
-  };
-  clickPos.rot = {
-    x: sldrRotateY.value,
-    y: sldrRotateX.value
-  };
-  window.addEventListener('mousemove', mouseMove);
-}
-
-function removeMouseMove() {
-  window.removeEventListener('mousemove', mouseMove);
-}
-function clearAxes(obj, prop) {
-  for (const axis in obj) {
-    if (prop !== axis) delete obj[axis];
-  }
-  return obj;
-}
-
-function draw() {
-  gl.uniformMatrix4fv(matOrigin, false, [
-    1, 0, 0, 0,
-    0, 1, 0, 0,
-    0, 0, 1, 0,
-    150, 150, 150, 1
-  ]);
+  GLBoiler.setMatrix(gl, 'origin', matOrigin, [150, 150, 150]);
 
   const perspective = Math.tan(Math.PI * 0.5 - 0.5 * (sldrFov.value * Math.PI / 180));
-  gl.uniformMatrix4fv(matPerspective, false, [
-    perspective * canvas.height / canvas.width, 0, 0, 0,
-    0, perspective, 0, 0,
-    0, 0, (1 + 2000) * (1.0 / (1 - 2000)), -1,
-    0, 0, (1 * 2000) * (1.0 / (1 - 2000)) * 2, 0
-  ]);
-  gl.uniformMatrix4fv(matTranslate, false, [
-    1, 0, 0, 0,
-    0, 1, 0, 0,
-    0, 0, 1, 0,
-    sldrTranslateX.value, sldrTranslateY.value, sldrTranslateZ.value, 1
-  ]);
-  gl.uniformMatrix4fv(matRotateX, false, [
-    1, 0, 0, 0,
-    0, Math.cos(sldrRotateX.value * Math.PI / 180), -Math.sin(sldrRotateX.value * Math.PI / 180), 0,
-    0, Math.sin(sldrRotateX.value * Math.PI / 180), Math.cos(sldrRotateX.value * Math.PI / 180), 0,
-    0, 0, 0, 1
-  ]);
-  gl.uniformMatrix4fv(matRotateY, false, [
-    Math.cos(sldrRotateY.value * Math.PI / 180), 0, Math.sin(sldrRotateY.value * Math.PI / 180), 0,
-    0, 1, 0, 0,
-    -Math.sin(sldrRotateY.value * Math.PI / 180), 0, Math.cos(sldrRotateY.value * Math.PI / 180), 0,
-    0, 0, 0, 1
-  ]);
-  gl.uniformMatrix4fv(matRotateZ, false, [
-    Math.cos(sldrRotateZ.value * Math.PI / 180), -Math.sin(sldrRotateZ.value * Math.PI / 180), 0, 0,
-    Math.sin(sldrRotateZ.value * Math.PI / 180), Math.cos(sldrRotateZ.value * Math.PI / 180), 0, 0,
-    0, 0, 1, 0,
-    0, 0, 0, 1
-  ]);
-  gl.uniformMatrix4fv(matScale, false, [
-    sldrScaleX.value, 0, 0, 0,
-    0, sldrScaleY.value, 0, 0,
-    0, 0, sldrScaleZ.value, 0,
-    0, 0, 0, 1
-  ]);
+  GLBoiler.setMatrix(gl, 'perspective', matPerspective, [canvas, perspective, 1, 2000]);
+
+  GLBoiler.setMatrix(gl, 'translate', matTranslate, Object.values(controls.state.tran));
+
+  GLBoiler.setMatrix(gl, 'rotateX', matRotateX, [controls.state.rot.x]);
+  GLBoiler.setMatrix(gl, 'rotateY', matRotateY, [controls.state.rot.y]);
+  GLBoiler.setMatrix(gl, 'rotateZ', matRotateZ, [controls.state.rot.z]);
+
+  GLBoiler.setMatrix(gl, 'scale', matScale, Object.values(controls.state.scale));
+
   //primitiveType, offsetExecute, count
   gl.drawArrays(gl.TRIANGLES, 0, 36);
 }
