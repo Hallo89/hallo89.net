@@ -60,7 +60,6 @@ const sldrScaleY = new Slider89(inputs, {
   caption: 'Scale: Y-axis'
 });
 const sldrScaleZ = new Slider89(inputs, {
-  value: -1,
   caption: 'Scale: Z-axis'
 });
 
@@ -142,46 +141,46 @@ gl.bindBuffer(gl.ARRAY_BUFFER, bufferPosition);
 const positions = new Float32Array([
   //back
      0,    0, -300,
-  -300, -300, -300,
      0, -300, -300,
-     0,    0, -300,
-  -300,    0, -300,
   -300, -300, -300,
+     0,    0, -300,
+  -300, -300, -300,
+  -300,    0, -300,
   //left
      0,    0,    0,
-     0,    0, -300,
      0, -300,    0,
      0,    0, -300,
+     0,    0, -300,
+     0, -300,    0,
      0, -300, -300,
-     0, -300,    0,
   //bottom
      0, -300,    0,
-     0, -300, -300,
-  -300, -300,    0,
   -300, -300,    0,
      0, -300, -300,
+  -300, -300,    0,
   -300, -300, -300,
+     0, -300, -300,
   //right
   -300,    0,    0,
-  -300, -300,    0,
   -300,    0, -300,
   -300, -300,    0,
+  -300, -300,    0,
+  -300,    0, -300,
   -300, -300, -300,
-  -300,    0, -300,
   //top
     0,     0,    0,
+  -300,    0, -300,
   -300,    0,    0,
-  -300,    0, -300,
      0,    0,    0,
-  -300,    0, -300,
      0,    0, -300,
+  -300,    0, -300,
   //front
      0,    0,    0,
+  -300, -300,    0,
      0, -300,    0,
-  -300, -300,    0,
      0,    0,    0,
+  -300,    0,    0,
   -300, -300,    0,
-  -300,    0,    0
 ]);
 //Writing data into that buffer
 gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);
@@ -197,33 +196,33 @@ const colors = new Float32Array([
   20/255, 65/255, 90/255,
   20/255, 65/255, 90/255,
   20/255, 50/255, 75/255,
-  20/255, 50/255, 75/255,
   20/255, 65/255, 90/255,
+  20/255, 50/255, 75/255,
 
   10/255, 100/255, 110/255,
-  10/255, 80/255, 90/255,
   10/255, 100/255, 110/255,
   10/255, 80/255, 90/255,
   10/255, 80/255, 90/255,
   10/255, 100/255, 110/255,
+  10/255, 80/255, 90/255,
 
+  80/255, 70/255, 110/255,
   80/255, 70/255, 110/255,
   60/255, 60/255, 95/255,
-  80/255, 70/255, 110/255,
   80/255, 70/255, 110/255,
   60/255, 60/255, 95/255,
   60/255, 60/255, 95/255,
 
   10/255, 100/255, 85/255,
-  10/255, 100/255, 85/255,
   10/255, 80/255, 70/255,
+  10/255, 100/255, 85/255,
   10/255, 100/255, 85/255,
   10/255, 80/255, 70/255,
   10/255, 80/255, 70/255,
 
-  70/255, 70/255, 115/255,
   70/255, 70/255, 115/255,
   50/255, 60/255, 100/255,
+  70/255, 70/255, 115/255,
   70/255, 70/255, 115/255,
   50/255, 60/255, 100/255,
   50/255, 60/255, 100/255,
@@ -232,8 +231,8 @@ const colors = new Float32Array([
   25/255, 80/255, 120/255,
   25/255, 80/255, 120/255,
   20/255, 70/255, 100/255,
-  25/255, 80/255, 120/255,
   20/255, 70/255, 100/255,
+  25/255, 80/255, 120/255,
 ]);
 gl.bufferData(gl.ARRAY_BUFFER, colors, gl.STATIC_DRAW);
 gl.enableVertexAttribArray(locationColor);
@@ -268,7 +267,7 @@ function wheel(e) {
     let distance = {
       x: current.x + direction * mod.scale,
       y: current.y + direction * mod.scale,
-      z: current.z - direction * mod.scale
+      z: current.z + direction * mod.scale
     };
     const step = {};
     for (const axis in distance) {
@@ -281,18 +280,11 @@ function wheel(e) {
 }
 function animateScale(distance, target, step, dir) {
   for (const axis in target) {
-    distance[axis] += (axis == 'z' ? -1 : 1) * step[axis];
-    if (dir > 0) {
-      if (axis == 'z') {
-        if (distance[axis] <= target[axis]) return;
-      } else
-        if (distance[axis] >= target[axis]) return;
-    } else {
-      if (axis == 'z') {
-        if (distance[axis] >= target[axis]) return;
-      } else
-        if (distance[axis] <= target[axis]) return;
-    }
+    distance[axis] += step[axis];
+    if (
+      dir > 0 && distance[axis] >= target[axis] ||
+      dir <= 0 && distance[axis] <= target[axis]
+    ) return;
   }
   if (distance.x) sldrScaleX.newValues({ value: distance.x });
   if (distance.y) sldrScaleY.newValues({ value: distance.y });
