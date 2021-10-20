@@ -1,7 +1,14 @@
 'use strict';
 var Controls3D = (function() {
+  let hasGamepad = false;
+  const gamepads = {};
+
   function Controls3D(canvas, drawFunction, skipEvents) {
     const that = this;
+
+    // persistant transform properties, here initial
+    const clickState = {};
+    let clickedBtn;
 
     that.drawFunction = drawFunction;
     that.animationID = {
@@ -10,14 +17,17 @@ var Controls3D = (function() {
       rot: null
     };
 
-    //persistant transform properties, here initial
-    const clickState = {};
-    let clickedBtn;
+    that.joystickThreshold = .14;
 
     that.mod = {
       scale: .224,
       tran: .025,
       rot: .44
+    };
+    that.gamepadMod = {
+      scale: .015,
+      tran: .25,
+      rot: .75
     };
 
     that.state = {
@@ -45,8 +55,74 @@ var Controls3D = (function() {
       canvas.addEventListener('mousedown', mouseDown);
       window.addEventListener('mouseup', removeMouseMove);
       canvas.addEventListener('wheel', wheel); //TODO: support for mousewheel
+
+      window.addEventListener('gamepadconnected', gamepadConnected.bind(that));
+      window.addEventListener('gamepaddisconnected', gamepadDisconnected.bind(that));
     }
 
+
+    // ---- GamepadEvent functions ----
+    function gamepadConnected(e) {
+      gamepads[e.gamepad.index] = e.gamepad;
+      hasGamepad = true;
+      gamepadLoop();
+    }
+    function gamepadDisconnected(e) {
+      delete gamepads[e.gamepad.index];
+      if (Object.keys(gamepads).length == 0) {
+        hasGamepad = false;
+      }
+    }
+
+    function gamepadLoop() {
+      for (const gamepadIndex in gamepads) {
+        const gamepad = gamepads[gamepadIndex];
+
+        // Scale, LB/RB
+        if (gamepad.buttons[4].pressed || gamepad.buttons[5].pressed) {
+          const direction = gamepad.buttons[5].value || -gamepad.buttons[4].value;
+          if (direction) {
+            that.animateProperty('scale', ['x', 'y', 'z'], direction * that.gamepadMod.scale, 35);
+          }
+        }
+
+        // Translate, left joystick
+        handleJoystick([gamepad.axes[0], -gamepad.axes[1]], gamepad.buttons[10], 'tran');
+
+        // Rotate, right joystick
+        handleJoystick([gamepad.axes[3], gamepad.axes[2]], gamepad.buttons[11], 'rot');
+      }
+
+      if (hasGamepad) {
+        requestAnimationFrame(gamepadLoop);
+      }
+    }
+
+    function handleJoystick(axes, resetButton, action) {
+      let hasNewState = false;
+      const newState = {};
+      newState[action] = {};
+
+      if (axes[0] > that.joystickThreshold || axes[0] < -that.joystickThreshold) {
+        hasNewState = true;
+        newState[action].x = (axes[0] * that.gamepadMod[action]) + that.state[action].x;
+      }
+      if (axes[1] > that.joystickThreshold || axes[1] < -that.joystickThreshold) {
+        hasNewState = true;
+        newState[action].y = (axes[1] * that.gamepadMod[action]) + that.state[action].y;
+      }
+
+      if (hasNewState) {
+        that.assignNewStateAndDraw(newState);
+      }
+
+      // Reset distance when right joystick is pressed
+      if (resetButton.pressed) {
+        newState[action].x = 0;
+        newState[action].y = 0;
+        that.assignNewStateAndDraw(newState);
+      }
+    }
 
     // ---- MouseEvent functions ----
     async function wheel(e) {
