@@ -1,6 +1,6 @@
 (function() {
-  const canvas = document.getElementsByTagName('canvas')[0];
-  if (!canvas.getContext('webgl2') && !canvas.getContext('experimental-webgl2')) {
+  const testCanvas = document.createElement('canvas');
+  if (!testCanvas.getContext('webgl2') && !testCanvas.getContext('experimental-webgl2')) {
     const prompt = (function() {
       const alert = document.createElement('div');
       const alertCaption = document.createElement('h1');
