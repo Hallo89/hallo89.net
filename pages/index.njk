@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    {% include 'templates/common-head.njk' %}
+    {% include 'pages/templates/common-head.njk' %}
     <link rel="stylesheet" href="/style/global.css">
     <link rel="stylesheet" href="/style/main.css">
     <script>
@@ -37,14 +37,14 @@
           document.write(randomSubheader[Math.floor(randomSubheader.length*Math.random())]);
         </script>
       </em>
-      {% include 'templates/mode-switch.njk' %}
+      {% include 'pages/templates/mode-switch.njk' %}
     </header>
 
     <nav id="gbl-box-menu" class="landing-animation-box">
-      {% include 'templates/box-list.njk' %}
+      {% include 'pages/templates/box-list.njk' %}
     </nav>
 
-    {% include "templates/footer.njk" %}
+    {% include "pages/templates/footer.njk" %}
 
     <script>
       const boxMenu = document.getElementById('gbl-box-menu');

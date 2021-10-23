@@ -18,7 +18,7 @@ const staticExclusions = [
 ];
 
 const app = express();
-const njk = nunjucks.configure('pages', {
+const njk = nunjucks.configure('', {
   express: app
 });
 
@@ -117,7 +117,7 @@ app.listen(8000, function() {
 });
 
 app.set('view engine', 'njk');
-app.set('views', __dirname + '/pages');
+app.set('views', __dirname);
 app.set('strict routing', false);
 
 app.use('/style', express.static('source/style/css'));
@@ -155,7 +155,7 @@ function getNJK(viewPath, customParams, fileName = viewPath) {
   }
 
   app.get('/' + viewPath, function(req, res) {
-    res.render(fileName, renderParams);
+    res.render('pages/' + fileName, renderParams);
   });
 }
 
