@@ -1,18 +1,9 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    {% include 'pages/templates/common-head.njk' %}
-    <style>
-      #gbl-box-menu {
-        background: linear-gradient(to bottom right, #1F6C6B, #664D6E);
-      }
-    </style>
-  </head>
-  <body class="info_mode">
-    <div id="gbl-box-menu">
-      {% include 'pages/templates/box-list.njk' %}
-    </div>
+{% extends 'pages/templates/page-overview.njk' %}
 
-    {% include "pages/templates/footer.njk" %}
-  </body>
-</html>
+{% block head %}
+  <style>
+    #gbl-box-menu {
+      background: linear-gradient(to bottom right, #1F6C6B, #664D6E);
+    }
+  </style>
+{% endblock %}

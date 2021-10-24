@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    {% include 'pages/templates/common-head.njk' %}
+    {%- block head %}{% endblock %}
+  </head>
+  <body>
+    <div id="gbl-box-menu">
+      {% include 'pages/templates/box-list.njk' %}
+    </div>
+
+    {% include "pages/templates/footer.njk" %}
+  </body>
+</html>
