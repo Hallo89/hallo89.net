@@ -122,7 +122,7 @@ No necessity to write this in here but Less is awesome!
     .box-animation-loop();
     // NOTE: when changing these animation timings,
     // BOX_LANDING_ANIMATION_DURATION in index.njk must be adjusted too
-    .box-animation-loop(@amount: 5, @duration: .42s, @it: 1) when (@it <= @amount) {
+    .box-animation-loop(@amount: 6, @duration: .42s, @it: 1) when (@it <= @amount) {
       &:nth-child(@{it}) {
         animation: @duration shiftinBox cubic-bezier(.285, .05, .5, 1);
       }
