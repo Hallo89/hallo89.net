@@ -28,13 +28,20 @@ children:
         title: Matrices & 3D - WebGL Experiments
         image: matrices3D.png
         description: A study of 3D perspective and matrices – Translations, rotations, scaling, fov, ...
-  https://minecraft.curseforge.com/projects/dandelion-with-mods:
-    name: Dandelion With Mods
-    image: dandelion-with-mods.jpg
-    footerHidden: true
-    description: |-
-      A minecraft resource pack built on top of the original pack 'Dandelion', adding improved blocks & items, custom models and mod support!
-      Its development is currently halted.
+  games:
+    image: snake3D.png
+    isResponsive: true
+    components: true
+    description: A small assortment of games.
+    children:
+      snake2D:
+        name: Snake 2D
+        image: snake2D.png
+        description: A normal game of Snake (boring).
+      snake3D:
+        name: Snake 3D
+        image: snake3D.png
+        description: It's Snake... But only two axes would be boring.
   tools:
     isResponsive: true
     image: "linear-gradient(to bottom right, #1F6C6B, #664D6E)"
@@ -60,6 +67,13 @@ children:
         title: Spacy text generator - Tools
         image: "linear-gradient(to bottom right, #1B6E87, #614B69)"
         description: A tool to insert a custom character in between every letter of an input text.
+  https://minecraft.curseforge.com/projects/dandelion-with-mods:
+    name: Dandelion With Mods
+    image: dandelion-with-mods.jpg
+    footerHidden: true
+    description: |-
+      A minecraft resource pack built on top of the original pack 'Dandelion', adding improved blocks & items, custom models and mod support!
+      Its development is currently halted.
   slider89:
     hasLightMode: true
     isResponsive: true
