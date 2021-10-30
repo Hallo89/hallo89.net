@@ -1,3 +1,6 @@
+# https://github.com/hallo89/snake
+/snake
+
 # Yarn 2 (.yarn/cache not needed due to global caching)
 .yarn/unplugged
 .yarn/build-state.yml

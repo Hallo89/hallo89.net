@@ -133,6 +133,9 @@ fs.readdir('./source', (err, files) => {
   });
 });
 
+app.use('/js/snake', express.static('snake/script'));
+app.use('/style/snake', express.static('snake/style'));
+
 function getNJK(viewPath, customParams, fileName = viewPath) {
   let renderParams = {
     pagePath: viewPath,
@@ -160,15 +163,23 @@ function getNJK(viewPath, customParams, fileName = viewPath) {
 }
 
 getNJK('', false, 'index');
+
 getNJK('blog');
+
 getNJK('tools');
 getNJK('tools/3DMagic');
 getNJK('tools/RFG');
 getNJK('tools/mocking');
 getNJK('tools/spacing');
+
 getNJK('webgl');
 getNJK('webgl/triangles');
 getNJK('webgl/matrices3d');
+
+getNJK('games');
+getNJK('games/snake3D', false, '../snake/snake3D')
+getNJK('games/snake2D', false, '../snake/snake2D')
+
 getNJK('slider89', {
   data: slider89Data.docs,
   gitData: slider89Data.versions
