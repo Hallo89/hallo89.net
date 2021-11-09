@@ -144,7 +144,7 @@ html.light-mode .gbl-box {
   border-top-color: @gbl-box-border-top--lt;
   border-bottom-color: @gbl-box-border-bottom--lt;
   box-shadow: @GBL-BOX-NORMAL-SHADOW-BASE @gbl-box-shadow--lt;
-  &.gbl-backdrop {
+  &.gbl-backdrop:not(.gbl-backdrop-transparent) {
     background-color: @gbl-box-backdrop-image-bg--lt;
     .description {
       color: @main-color;

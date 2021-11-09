@@ -30,6 +30,7 @@ children:
         description: A study of 3D perspective and matrices – Translations, rotations, scaling, fov, ...
   games:
     image: snake3D.png
+    hasTransparentImage: true
     isResponsive: true
     components: true
     description: A small assortment of games.

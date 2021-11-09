@@ -618,10 +618,10 @@ html.light-mode .gbl-box {
   border-bottom-color: hsl(0, 0%, 73.5%);
   box-shadow: 0 2px 18px hsla(0, 0%, 50%, 0.285);
 }
-html.light-mode .gbl-box.gbl-backdrop {
+html.light-mode .gbl-box.gbl-backdrop:not(.gbl-backdrop-transparent) {
   background-color: hsl(0, 0%, 77.5%);
 }
-html.light-mode .gbl-box.gbl-backdrop .description {
+html.light-mode .gbl-box.gbl-backdrop:not(.gbl-backdrop-transparent) .description {
   color: hsl(0, 0%, 88%);
 }
 html.light-mode .gbl-box .heading .text,
