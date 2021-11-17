@@ -577,7 +577,7 @@ html.light-mode #footer a::before {
   margin: 0;
   z-index: 0;
   font-size: 0.925em;
-  border-top: 3px solid hsla(0, 0%, 13%, 0.675);
+  border-top: 3px solid hsla(0, 0%, 15.5%, 0.675);
   transition: background 0.15s linear, border 0.15s linear;
 }
 .gbl-box .quick-links .link {
@@ -591,12 +591,12 @@ html.light-mode #footer a::before {
   position: absolute;
   top: -3px;
   left: 0;
+  bottom: 0;
   width: 0;
-  height: 100%;
   opacity: 0;
   z-index: -1;
-  background-color: hsla(0, 0%, 7.5%, 0.225);
-  border-top-color: hsla(0, 0%, 15%, 0.25);
+  background-color: hsla(0, 0%, 6.5%, 0.275);
+  border-top-color: hsla(0, 0%, 18.5%, 0.275);
   border-radius: 1px;
   visibility: hidden;
   animation: linkShiftOut 0.1s ease;

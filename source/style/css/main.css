@@ -631,11 +631,14 @@ html.light-mode .gbl-box .quick-links {
   backdrop-filter: blur(8px);
 }
 html.light-mode .gbl-box .quick-links {
-  border-top-color: hsla(0, 0%, 97%, 0.7);
+  border-top-color: hsla(0, 0%, 94%, 0.7);
 }
 html.light-mode .gbl-box .quick-links .link::before {
-  background-color: hsla(0, 0%, 100%, 0.225);
-  border-top-color: hsla(0, 0%, 95%, 0.25);
+  background-color: hsla(0, 0%, 100%, 0.275);
+  border-top-color: hsla(0, 0%, 91%, 0.275);
+}
+html.light-mode .gbl-box.gbl-backdrop-transparent .quick-links .link::before {
+  background-color: hsla(0, 0%, 84%, 0.275);
 }
 html.light-mode .gbl-box:hover {
   box-shadow: 0 4px 22px hsla(0, 0%, 50%, 0.475);

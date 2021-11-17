@@ -159,11 +159,14 @@ html.light-mode .gbl-box {
   }
   .quick-links {
     border-top-color: @gbl-box-quicklinks-border-top--lt;
-    .link {
-      &::before {
-        background-color: @gbl-box-quicklinks-hover-background--lt;
-        border-top-color: @gbl-box-quicklinks-hover-border-top--lt;
-      }
+    .link::before {
+      background-color: @gbl-box-quicklinks-hover-background--lt;
+      border-top-color: @gbl-box-quicklinks-hover-border-top--lt;
+    }
+  }
+  &.gbl-backdrop-transparent .quick-links {
+    .link::before {
+      background-color: @gbl-box-quicklinks-hover-background-transparent--lt;
     }
   }
 
