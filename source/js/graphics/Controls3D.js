@@ -128,9 +128,9 @@ var Controls3D = (function() {
     async function wheel(e) {
       if (e.ctrlKey) e.preventDefault();
       if (e.deltaY) {
-        const direction = -1 * (e.deltaY / Math.abs(e.deltaY)); //either 1 or -1
-        let usedAxes
+        const direction = -1 * (e.deltaY / Math.abs(e.deltaY)); // either 1 or -1
 
+        let usedAxes;
         if (e.ctrlKey && e.shiftKey)
           usedAxes = ['z'];
         else if (e.ctrlKey)
@@ -140,7 +140,12 @@ var Controls3D = (function() {
         else
           usedAxes = ['x', 'y', 'z'];
 
-        await that.animateProperty('scale', usedAxes, direction * that.mod.scale, 45);
+        const axesAmounts = {};
+        for (const axis of usedAxes) {
+          axesAmounts[axis] = direction * that.mod.scale;
+        }
+
+        await that.animateProperty('scale', 45, axesAmounts);
       }
     }
 
@@ -186,7 +191,7 @@ var Controls3D = (function() {
   }
 
   // ---- Prototype functions ----
-  Controls3D.prototype.animateProperty = function(property, axesArr, totalAmount, duration, drawCallback) {
+  Controls3D.prototype.animateProperty = function(property, duration, drawCallback, axesAmounts) {
     const that = this;
     return new Promise(resolve => {
       let startTime;
@@ -205,13 +210,17 @@ var Controls3D = (function() {
         }
         const totalElapsed = now - startTime;
         const stepElapsed = now - prevTime;
-        const cycleAmount = (stepElapsed / duration) * totalAmount;
+        let hasChanged = false;
 
-        if (cycleAmount) {
-          for (const axis of axesArr) {
-            that.state[property][axis] += cycleAmount;
+        for (const axis in axesAmounts) {
+          const stepAmount = (stepElapsed / duration) * axesAmounts[axis];
+          if (stepAmount) {
+            that.state[property][axis] += stepAmount;
+            hasChanged = true;
           }
+        }
 
+        if (hasChanged) {
           if (drawCallback) {
             drawCallback();
           } else {
