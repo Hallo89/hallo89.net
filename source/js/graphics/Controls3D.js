@@ -12,9 +12,9 @@ var Controls3D = (function() {
 
     that.drawFunction = drawFunction;
     that.animationID = {
-      scale: null,
-      tran: null,
-      rot: null
+      scale: -1,
+      tran: -1,
+      rot: -1
     };
 
     that.joystickThreshold = .14;
@@ -191,36 +191,38 @@ var Controls3D = (function() {
   }
 
   // ---- Prototype functions ----
-  Controls3D.prototype.animateProperty = function(property, duration, drawCallback, axesAmounts) {
+  Controls3D.prototype.animateProperty = function(property, duration, axesAmounts, drawCallback) {
     const that = this;
     return new Promise(resolve => {
+      let currentAnimationID = Infinity;
       let startTime;
-      let prevTime;
+      let initialAmounts;
 
       requestAnimationFrame(step);
 
       function step(now) {
+        // The first frame is empty to start the timings
         if (startTime == null) {
           startTime = now;
-          prevTime = now;
-        } else if (that.animationID[property] != null) {
-          // Cancelling other frames after the first frame for a smooth continous scroll
-          cancelAnimationFrame(that.animationID[property]);
-          that.animationID[property] = null;
+        } else if (currentAnimationID === Infinity) {
+          // This is always the second frame
+          currentAnimationID = ++that.animationID[property];
+          initialAmounts = Object.assign({}, that.state[property]);
+        } else if (currentAnimationID < that.animationID[property]) {
+          // Abort if another animation on the current property has started
+          // and has reached the second frame
+          return;
         }
         const totalElapsed = now - startTime;
-        const stepElapsed = now - prevTime;
-        let hasChanged = false;
 
-        for (const axis in axesAmounts) {
-          const stepAmount = (stepElapsed / duration) * axesAmounts[axis];
-          if (stepAmount) {
-            that.state[property][axis] += stepAmount;
-            hasChanged = true;
+        if (initialAmounts) {
+          for (const axis in axesAmounts) {
+            const stepAmount = (totalElapsed / duration) * axesAmounts[axis];
+            if (stepAmount) {
+              that.state[property][axis] = initialAmounts[axis] + stepAmount;
+            }
           }
-        }
 
-        if (hasChanged) {
           if (drawCallback) {
             drawCallback();
           } else {
@@ -229,8 +231,7 @@ var Controls3D = (function() {
         }
 
         if (totalElapsed < duration) {
-          prevTime = now;
-          that.animationID[property] = requestAnimationFrame(step);
+          requestAnimationFrame(step);
         } else {
           resolve();
         }
