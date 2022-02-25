@@ -190,8 +190,32 @@ var Controls3D = (function() {
     }
   }
 
+  // ---- Statics ----
+  // Mostly taken from https://easings.net/
+  Controls3D.Easing = {
+    LINEAR: x => x,
+
+    EASE_IN_SINE: x => 1 - Math.cos((x * Math.PI) / 2),
+    EASE_IN_QUAD: x => x * x,
+    EASE_IN_CUBIC: x => x * x * x,
+
+    EASE_OUT_SINE: x => Math.sin((x * Math.PI) / 2),
+    EASE_OUT_QUAD: x => 1 - (1 - x) * (1 - x),
+    EASE_OUT_CUBIC: x => 1 - Math.pow(1 - x, 3),
+
+    EASE_IN_OUT_SINE: x => -(Math.cos(Math.PI * x) - 1) / 2,
+    EASE_IN_OUT_QUAD: x => x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2,
+    EASE_IN_OUT_CUBIC: x => x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2,
+
+    EASE: x => {
+      return x < 0.2059
+        ? (5.2 * Math.pow(x, 1.8))
+        : (1 - 1.3 * Math.pow(1 - x, 2.7));
+    },
+  };
+
   // ---- Prototype functions ----
-  Controls3D.prototype.animateProperty = function(property, duration, axesAmounts, drawCallback) {
+  Controls3D.prototype.animateProperty = function(property, duration, axesAmounts, drawCallback, easingFn = Controls3D.Easing.LINEAR) {
     const that = this;
     return new Promise(resolve => {
       let currentAnimationID = Infinity;
@@ -217,7 +241,7 @@ var Controls3D = (function() {
 
         if (initialAmounts) {
           for (const axis in axesAmounts) {
-            const stepAmount = (totalElapsed / duration) * axesAmounts[axis];
+            const stepAmount = easingFn(totalElapsed / duration) * axesAmounts[axis];
             if (stepAmount) {
               that.state[property][axis] = initialAmounts[axis] + stepAmount;
             }
