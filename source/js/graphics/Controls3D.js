@@ -215,7 +215,7 @@ var Controls3D = (function() {
   };
 
   // ---- Prototype functions ----
-  Controls3D.prototype.animateProperty = function(property, duration, axesAmounts, drawCallback, easingFn = Controls3D.Easing.LINEAR) {
+  Controls3D.prototype.animateProperty = function(property, duration, axesAmounts, drawCallback = this.drawFunction, easingFn = Controls3D.Easing.LINEAR) {
     const that = this;
     return new Promise(resolve => {
       let currentAnimationID = Infinity;
@@ -247,11 +247,7 @@ var Controls3D = (function() {
             }
           }
 
-          if (drawCallback) {
-            drawCallback();
-          } else {
-            that.drawFunction();
-          }
+          drawCallback();
         }
 
         if (totalElapsed < duration) {
