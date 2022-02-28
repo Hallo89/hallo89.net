@@ -16,6 +16,11 @@ var Controls3D = (function() {
       tran: -1,
       rot: -1
     };
+    that.animationInitial = {
+      scale: null,
+      tran: null,
+      rot: null
+    };
 
     that.joystickThreshold = .14;
 
@@ -145,7 +150,7 @@ var Controls3D = (function() {
           axesAmounts[axis] = direction * that.mod.scale;
         }
 
-        await that.animateProperty('scale', 45, axesAmounts);
+        await that.animateProperty('scale', 45, axesAmounts, undefined, undefined, true);
       }
     }
 
@@ -215,12 +220,17 @@ var Controls3D = (function() {
   };
 
   // ---- Prototype functions ----
-  Controls3D.prototype.animateProperty = function(property, duration, axesAmounts, drawCallback = this.drawFunction, easingFn = Controls3D.Easing.LINEAR) {
+  Controls3D.prototype.animateProperty = function(
+    property, duration, axesAmounts, drawCallback = this.drawFunction, easingFn = Controls3D.Easing.LINEAR, allowStacking
+  ) {
     const that = this;
     return new Promise(resolve => {
       let currentAnimationID = Infinity;
       let startTime;
-      let initialAmounts;
+
+      if (!allowStacking && that.animationID[property] === -1) {
+        that.animationInitial[property] = Object.assign({}, that.state[property]);
+      }
 
       requestAnimationFrame(step);
 
@@ -230,20 +240,22 @@ var Controls3D = (function() {
           startTime = now;
         } else if (currentAnimationID === Infinity) {
           // This is always the second frame
+          // If stacking – as seen on scroll – is used, continuously advance the initial state
+          if (allowStacking) {
+            that.animationInitial[property] = Object.assign({}, that.state[property]);
+          }
           currentAnimationID = ++that.animationID[property];
-          initialAmounts = Object.assign({}, that.state[property]);
         } else if (currentAnimationID < that.animationID[property]) {
-          // Abort if another animation on the current property has started
-          // and has reached the second frame
+          // Abort if another animation on the current property has started and has reached the second frame
           return;
         }
         const totalElapsed = now - startTime;
 
-        if (initialAmounts) {
+        if (totalElapsed !== 0) {
           for (const axis in axesAmounts) {
             const stepAmount = easingFn(totalElapsed / duration) * axesAmounts[axis];
             if (stepAmount) {
-              that.state[property][axis] = initialAmounts[axis] + stepAmount;
+              that.state[property][axis] = that.animationInitial[property][axis] + stepAmount;
             }
           }
 
@@ -253,6 +265,7 @@ var Controls3D = (function() {
         if (totalElapsed < duration) {
           requestAnimationFrame(step);
         } else {
+          that.animationID[property] = -1;
           resolve();
         }
       }
