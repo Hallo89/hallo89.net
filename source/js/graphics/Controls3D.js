@@ -253,10 +253,8 @@ var Controls3D = (function() {
 
         if (totalElapsed !== 0) {
           for (const axis in axesAmounts) {
-            const stepAmount = easingFn(totalElapsed / duration) * axesAmounts[axis];
-            if (stepAmount) {
-              that.state[property][axis] = that.animationInitial[property][axis] + stepAmount;
-            }
+            const stepModifier = (totalElapsed >= duration ? 1 : easingFn(totalElapsed / duration));
+            that.state[property][axis] = that.animationInitial[property][axis] + (stepModifier * axesAmounts[axis]);
           }
 
           drawCallback();
