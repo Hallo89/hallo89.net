@@ -87,7 +87,7 @@ var Controls3D = (function() {
         if (gamepad.buttons[4].pressed || gamepad.buttons[5].pressed) {
           const direction = gamepad.buttons[5].value || -gamepad.buttons[4].value;
           if (direction) {
-            that.animateProperty('scale', ['x', 'y', 'z'], direction * that.gamepadMod.scale, 35);
+            that.animateStates('scale', ['x', 'y', 'z'], direction * that.gamepadMod.scale, 35);
           }
         }
 
@@ -150,7 +150,7 @@ var Controls3D = (function() {
           axesAmounts[axis] = direction * that.mod.scale;
         }
 
-        await that.animateProperty('scale', 45, axesAmounts, undefined, undefined, true);
+        await that.animateStates(45, { scale: axesAmounts }, undefined, undefined, true);
       }
     }
 
@@ -220,16 +220,21 @@ var Controls3D = (function() {
   };
 
   // ---- Prototype functions ----
-  Controls3D.prototype.animateProperty = function(
-    property, duration, axesAmounts, drawCallback = this.drawFunction, easingFn = Controls3D.Easing.LINEAR, allowStacking
+  Controls3D.prototype.animateStates = function(
+    duration, statesAmounts, drawCallback = this.drawFunction, easingFn = Controls3D.Easing.LINEAR, allowStacking
   ) {
     const that = this;
     return new Promise(resolve => {
+      const usedStateNames = Object.keys(statesAmounts);
       let currentAnimationID = Infinity;
       let startTime;
 
-      if (!allowStacking && that.animationID[property] === -1) {
-        that.animationInitial[property] = Object.assign({}, that.state[property]);
+      if (!allowStacking && usedStateNames.every(key => that.animationID[key] === -1)) {
+        for (const stateName in that.state) {
+          if (that.animationID[stateName] === -1) {
+            updateInitialState(stateName);
+          }
+        }
       }
 
       requestAnimationFrame(step);
@@ -240,21 +245,28 @@ var Controls3D = (function() {
           startTime = now;
         } else if (currentAnimationID === Infinity) {
           // This is always the second frame
-          // If stacking – as seen on scroll – is used, continuously advance the initial state
-          if (allowStacking) {
-            that.animationInitial[property] = Object.assign({}, that.state[property]);
+          currentAnimationID = 1 +
+            usedStateNames.reduce((acc, curr) => Math.max(acc, that.animationID[curr]), -1);
+          for (const stateName of usedStateNames) {
+            // If stacking – as seen on scroll – is used, continuously advance the initial state
+            if (allowStacking) {
+              updateInitialState(stateName);
+            }
+            that.animationID[stateName] = currentAnimationID;
           }
-          currentAnimationID = ++that.animationID[property];
-        } else if (currentAnimationID < that.animationID[property]) {
+        } else if (usedStateNames.some(key => currentAnimationID < that.animationID[key])) {
           // Abort if another animation on the current property has started and has reached the second frame
           return;
         }
         const totalElapsed = now - startTime;
 
         if (totalElapsed !== 0) {
-          for (const axis in axesAmounts) {
-            const stepModifier = (totalElapsed >= duration ? 1 : easingFn(totalElapsed / duration));
-            that.state[property][axis] = that.animationInitial[property][axis] + (stepModifier * axesAmounts[axis]);
+          for (const stateName of usedStateNames) {
+            const axesAmounts = statesAmounts[stateName];
+            for (const axis in axesAmounts) {
+              const stepModifier = (totalElapsed >= duration ? 1 : easingFn(totalElapsed / duration));
+              that.state[stateName][axis] = that.animationInitial[stateName][axis] + stepModifier * axesAmounts[axis];
+            }
           }
 
           drawCallback();
@@ -263,11 +275,17 @@ var Controls3D = (function() {
         if (totalElapsed < duration) {
           requestAnimationFrame(step);
         } else {
-          that.animationID[property] = -1;
+          for (const stateName of usedStateNames) {
+            that.animationID[stateName] = -1;
+          }
           resolve();
         }
       }
     });
+
+    function updateInitialState(stateName) {
+      that.animationInitial[stateName] = Object.assign({}, that.state[stateName]);
+    }
   }
 
   Controls3D.prototype.assignNewStateAndDraw = function(newState) {
