@@ -87,7 +87,13 @@ var Controls3D = (function() {
         if (gamepad.buttons[4].pressed || gamepad.buttons[5].pressed) {
           const direction = gamepad.buttons[5].value || -gamepad.buttons[4].value;
           if (direction) {
-            that.animateStates('scale', ['x', 'y', 'z'], direction * that.gamepadMod.scale, 35);
+            that.animateStates(35, {
+              scale: {
+                x: direction * that.gamepadMod.scale,
+                y: direction * that.gamepadMod.scale,
+                z: direction * that.gamepadMod.scale
+              }
+            }, undefined, undefined, true);
           }
         }
 
