@@ -57,8 +57,8 @@ var Controls3D = (function() {
       e.preventDefault();
     });
     if (!skipEvents) {
-      canvas.addEventListener('mousedown', mouseDown);
-      window.addEventListener('mouseup', removeMouseMove);
+      canvas.addEventListener('pointerdown', mouseDown);
+      window.addEventListener('pointerup', removeMouseMove);
       canvas.addEventListener('wheel', wheel); //TODO: support for mousewheel
 
       window.addEventListener('gamepadconnected', gamepadConnected.bind(that));
@@ -194,10 +194,10 @@ var Controls3D = (function() {
       clickState.y = e.screenY;
       clickState.tran = Object.assign({}, that.state.tran);
       clickState.rot = Object.assign({}, that.state.rot);
-      window.addEventListener('mousemove', mouseMove);
+      window.addEventListener('pointermove', mouseMove);
     }
     function removeMouseMove() {
-      window.removeEventListener('mousemove', mouseMove);
+      window.removeEventListener('pointermove', mouseMove);
     }
   }
 
@@ -226,6 +226,28 @@ var Controls3D = (function() {
   };
 
   // ---- Prototype functions ----
+  Controls3D.prototype.animateStatesSteps = function(duration, animationSteps, ...args) {
+    animationSteps = Object.entries(animationSteps)
+      .map(val => {
+        val[0] = (Number(val[0]) / 100) * duration;
+        return val;
+      })
+      .sort((val1, val2) => val1[0] > val2[0]);
+
+    return new Promise(async resolve => {
+      let prevStepTime = 0;
+
+      for (const step of animationSteps) {
+        const stepDuration = step[0] - prevStepTime;
+        prevStepTime = step[0];
+
+        await this.animateStates(stepDuration, step[1], ...args);
+      }
+
+      resolve();
+    });
+  };
+
   Controls3D.prototype.animateStates = function(
     duration, statesAmounts, drawCallback = this.drawFunction, easingFn = Controls3D.Easing.LINEAR, allowStacking
   ) {
