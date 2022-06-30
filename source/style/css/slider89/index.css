@@ -609,7 +609,7 @@ html.light-mode .code-copy-wrapper .copy-btn .checkbox .mark {
   padding-left: 1.5em;
 }
 .version-select .description .changelog a code {
-  padding-bottom: 1px;
+  padding-bottom: 0;
 }
 .version-select .description code,
 .version-select .description .codeblock {
