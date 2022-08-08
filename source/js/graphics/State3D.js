@@ -15,26 +15,28 @@ class State3D {
   };
 
   // State
-  state = {
-    scale: {
-      x: 1,
-      y: 1,
-      z: 1
-    },
-    tran: {
-      x: 0,
-      y: 0,
-      z: 0
-    },
-    rot: {
-      x: 0,
-      y: 0,
-      z: 0 //not implemented yet
-    }
-  };
+  state = {};
 
-  constructor(drawFunction) {
+  constructor(drawFunction, initialState) {
     this.drawFunction = drawFunction;
+
+    this.state = initialState || {
+      scale: {
+        x: 0,
+        y: 0,
+        z: 0
+      },
+      tran: {
+        x: 0,
+        y: 0,
+        z: 0
+      },
+      rot: {
+        x: 0,
+        y: 0,
+        z: 0
+      }
+    };
   }
 
   // ---- Animation ----
