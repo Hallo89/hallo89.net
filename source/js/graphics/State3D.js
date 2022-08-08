@@ -133,12 +133,14 @@ class State3D {
   assignNewStateAndDraw(newState) {
     this.assignNewState(newState);
     this.drawFunction();
+    return this;
   }
 
   assignNewState(newState) {
     for (const action in newState) {
       Object.assign(this.state[action], newState[action]);
     }
+    return this;
   }
 
   // ---- Statics ----
