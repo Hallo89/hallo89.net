@@ -23,6 +23,7 @@ class Controls3D extends State3D {
 
   constructor(canvas, drawFunction, skipEvents) {
     super(drawFunction);
+    this.assignNewState({ scale: { x: 1, y: 1, z: 1 } });
 
     canvas.addEventListener('contextmenu', e => {
       e.preventDefault();
