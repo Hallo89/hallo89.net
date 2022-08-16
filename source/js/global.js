@@ -45,6 +45,7 @@ function hideCookieBanner() {
       cookieBannerNode.classList.add('removing3');
       setTimeout(function() {
         cookieBannerNode.classList.add('gone');
+        document.body.removeChild(cookieBannerNode);
       }, 200);
     }, 100);
   }, 340);
