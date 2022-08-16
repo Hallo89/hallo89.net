@@ -1,11 +1,11 @@
-const hasAcceptedCookies = getCookie('acceptedCookies');
+const hasAcceptedBanner = localStorage.getItem('Global_acceptedBanner');
 const cookieBannerNode = (function() {
   const node = document.createElement('div');
   node.innerHTML =
     '<aside id="cookiebanner">' +
       '<span class="background"></span>' +
       '<div class="description">' +
-        'This site uses cookies by Cloudflare and this very banner. By continuing to use it, you agree to them.' +
+        'This site runs on Cloudflare. It does NOT use any kind of tracking or cookies – preferences are only stored locally in localStorage.' +
       '</div>' +
       '<button type="button" onclick="hideCookieBanner()">Alrighty!</button>' +
     '</aside>';
@@ -26,16 +26,16 @@ window.addEventListener('load', function() {
     }
   }
 
-  // Add the cookie banner if cookies haven't been accepted
-  if (hasAcceptedCookies !== 'true') {
+  // Add the cookie banner if banner hasn't been accepted
+  if (hasAcceptedBanner !== 'true') {
     document.body.insertBefore(cookieBannerNode, document.body.children[0]);
   }
-});
 
-function getCookie(name) {
-  const list = document.cookie.match('(?:;\\s*|^)' + name + '=(.+?)(?:;|$)');
-  return list != null ? list[1] : null;
-}
+  // NOTE This deletes potential cookies after the switch to LocalStorage (16/08/2022)
+  // Remove this at some point
+  document.cookie = 'acceptedCookies=; path=/; secure; SameSite=strict; expires=Thu, 01 Jan 1970 00:00:01 GMT';
+  document.cookie = 'theme=; path=/; secure; SameSite=strict; expires=Thu, 01 Jan 1970 00:00:01 GMT';
+});
 
 function hideCookieBanner() {
   cookieBannerNode.classList.add('removing');
@@ -50,7 +50,7 @@ function hideCookieBanner() {
     }, 100);
   }, 340);
 
-  document.cookie = 'acceptedCookies=true; path=/; secure; SameSite=strict';
-
   this.removeEventListener('click', hideCookieBanner);
+
+  localStorage.setItem('Global_acceptedBanner', 'true');
 }

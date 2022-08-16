@@ -1,30 +1,28 @@
 window.addEventListener('load', function() {
-  if (hasAcceptedCookies != 'true') {
-    cookieBannerNode.children[1].textContent =
-      'This site uses cookies by Cloudflare, this banner and to save your preferenced theme color. By continuing to use it, you agree to them.';
-    cookieBannerNode.children[2].addEventListener('click', handleThemes);
+  if (hasAcceptedBanner !== 'true') {
+    cookieBannerNode.children[2].addEventListener('click', cookieBannerClickSetTheme);
   }
   document.querySelector('#modes button.mode-switch').addEventListener('click', function() {
     toggleTheme();
   });
 });
 
-//Set the theme according to the cookie 'theme' on startup (but only if cookies have been accepted)
+// Set the theme according to the cookie 'theme' on startup (but only if cookies have been accepted)
 (function() {
-  const preferredTheme = getCookie('theme');
-  if (preferredTheme && hasAcceptedCookies === 'true') {
+  const preferredTheme = localStorage.getItem('Global_theme');
+  if (preferredTheme && hasAcceptedBanner === 'true') {
     toggleTheme(preferredTheme);
   }
 })();
 
-function handleThemes() {
-  const preferredTheme = getCookie('theme');
+function cookieBannerClickSetTheme() {
+  const preferredTheme = localStorage.getItem('Global_theme');
   if (!preferredTheme) {
-    setThemeCookie();
+    setLocalStorageTheme();
   } else {
     toggleTheme(preferredTheme);
   }
-  this.removeEventListener('click', handleThemes);
+  this.removeEventListener('click', cookieBannerClickSetTheme);
 }
 
 function toggleTheme(mode) {
@@ -39,12 +37,11 @@ function toggleTheme(mode) {
   } else {
     rootNode.classList.toggle('light-mode');
   }
-  if (getCookie('acceptedCookies') === 'true') {
-    setThemeCookie();
+  if (localStorage.getItem('Global_acceptedBanner') === 'true') {
+    setLocalStorageTheme();
   }
 }
 
-function setThemeCookie() {
-  document.cookie =
-    'theme=' + (document.documentElement.classList.contains('light-mode') ? 'light' : 'dark') + '; path=/; secure; SameSite=strict';
+function setLocalStorageTheme() {
+  localStorage.setItem('Global_theme', document.documentElement.classList.contains('light-mode') ? 'light' : 'dark');
 }
