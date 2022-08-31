@@ -63,7 +63,7 @@ class State3D {
   };
 
   animateStates(
-    duration, statesAmounts, drawCallback = this._drawFunction, easingFn = Controls3D.Easing.LINEAR, allowStacking
+    duration, statesAmounts, drawCallback = this._drawFunction, easingFn = State3D.Easing.LINEAR, allowStacking
   ) {
     const that = this;
 
