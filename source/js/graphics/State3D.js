@@ -1,14 +1,14 @@
 'use strict';
 class State3D {
-  drawFunction;
+  _drawFunction;
 
   // Animation helper properties
-  animationID = {
+  _animationID = {
     scale: -1,
     tran: -1,
     rot: -1
   };
-  animationInitial = {
+  _animationInitial = {
     scale: null,
     tran: null,
     rot: null
@@ -18,7 +18,7 @@ class State3D {
   state = {};
 
   constructor(drawFunction, initialState) {
-    this.drawFunction = drawFunction;
+    this._drawFunction = drawFunction;
 
     this.state = initialState || {
       scale: {
@@ -63,7 +63,7 @@ class State3D {
   };
 
   animateStates(
-    duration, statesAmounts, drawCallback = this.drawFunction, easingFn = Controls3D.Easing.LINEAR, allowStacking
+    duration, statesAmounts, drawCallback = this._drawFunction, easingFn = Controls3D.Easing.LINEAR, allowStacking
   ) {
     const that = this;
 
@@ -72,9 +72,9 @@ class State3D {
       let currentAnimationID = Infinity;
       let startTime;
 
-      if (!allowStacking && usedStateNames.every(key => that.animationID[key] === -1)) {
+      if (!allowStacking && usedStateNames.every(key => that._animationID[key] === -1)) {
         for (const stateName in that.state) {
-          if (that.animationID[stateName] === -1) {
+          if (that._animationID[stateName] === -1) {
             updateInitialState(stateName);
           }
         }
@@ -89,15 +89,15 @@ class State3D {
         } else if (currentAnimationID === Infinity) {
           // This is always the second frame
           currentAnimationID = 1 +
-            usedStateNames.reduce((acc, curr) => Math.max(acc, that.animationID[curr]), -1);
+            usedStateNames.reduce((acc, curr) => Math.max(acc, that._animationID[curr]), -1);
           for (const stateName of usedStateNames) {
             // If stacking – as seen on scroll – is used, continuously advance the initial state
             if (allowStacking) {
               updateInitialState(stateName);
             }
-            that.animationID[stateName] = currentAnimationID;
+            that._animationID[stateName] = currentAnimationID;
           }
-        } else if (usedStateNames.some(key => currentAnimationID < that.animationID[key])) {
+        } else if (usedStateNames.some(key => currentAnimationID < that._animationID[key])) {
           // Abort if another animation on the current property has started and has reached the second frame
           return;
         }
@@ -108,7 +108,7 @@ class State3D {
             const axesAmounts = statesAmounts[stateName];
             for (const axis in axesAmounts) {
               const stepModifier = (totalElapsed >= duration ? 1 : easingFn(totalElapsed / duration));
-              that.state[stateName][axis] = that.animationInitial[stateName][axis] + stepModifier * axesAmounts[axis];
+              that.state[stateName][axis] = that._animationInitial[stateName][axis] + stepModifier * axesAmounts[axis];
             }
           }
 
@@ -119,7 +119,7 @@ class State3D {
           requestAnimationFrame(step);
         } else {
           for (const stateName of usedStateNames) {
-            that.animationID[stateName] = -1;
+            that._animationID[stateName] = -1;
           }
           resolve();
         }
@@ -127,14 +127,14 @@ class State3D {
     });
 
     function updateInitialState(stateName) {
-      that.animationInitial[stateName] = Object.assign({}, that.state[stateName]);
+      that._animationInitial[stateName] = Object.assign({}, that.state[stateName]);
     }
   }
 
   // --- Helper functions ---
   assignNewStateAndDraw(newState) {
     this.assignNewState(newState);
-    this.drawFunction();
+    this._drawFunction();
     return this;
   }
 
