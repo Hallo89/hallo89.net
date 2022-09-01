@@ -1,5 +1,5 @@
 'use strict';
-class Controls3D extends State3D {
+class Controls3D {
   _hasGamepad = false;
   _gamepads = {};
 
@@ -21,9 +21,11 @@ class Controls3D extends State3D {
     rot: .75
   };
 
-  constructor(canvas, drawFunction, skipEvents) {
-    super(drawFunction);
-    this.assignNewState({ scale: { x: 1, y: 1, z: 1 } });
+  state;
+
+  constructor(canvas, initialState, skipEvents) {
+    this.state = initialState;
+    this.state.assignNewState({ scale: { x: 1, y: 1, z: 1 } });
 
     canvas.addEventListener('contextmenu', e => {
       e.preventDefault();
@@ -92,22 +94,22 @@ class Controls3D extends State3D {
 
     if (axes[0] > this.joystickThreshold || axes[0] < -this.joystickThreshold) {
       hasNewState = true;
-      newState[action].x = (axes[0] * this.gamepadMod[action]) + this.state[action].x;
+      newState[action].x = (axes[0] * this.gamepadMod[action]) + this.state.state[action].x;
     }
     if (axes[1] > this.joystickThreshold || axes[1] < -this.joystickThreshold) {
       hasNewState = true;
-      newState[action].y = (axes[1] * this.gamepadMod[action]) + this.state[action].y;
+      newState[action].y = (axes[1] * this.gamepadMod[action]) + this.state.state[action].y;
     }
 
     if (hasNewState) {
-      this.assignNewStateAndDraw(newState);
+      this.state.assignNewStateAndDraw(newState);
     }
 
     // Reset distance when right joystick is pressed
     if (resetButton.pressed) {
       newState[action].x = 0;
       newState[action].y = 0;
-      this.assignNewStateAndDraw(newState);
+      this.state.assignNewStateAndDraw(newState);
     }
   }
 
@@ -132,23 +134,24 @@ class Controls3D extends State3D {
         axesAmounts[axis] = direction * this.mod.scale;
       }
 
-      await this.animateStates(45, { scale: axesAmounts }, undefined, undefined, true);
+      await this.state.animateStates(45, { scale: axesAmounts }, undefined, undefined, true);
     }
   }
 
   mouseMove(e) {
-    if (this._clickedBtn == 0) {
+    if (this._clickedBtn == 1) {
       //LMB, translation
       const distance = {
         x: this._clickState.tran.x + (e.screenX - this._clickState.x) * this.mod.tran,
         y: this._clickState.tran.y - (e.screenY - this._clickState.y) * this.mod.tran
       };
       if (distance.x || distance.y) {
-        this.assignNewStateAndDraw({
+        this.state.assignNewStateAndDraw({
           tran: distance
         });
       }
-    } else if (this._clickedBtn == 2) {
+      // TODO
+    } else if (this._clickedBtn == null) {
       //RMB, rotation
       //x and y are swapped because of the OpenGL 3D coordinate system axes
       const distance = {
@@ -156,7 +159,7 @@ class Controls3D extends State3D {
         y: this._clickState.rot.y + (e.screenX - this._clickState.x) * this.mod.rot
       };
       if (distance.x || distance.y) {
-        this.assignNewStateAndDraw({
+        this.state.assignNewStateAndDraw({
           rot: distance
         });
       }
@@ -168,8 +171,8 @@ class Controls3D extends State3D {
     this._clickedBtn = e.button;
     this._clickState.x = e.screenX;
     this._clickState.y = e.screenY;
-    this._clickState.tran = Object.assign({}, this.state.tran);
-    this._clickState.rot = Object.assign({}, this.state.rot);
+    this._clickState.tran = Object.assign({}, this.state.state.tran);
+    this._clickState.rot = Object.assign({}, this.state.state.rot);
     window.addEventListener('pointermove', this.mouseMove);
   }
   removeMouseMove() {
