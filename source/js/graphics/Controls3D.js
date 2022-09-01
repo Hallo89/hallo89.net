@@ -36,15 +36,25 @@ class Controls3D {
 
       this.gamepadLoop = this.gamepadLoop.bind(this);
 
-      canvas.addEventListener('contextmenu', this.preventContext);
-
-      canvas.addEventListener('pointerdown', this.mouseDown);
       window.addEventListener('pointerup', this.removeMouseMove.bind(this));
-      canvas.addEventListener('wheel', this.wheel);
 
       window.addEventListener('gamepadconnected', this.gamepadConnected.bind(this));
       window.addEventListener('gamepaddisconnected', this.gamepadDisconnected.bind(this));
+
+      this.addTargetEvents(canvas);
     }
+  }
+
+  // ---- Helper functions ----
+  removeTargetEvents(eventTarget) {
+    eventTarget.removeEventListener('contextmenu', this.preventContext);
+    eventTarget.removeEventListener('pointerdown', this.mouseDown);
+    eventTarget.removeEventListener('wheel', this.wheel);
+  }
+  addTargetEvents(eventTarget) {
+    eventTarget.addEventListener('contextmenu', this.preventContext);
+    eventTarget.addEventListener('pointerdown', this.mouseDown);
+    eventTarget.addEventListener('wheel', this.wheel);
   }
 
   // ---- Misc event functions ----
