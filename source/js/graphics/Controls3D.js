@@ -27,21 +27,29 @@ class Controls3D {
     this.state = initialState;
     this.state.assignNewState({ scale: { x: 1, y: 1, z: 1 } });
 
-    canvas.addEventListener('contextmenu', e => {
-      e.preventDefault();
-    });
     if (!skipEvents) {
       // This permanently binds the methods to `this` (e.g. to be able to remove the event)
+      this.preventContext = this.preventContext.bind(this);
+      this.mouseDown = this.mouseDown.bind(this);
       this.mouseMove = this.mouseMove.bind(this);
+      this.wheel = this.wheel.bind(this);
+
       this.gamepadLoop = this.gamepadLoop.bind(this);
 
-      canvas.addEventListener('pointerdown', this.mouseDown.bind(this));
+      canvas.addEventListener('contextmenu', this.preventContext);
+
+      canvas.addEventListener('pointerdown', this.mouseDown);
       window.addEventListener('pointerup', this.removeMouseMove.bind(this));
-      canvas.addEventListener('wheel', this.wheel.bind(this)); //TODO: support for mousewheel
+      canvas.addEventListener('wheel', this.wheel);
 
       window.addEventListener('gamepadconnected', this.gamepadConnected.bind(this));
       window.addEventListener('gamepaddisconnected', this.gamepadDisconnected.bind(this));
     }
+  }
+
+  // ---- Misc event functions ----
+  preventContext(e) {
+    e.preventDefault();
   }
 
   // ---- GamepadEvent functions ----
