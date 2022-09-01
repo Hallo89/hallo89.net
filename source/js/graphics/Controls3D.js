@@ -7,18 +7,18 @@ class Controls3D {
   _clickState = {};
   _clickedBtn;
 
-  // Configurable properties
-  joystickThreshold = .14;
-
-  mod = {
-    scale: .224,
-    tran: .025,
-    rot: .44
-  };
-  gamepadMod = {
-    scale: .015,
-    tran: .25,
-    rot: .75
+  config = {
+    mod: {
+      scale: .224,
+      tran: .025,
+      rot: .44
+    },
+    gamepadMod: {
+      scale: .015,
+      tran: .25,
+      rot: .75
+    },
+    joystickThreshold: .14,
   };
 
   state;
@@ -85,9 +85,9 @@ class Controls3D {
         if (direction) {
           this.animateStates(35, {
             scale: {
-              x: direction * this.gamepadMod.scale,
-              y: direction * this.gamepadMod.scale,
-              z: direction * this.gamepadMod.scale
+              x: direction * this.config.gamepadMod.scale,
+              y: direction * this.config.gamepadMod.scale,
+              z: direction * this.config.gamepadMod.scale
             }
           }, undefined, undefined, true);
         }
@@ -110,13 +110,13 @@ class Controls3D {
     const newState = {};
     newState[action] = {};
 
-    if (axes[0] > this.joystickThreshold || axes[0] < -this.joystickThreshold) {
+    if (axes[0] > this.config.joystickThreshold || axes[0] < -this.config.joystickThreshold) {
       hasNewState = true;
-      newState[action].x = (axes[0] * this.gamepadMod[action]) + this.state.state[action].x;
+      newState[action].x = (axes[0] * this.config.gamepadMod[action]) + this.state.state[action].x;
     }
-    if (axes[1] > this.joystickThreshold || axes[1] < -this.joystickThreshold) {
+    if (axes[1] > this.config.joystickThreshold || axes[1] < -this.config.joystickThreshold) {
       hasNewState = true;
-      newState[action].y = (axes[1] * this.gamepadMod[action]) + this.state.state[action].y;
+      newState[action].y = (axes[1] * this.config.gamepadMod[action]) + this.state.state[action].y;
     }
 
     if (hasNewState) {
@@ -149,7 +149,7 @@ class Controls3D {
 
       const axesAmounts = {};
       for (const axis of usedAxes) {
-        axesAmounts[axis] = direction * this.mod.scale;
+        axesAmounts[axis] = direction * this.config.mod.scale;
       }
 
       await this.state.animateStates(45, { scale: axesAmounts }, undefined, undefined, true);
@@ -160,8 +160,8 @@ class Controls3D {
     if (this._clickedBtn == 1) {
       //LMB, translation
       const distance = {
-        x: this._clickState.tran.x + (e.screenX - this._clickState.x) * this.mod.tran,
-        y: this._clickState.tran.y - (e.screenY - this._clickState.y) * this.mod.tran
+        x: this._clickState.tran.x + (e.screenX - this._clickState.x) * this.config.mod.tran,
+        y: this._clickState.tran.y - (e.screenY - this._clickState.y) * this.config.mod.tran
       };
       if (distance.x || distance.y) {
         this.state.assignNewStateAndDraw({
@@ -173,8 +173,8 @@ class Controls3D {
       //RMB, rotation
       //x and y are swapped because of the OpenGL 3D coordinate system axes
       const distance = {
-        x: this._clickState.rot.x + (e.screenY - this._clickState.y) * this.mod.rot,
-        y: this._clickState.rot.y + (e.screenX - this._clickState.x) * this.mod.rot
+        x: this._clickState.rot.x + (e.screenY - this._clickState.y) * this.config.mod.rot,
+        y: this._clickState.rot.y + (e.screenX - this._clickState.x) * this.config.mod.rot
       };
       if (distance.x || distance.y) {
         this.state.assignNewStateAndDraw({
