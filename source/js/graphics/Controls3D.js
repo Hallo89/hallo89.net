@@ -152,11 +152,11 @@ class Controls3D {
 
     if (axes[0] > this.config.joystickThreshold || axes[0] < -this.config.joystickThreshold) {
       hasNewState = true;
-      newState[action].x = (axes[0] * this.config.gamepadMod[action]) + this.state.state[action].x;
+      newState[action].x = (axes[0] * this.config.gamepadMod[action]) + this.state[action].x;
     }
     if (axes[1] > this.config.joystickThreshold || axes[1] < -this.config.joystickThreshold) {
       hasNewState = true;
-      newState[action].y = (axes[1] * this.config.gamepadMod[action]) + this.state.state[action].y;
+      newState[action].y = (axes[1] * this.config.gamepadMod[action]) + this.state[action].y;
     }
 
     if (hasNewState) {
@@ -229,8 +229,8 @@ class Controls3D {
     this._clickedBtn = e.button;
     this._clickState.x = e.screenX;
     this._clickState.y = e.screenY;
-    this._clickState.tran = Object.assign({}, this.state.state.tran);
-    this._clickState.rot = Object.assign({}, this.state.state.rot);
+    this._clickState.tran = Object.assign({}, this.state.tran);
+    this._clickState.rot = Object.assign({}, this.state.rot);
     window.addEventListener('pointermove', this.mouseMove);
   }
   removeMouseMove() {
