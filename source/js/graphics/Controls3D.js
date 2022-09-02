@@ -248,16 +248,17 @@ class Controls3D {
   mouseMove(e) {
     if (this._clickedBtn === this.config.buttons.tran) {
       // Translation
-      // NOTE: y is inverted because of OpenGL reasons
       const distance = {
         x: this._clickState.tran.x + (e.screenX - this._clickState.x) * this.config.mod.tran,
-        y: this._clickState.tran.y - (e.screenY - this._clickState.y) * this.config.mod.tran
       };
+      // NOTE: y is inverted in 3D space because of OpenGL reasons
+      if (this.config.dontInvertTranY === true) {
+        distance.y = this._clickState.tran.y + (e.screenY - this._clickState.y) * this.config.mod.tran
+      } else {
+        distance.y = this._clickState.tran.y - (e.screenY - this._clickState.y) * this.config.mod.tran
+      }
 
       if (distance.x || distance.y) {
-        if (this.config.dontInvertTranY === true) {
-          distance.y *= -1;
-        }
         this.state.assignNewStateAndDraw({
           tran: distance
         });
