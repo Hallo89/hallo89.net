@@ -28,10 +28,7 @@ class Controls3D {
 
   constructor(eventTarget, initialState, config) {
     this._eventTarget = eventTarget;
-
-    this.state = initialState;
-    this.state.assignNewState({ scale: { x: 1, y: 1, z: 1 } });
-
+    this.changeState(initialState);
     this.assignNewConfig(config);
 
     // This permanently binds the methods to `this` (e.g. to be able to remove the event)
@@ -50,6 +47,18 @@ class Controls3D {
 
       this.addTargetEvents(this._eventTarget);
     }
+  }
+
+  // ---- Context switching functions ----
+  changeEventTarget(newEventTarget) {
+    this.removeTargetEvents(this._eventTarget);
+    this.addTargetEvents(newEventTarget);
+    this._eventTarget = newEventTarget;
+  }
+
+  changeState(newState) {
+    this.state = newState;
+    this.state.assignNewState({ scale: { x: 1, y: 1, z: 1 } });
   }
 
   // ---- Helper functions ----
