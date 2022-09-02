@@ -56,6 +56,28 @@ class State3D {
     }
   };
 
+  // State aliases
+  get scale() {
+    return this.state.scale;
+  };
+  set scale(val) {
+    this.state.scale = val;
+  };
+
+  get tran() {
+    return this.state.tran;
+  };
+  set tran(val) {
+    this.state.tran = val;
+  };
+
+  get rot() {
+    return this.state.rot;
+  };
+  set rot(val) {
+    this.state.rot = val;
+  };
+
   constructor(drawFunction, initialState) {
     this._drawFunction = drawFunction;
     if (initialState) {
