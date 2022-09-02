@@ -20,6 +20,11 @@ class Controls3D {
       tran: .25,
       rot: .75
     },
+    // TODO The gamepad buttons are not configurable yet
+    buttons: {
+      tran: 0,
+      rot: 2
+    },
     joystickThreshold: .14,
     disableEvents: false,
   };
@@ -197,8 +202,8 @@ class Controls3D {
   }
 
   mouseMove(e) {
-    if (this._clickedBtn == 1) {
-      //LMB, translation
+    if (this._clickedBtn === this.config.buttons.tran) {
+      // Translation
       const distance = {
         x: this._clickState.tran.x + (e.screenX - this._clickState.x) * this.config.mod.tran,
         y: this._clickState.tran.y - (e.screenY - this._clickState.y) * this.config.mod.tran
@@ -209,9 +214,9 @@ class Controls3D {
         });
       }
       // TODO
-    } else if (this._clickedBtn == null) {
-      //RMB, rotation
-      //x and y are swapped because of the OpenGL 3D coordinate system axes
+    } else if (this._clickedBtn === this.config.buttons.rot) {
+      // Rotation
+      // x and y are swapped because of the OpenGL 3D coordinate system axes
       const distance = {
         x: this._clickState.rot.x + (e.screenY - this._clickState.y) * this.config.mod.rot,
         y: this._clickState.rot.y + (e.screenX - this._clickState.x) * this.config.mod.rot
