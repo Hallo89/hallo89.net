@@ -21,24 +21,27 @@ class Controls3D {
       rot: .75
     },
     joystickThreshold: .14,
+    disableEvents: false,
   };
 
   state;
 
-  constructor(eventTarget, initialState, skipEvents) {
+  constructor(eventTarget, initialState, config) {
     this._eventTarget = eventTarget;
+    this.config = Object.assign(this.config, config);
+
     this.state = initialState;
     this.state.assignNewState({ scale: { x: 1, y: 1, z: 1 } });
 
-    if (!skipEvents) {
-      // This permanently binds the methods to `this` (e.g. to be able to remove the event)
-      this.preventContext = this.preventContext.bind(this);
-      this.mouseDown = this.mouseDown.bind(this);
-      this.mouseMove = this.mouseMove.bind(this);
-      this.wheel = this.wheel.bind(this);
+    // This permanently binds the methods to `this` (e.g. to be able to remove the event)
+    this.preventContext = this.preventContext.bind(this);
+    this.mouseDown = this.mouseDown.bind(this);
+    this.mouseMove = this.mouseMove.bind(this);
+    this.wheel = this.wheel.bind(this);
 
-      this.gamepadLoop = this.gamepadLoop.bind(this);
+    this.gamepadLoop = this.gamepadLoop.bind(this);
 
+    if (!this.config.disableEvents) {
       window.addEventListener('pointerup', this.removeMouseMove.bind(this));
 
       window.addEventListener('gamepadconnected', this.gamepadConnected.bind(this));
@@ -55,9 +58,17 @@ class Controls3D {
     eventTarget.removeEventListener('wheel', this.wheel);
   }
   addTargetEvents(eventTarget) {
-    eventTarget.addEventListener('contextmenu', this.preventContext);
-    eventTarget.addEventListener('pointerdown', this.mouseDown);
-    eventTarget.addEventListener('wheel', this.wheel);
+    if (!this.config.disableEvents) {
+      if (!this.config.disableEvents.contextmenu) {
+        eventTarget.addEventListener('contextmenu', this.preventContext);
+      }
+      if (!this.config.disableEvents.mousemove) {
+        eventTarget.addEventListener('pointerdown', this.mouseDown);
+      }
+      if (!this.config.disableEvents.mousewheel) {
+        eventTarget.addEventListener('wheel', this.wheel);
+      }
+    }
   }
 
   // ---- Misc event functions ----
