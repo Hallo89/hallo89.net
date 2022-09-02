@@ -1,4 +1,8 @@
 'use strict';
+/**
+ * @typedef {'scale' | 'tran' | 'rot'} StateName
+ */
+
 class State3D {
   // Mostly taken from https://easings.net/
   static Easing = {

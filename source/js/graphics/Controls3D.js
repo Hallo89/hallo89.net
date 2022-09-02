@@ -1,14 +1,31 @@
 'use strict';
+/**
+ * @typedef { import('./State3D.js') }
+ *
+ * @typedef {Record<StateName, number>} Controls3DModifier
+ *
+ * @typedef {object} Controls3DConfig
+ * @prop {Controls3DModifier} mod
+ * @prop {Controls3DModifier} gamepadMod
+ * @prop {{ tran: number, rot: number }} buttons
+ * @prop {boolean | { contextmenu: boolean, mousemove: boolean, mousewheel: boolean }} disableEvents
+ * @prop {number} joystickThreshold
+ * @prop {boolean} useScaleKeyModifier
+ */
+
 class Controls3D {
   _hasGamepad = false;
   _gamepads = {};
 
   _eventTarget;
 
-  // Persistant transform properties, here initial
+  // Persistent transform properties between events
   _clickState = {};
   _clickedBtn;
 
+  /**
+   * @type Controls3DConfig
+   */
   config = {
     mod: {
       scale: .224,
@@ -31,8 +48,16 @@ class Controls3D {
     useScaleKeyModifier: true,
   };
 
+  /**
+   * @type State3D
+   */
   state;
 
+  /**
+   * @param {EventTarget} eventTarget The DOM Element to receive the mouse and mousewheel events.
+   * @param {State3D} [initialState] A directly assigned state. Otherwise use {@link changeState}.
+   * @param {Partial<Controls3DConfig>} [config] A subset of the configuration options.
+   */
   constructor(eventTarget, initialState, config) {
     this._eventTarget = eventTarget;
     this.changeState(initialState);
@@ -57,12 +82,23 @@ class Controls3D {
   }
 
   // ---- Context switching functions ----
+  /**
+   * Assign a new event target.
+   * This removes currently attached events and attaches them to the new target.
+   *
+   * @param {EventTarget} newEventTarget
+   */
   changeEventTarget(newEventTarget) {
     this.removeTargetEvents(this._eventTarget);
     this.addTargetEvents(newEventTarget);
     this._eventTarget = newEventTarget;
   }
 
+  /**
+   * Assign a new State3D instance.
+   *
+   * @param {State3D} newState
+   */
   changeState(newState) {
     this.state = newState;
     this.state.assignNewState({ scale: { x: 1, y: 1, z: 1 } });
@@ -199,7 +235,7 @@ class Controls3D {
         axesAmounts[axis] = direction * this.config.mod.scale;
       }
 
-      await this.state.animateStates(45, { scale: axesAmounts }, undefined, undefined, true);
+      await this.state.animateStates(45, { scale: axesAmounts }, undefined, State3D.Easing.LINEAR, true);
     }
   }
 
@@ -232,7 +268,7 @@ class Controls3D {
   }
 
   mouseDown(e) {
-    if (e.button == 1) e.preventDefault();
+    if (e.button === 1) e.preventDefault();
     this._clickedBtn = e.button;
     this._clickState.x = e.screenX;
     this._clickState.y = e.screenY;
