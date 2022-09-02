@@ -3,6 +3,8 @@ class Controls3D {
   _hasGamepad = false;
   _gamepads = {};
 
+  _eventTarget;
+
   // Persistant transform properties, here initial
   _clickState = {};
   _clickedBtn;
@@ -23,7 +25,8 @@ class Controls3D {
 
   state;
 
-  constructor(canvas, initialState, skipEvents) {
+  constructor(eventTarget, initialState, skipEvents) {
+    this._eventTarget = eventTarget;
     this.state = initialState;
     this.state.assignNewState({ scale: { x: 1, y: 1, z: 1 } });
 
@@ -41,7 +44,7 @@ class Controls3D {
       window.addEventListener('gamepadconnected', this.gamepadConnected.bind(this));
       window.addEventListener('gamepaddisconnected', this.gamepadDisconnected.bind(this));
 
-      this.addTargetEvents(canvas);
+      this.addTargetEvents(this._eventTarget);
     }
   }
 
