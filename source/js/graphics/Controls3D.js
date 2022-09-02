@@ -27,6 +27,8 @@ class Controls3D {
     },
     joystickThreshold: .14,
     disableEvents: false,
+    // NOTE: If need arises, perhaps implement a system for individual ctrl/shift mods
+    useScaleKeyModifier: true,
   };
 
   state;
@@ -178,19 +180,19 @@ class Controls3D {
 
   // ---- MouseEvent functions ----
   async wheel(e) {
-    if (e.ctrlKey) e.preventDefault();
+    if (e.ctrlKey && this.config.useScaleKeyModifier) e.preventDefault();
     if (e.deltaY) {
       const direction = -1 * (e.deltaY / Math.abs(e.deltaY)); // either 1 or -1
 
-      let usedAxes;
-      if (e.ctrlKey && e.shiftKey)
-        usedAxes = ['z'];
-      else if (e.ctrlKey)
-        usedAxes = ['y'];
-      else if (e.shiftKey)
-        usedAxes = ['x'];
-      else
-        usedAxes = ['x', 'y', 'z'];
+      let usedAxes = ['x', 'y', 'z'];
+      if (this.config.useScaleKeyModifier) {
+        if (e.ctrlKey && e.shiftKey)
+          usedAxes = ['z'];
+        else if (e.ctrlKey)
+          usedAxes = ['y'];
+        else if (e.shiftKey)
+          usedAxes = ['x'];
+      }
 
       const axesAmounts = {};
       for (const axis of usedAxes) {
