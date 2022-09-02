@@ -28,10 +28,11 @@ class Controls3D {
 
   constructor(eventTarget, initialState, config) {
     this._eventTarget = eventTarget;
-    this.config = Object.assign(this.config, config);
 
     this.state = initialState;
     this.state.assignNewState({ scale: { x: 1, y: 1, z: 1 } });
+
+    this.assignNewConfig(config);
 
     // This permanently binds the methods to `this` (e.g. to be able to remove the event)
     this.preventContext = this.preventContext.bind(this);
@@ -52,6 +53,22 @@ class Controls3D {
   }
 
   // ---- Helper functions ----
+  assignNewConfig(newConfig) {
+    // Dynamically assigns new fields up to 1 nested object deep
+    for (const configName in newConfig) {
+      if (!(configName in this.config)) {
+        throw new Error(`Controls3D: Config option '${configName}' does not exist!`);
+      }
+
+      const configVal = newConfig[configName];
+      if (typeof configVal === 'object') {
+        this.config[configName] = Object.assign(this.config[configName], configVal);
+      } else {
+        this.config[configName] = configVal;
+      }
+    }
+  }
+
   removeTargetEvents(eventTarget) {
     eventTarget.removeEventListener('contextmenu', this.preventContext);
     eventTarget.removeEventListener('pointerdown', this.mouseDown);
