@@ -1,5 +1,28 @@
 'use strict';
 class State3D {
+  // Mostly taken from https://easings.net/
+  static Easing = {
+    LINEAR: x => x,
+
+    EASE_IN_SINE: x => 1 - Math.cos((x * Math.PI) / 2),
+    EASE_IN_QUAD: x => x * x,
+    EASE_IN_CUBIC: x => x * x * x,
+
+    EASE_OUT_SINE: x => Math.sin((x * Math.PI) / 2),
+    EASE_OUT_QUAD: x => 1 - (1 - x) * (1 - x),
+    EASE_OUT_CUBIC: x => 1 - Math.pow(1 - x, 3),
+
+    EASE_IN_OUT_SINE: x => -(Math.cos(Math.PI * x) - 1) / 2,
+    EASE_IN_OUT_QUAD: x => x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2,
+    EASE_IN_OUT_CUBIC: x => x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2,
+
+    EASE: x => {
+      return x < 0.2059
+        ? (5.2 * Math.pow(x, 1.8))
+        : (1 - 1.3 * Math.pow(1 - x, 2.7));
+    },
+  };
+
   _drawFunction;
 
   // Animation helper properties
@@ -131,7 +154,7 @@ class State3D {
     }
   }
 
-  // --- Helper functions ---
+  // ---- Helper functions ----
   assignNewStateAndDraw(newState) {
     this.assignNewState(newState);
     this._drawFunction();
@@ -144,28 +167,4 @@ class State3D {
     }
     return this;
   }
-
-  // ---- Statics ----
-  // Mostly taken from https://easings.net/
-  static Easing = {
-    LINEAR: x => x,
-
-    EASE_IN_SINE: x => 1 - Math.cos((x * Math.PI) / 2),
-    EASE_IN_QUAD: x => x * x,
-    EASE_IN_CUBIC: x => x * x * x,
-
-    EASE_OUT_SINE: x => Math.sin((x * Math.PI) / 2),
-    EASE_OUT_QUAD: x => 1 - (1 - x) * (1 - x),
-    EASE_OUT_CUBIC: x => 1 - Math.pow(1 - x, 3),
-
-    EASE_IN_OUT_SINE: x => -(Math.cos(Math.PI * x) - 1) / 2,
-    EASE_IN_OUT_QUAD: x => x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2,
-    EASE_IN_OUT_CUBIC: x => x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2,
-
-    EASE: x => {
-      return x < 0.2059
-        ? (5.2 * Math.pow(x, 1.8))
-        : (1 - 1.3 * Math.pow(1 - x, 2.7));
-    },
-  };
 }
