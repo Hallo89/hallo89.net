@@ -11,7 +11,7 @@
  * @prop {boolean | { contextmenu: boolean, mousemove: boolean, mousewheel: boolean }} disableEvents
  * @prop {number} joystickThreshold
  * @prop {boolean} dontInvertTranY
- * @prop {boolean} useScaleKeyModifier
+ * @prop {boolean} skipScaleKeyModifier
  */
 
 class Controls3D {
@@ -47,7 +47,7 @@ class Controls3D {
     disableEvents: false,
     dontInvertTranY: false,
     // NOTE: If need arises, perhaps implement a system for individual ctrl/shift mods
-    useScaleKeyModifier: true,
+    skipScaleKeyModifier: true,
   };
 
   /**
@@ -218,12 +218,16 @@ class Controls3D {
 
   // ---- MouseEvent functions ----
   async wheel(e) {
-    if (e.ctrlKey && this.config.useScaleKeyModifier) e.preventDefault();
+    if (e.ctrlKey) {
+      // Return when ctrl is not used as modifier to allow default browser scaling
+      if (!this.config.skipScaleKeyModifier) e.preventDefault();
+      else return;
+    }
     if (e.deltaY) {
       const direction = -1 * (e.deltaY / Math.abs(e.deltaY)); // either 1 or -1
 
       let usedAxes = ['x', 'y', 'z'];
-      if (this.config.useScaleKeyModifier) {
+      if (!this.config.skipScaleKeyModifier) {
         if (e.ctrlKey && e.shiftKey)
           usedAxes = ['z'];
         else if (e.ctrlKey)
