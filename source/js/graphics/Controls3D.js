@@ -10,6 +10,7 @@
  * @prop {{ tran: number, rot: number }} buttons
  * @prop {boolean | { contextmenu: boolean, mousemove: boolean, mousewheel: boolean }} disableEvents
  * @prop {number} joystickThreshold
+ * @prop {boolean} dontInvertTranY
  * @prop {boolean} useScaleKeyModifier
  */
 
@@ -44,6 +45,7 @@ class Controls3D {
     },
     joystickThreshold: .14,
     disableEvents: false,
+    dontInvertTranY: false,
     // NOTE: If need arises, perhaps implement a system for individual ctrl/shift mods
     useScaleKeyModifier: true,
   };
@@ -242,11 +244,16 @@ class Controls3D {
   mouseMove(e) {
     if (this._clickedBtn === this.config.buttons.tran) {
       // Translation
+      // NOTE: y is inverted because of OpenGL reasons
       const distance = {
         x: this._clickState.tran.x + (e.screenX - this._clickState.x) * this.config.mod.tran,
         y: this._clickState.tran.y - (e.screenY - this._clickState.y) * this.config.mod.tran
       };
+
       if (distance.x || distance.y) {
+        if (this.config.dontInvertTranY === true) {
+          distance.y *= -1;
+        }
         this.state.assignNewStateAndDraw({
           tran: distance
         });
