@@ -56,14 +56,19 @@ class Controls3D {
   state;
 
   /**
-   * @param {EventTarget} eventTarget The DOM Element to receive the mouse and mousewheel events.
-   * @param {State3D} [initialState] A directly assigned state. Otherwise use {@link changeState}.
+   * @param {EventTarget} [eventTarget] The DOM Element to receive the mouse and mousewheel events.
+   *                                   If left unspecified, use {@link changeEventTarget}.
+   * @param {State3D} [initialState] A directly assigned state.
+   *                                If left unspecified, use {@link changeState}.
    * @param {Partial<Controls3DConfig>} [config] A subset of the configuration options.
    */
   constructor(eventTarget, initialState, config) {
-    this._eventTarget = eventTarget;
-    this.changeState(initialState);
-    this.assignNewConfig(config);
+    if (initialState) {
+      this.changeState(initialState);
+    }
+    if (config) {
+      this.assignNewConfig(config);
+    }
 
     // This permanently binds the methods to `this` (e.g. to be able to remove the event)
     this.preventContext = this.preventContext.bind(this);
@@ -79,7 +84,9 @@ class Controls3D {
       window.addEventListener('gamepadconnected', this.gamepadConnected.bind(this));
       window.addEventListener('gamepaddisconnected', this.gamepadDisconnected.bind(this));
 
-      this.addTargetEvents(this._eventTarget);
+      if (eventTarget) {
+        this.changeEventTarget(eventTarget);
+      }
     }
   }
 
@@ -91,7 +98,9 @@ class Controls3D {
    * @param {EventTarget} newEventTarget
    */
   changeEventTarget(newEventTarget) {
-    this.removeTargetEvents(this._eventTarget);
+    if (this._eventTarget) {
+      this.removeTargetEvents(this._eventTarget);
+    }
     this.addTargetEvents(newEventTarget);
     this._eventTarget = newEventTarget;
   }
