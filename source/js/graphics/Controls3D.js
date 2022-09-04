@@ -65,6 +65,7 @@ class Controls3D {
   constructor(eventTarget, initialState, config) {
     if (initialState) {
       this.changeState(initialState);
+      this.state.assignNewState({ scale: { x: 1, y: 1, z: 1 } });
     }
     if (config) {
       this.assignNewConfig(config);
@@ -112,7 +113,6 @@ class Controls3D {
    */
   changeState(newState) {
     this.state = newState;
-    this.state.assignNewState({ scale: { x: 1, y: 1, z: 1 } });
   }
 
   // ---- Helper functions ----
