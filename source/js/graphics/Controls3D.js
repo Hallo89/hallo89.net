@@ -12,6 +12,7 @@
  * @prop {number} joystickThreshold
  * @prop {boolean} dontInvertTranY
  * @prop {boolean} skipScaleKeyModifier
+ * @prop {boolean} useProportionalScale
  */
 
 class Controls3D {
@@ -48,6 +49,7 @@ class Controls3D {
     dontInvertTranY: false,
     // NOTE: If need arises, perhaps implement a system for individual ctrl/shift mods
     skipScaleKeyModifier: false,
+    useProportionalScale: false,
   };
 
   /**
@@ -248,6 +250,9 @@ class Controls3D {
       const axesAmounts = {};
       for (const axis of usedAxes) {
         axesAmounts[axis] = direction * this.config.mod.scale;
+        if (this.config.useProportionalScale) {
+          axesAmounts[axis] *= this.state.scale[axis];
+        }
       }
 
       await this.state.animateStates(45, { scale: axesAmounts }, undefined, State3D.Easing.LINEAR, true);
