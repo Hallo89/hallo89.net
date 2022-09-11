@@ -47,7 +47,7 @@ class Controls3D {
     disableEvents: false,
     dontInvertTranY: false,
     // NOTE: If need arises, perhaps implement a system for individual ctrl/shift mods
-    skipScaleKeyModifier: true,
+    skipScaleKeyModifier: false,
   };
 
   /**
