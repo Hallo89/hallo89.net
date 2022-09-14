@@ -75,8 +75,14 @@ class Controls3D {
 
     // This permanently binds the methods to `this` (e.g. to be able to remove the event)
     this.preventContext = this.preventContext.bind(this);
+
+    this.touchDown = this.touchDown.bind(this);
+    this.touchMove = this.touchMove.bind(this);
+    this.touchUp = this.touchUp.bind(this);
+
     this.mouseDown = this.mouseDown.bind(this);
     this.mouseMove = this.mouseMove.bind(this);
+
     this.wheel = this.wheel.bind(this);
 
     this.gamepadLoop = this.gamepadLoop.bind(this);
@@ -138,6 +144,11 @@ class Controls3D {
     eventTarget.removeEventListener('contextmenu', this.preventContext);
     eventTarget.removeEventListener('pointerdown', this.mouseDown);
     eventTarget.removeEventListener('wheel', this.wheel);
+
+    eventTarget.removeEventListener('touchstart', this.touchDown);
+    eventTarget.removeEventListener('touchmove', this.touchMove);
+    eventTarget.removeEventListener('touchend', this.touchUp);
+    eventTarget.removeEventListener('touchcancel', this.touchUp);
   }
   addTargetEvents(eventTarget) {
     if (!this.config.disableEvents) {
@@ -151,6 +162,11 @@ class Controls3D {
         eventTarget.addEventListener('wheel', this.wheel);
       }
     }
+    // TODO
+    eventTarget.addEventListener('touchstart', this.touchDown);
+    eventTarget.addEventListener('touchmove', this.touchMove);
+    eventTarget.addEventListener('touchend', this.touchUp);
+    eventTarget.addEventListener('touchcancel', this.touchUp);
   }
 
   // ---- Misc event functions ----
