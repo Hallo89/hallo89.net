@@ -25,6 +25,9 @@ class Controls3D {
   _clickState = {};
   _clickedBtn;
 
+  _activeTouchIDs = {};
+  _scaleTouchPrevDistance;
+
   /**
    * @type Controls3DConfig
    */
@@ -167,6 +170,47 @@ class Controls3D {
     eventTarget.addEventListener('touchmove', this.touchMove);
     eventTarget.addEventListener('touchend', this.touchUp);
     eventTarget.addEventListener('touchcancel', this.touchUp);
+  }
+
+  // ---- Touch events ----
+  touchDown(e) {
+    if (e.targetTouches.length === 2 && !this._activeTouchIDs.scale) {
+      this._activeTouchIDs.scale = [
+        e.targetTouches[0].identifier,
+        e.targetTouches[1].identifier
+      ];
+      this._scaleTouchPrevDistance = this.getTouchesDistance(e.targetTouches[0], e.targetTouches[1]);
+    }
+  }
+  touchMove(e) {
+    // If set, it is always an array of 2 items
+    if (this._activeTouchIDs.scale) {
+      e.preventDefault();
+
+      const usedTouches = this.getTouchesFromIDs(e.targetTouches, this._activeTouchIDs.scale);
+
+      const distance = this.getTouchesDistance(usedTouches[0], usedTouches[1]);
+      const delta = (distance - this._scaleTouchPrevDistance) * 10;
+
+      this._scaleTouchPrevDistance = distance;
+
+      this.state.assignNewStateAndDraw({
+        scale: {
+          x: this.state.scale.x + delta * this.config.mod.scale,
+          y: this.state.scale.y + delta * this.config.mod.scale,
+          z: this.state.scale.z + delta * this.config.mod.scale
+        }
+      });
+    }
+  }
+  touchUp(e) {
+    for (const touch of e.changedTouches) {
+      if (this._activeTouchIDs.scale.includes(touch.identifier)) {
+        this._activeTouchIDs.scale = null;
+        this._scaleTouchPrevDistance = null;
+        break;
+      }
+    }
   }
 
   // ---- Touch helper functions ----
