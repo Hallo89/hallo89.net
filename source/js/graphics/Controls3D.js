@@ -169,6 +169,26 @@ class Controls3D {
     eventTarget.addEventListener('touchcancel', this.touchUp);
   }
 
+  // ---- Touch helper functions ----
+  getTouchesDistance(touch1, touch2) {
+    return Math.sqrt(
+        Math.pow((touch2.clientX - touch1.clientX) / document.documentElement.clientWidth, 2)
+      + Math.pow((touch2.clientY - touch1.clientY) / document.documentElement.clientHeight, 2));
+  }
+
+  // NOTE: It is assumed that all given touchIDs are valid
+  getTouchesFromIDs(targetTouches, touchIDs) {
+    const usedTouches = new Array(touchIDs.length);
+    for (let i = 0; i < usedTouches.length; i++) {
+      for (const targetTouch of targetTouches) {
+        if (targetTouch.identifier === touchIDs[i]) {
+          usedTouches[i] = targetTouch;
+        }
+      }
+    }
+    return usedTouches;
+  }
+
   // ---- Misc event functions ----
   preventContext(e) {
     e.preventDefault();
