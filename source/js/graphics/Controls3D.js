@@ -8,7 +8,7 @@
  * @prop {Controls3DModifier} mod
  * @prop {Controls3DModifier} gamepadMod
  * @prop {{ tran: number, rot: number }} buttons
- * @prop {boolean | { contextmenu: boolean, mousemove: boolean, mousewheel: boolean }} disableEvents
+ * @prop {boolean | { contextmenu: boolean, mousemove: boolean, mousewheel: boolean, touch: boolean }} disableEvents
  * @prop {number} joystickThreshold
  * @prop {boolean} dontInvertTranY
  * @prop {boolean} skipScaleKeyModifier
@@ -164,12 +164,13 @@ class Controls3D {
       if (!this.config.disableEvents.mousewheel) {
         eventTarget.addEventListener('wheel', this.wheel);
       }
+      if (!this.config.disableEvents.touch) {
+        eventTarget.addEventListener('touchstart', this.touchDown);
+        eventTarget.addEventListener('touchmove', this.touchMove);
+        eventTarget.addEventListener('touchend', this.touchUp);
+        eventTarget.addEventListener('touchcancel', this.touchUp);
+      }
     }
-    // TODO
-    eventTarget.addEventListener('touchstart', this.touchDown);
-    eventTarget.addEventListener('touchmove', this.touchMove);
-    eventTarget.addEventListener('touchend', this.touchUp);
-    eventTarget.addEventListener('touchcancel', this.touchUp);
   }
 
   // ---- Touch events ----
