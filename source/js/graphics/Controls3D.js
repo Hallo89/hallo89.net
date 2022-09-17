@@ -25,7 +25,8 @@ class Controls3D {
   _clickState = {};
   _clickedBtn;
 
-  _activeTouchIDs = {};
+  _activeTouchData;
+  _activeTouchIDs;
   _scaleTouchPrevDistance;
 
   /**
@@ -175,43 +176,61 @@ class Controls3D {
 
   // ---- Touch events ----
   touchDown(e) {
-    if (e.targetTouches.length === 2 && !this._activeTouchIDs.scale) {
-      this._activeTouchIDs.scale = [
+    if (e.targetTouches.length === 2 && !this._activeTouchIDs) {
+      this._activeTouchIDs = [
         e.targetTouches[0].identifier,
         e.targetTouches[1].identifier
       ];
+
+      this._activeTouchData = [
+        {
+          x: e.targetTouches[0].clientX,
+          y: e.targetTouches[0].clientY,
+        }, {
+          x: e.targetTouches[1].clientX,
+          y: e.targetTouches[1].clientY,
+        }
+      ];
+
       this._scaleTouchPrevDistance = this.getTouchesDistance(e.targetTouches[0], e.targetTouches[1]);
+      this._touchStateTran = Object.assign({}, this.state.tran);
     }
   }
   touchMove(e) {
     // If set, it is always an array of 2 items
-    if (this._activeTouchIDs.scale) {
+    if (this._activeTouchIDs) {
       e.preventDefault();
 
-      const usedTouches = this.getTouchesFromIDs(e.targetTouches, this._activeTouchIDs.scale);
+      const usedTouches = this.getTouchesFromIDs(e.targetTouches, this._activeTouchIDs);
 
-      const distance = this.getTouchesDistance(usedTouches[0], usedTouches[1]);
-      const delta = (distance - this._scaleTouchPrevDistance) * 10;
-
-      this._scaleTouchPrevDistance = distance;
-
-      this.state.assignNewStateAndDraw({
-        scale: {
-          x: this.state.scale.x + delta * this.config.mod.scale,
-          y: this.state.scale.y + delta * this.config.mod.scale,
-          z: this.state.scale.z + delta * this.config.mod.scale
-        }
-      });
+      this.touchTransformScale(usedTouches);
     }
   }
   touchUp(e) {
     for (const touch of e.changedTouches) {
-      if (this._activeTouchIDs.scale.includes(touch.identifier)) {
-        this._activeTouchIDs.scale = null;
+      if (this._activeTouchIDs.includes(touch.identifier)) {
+        this._activeTouchIDs = null;
+        this._activeTouchData = null;
         this._scaleTouchPrevDistance = null;
+        this._touchStateTran = null;
         break;
       }
     }
+  }
+
+  touchTransformScale(usedTouches) {
+    const distance = this.getTouchesDistance(usedTouches[0], usedTouches[1]);
+    const delta = (distance - this._scaleTouchPrevDistance) * 10;
+
+    this._scaleTouchPrevDistance = distance;
+
+    this.state.assignNewStateAndDraw({
+      scale: {
+        x: this.state.scale.x + delta * this.config.mod.scale * this.state.scale.x,
+        y: this.state.scale.y + delta * this.config.mod.scale * this.state.scale.y,
+        z: this.state.scale.z + delta * this.config.mod.scale * this.state.scale.z
+      }
+    });
   }
 
   // ---- Touch helper functions ----
