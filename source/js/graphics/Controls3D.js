@@ -25,9 +25,10 @@ class Controls3D {
   _clickState = {};
   _clickedBtn;
 
-  _activeTouchData;
+  _activeTouchData = [];
   _activeTouchIDs;
   _scaleTouchPrevDistance;
+  _touchStateTran = {};
 
   /**
    * @type Controls3DConfig
@@ -203,7 +204,10 @@ class Controls3D {
 
       const usedTouches = this.getTouchesFromIDs(e.targetTouches, this._activeTouchIDs);
 
+      this.touchTransformTranslate(usedTouches);
       this.touchTransformScale(usedTouches);
+
+      this.state.draw();
     }
   }
   touchUp(e) {
@@ -218,13 +222,28 @@ class Controls3D {
     }
   }
 
+  touchTransformTranslate(usedTouches) {
+    const averageDistance = {
+      x: ((usedTouches[0].clientX - this._activeTouchData[0].x)
+        + (usedTouches[1].clientX - this._activeTouchData[1].x)) / 2,
+      y: ((usedTouches[0].clientY - this._activeTouchData[0].y)
+        + (usedTouches[1].clientY - this._activeTouchData[1].y)) / 2,
+    };
+
+    this.state.assignNewState({
+      tran: {
+        x: this._touchStateTran.x + averageDistance.x,
+        y: this._touchStateTran.y + averageDistance.y,
+      }
+    });
+  }
   touchTransformScale(usedTouches) {
     const distance = this.getTouchesDistance(usedTouches[0], usedTouches[1]);
     const delta = (distance - this._scaleTouchPrevDistance) * 10;
 
     this._scaleTouchPrevDistance = distance;
 
-    this.state.assignNewStateAndDraw({
+    this.state.assignNewState({
       scale: {
         x: this.state.scale.x + delta * this.config.mod.scale * this.state.scale.x,
         y: this.state.scale.y + delta * this.config.mod.scale * this.state.scale.y,
