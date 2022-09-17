@@ -27,8 +27,6 @@ class State3D {
     },
   };
 
-  _drawFunction;
-
   // Animation helper properties
   _animationID = {
     scale: -1,
@@ -40,6 +38,9 @@ class State3D {
     tran: null,
     rot: null
   };
+
+  // Draw function
+  draw;
 
   // State
   state = {
@@ -83,7 +84,7 @@ class State3D {
   };
 
   constructor(drawFunction, initialState) {
-    this._drawFunction = drawFunction;
+    this.draw = drawFunction;
     if (initialState) {
       this.assignNewState(initialState);
     }
@@ -113,7 +114,7 @@ class State3D {
   };
 
   animateStates(
-    duration, statesAmounts, drawCallback = this._drawFunction, easingFn = State3D.Easing.LINEAR, allowStacking
+    duration, statesAmounts, drawCallback = this.draw, easingFn = State3D.Easing.LINEAR, allowStacking
   ) {
     const that = this;
 
@@ -184,7 +185,7 @@ class State3D {
   // ---- Helper functions ----
   assignNewStateAndDraw(newState) {
     this.assignNewState(newState);
-    this._drawFunction();
+    this.draw();
     return this;
   }
 
