@@ -25,10 +25,10 @@ class Controls3D {
   _clickState = {};
   _clickedBtn;
 
+  _touchStateTran;
+  _touchStartDistance;
   _activeTouchData = [];
   _activeTouchIDs;
-  _scaleTouchPrevDistance;
-  _touchStateTran = {};
 
   /**
    * @type Controls3DConfig
@@ -193,7 +193,12 @@ class Controls3D {
         }
       ];
 
-      this._scaleTouchPrevDistance = this.getTouchesDistance(e.targetTouches[0], e.targetTouches[1]);
+      const distance = this.getTouchesDistance(e.targetTouches[0], e.targetTouches[1]);
+      this._touchStartDistance = {
+        x: distance / this.state.scale.x,
+        y: distance / this.state.scale.y,
+        z: distance / this.state.scale.z
+      };
       this._touchStateTran = Object.assign({}, this.state.tran);
     }
   }
@@ -241,15 +246,12 @@ class Controls3D {
   }
   touchTransformScale(usedTouches) {
     const distance = this.getTouchesDistance(usedTouches[0], usedTouches[1]);
-    const delta = (distance - this._scaleTouchPrevDistance) * 10;
-
-    this._scaleTouchPrevDistance = distance;
 
     this.state.assignNewState({
       scale: {
-        x: this.state.scale.x + delta * this.config.mod.scale * this.state.scale.x,
-        y: this.state.scale.y + delta * this.config.mod.scale * this.state.scale.y,
-        z: this.state.scale.z + delta * this.config.mod.scale * this.state.scale.z
+        x: distance / this._touchStartDistance.x,
+        y: distance / this._touchStartDistance.y,
+        z: distance / this._touchStartDistance.z
       }
     });
   }
@@ -257,8 +259,8 @@ class Controls3D {
   // ---- Touch helper functions ----
   getTouchesDistance(touch1, touch2) {
     return Math.sqrt(
-        Math.pow((touch2.clientX - touch1.clientX) / document.documentElement.clientWidth, 2)
-      + Math.pow((touch2.clientY - touch1.clientY) / document.documentElement.clientHeight, 2));
+        Math.pow(touch2.screenX - touch1.screenX, 2)
+      + Math.pow(touch2.screenY - touch1.screenY, 2));
   }
 
   // NOTE: It is assumed that all given touchIDs are valid
