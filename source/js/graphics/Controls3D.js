@@ -211,13 +211,15 @@ class Controls3D {
     }
   }
   touchUp(e) {
-    for (const touch of e.changedTouches) {
-      if (this._activeTouchIDs.includes(touch.identifier)) {
-        this._activeTouchIDs = null;
-        this._activeTouchData = null;
-        this._scaleTouchPrevDistance = null;
-        this._touchStateTran = null;
-        break;
+    if (this._activeTouchIDs != null) {
+      for (const touch of e.changedTouches) {
+        if (this._activeTouchIDs.includes(touch.identifier)) {
+          this._activeTouchIDs = null;
+          this._activeTouchData = null;
+          this._touchStartDistance = null;
+          this._touchStateTran = null;
+          break;
+        }
       }
     }
   }
