@@ -177,38 +177,16 @@ class Controls3D {
 
   // ---- Touch events ----
   touchDown(e) {
-    if (e.targetTouches.length === 2 && !this._activeTouchIDs) {
-      this._activeTouchIDs = [
-        e.targetTouches[0].identifier,
-        e.targetTouches[1].identifier
-      ];
-
-      this._activeTouchData = [
-        {
-          x: e.targetTouches[0].clientX,
-          y: e.targetTouches[0].clientY,
-        }, {
-          x: e.targetTouches[1].clientX,
-          y: e.targetTouches[1].clientY,
-        }
-      ];
-
-      const distance = this.getTouchesDistance(e.targetTouches[0], e.targetTouches[1]);
-      this._touchStartDistance = {
-        x: distance / this.state.scale.x,
-        y: distance / this.state.scale.y,
-        z: distance / this.state.scale.z
-      };
-      this._touchStateTran = Object.assign({}, this.state.tran);
+    if (e.targetTouches.length === 2) {
+      e.preventDefault();
+      this.initializeTouchData(e.targetTouches);
     }
   }
   touchMove(e) {
-    // If set, it is always an array of 2 items
-    if (this._activeTouchIDs) {
+    if (e.targetTouches.length >= 2) {
       e.preventDefault();
 
       const usedTouches = this.getTouchesFromIDs(e.targetTouches, this._activeTouchIDs);
-
       this.touchTransformTranslate(usedTouches);
       this.touchTransformScale(usedTouches);
 
@@ -216,16 +194,14 @@ class Controls3D {
     }
   }
   touchUp(e) {
-    if (this._activeTouchIDs != null) {
-      for (const touch of e.changedTouches) {
-        if (this._activeTouchIDs.includes(touch.identifier)) {
-          this._activeTouchIDs = null;
-          this._activeTouchData = null;
-          this._touchStartDistance = null;
-          this._touchStateTran = null;
-          break;
-        }
-      }
+    if (e.targetTouches.length === 2) {
+      // Update initial data to the current fingers, in case a finger was
+      // lifted which was responsible for the previous initial data
+      this.initializeTouchData(e.targetTouches);
+    } else if (e.targetTouches.length < 2) {
+      this._activeTouchData = null;
+      this._touchStartDistance = null;
+      this._touchStateTran = null;
     }
   }
 
@@ -274,6 +250,31 @@ class Controls3D {
       }
     }
     return usedTouches;
+  }
+
+  initializeTouchData(usedTouches) {
+    const distance = this.getTouchesDistance(usedTouches[0], usedTouches[1]);
+    this._touchStartDistance = {
+      x: distance / this.state.scale.x,
+      y: distance / this.state.scale.y,
+      z: distance / this.state.scale.z
+    };
+
+    this._activeTouchIDs = [
+      usedTouches[0].identifier,
+      usedTouches[1].identifier
+    ];
+    this._activeTouchData = [
+      {
+        x: usedTouches[0].clientX,
+        y: usedTouches[0].clientY
+      }, {
+        x: usedTouches[1].clientX,
+        y: usedTouches[1].clientY
+      }
+    ];
+
+    this._touchStateTran = Object.assign({}, this.state.tran);
   }
 
   // ---- Misc event functions ----
