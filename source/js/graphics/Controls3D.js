@@ -189,11 +189,14 @@ class Controls3D {
       this.touchTransformScale(usedTouches);
 
       this.state.draw({ touches: usedTouches });
+
+      // Update touch data in case the state has been changed from the outside
+      this.updateTouchData(usedTouches);
     }
   }
   touchUp(e) {
     if (e.targetTouches.length === 2) {
-      // Update initial data to the current fingers, in case a finger was
+      // Update touch data to the current fingers, in case a finger was
       // lifted which was responsible for the previous initial data
       this.initializeTouchData(e.targetTouches);
     } else if (e.targetTouches.length < 2) {
@@ -247,6 +250,14 @@ class Controls3D {
   }
 
   initializeTouchData(usedTouches) {
+    this._activeTouchIDs = [
+      usedTouches[0].identifier,
+      usedTouches[1].identifier
+    ];
+
+    this.updateTouchData(usedTouches);
+  }
+  updateTouchData(usedTouches) {
     const distance = Controls3D.computeTouchesDistance(...usedTouches);
     this._touchStartDistance = {
       x: distance / this.state.scale.x,
@@ -254,10 +265,6 @@ class Controls3D {
       z: distance / this.state.scale.z
     };
 
-    this._activeTouchIDs = [
-      usedTouches[0].identifier,
-      usedTouches[1].identifier
-    ];
     // NOTE Touch objects are supposed to be immutable, but apparently apple reuses
     // them or have reused them at some point. By copying them, I'm going the safe route.
     this._activeTouchData = [
