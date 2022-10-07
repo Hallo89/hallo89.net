@@ -108,7 +108,6 @@ class Controls3D {
   /**
    * Assign a new event target.
    * This removes currently attached events and attaches them to the new target.
-   *
    * @param {EventTarget} newEventTarget
    */
   changeEventTarget(newEventTarget) {
@@ -121,7 +120,6 @@ class Controls3D {
 
   /**
    * Assign a new State3D instance.
-   *
    * @param {State3D} newState
    */
   changeState(newState) {
@@ -205,6 +203,7 @@ class Controls3D {
     }
   }
 
+  // ---- Touch transform functions ----
   touchTransformTranslate(usedTouches) {
     const usedMidpoint = Controls3D.computeTouchesMidpoint(...usedTouches);
     const initialMidpoint = Controls3D.computeTouchesMidpoint(...(this._activeTouchData));
@@ -222,7 +221,7 @@ class Controls3D {
     });
   }
   touchTransformScale(usedTouches) {
-    const distance = this.getTouchesDistance(usedTouches[0], usedTouches[1]);
+    const distance = Controls3D.computeTouchesDistance(...usedTouches);
 
     this.state.assignNewState({
       scale: {
@@ -234,12 +233,6 @@ class Controls3D {
   }
 
   // ---- Touch helper functions ----
-  getTouchesDistance(touch1, touch2) {
-    return Math.sqrt(
-        Math.pow(touch2.screenX - touch1.screenX, 2)
-      + Math.pow(touch2.screenY - touch1.screenY, 2));
-  }
-
   // NOTE: It is assumed that all given touchIDs are valid
   getTouchesFromIDs(targetTouches, touchIDs) {
     const usedTouches = new Array(touchIDs.length);
@@ -254,7 +247,7 @@ class Controls3D {
   }
 
   initializeTouchData(usedTouches) {
-    const distance = this.getTouchesDistance(usedTouches[0], usedTouches[1]);
+    const distance = Controls3D.computeTouchesDistance(...usedTouches);
     this._touchStartDistance = {
       x: distance / this.state.scale.x,
       y: distance / this.state.scale.y,
@@ -430,8 +423,19 @@ class Controls3D {
 
   // ---- Static helper functions ----
   /**
-   * Returns the midpoint of two supplied touch objects.
-   *
+   * Compute the distance between two supplied Touch objects.
+   * @param {Touch} touch0
+   * @param {Touch} touch1
+   * @return {number} The resulting distance.
+   */
+  static computeTouchesDistance(touch0, touch1) {
+    return Math.sqrt(
+        Math.pow(touch1.screenX - touch0.screenX, 2)
+      + Math.pow(touch1.screenY - touch0.screenY, 2));
+  }
+
+  /**
+   * Compute the midpoint of two supplied Touch objects.
    * @param {Touch} touch0
    * @param {Touch} touch1
    * @return {[number, number]} The resulting midpoint.
