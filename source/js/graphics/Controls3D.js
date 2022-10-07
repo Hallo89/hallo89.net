@@ -207,10 +207,10 @@ class Controls3D {
 
   touchTransformTranslate(usedTouches) {
     const averageDistance = {
-      x: ((usedTouches[0].clientX - this._activeTouchData[0].x)
-        + (usedTouches[1].clientX - this._activeTouchData[1].x)) / 2,
-      y: ((usedTouches[0].clientY - this._activeTouchData[0].y)
-        + (usedTouches[1].clientY - this._activeTouchData[1].y)) / 2,
+      x: ((usedTouches[0].clientX - this._activeTouchData[0].clientX)
+        + (usedTouches[1].clientX - this._activeTouchData[1].clientX)) / 2,
+      y: ((usedTouches[0].clientY - this._activeTouchData[0].clientY)
+        + (usedTouches[1].clientY - this._activeTouchData[1].clientY)) / 2,
     };
 
     this.state.assignNewState({
@@ -264,14 +264,11 @@ class Controls3D {
       usedTouches[0].identifier,
       usedTouches[1].identifier
     ];
+    // NOTE Touch objects are supposed to be immutable, but apparently apple reuses
+    // them or have reused them at some point. By copying them, I'm going the safe route.
     this._activeTouchData = [
-      {
-        x: usedTouches[0].clientX,
-        y: usedTouches[0].clientY
-      }, {
-        x: usedTouches[1].clientX,
-        y: usedTouches[1].clientY
-      }
+      { clientX: usedTouches[0].clientX, clientY: usedTouches[0].clientY },
+      { clientX: usedTouches[1].clientX, clientY: usedTouches[1].clientY }
     ];
 
     this._touchStateTran = Object.assign({}, this.state.tran);
