@@ -206,11 +206,12 @@ class Controls3D {
   }
 
   touchTransformTranslate(usedTouches) {
+    const usedMidpoint = Controls3D.computeTouchesMidpoint(...usedTouches);
+    const initialMidpoint = Controls3D.computeTouchesMidpoint(...(this._activeTouchData));
+
     const averageDistance = {
-      x: ((usedTouches[0].clientX - this._activeTouchData[0].clientX)
-        + (usedTouches[1].clientX - this._activeTouchData[1].clientX)) / 2,
-      y: ((usedTouches[0].clientY - this._activeTouchData[0].clientY)
-        + (usedTouches[1].clientY - this._activeTouchData[1].clientY)) / 2,
+      x: usedMidpoint[0] - initialMidpoint[0],
+      y: usedMidpoint[1] - initialMidpoint[1]
     };
 
     this.state.assignNewState({
@@ -425,5 +426,20 @@ class Controls3D {
   }
   removeMouseMove() {
     window.removeEventListener('pointermove', this.mouseMove);
+  }
+
+  // ---- Static helper functions ----
+  /**
+   * Returns the midpoint of two supplied touch objects.
+   *
+   * @param {Touch} touch0
+   * @param {Touch} touch1
+   * @return {[number, number]} The resulting midpoint.
+   */
+  static computeTouchesMidpoint(touch0, touch1) {
+    return [
+      (touch0.clientX + touch1.clientX) / 2,
+      (touch0.clientY + touch1.clientY) / 2,
+    ];
   }
 }
