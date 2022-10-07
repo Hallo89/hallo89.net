@@ -190,7 +190,7 @@ class Controls3D {
       this.touchTransformTranslate(usedTouches);
       this.touchTransformScale(usedTouches);
 
-      this.state.draw();
+      this.state.draw({ touches: usedTouches });
     }
   }
   touchUp(e) {
