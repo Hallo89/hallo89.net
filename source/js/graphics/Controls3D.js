@@ -30,6 +30,8 @@ class Controls3D {
   _activeTouchData = [];
   _activeTouchIDs;
 
+  touchIsActive = false;
+
   /**
    * @type Controls3DConfig
    */
@@ -178,6 +180,7 @@ class Controls3D {
     if (e.targetTouches.length === 2) {
       e.preventDefault();
       this.initializeTouchData(e.targetTouches);
+      this.touchIsActive = true;
     }
   }
   touchMove(e) {
@@ -203,6 +206,7 @@ class Controls3D {
       this._activeTouchData = null;
       this._touchStartDistance = null;
       this._touchStateTran = null;
+      this.touchIsActive = false;
     }
   }
 
