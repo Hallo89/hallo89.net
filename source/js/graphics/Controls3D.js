@@ -355,10 +355,11 @@ class Controls3D {
 
   // ---- MouseEvent functions ----
   async wheel(e) {
-    if (e.ctrlKey) {
-      // Return when ctrl is not used as modifier to allow default browser scaling
-      if (!this.config.skipScaleKeyModifier) e.preventDefault();
-      else return;
+    // Don't allow any modifiers when axes are not split up
+    if (this.config.skipScaleKeyModifier) {
+      if (e.ctrlKey || e.shiftKey || e.altKey) return;
+    } else if (e.ctrlKey) {
+      e.preventDefault();
     }
     if (e.deltaY) {
       const direction = -1 * (e.deltaY / Math.abs(e.deltaY)); // either 1 or -1
