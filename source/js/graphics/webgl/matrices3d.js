@@ -1,14 +1,7 @@
 const canvas = GLBoiler.getCanvasByTag();
 const inputs = toolbar.querySelector('.inputs');
 
-const controls = new Controls3D(canvas, draw);
-controls.mod.tran = 1.75;
-controls.gamepadMod = {
-  scale: .04,
-  tran: 8,
-  rot: 1.15
-};
-controls.assignNewState({
+const state = new State3D(draw, {
   tran: {
     z: -1000
   },
@@ -18,6 +11,16 @@ controls.assignNewState({
   }
 });
 
+new Controls3D(canvas, state, {
+  mod: {
+    tran: 1.75
+  },
+  gamepadMod: {
+    scale: .04,
+    tran: 8,
+    rot: 1.15
+  }
+});
 
 slider89.defaultValues({
   task: sliderMove,
@@ -256,32 +259,32 @@ draw();
 
 
 function setSlidersFromControlsState() {
-  sldrTranslateX.newValues({ value: controls.state.tran.x });
-  sldrTranslateY.newValues({ value: controls.state.tran.y });
-  sldrTranslateZ.newValues({ value: controls.state.tran.z });
+  sldrTranslateX.newValues({ value: state.tran.x });
+  sldrTranslateY.newValues({ value: state.tran.y });
+  sldrTranslateZ.newValues({ value: state.tran.z });
 
-  sldrRotateX.newValues({ value: controls.state.rot.x });
-  sldrRotateY.newValues({ value: controls.state.rot.y });
-  sldrRotateZ.newValues({ value: controls.state.rot.z });
+  sldrRotateX.newValues({ value: state.rot.x });
+  sldrRotateY.newValues({ value: state.rot.y });
+  sldrRotateZ.newValues({ value: state.rot.z });
 
-  sldrScaleX.newValues({ value: controls.state.scale.x });
-  sldrScaleY.newValues({ value: controls.state.scale.y });
-  sldrScaleZ.newValues({ value: controls.state.scale.z });
+  sldrScaleX.newValues({ value: state.scale.x });
+  sldrScaleY.newValues({ value: state.scale.y });
+  sldrScaleZ.newValues({ value: state.scale.z });
 }
 
 function setControlsStateFromSliders() {
   // Slider89 is dumb and I have no way of knowing which slider invoked the event
-  controls.state.tran.x = sldrTranslateX.value;
-  controls.state.tran.y = sldrTranslateY.value;
-  controls.state.tran.z = sldrTranslateZ.value;
+  state.tran.x = sldrTranslateX.value;
+  state.tran.y = sldrTranslateY.value;
+  state.tran.z = sldrTranslateZ.value;
 
-  controls.state.rot.x = sldrRotateX.value;
-  controls.state.rot.y = sldrRotateY.value;
-  controls.state.rot.z = sldrRotateZ.value;
+  state.rot.x = sldrRotateX.value;
+  state.rot.y = sldrRotateY.value;
+  state.rot.z = sldrRotateZ.value;
 
-  controls.state.scale.x = sldrScaleX.value;
-  controls.state.scale.y = sldrScaleY.value;
-  controls.state.scale.z = sldrScaleZ.value;
+  state.scale.x = sldrScaleX.value;
+  state.scale.y = sldrScaleY.value;
+  state.scale.z = sldrScaleZ.value;
 }
 
 function sliderMove() {
@@ -299,13 +302,13 @@ function draw(skipSliderUpdate) {
   const perspective = Math.tan(Math.PI * 0.5 - 0.5 * (sldrFov.value * Math.PI / 180));
   GLBoiler.setMatrix(gl, 'perspective', matPerspective, [canvas, perspective, 1, 2000]);
 
-  GLBoiler.setMatrix(gl, 'translate', matTranslate, Object.values(controls.state.tran));
+  GLBoiler.setMatrix(gl, 'translate', matTranslate, Object.values(state.tran));
 
-  GLBoiler.setMatrix(gl, 'rotateX', matRotateX, [controls.state.rot.x]);
-  GLBoiler.setMatrix(gl, 'rotateY', matRotateY, [controls.state.rot.y]);
-  GLBoiler.setMatrix(gl, 'rotateZ', matRotateZ, [controls.state.rot.z]);
+  GLBoiler.setMatrix(gl, 'rotateX', matRotateX, [state.rot.x]);
+  GLBoiler.setMatrix(gl, 'rotateY', matRotateY, [state.rot.y]);
+  GLBoiler.setMatrix(gl, 'rotateZ', matRotateZ, [state.rot.z]);
 
-  GLBoiler.setMatrix(gl, 'scale', matScale, Object.values(controls.state.scale));
+  GLBoiler.setMatrix(gl, 'scale', matScale, Object.values(state.scale));
 
   //primitiveType, offsetExecute, count
   gl.drawArrays(gl.TRIANGLES, 0, 36);
