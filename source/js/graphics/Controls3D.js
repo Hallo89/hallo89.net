@@ -74,7 +74,12 @@ class Controls3D {
   constructor(eventTarget, initialState, config) {
     if (initialState) {
       this.changeState(initialState);
-      this.state.assignNewState({ scale: { x: 1, y: 1, z: 1 } });
+      // Assign (scale 1) to state if it was left at its initial values,
+      // which is the desired state for a Controls3D operation.
+      // NOTE: If an initial Controls3D state of { scale 0 } is desired, add a parameter or something
+      if (this.state.scale.x === 0) this.state.scale.x = 1;
+      if (this.state.scale.y === 0) this.state.scale.y = 1;
+      if (this.state.scale.z === 0) this.state.scale.z = 1;
     }
     if (config) {
       this.assignNewConfig(config);
