@@ -1,7 +1,7 @@
 import fs from 'fs';
-import express from 'express';
-import yaml from 'js-yaml';
-import nunjucks from 'nunjucks';
+import Express from 'express';
+import Yaml from 'js-yaml';
+import Nunjucks from 'nunjucks';
 import argon from 'argon-parser';
 import MarkdownIt from 'markdown-it';
 
@@ -20,14 +20,14 @@ const slider89Data = {
   versions: sl89Versions
 };
 
-const pageData = yaml.load(fs.readFileSync('./source/data/page-data.yml', 'utf8'));
+const pageData = Yaml.load(fs.readFileSync('./source/data/page-data.yml', 'utf8'));
 const staticExclusions = [
   'data',
   'style'
 ];
 
-const app = express();
-const njk = nunjucks.configure('', {
+const app = Express();
+const njk = Nunjucks.configure('', {
   express: app
 });
 
@@ -129,7 +129,7 @@ app.set('view engine', 'njk');
 app.set('views', cwd);
 app.set('strict routing', false);
 
-app.use('/style', express.static('source/style/css'));
+app.use('/style', Express.static('source/style/css'));
 fs.readdir('./source', (err, files) => {
   if (err) {
     console.error("Error scanning directory 'source': " + err);
@@ -138,12 +138,12 @@ fs.readdir('./source', (err, files) => {
   files
   .filter(val => !staticExclusions.includes(val))
   .forEach(val => {
-    app.use(val == 'root' ? '' : '/' + val, express.static('source/' + val));
+    app.use(val == 'root' ? '' : '/' + val, Express.static('source/' + val));
   });
 });
 
-app.use('/js/snake', express.static('snake/script'));
-app.use('/style/snake', express.static('snake/style'));
+app.use('/js/snake', Express.static('snake/script'));
+app.use('/style/snake', Express.static('snake/style'));
 
 function getNJK(viewPath, customParams, fileName = viewPath) {
   let renderParams = {
