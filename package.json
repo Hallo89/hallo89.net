@@ -2,11 +2,11 @@
   "name": "hallo89.net",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "test": "nodemon index.js -e njk"
+    "start": "node main.js",
+    "test": "nodemon main.js -e njk"
   },
   "author": "Hallo89",
   "license": "MIT",
