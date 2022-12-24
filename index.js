@@ -20,7 +20,7 @@ const staticExclusions = [
 const cwd = new URL('.', import.meta.url).pathname;
 
 
-// ---- Initialization ----
+// ---- Express & Nunjucks setup ----
 const markdown = new MarkdownIt({
   breaks: true
 });
@@ -39,19 +39,45 @@ app.set('strict routing', false);
 app.use('/style', Express.static('source/style/css'));
 fs.readdir('./source', (err, files) => {
   if (err) {
-    console.error("Error scanning directory 'source': " + err);
-    return;
+    throw new Error("Error scanning directory 'source': " + err);
   }
   files
-  .filter(val => !staticExclusions.includes(val))
-  .forEach(val => {
-    app.use(val == 'root' ? '' : '/' + val, Express.static('source/' + val));
-  });
+    .filter(val => !staticExclusions.includes(val))
+    .forEach(val => {
+      app.use(val == 'root' ? '' : '/' + val, Express.static('source/' + val));
+    });
 });
 
 app.use('/js/snake', Express.static('snake/script'));
 app.use('/style/snake', Express.static('snake/style'));
 
+
+// ---- Routes ----
+getNJK('', false, 'index');
+
+getNJK('blog');
+
+getNJK('tools');
+getNJK('tools/3DMagic');
+getNJK('tools/RFG');
+getNJK('tools/mocking');
+getNJK('tools/spacing');
+
+getNJK('webgl');
+getNJK('webgl/triangles');
+getNJK('webgl/matrices3d');
+
+getNJK('games');
+getNJK('games/snake3D', false, '../snake/snake3D')
+getNJK('games/snake2D', false, '../snake/snake2D')
+
+getNJK('slider89', {
+  data: slider89DocData,
+  gitData: slider89VersionData
+});
+
+
+// ---- Route functions ----
 function getNJK(viewPath, customParams, fileName = viewPath) {
   let renderParams = {
     pagePath: viewPath,
@@ -77,26 +103,3 @@ function getNJK(viewPath, customParams, fileName = viewPath) {
     res.render('pages/' + fileName, renderParams);
   });
 }
-
-getNJK('', false, 'index');
-
-getNJK('blog');
-
-getNJK('tools');
-getNJK('tools/3DMagic');
-getNJK('tools/RFG');
-getNJK('tools/mocking');
-getNJK('tools/spacing');
-
-getNJK('webgl');
-getNJK('webgl/triangles');
-getNJK('webgl/matrices3d');
-
-getNJK('games');
-getNJK('games/snake3D', false, '../snake/snake3D')
-getNJK('games/snake2D', false, '../snake/snake2D')
-
-getNJK('slider89', {
-  data: slider89DocData,
-  gitData: slider89VersionData
-});
