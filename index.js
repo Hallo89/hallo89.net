@@ -5,26 +5,22 @@ import Nunjucks from 'nunjucks';
 import argon from 'argon-parser';
 import MarkdownIt from 'markdown-it';
 
-const markdown = new MarkdownIt({
-  breaks: true
-});
-
-import sl89Docs from './source/data/slider89/docs.json' assert { type: "json" };
 // This is completely static
-import sl89Versions from './source/data/slider89/static-git.json' assert { type: "json" };
-
-const cwd = new URL('.', import.meta.url).pathname;
-
-const slider89Data = {
-  docs: sl89Docs,
-  versions: sl89Versions
-};
+import slider89VersionData from './source/data/slider89/static-git.json' assert { type: 'json' };
+import slider89DocData from './source/data/slider89/docs.json' assert { type: 'json' };
 
 const pageData = Yaml.load(fs.readFileSync('./source/data/page-data.yml', 'utf8'));
 const staticExclusions = [
   'data',
   'style'
 ];
+
+const cwd = new URL('.', import.meta.url).pathname;
+
+// ---- Initialization ----
+const markdown = new MarkdownIt({
+  breaks: true
+});
 
 const app = Express();
 const njk = Nunjucks.configure('', {
@@ -190,6 +186,6 @@ getNJK('games/snake3D', false, '../snake/snake3D')
 getNJK('games/snake2D', false, '../snake/snake2D')
 
 getNJK('slider89', {
-  data: slider89Data.docs,
-  gitData: slider89Data.versions
+  data: slider89DocData,
+  gitData: slider89VersionData
 });
