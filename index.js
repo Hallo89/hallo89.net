@@ -1,7 +1,6 @@
 import fs from 'fs';
 import Express from 'express';
 import Yaml from 'js-yaml';
-import MarkdownIt from 'markdown-it';
 
 import { setupNunjucks } from './nunjucks.js';
 
@@ -21,10 +20,6 @@ const cwd = new URL('.', import.meta.url).pathname;
 
 
 // ---- Express & Nunjucks setup ----
-const markdown = new MarkdownIt({
-  breaks: true
-});
-
 const app = Express();
 const njk = setupNunjucks(app, pageData)
 
