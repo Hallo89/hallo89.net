@@ -21,11 +21,7 @@ const cwd = new URL('.', import.meta.url).pathname;
 
 // ---- Express & Nunjucks setup ----
 const app = Express();
-const njk = setupNunjucks(app, pageData)
-
-app.listen(8000, function() {
-  console.log("Listening on port 8000!");
-});
+const njk = setupNunjucks(app, pageData);
 
 app.set('view engine', 'njk');
 app.set('views', cwd);
@@ -39,12 +35,16 @@ fs.readdir('./source', (err, files) => {
   files
     .filter(val => !staticExclusions.includes(val))
     .forEach(val => {
-      app.use(val == 'root' ? '' : '/' + val, Express.static('source/' + val));
+      app.use((val === 'root' ? '' : '/' + val), Express.static('source/' + val));
     });
 });
 
 app.use('/js/snake', Express.static('snake/script'));
 app.use('/style/snake', Express.static('snake/style'));
+
+app.listen(8000, () => {
+  console.log("Listening on port 8000!");
+});
 
 
 // ---- Routes ----
@@ -63,8 +63,8 @@ getNJK('webgl/triangles');
 getNJK('webgl/matrices3d');
 
 getNJK('games');
-getNJK('games/snake3D', false, '../snake/snake3D')
-getNJK('games/snake2D', false, '../snake/snake2D')
+getNJK('games/snake3D', false, '../snake/snake3D');
+getNJK('games/snake2D', false, '../snake/snake2D');
 
 getNJK('slider89', {
   data: slider89DocData,
@@ -77,18 +77,7 @@ function getNJK(viewPath, customParams, fileName = viewPath) {
   let renderParams = {
     pagePath: viewPath,
     pageTopLink: viewPath.includes('/') ? viewPath.slice(0, viewPath.indexOf('/')) : viewPath,
-    pageData: (function() {
-      let data = pageData;
-      // Special check for index
-      if (viewPath !== '') {
-        for (const view of viewPath.split('/')) {
-          if (data.children) data = data.children;
-          data = data[view];
-          if (!data) return;
-        }
-      }
-      return data;
-    }())
+    pageData: getPageDataFromPath(viewPath)
   };
   if (customParams) {
     renderParams = Object.assign(renderParams, customParams);
@@ -97,4 +86,17 @@ function getNJK(viewPath, customParams, fileName = viewPath) {
   app.get('/' + viewPath, function(req, res) {
     res.render('pages/' + fileName, renderParams);
   });
+}
+
+function getPageDataFromPath(viewPath) {
+  let data = pageData;
+  // Special check for index
+  if (viewPath !== '') {
+    for (const view of viewPath.split('/')) {
+      if (data.children) data = data.children;
+      data = data[view];
+      if (!data) return;
+    }
+  }
+  return data;
 }
