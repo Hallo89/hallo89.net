@@ -10,11 +10,13 @@ export function setupNunjucks(expressApp, pageData) {
   const njk = Nunjucks.configure('', {
     express: expressApp
   });
-  applyNunjucksFilters(njk, pageData);
+  addNunjucksGlobals(njk, pageData);
+  addNunjucksFilters(njk);
   return njk;
 }
 
-function applyNunjucksFilters(njk, pageData) {
+
+function addNunjucksGlobals(njk, pageData) {
   njk.addGlobal('staticPageData', pageData);
   njk.addGlobal('getPageName', function(name, link) {
     return name != null ? name : (link.slice(0, 1).toUpperCase() + link.slice(1));
@@ -44,7 +46,9 @@ function applyNunjucksFilters(njk, pageData) {
       return target;
     }
   });
+}
 
+function addNunjucksFilters(njk) {
   njk.addFilter('startsWith', function(val, expr) {
     if (Array.isArray(expr)) {
       for (const str of expr) {
