@@ -64,7 +64,7 @@ const njk = nunjucks.configure('', {
 
   njk.addFilter('startsWith', function(val, expr) {
     if (Array.isArray(expr)) {
-      for (str of expr) {
+      for (const str of expr) {
         if (new RegExp('^' + str).test(val)) return true;
       }
       return false;
