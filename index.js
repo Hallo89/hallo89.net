@@ -1,16 +1,25 @@
-const fs = require('fs');
-const express = require('express');
-const yaml = require('js-yaml');
-const nunjucks = require('nunjucks');
-const argon = require('argon-parser');
-const markdown = require('markdown-it')({
+import fs from 'fs';
+import express from 'express';
+import yaml from 'js-yaml';
+import nunjucks from 'nunjucks';
+import argon from 'argon-parser';
+import MarkdownIt from 'markdown-it';
+
+const markdown = new MarkdownIt({
   breaks: true
 });
+
+import sl89Docs from './source/data/slider89/docs.json' assert { type: "json" };
+// This is completely static
+import sl89Versions from './source/data/slider89/static-git.json' assert { type: "json" };
+
+const cwd = new URL('.', import.meta.url).pathname;
+
 const slider89Data = {
-  docs: require('./source/data/slider89/docs.json'),
-  // This is completely static
-  versions: require('./source/data/slider89/static-git.json')
+  docs: sl89Docs,
+  versions: sl89Versions
 };
+
 const pageData = yaml.load(fs.readFileSync('./source/data/page-data.yml', 'utf8'));
 const staticExclusions = [
   'data',
@@ -117,7 +126,7 @@ app.listen(8000, function() {
 });
 
 app.set('view engine', 'njk');
-app.set('views', __dirname);
+app.set('views', cwd);
 app.set('strict routing', false);
 
 app.use('/style', express.static('source/style/css'));
