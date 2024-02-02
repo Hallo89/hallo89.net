@@ -1,0 +1,3 @@
+[submodule "lib/website-common"]
+	path = lib/website-common
+	url = https://gitlab.com/Hallo89/website-common.git
