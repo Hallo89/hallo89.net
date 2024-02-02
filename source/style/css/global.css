@@ -7,19 +7,19 @@ No necessity to write this in here but Less is awesome!
   font-family: 'Inter';
   font-weight: normal;
   font-display: swap;
-  src: local('Inter'), local('Inter Regular'), local('Inter-Regular'), url('/font/Inter/Inter-Regular.woff2') format('woff2'), url('/font/Inter/Inter-Regular.woff') format('woff');
+  src: local('Inter'), local('Inter Regular'), local('Inter-Regular'), url('/font/Inter/Inter-Regular.woff2') format('woff2');
 }
 @font-face {
   font-family: 'Inter';
   font-weight: bold;
   font-display: swap;
-  src: local('Inter Bold'), local('Inter-Bold'), url('/font/Inter/Inter-Bold.woff2') format('woff2'), url('/font/Inter/Inter-Bold.woff') format('woff');
+  src: local('Inter Bold'), local('Inter-Bold'), url('/font/Inter/Inter-Bold.woff2') format('woff2');
 }
 @font-face {
   font-family: 'Inter';
   font-weight: 300;
   font-display: swap;
-  src: local('Inter Light'), local('Inter-Light'), url('/font/Inter/Inter-Light.woff2') format('woff2'), url('/font/Inter/Inter-Light.woff') format('woff');
+  src: local('Inter Light'), local('Inter-Light'), url('/font/Inter/Inter-Light.woff2') format('woff2');
 }
 html {
   scrollbar-color: hsl(0, 0%, 43%) hsl(0, 0%, 14%);

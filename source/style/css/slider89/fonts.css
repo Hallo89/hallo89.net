@@ -6,8 +6,7 @@
   src:
     local('Source Code Pro'),
     local('SourceCodePro-Regular'),
-    url('/font/SourceCodePro/SourceCodePro-Regular.otf.woff2') format('woff2'),
-    url('/font/SourceCodePro/SourceCodePro-Regular.otf.woff') format('woff');
+    url('/font/SourceCodePro/SourceCodePro-Regular.otf.woff2') format('woff2');
 }
 @font-face {
   font-family: 'Source Code Pro';
@@ -16,8 +15,7 @@
   src:
     local('Source Code Pro Bold'),
     local('SourceCodePro-Bold'),
-    url('/font/SourceCodePro/SourceCodePro-Bold.otf.woff2') format('woff2'),
-    url('/font/SourceCodePro/SourceCodePro-Bold.otf.woff') format('woff');
+    url('/font/SourceCodePro/SourceCodePro-Bold.otf.woff2') format('woff2');
 }
 @font-face {
   font-family: 'Source Code Pro';
@@ -26,6 +24,5 @@
   src:
     local('Source Code Pro Semibold'),
     local('SourceCodePro-Semibold'),
-    url('/font/SourceCodePro/SourceCodePro-Semibold.otf.woff2') format('woff2'),
-    url('/font/SourceCodePro/SourceCodePro-Semibold.otf.woff') format('woff');
+    url('/font/SourceCodePro/SourceCodePro-Semibold.otf.woff2') format('woff2');
 }
