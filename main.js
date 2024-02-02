@@ -50,8 +50,6 @@ app.listen(8000, () => {
 // ---- Routes ----
 getNJK('', false, 'index');
 
-getNJK('blog');
-
 getNJK('tools');
 getNJK('tools/3DMagic');
 getNJK('tools/RFG');
