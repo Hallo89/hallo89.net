@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'fs/promises';
 import Express from 'express';
 import Yaml from 'js-yaml';
 
@@ -10,7 +10,10 @@ import slider89DocData from './source/data/slider89/docs.json' assert { type: 'j
 
 
 // ---- Constants ----
-const pageData = Yaml.load(fs.readFileSync('./source/data/page-data.yml', 'utf8'));
+const staticRoute = {
+  'style': 'style/css/'
+};
+const pageData = Yaml.load(await fs.readFile('./source/data/page-data.yml', 'utf8'));
 const cwd = new URL('.', import.meta.url).pathname;
 
 
@@ -22,9 +25,12 @@ app.set('view engine', 'njk');
 app.set('views', cwd);
 app.set('strict routing', false);
 
-app.use('/style', Express.static('source/style/css'));
 app.use('/', Express.static('source/root/'));
-app.use(Express.static('source/static/'));
+
+for (const folder of await fs.readdir('./source/static/')) {
+  const target = staticRoute[folder] ?? folder;
+  app.use('/' + folder, Express.static('source/static/' + target));
+}
 
 app.use('/js/snake', Express.static('snake/script'));
 app.use('/style/snake', Express.static('snake/style'));
