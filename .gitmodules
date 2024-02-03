@@ -1,3 +1,6 @@
 [submodule "lib/website-common"]
 	path = lib/website-common
 	url = https://gitlab.com/Hallo89/website-common.git
+[submodule "lib/controls3d"]
+	path = lib/controls3d
+	url = https://gitlab.com/Hallo89/controls3d.git

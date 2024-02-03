@@ -25,20 +25,24 @@ app.set('view engine', 'njk');
 app.set('views', cwd);
 app.set('strict routing', false);
 
-// -- Static resources --
+// -- Static resources: Controls3D --
+app.use('/script/graphics', Express.static('lib/controls3d/script/'));
+
+// -- Static resources: Website-common --
 app.use('/', Express.static('lib/website-common/root'));
 app.use(Express.static('lib/website-common/static'));
 
+// -- Static resources: Snake --
+app.use('/js/snake', Express.static('snake/script'));
+app.use('/style/snake', Express.static('snake/style'));
+
+// -- Static resources: Local --
 app.use('/style', Express.static('source/style/css'));
 
 for (const folder of await fs.readdir('./source/static/')) {
   const target = staticRoute[folder] ?? folder;
   app.use('/' + folder, Express.static('source/static/' + target));
 }
-
-// -- Static resources: Snake --
-app.use('/js/snake', Express.static('snake/script'));
-app.use('/style/snake', Express.static('snake/style'));
 
 
 app.listen(8000, () => {
