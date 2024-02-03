@@ -25,15 +25,21 @@ app.set('view engine', 'njk');
 app.set('views', cwd);
 app.set('strict routing', false);
 
-app.use('/', Express.static('source/root/'));
+// -- Static resources --
+app.use('/', Express.static('lib/website-common/root'));
+app.use(Express.static('lib/website-common/static'));
+
+app.use('/style', Express.static('source/style/css'));
 
 for (const folder of await fs.readdir('./source/static/')) {
   const target = staticRoute[folder] ?? folder;
   app.use('/' + folder, Express.static('source/static/' + target));
 }
 
+// -- Static resources: Snake --
 app.use('/js/snake', Express.static('snake/script'));
 app.use('/style/snake', Express.static('snake/style'));
+
 
 app.listen(8000, () => {
   console.log("Listening on port 8000!");
