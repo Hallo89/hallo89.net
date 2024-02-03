@@ -11,11 +11,6 @@ import slider89DocData from './source/data/slider89/docs.json' assert { type: 'j
 
 // ---- Constants ----
 const pageData = Yaml.load(fs.readFileSync('./source/data/page-data.yml', 'utf8'));
-const staticExclusions = [
-  'data',
-  'style'
-];
-
 const cwd = new URL('.', import.meta.url).pathname;
 
 
@@ -28,16 +23,8 @@ app.set('views', cwd);
 app.set('strict routing', false);
 
 app.use('/style', Express.static('source/style/css'));
-fs.readdir('./source', (err, files) => {
-  if (err) {
-    throw new Error("Error scanning directory 'source': " + err);
-  }
-  files
-    .filter(val => !staticExclusions.includes(val))
-    .forEach(val => {
-      app.use((val === 'root' ? '' : '/' + val), Express.static('source/' + val));
-    });
-});
+app.use('/', Express.static('source/root/'));
+app.use(Express.static('source/static/'));
 
 app.use('/js/snake', Express.static('snake/script'));
 app.use('/style/snake', Express.static('snake/style'));
